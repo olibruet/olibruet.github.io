@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O17 &ndash; &Eacute;crire c ou &ccedil;</title>
+    <title>O18 &ndash; Les adverbes en -ment</title>
     <style>
         /* ===== RESET & BASE ===== */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -174,6 +174,10 @@
             border-left-color: var(--orange);
         }
 
+        .card.blue {
+            border-left-color: var(--blue);
+        }
+
         .card.exercise {
             border-left-color: var(--purple);
         }
@@ -196,14 +200,19 @@
             margin-bottom: 0.6rem;
         }
 
-        .rule-keyword.c-simple {
+        .rule-keyword.green {
             background: var(--green-bg);
             color: var(--green);
         }
 
-        .rule-keyword.c-cedille {
+        .rule-keyword.orange {
             background: var(--orange-bg);
             color: var(--orange);
+        }
+
+        .rule-keyword.blue-kw {
+            background: var(--blue-bg);
+            color: var(--blue);
         }
 
         .example {
@@ -222,6 +231,10 @@
             color: var(--orange);
         }
 
+        .example.blue strong {
+            color: var(--blue);
+        }
+
         .tip {
             background: #fff8e1;
             border-radius: 8px;
@@ -229,35 +242,6 @@
             margin-top: 0.8rem;
             border-left: 3px solid #f39c12;
             font-size: 0.9rem;
-        }
-
-        .letters-table {
-            display: flex;
-            gap: 0.8rem;
-            margin-top: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .letters-box {
-            background: var(--light);
-            border-radius: 8px;
-            padding: 0.6rem 1rem;
-            text-align: center;
-            flex: 1;
-            min-width: 120px;
-        }
-
-        .letters-box .letter {
-            font-size: 1.3rem;
-            font-weight: 800;
-        }
-
-        .letters-box .letter.green { color: var(--green); }
-        .letters-box .letter.orange { color: var(--orange); }
-
-        .letters-box .desc {
-            font-size: 0.85rem;
-            color: var(--gray);
         }
 
         /* ===== WORD TABLE ===== */
@@ -333,7 +317,7 @@
 
         .blank {
             display: inline-block;
-            min-width: 1.5rem;
+            min-width: 6rem;
             border-bottom: 2px dashed var(--purple);
             text-align: center;
             font-weight: 700;
@@ -408,8 +392,12 @@
             color: var(--green);
         }
 
-        .answer.cedille {
+        .answer.orange {
             color: var(--orange);
+        }
+
+        .answer.blue {
+            color: var(--blue);
         }
 
         /* ===== FOOTER ===== */
@@ -443,7 +431,7 @@
         @media print {
             .nav { display: none; }
             .hero { padding: 1.5rem; }
-            .blank { border-bottom-style: solid; min-width: 2rem; }
+            .blank { border-bottom-style: solid; min-width: 4rem; }
             .correction { display: none; }
             body { background: white; }
         }
@@ -454,16 +442,17 @@
 <!-- ===== HERO ===== -->
 <header class="hero">
     <div class="hero-icon">&#9997;&#65039;</div>
-    <h1>O17 &ndash; &Eacute;crire c ou &ccedil;</h1>
-    <p class="author">Orthographe &bull; Le&ccedil;on 17</p>
-    <p class="collection">CM1 &bull; Dict&eacute;e La peinture aborig&egrave;ne (Australie)</p>
+    <h1>O18 &ndash; Les adverbes en -ment</h1>
+    <p class="author">Orthographe &bull; Le&ccedil;on 18</p>
+    <p class="collection">CM1 &bull; Dict&eacute;e Le Haka (Nouvelle-Z&eacute;lande)</p>
 </header>
 
 <!-- ===== NAVIGATION ===== -->
 <nav class="nav" role="navigation">
     <a href="#lecon">La le&ccedil;on</a>
     <a href="#mots">Mots de la dict&eacute;e</a>
-    <a href="#exercice">Exercice</a>
+    <a href="#exercice1">Exercice 1</a>
+    <a href="#exercice2">Exercice 2</a>
 </nav>
 
 <!-- ===== MAIN ===== -->
@@ -477,49 +466,39 @@
         </div>
 
         <div class="card">
-            <div class="rule-keyword c-simple">c = [s]</div>
-            <p>La lettre <strong>c</strong> se prononce <strong>[s]</strong> quand elle est devant <strong>e</strong> et <strong>i</strong>.</p>
+            <div class="rule-keyword green">R&egrave;gle g&eacute;n&eacute;rale</div>
+            <p>La plupart des adverbes qui se terminent par <strong>-ment</strong> se forment &agrave; partir de l'adjectif au <strong>f&eacute;minin</strong> suivi du suffixe <strong>-ment</strong>. Le <em>e</em> peut devenir un <strong>&eacute;</strong>.</p>
             <div class="example">
-                leurs an<strong>c</strong>&ecirc;tres &bull; une <strong>c</strong>&eacute;r&eacute;monie &bull; un <strong>c</strong>ercle
-            </div>
-            <div class="letters-table">
-                <div class="letters-box">
-                    <div class="letter green">ce</div>
-                    <div class="desc">an<strong>ce</strong>stre</div>
-                </div>
-                <div class="letters-box">
-                    <div class="letter green">ci</div>
-                    <div class="desc">an<strong>ci</strong>en</div>
-                </div>
+                fort &rarr; fort<strong>e</strong> &rarr; fort<strong>e</strong><strong>ment</strong><br>
+                simple &rarr; simple &rarr; simple<strong>ment</strong><br>
+                brutal &rarr; brutal<strong>e</strong> &rarr; brutal<strong>e</strong><strong>ment</strong>
             </div>
         </div>
 
         <div class="card accent">
-            <div class="rule-keyword c-cedille">&ccedil; = [s]</div>
-            <p>Pour obtenir le son <strong>[s]</strong> devant <strong>a</strong>, <strong>o</strong>, <strong>u</strong>, on &eacute;crit <strong>&ccedil;</strong> (c c&eacute;dille).</p>
+            <div class="rule-keyword orange">-ent &rarr; -emment</div>
+            <p>Les adjectifs qui se terminent par <strong>-ent</strong> forment leurs adverbes en <strong>-emment</strong>.</p>
             <div class="example accent">
-                Ils re<strong>&ccedil;</strong>oivent l'inspiration. &bull; Il fa<strong>&ccedil;</strong>onne la terre. &bull; un aper<strong>&ccedil;</strong>u
+                violent &rarr; viol<strong>emment</strong><br>
+                r&eacute;cent &rarr; r&eacute;c<strong>emment</strong>
             </div>
-            <div class="letters-table">
-                <div class="letters-box">
-                    <div class="letter orange">&ccedil;a</div>
-                    <div class="desc">fa<strong>&ccedil;a</strong>de</div>
-                </div>
-                <div class="letters-box">
-                    <div class="letter orange">&ccedil;o</div>
-                    <div class="desc">fa<strong>&ccedil;o</strong>nner</div>
-                </div>
-                <div class="letters-box">
-                    <div class="letter orange">&ccedil;u</div>
-                    <div class="desc">aper<strong>&ccedil;u</strong></div>
-                </div>
+        </div>
+
+        <div class="card blue">
+            <div class="rule-keyword blue-kw">-ant &rarr; -amment</div>
+            <p>Les adjectifs qui se terminent par <strong>-ant</strong> forment leurs adverbes en <strong>-amment</strong>.</p>
+            <div class="example blue">
+                m&eacute;chant &rarr; m&eacute;ch<strong>amment</strong><br>
+                bruyant &rarr; bruy<strong>amment</strong>
             </div>
         </div>
 
         <div class="card">
             <div class="tip">
-                <strong>Astuce :</strong> devant <strong>e</strong> ou <strong>i</strong>, le c fait d&eacute;j&agrave; le son [s] &rarr; pas besoin de c&eacute;dille.<br>
-                Devant <strong>a</strong>, <strong>o</strong> ou <strong>u</strong>, le c fait le son [k] &rarr; il faut la c&eacute;dille <strong>&ccedil;</strong> pour obtenir [s].
+                <strong>Astuce :</strong> pour savoir s'il faut &eacute;crire <strong>-emment</strong> ou <strong>-amment</strong>, retrouve l'adjectif&nbsp;!<br>
+                &bull; Si l'adjectif finit par <strong>-ent</strong> &rarr; adverbe en <strong>-emment</strong> (violent &rarr; violemment)<br>
+                &bull; Si l'adjectif finit par <strong>-ant</strong> &rarr; adverbe en <strong>-amment</strong> (m&eacute;chant &rarr; m&eacute;chamment)<br>
+                Attention&nbsp;: <em>-emment</em> et <em>-amment</em> se prononcent pareil&nbsp;!
             </div>
         </div>
     </section>
@@ -532,125 +511,99 @@
         </div>
 
         <div class="word-table">
-            <div class="word-table-header">La peinture aborig&egrave;ne (Australie)</div>
+            <div class="word-table-header">Le Haka (Nouvelle-Z&eacute;lande)</div>
 
             <div class="word-row">
                 <div class="word-cat">Noms</div>
                 <div class="word-list">
-                    <span class="important">l'Australie</span>, <span class="important">une &oelig;uvre</span>, <span class="important">le temps</span>, <span class="important">le r&ecirc;ve</span>, <span class="important">une &eacute;poque</span>, <span class="important">la cr&eacute;ation</span>, <span class="important">un anc&ecirc;tre</span>, <span class="important">la rivi&egrave;re</span>, <span class="important">la montagne</span>, <span class="important">un &ecirc;tre</span>, le commencement, une c&eacute;r&eacute;monie, le sol, un &eacute;l&eacute;ment, <em>la ligne</em>, <em>le point</em>, <em>le cercle</em>, <em>le hasard</em>, <em>une vue</em>, <em>la r&eacute;gion</em>, <em>le r&eacute;cit</em>, <em>la l&eacute;gende</em>, <em>un aper&ccedil;u</em>
+                    <span class="important">la Nouvelle-Z&eacute;lande</span>, <span class="important">une danse</span>, <span class="important">un chant</span>, <span class="important">un ennemi</span>, <span class="important">un combat</span>, <span class="important">le respect</span>, <span class="important">une occasion</span>, <span class="important">une c&eacute;r&eacute;monie</span>, <span class="important">le mariage</span>, <span class="important">un enterrement</span>, <span class="important">la langue</span>, <span class="important">un adversaire</span>, <span class="important">un homme</span>, <span class="important">la cuisse</span>, <span class="important">la poitrine</span>, <span class="important">une &eacute;quipe</span>, <span class="important">le match</span>, <span class="important">la d&eacute;monstration</span>
                 </div>
             </div>
 
             <div class="word-row">
                 <div class="word-cat">Verbes</div>
                 <div class="word-list">
-                    <span class="important">appeler</span>, <span class="important">raconter</span>, <span class="important">fa&ccedil;onner</span>, tracer, s'effacer, donner, faire
+                    <span class="important">pratiquer</span>, <span class="important">accompagner</span>, <span class="important">t&eacute;moigner</span>, interpr&eacute;ter, pouvoir, tirer, se taper, faire
                 </div>
             </div>
 
             <div class="word-row">
                 <div class="word-cat">Adjectifs</div>
                 <div class="word-list">
-                    <span class="important">vivant</span>, rituel/elle, naturel/elle, trac&eacute;, a&eacute;rien/enne, ancien/enne
+                    <span class="important">guerrier/guerri&egrave;re</span>, <span class="important">brutal</span>, <span class="important">simple</span>, amical, particulier/&egrave;re, fort, important, m&eacute;chant, violent, c&eacute;l&egrave;bre, ancestral, r&eacute;cent, bruyant
                 </div>
             </div>
 
             <div class="word-row">
                 <div class="word-cat">Mots invariables</div>
                 <div class="word-list">
-                    <span class="important">lors</span>, <span class="important">comment</span>, m&ecirc;me, avec, <em>parfois</em>, voil&agrave;
+                    <span class="important">lors</span>, <span class="important">g&eacute;n&eacute;ralement</span>, aussi, comme, selon, gr&acirc;ce, avant
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- EXERCICE -->
-    <section id="exercice">
+    <!-- EXERCICE 1 -->
+    <section id="exercice1">
         <div class="section-header">
             <span class="section-icon">&#9998;&#65039;</span>
-            <h2>Exercice &ndash; c ou &ccedil;&nbsp;?</h2>
+            <h2>Exercice 1 &ndash; Forme l'adverbe</h2>
         </div>
 
         <div class="card exercise">
-            <p>Compl&egrave;te chaque mot avec <strong>c</strong> ou <strong>&ccedil;</strong>. Regarde la lettre qui suit&nbsp;!</p>
+            <p>Transforme chaque adjectif en adverbe en <strong>-ment</strong>.</p>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">1.</span>
-                <span>Les aborig&egrave;nes re<span class="blank">&ccedil;</span>oivent l'inspiration de leurs anc&ecirc;tres.</span>
+                <span>simple &rarr; <span class="blank">simplement</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">2.</span>
-                <span>La <span class="blank">c</span>&eacute;r&eacute;monie raconte l'histoire de la cr&eacute;ation.</span>
+                <span>brutal &rarr; <span class="blank">brutalement</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">3.</span>
-                <span>L'artiste fa<span class="blank">&ccedil;</span>onne la terre avec ses mains.</span>
+                <span>violent &rarr; <span class="blank">violemment</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">4.</span>
-                <span>Le <span class="blank">c</span>ercle est un symbole important de la peinture.</span>
+                <span>m&eacute;chant &rarr; <span class="blank">m&eacute;chamment</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">5.</span>
-                <span>Voil&agrave; un aper<span class="blank">&ccedil;</span>u de l'art aborig&egrave;ne.</span>
+                <span>fort &rarr; <span class="blank">fortement</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">6.</span>
-                <span>La le<span class="blank">&ccedil;</span>on des anc&ecirc;tres est vivante.</span>
+                <span>g&eacute;n&eacute;ral &rarr; <span class="blank">g&eacute;n&eacute;ralement</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">7.</span>
-                <span>Il tra<span class="blank">c</span>e des lignes et des points sur le sol.</span>
+                <span>r&eacute;cent &rarr; <span class="blank">r&eacute;cemment</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">8.</span>
-                <span>Le gar<span class="blank">&ccedil;</span>on &eacute;coute le r&eacute;cit de la l&eacute;gende.</span>
+                <span>bruyant &rarr; <span class="blank">bruyamment</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">9.</span>
-                <span>Il effa<span class="blank">c</span>e le dessin pour recommencer.</span>
+                <span>ancien &rarr; <span class="blank">anciennement</span></span>
             </div>
 
             <div class="exercise-sentence">
                 <span class="exercise-number">10.</span>
-                <span>La fa<span class="blank">&ccedil;</span>ade de la montagne est impressionnante.</span>
-            </div>
-
-            <div class="exercise-sentence">
-                <span class="exercise-number">11.</span>
-                <span>Il avan<span class="blank">&ccedil;</span>ait lentement vers la rivi&egrave;re.</span>
-            </div>
-
-            <div class="exercise-sentence">
-                <span class="exercise-number">12.</span>
-                <span>Nous commen<span class="blank">&ccedil;</span>ons une nouvelle &oelig;uvre.</span>
-            </div>
-
-            <div class="exercise-sentence">
-                <span class="exercise-number">13.</span>
-                <span>La surfa<span class="blank">c</span>e du sol est lisse.</span>
-            </div>
-
-            <div class="exercise-sentence">
-                <span class="exercise-number">14.</span>
-                <span>Nous pla<span class="blank">&ccedil;</span>ons des points de couleur.</span>
-            </div>
-
-            <div class="exercise-sentence">
-                <span class="exercise-number">15.</span>
-                <span>Cette r&eacute;gion est le ber<span class="blank">c</span>eau de l'art ancien.</span>
+                <span>amical &rarr; <span class="blank">amicalement</span></span>
             </div>
         </div>
 
-        <!-- CORRECTION avec <details> natif -->
         <details class="correction">
             <summary>
                 <span>&#9989; Voir la correction</span>
@@ -659,63 +612,172 @@
             <div class="correction-inner">
                 <div class="correction-sentence">
                     <span class="exercise-number">1.</span>
-                    <span>re<span class="answer cedille">&ccedil;</span>oivent &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                    <span>simple &rarr; <span class="answer">simplement</span> <em>(f&eacute;minin simple + ment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">2.</span>
-                    <span><span class="answer">c</span>&eacute;r&eacute;monie &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                    <span>brutal &rarr; <span class="answer">brutalement</span> <em>(f&eacute;minin brutale + ment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">3.</span>
-                    <span>fa<span class="answer cedille">&ccedil;</span>onne &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                    <span>violent &rarr; <span class="answer orange">violemment</span> <em>(-ent &rarr; -emment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">4.</span>
-                    <span><span class="answer">c</span>ercle &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                    <span>m&eacute;chant &rarr; <span class="answer blue">m&eacute;chamment</span> <em>(-ant &rarr; -amment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">5.</span>
-                    <span>aper<span class="answer cedille">&ccedil;</span>u &rarr; <em>devant <strong>u</strong> &rarr; &ccedil;</em></span>
+                    <span>fort &rarr; <span class="answer">fortement</span> <em>(f&eacute;minin forte + ment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">6.</span>
-                    <span>le<span class="answer cedille">&ccedil;</span>on &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                    <span>g&eacute;n&eacute;ral &rarr; <span class="answer">g&eacute;n&eacute;ralement</span> <em>(f&eacute;minin g&eacute;n&eacute;rale + ment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">7.</span>
-                    <span>tra<span class="answer">c</span>e &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                    <span>r&eacute;cent &rarr; <span class="answer orange">r&eacute;cemment</span> <em>(-ent &rarr; -emment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">8.</span>
-                    <span>gar<span class="answer cedille">&ccedil;</span>on &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                    <span>bruyant &rarr; <span class="answer blue">bruyamment</span> <em>(-ant &rarr; -amment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">9.</span>
-                    <span>effa<span class="answer">c</span>e &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                    <span>ancien &rarr; <span class="answer">anciennement</span> <em>(f&eacute;minin ancienne + ment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">10.</span>
-                    <span>fa<span class="answer cedille">&ccedil;</span>ade &rarr; <em>devant <strong>a</strong> &rarr; &ccedil;</em></span>
+                    <span>amical &rarr; <span class="answer">amicalement</span> <em>(f&eacute;minin amicale + ment)</em></span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 -->
+    <section id="exercice2">
+        <div class="section-header">
+            <span class="section-icon">&#128221;</span>
+            <h2>Exercice 2 &ndash; Compl&egrave;te avec l'adverbe</h2>
+        </div>
+
+        <div class="card exercise">
+            <p>Compl&egrave;te chaque phrase avec l'adverbe form&eacute; &agrave; partir de l'adjectif entre parenth&egrave;ses.</p>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">1.</span>
+                <span>Les danseurs chantent le haka <span class="blank">violemment</span>. (violent)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">2.</span>
+                <span>Ils regardent <span class="blank">m&eacute;chamment</span> leurs adversaires. (m&eacute;chant)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">3.</span>
+                <span>Les guerriers tirent <span class="blank">fortement</span> la langue. (fort)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">4.</span>
+                <span>Le haka est <span class="blank">g&eacute;n&eacute;ralement</span> pratiqu&eacute; avant un match. (g&eacute;n&eacute;ral)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">5.</span>
+                <span>Ils se tapent <span class="blank">brutalement</span> la poitrine et les cuisses. (brutal)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">6.</span>
+                <span>La d&eacute;monstration se d&eacute;roule <span class="blank">simplement</span>. (simple)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">7.</span>
+                <span>Le public applaudit <span class="blank">bruyamment</span>. (bruyant)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">8.</span>
+                <span>Cette danse a &eacute;t&eacute; <span class="blank">r&eacute;cemment</span> pratiqu&eacute;e lors d'une c&eacute;r&eacute;monie. (r&eacute;cent)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">9.</span>
+                <span>Les &eacute;quipes se saluent <span class="blank">amicalement</span> apr&egrave;s le match. (amical)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">10.</span>
+                <span>Cette danse &eacute;tait <span class="blank">anciennement</span> r&eacute;serv&eacute;e aux guerriers. (ancien)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">11.</span>
+                <span>Les joueurs frappent <span class="blank">bruyamment</span> leurs cuisses. (bruyant)</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">12.</span>
+                <span>Cette tradition t&eacute;moigne <span class="blank">particuli&egrave;rement</span> du respect des anc&ecirc;tres. (particulier)</span>
+            </div>
+        </div>
+
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-sentence">
+                    <span class="exercise-number">1.</span>
+                    <span><span class="answer orange">violemment</span> <em>(violent &rarr; -ent &rarr; -emment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">2.</span>
+                    <span><span class="answer blue">m&eacute;chamment</span> <em>(m&eacute;chant &rarr; -ant &rarr; -amment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">3.</span>
+                    <span><span class="answer">fortement</span> <em>(fort &rarr; forte + ment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">4.</span>
+                    <span><span class="answer">g&eacute;n&eacute;ralement</span> <em>(g&eacute;n&eacute;ral &rarr; g&eacute;n&eacute;rale + ment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">5.</span>
+                    <span><span class="answer">brutalement</span> <em>(brutal &rarr; brutale + ment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">6.</span>
+                    <span><span class="answer">simplement</span> <em>(simple &rarr; simple + ment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">7.</span>
+                    <span><span class="answer blue">bruyamment</span> <em>(bruyant &rarr; -ant &rarr; -amment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">8.</span>
+                    <span><span class="answer orange">r&eacute;cemment</span> <em>(r&eacute;cent &rarr; -ent &rarr; -emment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">9.</span>
+                    <span><span class="answer">amicalement</span> <em>(amical &rarr; amicale + ment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">10.</span>
+                    <span><span class="answer">anciennement</span> <em>(ancien &rarr; ancienne + ment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">11.</span>
-                    <span>avan<span class="answer cedille">&ccedil;</span>ait &rarr; <em>devant <strong>a</strong> &rarr; &ccedil;</em></span>
+                    <span><span class="answer blue">bruyamment</span> <em>(bruyant &rarr; -ant &rarr; -amment)</em></span>
                 </div>
                 <div class="correction-sentence">
                     <span class="exercise-number">12.</span>
-                    <span>commen<span class="answer cedille">&ccedil;</span>ons &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
-                </div>
-                <div class="correction-sentence">
-                    <span class="exercise-number">13.</span>
-                    <span>surfa<span class="answer">c</span>e &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
-                </div>
-                <div class="correction-sentence">
-                    <span class="exercise-number">14.</span>
-                    <span>pla<span class="answer cedille">&ccedil;</span>ons &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
-                </div>
-                <div class="correction-sentence">
-                    <span class="exercise-number">15.</span>
-                    <span>ber<span class="answer">c</span>eau &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                    <span><span class="answer">particuli&egrave;rement</span> <em>(particulier &rarr; particuli&egrave;re + ment)</em></span>
                 </div>
             </div>
         </details>
@@ -725,8 +787,8 @@
 
 <!-- ===== FOOTER ===== -->
 <footer>
-    <p>Orthographe &bull; &Eacute;crire c ou &ccedil;</p>
-    <p>CM1 &bull; Dict&eacute;e La peinture aborig&egrave;ne (Australie)</p>
+    <p>Orthographe &bull; Les adverbes en -ment</p>
+    <p>CM1 &bull; Dict&eacute;e Le Haka (Nouvelle-Z&eacute;lande)</p>
 </footer>
 
 </body>
