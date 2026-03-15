@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connecter Strava & Garmin à Claude Code</title>
+<style>
+  :root {
+    --strava: #fc4c02;
+    --garmin: #007cc3;
+    --garmin-workouts: #00a651;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --border: #dee2e6;
+    --code-bg: #1e1e2e;
+    --code-text: #cdd6f4;
+    --code-comment: #6c7086;
+    --code-string: #a6e3a1;
+    --code-keyword: #89b4fa;
+    --success: #28a745;
+    --warning: #ffc107;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  header {
+    text-align: center;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, var(--strava), var(--garmin));
+    border-radius: 16px;
+    color: white;
+  }
+  header h1 {
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+  }
+  header p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+  .logos {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    font-size: 1.8rem;
+  }
+  .prereqs {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 2rem;
+  }
+  .prereqs h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  .prereqs ul {
+    list-style: none;
+    padding: 0;
+  }
+  .prereqs li {
+    padding: 0.3rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .prereqs li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+  }
+  .section {
+    background: var(--card);
+    border-radius: 12px;
+    border-left: 4px solid var(--border);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .section.strava { border-left-color: var(--strava); }
+  .section.garmin { border-left-color: var(--garmin); }
+  .section.garmin-workouts { border-left-color: var(--garmin-workouts); }
+  .section-header {
+    padding: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    user-select: none;
+  }
+  .section-header:hover { background: rgba(0,0,0,0.02); }
+  .section-header .icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+  .strava .icon { background: #fff0eb; }
+  .garmin .icon { background: #e6f3fb; }
+  .garmin-workouts .icon { background: #e6f7ed; }
+  .section-header h2 {
+    font-size: 1.15rem;
+    flex: 1;
+  }
+  .section-header .badge {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+  }
+  .strava .badge { background: var(--strava); }
+  .garmin .badge { background: var(--garmin); }
+  .garmin-workouts .badge { background: var(--garmin-workouts); }
+  .section-header .chevron {
+    font-size: 1.2rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  .section.open .chevron { transform: rotate(90deg); }
+  .section-body {
+    padding: 0 1.25rem 1.25rem;
+    display: none;
+  }
+  .section.open .section-body { display: block; }
+  .step {
+    margin-bottom: 1.25rem;
+  }
+  .step h3 {
+    font-size: 1rem;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--text);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step p, .step li {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+  .step ul, .step ol {
+    padding-left: 1.25rem;
+  }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0.75rem 0;
+    position: relative;
+  }
+  pre .comment { color: var(--code-comment); }
+  pre .cmd { color: var(--code-keyword); }
+  pre .str { color: var(--code-string); }
+  code {
+    background: #e9ecef;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.85em;
+  }
+  pre code {
+    background: none;
+    padding: 0;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: var(--code-text);
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+  }
+  .copy-btn:hover { background: rgba(255,255,255,0.2); }
+  .note {
+    background: #fff8e1;
+    border-left: 3px solid var(--warning);
+    padding: 0.75rem 1rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    margin: 0.75rem 0;
+  }
+  .verify {
+    background: #e8f5e9;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+  }
+  .verify strong { color: var(--success); }
+
+  /* Check section */
+  .check-section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 2px dashed var(--border);
+  }
+  .check-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* Troubleshooting */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-top: 0.75rem;
+  }
+  th, td {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    background: var(--bg);
+    font-weight: 600;
+  }
+  td code { font-size: 0.8em; }
+
+  /* Examples */
+  .examples {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .examples h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  .example-prompt {
+    background: var(--bg);
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    border-left: 3px solid var(--garmin);
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+  footer a { color: var(--garmin); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.3rem; }
+    body { padding: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Connecter Strava & Garmin à Claude Code</h1>
+  <p>Guide pas-à-pas pour connecter tes comptes sport via MCP</p>
+  <div class="logos">
+    <span title="Strava">🏃</span>
+    <span title="Garmin">⌚</span>
+    <span title="Claude">🤖</span>
+  </div>
+</header>
+
+<!-- PREREQS -->
+<div class="prereqs">
+  <h2>Prérequis</h2>
+  <ul>
+    <li><strong>Claude Code</strong> installé — <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank">doc officielle</a></li>
+    <li><strong>Node.js 18+</strong> — vérifie avec <code>node --version</code></li>
+    <li><strong>Python 3.10+</strong> et <strong>uv</strong> — <code>pip install uv</code> ou <code>brew install uv</code></li>
+    <li>Un compte <strong>Strava</strong> et/ou <strong>Garmin Connect</strong></li>
+  </ul>
+</div>
+
+<!-- STRAVA -->
+<div class="section strava open">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon">🏃</div>
+    <h2>Strava</h2>
+    <span class="badge">Activités & Routes</span>
+    <span class="chevron">›</span>
+  </div>
+  <div class="section-body">
+
+    <div class="step">
+      <h3><span class="step-num">1</span> Créer une application Strava API</h3>
+      <p>Va sur <a href="https://www.strava.com/settings/api" target="_blank"><strong>strava.com/settings/api</strong></a> et crée une application :</p>
+      <ul>
+        <li><strong>Application Name</strong> : <code>Claude Code MCP</code></li>
+        <li><strong>Category</strong> : <code>Training Analysis</code></li>
+        <li><strong>Website</strong> : <code>http://localhost</code></li>
+        <li><strong>Authorization Callback Domain</strong> : <code>localhost</code></li>
+      </ul>
+      <p>Note ton <strong>Client ID</strong> et <strong>Client Secret</strong>.</p>
+      <div class="note">
+        L'app Strava API est gratuite. Elle te donne un accès en lecture à tes propres données.
+      </div>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">2</span> Installer le serveur MCP</h3>
+      <pre><code><span class="cmd">claude</span> mcp add strava -- npx -y @r-huijts/strava-mcp-server</code><button class="copy-btn" onclick="copyCmd(this)">Copier</button></pre>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">3</span> Authentification</h3>
+      <ol>
+        <li>Lance <code>claude</code> dans ton terminal</li>
+        <li>Demande quelque chose qui utilise Strava (ex : "mes dernières activités Strava")</li>
+        <li>Le serveur ouvre ton navigateur pour autoriser l'accès</li>
+        <li>Autorise l'app sur Strava</li>
+        <li>Les tokens sont sauvegardés dans <code>~/.config/strava-mcp/config.json</code></li>
+      </ol>
+    </div>
+
+    <div class="verify">
+      <strong>Test :</strong> Dans Claude Code, demande <em>"Donne-moi mes 5 dernières activités Strava"</em>
+    </div>
+  </div>
+</div>
+
+<!-- GARMIN -->
+<div class="section garmin">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon">⌚</div>
+    <h2>Garmin Connect</h2>
+    <span class="badge">Données & Santé</span>
+    <span class="chevron">›</span>
+  </div>
+  <div class="section-body">
+
+    <div class="step">
+      <h3><span class="step-num">1</span> Pré-authentification</h3>
+      <p>Il faut d'abord s'authentifier une fois manuellement :</p>
+      <pre><code><span class="cmd">uvx</span> --python 3.12 --from git+https://github.com/Taxuspt/garmin_mcp garmin-mcp-auth</code><button class="copy-btn" onclick="copyCmd(this)">Copier</button></pre>
+      <p>Le script demande :</p>
+      <ol>
+        <li><strong>Email</strong> — ton email Garmin Connect</li>
+        <li><strong>Password</strong> — ton mot de passe</li>
+        <li><strong>Code MFA</strong> — le code à 6 chiffres si tu as la double authentification</li>
+      </ol>
+      <p>Les tokens OAuth sont sauvegardés dans <code>~/.garminconnect/</code>.</p>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">2</span> Installer le serveur MCP</h3>
+      <pre><code><span class="cmd">claude</span> mcp add garmin -- uvx --python 3.12 --from git+https://github.com/Taxuspt/garmin_mcp garmin-mcp</code><button class="copy-btn" onclick="copyCmd(this)">Copier</button></pre>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">3</span> Ce que tu peux faire</h3>
+      <ul>
+        <li>Consulter tes activités (détails, splits, FC, météo...)</li>
+        <li>Lire tes données de santé (sommeil, stress, Body Battery, SpO2)</li>
+        <li>Voir ton profil, tes records personnels, ton score d'endurance</li>
+        <li>Gérer tes pesées et ta composition corporelle</li>
+        <li>Consulter tes entraînements planifiés</li>
+      </ul>
+    </div>
+
+    <div class="verify">
+      <strong>Test :</strong> Dans Claude Code, demande <em>"Donne-moi mon résumé d'activité de la semaine"</em>
+    </div>
+  </div>
+</div>
+
+<!-- GARMIN WORKOUTS -->
+<div class="section garmin-workouts">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon">📲</div>
+    <h2>Garmin Workouts</h2>
+    <span class="badge">Envoi de séances</span>
+    <span class="chevron">›</span>
+  </div>
+  <div class="section-body">
+
+    <div class="step">
+      <h3><span class="step-num">1</span> Installer le serveur MCP</h3>
+      <pre><code><span class="cmd">claude</span> mcp add garmin-workouts -- npx -y garmin-workouts-mcp</code><button class="copy-btn" onclick="copyCmd(this)">Copier</button></pre>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">2</span> Authentification</h3>
+      <p>La première utilisation ouvre une fenêtre de navigateur (via Puppeteer) pour te connecter à Garmin Connect. Suis les instructions à l'écran.</p>
+      <div class="note">
+        Puppeteer a besoin de Chrome ou Chromium installé sur ta machine.
+      </div>
+    </div>
+
+    <div class="step">
+      <h3><span class="step-num">3</span> Ce que tu peux faire</h3>
+      <p>Décrire un entraînement en langage naturel et l'envoyer directement sur ta montre :</p>
+      <pre><code><span class="comment"># Dans Claude Code :</span>
+<span class="str">"Crée un entraînement fractionné :
+20' EF puis 6x(1' vite / 1' récup) puis 10' retour au calme"</span></code></pre>
+      <p>La séance apparaît dans ton calendrier Garmin Connect et peut être envoyée sur ta montre.</p>
+    </div>
+
+    <div class="verify">
+      <strong>Test :</strong> Demande à Claude de créer un footing simple de 40 minutes
+    </div>
+  </div>
+</div>
+
+<!-- CHECK ALL -->
+<div class="check-section">
+  <h2>Vérifier que tout est connecté</h2>
+  <pre><code><span class="cmd">claude</span> mcp list</code><button class="copy-btn" onclick="copyCmd(this)">Copier</button></pre>
+  <p>Tu devrais voir :</p>
+  <pre><code>garmin-workouts  npx -y garmin-workouts-mcp        <span class="str">✓ Connected</span>
+garmin           uvx --python 3.12 --from [...]     <span class="str">✓ Connected</span>
+strava           npx -y @r-huijts/strava-mcp-server <span class="str">✓ Connected</span></code></pre>
+</div>
+
+<!-- TROUBLESHOOTING -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="icon">🔧</div>
+    <h2>Troubleshooting</h2>
+    <span class="chevron">›</span>
+  </div>
+  <div class="section-body">
+    <table>
+      <thead>
+        <tr><th>Problème</th><th>Solution</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Not authenticated</code> (Garmin)</td>
+          <td>Relance <code>garmin-mcp-auth</code> pour rafraichir les tokens</td>
+        </tr>
+        <tr>
+          <td><code>Invalid token</code> (Strava)</td>
+          <td>Supprime <code>~/.config/strava-mcp/config.json</code> et relance Claude Code</td>
+        </tr>
+        <tr>
+          <td>Le serveur ne démarre pas</td>
+          <td>Vérifie Node.js (&ge; 18) et Python (&ge; 3.10)</td>
+        </tr>
+        <tr>
+          <td><code>Disconnected</code> dans <code>mcp list</code></td>
+          <td><code>claude mcp remove &lt;nom&gt;</code> puis réinstalle</td>
+        </tr>
+        <tr>
+          <td>Garmin Workouts bloqué</td>
+          <td>Puppeteer a besoin de Chrome/Chromium installé</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- EXAMPLES -->
+<div class="examples">
+  <h2>Exemples de prompts</h2>
+  <div class="example-prompt">"Analyse ma charge d'entraînement des 4 dernières semaines"</div>
+  <div class="example-prompt">"Compare mes allures sur mes 3 dernières sorties longues"</div>
+  <div class="example-prompt">"Envoie cette séance de fractionné sur ma montre pour demain"</div>
+  <div class="example-prompt">"Quel est mon temps de sommeil moyen cette semaine ?"</div>
+  <div class="example-prompt">"Génère un plan d'entraînement basé sur mes données récentes"</div>
+</div>
+
+<footer>
+  <p>Serveurs MCP : <a href="https://github.com/r-huijts/strava-mcp">strava-mcp</a> · <a href="https://github.com/Taxuspt/garmin_mcp">garmin_mcp</a> · <a href="https://www.npmjs.com/package/garmin-workouts-mcp">garmin-workouts-mcp</a></p>
+</footer>
+
+<script>
+function toggle(header) {
+  header.parentElement.classList.toggle('open');
+}
+function copyCmd(btn) {
+  const code = btn.parentElement.querySelector('code').textContent;
+  navigator.clipboard.writeText(code.replace('Copier','').trim());
+  btn.textContent = 'Copié !';
+  setTimeout(() => btn.textContent = 'Copier', 1500);
+}
+</script>
+</body>
+</html>
