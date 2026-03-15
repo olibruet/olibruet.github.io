@@ -3,9 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pages perso</title>
+    <title>Pages perso &mdash; olibruet.github.io</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f2f5;
+            color: #1a1a2e;
+            line-height: 1.6;
+        }
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem 1rem 2rem;
+            text-align: center;
+        }
+        .hero h1 { font-size: 2rem; margin-bottom: 0.3rem; }
+        .hero p { opacity: 0.85; font-size: 1rem; }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 3rem;
+        }
+        .section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .section-header {
+            background: #f8f9fa;
+            padding: 1rem 1.2rem;
+            border-bottom: 1px solid #e9ecef;
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .subsection { padding: 0.2rem 0; }
+        .subsection-title {
+            padding: 0.6rem 1.2rem;
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.95rem;
+            text-transform: capitalize;
+            border-bottom: 1px solid #f1f3f5;
+        }
+        .file-list { list-style: none; padding: 0; }
+        .file-list li { border-bottom: 1px solid #f1f3f5; }
+        .file-list li:last-child { border-bottom: none; }
+        .file-list a {
+            display: block;
+            padding: 0.6rem 1.2rem 0.6rem 2rem;
+            color: #4a6cf7;
+            text-decoration: none;
+            transition: background 0.15s;
+            font-size: 0.95rem;
+        }
+        .file-list a:hover { background: #f0f4ff; }
+        .badge {
+            display: inline-block;
+            background: #e9ecef;
+            color: #495057;
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+            font-weight: 400;
+        }
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            color: #adb5bd;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Pages perso</h1>
+    <div class="hero">
+        <h1>Pages perso</h1>
+        <p>olibruet.github.io</p>
+    </div>
+    <div class="container">
+        <div class="section">
+            <div class="section-header">
+                <span>&#128218;</span> Scolarit&eacute;
+                <span class="badge">14 fiches</span>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">5eme / fiches de lecture</div>
+                <ul class="file-list">
+                    <li><a href="scolarite/5eme/fiches-de-lecture/le-renard-de-morlange.html">Le Renard de Morlange - Alain Surget</a></li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">CM1 / geographie</div>
+                <ul class="file-list">
+                    <li><a href="scolarite/CM1/geographie/geo13-zones-touristiques.html">G&Eacute;O 13 &ndash; O&ugrave; se situent les principales zones touristiques en France&nbsp;?</a></li>
+                    <li><a href="scolarite/CM1/geographie/geo14-logement-vacances.html">G&Eacute;O 14 &ndash; O&ugrave; se loge-t-on en vacances&nbsp;?</a></li>
+                    <li><a href="scolarite/CM1/geographie/geo15-loisirs-en-vacances.html">G&Eacute;O 15 &ndash; Quels loisirs pour mes vacances&nbsp;?</a></li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">CM1 / grammaire</div>
+                <ul class="file-list">
+                    <li><a href="scolarite/CM1/grammaire/c4-c4suite-passe-compose-avec-etre.html">C4 &ndash; Le pass&eacute; compos&eacute; avec &ecirc;tre</a></li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">CM1 / histoire</div>
+                <ul class="file-list">
+                    <li><a href="scolarite/CM1/histoire/h12-vie-temps-premiers-chateaux.html">H12 &ndash; La vie au temps des premiers ch&acirc;teaux</a></li>
+                    <li><a href="scolarite/CM1/histoire/h5-h11-heritages-gaule-moyen-age.html">H5&ndash;H11 &ndash; Des h&eacute;ritages de la Gaule au Moyen &Acirc;ge</a></li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">CM1 / maths</div>
+                <ul class="file-list">
+                    <li><a href="scolarite/CM1/maths/calc5-multiples-diviseurs.html">CALC5 &ndash; Conna&icirc;tre les multiples et diviseurs d'un nombre</a></li>
+                    <li><a href="scolarite/CM1/maths/num14-nombres-decimaux.html">NUM14 &ndash; Lire, &eacute;crire et d&eacute;composer les nombres d&eacute;cimaux</a></li>
+                    <li><a href="scolarite/CM1/maths/problemes-serie3.html">Maths CM1 &ndash; Probl&egrave;mes S&eacute;rie 3</a></li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">CM1 / orthographe / CM1</div>
+                <ul class="file-list">
+                    <li><a href="scolarite/CM1/orthographe/CM1/o16-ou-ou.html">Orthographe - &Eacute;crire &laquo; ou &raquo; et &laquo; o&ugrave; &raquo;</a></li>
+                    <li><a href="scolarite/CM1/orthographe/CM1/o17-c-ou-c-cedille.html">Orthographe - &Eacute;crire c ou &ccedil;</a></li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">CM1 / sciences</div>
+                <ul class="file-list">
+                    <li><a href="scolarite/CM1/sciences/s5-s8-mouvements-terre-soleil.html">S5&ndash;S8 &ndash; Les mouvements de la Terre et du Soleil</a></li>
+                </ul>
+            </div>
+            <div class="subsection">
+                <div class="subsection-title">CM1 / vocabulaire</div>
+                <ul class="file-list">
+                    <li><a href="scolarite/CM1/vocabulaire/voc7-les-antonymes.html">VOC 7 &ndash; Les antonymes</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-header">
+                <span>&#127939;</span> Sport &amp; Sant&eacute;
+                <span class="badge">3 fiches</span>
+            </div>
+            <ul class="file-list">
+                <li><a href="sport-health/2026_semi_1h35_3s_v1.html">Plan Semi-Marathon 1h35 — 2026</a></li>
+                <li><a href="sport-health/2026_semi_1h35_3s.html">Plan Semi-Marathon 1h35 — 2026</a></li>
+                <li><a href="sport-health/renfo_2026_semi.html">Programme Renfo — Prépa Semi 2026</a></li>
+            </ul>
+        </div>
+    </div>
+    <footer>
+        G&eacute;n&eacute;r&eacute; automatiquement
+    </footer>
 </body>
 </html>

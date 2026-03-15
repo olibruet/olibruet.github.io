@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orthographe - &Eacute;crire &laquo; ou &raquo; et &laquo; o&ugrave; &raquo;</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --green: #00897b;
+            --green-light: #26a69a;
+            --green-bg: #e0f2f1;
+            --orange: #e67e22;
+            --orange-light: #f39c12;
+            --orange-bg: #fef5e7;
+            --blue: #2980b9;
+            --blue-bg: #ebf5fb;
+            --purple: #8e44ad;
+            --purple-bg: #f4ecf7;
+            --red: #c0392b;
+            --red-bg: #fdedec;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafffe 0%, #b2dfdb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HEADER ===== */
+        .hero {
+            background: linear-gradient(135deg, #00695c 0%, #00897b 40%, #26a69a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.3rem;
+            position: relative;
+        }
+
+        .hero .author {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            position: relative;
+        }
+
+        .hero .collection {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+            position: relative;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav::-webkit-scrollbar { display: none; }
+
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav a:hover, .nav a:active {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--green);
+        }
+
+        .section-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--green);
+        }
+
+        .card.accent {
+            border-left-color: var(--orange);
+        }
+
+        .card.exercise {
+            border-left-color: var(--purple);
+        }
+
+        .card p {
+            margin-bottom: 0.8rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== RULE SPECIFICS ===== */
+        .rule-keyword {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.4rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+
+        .rule-keyword.ou-accent {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .rule-keyword.ou-simple {
+            background: var(--orange-bg);
+            color: var(--orange);
+        }
+
+        .example {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .example strong {
+            color: var(--green);
+        }
+
+        .example.accent strong {
+            color: var(--orange);
+        }
+
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== WORD TABLE ===== */
+        .word-table {
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .word-table-header {
+            background: var(--green);
+            color: var(--white);
+            padding: 0.8rem 1.2rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-align: center;
+        }
+
+        .word-row {
+            display: flex;
+            border-bottom: 1px solid var(--light);
+            align-items: stretch;
+        }
+
+        .word-row:last-child {
+            border-bottom: none;
+        }
+
+        .word-cat {
+            width: 120px;
+            flex-shrink: 0;
+            padding: 0.8rem 1rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            background: var(--green-bg);
+        }
+
+        .word-list {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .word-list .important {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-sentence {
+            padding: 0.6rem 0;
+            font-size: 1rem;
+            line-height: 1.8;
+            display: flex;
+            gap: 0.5rem;
+            align-items: baseline;
+        }
+
+        .exercise-number {
+            font-weight: 700;
+            color: var(--purple);
+            flex-shrink: 0;
+            width: 1.8rem;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 3rem;
+            border-bottom: 2px dashed var(--purple);
+            text-align: center;
+            font-weight: 700;
+            color: transparent;
+            padding: 0 0.3rem;
+        }
+
+        /* ===== CORRECTION (native <details>) ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 137, 123, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+
+        .correction summary:hover,
+        .correction summary:active {
+            background: var(--green-bg);
+        }
+
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+
+        .correction[open] .correction-arrow {
+            transform: rotate(180deg);
+        }
+
+        .correction-inner {
+            padding: 0 1.2rem 1.2rem;
+        }
+
+        .correction-sentence {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            display: flex;
+            gap: 0.5rem;
+            align-items: baseline;
+        }
+
+        .correction-sentence .exercise-number {
+            color: var(--green);
+        }
+
+        .answer {
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .answer.choice {
+            color: var(--orange);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.6rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+            .word-cat { width: 140px; }
+        }
+
+        @media (max-width: 480px) {
+            .word-row { flex-direction: column; }
+            .word-cat {
+                width: 100%;
+                padding: 0.5rem 1rem;
+                border-bottom: 1px solid rgba(0,137,123,0.2);
+            }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .blank { border-bottom-style: solid; min-width: 4rem; }
+            .correction { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#9997;&#65039;</div>
+    <h1>&Eacute;crire &laquo;&nbsp;ou&nbsp;&raquo; et &laquo;&nbsp;o&ugrave;&nbsp;&raquo;</h1>
+    <p class="author">Orthographe &bull; Le&ccedil;on 16</p>
+    <p class="collection">CM1 &bull; Dict&eacute;e Lava (Hawa&iuml;)</p>
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">La le&ccedil;on</a>
+    <a href="#mots">Mots de la dict&eacute;e</a>
+    <a href="#exercice">Exercice</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+
+        <div class="card">
+            <div class="rule-keyword ou-accent">o&ugrave;</div>
+            <p><strong>o&ugrave;</strong> (avec un <strong>accent grave</strong>) peut &ecirc;tre un adverbe ou un pronom qui exprime le plus souvent une <strong>id&eacute;e de lieu</strong>.</p>
+            <div class="example">
+                <strong>O&ugrave;</strong> se passe cette histoire&nbsp;?<br>
+                C'est l'&icirc;le <strong>o&ugrave;</strong> vivent les tortues.
+            </div>
+        </div>
+
+        <div class="card accent">
+            <div class="rule-keyword ou-simple">ou</div>
+            <p><strong>ou</strong> (sans accent) marque un <strong>choix entre deux choses</strong>. C'est une conjonction. On peut la remplacer par &laquo;&nbsp;<strong>ou bien</strong>&nbsp;&raquo;.</p>
+            <div class="example accent">
+                Se passe-t-elle &agrave; Hawa&iuml; <strong>ou</strong> ailleurs&nbsp;?<br>
+                (&rarr; &agrave; Hawa&iuml; <strong>ou bien</strong> ailleurs)
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="tip">
+                <strong>Astuce :</strong> si tu peux remplacer par &laquo;&nbsp;ou bien&nbsp;&raquo; et que la phrase a toujours du sens &rarr; c'est <strong>ou</strong> (sans accent).<br>
+                Sinon &rarr; c'est <strong>o&ugrave;</strong> (avec accent).
+            </div>
+        </div>
+    </section>
+
+    <!-- MOTS DE LA DICTÉE -->
+    <section id="mots">
+        <div class="section-header">
+            <span class="section-icon">&#128209;</span>
+            <h2>Mots &agrave; apprendre pour la dict&eacute;e</h2>
+        </div>
+
+        <div class="word-table">
+            <div class="word-table-header">Lava (Hawa&iuml;)</div>
+
+            <div class="word-row">
+                <div class="word-cat">Noms</div>
+                <div class="word-list">
+                    <span class="important">Hawa&iuml;</span>, <span class="important">un film</span>, <span class="important">un volcan</span>, <span class="important">la terre</span>, <span class="important">un oc&eacute;an</span>, <span class="important">un archipel</span>, <span class="important">une ile</span>, <span class="important">une &eacute;ruption</span>, <span class="important">le r&eacute;sultat</span>, une envie, un animal, la tortue, la baleine, un amour, l'eau, le chant, <em>le jour</em>, <em>la mer</em>, <em>la musique</em>, <em>une histoire</em>, <em>une origine</em>, <em>le ukul&eacute;l&eacute;</em>
+                </div>
+            </div>
+
+            <div class="word-row">
+                <div class="word-cat">Verbes</div>
+                <div class="word-list">
+                    <span class="important">se d&eacute;rouler</span>, <span class="important">se dresser</span>, <span class="important">compter</span>, se sentir, chanter, r&eacute;sonner, savoir, <em>sortir</em>, <em>s'enfoncer</em>, <em>se rencontrer</em>
+                </div>
+            </div>
+
+            <div class="word-row">
+                <div class="word-cat">Adjectifs</div>
+                <div class="word-list">
+                    <span class="important">volcanique</span>, amoureux, seul, autre, <em>d&eacute;sesp&eacute;r&eacute;</em>, <em>imaginaire</em>
+                </div>
+            </div>
+
+            <div class="word-row">
+                <div class="word-cat">Mots invariables</div>
+                <div class="word-list">
+                    <span class="important">plusieurs</span>, <span class="important">sur</span>, <span class="important">sous</span>, avec, sans, l&agrave;, comme, <em>mais</em>, <em>gr&acirc;ce &agrave;</em>, <em>enfin</em>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXERCICE -->
+    <section id="exercice">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice &ndash; &laquo;&nbsp;ou&nbsp;&raquo; ou &laquo;&nbsp;o&ugrave;&nbsp;&raquo;&nbsp;?</h2>
+        </div>
+
+        <div class="card exercise">
+            <p>Compl&egrave;te chaque phrase avec <strong>ou</strong> (sans accent) ou <strong>o&ugrave;</strong> (avec accent grave).</p>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">1.</span>
+                <span><span class="blank">O&ugrave;</span> se d&eacute;roule le film Lava&nbsp;?</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">2.</span>
+                <span>Le volcan est sur une ile <span class="blank">ou</span> un archipel.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">3.</span>
+                <span>C'est l'endroit <span class="blank">o&ugrave;</span> il fait toujours chaud.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">4.</span>
+                <span>Tu pr&eacute;f&egrave;res la mer <span class="blank">ou</span> la montagne&nbsp;?</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">5.</span>
+                <span>La plage <span class="blank">o&ugrave;</span> nous allons est magnifique.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">6.</span>
+                <span>Il chante seul <span class="blank">ou</span> avec ses amis.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">7.</span>
+                <span>Le jour <span class="blank">o&ugrave;</span> le volcan a surgi, la terre a trembl&eacute;.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">8.</span>
+                <span>Veux-tu &eacute;couter de la musique <span class="blank">ou</span> chanter&nbsp;?</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">9.</span>
+                <span>C'est l'ile <span class="blank">o&ugrave;</span> vivent les tortues et les baleines.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">10.</span>
+                <span>On peut y aller en bateau <span class="blank">ou</span> en avion.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">11.</span>
+                <span>La for&ecirc;t <span class="blank">o&ugrave;</span> vivent les animaux est immense.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">12.</span>
+                <span>Est-ce une tortue <span class="blank">ou</span> une baleine&nbsp;?</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">13.</span>
+                <span>Je ne sais pas <span class="blank">o&ugrave;</span> se trouve l'archipel d'Hawa&iuml;.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">14.</span>
+                <span>Gr&acirc;ce &agrave; la musique <span class="blank">ou</span> au chant, il se sent moins seul.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">15.</span>
+                <span>L'oc&eacute;an <span class="blank">o&ugrave;</span> s'enfonce le volcan est tr&egrave;s profond.</span>
+            </div>
+        </div>
+
+        <!-- CORRECTION avec <details> natif -->
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-sentence">
+                    <span class="exercise-number">1.</span>
+                    <span><span class="answer">O&ugrave;</span> se d&eacute;roule le film Lava&nbsp;? &rarr; <em>lieu</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">2.</span>
+                    <span>Le volcan est sur une ile <span class="answer choice">ou</span> un archipel. &rarr; <em>choix (ou bien)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">3.</span>
+                    <span>C'est l'endroit <span class="answer">o&ugrave;</span> il fait toujours chaud. &rarr; <em>lieu</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">4.</span>
+                    <span>Tu pr&eacute;f&egrave;res la mer <span class="answer choice">ou</span> la montagne&nbsp;? &rarr; <em>choix (ou bien)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">5.</span>
+                    <span>La plage <span class="answer">o&ugrave;</span> nous allons est magnifique. &rarr; <em>lieu</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">6.</span>
+                    <span>Il chante seul <span class="answer choice">ou</span> avec ses amis. &rarr; <em>choix (ou bien)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">7.</span>
+                    <span>Le jour <span class="answer">o&ugrave;</span> le volcan a surgi, la terre a trembl&eacute;. &rarr; <em>lieu (moment)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">8.</span>
+                    <span>Veux-tu &eacute;couter de la musique <span class="answer choice">ou</span> chanter&nbsp;? &rarr; <em>choix (ou bien)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">9.</span>
+                    <span>C'est l'ile <span class="answer">o&ugrave;</span> vivent les tortues et les baleines. &rarr; <em>lieu</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">10.</span>
+                    <span>On peut y aller en bateau <span class="answer choice">ou</span> en avion. &rarr; <em>choix (ou bien)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">11.</span>
+                    <span>La for&ecirc;t <span class="answer">o&ugrave;</span> vivent les animaux est immense. &rarr; <em>lieu</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">12.</span>
+                    <span>Est-ce une tortue <span class="answer choice">ou</span> une baleine&nbsp;? &rarr; <em>choix (ou bien)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">13.</span>
+                    <span>Je ne sais pas <span class="answer">o&ugrave;</span> se trouve l'archipel d'Hawa&iuml;. &rarr; <em>lieu</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">14.</span>
+                    <span>Gr&acirc;ce &agrave; la musique <span class="answer choice">ou</span> au chant, il se sent moins seul. &rarr; <em>choix (ou bien)</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">15.</span>
+                    <span>L'oc&eacute;an <span class="answer">o&ugrave;</span> s'enfonce le volcan est tr&egrave;s profond. &rarr; <em>lieu</em></span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>Orthographe &bull; &Eacute;crire &laquo;&nbsp;ou&nbsp;&raquo; et &laquo;&nbsp;o&ugrave;&nbsp;&raquo;</p>
+    <p>CM1 &bull; Dict&eacute;e Lava (Hawa&iuml;)</p>
+</footer>
+
+</body>
+</html>

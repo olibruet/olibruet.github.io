@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C4 &ndash; Le pass&eacute; compos&eacute; avec &ecirc;tre</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --indigo: #283593;
+            --indigo-bg: #e8eaf6;
+            --orange: #e67e22;
+            --orange-light: #f39c12;
+            --orange-bg: #fef5e7;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f8ff 0%, #bbdefb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 40%, #42a5f5 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--blue); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--blue);
+        }
+        .card.orange { border-left-color: var(--orange); }
+        .card.green { border-left-color: var(--green); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.red { border-left-color: var(--red); }
+        .card.indigo { border-left-color: var(--indigo); }
+        .card.teal { border-left-color: var(--teal); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.indigo { background: var(--indigo-bg); color: var(--indigo); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+
+        /* ===== EXAMPLE ===== */
+        .example {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+        }
+        .example strong { color: var(--blue); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== CONJUGATION TABLE ===== */
+        .conj-table {
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        .conj-table-header {
+            background: var(--blue);
+            color: var(--white);
+            padding: 0.8rem 1.2rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-align: center;
+        }
+        .conj-table-header.orange-header { background: var(--orange); }
+        .conj-row {
+            display: flex;
+            border-bottom: 1px solid var(--light);
+            align-items: stretch;
+        }
+        .conj-row:last-child { border-bottom: none; }
+        .conj-subject {
+            width: 140px;
+            flex-shrink: 0;
+            padding: 0.6rem 1rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            background: var(--blue-bg);
+        }
+        .conj-subject.orange-sub { color: var(--orange); background: var(--orange-bg); }
+        .conj-verb {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #444;
+        }
+        .conj-verb strong { color: var(--blue); }
+        .conj-verb strong.pp { color: var(--indigo); }
+        .conj-verb strong.orange { color: var(--orange); }
+
+        /* ===== VERB LIST ===== */
+        .verb-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+        .verb-tag {
+            display: inline-block;
+            background: var(--blue-bg);
+            color: var(--blue);
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .blank {
+            display: inline-block;
+            min-width: 5rem;
+            border-bottom: 2px dashed var(--purple);
+            text-align: center;
+            font-weight: 700;
+            color: transparent;
+            padding: 0 0.3rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(21, 101, 192, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.4rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+            .conj-subject { width: 160px; }
+        }
+
+        @media (max-width: 480px) {
+            .conj-row { flex-direction: column; }
+            .conj-subject {
+                width: 100%;
+                padding: 0.4rem 1rem;
+                border-bottom: 1px solid rgba(21,101,192,0.2);
+            }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .blank { border-bottom-style: solid; min-width: 5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#128221;</div>
+    <h1>Le pass&eacute; compos&eacute; avec &ecirc;tre</h1>
+    <p class="subtitle">Grammaire &bull; Le&ccedil;ons C4 &amp; C4 suite</p>
+    <p class="collection">CM1 &bull; Conjugaison</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#regle">La r&egrave;gle</a>
+    <a href="#verbes">Les verbes avec &ecirc;tre</a>
+    <a href="#accord">L'accord</a>
+    <a href="#conjugaison">Conjugaison</a>
+    <a href="#avoir">Rappel : avec avoir</a>
+    <a href="#retenir">&Agrave; retenir</a>
+    <a href="#ex1">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- RÈGLE -->
+    <section id="regle">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La r&egrave;gle du pass&eacute; compos&eacute; avec &ecirc;tre</h2>
+        </div>
+        <div class="card">
+            <div class="key blue">Formation</div>
+            <p>Le pass&eacute; compos&eacute; se forme &eacute;galement avec&nbsp;:</p>
+            <ul style="margin-left: 1.2rem; margin-top: 0.4rem;">
+                <li>Le verbe <strong>&ecirc;tre</strong> conjugu&eacute; au <strong>pr&eacute;sent</strong></li>
+                <li>Le <strong>participe pass&eacute;</strong> du verbe</li>
+            </ul>
+            <div class="example">
+                <strong>&ecirc;tre au pr&eacute;sent</strong> + <strong>participe pass&eacute;</strong> = pass&eacute; compos&eacute;<br>
+                Elle <strong>est</strong> <strong>venue</strong>. &mdash; Ils <strong>sont</strong> <strong>venus</strong>.
+            </div>
+            <div class="tip">
+                <strong>Rappel :</strong> Le pass&eacute; compos&eacute; est toujours form&eacute; de <strong>2 mots</strong>&nbsp;: un auxiliaire (avoir ou &ecirc;tre) + un participe pass&eacute;.
+            </div>
+        </div>
+    </section>
+
+    <!-- VERBES AVEC ÊTRE -->
+    <section id="verbes">
+        <div class="section-header">
+            <span class="section-icon">&#128270;</span>
+            <h2>Les verbes conjugu&eacute;s avec &ecirc;tre</h2>
+        </div>
+        <div class="card">
+            <div class="key blue">Les 10 verbes &agrave; conna&icirc;tre</div>
+            <p>Voici les verbes qui se conjuguent avec l'auxiliaire <strong>&ecirc;tre</strong> au pass&eacute; compos&eacute;&nbsp;:</p>
+            <div class="verb-list">
+                <span class="verb-tag">na&icirc;tre</span>
+                <span class="verb-tag">mourir</span>
+                <span class="verb-tag">aller</span>
+                <span class="verb-tag">venir</span>
+                <span class="verb-tag">partir</span>
+                <span class="verb-tag">monter</span>
+                <span class="verb-tag">descendre</span>
+                <span class="verb-tag">arriver</span>
+                <span class="verb-tag">tomber</span>
+                <span class="verb-tag">passer</span>
+            </div>
+            <div class="tip">
+                <strong>Astuce pour les retenir :</strong> ce sont des verbes de <strong>mouvement</strong> ou de <strong>changement d'&eacute;tat</strong> (na&icirc;tre, mourir). Pense &agrave; des personnages qui <em>vont</em>, <em>viennent</em>, <em>montent</em>, <em>descendent</em>&hellip;
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCORD -->
+    <section id="accord">
+        <div class="section-header">
+            <span class="section-icon">&#9888;&#65039;</span>
+            <h2>L'accord du participe pass&eacute;</h2>
+        </div>
+        <div class="card red">
+            <div class="key red">R&egrave;gle importante</div>
+            <p>Avec l'auxiliaire <strong>&ecirc;tre</strong>, le participe pass&eacute; <strong>s'accorde avec le sujet</strong>&nbsp;:</p>
+            <ul style="margin-left: 1.2rem; margin-top: 0.4rem;">
+                <li><strong>f&eacute;minin singulier</strong> &rarr; on ajoute <strong>-e</strong></li>
+                <li><strong>masculin pluriel</strong> &rarr; on ajoute <strong>-s</strong></li>
+                <li><strong>f&eacute;minin pluriel</strong> &rarr; on ajoute <strong>-es</strong></li>
+            </ul>
+            <div class="example">
+                Il est <strong>all&eacute;</strong>. &mdash; Elle est <strong>all&eacute;e</strong>.<br>
+                Ils sont <strong>all&eacute;s</strong>. &mdash; Elles sont <strong>all&eacute;es</strong>.
+            </div>
+            <div class="example">
+                Il est <strong>parti</strong>. &mdash; Elle est <strong>partie</strong>.<br>
+                Ils sont <strong>partis</strong>. &mdash; Elles sont <strong>parties</strong>.
+            </div>
+        </div>
+    </section>
+
+    <!-- CONJUGAISON -->
+    <section id="conjugaison">
+        <div class="section-header">
+            <span class="section-icon">&#128203;</span>
+            <h2>Tableaux de conjugaison</h2>
+        </div>
+
+        <div class="conj-table">
+            <div class="conj-table-header">Aller &rarr; au pass&eacute; compos&eacute;</div>
+            <div class="conj-row">
+                <div class="conj-subject">Je</div>
+                <div class="conj-verb"><strong>suis</strong> <strong class="pp">all&eacute;(e)</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Tu</div>
+                <div class="conj-verb"><strong>es</strong> <strong class="pp">all&eacute;(e)</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Il / Elle</div>
+                <div class="conj-verb"><strong>est</strong> <strong class="pp">all&eacute; / all&eacute;e</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Nous</div>
+                <div class="conj-verb"><strong>sommes</strong> <strong class="pp">all&eacute;(e)s</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Vous</div>
+                <div class="conj-verb"><strong>&ecirc;tes</strong> <strong class="pp">all&eacute;(e)s</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Ils / Elles</div>
+                <div class="conj-verb"><strong>sont</strong> <strong class="pp">all&eacute;s / all&eacute;es</strong></div>
+            </div>
+        </div>
+
+        <div class="conj-table">
+            <div class="conj-table-header">Venir &rarr; au pass&eacute; compos&eacute;</div>
+            <div class="conj-row">
+                <div class="conj-subject">Je</div>
+                <div class="conj-verb"><strong>suis</strong> <strong class="pp">venu(e)</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Tu</div>
+                <div class="conj-verb"><strong>es</strong> <strong class="pp">venu(e)</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Il / Elle</div>
+                <div class="conj-verb"><strong>est</strong> <strong class="pp">venu / venue</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Nous</div>
+                <div class="conj-verb"><strong>sommes</strong> <strong class="pp">venu(e)s</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Vous</div>
+                <div class="conj-verb"><strong>&ecirc;tes</strong> <strong class="pp">venu(e)s</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject">Ils / Elles</div>
+                <div class="conj-verb"><strong>sont</strong> <strong class="pp">venus / venues</strong></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="key indigo">Autres participes pass&eacute;s &agrave; conna&icirc;tre</div>
+            <div class="example">
+                na&icirc;tre &rarr; <strong>n&eacute;(e)(s)</strong> &mdash;
+                mourir &rarr; <strong>mort(e)(s)</strong> &mdash;
+                partir &rarr; <strong>parti(e)(s)</strong><br>
+                monter &rarr; <strong>mont&eacute;(e)(s)</strong> &mdash;
+                descendre &rarr; <strong>descendu(e)(s)</strong> &mdash;
+                arriver &rarr; <strong>arriv&eacute;(e)(s)</strong><br>
+                tomber &rarr; <strong>tomb&eacute;(e)(s)</strong> &mdash;
+                passer &rarr; <strong>pass&eacute;(e)(s)</strong> &mdash;
+                appara&icirc;tre &rarr; <strong>apparu(e)(s)</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- RAPPEL AVOIR -->
+    <section id="avoir">
+        <div class="section-header">
+            <span class="section-icon">&#128161;</span>
+            <h2>Rappel : le pass&eacute; compos&eacute; avec avoir</h2>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Avec l'auxiliaire avoir</div>
+            <p>La plupart des verbes se conjuguent avec <strong>avoir</strong> au pass&eacute; compos&eacute;. Le participe pass&eacute; <strong>ne s'accorde pas</strong> avec le sujet.</p>
+            <div class="example">
+                J'<strong class="pp">ai</strong> <strong>mang&eacute;</strong>. &mdash;
+                Elle <strong class="pp">a</strong> <strong>mang&eacute;</strong>. &mdash;
+                Ils <strong class="pp">ont</strong> <strong>mang&eacute;</strong>.
+            </div>
+        </div>
+
+        <div class="conj-table">
+            <div class="conj-table-header orange-header">&Ecirc;tre &rarr; au pass&eacute; compos&eacute; (avec avoir&nbsp;!)</div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">J'</div>
+                <div class="conj-verb"><strong class="orange">ai</strong> <strong class="pp">&eacute;t&eacute;</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Tu</div>
+                <div class="conj-verb"><strong class="orange">as</strong> <strong class="pp">&eacute;t&eacute;</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Il / Elle</div>
+                <div class="conj-verb"><strong class="orange">a</strong> <strong class="pp">&eacute;t&eacute;</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Nous</div>
+                <div class="conj-verb"><strong class="orange">avons</strong> <strong class="pp">&eacute;t&eacute;</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Vous</div>
+                <div class="conj-verb"><strong class="orange">avez</strong> <strong class="pp">&eacute;t&eacute;</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Ils / Elles</div>
+                <div class="conj-verb"><strong class="orange">ont</strong> <strong class="pp">&eacute;t&eacute;</strong></div>
+            </div>
+        </div>
+
+        <div class="conj-table">
+            <div class="conj-table-header orange-header">Avoir &rarr; au pass&eacute; compos&eacute; (avec avoir&nbsp;!)</div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">J'</div>
+                <div class="conj-verb"><strong class="orange">ai</strong> <strong class="pp">eu</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Tu</div>
+                <div class="conj-verb"><strong class="orange">as</strong> <strong class="pp">eu</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Il / Elle</div>
+                <div class="conj-verb"><strong class="orange">a</strong> <strong class="pp">eu</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Nous</div>
+                <div class="conj-verb"><strong class="orange">avons</strong> <strong class="pp">eu</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Vous</div>
+                <div class="conj-verb"><strong class="orange">avez</strong> <strong class="pp">eu</strong></div>
+            </div>
+            <div class="conj-row">
+                <div class="conj-subject orange-sub">Ils / Elles</div>
+                <div class="conj-verb"><strong class="orange">ont</strong> <strong class="pp">eu</strong></div>
+            </div>
+        </div>
+
+        <div class="card orange">
+            <div class="key orange">Participes pass&eacute;s irr&eacute;guliers (avec avoir)</div>
+            <div class="example">
+                prendre &rarr; <strong>pris</strong> &mdash;
+                faire &rarr; <strong>fait</strong> &mdash;
+                dire &rarr; <strong>dit</strong><br>
+                voir &rarr; <strong>vu</strong> &mdash;
+                pouvoir &rarr; <strong>pu</strong> &mdash;
+                vouloir &rarr; <strong>voulu</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--red);">
+            <p><strong>1.</strong> Le pass&eacute; compos&eacute; = <strong>auxiliaire</strong> (avoir ou &ecirc;tre) + <strong>participe pass&eacute;</strong> &rarr; toujours <strong>2 mots</strong>.</p>
+            <p><strong>2.</strong> Avec <strong>&ecirc;tre</strong>, le participe pass&eacute; <strong>s'accorde avec le sujet</strong> (f&eacute;minin, pluriel).</p>
+            <p><strong>3.</strong> Les verbes conjugu&eacute;s avec &ecirc;tre&nbsp;: <em>na&icirc;tre, mourir, aller, venir, partir, monter, descendre, arriver, tomber, passer</em>.</p>
+            <p><strong>4.</strong> Avec <strong>avoir</strong>, le participe pass&eacute; <strong>ne s'accorde pas</strong> avec le sujet.</p>
+        </div>
+    </section>
+
+    <!-- ================================ -->
+    <!--  EXERCICES                        -->
+    <!-- ================================ -->
+    <section id="ex1">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Avoir ou &ecirc;tre&nbsp;?</h2>
+        </div>
+        <div class="card purple">
+            <p>Indique si le verbe se conjugue avec <strong>avoir</strong> ou <strong>&ecirc;tre</strong> au pass&eacute; compos&eacute;&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>manger</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>partir</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>venir</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>chanter</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>na&icirc;tre</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>descendre</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>prendre</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">8</span>
+                <span>tomber</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1.</strong> manger &rarr; <span class="answer">avoir</span> (j'ai mang&eacute;)</div>
+                <div class="correction-item"><strong>2.</strong> partir &rarr; <span class="answer">&ecirc;tre</span> (je suis parti)</div>
+                <div class="correction-item"><strong>3.</strong> venir &rarr; <span class="answer">&ecirc;tre</span> (je suis venu)</div>
+                <div class="correction-item"><strong>4.</strong> chanter &rarr; <span class="answer">avoir</span> (j'ai chant&eacute;)</div>
+                <div class="correction-item"><strong>5.</strong> na&icirc;tre &rarr; <span class="answer">&ecirc;tre</span> (je suis n&eacute;)</div>
+                <div class="correction-item"><strong>6.</strong> descendre &rarr; <span class="answer">&ecirc;tre</span> (je suis descendu)</div>
+                <div class="correction-item"><strong>7.</strong> prendre &rarr; <span class="answer">avoir</span> (j'ai pris)</div>
+                <div class="correction-item"><strong>8.</strong> tomber &rarr; <span class="answer">&ecirc;tre</span> (je suis tomb&eacute;)</div>
+            </div>
+        </details>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128221;</span>
+            <h2>Exercice 2 &ndash; Conjugue au pass&eacute; compos&eacute;</h2>
+        </div>
+        <div class="card purple">
+            <p>Conjugue le verbe entre parenth&egrave;ses au pass&eacute; compos&eacute;. Attention aux accords&nbsp;!</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Marie ______ au march&eacute;. (aller)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Les enfants ______ &agrave; l'heure. (arriver)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Paul ______ de l'arbre. (tomber)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Mes s&oelig;urs ______ en vacances. (partir)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Ma grand-m&egrave;re ______ en 1950. (na&icirc;tre)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>Nous ______ par l'escalier. (monter) &ndash; sujet = des gar&ccedil;ons</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>Vous ______ tr&egrave;s vite. (venir) &ndash; sujet = des filles</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">8</span>
+                <span>L'oiseau ______ de sa cage. (mourir)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1.</strong> Marie <span class="answer">est all&eacute;e</span> au march&eacute;. (f&eacute;minin singulier &rarr; -&eacute;e)</div>
+                <div class="correction-item"><strong>2.</strong> Les enfants <span class="answer">sont arriv&eacute;s</span> &agrave; l'heure. (masculin pluriel &rarr; -&eacute;s)</div>
+                <div class="correction-item"><strong>3.</strong> Paul <span class="answer">est tomb&eacute;</span> de l'arbre. (masculin singulier)</div>
+                <div class="correction-item"><strong>4.</strong> Mes s&oelig;urs <span class="answer">sont parties</span> en vacances. (f&eacute;minin pluriel &rarr; -ies)</div>
+                <div class="correction-item"><strong>5.</strong> Ma grand-m&egrave;re <span class="answer">est n&eacute;e</span> en 1950. (f&eacute;minin singulier &rarr; -&eacute;e)</div>
+                <div class="correction-item"><strong>6.</strong> Nous <span class="answer">sommes mont&eacute;s</span> par l'escalier. (masculin pluriel &rarr; -&eacute;s)</div>
+                <div class="correction-item"><strong>7.</strong> Vous <span class="answer">&ecirc;tes venues</span> tr&egrave;s vite. (f&eacute;minin pluriel &rarr; -ues)</div>
+                <div class="correction-item"><strong>8.</strong> L'oiseau <span class="answer">est mort</span> dans sa cage. (masculin singulier)</div>
+            </div>
+        </details>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 3 &ndash; Corrige les erreurs</h2>
+        </div>
+        <div class="card purple">
+            <p>Chaque phrase contient une erreur d'accord. Recopie la phrase corrig&eacute;e&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Julie est arriv&eacute; en retard.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Mes cousines sont parti hier soir.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Il est tomb&eacute;e dans la cour.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Les filles sont all&eacute;s au cin&eacute;ma.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Ma m&egrave;re est n&eacute; en juin.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1.</strong> Julie est <span class="answer">arriv&eacute;e</span> en retard. (Julie = f&eacute;minin &rarr; -&eacute;e)</div>
+                <div class="correction-item"><strong>2.</strong> Mes cousines sont <span class="answer">parties</span> hier soir. (f&eacute;minin pluriel &rarr; -ies)</div>
+                <div class="correction-item"><strong>3.</strong> Il est <span class="answer">tomb&eacute;</span> dans la cour. (il = masculin &rarr; -&eacute;)</div>
+                <div class="correction-item"><strong>4.</strong> Les filles sont <span class="answer">all&eacute;es</span> au cin&eacute;ma. (f&eacute;minin pluriel &rarr; -&eacute;es)</div>
+                <div class="correction-item"><strong>5.</strong> Ma m&egrave;re est <span class="answer">n&eacute;e</span> en juin. (f&eacute;minin &rarr; -&eacute;e)</div>
+            </div>
+        </details>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128172;</span>
+            <h2>Exercice 4 &ndash; &Eacute;cris des phrases</h2>
+        </div>
+        <div class="card purple">
+            <p>&Eacute;cris une phrase au pass&eacute; compos&eacute; avec chaque verbe et le sujet indiqu&eacute;&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span><strong>aller</strong> &ndash; sujet : <em>Camille</em> (fille)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span><strong>venir</strong> &ndash; sujet : <em>les voisins</em></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span><strong>monter</strong> &ndash; sujet : <em>nous</em> (des filles)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span><strong>passer</strong> &ndash; sujet : <em>l'ann&eacute;e</em></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1.</strong> <span class="answer">Camille est all&eacute;e &agrave; l'&eacute;cole.</span> (f&eacute;minin &rarr; all&eacute;e)</div>
+                <div class="correction-item"><strong>2.</strong> <span class="answer">Les voisins sont venus chez nous.</span> (masculin pluriel &rarr; venus)</div>
+                <div class="correction-item"><strong>3.</strong> <span class="answer">Nous sommes mont&eacute;es au grenier.</span> (f&eacute;minin pluriel &rarr; mont&eacute;es)</div>
+                <div class="correction-item"><strong>4.</strong> <span class="answer">L'ann&eacute;e est pass&eacute;e tr&egrave;s vite.</span> (f&eacute;minin &rarr; pass&eacute;e)</div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>C4 &bull; Le pass&eacute; compos&eacute; avec &ecirc;tre</p>
+    <p>CM1 &bull; Grammaire / Conjugaison</p>
+</footer>
+
+</body>
+</html>

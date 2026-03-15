@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H12 &ndash; La vie au temps des premiers ch&acirc;teaux</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --brown: #5d4037;
+            --brown-light: #8d6e63;
+            --brown-bg: #efebe9;
+            --blue: #1565c0;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --gold: #f57f17;
+            --gold-bg: #fff8e1;
+            --indigo: #283593;
+            --indigo-bg: #e8eaf6;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafaf5 0%, #d7ccc8 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #3e2723 0%, #5d4037 40%, #8d6e63 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--brown); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--brown);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--brown);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.gold { border-left-color: var(--gold); }
+        .card.indigo { border-left-color: var(--indigo); }
+        .card.teal { border-left-color: var(--teal); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.brown { background: var(--brown-bg); color: var(--brown); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.gold { background: var(--gold-bg); color: var(--gold); }
+        .key.indigo { background: var(--indigo-bg); color: var(--indigo); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== VOCAB ===== */
+        .vocab {
+            background: var(--indigo-bg);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .vocab strong { color: var(--indigo); }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(93, 64, 55, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127984;</div>
+    <h1>H12 &ndash; La vie au temps des premiers ch&acirc;teaux</h1>
+    <p class="subtitle">Paysans et seigneurs dans la seigneurie</p>
+    <p class="collection">CM1 &bull; Histoire</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#seigneurie">La seigneurie</a>
+    <a href="#terres">Les terres</a>
+    <a href="#paysans">La vie des paysans</a>
+    <a href="#banalites">Les banalit&eacute;s</a>
+    <a href="#retenir">&Agrave; retenir</a>
+    <a href="#exercices">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LA SEIGNEURIE -->
+    <section id="seigneurie">
+        <div class="section-header">
+            <span class="section-icon">&#127984;</span>
+            <h2>Qu'est-ce qu'une seigneurie&nbsp;?</h2>
+        </div>
+        <div class="card blue">
+            <div class="key blue">Un domaine de terres agricoles</div>
+            <p>Les <strong>seigneuries</strong> sont des domaines de terres agricoles. Elles sont compos&eacute;es de&nbsp;:</p>
+            <ul style="margin-left: 1.2rem; margin-top: 0.4rem;">
+                <li>Un <strong>ch&acirc;teau</strong> o&ugrave; vit le seigneur</li>
+                <li>Les <strong>terres du seigneur</strong> (la <strong>r&eacute;serve</strong>)</li>
+                <li>Les <strong>terres laiss&eacute;es aux paysans</strong> (les <strong>tenures</strong>)</li>
+            </ul>
+            <div class="vocab">
+                <strong>&#128214; Seigneurie :</strong> ensemble des terres et des droits poss&eacute;d&eacute;s par un seigneur.
+            </div>
+        </div>
+    </section>
+
+    <!-- LES TERRES -->
+    <section id="terres">
+        <div class="section-header">
+            <span class="section-icon">&#127806;</span>
+            <h2>Les diff&eacute;rentes terres</h2>
+        </div>
+        <div class="card green">
+            <div class="key green">La r&eacute;serve</div>
+            <p>Les terres qui <strong>appartiennent au seigneur</strong> et sur lesquelles les paysans effectuent des <strong>corv&eacute;es</strong>. Ces terres se trouvent <strong>pr&egrave;s du ch&acirc;teau</strong>.</p>
+            <div class="vocab">
+                <strong>&#128214; Corv&eacute;e :</strong> travail gratuit et obligatoire que les paysans doivent au seigneur sur ses terres.
+            </div>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Les tenures</div>
+            <p>Les terres <strong>laiss&eacute;es aux paysans</strong> pour leur culture. Ces terres se trouvent <strong>pr&egrave;s de leurs maisons</strong>, dans le village.</p>
+            <p>En &eacute;change, les paysans doivent donner une <strong>partie de leurs r&eacute;coltes</strong> au seigneur et payer des <strong>taxes</strong> et des <strong>imp&ocirc;ts</strong>.</p>
+        </div>
+    </section>
+
+    <!-- LA VIE DES PAYSANS -->
+    <section id="paysans">
+        <div class="section-header">
+            <span class="section-icon">&#129489;&#8205;&#127806;</span>
+            <h2>La vie des paysans</h2>
+        </div>
+        <div class="card red">
+            <div class="key red">Une vie difficile et souvent mis&eacute;rable</div>
+            <p>Dans la seigneurie, les paysans doivent <strong>travailler pour vivre</strong>, mais aussi <strong>pour le seigneur</strong>.</p>
+            <p>Le seigneur peut&nbsp;:</p>
+            <ul style="margin-left: 1.2rem; margin-top: 0.4rem;">
+                <li>Recevoir une <strong>partie des r&eacute;coltes</strong></li>
+                <li>Faire <strong>travailler les paysans</strong> dans sa r&eacute;serve (corv&eacute;es)</li>
+                <li>Percevoir des <strong>taxes</strong> et des <strong>imp&ocirc;ts</strong> de diff&eacute;rentes mani&egrave;res</li>
+            </ul>
+            <div class="tip">
+                <strong>&Agrave; retenir :</strong> La vie des paysans est difficile et souvent mis&eacute;rable. Ils travaillent dur pour eux-m&ecirc;mes ET pour le seigneur.
+            </div>
+        </div>
+    </section>
+
+    <!-- LES BANALITÉS -->
+    <section id="banalites">
+        <div class="section-header">
+            <span class="section-icon">&#9881;&#65039;</span>
+            <h2>Les &eacute;quipements de la seigneurie</h2>
+        </div>
+        <div class="card gold">
+            <div class="key gold">Des &eacute;quipements communs payants</div>
+            <p>Dans la seigneurie, certains &eacute;quipements appartiennent au seigneur. Les paysans doivent <strong>payer une taxe</strong> pour les utiliser&nbsp;:</p>
+        </div>
+        <div class="card teal">
+            <div class="key teal">Le moulin</div>
+            <p>Endroit o&ugrave; l'on <strong>transforme le bl&eacute; en farine</strong>. Il faut verser une <strong>taxe</strong> pour faire son pain.</p>
+        </div>
+        <div class="card purple">
+            <div class="key purple">Le four</div>
+            <p>Lieu o&ugrave; l'on fait <strong>cuire le pain</strong> et d'autres aliments. Il faut <strong>payer une taxe</strong> pour l'utiliser.</p>
+        </div>
+        <div class="card indigo">
+            <div class="key indigo">Le pressoir</div>
+            <p>Instrument destin&eacute; &agrave; <strong>presser des fruits</strong> (pommes, poires, raisins&hellip;). En g&eacute;n&eacute;ral, il est au centre de la seigneurie, <strong>proche du village</strong>, avec le four.</p>
+        </div>
+        <div class="vocab">
+            <strong>&#128214; Banalit&eacute;s :</strong> taxes que les paysans doivent payer au seigneur pour utiliser le moulin, le four ou le pressoir.
+        </div>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--red);">
+            <p><strong>1.</strong> Une <strong>seigneurie</strong> est un domaine de terres agricoles dirig&eacute; par un <strong>seigneur</strong> depuis son <strong>ch&acirc;teau</strong>.</p>
+            <p><strong>2.</strong> La <strong>r&eacute;serve</strong> = terres du seigneur (pr&egrave;s du ch&acirc;teau). Les <strong>tenures</strong> = terres des paysans (pr&egrave;s du village).</p>
+            <p><strong>3.</strong> Les paysans travaillent pour eux ET pour le seigneur (corv&eacute;es, taxes, imp&ocirc;ts, partie des r&eacute;coltes).</p>
+            <p><strong>4.</strong> Les <strong>banalit&eacute;s</strong> sont des taxes pour utiliser le moulin, le four et le pressoir.</p>
+            <p><strong>5.</strong> La vie des paysans est <strong>difficile</strong> et souvent <strong>mis&eacute;rable</strong>.</p>
+        </div>
+    </section>
+
+    <!-- ================================ -->
+    <!--  EXERCICES                        -->
+    <!-- ================================ -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Vocabulaire</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--purple);">
+            <p>Donne la d&eacute;finition des mots suivants&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>Seigneurie</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>R&eacute;serve</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Tenures</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Corv&eacute;e</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span>Banalit&eacute;s</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">Domaine de terres agricoles poss&eacute;d&eacute; par un seigneur.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">Terres qui appartiennent au seigneur, pr&egrave;s du ch&acirc;teau, o&ugrave; les paysans font les corv&eacute;es.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">Terres laiss&eacute;es aux paysans pour leur culture, pr&egrave;s de leurs maisons.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> <span class="answer">Travail gratuit et obligatoire que les paysans doivent au seigneur sur ses terres.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> <span class="answer">Taxes que les paysans doivent payer pour utiliser le moulin, le four ou le pressoir.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 2 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--purple);">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>Les tenures sont les terres du seigneur.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>La r&eacute;serve se trouve pr&egrave;s du ch&acirc;teau.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Les paysans utilisent le moulin gratuitement.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Le pressoir sert &agrave; presser des fruits.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span>Les paysans vivent une vie facile et confortable.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span>Les paysans doivent donner une partie de leurs r&eacute;coltes au seigneur.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">FAUX</span> &ndash; Les tenures sont les terres laiss&eacute;es <strong>aux paysans</strong>. La r&eacute;serve est la terre du seigneur.
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">VRAI</span> &ndash; La r&eacute;serve se trouve bien pr&egrave;s du ch&acirc;teau.
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">FAUX</span> &ndash; Les paysans doivent <strong>payer une taxe</strong> pour utiliser le moulin.
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> <span class="answer">VRAI</span> &ndash; Le pressoir sert &agrave; presser des fruits (pommes, poires, raisins&hellip;).
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> <span class="answer">FAUX</span> &ndash; La vie des paysans est <strong>difficile et souvent mis&eacute;rable</strong>.
+                </div>
+                <div class="correction-item">
+                    <strong>f)</strong> <span class="answer">VRAI</span> &ndash; Les paysans doivent donner une partie de leurs r&eacute;coltes au seigneur.
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128221;</span>
+            <h2>Exercice 3 &ndash; Compl&egrave;te le texte</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--purple);">
+            <p>Compl&egrave;te chaque phrase avec le mot qui convient&nbsp;: <em>r&eacute;serve, tenures, corv&eacute;es, banalit&eacute;s, seigneurie, ch&acirc;teau</em></p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>Les terres du seigneur s'appellent la ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>Les terres laiss&eacute;es aux paysans s'appellent les ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Le travail gratuit et obligatoire sur les terres du seigneur s'appelle les ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Un domaine de terres agricoles dirig&eacute; par un seigneur est une ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span>Les taxes pour utiliser le moulin, le four ou le pressoir s'appellent les ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> Les terres du seigneur s'appellent la <span class="answer">r&eacute;serve</span>.
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> Les terres laiss&eacute;es aux paysans s'appellent les <span class="answer">tenures</span>.
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> Le travail gratuit et obligatoire s'appelle les <span class="answer">corv&eacute;es</span>.
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> Un domaine de terres agricoles dirig&eacute; par un seigneur est une <span class="answer">seigneurie</span>.
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> Les taxes pour utiliser le moulin, le four ou le pressoir s'appellent les <span class="answer">banalit&eacute;s</span>.
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128172;</span>
+            <h2>Exercice 4 &ndash; Questions de cours</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--purple);">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>De quoi est compos&eacute;e une seigneurie&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>Que doivent faire les paysans pour le seigneur&nbsp;? (cite au moins 3 choses)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Quelle diff&eacute;rence y a-t-il entre la r&eacute;serve et les tenures&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Cite les trois &eacute;quipements de la seigneurie pour lesquels il faut payer une taxe.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">Un ch&acirc;teau, la r&eacute;serve (terres du seigneur) et les tenures (terres des paysans).</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">Donner une partie des r&eacute;coltes, faire les corv&eacute;es sur la r&eacute;serve, payer des taxes et des imp&ocirc;ts (banalit&eacute;s pour le moulin, le four, le pressoir).</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">La r&eacute;serve appartient au seigneur (pr&egrave;s du ch&acirc;teau), les tenures sont laiss&eacute;es aux paysans pour leur propre culture (pr&egrave;s du village).</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> <span class="answer">Le moulin, le four et le pressoir.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>H12 &bull; La vie au temps des premiers ch&acirc;teaux</p>
+    <p>CM1 &bull; Histoire</p>
+</footer>
+
+</body>
+</html>

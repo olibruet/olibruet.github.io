@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUM14 &ndash; Lire, &eacute;crire et d&eacute;composer les nombres d&eacute;cimaux</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #bbdefb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 40%, #42a5f5 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--blue); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--blue);
+        }
+        .card.accent { border-left-color: var(--orange); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== NUMERATION TABLE ===== */
+        .num-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+        .num-table th, .num-table td {
+            border: 2px solid #cfd8dc;
+            padding: 0.5rem 0.8rem;
+            text-align: center;
+        }
+        .num-table thead th {
+            background: var(--blue);
+            color: var(--white);
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+        .num-table thead th.partie-entiere { background: #0d47a1; }
+        .num-table thead th.partie-decimale { background: var(--orange); }
+        .num-table .sub-header th {
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.4rem;
+        }
+        .num-table .sub-header th.entiere { background: var(--blue-bg); color: var(--blue); }
+        .num-table .sub-header th.decimale { background: var(--orange-bg); color: var(--orange); }
+        .num-table td {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+        .num-table td.entiere { color: var(--blue); background: #f5f9ff; }
+        .num-table td.decimale { color: var(--orange); background: #fffbf5; }
+        .num-table td.virgule {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0 0.2rem;
+            width: 1.5rem;
+        }
+
+        /* ===== DECOMPOSITION ===== */
+        .decomp {
+            background: var(--blue-bg);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin: 0.6rem 0;
+            font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+            font-size: 0.95rem;
+            line-height: 2;
+            color: var(--blue);
+            font-weight: 600;
+        }
+        .decomp.orange {
+            background: var(--orange-bg);
+            color: var(--orange);
+        }
+        .decomp.purple {
+            background: var(--purple-bg);
+            color: var(--purple);
+        }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.2rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .exercise-text { font-size: 1rem; line-height: 1.8; }
+
+        /* ===== ANSWER ZONE ===== */
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(21, 101, 192, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+        .calc {
+            display: inline-block;
+            background: var(--blue-bg);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 700;
+            color: var(--blue);
+            font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+            margin: 0.2rem 0;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#128290;</div>
+    <h1>NUM14 &ndash; Les nombres d&eacute;cimaux</h1>
+    <p class="subtitle">Lire, &eacute;crire et d&eacute;composer</p>
+    <p class="collection">CM1 &bull; Num&eacute;ration</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#definition">D&eacute;finition</a>
+    <a href="#tableau">Tableau</a>
+    <a href="#lire">Lire</a>
+    <a href="#decomposer">D&eacute;composer</a>
+    <a href="#zeros">Les z&eacute;ros</a>
+    <a href="#ex-lire">Exercices</a>
+    <a href="#ex-calcul">Calcul en ligne</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- DÉFINITION -->
+    <section id="definition">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>Qu'est-ce qu'un nombre d&eacute;cimal&nbsp;?</h2>
+        </div>
+        <div class="card">
+            <div class="key blue">Nombre d&eacute;cimal</div>
+            <p>Un nombre d&eacute;cimal est compos&eacute; de <strong>deux parties</strong> s&eacute;par&eacute;es par une <strong>virgule</strong>&nbsp;:</p>
+            <p>&bull; La <strong>partie enti&egrave;re</strong> (avant la virgule)</p>
+            <p>&bull; La <strong>partie d&eacute;cimale</strong> (apr&egrave;s la virgule)</p>
+            <div class="tip">
+                <strong>Exemple :</strong> dans <strong>56,78</strong> &rarr; <strong>56</strong> est la partie enti&egrave;re et <strong>78</strong> est la partie d&eacute;cimale.
+            </div>
+        </div>
+    </section>
+
+    <!-- TABLEAU DE NUMÉRATION -->
+    <section id="tableau">
+        <div class="section-header">
+            <span class="section-icon">&#128202;</span>
+            <h2>Le tableau de num&eacute;ration</h2>
+        </div>
+        <div class="card">
+            <p>Pour conna&icirc;tre la <strong>valeur de chaque chiffre</strong>, on utilise un tableau&nbsp;:</p>
+            <table class="num-table">
+                <thead>
+                    <tr>
+                        <th class="partie-entiere" colspan="3">Partie enti&egrave;re</th>
+                        <th rowspan="2" style="background: var(--light); width: 1.5rem;"></th>
+                        <th class="partie-decimale" colspan="3">Partie d&eacute;cimale</th>
+                    </tr>
+                    <tr class="sub-header">
+                        <th class="entiere">Centaines</th>
+                        <th class="entiere">Dizaines</th>
+                        <th class="entiere">Unit&eacute;s</th>
+                        <th class="decimale">Dixi&egrave;mes</th>
+                        <th class="decimale">Centi&egrave;mes</th>
+                        <th class="decimale">Milli&egrave;mes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="entiere"></td>
+                        <td class="entiere">5</td>
+                        <td class="entiere">6</td>
+                        <td class="virgule">,</td>
+                        <td class="decimale">7</td>
+                        <td class="decimale">8</td>
+                        <td class="decimale"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Le <strong>7</strong> est le chiffre des <strong>dixi&egrave;mes</strong>, le <strong>8</strong> est le chiffre des <strong>centi&egrave;mes</strong>.</p>
+        </div>
+    </section>
+
+    <!-- LIRE UN NOMBRE DÉCIMAL -->
+    <section id="lire">
+        <div class="section-header">
+            <span class="section-icon">&#128483;&#65039;</span>
+            <h2>Lire un nombre d&eacute;cimal</h2>
+        </div>
+        <div class="card">
+            <p>On peut lire un nombre d&eacute;cimal de <strong>deux fa&ccedil;ons</strong>&nbsp;:</p>
+            <div class="decomp">56,78 &rarr; &laquo;&nbsp;cinquante-six virgule soixante-dix-huit&nbsp;&raquo;</div>
+            <div class="decomp orange">56,78 &rarr; &laquo;&nbsp;56 unit&eacute;s et 78 centi&egrave;mes&nbsp;&raquo;</div>
+            <div class="tip">
+                <strong>Autre exemple :</strong> <strong>3,25</strong> se lit &laquo;&nbsp;trois virgule vingt-cinq&nbsp;&raquo; ou &laquo;&nbsp;3 unit&eacute;s et 25 centi&egrave;mes&nbsp;&raquo;.
+            </div>
+        </div>
+        <div class="card accent">
+            <div class="key orange">Chiffre ou nombre&nbsp;?</div>
+            <p>Dans <strong>3,25</strong>&nbsp;:</p>
+            <p>&bull; <strong>2</strong> est le <strong>chiffre</strong> des dixi&egrave;mes</p>
+            <p>&bull; <strong>32</strong> est le <strong>nombre</strong> de dixi&egrave;mes (car 3,25 = 32 dixi&egrave;mes + 5 centi&egrave;mes)</p>
+            <div class="tip">
+                <strong>Attention :</strong> le <em>chiffre</em> des dixi&egrave;mes, c'est juste le chiffre &agrave; cette position. Le <em>nombre</em> de dixi&egrave;mes, c'est tout ce qu'il y a jusqu'&agrave; cette position.
+            </div>
+        </div>
+    </section>
+
+    <!-- DÉCOMPOSER -->
+    <section id="decomposer">
+        <div class="section-header">
+            <span class="section-icon">&#128296;</span>
+            <h2>D&eacute;composer un nombre d&eacute;cimal</h2>
+        </div>
+        <div class="card">
+            <p>On peut d&eacute;composer de <strong>3 mani&egrave;res</strong>&nbsp;:</p>
+            <p><strong>Exemple avec 6,216&nbsp;:</strong></p>
+            <div class="decomp">6,216 = 6 + 0,2 + 0,01 + 0,006</div>
+            <div class="decomp orange">6,216 = 6 + 2/10 + 1/100 + 6/1000</div>
+            <div class="decomp purple">6,216 = (6&times;1) + (2&times;0,1) + (1&times;0,01) + (6&times;0,001)</div>
+        </div>
+        <div class="card green">
+            <p><strong>Exemple avec 3,25&nbsp;:</strong></p>
+            <div class="decomp">3,25 = 3 + 0,2 + 0,05</div>
+            <div class="decomp orange">3,25 = 3 + 2/10 + 5/100</div>
+            <div class="decomp purple">3,25 = (3&times;1) + (2&times;0,1) + (5&times;0,01)</div>
+        </div>
+    </section>
+
+    <!-- LES ZÉROS INUTILES -->
+    <section id="zeros">
+        <div class="section-header">
+            <span class="section-icon">&#128161;</span>
+            <h2>Les z&eacute;ros inutiles</h2>
+        </div>
+        <div class="card">
+            <div class="key green">R&egrave;gle</div>
+            <p>Un nombre d&eacute;cimal <strong>ne change pas</strong> si on ajoute ou retire des <strong>z&eacute;ros &agrave; la fin</strong> de la partie d&eacute;cimale.</p>
+            <div class="decomp">1,600000 = 1,6</div>
+            <div class="decomp">765,070 = 765,07</div>
+            <div class="tip">
+                <strong>Attention :</strong> on ne peut PAS retirer les z&eacute;ros <em>avant</em> la partie enti&egrave;re (sauf ceux en t&ecirc;te) ni <em>entre</em> la virgule et un chiffre. Par exemple 3,05 &ne; 3,5&nbsp;!
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 : LIRE -->
+    <section id="ex-lire">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Lire des nombres d&eacute;cimaux</h2>
+        </div>
+        <div class="card exercise">
+            <p>&Eacute;cris ces nombres d&eacute;cimaux <strong>en lettres</strong> (deux fa&ccedil;ons)&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text"><strong>45,7</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text"><strong>7,98</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text"><strong>3,5</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text"><strong>120,04</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">quarante-cinq virgule sept</span> ou <span class="answer">45 unit&eacute;s et 7 dixi&egrave;mes</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">sept virgule quatre-vingt-dix-huit</span> ou <span class="answer">7 unit&eacute;s et 98 centi&egrave;mes</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">trois virgule cinq</span> ou <span class="answer">3 unit&eacute;s et 5 dixi&egrave;mes</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> <span class="answer">cent-vingt virgule z&eacute;ro quatre</span> ou <span class="answer">120 unit&eacute;s et 4 centi&egrave;mes</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 : CHIFFRE / NOMBRE -->
+    <section id="ex-chiffre">
+        <div class="section-header">
+            <span class="section-icon">&#128269;</span>
+            <h2>Exercice 2 &ndash; Chiffre ou nombre&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Pour chaque nombre, donne le <strong>chiffre</strong> des dixi&egrave;mes et le <strong>nombre</strong> de dixi&egrave;mes&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text"><strong>14,63</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text"><strong>8,251</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text"><strong>0,79</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text"><strong>235,1</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a) 14,63</strong> &rarr; chiffre des dixi&egrave;mes = <span class="answer">6</span>, nombre de dixi&egrave;mes = <span class="answer">146</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b) 8,251</strong> &rarr; chiffre des dixi&egrave;mes = <span class="answer">2</span>, nombre de dixi&egrave;mes = <span class="answer">82</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c) 0,79</strong> &rarr; chiffre des dixi&egrave;mes = <span class="answer">7</span>, nombre de dixi&egrave;mes = <span class="answer">7</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d) 235,1</strong> &rarr; chiffre des dixi&egrave;mes = <span class="answer">1</span>, nombre de dixi&egrave;mes = <span class="answer">2351</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 : DÉCOMPOSER -->
+    <section id="ex-decomposer">
+        <div class="section-header">
+            <span class="section-icon">&#128296;</span>
+            <h2>Exercice 3 &ndash; D&eacute;composer</h2>
+        </div>
+        <div class="card exercise">
+            <p>D&eacute;compose chaque nombre de <strong>3 mani&egrave;res</strong> (comme dans la le&ccedil;on)&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text"><strong>4,37</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text"><strong>12,6</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text"><strong>9,125</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a) 4,37</strong><br>
+                    <span class="calc">4 + 0,3 + 0,07</span><br>
+                    <span class="calc">4 + 3/10 + 7/100</span><br>
+                    <span class="calc">(4&times;1) + (3&times;0,1) + (7&times;0,01)</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b) 12,6</strong><br>
+                    <span class="calc">12 + 0,6</span><br>
+                    <span class="calc">12 + 6/10</span><br>
+                    <span class="calc">(1&times;10) + (2&times;1) + (6&times;0,1)</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c) 9,125</strong><br>
+                    <span class="calc">9 + 0,1 + 0,02 + 0,005</span><br>
+                    <span class="calc">9 + 1/10 + 2/100 + 5/1000</span><br>
+                    <span class="calc">(9&times;1) + (1&times;0,1) + (2&times;0,01) + (5&times;0,001)</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 4 : RECOMPOSER -->
+    <section id="ex-recomposer">
+        <div class="section-header">
+            <span class="section-icon">&#129513;</span>
+            <h2>Exercice 4 &ndash; Recomposer</h2>
+        </div>
+        <div class="card exercise">
+            <p>Retrouve le nombre d&eacute;cimal &agrave; partir de sa d&eacute;composition&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">7 + 0,4 + 0,03 = <strong>?</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">(2&times;10) + (5&times;1) + (8&times;0,1) + (1&times;0,01) = <strong>?</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">30 + 6 + 9/10 + 2/100 = <strong>?</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">100 + 0,5 + 0,003 = <strong>?</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> 7 + 0,4 + 0,03 = <span class="answer">7,43</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> 20 + 5 + 0,8 + 0,01 = <span class="answer">25,81</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> 30 + 6 + 0,9 + 0,02 = <span class="answer">36,92</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> 100 + 0,5 + 0,003 = <span class="answer">100,503</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 5 : ZÉROS INUTILES -->
+    <section id="ex-zeros">
+        <div class="section-header">
+            <span class="section-icon">&#128161;</span>
+            <h2>Exercice 5 &ndash; Simplifier</h2>
+        </div>
+        <div class="card exercise">
+            <p>Supprime les z&eacute;ros inutiles (attention aux pi&egrave;ges&nbsp;!)&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text"><strong>4,500</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text"><strong>12,080</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text"><strong>0,300</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text"><strong>70,0100</strong></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> 4,500 = <span class="answer">4,5</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> 12,080 = <span class="answer">12,08</span> (le z&eacute;ro entre la virgule et le 8 reste&nbsp;!)
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> 0,300 = <span class="answer">0,3</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> 70,0100 = <span class="answer">70,01</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 6 : TABLEAU -->
+    <section id="ex-tableau">
+        <div class="section-header">
+            <span class="section-icon">&#128202;</span>
+            <h2>Exercice 6 &ndash; Placer dans le tableau</h2>
+        </div>
+        <div class="card exercise">
+            <p>Place ces nombres dans le tableau de num&eacute;ration, puis indique la valeur du chiffre soulign&eacute;&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">2<u>8</u>,45 &rarr; que vaut le 8&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">103,<u>6</u>2 &rarr; que vaut le 6&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">5,0<u>9</u>1 &rarr; que vaut le 9&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text"><u>4</u>7,83 &rarr; que vaut le 4&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> Le 8 est le chiffre des <strong>unit&eacute;s</strong> &rarr; il vaut <span class="answer">8</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> Le 6 est le chiffre des <strong>dixi&egrave;mes</strong> &rarr; il vaut <span class="answer">0,6</span> (ou 6 dixi&egrave;mes)
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> Le 9 est le chiffre des <strong>centi&egrave;mes</strong> &rarr; il vaut <span class="answer">0,09</span> (ou 9 centi&egrave;mes)
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> Le 4 est le chiffre des <strong>dizaines</strong> &rarr; il vaut <span class="answer">40</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 7 : CALCUL EN LIGNE -->
+    <section id="ex-calcul">
+        <div class="section-header">
+            <span class="section-icon">&#129518;</span>
+            <h2>Exercice 7 &ndash; Calcul en ligne</h2>
+        </div>
+        <div class="card exercise">
+            <p>Calcule en ligne. <strong>Attention</strong> &agrave; bien regarder le signe (+ ou &minus;)&nbsp;!</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">8,45 + 3,2 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">12,6 &minus; 4,35 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">6,73 + 5,8 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">15,42 &minus; 7,6 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">9,5 + 4,86 + 3 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span class="exercise-text">23,1 &minus; 8,74 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">g</span>
+                <span class="exercise-text">7,08 + 6,9 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">h</span>
+                <span class="exercise-text">18,3 &minus; 9,56 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">i</span>
+                <span class="exercise-text">4,6 + 11,25 + 5 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">j</span>
+                <span class="exercise-text">16,05 &minus; 7,8 = </span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> 8,45 + 3,2 = <span class="answer">11,65</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> 12,6 &minus; 4,35 = <span class="answer">8,25</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> 6,73 + 5,8 = <span class="answer">12,53</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> 15,42 &minus; 7,6 = <span class="answer">7,82</span>
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> 9,5 + 4,86 + 3 = <span class="answer">17,36</span>
+                </div>
+                <div class="correction-item">
+                    <strong>f)</strong> 23,1 &minus; 8,74 = <span class="answer">14,36</span>
+                </div>
+                <div class="correction-item">
+                    <strong>g)</strong> 7,08 + 6,9 = <span class="answer">13,98</span>
+                </div>
+                <div class="correction-item">
+                    <strong>h)</strong> 18,3 &minus; 9,56 = <span class="answer">8,74</span>
+                </div>
+                <div class="correction-item">
+                    <strong>i)</strong> 4,6 + 11,25 + 5 = <span class="answer">20,85</span>
+                </div>
+                <div class="correction-item">
+                    <strong>j)</strong> 16,05 &minus; 7,8 = <span class="answer">8,25</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>NUM14 &bull; Lire, &eacute;crire et d&eacute;composer les nombres d&eacute;cimaux</p>
+    <p>CM1 &bull; Num&eacute;ration</p>
+</footer>
+
+</body>
+</html>

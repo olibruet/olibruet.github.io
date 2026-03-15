@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maths CM1 &ndash; Probl&egrave;mes S&eacute;rie 3</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --red: #c62828;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #bbdefb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 40%, #42a5f5 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active {
+            background: var(--blue);
+            color: var(--white);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== PROBLEM CARDS ===== */
+        .problem {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--blue);
+        }
+
+        .problem-number {
+            display: inline-block;
+            background: var(--blue);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            margin-bottom: 0.6rem;
+        }
+
+        .problem-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 0.8rem;
+        }
+
+        .problem-text strong {
+            color: var(--blue);
+        }
+
+        /* ===== ANSWER ZONE ===== */
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 80px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Tape ton calcul et ta r\00e9ponse ici\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--blue);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(21, 101, 192, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(21, 101, 192, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+
+        .correction-inner {
+            padding: 0 1.2rem 1.2rem;
+        }
+
+        .correction-step {
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .correction-step .calc {
+            display: inline-block;
+            background: var(--blue-bg);
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-weight: 700;
+            color: var(--blue);
+            font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+            margin: 0.2rem 0;
+        }
+
+        .correction-step .result {
+            display: inline-block;
+            background: var(--green-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-weight: 800;
+            color: var(--green);
+            margin-top: 0.3rem;
+        }
+
+        .correction-step .phrase {
+            display: block;
+            margin-top: 0.3rem;
+            font-style: italic;
+            color: var(--dark);
+        }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.6rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .problem { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 100px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#129518;</div>
+    <h1>Probl&egrave;mes &ndash; S&eacute;rie 3</h1>
+    <p class="subtitle">Math&eacute;matiques &bull; R&eacute;solution de probl&egrave;mes</p>
+    <p class="collection">CM1 &bull; Addition, soustraction, temps et fractions</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#conseil">Conseils</a>
+    <a href="#pb1">Pb 1</a>
+    <a href="#pb2">Pb 2</a>
+    <a href="#pb3">Pb 3</a>
+    <a href="#pb4">Pb 4</a>
+    <a href="#pb5">Pb 5</a>
+    <a href="#pb6">Pb 6</a>
+    <a href="#pb7">Pb 7</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- CONSEILS -->
+    <section id="conseil">
+        <div class="section-header">
+            <span class="section-icon">&#128161;</span>
+            <h2>Comment r&eacute;soudre un probl&egrave;me</h2>
+        </div>
+        <div class="problem" style="border-left-color: var(--orange);">
+            <p><strong>1.</strong> Lis bien l'&eacute;nonc&eacute; (2 fois si besoin).</p>
+            <p><strong>2.</strong> Cherche les <strong>donn&eacute;es</strong> (les nombres) et ce qu'on te <strong>demande</strong>.</p>
+            <p><strong>3.</strong> Choisis l'<strong>op&eacute;ration</strong> : addition (+) ou soustraction (&minus;).</p>
+            <p><strong>4.</strong> Pose le calcul et trouve le r&eacute;sultat.</p>
+            <p><strong>5.</strong> &Eacute;cris une <strong>phrase r&eacute;ponse</strong> compl&egrave;te.</p>
+            <div class="tip">
+                <strong>Astuce :</strong> si on cherche ce qui <em>reste</em>, une <em>diff&eacute;rence</em> ou une <em>partie</em>, c'est une <strong>soustraction</strong>. Si on cherche un <em>total</em>, c'est une <strong>addition</strong>.
+            </div>
+        </div>
+    </section>
+
+    <!-- PROBLÈME 1 -->
+    <section id="pb1">
+        <div class="section-header">
+            <span class="section-icon">&#127866;</span>
+            <h2>Probl&egrave;me 1</h2>
+        </div>
+        <div class="problem">
+            <span class="problem-number">Probl&egrave;me 1</span>
+            <p class="problem-text">Un boulanger a pr&eacute;par&eacute; <strong>485 croissants</strong> pour le week-end. Le samedi, il en vend <strong>237</strong>. Combien lui reste-t-il de croissants pour le dimanche&nbsp;?</p>
+            <div class="answer-zone" contenteditable="true"></div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-step">
+                    <span class="calc">485 &minus; 237 = 248</span>
+                    <span class="phrase">Il lui reste <span class="result">248 croissants</span> pour le dimanche.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- PROBLÈME 2 -->
+    <section id="pb2">
+        <div class="section-header">
+            <span class="section-icon">&#127963;&#65039;</span>
+            <h2>Probl&egrave;me 2</h2>
+        </div>
+        <div class="problem">
+            <span class="problem-number">Probl&egrave;me 2</span>
+            <p class="problem-text">Dans un cin&eacute;ma, il y a <strong>520 places</strong>. Lors d'une s&eacute;ance, <strong>283 places</strong> sont occup&eacute;es. Combien de places sont libres&nbsp;?</p>
+            <div class="answer-zone" contenteditable="true"></div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-step">
+                    <span class="calc">520 &minus; 283 = 237</span>
+                    <span class="phrase">Il y a <span class="result">237 places libres</span>.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- PROBLÈME 3 -->
+    <section id="pb3">
+        <div class="section-header">
+            <span class="section-icon">&#9200;</span>
+            <h2>Probl&egrave;me 3</h2>
+        </div>
+        <div class="problem">
+            <span class="problem-number">Probl&egrave;me 3</span>
+            <p class="problem-text">Un spectacle dure <strong>1h45</strong>. Il se termine &agrave; <strong>21h30</strong>. &Agrave; quelle heure a-t-il commenc&eacute;&nbsp;?</p>
+            <div class="answer-zone" contenteditable="true"></div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-step">
+                    <span class="calc">21h30 &minus; 1h45</span><br>
+                    30 min &minus; 45 min : on ne peut pas, on emprunte 1 heure.<br>
+                    <span class="calc">90 min &minus; 45 min = 45 min</span><br>
+                    <span class="calc">20h &minus; 1h = 19h</span>
+                    <span class="phrase">Le spectacle a commenc&eacute; &agrave; <span class="result">19h45</span>.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- PROBLÈME 4 -->
+    <section id="pb4">
+        <div class="section-header">
+            <span class="section-icon">&#128662;</span>
+            <h2>Probl&egrave;me 4</h2>
+        </div>
+        <div class="problem">
+            <span class="problem-number">Probl&egrave;me 4</span>
+            <p class="problem-text">Un voyage en train couvre une distance de <strong>563 km</strong> en 2 &eacute;tapes. La premi&egrave;re &eacute;tape fait <strong>318 km</strong>. Quelle est la distance de la deuxi&egrave;me &eacute;tape&nbsp;?</p>
+            <div class="answer-zone" contenteditable="true"></div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-step">
+                    <span class="calc">563 &minus; 318 = 245</span>
+                    <span class="phrase">La deuxi&egrave;me &eacute;tape fait <span class="result">245 km</span>.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- PROBLÈME 5 -->
+    <section id="pb5">
+        <div class="section-header">
+            <span class="section-icon">&#127822;</span>
+            <h2>Probl&egrave;me 5</h2>
+        </div>
+        <div class="problem">
+            <span class="problem-number">Probl&egrave;me 5</span>
+            <p class="problem-text">Un panier de fruits p&egrave;se <strong>2&nbsp;340 g</strong>. Il contient <strong>875 g</strong> de pommes et le reste en oranges. Quelle est la masse des oranges&nbsp;?</p>
+            <div class="answer-zone" contenteditable="true"></div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-step">
+                    <span class="calc">2 340 &minus; 875 = 1 465</span>
+                    <span class="phrase">Les oranges p&egrave;sent <span class="result">1 465 g</span>.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- PROBLÈME 6 -->
+    <section id="pb6">
+        <div class="section-header">
+            <span class="section-icon">&#127970;</span>
+            <h2>Probl&egrave;me 6</h2>
+        </div>
+        <div class="problem">
+            <span class="problem-number">Probl&egrave;me 6</span>
+            <p class="problem-text">Une biblioth&egrave;que poss&egrave;de <strong>8&nbsp;254 livres</strong>. Parmi eux, <strong>3&nbsp;678</strong> sont des romans. Combien de livres ne sont pas des romans&nbsp;?</p>
+            <div class="answer-zone" contenteditable="true"></div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-step">
+                    <span class="calc">8 254 &minus; 3 678 = 4 576</span>
+                    <span class="phrase">Il y a <span class="result">4 576 livres</span> qui ne sont pas des romans.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- PROBLÈME 7 -->
+    <section id="pb7">
+        <div class="section-header">
+            <span class="section-icon">&#127928;</span>
+            <h2>Probl&egrave;me 7</h2>
+        </div>
+        <div class="problem">
+            <span class="problem-number">Probl&egrave;me 7</span>
+            <p class="problem-text">Dans un orchestre, <strong>4/7</strong> des musiciens jouent d'un instrument &agrave; cordes. Quelle fraction des musiciens joue d'un autre type d'instrument&nbsp;?</p>
+            <div class="answer-zone" contenteditable="true"></div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-step">
+                    L'orchestre entier = <span class="calc">7/7</span><br>
+                    <span class="calc">7/7 &minus; 4/7 = 3/7</span>
+                    <span class="phrase"><span class="result">3/7</span> des musiciens jouent d'un autre type d'instrument.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>Math&eacute;matiques &bull; Probl&egrave;mes S&eacute;rie 3</p>
+    <p>CM1 &bull; Addition, soustraction, temps et fractions</p>
+</footer>
+
+</body>
+</html>

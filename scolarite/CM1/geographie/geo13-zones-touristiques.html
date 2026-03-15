@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G&Eacute;O 13 &ndash; O&ugrave; se situent les principales zones touristiques en France&nbsp;?</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #b2dfdb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #004d40 0%, #00796b 40%, #26a69a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--teal); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--teal);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--teal);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== EXAMPLES ===== */
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+        .example-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .example-tag.teal { background: var(--teal-bg); color: var(--teal); }
+        .example-tag.blue { background: var(--blue-bg); color: var(--blue); }
+        .example-tag.orange { background: var(--orange-bg); color: var(--orange); }
+        .example-tag.green { background: var(--green-bg); color: var(--green); }
+        .example-tag.purple { background: var(--purple-bg); color: var(--purple); }
+        .example-tag.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .exercise-text { font-size: 1rem; line-height: 1.8; }
+
+        /* ===== ANSWER ZONE ===== */
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127963;&#65039;</div>
+    <h1>G&Eacute;O 13 &ndash; Les zones touristiques en France</h1>
+    <p class="subtitle">O&ugrave; se situent les principales zones touristiques&nbsp;?</p>
+    <p class="collection">CM1 &bull; G&eacute;ographie</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#balneaire">Baln&eacute;aire</a>
+    <a href="#montagnard">Montagnard</a>
+    <a href="#vert">Vert</a>
+    <a href="#urbain">Urbain</a>
+    <a href="#culturel">Culturel</a>
+    <a href="#recreatif">R&eacute;cr&eacute;atif</a>
+    <a href="#exercices">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+        <div class="card">
+            <p>Les r&eacute;gions o&ugrave; nous passons nos vacances sont nombreuses. Les formes de tourisme sont vari&eacute;es&nbsp;: <strong>tourisme baln&eacute;aire</strong> (au bord de la mer), <strong>tourisme montagnard</strong>, <strong>tourisme vert</strong> (&agrave; la campagne), <strong>tourisme urbain</strong> (dans les villes), visite des monuments, des mus&eacute;es, des sites exceptionnels (<strong>tourisme culturel</strong>), des parcs d'attractions (<strong>tourisme r&eacute;cr&eacute;atif</strong>).</p>
+            <p>Paris et la r&eacute;gion &Icirc;le-de-France ont un fort attrait touristique gr&acirc;ce &agrave; leurs sites culturels et r&eacute;cr&eacute;atifs.</p>
+        </div>
+    </section>
+
+    <!-- TOURISME BALNÉAIRE -->
+    <section id="balneaire">
+        <div class="section-header">
+            <span class="section-icon">&#127754;</span>
+            <h2>Tourisme baln&eacute;aire</h2>
+        </div>
+        <div class="card blue">
+            <div class="key blue">Au bord de la mer</div>
+            <p>Les vacanciers profitent des <strong>plages</strong>, de la baignade et des activit&eacute;s nautiques. La France poss&egrave;de de nombreuses c&ocirc;tes tr&egrave;s fr&eacute;quent&eacute;es.</p>
+            <div class="examples">
+                <span class="example-tag blue">C&ocirc;te d'Azur (Nice, Cannes)</span>
+                <span class="example-tag blue">C&ocirc;te atlantique (La Rochelle, Arcachon)</span>
+                <span class="example-tag blue">Corse (Ajaccio, Porto-Vecchio)</span>
+                <span class="example-tag blue">Bretagne (Saint-Malo, Quiberon)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOURISME MONTAGNARD -->
+    <section id="montagnard">
+        <div class="section-header">
+            <span class="section-icon">&#9968;&#65039;</span>
+            <h2>Tourisme montagnard</h2>
+        </div>
+        <div class="card orange">
+            <div class="key orange">En montagne</div>
+            <p>En <strong>hiver</strong>, on pratique le ski et les sports de glisse. En <strong>&eacute;t&eacute;</strong>, on fait de la randonn&eacute;e et de l'escalade. Les montagnes fran&ccedil;aises attirent des millions de visiteurs chaque ann&eacute;e.</p>
+            <div class="examples">
+                <span class="example-tag orange">Alpes (Chamonix, Les 2 Alpes)</span>
+                <span class="example-tag orange">Pyr&eacute;n&eacute;es (Font-Romeu, Cauterets)</span>
+                <span class="example-tag orange">Massif central (Le Mont-Dore)</span>
+                <span class="example-tag orange">Vosges (La Bresse, G&eacute;rardmer)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOURISME VERT -->
+    <section id="vert">
+        <div class="section-header">
+            <span class="section-icon">&#127795;</span>
+            <h2>Tourisme vert</h2>
+        </div>
+        <div class="card green">
+            <div class="key green">&Agrave; la campagne</div>
+            <p>Le tourisme vert permet de d&eacute;couvrir la <strong>nature</strong>, les fermes, les produits locaux et de profiter du <strong>calme</strong>. On s&eacute;journe souvent dans des g&icirc;tes ou des chambres d'h&ocirc;tes.</p>
+            <div class="examples">
+                <span class="example-tag green">Dordogne (Sarlat, les villages du P&eacute;rigord)</span>
+                <span class="example-tag green">Provence (les champs de lavande)</span>
+                <span class="example-tag green">Normandie (le bocage, les vergers)</span>
+                <span class="example-tag green">Ard&egrave;che (les gorges, la nature pr&eacute;serv&eacute;e)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOURISME URBAIN -->
+    <section id="urbain">
+        <div class="section-header">
+            <span class="section-icon">&#127961;&#65039;</span>
+            <h2>Tourisme urbain</h2>
+        </div>
+        <div class="card">
+            <div class="key teal">Dans les villes</div>
+            <p>Les grandes villes attirent les touristes pour leur <strong>animation</strong>, leurs commerces, leurs restaurants et leur <strong>vie culturelle</strong>. On y d&eacute;couvre l'architecture et l'ambiance de chaque r&eacute;gion.</p>
+            <div class="examples">
+                <span class="example-tag teal">Paris (la capitale, 1re destination mondiale)</span>
+                <span class="example-tag teal">Lyon (gastronomie, Vieux-Lyon)</span>
+                <span class="example-tag teal">Bordeaux (centre historique class&eacute; UNESCO)</span>
+                <span class="example-tag teal">Marseille (Vieux-Port, calanques)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOURISME CULTUREL -->
+    <section id="culturel">
+        <div class="section-header">
+            <span class="section-icon">&#127963;&#65039;</span>
+            <h2>Tourisme culturel</h2>
+        </div>
+        <div class="card purple">
+            <div class="key purple">Monuments, mus&eacute;es, sites exceptionnels</div>
+            <p>La France poss&egrave;de un <strong>patrimoine tr&egrave;s riche</strong>&nbsp;: des monuments historiques, des mus&eacute;es c&eacute;l&egrave;bres et des sites class&eacute;s au <strong>patrimoine mondial de l'UNESCO</strong>.</p>
+            <div class="examples">
+                <span class="example-tag purple">Tour Eiffel &amp; Mus&eacute;e du Louvre (Paris)</span>
+                <span class="example-tag purple">Mont-Saint-Michel (Normandie)</span>
+                <span class="example-tag purple">Ch&acirc;teaux de la Loire (Chambord, Chenonceau)</span>
+                <span class="example-tag purple">Pont du Gard (Occitanie)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TOURISME RÉCRÉATIF -->
+    <section id="recreatif">
+        <div class="section-header">
+            <span class="section-icon">&#127904;</span>
+            <h2>Tourisme r&eacute;cr&eacute;atif</h2>
+        </div>
+        <div class="card red">
+            <div class="key red">Parcs d'attractions et de loisirs</div>
+            <p>Les <strong>parcs d'attractions</strong> et parcs &agrave; th&egrave;me attirent des millions de visiteurs, en particulier les familles. C'est la forme de tourisme la plus <strong>ludique</strong>.</p>
+            <div class="examples">
+                <span class="example-tag red">Disneyland Paris (Marne-la-Vall&eacute;e)</span>
+                <span class="example-tag red">Puy du Fou (Vend&eacute;e)</span>
+                <span class="example-tag red">Futuroscope (Poitiers)</span>
+                <span class="example-tag red">Parc Ast&eacute;rix (Oise)</span>
+            </div>
+        </div>
+        <div class="tip">
+            <strong>&Agrave; retenir :</strong> Paris et l'&Icirc;le-de-France sont la premi&egrave;re r&eacute;gion touristique de France gr&acirc;ce &agrave; leurs nombreux sites <strong>culturels</strong> (Louvre, Tour Eiffel&hellip;) et <strong>r&eacute;cr&eacute;atifs</strong> (Disneyland Paris).
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 : ASSOCIER -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Quel type de tourisme&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Pour chaque activit&eacute;, indique le <strong>type de tourisme</strong> correspondant&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Faire du ski &agrave; Chamonix</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Visiter le ch&acirc;teau de Chambord</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Se baigner sur une plage en Corse</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Passer un week-end dans un g&icirc;te en Dordogne</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">Aller &agrave; Disneyland Paris avec sa famille</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span class="exercise-text">Se promener dans le Vieux-Lyon et d&eacute;couvrir les bouchons lyonnais</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> Faire du ski &agrave; Chamonix &rarr; <span class="answer">tourisme montagnard</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> Visiter le ch&acirc;teau de Chambord &rarr; <span class="answer">tourisme culturel</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> Se baigner sur une plage en Corse &rarr; <span class="answer">tourisme baln&eacute;aire</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> Passer un week-end dans un g&icirc;te en Dordogne &rarr; <span class="answer">tourisme vert</span>
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> Aller &agrave; Disneyland Paris &rarr; <span class="answer">tourisme r&eacute;cr&eacute;atif</span>
+                </div>
+                <div class="correction-item">
+                    <strong>f)</strong> Se promener dans le Vieux-Lyon &rarr; <span class="answer">tourisme urbain</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 : VRAI OU FAUX -->
+    <section id="ex-vrai-faux">
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 2 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Le tourisme baln&eacute;aire se pratique en montagne.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Paris est la premi&egrave;re destination touristique en France.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Le Puy du Fou est un exemple de tourisme vert.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Le tourisme vert se pratique &agrave; la campagne.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">FAUX</span> &ndash; Le tourisme baln&eacute;aire se pratique au bord de la <strong>mer</strong>.
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">VRAI</span> &ndash; Paris et l'&Icirc;le-de-France ont un fort attrait touristique.
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">FAUX</span> &ndash; Le Puy du Fou est un parc d'attractions, c'est du tourisme <strong>r&eacute;cr&eacute;atif</strong>.
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> <span class="answer">VRAI</span> &ndash; Le tourisme vert se pratique &agrave; la campagne, en pleine nature.
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>G&Eacute;O 13 &bull; O&ugrave; se situent les principales zones touristiques en France&nbsp;?</p>
+    <p>CM1 &bull; G&eacute;ographie</p>
+</footer>
+
+</body>
+</html>

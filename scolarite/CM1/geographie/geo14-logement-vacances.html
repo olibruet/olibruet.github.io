@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G&Eacute;O 14 &ndash; O&ugrave; se loge-t-on en vacances&nbsp;?</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #b2dfdb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #004d40 0%, #00796b 40%, #26a69a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--teal); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--teal);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--teal);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== EXAMPLES ===== */
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+        .example-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .example-tag.teal { background: var(--teal-bg); color: var(--teal); }
+        .example-tag.blue { background: var(--blue-bg); color: var(--blue); }
+        .example-tag.orange { background: var(--orange-bg); color: var(--orange); }
+        .example-tag.green { background: var(--green-bg); color: var(--green); }
+        .example-tag.purple { background: var(--purple-bg); color: var(--purple); }
+        .example-tag.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== VOCAB ===== */
+        .vocab {
+            background: var(--blue-bg);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .vocab strong { color: var(--blue); }
+
+        /* ===== TABLE ===== */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+        .data-table th {
+            background: var(--teal);
+            color: var(--white);
+            padding: 0.7rem 0.5rem;
+            font-weight: 700;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+        .data-table td {
+            padding: 0.6rem 0.5rem;
+            border-bottom: 1px solid var(--light);
+            text-align: center;
+            vertical-align: top;
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table .row-label {
+            background: var(--teal-bg);
+            color: var(--teal);
+            font-weight: 700;
+            text-align: left;
+            padding-left: 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .exercise-text { font-size: 1rem; line-height: 1.8; }
+
+        /* ===== ANSWER ZONE ===== */
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+        }
+
+        @media (max-width: 600px) {
+            .data-table { font-size: 0.75rem; }
+            .data-table th, .data-table td { padding: 0.4rem 0.3rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127968;</div>
+    <h1>G&Eacute;O 14 &ndash; O&ugrave; se loge-t-on en vacances&nbsp;?</h1>
+    <p class="subtitle">Les diff&eacute;rents types de logement touristique</p>
+    <p class="collection">CM1 &bull; G&eacute;ographie</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#logements">Les logements</a>
+    <a href="#tableau">Tableau</a>
+    <a href="#retenir">&Agrave; retenir</a>
+    <a href="#exercices">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+        <div class="card">
+            <div class="key teal">Changer de lieu de vie</div>
+            <p>Lorsque nous partons en <strong>vacances</strong>, nous changeons de lieu de vie. Nous pouvons loger dans diff&eacute;rents types d'h&eacute;bergement&nbsp;:</p>
+            <div class="examples">
+                <span class="example-tag teal">R&eacute;sidence secondaire</span>
+                <span class="example-tag teal">Location</span>
+                <span class="example-tag teal">G&icirc;te</span>
+                <span class="example-tag teal">Chambre d'h&ocirc;tel</span>
+                <span class="example-tag teal">Camping</span>
+                <span class="example-tag teal">Appartement</span>
+                <span class="example-tag teal">R&eacute;sidence de tourisme</span>
+                <span class="example-tag teal">Village de vacances</span>
+            </div>
+        </div>
+        <div class="card blue">
+            <div class="key blue">Un logement temporaire</div>
+            <p>Nous occupons ces lieux de mani&egrave;re <strong>temporaire</strong>, c'est-&agrave;-dire quelques semaines dans l'ann&eacute;e. Ils peuvent &ecirc;tre <strong>diff&eacute;rents &agrave; chaque p&eacute;riode</strong> de vacances.</p>
+            <div class="tip">
+                <strong>&Agrave; retenir :</strong> Pour les s&eacute;jours <strong>longs</strong>, ce sont les <strong>campings</strong> qui attirent le plus de touristes. Pour les s&eacute;jours <strong>courts</strong>, ce sont les <strong>h&ocirc;tels</strong>.
+            </div>
+        </div>
+    </section>
+
+    <!-- LES LOGEMENTS -->
+    <section id="logements">
+        <div class="section-header">
+            <span class="section-icon">&#127969;</span>
+            <h2>Les types de logement</h2>
+        </div>
+        <div class="card green">
+            <div class="key green">La grande maison / location</div>
+            <p>On peut louer une <strong>maison</strong> ou un <strong>appartement</strong> pour une ou plusieurs semaines. C'est id&eacute;al pour les <strong>familles</strong> qui veulent &ecirc;tre ind&eacute;pendantes.</p>
+            <div class="vocab">
+                <strong>&#128214; Location :</strong> logement lou&eacute; pour une dur&eacute;e d&eacute;termin&eacute;e (souvent &agrave; la semaine).
+            </div>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Le camping</div>
+            <p>Le <strong>camping</strong> propose des emplacements pour tentes, caravanes ou mobil-homes. On peut y s&eacute;journer &agrave; partir d'<strong>une nuit</strong>. Il offre souvent des &eacute;quipements&nbsp;: <strong>piscine</strong>, snack-bar, salle de jeux, acc&egrave;s au lac&hellip;</p>
+        </div>
+        <div class="card purple">
+            <div class="key purple">Le village de vacances</div>
+            <p>Le <strong>village de vacances</strong> regroupe des logements avec de nombreuses <strong>activit&eacute;s organis&eacute;es</strong>&nbsp;: voile, plong&eacute;e, kayak, volley, tennis, tir &agrave; l'arc&hellip; La dur&eacute;e minimum est souvent d'<strong>une semaine</strong>.</p>
+        </div>
+        <div class="card red">
+            <div class="key red">L'h&ocirc;tel</div>
+            <p>L'<strong>h&ocirc;tel</strong> propose des chambres que l'on r&eacute;serve &agrave; la <strong>nuit</strong>. C'est le logement id&eacute;al pour les <strong>s&eacute;jours courts</strong> ou les voyages en ville.</p>
+        </div>
+    </section>
+
+    <!-- TABLEAU RÉCAPITULATIF -->
+    <section id="tableau">
+        <div class="section-header">
+            <span class="section-icon">&#128202;</span>
+            <h2>Tableau r&eacute;capitulatif &ndash; 5 exemples</h2>
+        </div>
+        <div style="overflow-x: auto;">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Doc 1</th>
+                        <th>Doc 2</th>
+                        <th>Doc 3</th>
+                        <th>Doc 4</th>
+                        <th>Doc 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="row-label">Situation g&eacute;ographique</td>
+                        <td>Bretagne</td>
+                        <td>Alpes</td>
+                        <td>Corr&egrave;ze</td>
+                        <td>Corse</td>
+                        <td>Strasbourg</td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">Logement propos&eacute;</td>
+                        <td>Grande maison</td>
+                        <td>Appartement</td>
+                        <td>Camping</td>
+                        <td>Village vacances</td>
+                        <td>H&ocirc;tel</td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">Dur&eacute;e minimum</td>
+                        <td>Une semaine</td>
+                        <td>Une semaine</td>
+                        <td>Une nuit</td>
+                        <td>Une semaine</td>
+                        <td>Une nuit</td>
+                    </tr>
+                    <tr>
+                        <td class="row-label">Activit&eacute;s possibles</td>
+                        <td>Plage, bateau, activit&eacute;s li&eacute;es &agrave; la mer</td>
+                        <td>Golf, ski, &eacute;quitation, p&ecirc;che, piscine, spa</td>
+                        <td>Piscine, snack-bar, salle de jeux, lac, plage, centre-ville</td>
+                        <td>Voile, plong&eacute;e, kayak, volley, tennis, tir &agrave; l'arc</td>
+                        <td>Visiter la ville</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--red);">
+            <p><strong>1.</strong> En vacances, nous changeons de <strong>lieu de vie</strong> de mani&egrave;re temporaire.</p>
+            <p><strong>2.</strong> Il existe diff&eacute;rents types de logement&nbsp;: <strong>maison, appartement, camping, village de vacances, h&ocirc;tel, g&icirc;te, r&eacute;sidence de tourisme</strong>&hellip;</p>
+            <p><strong>3.</strong> Pour les s&eacute;jours <strong>longs</strong> &rarr; les <strong>campings</strong> attirent le plus de touristes.</p>
+            <p><strong>4.</strong> Pour les s&eacute;jours <strong>courts</strong> &rarr; ce sont les <strong>h&ocirc;tels</strong>.</p>
+            <p><strong>5.</strong> Le type de logement d&eacute;pend du <strong>lieu</strong>, de la <strong>dur&eacute;e</strong> du s&eacute;jour et des <strong>activit&eacute;s</strong> souhait&eacute;es.</p>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Quel logement&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Pour chaque situation, indique le type de logement le plus adapt&eacute;&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Tu pars une nuit &agrave; Strasbourg pour visiter le march&eacute; de No&euml;l.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Ta famille veut passer une semaine en Bretagne au bord de la mer.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Tu veux faire de la voile, de la plong&eacute;e et du kayak en Corse.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Tu pars en Corr&egrave;ze avec une tente pour quelques nuits.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">Tes parents louent un logement dans les Alpes pour une semaine de ski.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> Une nuit &agrave; Strasbourg &rarr; <span class="answer">h&ocirc;tel</span></div>
+                <div class="correction-item"><strong>b)</strong> Une semaine en Bretagne &rarr; <span class="answer">grande maison (location)</span></div>
+                <div class="correction-item"><strong>c)</strong> Activit&eacute;s nautiques en Corse &rarr; <span class="answer">village de vacances</span></div>
+                <div class="correction-item"><strong>d)</strong> Tente en Corr&egrave;ze &rarr; <span class="answer">camping</span></div>
+                <div class="correction-item"><strong>e)</strong> Semaine de ski dans les Alpes &rarr; <span class="answer">appartement (location)</span></div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 2 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">En vacances, nous changeons de lieu de vie de mani&egrave;re d&eacute;finitive.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Pour les s&eacute;jours longs, les campings attirent le plus de touristes.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Un h&ocirc;tel se loue &agrave; la semaine uniquement.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Un village de vacances propose des activit&eacute;s organis&eacute;es.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">On peut choisir un logement diff&eacute;rent &agrave; chaque p&eacute;riode de vacances.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> <span class="answer">FAUX</span> &ndash; C'est <strong>temporaire</strong> (quelques semaines dans l'ann&eacute;e), pas d&eacute;finitif.</div>
+                <div class="correction-item"><strong>b)</strong> <span class="answer">VRAI</span> &ndash; Les campings sont les plus populaires pour les longs s&eacute;jours.</div>
+                <div class="correction-item"><strong>c)</strong> <span class="answer">FAUX</span> &ndash; Un h&ocirc;tel se r&eacute;serve &agrave; la <strong>nuit</strong>.</div>
+                <div class="correction-item"><strong>d)</strong> <span class="answer">VRAI</span> &ndash; Voile, plong&eacute;e, kayak, tennis&hellip; sont des exemples d'activit&eacute;s propos&eacute;es.</div>
+                <div class="correction-item"><strong>e)</strong> <span class="answer">VRAI</span> &ndash; Le logement peut &ecirc;tre diff&eacute;rent &agrave; chaque p&eacute;riode de vacances.</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128221;</span>
+            <h2>Exercice 3 &ndash; Compl&egrave;te le texte</h2>
+        </div>
+        <div class="card exercise">
+            <p>Compl&egrave;te avec les mots&nbsp;: <em>temporaire, campings, h&ocirc;tels, vacances, village de vacances, location</em></p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Lorsque nous partons en ______, nous changeons de lieu de vie.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Nous occupons ces lieux de mani&egrave;re ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Pour les s&eacute;jours longs, ce sont les ______ qui attirent le plus de touristes.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Pour les s&eacute;jours courts, ce sont les ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">En Corse, on peut s&eacute;journer dans un ______ avec de nombreuses activit&eacute;s.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span class="exercise-text">En Bretagne, une famille peut louer une grande maison&nbsp;: c'est une ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> Lorsque nous partons en <span class="answer">vacances</span>, nous changeons de lieu de vie.</div>
+                <div class="correction-item"><strong>b)</strong> Nous occupons ces lieux de mani&egrave;re <span class="answer">temporaire</span>.</div>
+                <div class="correction-item"><strong>c)</strong> Pour les s&eacute;jours longs, ce sont les <span class="answer">campings</span> qui attirent le plus de touristes.</div>
+                <div class="correction-item"><strong>d)</strong> Pour les s&eacute;jours courts, ce sont les <span class="answer">h&ocirc;tels</span>.</div>
+                <div class="correction-item"><strong>e)</strong> En Corse, on peut s&eacute;journer dans un <span class="answer">village de vacances</span>.</div>
+                <div class="correction-item"><strong>f)</strong> En Bretagne, c'est une <span class="answer">location</span>.</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 4 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128172;</span>
+            <h2>Exercice 4 &ndash; Questions de cours</h2>
+        </div>
+        <div class="card exercise">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Cite 4 types de logement o&ugrave; l'on peut s&eacute;journer en vacances.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Pourquoi dit-on que le logement de vacances est &laquo;&nbsp;temporaire&nbsp;&raquo;&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Quelles activit&eacute;s peut-on faire dans un village de vacances en Corse&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Quel logement choisir pour visiter une ville pour une seule nuit&nbsp;? Pourquoi&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> <span class="answer">Maison (location), appartement, camping, village de vacances, h&ocirc;tel, g&icirc;te, r&eacute;sidence de tourisme, r&eacute;sidence secondaire</span> (4 parmi ceux-l&agrave;).</div>
+                <div class="correction-item"><strong>b)</strong> <span class="answer">Parce qu'on y s&eacute;journe seulement quelques semaines dans l'ann&eacute;e</span>, pas de mani&egrave;re d&eacute;finitive.</div>
+                <div class="correction-item"><strong>c)</strong> <span class="answer">Voile, plong&eacute;e, kayak, volley, tennis, tir &agrave; l'arc.</span></div>
+                <div class="correction-item"><strong>d)</strong> <span class="answer">Un h&ocirc;tel</span>, car on peut y r&eacute;server une chambre pour une seule nuit.</div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>G&Eacute;O 14 &bull; O&ugrave; se loge-t-on en vacances&nbsp;?</p>
+    <p>CM1 &bull; G&eacute;ographie</p>
+</footer>
+
+</body>
+</html>

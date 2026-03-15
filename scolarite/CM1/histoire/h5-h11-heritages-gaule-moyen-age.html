@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5&ndash;H11 &ndash; Des h&eacute;ritages de la Gaule au Moyen &Acirc;ge</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --brown: #5d4037;
+            --brown-light: #8d6e63;
+            --brown-bg: #efebe9;
+            --blue: #1565c0;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --gold: #f57f17;
+            --gold-bg: #fff8e1;
+            --indigo: #283593;
+            --indigo-bg: #e8eaf6;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafaf5 0%, #d7ccc8 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #3e2723 0%, #5d4037 40%, #8d6e63 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--brown); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== CHAPTER DIVIDER ===== */
+        .chapter-divider {
+            text-align: center;
+            margin: 2rem 0 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--brown) 0%, var(--brown-light) 100%);
+            border-radius: var(--radius);
+            color: var(--white);
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--brown);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--brown);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.gold { border-left-color: var(--gold); }
+        .card.indigo { border-left-color: var(--indigo); }
+        .card.teal { border-left-color: var(--teal); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.brown { background: var(--brown-bg); color: var(--brown); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.gold { background: var(--gold-bg); color: var(--gold); }
+        .key.indigo { background: var(--indigo-bg); color: var(--indigo); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+
+        /* ===== DATE TAG ===== */
+        .date-tag {
+            display: inline-block;
+            background: var(--red-bg);
+            color: var(--red);
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 6px;
+            margin-right: 0.3rem;
+        }
+
+        /* ===== TIMELINE ===== */
+        .timeline {
+            position: relative;
+            padding-left: 1.8rem;
+            margin-top: 0.8rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--brown-light);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.3rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.55rem;
+            top: 0.5rem;
+            width: 11px;
+            height: 11px;
+            background: var(--brown);
+            border-radius: 50%;
+            border: 2px solid var(--white);
+        }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== VOCAB ===== */
+        .vocab {
+            background: var(--indigo-bg);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .vocab strong { color: var(--indigo); }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(93, 64, 55, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#9876;&#65039;</div>
+    <h1>H5&ndash;H11 &ndash; De la Gaule au Moyen &Acirc;ge</h1>
+    <p class="subtitle">H&eacute;ritages, invasions et grands rois</p>
+    <p class="collection">CM1 &bull; Histoire</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#h5">H5 H&eacute;ritages</a>
+    <a href="#h5b">Vercing&eacute;torix</a>
+    <a href="#h5c">Romanisation</a>
+    <a href="#h6">H6 Chr&eacute;tiens</a>
+    <a href="#h7">H7 Barbares</a>
+    <a href="#h8">H8 Clovis</a>
+    <a href="#h9">H9 Charlemagne</a>
+    <a href="#h10">H10 L&eacute;gendes</a>
+    <a href="#h11">H11 Religion</a>
+    <a href="#frise">Frise</a>
+    <a href="#exercices">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- ================================ -->
+    <!--  CHAPITRE 2 : ANTIQUITÉ          -->
+    <!-- ================================ -->
+
+    <!-- H5 : HÉRITAGES DE LA GAULE -->
+    <section id="h5">
+        <div class="section-header">
+            <span class="section-icon">&#127963;&#65039;</span>
+            <h2>H5 &ndash; Quels sont les h&eacute;ritages de la Gaule&nbsp;?</h2>
+        </div>
+        <div class="card blue">
+            <div class="key blue">Les Grecs en M&eacute;diterran&eacute;e</div>
+            <p>Les <strong>Grecs</strong> ont fond&eacute; beaucoup de <strong>cit&eacute;s</strong> le long des c&ocirc;tes de la M&eacute;diterran&eacute;e. Ils y ont rencontr&eacute; de nombreuses civilisations diff&eacute;rentes, comme les <strong>Celtes</strong>.</p>
+            <p>Les <strong>hommes</strong>, les <strong>marchandises</strong> et les <strong>id&eacute;es</strong> ont beaucoup circul&eacute; entre ces peuples.</p>
+            <div class="tip">
+                <strong>&Agrave; retenir :</strong> Les Grecs, les Celtes et d'autres peuples &eacute;changent autour de la M&eacute;diterran&eacute;e &rarr; c'est l'Antiquit&eacute;&nbsp;!
+            </div>
+        </div>
+    </section>
+
+    <!-- VERCINGÉTORIX -->
+    <section id="h5b">
+        <div class="section-header">
+            <span class="section-icon">&#128737;&#65039;</span>
+            <h2>Qui &eacute;tait Vercing&eacute;torix&nbsp;?</h2>
+        </div>
+        <div class="card red">
+            <div class="key red">La conqu&ecirc;te de la Gaule</div>
+            <p>Quand <strong>C&eacute;sar</strong> entame la conqu&ecirc;te de la Gaule, <strong>Vercing&eacute;torix</strong>, un ancien alli&eacute; de Rome, se <strong>r&eacute;volte</strong> contre les arm&eacute;es de C&eacute;sar.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p><span class="date-tag">52 av. J.-C.</span> Vercing&eacute;torix <strong>gagne</strong> la bataille de <strong>Gergovie</strong>.</p>
+                </div>
+                <div class="timeline-item">
+                    <p><span class="date-tag">52 av. J.-C.</span> Mais il doit <strong>se rendre</strong> pendant le si&egrave;ge d'<strong>Al&eacute;sia</strong>. La Gaule passe sous domination romaine.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ROMANISATION -->
+    <section id="h5c">
+        <div class="section-header">
+            <span class="section-icon">&#127963;&#65039;</span>
+            <h2>La romanisation de la Gaule</h2>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Les Romains transforment la Gaule</div>
+            <p>Les Romains organisent la Gaule, construisent des <strong>routes</strong>, des <strong>b&acirc;timents</strong> et imposent le <strong>latin</strong> comme langue officielle.</p>
+            <p>Dans les cit&eacute;s romaines, on retrouve&nbsp;:</p>
+            <ul style="margin-left: 1.2rem; margin-top: 0.4rem;">
+                <li>Les <strong>thermes</strong> (bains publics)</li>
+                <li>Un <strong>th&eacute;&acirc;tre</strong></li>
+                <li>Des <strong>ar&egrave;nes</strong></li>
+                <li>Un <strong>forum</strong> (place centrale)</li>
+                <li>Un <strong>temple</strong></li>
+                <li>Une tr&egrave;s grande <strong>porte</strong> pour entrer dans la cit&eacute;</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- H6 : EMPIRE ROMAIN ET CHRISTIANISME -->
+    <section id="h6">
+        <div class="section-header">
+            <span class="section-icon">&#10013;&#65039;</span>
+            <h2>H6 &ndash; Comment l'Empire romain est-il devenu chr&eacute;tien&nbsp;?</h2>
+        </div>
+        <div class="card purple">
+            <div class="key purple">Du christianisme pers&eacute;cut&eacute; &agrave; la religion officielle</div>
+            <p>La religion des chr&eacute;tiens na&icirc;t en <strong>Palestine</strong> et se diffuse progressivement.</p>
+            <p>Les chr&eacute;tiens sont souvent <strong>pers&eacute;cut&eacute;s</strong> pour leur croyance.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p><span class="date-tag">313</span> L'empereur <strong>Constantin</strong> se convertit et <strong>autorise</strong> la religion chr&eacute;tienne.</p>
+                </div>
+                <div class="timeline-item">
+                    <p><span class="date-tag">380</span> Le <strong>christianisme</strong> devient la <strong>religion officielle</strong> de l'Empire.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- H7 : MIGRATIONS BARBARES -->
+    <section id="h7">
+        <div class="section-header">
+            <span class="section-icon">&#128014;</span>
+            <h2>H7 &ndash; Qu'appelle-t-on les migrations barbares&nbsp;?</h2>
+        </div>
+        <div class="card">
+            <div class="key brown">Les grandes migrations</div>
+            <p>Au <strong>IV<sup>e</sup> si&egrave;cle</strong>, les <strong>Huns</strong> se d&eacute;placent brutalement vers l'ouest de l'Europe, entra&icirc;nant les autres peuples vers l'ouest.</p>
+            <p>Tant&ocirc;t ces peuples <strong>demandent asile</strong> &agrave; l'Empire, tant&ocirc;t ils n'attendent pas l'autorisation et s'installent <strong>par la force</strong> ou en travaillant.</p>
+            <div class="tip">
+                <strong>&Agrave; retenir :</strong> Ces d&eacute;placements de population ont dur&eacute; <strong>plusieurs si&egrave;cles</strong>.
+            </div>
+            <div class="vocab">
+                <strong>&#128214; Barbares :</strong> nom donn&eacute; par les Romains aux peuples vivant hors de l'Empire romain.
+            </div>
+        </div>
+    </section>
+
+    <!-- H8 : CLOVIS -->
+    <section id="h8">
+        <div class="section-header">
+            <span class="section-icon">&#128081;</span>
+            <h2>H8 &ndash; Quel &eacute;tait le pouvoir de Clovis&nbsp;?</h2>
+        </div>
+        <div class="card green">
+            <div class="key green">Clovis, roi des Francs</div>
+            <p><strong>Clovis</strong> est le roi des <strong>Francs</strong> alors que l'Empire romain s'est effondr&eacute;. Il appartient aux <strong>M&eacute;rovingiens</strong>, famille d'anciens alli&eacute;s de l'Empire romain.</p>
+            <p>Pour augmenter son pouvoir, il <strong>devient chr&eacute;tien</strong> et se fait <strong>baptiser</strong>.</p>
+            <p>Il agrandit son royaume, mais &agrave; sa mort, le territoire est <strong>partag&eacute; entre ses quatre fils</strong> en <span class="date-tag">511</span>.</p>
+            <div class="vocab">
+                <strong>&#128214; M&eacute;rovingiens :</strong> premi&egrave;re grande famille de rois francs, &agrave; laquelle appartient Clovis.
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================ -->
+    <!--  CHAPITRE 3 : LE MOYEN ÂGE      -->
+    <!-- ================================ -->
+    <div class="chapter-divider" id="chap3">&#127984; Chapitre 3 &ndash; Le Moyen &Acirc;ge</div>
+
+    <!-- H9 : CHARLEMAGNE À AIX-LA-CHAPELLE -->
+    <section id="h9">
+        <div class="section-header">
+            <span class="section-icon">&#127984;</span>
+            <h2>H9 &ndash; Pourquoi le tr&ocirc;ne de Charlemagne se trouve-t-il &agrave; Aix-la-Chapelle&nbsp;?</h2>
+        </div>
+        <div class="card gold">
+            <div class="key gold">Un empire europ&eacute;en</div>
+            <p><strong>Charlemagne</strong> est un personnage tr&egrave;s puissant qui s'impose comme le <strong>principal protecteur de la chr&eacute;tient&eacute;</strong>.</p>
+            <p>Son empire est <strong>europ&eacute;en</strong>. Pour pouvoir le gouverner, Charlemagne imagine toute une <strong>administration</strong> avec&nbsp;:</p>
+            <ul style="margin-left: 1.2rem; margin-top: 0.4rem;">
+                <li>Des <strong>comtes</strong></li>
+                <li>Des <strong>ducs</strong></li>
+                <li>Des agents du seigneur, les <strong>missi dominici</strong>, pour surveiller l'ensemble</li>
+            </ul>
+            <div class="vocab">
+                <strong>&#128214; Missi dominici :</strong> &laquo;&nbsp;envoy&eacute;s du ma&icirc;tre&nbsp;&raquo; &ndash; agents de Charlemagne charg&eacute;s de contr&ocirc;ler les comtes et ducs.
+            </div>
+        </div>
+    </section>
+
+    <!-- H10 : QUI ÉTAIT VRAIMENT CHARLEMAGNE ? -->
+    <section id="h10">
+        <div class="section-header">
+            <span class="section-icon">&#128220;</span>
+            <h2>H10 &ndash; Qui &eacute;tait vraiment Charlemagne&nbsp;?</h2>
+        </div>
+        <div class="card indigo">
+            <div class="key indigo">Un personnage l&eacute;gendaire</div>
+            <p>Charlemagne est un personnage tr&egrave;s <strong>important</strong> de l'Europe occidentale. Si important que tr&egrave;s vite des <strong>l&eacute;gendes</strong> ont &eacute;t&eacute; invent&eacute;es &agrave; son sujet.</p>
+            <p>Son <strong>conseiller</strong> a &eacute;crit &agrave; quel point il &eacute;tait puissant. Sur des <strong>pi&egrave;ces de monnaie</strong>, il est repr&eacute;sent&eacute; comme un <strong>empereur romain</strong>.</p>
+            <div class="tip">
+                <strong>&Agrave; retenir :</strong> Les l&eacute;gendes autour de Charlemagne montrent &agrave; quel point il a marqu&eacute; l'Histoire&nbsp;!
+            </div>
+        </div>
+    </section>
+
+    <!-- H11 : CHARLEMAGNE ET LA RELIGION -->
+    <section id="h11">
+        <div class="section-header">
+            <span class="section-icon">&#9961;&#65039;</span>
+            <h2>H11 &ndash; Charlemagne et la religion</h2>
+        </div>
+        <div class="card teal">
+            <div class="key teal">Protecteur des chr&eacute;tiens</div>
+            <p>Pour le pape, Charlemagne &eacute;tait le <strong>protecteur des chr&eacute;tiens</strong>.</p>
+            <p>Tr&egrave;s croyant, il a d&eacute;velopp&eacute; les <strong>&eacute;glises</strong> et la <strong>musique d'&eacute;glise</strong>.</p>
+            <p>Pourtant, il a aussi nourri des <strong>amiti&eacute;s avec des princes arabes</strong>. Car &agrave; l'&eacute;poque, les hommes ne savaient pas grand-chose de cette nouvelle religion n&eacute;e en Arabie&nbsp;: l'<strong>islam</strong>.</p>
+        </div>
+    </section>
+
+    <!-- ================================ -->
+    <!--  FRISE CHRONOLOGIQUE             -->
+    <!-- ================================ -->
+    <section id="frise">
+        <div class="section-header">
+            <span class="section-icon">&#128197;</span>
+            <h2>Frise chronologique &ndash; Les dates cl&eacute;s</h2>
+        </div>
+        <div class="card">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <p><span class="date-tag">52 av. J.-C.</span> Victoire de Vercing&eacute;torix &agrave; <strong>Gergovie</strong>, puis d&eacute;faite &agrave; <strong>Al&eacute;sia</strong></p>
+                </div>
+                <div class="timeline-item">
+                    <p><span class="date-tag">313</span> <strong>Constantin</strong> autorise le christianisme</p>
+                </div>
+                <div class="timeline-item">
+                    <p><span class="date-tag">380</span> Le christianisme devient la <strong>religion officielle</strong> de l'Empire romain</p>
+                </div>
+                <div class="timeline-item">
+                    <p><span class="date-tag">IV<sup>e</sup> s.</span> D&eacute;but des <strong>migrations barbares</strong> (les Huns poussent les peuples vers l'ouest)</p>
+                </div>
+                <div class="timeline-item">
+                    <p><span class="date-tag">511</span> Mort de <strong>Clovis</strong>, royaume partag&eacute; entre ses quatre fils</p>
+                </div>
+                <div class="timeline-item">
+                    <p><span class="date-tag">768&ndash;814</span> R&egrave;gne de <strong>Charlemagne</strong>, protecteur de la chr&eacute;tient&eacute;</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================ -->
+    <!--  EXERCICES                        -->
+    <!-- ================================ -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Les dates importantes</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--purple);">
+            <p>Relie chaque date &agrave; l'&eacute;v&eacute;nement correspondant&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>52 avant J.-C.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>313</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>380</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>511</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> 52 av. J.-C. &rarr; <span class="answer">Si&egrave;ge d'Al&eacute;sia &ndash; Vercing&eacute;torix se rend &agrave; C&eacute;sar</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> 313 &rarr; <span class="answer">Constantin autorise la religion chr&eacute;tienne</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> 380 &rarr; <span class="answer">Le christianisme devient la religion officielle de l'Empire</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> 511 &rarr; <span class="answer">Mort de Clovis, partage du royaume entre ses quatre fils</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 2 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--purple);">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>Vercing&eacute;torix a gagn&eacute; la bataille d'Al&eacute;sia.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>Les Romains ont impos&eacute; le latin en Gaule.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Clovis appartenait &agrave; la famille des Carolingiens.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Charlemagne utilisait des missi dominici pour surveiller son empire.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span>Les Huns venaient de l'ouest de l'Europe.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">FAUX</span> &ndash; Vercing&eacute;torix a gagn&eacute; &agrave; <strong>Gergovie</strong>, mais il a <strong>perdu</strong> &agrave; Al&eacute;sia.
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">VRAI</span> &ndash; Les Romains ont impos&eacute; le latin comme langue officielle en Gaule.
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">FAUX</span> &ndash; Clovis appartenait aux <strong>M&eacute;rovingiens</strong>, pas aux Carolingiens.
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> <span class="answer">VRAI</span> &ndash; Les missi dominici &eacute;taient les &laquo;&nbsp;envoy&eacute;s du ma&icirc;tre&nbsp;&raquo;.
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> <span class="answer">FAUX</span> &ndash; Les Huns venaient de l'<strong>est</strong> et se d&eacute;pla&ccedil;aient vers l'ouest.
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128221;</span>
+            <h2>Exercice 3 &ndash; Questions de cours</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--purple);">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>Cite 3 b&acirc;timents que l'on trouve dans une cit&eacute; romaine.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>Pourquoi Clovis s'est-il fait baptiser&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Comment Charlemagne gouvernait-il son vaste empire&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">Les thermes, un th&eacute;&acirc;tre, des ar&egrave;nes, un forum, un temple, une grande porte</span> (3 parmi ceux-l&agrave;).
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">Pour augmenter son pouvoir</span>, en devenant chr&eacute;tien il gagnait le soutien de l'&Eacute;glise.
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">Avec des comtes, des ducs et des missi dominici</span> (envoy&eacute;s du ma&icirc;tre) pour surveiller l'ensemble de l'empire.
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>H5&ndash;H11 &bull; Des h&eacute;ritages de la Gaule au Moyen &Acirc;ge</p>
+    <p>CM1 &bull; Histoire</p>
+</footer>
+
+</body>
+</html>

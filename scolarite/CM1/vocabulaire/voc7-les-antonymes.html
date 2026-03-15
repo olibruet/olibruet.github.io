@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOC 7 &ndash; Les antonymes</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #ce93d8 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #4a148c 0%, #7b1fa2 40%, #ab47bc 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--purple); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--purple);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--purple);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+
+        /* ===== PAIR (for antonym pairs) ===== */
+        .pair-list { margin-top: 0.6rem; }
+        .pair {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--light);
+            flex-wrap: wrap;
+        }
+        .pair:last-child { border-bottom: none; }
+        .pair-word {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .pair-word.left { background: var(--blue-bg); color: var(--blue); }
+        .pair-word.right { background: var(--red-bg); color: var(--red); }
+        .pair-arrow { font-size: 1.2rem; color: var(--gray); flex-shrink: 0; }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .exercise-text { font-size: 1rem; line-height: 1.8; }
+
+        /* ===== ANSWER ZONE ===== */
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(123, 31, 162, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#128260;</div>
+    <h1>VOC 7 &ndash; Les antonymes</h1>
+    <p class="subtitle">Les mots de sens contraire</p>
+    <p class="collection">CM1 &bull; Vocabulaire</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#verbes">Verbes</a>
+    <a href="#noms">Noms</a>
+    <a href="#adjectifs">Adjectifs</a>
+    <a href="#adverbes">Adverbes</a>
+    <a href="#ex-contraire">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+        <div class="card">
+            <div class="key purple">Antonyme</div>
+            <p>Les <strong>antonymes</strong> sont des mots de <strong>sens contraire</strong>.</p>
+            <p>Des mots antonymes appartiennent toujours &agrave; la <strong>m&ecirc;me classe grammaticale</strong>.</p>
+            <div class="tip">
+                <strong>R&egrave;gle importante :</strong> un verbe a pour antonyme un <em>verbe</em>, un nom a pour antonyme un <em>nom</em>, un adjectif a pour antonyme un <em>adjectif</em>, etc.
+            </div>
+        </div>
+    </section>
+
+    <!-- VERBES ANTONYMES -->
+    <section id="verbes">
+        <div class="section-header">
+            <span class="section-icon">&#128643;</span>
+            <h2>Des verbes antonymes</h2>
+        </div>
+        <div class="card blue">
+            <div class="key blue">Verbe &#8596; Verbe</div>
+            <div class="pair-list">
+                <div class="pair">
+                    <span class="pair-word left">appara&icirc;tre</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">dispara&icirc;tre</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">monter</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">descendre</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">ouvrir</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">fermer</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">avancer</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">reculer</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">rire</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">pleurer</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOMS ANTONYMES -->
+    <section id="noms">
+        <div class="section-header">
+            <span class="section-icon">&#128220;</span>
+            <h2>Des noms antonymes</h2>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Nom &#8596; Nom</div>
+            <div class="pair-list">
+                <div class="pair">
+                    <span class="pair-word left">le bruit</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">le silence</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">la joie</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">la tristesse</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">le jour</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">la nuit</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">le courage</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">la l&acirc;chet&eacute;</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">la richesse</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">la pauvret&eacute;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADJECTIFS ANTONYMES -->
+    <section id="adjectifs">
+        <div class="section-header">
+            <span class="section-icon">&#127912;</span>
+            <h2>Des adjectifs antonymes</h2>
+        </div>
+        <div class="card green">
+            <div class="key green">Adjectif &#8596; Adjectif</div>
+            <div class="pair-list">
+                <div class="pair">
+                    <span class="pair-word left">facile</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">difficile</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">grand</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">petit</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">chaud</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">froid</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">rapide</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">lent</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">gentil</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">m&eacute;chant</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADVERBES ANTONYMES -->
+    <section id="adverbes">
+        <div class="section-header">
+            <span class="section-icon">&#128268;</span>
+            <h2>Des adverbes antonymes</h2>
+        </div>
+        <div class="card teal">
+            <div class="key teal">Adverbe &#8596; Adverbe</div>
+            <div class="pair-list">
+                <div class="pair">
+                    <span class="pair-word left">peu</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">beaucoup</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">lentement</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">rapidement</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">toujours</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">jamais</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">ici</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">l&agrave;-bas</span>
+                </div>
+                <div class="pair">
+                    <span class="pair-word left">devant</span>
+                    <span class="pair-arrow">&#8596;</span>
+                    <span class="pair-word right">derri&egrave;re</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 : TROUVER L'ANTONYME -->
+    <section id="ex-contraire">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Trouve l'antonyme</h2>
+        </div>
+        <div class="card exercise">
+            <p>Pour chaque mot, &eacute;cris son <strong>antonyme</strong>&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">entrer &rarr;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">l&eacute;ger &rarr;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">la victoire &rarr;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">souvent &rarr;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">propre &rarr;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span class="exercise-text">all&eacute;ger &rarr;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">g</span>
+                <span class="exercise-text">le d&eacute;but &rarr;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">h</span>
+                <span class="exercise-text">doucement &rarr;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> entrer &rarr; <span class="answer">sortir</span> (verbe &#8596; verbe)
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> l&eacute;ger &rarr; <span class="answer">lourd</span> (adjectif &#8596; adjectif)
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> la victoire &rarr; <span class="answer">la d&eacute;faite</span> (nom &#8596; nom)
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> souvent &rarr; <span class="answer">rarement</span> (adverbe &#8596; adverbe)
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> propre &rarr; <span class="answer">sale</span> (adjectif &#8596; adjectif)
+                </div>
+                <div class="correction-item">
+                    <strong>f)</strong> all&eacute;ger &rarr; <span class="answer">alourdir</span> (verbe &#8596; verbe)
+                </div>
+                <div class="correction-item">
+                    <strong>g)</strong> le d&eacute;but &rarr; <span class="answer">la fin</span> (nom &#8596; nom)
+                </div>
+                <div class="correction-item">
+                    <strong>h)</strong> doucement &rarr; <span class="answer">brusquement</span> (adverbe &#8596; adverbe)
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 : QUELLE CLASSE GRAMMATICALE ? -->
+    <section id="ex-classe">
+        <div class="section-header">
+            <span class="section-icon">&#128269;</span>
+            <h2>Exercice 2 &ndash; Classe grammaticale et antonyme</h2>
+        </div>
+        <div class="card exercise">
+            <p>Pour chaque paire, indique la <strong>classe grammaticale</strong> commune et dis si ce sont bien des antonymes&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">permettre / interdire</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">la g&eacute;n&eacute;rosit&eacute; / avare</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">ancien / moderne</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">la libert&eacute; / la prison</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">poliment / grossi&egrave;rement</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> permettre / interdire &rarr; <span class="answer">verbes &rarr; oui, ce sont des antonymes</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> la g&eacute;n&eacute;rosit&eacute; / avare &rarr; <span class="answer">nom / adjectif &rarr; non, ce ne sont PAS des antonymes</span> (pas la m&ecirc;me classe&nbsp;! L'antonyme de &laquo;&nbsp;la g&eacute;n&eacute;rosit&eacute;&nbsp;&raquo; serait &laquo;&nbsp;l'avarice&nbsp;&raquo;)
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> ancien / moderne &rarr; <span class="answer">adjectifs &rarr; oui, ce sont des antonymes</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> la libert&eacute; / la prison &rarr; <span class="answer">noms &rarr; non, ce ne sont PAS vraiment des antonymes</span> (l'antonyme de &laquo;&nbsp;la libert&eacute;&nbsp;&raquo; serait &laquo;&nbsp;la captivit&eacute;&nbsp;&raquo; ou &laquo;&nbsp;l'emprisonnement&nbsp;&raquo;)
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> poliment / grossi&egrave;rement &rarr; <span class="answer">adverbes &rarr; oui, ce sont des antonymes</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 : COMPLÉTER DES PHRASES -->
+    <section id="ex-phrases">
+        <div class="section-header">
+            <span class="section-icon">&#128221;</span>
+            <h2>Exercice 3 &ndash; Compl&egrave;te avec l'antonyme</h2>
+        </div>
+        <div class="card exercise">
+            <p>Remplace le mot en gras par son <strong>antonyme</strong> pour changer le sens de la phrase&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Ce probl&egrave;me est <strong>facile</strong>.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Le chat <strong>monte</strong> sur le toit.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Il y a <strong>beaucoup</strong> de bruit dans la cour.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">La <strong>joie</strong> se lisait sur son visage.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">Cette route est tr&egrave;s <strong>large</strong>.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> Ce probl&egrave;me est <span class="answer">difficile</span>.
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> Le chat <span class="answer">descend</span> du toit.
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> Il y a <span class="answer">peu</span> de bruit dans la cour.
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> La <span class="answer">tristesse</span> se lisait sur son visage.
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> Cette route est tr&egrave;s <span class="answer">&eacute;troite</span>.
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>VOC 7 &bull; Les antonymes</p>
+    <p>CM1 &bull; Vocabulaire</p>
+</footer>
+
+</body>
+</html>

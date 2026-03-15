@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Renard de Morlange - Alain Surget</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --orange: #e67e22;
+            --orange-light: #f39c12;
+            --orange-bg: #fef5e7;
+            --green: #27ae60;
+            --green-bg: #eafaf1;
+            --blue: #2980b9;
+            --blue-bg: #ebf5fb;
+            --purple: #8e44ad;
+            --purple-bg: #f4ecf7;
+            --red: #c0392b;
+            --red-bg: #fdedec;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HEADER ===== */
+        .hero {
+            background: linear-gradient(135deg, #d35400 0%, #e67e22 40%, #f39c12 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.3rem;
+            position: relative;
+        }
+
+        .hero .author {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            position: relative;
+        }
+
+        .hero .collection {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+            position: relative;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav::-webkit-scrollbar { display: none; }
+
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav a:hover, .nav a:active {
+            background: var(--orange);
+            color: var(--white);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--orange);
+        }
+
+        .section-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--orange);
+        }
+
+        .card p {
+            margin-bottom: 0.8rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== CHAPTER ACCORDION (native <details>) ===== */
+        .chapter {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+            border-left: 4px solid var(--blue);
+        }
+
+        .chapter summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(41, 128, 185, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+        }
+
+        .chapter summary::-webkit-details-marker { display: none; }
+        .chapter summary::marker { display: none; content: ''; }
+
+        .chapter summary:hover,
+        .chapter summary:active {
+            background: var(--blue-bg);
+        }
+
+        .chapter-number {
+            background: var(--blue);
+            color: var(--white);
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .chapter-title-block {
+            flex: 1;
+        }
+
+        .chapter-title {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        .chapter-subtitle {
+            font-size: 0.8rem;
+            color: var(--gray);
+            font-style: italic;
+        }
+
+        .chapter-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+
+        .chapter[open] .chapter-arrow {
+            transform: rotate(180deg);
+        }
+
+        .chapter-content-inner {
+            padding: 0 1.2rem 1.2rem;
+            color: #444;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* ===== CHARACTER CARDS ===== */
+        .character-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .character-avatar {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .character-avatar.main { background: var(--orange-bg); }
+        .character-avatar.secondary { background: var(--blue-bg); }
+        .character-avatar.minor { background: var(--light); }
+
+        .character-info { flex: 1; }
+
+        .character-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--dark);
+        }
+
+        .character-role {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 0.4rem;
+        }
+
+        .character-desc {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* ===== THEME TAGS ===== */
+        .theme-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .theme-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .theme-title .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .theme-desc {
+            font-size: 0.9rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* ===== CONTEXT BOX ===== */
+        .context-box {
+            background: var(--purple-bg);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+            border-left: 4px solid var(--purple);
+            margin-bottom: 1rem;
+        }
+
+        .context-box h3 {
+            font-size: 1rem;
+            color: var(--purple);
+            margin-bottom: 0.4rem;
+        }
+
+        .context-box p {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.6rem; }
+            .hero .author { font-size: 1.3rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+
+            .characters-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .characters-grid .character-card { margin-bottom: 0; }
+            .character-card.full-width { grid-column: 1 / -1; }
+
+            .themes-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .themes-grid .theme-card { margin-bottom: 0; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .chapter[open] { break-inside: avoid; }
+            .chapter { border: 1px solid #ccc; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#129418;</div>
+    <h1>Le Renard de Morlange</h1>
+    <p class="author">Alain Surget</p>
+    <p class="collection">Nathan &bull; Collection Pleine Lune</p>
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" role="navigation">
+    <a href="#resume">En bref</a>
+    <a href="#chapitres">Chapitres</a>
+    <a href="#personnages">Personnages</a>
+    <a href="#themes">Th&egrave;mes</a>
+    <a href="#savais-tu">Le savais-tu ?</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- RÉSUMÉ GÉNÉRAL -->
+    <section id="resume">
+        <div class="section-header">
+            <span class="section-icon">&#128214;</span>
+            <h2>R&eacute;sum&eacute; g&eacute;n&eacute;ral</h2>
+        </div>
+        <div class="card">
+            <p>L'histoire se passe au <strong>XIV&egrave;me si&egrave;cle</strong> (Moyen &Acirc;ge), en <strong>Lorraine</strong>.
+            <strong>Renaud de Morlange</strong> est un seigneur tr&egrave;s puissant, riche... et surtout tr&egrave;s <strong>cruel</strong>.
+            Il &eacute;crase ses paysans de taxes, d&eacute;truit leurs r&eacute;coltes pendant ses chasses, et maltraite sa propre femme, <strong>Mathilde</strong>,
+            qu'il garde enferm&eacute;e au ch&acirc;teau.</p>
+
+            <p>Un jour, il croise un <strong>vieil ermite</strong> dans la for&ecirc;t qui lui demande de changer de comportement.
+            Renaud le frappe et l'insulte. Mauvaise id&eacute;e ! L'ermite lui lance une <strong>mal&eacute;diction</strong> :
+            d&eacute;sormais, &agrave; chaque pleine lune, Renaud se transformera en <strong>renard</strong>, tout en gardant son esprit humain.</p>
+
+            <p>Au d&eacute;but, Renaud trouve &ccedil;a plut&ocirc;t cool. Mais sa femme Mathilde d&eacute;couvre son secret et
+            <strong>lui vole ses v&ecirc;tements</strong> &ndash; sans eux, il ne peut plus redevenir humain !
+            Le voil&agrave; <strong>pi&eacute;g&eacute; sous forme de renard</strong>, pour de bon.</p>
+
+            <p>Renaud va alors vivre la vie d'un animal sauvage : la faim, le froid, la solitude, la peur d'&ecirc;tre chass&eacute;...
+            Lui qui &eacute;tait tout-puissant devient le plus faible. Petit &agrave; petit, il comprend enfin le mal qu'il faisait aux autres.</p>
+
+            <p>Apr&egrave;s de nombreuses &eacute;preuves, il finit par <strong>r&eacute;cup&eacute;rer ses v&ecirc;tements</strong> et retrouver sa forme humaine.
+            Mais il a compl&egrave;tement <strong>chang&eacute;</strong> : il devient un seigneur juste et bienveillant,
+            et Mathilde lui <strong>pardonne</strong>.</p>
+        </div>
+    </section>
+
+    <!-- CHAPITRES -->
+    <section id="chapitres">
+        <div class="section-header">
+            <span class="section-icon">&#128220;</span>
+            <h2>R&eacute;sum&eacute; chapitre par chapitre</h2>
+        </div>
+
+        <!-- Chapitre 1 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">1</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">Renaud de Morlange</div>
+                    <div class="chapter-subtitle">Situation initiale</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>On d&eacute;couvre le personnage principal lors d'une <strong>chasse &agrave; courre</strong>. Renaud de Morlange galope &agrave; travers les champs de bl&eacute; de ses paysans sans aucun respect pour leur travail. Il tue un sanglier.</p>
+                <p>On comprend vite qu'il est un seigneur <strong>cruel et orgueilleux</strong> : il &eacute;crase ses paysans de corvées et de taxes, et garde sa femme Mathilde <strong>prisonnière</strong> au ch&acirc;teau. Il d&eacute;teste aussi <strong>Robert de Florange</strong>, un jeune seigneur voisin plus beau et plus aimable que lui, qu'il soup&ccedil;onne de tourner autour de Mathilde.</p>
+                <p>Dans la for&ecirc;t, Renaud rencontre un <strong>vieil ermite</strong> qui lui demande de se repentir. Renaud le frappe et l'insulte. L'ermite, qui le d&eacute;passe de deux t&ecirc;tes, se redresse et prononce la <strong>mal&eacute;diction</strong> : chaque nuit de pleine lune, Renaud vivra sous la forme d'un renard, en gardant son esprit humain, jusqu'&agrave; ce qu'il fasse p&eacute;nitence.</p>
+            </div>
+        </details>
+
+        <!-- Chapitre 2 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">2</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La mal&eacute;diction</div>
+                    <div class="chapter-subtitle">&Eacute;l&eacute;ment perturbateur</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Renaud est obs&eacute;d&eacute; par les paroles de l'ermite, m&ecirc;me s'il refuse d'y croire. Pour se changer les id&eacute;es, il organise une <strong>grande f&ecirc;te</strong> au ch&acirc;teau et invite le puissant sire de Sancy. Buffets &eacute;normes, musiciens, m&eacute;nestrels... Le sire de Sancy s'&eacute;tonne d'un tel festin sans occasion particuli&egrave;re.</p>
+                <p>Mais malgr&eacute; la f&ecirc;te, Renaud n'arrive pas &agrave; oublier. En pleine nuit, il est comme <strong>attir&eacute;</strong> vers la for&ecirc;t. Il se rend &agrave; la <strong>source de la Lenderre</strong>, s'y plonge... et en ressort <strong>transform&eacute; en renard</strong> !</p>
+                <p>Il passe toute la nuit &agrave; d&eacute;couvrir son nouveau corps d'animal, un peu maladroit. Au matin, il retrouve sa forme humaine pr&egrave;s de ses v&ecirc;tements. Finalement, il trouve l'exp&eacute;rience plut&ocirc;t... <strong>excitante</strong>.</p>
+            </div>
+        </details>
+
+        <!-- Chapitre 3 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">3</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La nuit du renard</div>
+                    <div class="chapter-subtitle">Les premi&egrave;res transformations</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>&Agrave; chaque pleine lune, Renaud retourne &agrave; la source et se transforme. Il prend de plus en plus d'<strong>assurance</strong> dans son corps de renard et d&eacute;couvre la for&ecirc;t sous un angle totalement nouveau.</p>
+                <p>Mais un probl&egrave;me se pose : pendant ses sorties nocturnes en renard, il d&eacute;couvre que ses paysans <strong>braconnent</strong> sur ses terres. De retour sous forme humaine, sa col&egrave;re explose et il les punit encore plus durement qu'avant.</p>
+                <p>R&eacute;sultat : <strong>rien ne change</strong> dans son comportement. La mal&eacute;diction ne lui sert &agrave; rien pour l'instant, il reste aussi m&eacute;chant.</p>
+            </div>
+        </details>
+
+        <!-- Chapitre 4 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">4</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">M&eacute;tamorphoses</div>
+                    <div class="chapter-subtitle">Le pi&egrave;ge se referme</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Renaud progresse dans sa ma&icirc;trise de son corps de renard : la <strong>course</strong>, l'<strong>&eacute;quilibre</strong> avec sa queue, la <strong>chasse</strong>... Il prend de plus en plus de plaisir &agrave; ses nuits de m&eacute;tamorphose.</p>
+                <p>Mais lors de la cinqui&egrave;me pleine lune, <strong>Mathilde</strong>, intrigu&eacute;e par le comportement bizarre de son mari, le <strong>suit en secret</strong>. Elle le voit plonger dans la source et ressortir en renard. D'abord terrifi&eacute;e, elle d&eacute;cide de se <strong>venger</strong> : elle s'enfuit en emportant ses v&ecirc;tements !</p>
+                <p>&Agrave; l'aube, Renaud revient &agrave; la source mais ses habits ont disparu. Il sent l'odeur de Mathilde et comprend : elle l'a trahi. <strong>Sans ses v&ecirc;tements, il ne peut plus redevenir humain.</strong> Il tente de retourner au ch&acirc;teau, mais les soldats le chassent &agrave; coups de fl&egrave;ches. M&ecirc;me les moines le repoussent quand il cherche refuge &agrave; l'&eacute;glise. Il est <strong>pi&eacute;g&eacute;</strong>.</p>
+            </div>
+        </details>
+
+        <!-- Chapitre 5 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">5</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La peau de chagrin</div>
+                    <div class="chapter-subtitle">La survie</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Renaud est d&eacute;sormais <strong>seul</strong>, pi&eacute;g&eacute; sous sa forme animale. Lui qui &eacute;tait un seigneur tout-puissant n'est plus qu'un renard perdu dans la for&ecirc;t.</p>
+                <p>Il doit faire face &agrave; la <strong>faim</strong>, au <strong>froid</strong>, et aux dangers de la vie sauvage. Trouver de la nourriture, se prot&eacute;ger... Tout ce qu'il avait gratuitement en tant que seigneur, il doit maintenant se battre pour l'obtenir.</p>
+                <p>C'est &agrave; ce moment qu'il commence &agrave; <strong>r&eacute;aliser</strong> le mal qu'il a fait. La vie dure qu'il imposait &agrave; ses paysans, c'est exactement celle qu'il vit maintenant. La le&ccedil;on commence &agrave; rentrer...</p>
+            </div>
+        </details>
+
+        <!-- Chapitre 6 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">6</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La renarde</div>
+                    <div class="chapter-subtitle">La douceur et la perte</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Renaud-renard rencontre une <strong>renarde</strong> qui devient sa compagne. Pour la premi&egrave;re fois de sa vie, il fait preuve de <strong>douceur</strong> et de <strong>tendresse</strong> &ndash; des sentiments qu'il n'avait jamais montr&eacute;s &agrave; Mathilde.</p>
+                <p>Mais un <strong>renard rival</strong>, plus fort et plus agressif, convoite sa compagne et son territoire. Apr&egrave;s un combat qu'il <strong>perd</strong>, Renaud est chass&eacute;. Il se retrouve &agrave; nouveau seul, vaincu et humili&eacute;.</p>
+                <p>Lui qui dominait tout le monde d&eacute;couvre ce que &ccedil;a fait d'&ecirc;tre <strong>le plus faible</strong>.</p>
+            </div>
+        </details>
+
+        <!-- Chapitre 7 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">7</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La harde</div>
+                    <div class="chapter-subtitle">La vie en communaut&eacute;</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Seul et vuln&eacute;rable, Renaud rejoint un <strong>groupe de renards</strong> (une harde) pour se sentir plus en s&eacute;curit&eacute;.</p>
+                <p>Il d&eacute;couvre alors quelque chose d'important : la vie sauvage fonctionne <strong>comme la soci&eacute;t&eacute; des hommes</strong> ! Il y a des chefs, des domin&eacute;s, des luttes de pouvoir... Exactement ce qu'il faisait subir &agrave; ses paysans.</p>
+                <p>Il apprend aussi la <strong>solidarit&eacute;</strong>, le <strong>partage</strong>, et l'<strong>humilit&eacute;</strong>. Affam&eacute; et mis&eacute;rable, il comprend v&eacute;ritablement cette fois le mal qu'il a caus&eacute; &agrave; tout le monde autour de lui.</p>
+            </div>
+        </details>
+
+        <!-- Chapitre 8 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">8</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La grande v&egrave;nerie</div>
+                    <div class="chapter-subtitle">La chasse</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Le <strong>duc de Lorraine</strong> organise une grande chasse avec sa meute de chiens. La harde de renards est pourchass&eacute;e et Renaud se retrouve bient&ocirc;t <strong>seul face aux chiens</strong>.</p>
+                <p>Une course-poursuite terrifiante s'engage &agrave; travers la for&ecirc;t. &Eacute;puis&eacute;, encercl&eacute;, Renaud-renard fait face au duc pr&ecirc;t &agrave; le transpercer. Plut&ocirc;t que de fuir, il se dresse avec <strong>courage</strong> pour mourir dignement.</p>
+                <p>Impressionn&eacute; par ce renard au comportement si &eacute;trange et si courageux, le duc d&eacute;cide de <strong>ne pas le tuer</strong>. Il le capture vivant et l'emm&egrave;ne au ch&acirc;teau pour en faire son <strong>animal de compagnie</strong>.</p>
+            </div>
+        </details>
+
+        <!-- Chapitre 9 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">9</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">&Agrave; la cour ducale</div>
+                    <div class="chapter-subtitle">D&eacute;nouement</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Renaud-renard vit d&eacute;sormais &agrave; la cour du duc. Lors d'un <strong>tournoi</strong>, il reconnait <strong>Mathilde</strong>, venue au bras de <strong>Robert de Florange</strong>. Et Robert porte les v&ecirc;tements vol&eacute;s de Renaud !</p>
+                <p>Le renard <strong>attaque Robert</strong> avec f&eacute;rocit&eacute;, le mord et r&eacute;cup&egrave;re ses v&ecirc;tements. En les enfilant, Renaud <strong>retrouve sa forme humaine</strong> devant tout le monde.</p>
+                <p>Mais ce n'est plus le m&ecirc;me homme : transform&eacute; par ses &eacute;preuves, devenu <strong>humble et juste</strong>, il obtient le <strong>pardon de Mathilde</strong>. Le couple se r&eacute;concilie et Renaud devient enfin un seigneur <strong>g&eacute;n&eacute;reux et bienveillant</strong>.</p>
+            </div>
+        </details>
+    </section>
+
+    <!-- PERSONNAGES -->
+    <section id="personnages">
+        <div class="section-header">
+            <span class="section-icon">&#128101;</span>
+            <h2>Les personnages</h2>
+        </div>
+
+        <!-- Personnage principal -->
+        <div class="character-card full-width">
+            <div class="character-avatar main">&#129418;</div>
+            <div class="character-info">
+                <div class="character-name">Renaud de Morlange</div>
+                <div class="character-role">Personnage principal &bull; Le comte</div>
+                <div class="character-desc">
+                    Seigneur puissant et riche de Lorraine. Au d&eacute;but de l'histoire, c'est un homme <strong>cruel, orgueilleux et violent</strong>. Il &eacute;crase ses paysans, maltraite sa femme et ne respecte personne. Apr&egrave;s avoir &eacute;t&eacute; maudit et transform&eacute; en renard, il vit toutes les souffrances qu'il faisait subir aux autres. Il finit par <strong>changer compl&egrave;tement</strong> et devenir un seigneur juste.
+                </div>
+            </div>
+        </div>
+
+        <div class="characters-grid">
+            <div class="character-card">
+                <div class="character-avatar secondary">&#128081;</div>
+                <div class="character-info">
+                    <div class="character-name">Mathilde</div>
+                    <div class="character-role">La comtesse &bull; &Eacute;pouse de Renaud</div>
+                    <div class="character-desc">
+                        Belle mais maltrait&eacute;e par son mari, elle est <strong>retenue prisonni&egrave;re</strong> au ch&acirc;teau. Quand elle d&eacute;couvre le secret de Renaud, elle lui vole ses v&ecirc;tements pour se <strong>venger</strong>. Elle finit par lui pardonner quand elle voit qu'il a vraiment chang&eacute;.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar secondary">&#9876;&#65039;</div>
+                <div class="character-info">
+                    <div class="character-name">Robert de Florange</div>
+                    <div class="character-role">Seigneur voisin &bull; Rival</div>
+                    <div class="character-desc">
+                        Jeune seigneur <strong>beau et aimable</strong>, il courtise Mathilde, ce qui rend Renaud fou de jalousie. Apr&egrave;s la disparition de Renaud, il prend sa place aupr&egrave;s de Mathilde et porte ses v&ecirc;tements.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar secondary">&#129491;</div>
+                <div class="character-info">
+                    <div class="character-name">L'ermite</div>
+                    <div class="character-role">Le vieil homme de la for&ecirc;t</div>
+                    <div class="character-desc">
+                        Personnage myst&eacute;rieux qui vit seul dans la for&ecirc;t. <strong>Immense</strong> (il d&eacute;passe Renaud de deux t&ecirc;tes), il demande au comte de se repentir. Face &agrave; son refus, il lance la <strong>mal&eacute;diction</strong> qui va tout changer.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar secondary">&#128084;</div>
+                <div class="character-info">
+                    <div class="character-name">Le duc de Lorraine</div>
+                    <div class="character-role">Seigneur puissant</div>
+                    <div class="character-desc">
+                        Grand chasseur, il organise la v&egrave;nerie (chasse) o&ugrave; Renaud-renard est captur&eacute;. Impressionn&eacute; par le <strong>courage</strong> du renard, il d&eacute;cide de le garder en vie comme animal de compagnie &agrave; sa cour.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar minor">&#127806;</div>
+                <div class="character-info">
+                    <div class="character-name">Les paysans</div>
+                    <div class="character-role">Les victimes</div>
+                    <div class="character-desc">
+                        &Eacute;cras&eacute;s de corvées et de taxes par Renaud. Ils braconnent en cachette pour survivre. Ils repr&eacute;sentent tous ceux que le comte <strong>opprime</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar minor">&#129446;</div>
+                <div class="character-info">
+                    <div class="character-name">La renarde</div>
+                    <div class="character-role">Compagne animale</div>
+                    <div class="character-desc">
+                        Renard-femelle que Renaud rencontre dans la for&ecirc;t. Avec elle, il d&eacute;couvre la <strong>tendresse</strong> pour la premi&egrave;re fois, mais il la perd face &agrave; un rival plus fort.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THÈMES -->
+    <section id="themes">
+        <div class="section-header">
+            <span class="section-icon">&#128161;</span>
+            <h2>Les th&egrave;mes du livre</h2>
+        </div>
+
+        <div class="themes-grid">
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--red);"></span>
+                    La cruaut&eacute; et l'abus de pouvoir
+                </div>
+                <div class="theme-desc">
+                    Renaud utilise son pouvoir de seigneur pour faire souffrir les autres. Le livre montre que <strong>la violence et la m&eacute;chancet&eacute; finissent toujours par se retourner contre soi</strong>.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--orange);"></span>
+                    La m&eacute;tamorphose
+                </div>
+                <div class="theme-desc">
+                    Comme dans les contes, la transformation physique (homme &rarr; renard) repr&eacute;sente aussi une <strong>transformation int&eacute;rieure</strong>. C'est en devenant un animal que Renaud apprend &agrave; devenir vraiment humain.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--blue);"></span>
+                    Se mettre &agrave; la place des autres
+                </div>
+                <div class="theme-desc">
+                    Renaud ne comprenait pas la souffrance des autres car il n'avait jamais rien subi. En vivant comme un animal traqu&eacute;, <strong>il ressent enfin ce que ressentent les plus faibles</strong>. C'est l'empathie.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--green);"></span>
+                    Le pardon
+                </div>
+                <div class="theme-desc">
+                    Malgr&eacute; tout ce qu'il lui a fait subir, Mathilde finit par pardonner &agrave; Renaud quand elle voit qu'il a sinc&egrave;rement chang&eacute;. Le livre montre que <strong>le pardon est possible quand le changement est r&eacute;el</strong>.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--purple);"></span>
+                    Le parcours initiatique
+                </div>
+                <div class="theme-desc">
+                    Renaud traverse une s&eacute;rie d'<strong>&eacute;preuves</strong> (la faim, la solitude, la d&eacute;faite, la chasse...) qui le font grandir et changer. C'est comme un parcours d'apprentissage de la vie.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: #e84393;"></span>
+                    La soci&eacute;t&eacute; du Moyen &Acirc;ge
+                </div>
+                <div class="theme-desc">
+                    Le roman montre comment fonctionnait la <strong>soci&eacute;t&eacute; f&eacute;odale</strong> : les seigneurs tout-puissants, les paysans &eacute;cras&eacute;s, les tournois, les chasses, les banquets... Et les renards ont aussi leur propre hi&eacute;rarchie !
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LE SAVAIS-TU ? -->
+    <section id="savais-tu">
+        <div class="section-header">
+            <span class="section-icon">&#128300;</span>
+            <h2>Le savais-tu ?</h2>
+        </div>
+
+        <div class="context-box">
+            <h3>Une histoire inspir&eacute;e du Moyen &Acirc;ge</h3>
+            <p>Ce roman est une <strong>r&eacute;&eacute;criture</strong> d'un texte m&eacute;di&eacute;val appel&eacute; <em>Bisclavret</em>, &eacute;crit par <strong>Marie de France</strong> au XII&egrave;me si&egrave;cle. Dans cette version originale, c'est un loup-garou (pas un renard) ! Alain Surget dit s'&ecirc;tre inspir&eacute; d'une <strong>l&eacute;gende lorraine</strong> qu'il a d&eacute;couverte en vivant 25 ans &agrave; Fameck, en Lorraine.</p>
+        </div>
+
+        <div class="context-box">
+            <h3>Pourquoi &laquo;&nbsp;goupil&nbsp;&raquo; ?</h3>
+            <p>Dans le livre, le renard est parfois appel&eacute; <strong>&laquo;&nbsp;goupil&nbsp;&raquo;</strong>. C'est l'<strong>ancien mot fran&ccedil;ais</strong> pour d&eacute;signer le renard ! Le mot &laquo;&nbsp;renard&nbsp;&raquo; vient en fait du personnage <em>Renart</em> dans le c&eacute;l&egrave;bre <em>Roman de Renart</em> (un recueil de contes du Moyen &Acirc;ge o&ugrave; les animaux se comportent comme des humains).</p>
+        </div>
+
+        <div class="context-box">
+            <h3>Le r&ocirc;le des v&ecirc;tements</h3>
+            <p>Dans les l&eacute;gendes de m&eacute;tamorphose au Moyen &Acirc;ge, les <strong>v&ecirc;tements</strong> repr&eacute;sentent l'identit&eacute; humaine. Les enlever, c'est perdre son humanit&eacute;. Les retrouver, c'est la retrouver. C'est pour &ccedil;a que Renaud doit absolument r&eacute;cup&eacute;rer les siens pour redevenir humain.</p>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>Fiche de lecture &bull; <em>Le Renard de Morlange</em> &ndash; Alain Surget</p>
+    <p>Niveau 5&egrave;me &bull; Fran&ccedil;ais</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S5&ndash;S8 &ndash; Les mouvements de la Terre et du Soleil</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --indigo: #283593;
+            --indigo-bg: #e8eaf6;
+            --gold: #f57f17;
+            --gold-bg: #fff8e1;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f0f4ff 0%, #90caf9 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 40%, #42a5f5 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--blue); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--blue);
+        }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.indigo { border-left-color: var(--indigo); }
+        .card.gold { border-left-color: var(--gold); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.indigo { background: var(--indigo-bg); color: var(--indigo); }
+        .key.gold { background: var(--gold-bg); color: var(--gold); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+
+        /* ===== DATE TAG ===== */
+        .date-tag {
+            display: inline-block;
+            background: var(--orange-bg);
+            color: var(--orange);
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 6px;
+            margin-right: 0.3rem;
+        }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== VOCAB ===== */
+        .vocab {
+            background: var(--indigo-bg);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .vocab strong { color: var(--indigo); }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(21, 101, 192, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#9728;&#65039;</div>
+    <h1>S5&ndash;S8 &ndash; Les mouvements de la Terre et du Soleil</h1>
+    <p class="subtitle">Rotation, r&eacute;volution, saisons et jours</p>
+    <p class="collection">CM1 &bull; Sciences</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#s5">S5 Soleil</a>
+    <a href="#s6">S6 Mod&egrave;les</a>
+    <a href="#s7">S7 Rotation</a>
+    <a href="#s8">S8 R&eacute;volution</a>
+    <a href="#retenir">&Agrave; retenir</a>
+    <a href="#exercices">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- S5 : MOUVEMENT APPARENT DU SOLEIL -->
+    <section id="s5">
+        <div class="section-header">
+            <span class="section-icon">&#127773;</span>
+            <h2>S5 &ndash; Le mouvement apparent du Soleil</h2>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Le Soleil se d&eacute;place d'est en ouest</div>
+            <p>Le Soleil se d&eacute;place au cours d'une journ&eacute;e d'<strong>est en ouest</strong>.</p>
+            <p>Dans la journ&eacute;e, il <strong>monte</strong> dans le ciel et atteint le point le plus haut <strong>entre 12h et 14h</strong>, puis il <strong>redescend</strong>.</p>
+            <p>Lorsqu'il appara&icirc;t, <strong>il fait jour</strong>. Lorsqu'il dispara&icirc;t, <strong>il fait nuit</strong>.</p>
+            <div class="tip">
+                <strong>Attention :</strong> on dit &laquo;&nbsp;mouvement <em>apparent</em>&nbsp;&raquo; car en r&eacute;alit&eacute;, c'est la Terre qui bouge, pas le Soleil&nbsp;!
+            </div>
+        </div>
+    </section>
+
+    <!-- S6 : GÉOCENTRISME / HÉLIOCENTRISME -->
+    <section id="s6">
+        <div class="section-header">
+            <span class="section-icon">&#128301;</span>
+            <h2>S6 &ndash; G&eacute;ocentrisme et h&eacute;liocentrisme</h2>
+        </div>
+        <div class="card red">
+            <div class="key red">Le g&eacute;ocentrisme (ancien mod&egrave;le)</div>
+            <p>Jusqu'au XVI<sup>e</sup> si&egrave;cle, les hommes &eacute;taient persuad&eacute;s que la <strong>Terre</strong> &eacute;tait au <strong>centre de l'univers</strong>. C'est le <strong>g&eacute;ocentrisme</strong>, propos&eacute; par le Grec <strong>Ptol&eacute;m&eacute;e</strong>.</p>
+            <div class="vocab">
+                <strong>&#128214; G&eacute;ocentrisme :</strong> mod&egrave;le o&ugrave; la Terre est au centre et tout tourne autour d'elle.
+            </div>
+        </div>
+        <div class="card green">
+            <div class="key green">L'h&eacute;liocentrisme (mod&egrave;le actuel)</div>
+            <p><strong>Copernic</strong> propose un nouveau mod&egrave;le&nbsp;: c'est le <strong>Soleil</strong> qui est au centre de l'univers et les plan&egrave;tes qui <strong>gravitent autour</strong>. C'est l'<strong>h&eacute;liocentrisme</strong>.</p>
+            <p>Ses id&eacute;es sont reprises par <strong>Galil&eacute;e</strong> (1564&ndash;1642) qui est oblig&eacute; de les renier en public pour &eacute;viter la mort, bien qu'il ait raison.</p>
+            <p>Nous savons maintenant que le <strong>Soleil est fixe</strong> et que c'est la <strong>Terre qui bouge</strong>.</p>
+            <div class="vocab">
+                <strong>&#128214; H&eacute;liocentrisme :</strong> mod&egrave;le o&ugrave; le Soleil est au centre et les plan&egrave;tes tournent autour.
+            </div>
+        </div>
+    </section>
+
+    <!-- S7 : ROTATION DE LA TERRE -->
+    <section id="s7">
+        <div class="section-header">
+            <span class="section-icon">&#127758;</span>
+            <h2>S7 &ndash; Le mouvement de la Terre sur elle-m&ecirc;me</h2>
+        </div>
+        <div class="card">
+            <div class="key blue">La rotation : 24 heures</div>
+            <p>La Terre tourne sur elle-m&ecirc;me en <strong>24 heures</strong> dans le sens <strong>inverse des aiguilles d'une montre</strong> (vue du p&ocirc;le Nord).</p>
+            <p>C'est cette rotation qui cr&eacute;e l'<strong>alternance jour / nuit</strong>.</p>
+        </div>
+        <div class="card indigo">
+            <div class="key indigo">La dur&eacute;e du jour et de la nuit varie</div>
+            <p>La dur&eacute;e du jour et de la nuit <strong>varie au cours de l'ann&eacute;e</strong>&nbsp;:</p>
+            <ul style="margin-left: 1.2rem; margin-top: 0.4rem;">
+                <li><span class="date-tag">21 juin</span> <strong>Solstice d'&eacute;t&eacute;</strong> &rarr; le jour le plus <strong>long</strong></li>
+                <li><span class="date-tag">21 d&eacute;cembre</span> <strong>Solstice d'hiver</strong> &rarr; le jour le plus <strong>court</strong></li>
+                <li><span class="date-tag">mars</span> <strong>&Eacute;quinoxe de printemps</strong> &rarr; dur&eacute;e du jour = dur&eacute;e de la nuit</li>
+                <li><span class="date-tag">septembre</span> <strong>&Eacute;quinoxe d'automne</strong> &rarr; dur&eacute;e du jour = dur&eacute;e de la nuit</li>
+            </ul>
+            <div class="vocab">
+                <strong>&#128214; Solstice :</strong> jour o&ugrave; la dur&eacute;e du jour est la plus longue (&eacute;t&eacute;) ou la plus courte (hiver).
+            </div>
+            <div class="vocab">
+                <strong>&#128214; &Eacute;quinoxe :</strong> jour o&ugrave; la dur&eacute;e du jour est &eacute;gale &agrave; celle de la nuit.
+            </div>
+        </div>
+    </section>
+
+    <!-- S8 : RÉVOLUTION DE LA TERRE -->
+    <section id="s8">
+        <div class="section-header">
+            <span class="section-icon">&#9728;&#65039;</span>
+            <h2>S8 &ndash; Le mouvement de la Terre autour du Soleil</h2>
+        </div>
+        <div class="card gold">
+            <div class="key gold">La r&eacute;volution : 365 jours</div>
+            <p>Les <strong>saisons</strong> s'expliquent par la <strong>r&eacute;volution</strong> de la Terre autour du Soleil et l'<strong>inclinaison de son axe</strong>.</p>
+            <p>La Terre a un mouvement de r&eacute;volution de <strong>365 jours</strong> autour du Soleil. Elle tourne sur elle-m&ecirc;me autour d'un <strong>axe de rotation</strong> dont l'inclinaison est la <strong>m&ecirc;me tout au long de l'ann&eacute;e</strong>.</p>
+        </div>
+        <div class="card teal">
+            <div class="key teal">Pourquoi les saisons&nbsp;?</div>
+            <p>Chaque zone est &eacute;clair&eacute;e plus ou moins <strong>longtemps</strong> et <strong>intens&eacute;ment</strong> en fonction de la position de la Terre sur son orbite.</p>
+            <p>En <strong>&eacute;t&eacute;</strong>&nbsp;: le Soleil nous &eacute;claire <strong>plus longtemps</strong> et la lumi&egrave;re qui arrive sur la Terre est <strong>plus concentr&eacute;e</strong> &rarr; il fait <strong>plus chaud</strong>.</p>
+            <p>C'est l'<strong>inverse en hiver</strong>&nbsp;: moins de lumi&egrave;re, moins longtemps &rarr; il fait plus froid.</p>
+        </div>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card" style="border-left-color: var(--red);">
+            <p><strong>S5.</strong> Le Soleil semble se d&eacute;placer d'<strong>est en ouest</strong>, point le plus haut entre 12h et 14h. Jour quand il appara&icirc;t, nuit quand il dispara&icirc;t.</p>
+            <p><strong>S6.</strong> <strong>G&eacute;ocentrisme</strong> (Ptol&eacute;m&eacute;e) = Terre au centre. <strong>H&eacute;liocentrisme</strong> (Copernic, Galil&eacute;e) = Soleil au centre. C'est l'h&eacute;liocentrisme qui est vrai.</p>
+            <p><strong>S7.</strong> La Terre tourne sur elle-m&ecirc;me en <strong>24h</strong> (rotation) &rarr; alternance jour/nuit. Solstices (21 juin, 21 d&eacute;cembre) et &eacute;quinoxes (mars, septembre).</p>
+            <p><strong>S8.</strong> La Terre tourne autour du Soleil en <strong>365 jours</strong> (r&eacute;volution). L'<strong>inclinaison de l'axe</strong> + la r&eacute;volution expliquent les <strong>saisons</strong>.</p>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Vocabulaire</h2>
+        </div>
+        <div class="card exercise">
+            <p>Donne la d&eacute;finition de chaque mot&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>G&eacute;ocentrisme</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>H&eacute;liocentrisme</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Rotation</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>R&eacute;volution</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span>Solstice</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span>&Eacute;quinoxe</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> <span class="answer">Mod&egrave;le o&ugrave; la Terre est au centre de l'univers et tout tourne autour d'elle.</span></div>
+                <div class="correction-item"><strong>b)</strong> <span class="answer">Mod&egrave;le o&ugrave; le Soleil est au centre et les plan&egrave;tes tournent autour.</span></div>
+                <div class="correction-item"><strong>c)</strong> <span class="answer">Mouvement de la Terre qui tourne sur elle-m&ecirc;me en 24 heures.</span></div>
+                <div class="correction-item"><strong>d)</strong> <span class="answer">Mouvement de la Terre qui tourne autour du Soleil en 365 jours.</span></div>
+                <div class="correction-item"><strong>e)</strong> <span class="answer">Jour o&ugrave; la dur&eacute;e du jour est la plus longue (&eacute;t&eacute;) ou la plus courte (hiver).</span></div>
+                <div class="correction-item"><strong>f)</strong> <span class="answer">Jour o&ugrave; la dur&eacute;e du jour est &eacute;gale &agrave; celle de la nuit.</span></div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 2 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>Le Soleil se d&eacute;place d'ouest en est au cours de la journ&eacute;e.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>Ptol&eacute;m&eacute;e pensait que la Terre &eacute;tait au centre de l'univers.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>La Terre tourne sur elle-m&ecirc;me en 365 jours.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Copernic a propos&eacute; le mod&egrave;le h&eacute;liocentrique.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span>Le solstice d'&eacute;t&eacute; a lieu le 21 d&eacute;cembre.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span>Galil&eacute;e a &eacute;t&eacute; oblig&eacute; de renier ses id&eacute;es en public.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">g</span>
+                <span>C'est le Soleil qui tourne autour de la Terre.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">h</span>
+                <span>En &eacute;t&eacute;, le Soleil nous &eacute;claire plus longtemps qu'en hiver.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> <span class="answer">FAUX</span> &ndash; Le Soleil se d&eacute;place d'<strong>est en ouest</strong>.</div>
+                <div class="correction-item"><strong>b)</strong> <span class="answer">VRAI</span> &ndash; C'est le g&eacute;ocentrisme.</div>
+                <div class="correction-item"><strong>c)</strong> <span class="answer">FAUX</span> &ndash; La Terre tourne sur elle-m&ecirc;me en <strong>24 heures</strong>. C'est le tour autour du Soleil qui dure 365 jours.</div>
+                <div class="correction-item"><strong>d)</strong> <span class="answer">VRAI</span> &ndash; Copernic a propos&eacute; que le Soleil &eacute;tait au centre.</div>
+                <div class="correction-item"><strong>e)</strong> <span class="answer">FAUX</span> &ndash; Le solstice d'&eacute;t&eacute; a lieu le <strong>21 juin</strong>. Le 21 d&eacute;cembre, c'est le solstice d'hiver.</div>
+                <div class="correction-item"><strong>f)</strong> <span class="answer">VRAI</span> &ndash; Galil&eacute;e a d&ucirc; renier ses id&eacute;es pour &eacute;viter la mort.</div>
+                <div class="correction-item"><strong>g)</strong> <span class="answer">FAUX</span> &ndash; C'est la <strong>Terre qui tourne autour du Soleil</strong>.</div>
+                <div class="correction-item"><strong>h)</strong> <span class="answer">VRAI</span> &ndash; En &eacute;t&eacute;, le Soleil nous &eacute;claire plus longtemps et la lumi&egrave;re est plus concentr&eacute;e.</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128221;</span>
+            <h2>Exercice 3 &ndash; Compl&egrave;te le texte</h2>
+        </div>
+        <div class="card exercise">
+            <p>Compl&egrave;te avec les mots&nbsp;: <em>24 heures, 365 jours, est, ouest, rotation, r&eacute;volution, Soleil, Terre, saisons, axe</em></p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>Le Soleil se d&eacute;place d'______ en ______ au cours de la journ&eacute;e.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>La Terre tourne sur elle-m&ecirc;me en ______&nbsp;: c'est la ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>La Terre tourne autour du ______ en ______&nbsp;: c'est la ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Les ______ s'expliquent par la r&eacute;volution de la ______ et l'inclinaison de son ______.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> Le Soleil se d&eacute;place d'<span class="answer">est</span> en <span class="answer">ouest</span>.</div>
+                <div class="correction-item"><strong>b)</strong> La Terre tourne sur elle-m&ecirc;me en <span class="answer">24 heures</span>&nbsp;: c'est la <span class="answer">rotation</span>.</div>
+                <div class="correction-item"><strong>c)</strong> La Terre tourne autour du <span class="answer">Soleil</span> en <span class="answer">365 jours</span>&nbsp;: c'est la <span class="answer">r&eacute;volution</span>.</div>
+                <div class="correction-item"><strong>d)</strong> Les <span class="answer">saisons</span> s'expliquent par la r&eacute;volution de la <span class="answer">Terre</span> et l'inclinaison de son <span class="answer">axe</span>.</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 4 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128172;</span>
+            <h2>Exercice 4 &ndash; Les dates cl&eacute;s</h2>
+        </div>
+        <div class="card exercise">
+            <p>Associe chaque date &agrave; l'&eacute;v&eacute;nement correspondant&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>21 juin</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>21 d&eacute;cembre</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Mars</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Septembre</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> 21 juin &rarr; <span class="answer">Solstice d'&eacute;t&eacute; (jour le plus long)</span></div>
+                <div class="correction-item"><strong>b)</strong> 21 d&eacute;cembre &rarr; <span class="answer">Solstice d'hiver (jour le plus court)</span></div>
+                <div class="correction-item"><strong>c)</strong> Mars &rarr; <span class="answer">&Eacute;quinoxe de printemps (jour = nuit)</span></div>
+                <div class="correction-item"><strong>d)</strong> Septembre &rarr; <span class="answer">&Eacute;quinoxe d'automne (jour = nuit)</span></div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 5 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128300;</span>
+            <h2>Exercice 5 &ndash; Questions de cours</h2>
+        </div>
+        <div class="card exercise">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span>Quelle est la diff&eacute;rence entre le g&eacute;ocentrisme et l'h&eacute;liocentrisme&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span>Qui a propos&eacute; l'h&eacute;liocentrisme&nbsp;? Qui a repris ses id&eacute;es&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span>Pourquoi fait-il plus chaud en &eacute;t&eacute; qu'en hiver&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span>Qu'est-ce qui cr&eacute;e l'alternance jour / nuit&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>a)</strong> <span class="answer">Le g&eacute;ocentrisme place la Terre au centre (Ptol&eacute;m&eacute;e). L'h&eacute;liocentrisme place le Soleil au centre (Copernic). C'est l'h&eacute;liocentrisme qui est vrai.</span></div>
+                <div class="correction-item"><strong>b)</strong> <span class="answer">Copernic a propos&eacute; l'h&eacute;liocentrisme. Galil&eacute;e (1564&ndash;1642) a repris ses id&eacute;es.</span></div>
+                <div class="correction-item"><strong>c)</strong> <span class="answer">En &eacute;t&eacute;, le Soleil nous &eacute;claire plus longtemps et la lumi&egrave;re est plus concentr&eacute;e, donc il fait plus chaud. C'est l'inverse en hiver.</span></div>
+                <div class="correction-item"><strong>d)</strong> <span class="answer">La rotation de la Terre sur elle-m&ecirc;me en 24 heures cr&eacute;e l'alternance jour / nuit.</span></div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>S5&ndash;S8 &bull; Les mouvements de la Terre et du Soleil</p>
+    <p>CM1 &bull; Sciences</p>
+</footer>
+
+</body>
+</html>
