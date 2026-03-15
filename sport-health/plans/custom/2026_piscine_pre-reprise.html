@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Piscine — Pré-reprise course (mars 2026)</title>
+<style>
+  :root {
+    --blue: #0077b6;
+    --blue-light: #e8f4f8;
+    --blue-border: #90e0ef;
+    --sprint: #fff0e6;
+    --sprint-border: #e8712a;
+    --endurance: #e8f5e9;
+    --endurance-border: #4caf50;
+    --pyramide: #f3e5f5;
+    --pyramide-border: #9c27b0;
+    --test: #fff8e1;
+    --test-border: #ff8f00;
+    --puissance: #e3f2fd;
+    --puissance-border: #1976d2;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --border: #dee2e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  header h1 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+  header .subtitle { font-size: 0.95rem; opacity: 0.9; }
+  header .meta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+  header .meta span {
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* CONTEXT */
+  .context {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .context strong { color: var(--blue); }
+
+  /* WEEK */
+  .week {
+    margin-bottom: 2rem;
+  }
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .week-num {
+    background: var(--blue);
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+  .week-header h2 { font-size: 1.15rem; flex: 1; }
+  .week-header .week-vol {
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+  }
+
+  /* SESSION CARD */
+  .session {
+    background: var(--card);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .session.puissance { border-left: 4px solid var(--puissance-border); }
+  .session.sprint { border-left: 4px solid var(--sprint-border); }
+  .session.endurance { border-left: 4px solid var(--endurance-border); }
+  .session.pyramide { border-left: 4px solid var(--pyramide-border); }
+  .session.test { border-left: 4px solid var(--test-border); }
+
+  .session-header {
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .session-header:hover { background: rgba(0,0,0,0.015); }
+  .session-header h3 { font-size: 1rem; flex: 1; }
+  .session-header .distance {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--blue);
+    background: var(--blue-light);
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+  }
+  .session-header .objectif {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .chevron {
+    font-size: 1.2rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  .session.open .chevron { transform: rotate(90deg); }
+
+  .session-body {
+    padding: 0 1.25rem 1.25rem;
+    display: none;
+  }
+  .session.open .session-body { display: block; }
+
+  /* TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  th {
+    text-align: left;
+    padding: 0.5rem 0.6rem;
+    background: var(--bg);
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  td {
+    padding: 0.5rem 0.6rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  .row-echauf td { background: #f8f9fa; }
+  .row-serie td { background: #ffffff; }
+  .row-recup td { background: #f8fffe; }
+  td.dist {
+    font-weight: 600;
+    color: var(--blue);
+    white-space: nowrap;
+    text-align: right;
+    width: 70px;
+  }
+  td.bloc {
+    font-weight: 600;
+    white-space: nowrap;
+    width: 100px;
+  }
+
+  /* RECAP */
+  .recap {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 2px dashed var(--border);
+  }
+  .recap h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  .recap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+    text-align: center;
+  }
+  .recap-card {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 0.75rem;
+  }
+  .recap-card .num {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--blue);
+  }
+  .recap-card .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* NOTES */
+  .notes {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .notes h2 { font-size: 1.1rem; margin-bottom: 0.75rem; }
+  .notes ul { padding-left: 1.25rem; }
+  .notes li {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.3rem; }
+    .recap-grid { grid-template-columns: 1fr; }
+    .session-header .objectif { display: none; }
+    table { font-size: 0.82rem; }
+    td.bloc { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Plan Piscine — Pré-reprise</h1>
+  <p class="subtitle">Maintien cardio avant retour à la course</p>
+  <div class="meta">
+    <span>3 semaines</span>
+    <span>5 séances</span>
+    <span>9 800m total</span>
+    <span>100% pullbuoy</span>
+  </div>
+</header>
+
+<div class="context">
+  <strong>Contexte :</strong> Contracture mollet gauche en rééducation. Tout en pullbuoy, pas de battements de jambes.
+  Allure de référence : ~1'42"/100m sur 2000m (11/03/2026).<br>
+  <strong>Matériel :</strong> Pullbuoy, plaquettes, élastique chevilles.
+</div>
+
+<!-- ============ SEMAINE 1 ============ -->
+<div class="week">
+  <div class="week-header">
+    <div class="week-num">1</div>
+    <h2>16 — 22 mars</h2>
+    <span class="week-vol">1 séance · 1 600m</span>
+  </div>
+
+  <div class="session puissance open">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>S1 — Puissance & Gainage</h3>
+      <span class="objectif">Renforcer le haut du corps</span>
+      <span class="distance">1 600m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr class="row-echauf"><td class="bloc">Échauffement</td><td>400m mix crawl / dos souple</td><td class="dist">400m</td></tr>
+          <tr class="row-serie"><td class="bloc">Série 1</td><td>12x50m PB + élastique (25m dos / 25m crawl) — R:20"</td><td class="dist">600m</td></tr>
+          <tr class="row-serie"><td class="bloc">Série 2</td><td>4x100m crawl plaquettes (focus puissance bras) — R:30"</td><td class="dist">400m</td></tr>
+          <tr class="row-recup"><td class="bloc">Récup</td><td>200m dos deux bras</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SEMAINE 2 ============ -->
+<div class="week">
+  <div class="week-header">
+    <div class="week-num">2</div>
+    <h2>23 — 29 mars</h2>
+    <span class="week-vol">2 séances · 4 000m</span>
+  </div>
+
+  <div class="session sprint">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>S2a — Fractionné cardio</h3>
+      <span class="objectif">Faire monter le cœur, simuler du seuil</span>
+      <span class="distance">1 800m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr class="row-echauf"><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr class="row-serie"><td class="bloc">Série 1</td><td>8x100m crawl PB allure soutenue (~1'40"/100m) — départ toutes les 1'55"</td><td class="dist">800m</td></tr>
+          <tr class="row-recup"><td class="bloc">Récup active</td><td>200m dos souple</td><td class="dist">200m</td></tr>
+          <tr class="row-serie"><td class="bloc">Série 2</td><td>4x50m sprint PB — R:30" (viser 160+ bpm)</td><td class="dist">200m</td></tr>
+          <tr class="row-recup"><td class="bloc">Récup</td><td>200m souple</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session endurance">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>S2b — Endurance longue</h3>
+      <span class="objectif">Volume aérobie, nager longtemps sans pause</span>
+      <span class="distance">2 200m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr class="row-echauf"><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr class="row-serie"><td class="bloc">Corps</td><td>1500m crawl PB continu, allure régulière (~1'45"/100m) — sans pause</td><td class="dist">1 500m</td></tr>
+          <tr class="row-recup"><td class="bloc">Récup</td><td>300m dos souple, quelques brasses</td><td class="dist">300m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SEMAINE 3 ============ -->
+<div class="week">
+  <div class="week-header">
+    <div class="week-num">3</div>
+    <h2>30 mars — 5 avril</h2>
+    <span class="week-vol">2 séances · 4 200m</span>
+  </div>
+
+  <div class="session pyramide">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>S3a — Pyramide intensité</h3>
+      <span class="objectif">Varier les zones cardio, changements d'allure</span>
+      <span class="distance">2 000m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr class="row-echauf"><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr class="row-serie"><td class="bloc">Pyramide</td><td>
+            PB + plaquettes :<br>
+            100m confort R:15" → 200m soutenu R:20" → 300m tempo R:30" → 200m soutenu R:20" → 100m sprint R:15"
+          </td><td class="dist">900m</td></tr>
+          <tr class="row-recup"><td class="bloc">Récup active</td><td>200m souple</td><td class="dist">200m</td></tr>
+          <tr class="row-serie"><td class="bloc">Série</td><td>6x50m PB + élastique sprint — R:30"</td><td class="dist">300m</td></tr>
+          <tr class="row-recup"><td class="bloc">Récup</td><td>200m dos</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session test">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>S3b — Test chrono + puissance</h3>
+      <span class="objectif">Valider la forme avant reprise course</span>
+      <span class="distance">2 200m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr class="row-echauf"><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr class="row-serie"><td class="bloc">Test</td><td>1000m crawl PB chronométré — à fond (cible ~16'30-17'00)</td><td class="dist">1 000m</td></tr>
+          <tr class="row-recup"><td class="bloc">Récup active</td><td>200m souple</td><td class="dist">200m</td></tr>
+          <tr class="row-serie"><td class="bloc">Série</td><td>4x100m crawl plaquettes allure soutenue — R:20"</td><td class="dist">400m</td></tr>
+          <tr class="row-recup"><td class="bloc">Récup</td><td>200m dos</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- RECAP -->
+<div class="recap">
+  <h2>Récapitulatif</h2>
+  <div class="recap-grid">
+    <div class="recap-card">
+      <div class="num">3</div>
+      <div class="label">semaines</div>
+    </div>
+    <div class="recap-card">
+      <div class="num">5</div>
+      <div class="label">séances</div>
+    </div>
+    <div class="recap-card">
+      <div class="num">9 800m</div>
+      <div class="label">volume total</div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTES -->
+<div class="notes">
+  <h2>Notes</h2>
+  <ul>
+    <li><strong>Tout en pullbuoy</strong> — pas de battements de jambes, on protège le mollet</li>
+    <li>Les séances <strong>fractionné</strong> (S2a) et <strong>pyramide</strong> (S3a) font le plus monter le cœur → meilleur transfert vers la course</li>
+    <li>Le <strong>test 1000m</strong> (S3b) donne un chrono de référence utile si tu retournes à la piscine en cross-training</li>
+    <li>Allure de référence : ~1'42"/100m sur 2000m (séance du 11/03/2026)</li>
+  </ul>
+</div>
+
+<footer>
+  Plan piscine pré-reprise · Mars 2026
+</footer>
+
+<script>
+function toggle(header) {
+  header.parentElement.classList.toggle('open');
+}
+</script>
+</body>
+</html>
