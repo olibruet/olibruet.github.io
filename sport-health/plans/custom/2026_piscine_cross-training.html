@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séances Piscine — Cross-training course à pied</title>
+<style>
+  :root {
+    --blue: #0077b6;
+    --blue-light: #e8f4f8;
+    --phase1: #00b4d8;
+    --phase1-bg: #e0f7fa;
+    --phase2: #ff8f00;
+    --phase2-bg: #fff8e1;
+    --phase3: #7b1fa2;
+    --phase3-bg: #f3e5f5;
+    --recup: #4caf50;
+    --recup-bg: #e8f5e9;
+    --cardio: #e8712a;
+    --cardio-bg: #fff0e6;
+    --sprint: #d32f2f;
+    --sprint-bg: #ffebee;
+    --puissance: #1976d2;
+    --puissance-bg: #e3f2fd;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --border: #dee2e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0077b6, #00b4d8);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  header h1 { font-size: 1.5rem; margin-bottom: 0.3rem; }
+  header .subtitle { font-size: 0.95rem; opacity: 0.9; }
+  header .meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+  header .meta span {
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .context {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* PHASE HEADERS */
+  .phase {
+    margin-bottom: 2rem;
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    color: white;
+  }
+  .phase-header.p1 { background: linear-gradient(135deg, #00b4d8, #0077b6); }
+  .phase-header.p2 { background: linear-gradient(135deg, #ff8f00, #f57c00); }
+  .phase-header.p3 { background: linear-gradient(135deg, #9c27b0, #7b1fa2); }
+  .phase-header h2 { font-size: 1.1rem; flex: 1; }
+  .phase-header .phase-info {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    text-align: right;
+  }
+
+  .phase-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding: 0 0.25rem;
+    font-style: italic;
+  }
+
+  /* SESSION CARD */
+  .session {
+    background: var(--card);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--border);
+  }
+  .session.recup { border-left-color: var(--recup); }
+  .session.cardio { border-left-color: var(--cardio); }
+  .session.sprint { border-left-color: var(--sprint); }
+  .session.puissance { border-left-color: var(--puissance); }
+  .session.mobilite { border-left-color: var(--phase3); }
+  .session.fartlek { border-left-color: var(--phase1); }
+  .session.aerobie { border-left-color: var(--recup); }
+
+  .session-header {
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .session-header:hover { background: rgba(0,0,0,0.015); }
+  .session-header h3 { font-size: 0.95rem; flex: 1; }
+  .session-header .distance {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--blue);
+    background: var(--blue-light);
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+  .session-header .tag {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag.recup { background: var(--recup-bg); color: var(--recup); }
+  .tag.cardio { background: var(--cardio-bg); color: var(--cardio); }
+  .tag.sprint { background: var(--sprint-bg); color: var(--sprint); }
+  .tag.puissance { background: var(--puissance-bg); color: var(--puissance); }
+  .tag.mobilite { background: var(--phase3-bg); color: var(--phase3); }
+  .tag.fartlek { background: var(--phase1-bg); color: var(--phase1); }
+  .tag.aerobie { background: var(--recup-bg); color: var(--recup); }
+  .chevron {
+    font-size: 1.2rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  .session.open .chevron { transform: rotate(90deg); }
+
+  .session-body {
+    padding: 0 1.25rem 1rem;
+    display: none;
+  }
+  .session.open .session-body { display: block; }
+  .session-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.75rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  th {
+    text-align: left;
+    padding: 0.45rem 0.5rem;
+    background: var(--bg);
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  td {
+    padding: 0.45rem 0.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+  }
+  tr:last-child td { border-bottom: none; }
+  td.dist {
+    font-weight: 600;
+    color: var(--blue);
+    white-space: nowrap;
+    text-align: right;
+    width: 65px;
+  }
+  td.bloc {
+    font-weight: 600;
+    white-space: nowrap;
+    width: 95px;
+  }
+
+  /* GUIDE */
+  .guide {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 2px dashed var(--border);
+  }
+  .guide h2 { font-size: 1.05rem; margin-bottom: 0.75rem; }
+  .guide table { font-size: 0.85rem; }
+  .guide th { font-size: 0.75rem; }
+  .guide td { padding: 0.5rem 0.6rem; }
+
+  /* RECAP */
+  .recap {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .recap h2 { font-size: 1.05rem; margin-bottom: 0.75rem; }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 600px) {
+    header h1 { font-size: 1.3rem; }
+    body { padding: 0.75rem; }
+    .phase-header { flex-wrap: wrap; }
+    .session-header .tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Séances Piscine — Cross-training</h1>
+  <p class="subtitle">Banque de séances pour accompagner la prépa semi-marathon</p>
+  <div class="meta">
+    <span>100% pullbuoy</span>
+    <span>8 séances au choix</span>
+    <span>1000m — 1800m</span>
+  </div>
+</header>
+
+<div class="context">
+  <strong>Principe :</strong> La piscine complète la course à pied — cardio sans impact, récupération active, entretien musculaire haut du corps.
+  Volume et intensité décroissants à mesure que le running monte en charge.<br>
+  <strong>Matériel :</strong> Pullbuoy, plaquettes, élastique chevilles.
+</div>
+
+<!-- ============ PHASE 1 ============ -->
+<div class="phase">
+  <div class="phase-header p1">
+    <h2>Phase 1 — Reprise course</h2>
+    <div class="phase-info">Semaines R1-R2<br>07/04 → 20/04<br>1-2x/sem</div>
+  </div>
+  <p class="phase-desc">Le running reprend doucement (10-20 km/sem). La piscine reste un pilier cardio important.</p>
+
+  <div class="session aerobie">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>R1 — Aérobie continu</h3>
+      <span class="tag aerobie">Aérobie</span>
+      <span class="distance">1 600m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Semaine R1. Séance simple, garder le rythme piscine sans fatigue.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>300m crawl / 100m dos</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Corps</td><td>800m crawl PB continu (~1'45"/100m) — sans pause</td><td class="dist">800m</td></tr>
+          <tr><td class="bloc">Technique</td><td>4x50m crawl PB rattrapé (focus longueur de bras) — R:15"</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos souple</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session fartlek">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>R2a — Fartlek aquatique</h3>
+      <span class="tag fartlek">Fartlek</span>
+      <span class="distance">1 800m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Semaine R2. Jouer avec les allures pour solliciter le cardio sans monotonie.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Fartlek</td><td>10x100m PB alternés : impairs = confort (~1'50"), pairs = soutenu (~1'35") — R:15"</td><td class="dist">1 000m</td></tr>
+          <tr><td class="bloc">Récup active</td><td>200m dos</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m souple</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session puissance">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>R2b — Puissance bras</h3>
+      <span class="tag puissance">Puissance</span>
+      <span class="distance">1 600m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Semaine R2, 2e séance. Garder la force du haut du corps.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Série 1</td><td>8x50m crawl PB + plaquettes (puissance) — R:20"</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Série 2</td><td>4x100m PB + élastique (25m dos / 75m crawl) — R:20"</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos + 200m brasse souple</td><td class="dist">400m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PHASE 2 ============ -->
+<div class="phase">
+  <div class="phase-header p2">
+    <h2>Phase 2 — Prépa semi (séances courtes)</h2>
+    <div class="phase-info">Semaines S1-S4<br>21/04 → 18/05<br>1x/sem</div>
+  </div>
+  <p class="phase-desc">La course est le pilier principal (3x/sem). La piscine passe en mode récup active et entretien cardio — 1 séance/semaine, 30-40 min.</p>
+
+  <div class="session recup">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>PC1 — Récup active</h3>
+      <span class="tag recup">Récup</span>
+      <span class="distance">1 200m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Après une grosse séance de VMA ou de seuil. Relâcher, faire circuler le sang.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Corps</td><td>400m crawl PB très souple (~2'00"/100m)</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Alternance</td><td>4x100m (50m dos / 50m crawl) PB souple — R:15"</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos deux bras + 200m brasse coulée</td><td class="dist">400m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session cardio">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>PC2 — Cardio modéré</h3>
+      <span class="tag cardio">Cardio</span>
+      <span class="distance">1 500m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Maintenir un minimum de travail cardio sans fatigue musculaire.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>200m crawl / 100m dos</td><td class="dist">300m</td></tr>
+          <tr><td class="bloc">Série</td><td>6x100m crawl PB allure soutenue (~1'40") — départ toutes les 2'00"</td><td class="dist">600m</td></tr>
+          <tr><td class="bloc">Technique</td><td>4x50m crawl PB rattrapé — R:15"</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos + 200m souple</td><td class="dist">400m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session sprint">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>PC3 — Intervalles courts</h3>
+      <span class="tag sprint">Dynamique</span>
+      <span class="distance">1 400m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Petite séance dynamique pour garder de la vivacité. Idéal en milieu de semaine.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>300m crawl / dos</td><td class="dist">300m</td></tr>
+          <tr><td class="bloc">Série 1</td><td>8x50m crawl PB sprint — R:25" (viser 160+ bpm)</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Récup active</td><td>200m dos</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Série 2</td><td>4x50m PB + plaquettes allure soutenue — R:20"</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Récup</td><td>300m souple</td><td class="dist">300m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ PHASE 3 ============ -->
+<div class="phase">
+  <div class="phase-header p3">
+    <h2>Phase 3 — Affûtage</h2>
+    <div class="phase-info">Semaines S5-S8<br>19/05 → 14/06<br>0-1x/sem</div>
+  </div>
+  <p class="phase-desc">Volume course élevé, séances spécifiques exigeantes. La piscine = récupération pure, 25-30 min max.</p>
+
+  <div class="session recup">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>PA1 — Récup pure</h3>
+      <span class="tag recup">Récup</span>
+      <span class="distance">1 000m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Le lendemain d'une sortie longue ou d'une séance d'allure spécifique. Zéro intensité.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Corps</td><td>500m crawl PB ultra souple, respiration 3 temps, focus relâchement</td><td class="dist">500m</td></tr>
+          <tr><td class="bloc">Alternance</td><td>100m dos / 100m crawl / 100m dos</td><td class="dist">300m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos deux bras, yeux fermés</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session mobilite">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>PA2 — Mobilité + relâchement</h3>
+      <span class="tag mobilite">Mobilité</span>
+      <span class="distance">1 200m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Pour les semaines chargées. Focus mobilité épaules et relâchement global.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Dos</td><td>400m dos deux bras, très souple</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Crawl</td><td>400m crawl PB rattrapé, allonger chaque mouvement</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Mix</td><td>200m (50m dos / 50m brasse) × 2</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m au choix, très souple</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- GUIDE -->
+<div class="guide">
+  <h2>Comment choisir sa séance</h2>
+  <table>
+    <thead><tr><th>Situation</th><th>Séance</th></tr></thead>
+    <tbody>
+      <tr><td>Lendemain de VMA ou seuil</td><td><strong>PC1</strong> (récup active) ou <strong>PA1</strong> (récup pure)</td></tr>
+      <tr><td>Journée sans course, envie de bouger</td><td><strong>PC2</strong> (cardio modéré) ou <strong>R2a</strong> (fartlek)</td></tr>
+      <tr><td>Semaine légère, envie de se faire plaisir</td><td><strong>PC3</strong> (intervalles courts)</td></tr>
+      <tr><td>Semaine chargée en course</td><td><strong>PA1</strong> ou <strong>PA2</strong> (récup / mobilité)</td></tr>
+      <tr><td>Dernière semaine avant la course</td><td><strong>PA1</strong> uniquement</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- RECAP -->
+<div class="recap">
+  <h2>Volumes par phase</h2>
+  <table>
+    <thead><tr><th>Phase</th><th>Période</th><th>Fréquence</th><th>Volume/séance</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Reprise</strong> (R1-R2)</td><td>07/04 → 20/04</td><td>1-2x/sem</td><td>1 600 — 1 800m</td></tr>
+      <tr><td><strong>Prépa</strong> (S1-S4)</td><td>21/04 → 18/05</td><td>1x/sem</td><td>1 200 — 1 500m</td></tr>
+      <tr><td><strong>Affûtage</strong> (S5-S8)</td><td>19/05 → 14/06</td><td>0-1x/sem</td><td>1 000 — 1 200m</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<footer>
+  Séances piscine cross-training · Prépa Semi des Jalles 2026
+</footer>
+
+<script>
+function toggle(header) {
+  header.parentElement.classList.toggle('open');
+}
+</script>
+</body>
+</html>
