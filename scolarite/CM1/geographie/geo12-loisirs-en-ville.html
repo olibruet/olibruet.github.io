@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G&Eacute;O 12 &ndash; Quels loisirs en ville&nbsp;?</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #b2dfdb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #004d40 0%, #00796b 40%, #26a69a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--teal); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--teal);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--teal);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== EXAMPLES ===== */
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+        .example-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .example-tag.teal { background: var(--teal-bg); color: var(--teal); }
+        .example-tag.blue { background: var(--blue-bg); color: var(--blue); }
+        .example-tag.orange { background: var(--orange-bg); color: var(--orange); }
+        .example-tag.green { background: var(--green-bg); color: var(--green); }
+        .example-tag.purple { background: var(--purple-bg); color: var(--purple); }
+        .example-tag.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .exercise-text { font-size: 1rem; line-height: 1.8; }
+
+        /* ===== ANSWER ZONE ===== */
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127914;</div>
+    <h1>G&Eacute;O 12 &ndash; Quels loisirs en ville&nbsp;?</h1>
+    <p class="subtitle">Les loisirs dans l'espace urbain</p>
+    <p class="collection">CM1 &bull; G&eacute;ographie</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#sportifs">Sportifs</a>
+    <a href="#culturels">Culturels</a>
+    <a href="#divertissement">Divertissement</a>
+    <a href="#retenir">&Agrave; retenir</a>
+    <a href="#exercices">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+        <div class="card">
+            <p>La ville ne permet pas seulement aux habitants d'y <strong>habiter</strong> et d'y <strong>travailler</strong>. Ils peuvent aussi avoir des loisirs <strong>sportifs</strong>, <strong>culturels</strong> ou de <strong>divertissement</strong>.</p>
+            <p>Les lieux de loisirs se r&eacute;partissent <strong>partout dans l'espace urbain</strong>&nbsp;: au centre-ville, dans les quartiers et en p&eacute;riph&eacute;rie.</p>
+        </div>
+    </section>
+
+    <!-- LOISIRS SPORTIFS -->
+    <section id="sportifs">
+        <div class="section-header">
+            <span class="section-icon">&#9917;</span>
+            <h2>Les loisirs sportifs</h2>
+        </div>
+        <div class="card blue">
+            <div class="key blue">Loisirs sportifs</div>
+            <p>Les villes offrent de nombreux <strong>&eacute;quipements sportifs</strong> pour pratiquer des activit&eacute;s physiques. On les trouve dans tous les quartiers de la ville.</p>
+            <div class="examples">
+                <span class="example-tag blue">Stades</span>
+                <span class="example-tag blue">Piscines</span>
+                <span class="example-tag blue">Gymnases</span>
+                <span class="example-tag blue">Terrains de sport</span>
+                <span class="example-tag blue">Skate-parks</span>
+                <span class="example-tag blue">Salles d'escalade</span>
+                <span class="example-tag blue">Pistes cyclables</span>
+            </div>
+            <div class="tip">
+                <strong>Bon &agrave; savoir :</strong> les grands stades et complexes sportifs sont souvent situ&eacute;s en <strong>p&eacute;riph&eacute;rie</strong> car ils ont besoin de beaucoup de place. Les petits &eacute;quipements (gymnases, terrains) sont r&eacute;partis dans les quartiers.
+            </div>
+        </div>
+    </section>
+
+    <!-- LOISIRS CULTURELS -->
+    <section id="culturels">
+        <div class="section-header">
+            <span class="section-icon">&#127912;</span>
+            <h2>Les loisirs culturels</h2>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Loisirs culturels</div>
+            <p>Les villes proposent des lieux pour d&eacute;couvrir l'<strong>art</strong>, l'<strong>histoire</strong> et le <strong>spectacle vivant</strong>. Beaucoup de ces lieux se trouvent au <strong>centre-ville</strong>.</p>
+            <div class="examples">
+                <span class="example-tag orange">Mus&eacute;es</span>
+                <span class="example-tag orange">Biblioth&egrave;ques / m&eacute;diath&egrave;ques</span>
+                <span class="example-tag orange">Th&eacute;&acirc;tres</span>
+                <span class="example-tag orange">Cin&eacute;mas</span>
+                <span class="example-tag orange">Salles de concert</span>
+                <span class="example-tag orange">Op&eacute;ra</span>
+                <span class="example-tag orange">Galeries d'art</span>
+            </div>
+            <div class="tip">
+                <strong>Bon &agrave; savoir :</strong> les grandes m&eacute;diath&egrave;ques et multiplexes de cin&eacute;ma sont parfois en <strong>p&eacute;riph&eacute;rie</strong>, pr&egrave;s des zones commerciales, pour &ecirc;tre accessibles en voiture.
+            </div>
+        </div>
+    </section>
+
+    <!-- LOISIRS DE DIVERTISSEMENT -->
+    <section id="divertissement">
+        <div class="section-header">
+            <span class="section-icon">&#127906;</span>
+            <h2>Les loisirs de divertissement</h2>
+        </div>
+        <div class="card green">
+            <div class="key green">Divertissement</div>
+            <p>En ville, on peut aussi se <strong>d&eacute;tendre</strong> et s'<strong>amuser</strong> dans de nombreux lieux de divertissement.</p>
+            <div class="examples">
+                <span class="example-tag green">Parcs et jardins publics</span>
+                <span class="example-tag green">Aires de jeux</span>
+                <span class="example-tag green">Parcs d'attractions</span>
+                <span class="example-tag green">Bowling</span>
+                <span class="example-tag green">Restaurants</span>
+                <span class="example-tag green">Centres commerciaux</span>
+                <span class="example-tag green">Laser game</span>
+            </div>
+            <div class="tip">
+                <strong>Bon &agrave; savoir :</strong> les parcs et jardins sont r&eacute;partis dans toute la ville. Les grands espaces de loisirs (parcs d'attractions, bowling, centres commerciaux) sont souvent en <strong>p&eacute;riph&eacute;rie</strong>.
+            </div>
+        </div>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card red">
+            <div class="key red">O&ugrave; se trouvent les loisirs en ville&nbsp;?</div>
+            <ul style="list-style: none; padding: 0; margin: 0.5rem 0;">
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--light);">
+                    <strong>Au centre-ville :</strong> th&eacute;&acirc;tres, mus&eacute;es, cin&eacute;mas, op&eacute;ra, petits parcs, restaurants.
+                </li>
+                <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--light);">
+                    <strong>Dans les quartiers :</strong> gymnases, terrains de sport, biblioth&egrave;ques de quartier, aires de jeux.
+                </li>
+                <li style="padding: 0.5rem 0;">
+                    <strong>En p&eacute;riph&eacute;rie :</strong> grands stades, multiplexes, centres commerciaux, parcs d'attractions, grands parcs.
+                </li>
+            </ul>
+            <div class="tip">
+                <strong>R&egrave;gle g&eacute;n&eacute;rale :</strong> plus un &eacute;quipement de loisir est <strong>grand</strong> et a besoin de <strong>place</strong>, plus il est situ&eacute; en <strong>p&eacute;riph&eacute;rie</strong>.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Quel type de loisir&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Classe chaque lieu dans la bonne cat&eacute;gorie&nbsp;: <strong>sportif</strong>, <strong>culturel</strong> ou <strong>divertissement</strong>.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Une piscine municipale</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Un mus&eacute;e d'art</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Un parc d'attractions</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Un th&eacute;&acirc;tre</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">Un stade de football</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span class="exercise-text">Un bowling</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">g</span>
+                <span class="exercise-text">Une m&eacute;diath&egrave;que</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">h</span>
+                <span class="exercise-text">Un jardin public avec aire de jeux</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> Piscine municipale &rarr; <span class="answer">sportif</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> Mus&eacute;e d'art &rarr; <span class="answer">culturel</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> Parc d'attractions &rarr; <span class="answer">divertissement</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> Th&eacute;&acirc;tre &rarr; <span class="answer">culturel</span>
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> Stade de football &rarr; <span class="answer">sportif</span>
+                </div>
+                <div class="correction-item">
+                    <strong>f)</strong> Bowling &rarr; <span class="answer">divertissement</span>
+                </div>
+                <div class="correction-item">
+                    <strong>g)</strong> M&eacute;diath&egrave;que &rarr; <span class="answer">culturel</span>
+                </div>
+                <div class="correction-item">
+                    <strong>h)</strong> Jardin public avec aire de jeux &rarr; <span class="answer">divertissement</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 -->
+    <section id="ex-localisation">
+        <div class="section-header">
+            <span class="section-icon">&#128205;</span>
+            <h2>Exercice 2 &ndash; Centre ou p&eacute;riph&eacute;rie&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Pour chaque lieu, indique s'il se trouve plut&ocirc;t au <strong>centre-ville</strong>, dans les <strong>quartiers</strong> ou en <strong>p&eacute;riph&eacute;rie</strong>.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Un grand stade de 50&nbsp;000 places</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">L'op&eacute;ra de la ville</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Un gymnase &agrave; c&ocirc;t&eacute; d'une &eacute;cole</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Un multiplexe de cin&eacute;ma avec parking</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">Un petit th&eacute;&acirc;tre historique</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span class="exercise-text">Un centre commercial avec bowling et laser game</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> Grand stade &rarr; <span class="answer">p&eacute;riph&eacute;rie</span> (besoin de beaucoup de place et d'acc&egrave;s routiers)
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> Op&eacute;ra &rarr; <span class="answer">centre-ville</span> (b&acirc;timent historique prestigieux)
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> Gymnase &agrave; c&ocirc;t&eacute; d'une &eacute;cole &rarr; <span class="answer">dans les quartiers</span> (&eacute;quipement de proximit&eacute;)
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> Multiplexe avec parking &rarr; <span class="answer">p&eacute;riph&eacute;rie</span> (grand b&acirc;timent, besoin de stationnement)
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> Petit th&eacute;&acirc;tre historique &rarr; <span class="answer">centre-ville</span>
+                </div>
+                <div class="correction-item">
+                    <strong>f)</strong> Centre commercial avec loisirs &rarr; <span class="answer">p&eacute;riph&eacute;rie</span> (zone commerciale, besoin de place)
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 -->
+    <section id="ex-vrai-faux">
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 3 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">La ville sert uniquement &agrave; habiter et travailler.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Les lieux de loisirs se r&eacute;partissent partout dans l'espace urbain.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Tous les &eacute;quipements sportifs sont au centre-ville.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Les grands &eacute;quipements de loisirs sont souvent en p&eacute;riph&eacute;rie.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">Un cin&eacute;ma est un loisir sportif.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">FAUX</span> &ndash; La ville permet aussi d'avoir des <strong>loisirs</strong> (sportifs, culturels, divertissement).
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">VRAI</span> &ndash; On trouve des loisirs au centre, dans les quartiers et en p&eacute;riph&eacute;rie.
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">FAUX</span> &ndash; Les petits &eacute;quipements sont dans les quartiers, les grands stades sont en p&eacute;riph&eacute;rie.
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> <span class="answer">VRAI</span> &ndash; Ils ont besoin de beaucoup de place (stades, multiplexes, centres commerciaux).
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> <span class="answer">FAUX</span> &ndash; Un cin&eacute;ma est un loisir <strong>culturel</strong>.
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>G&Eacute;O 12 &bull; Quels loisirs en ville&nbsp;?</p>
+    <p>CM1 &bull; G&eacute;ographie</p>
+</footer>
+
+</body>
+</html>

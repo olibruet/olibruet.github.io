@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G&Eacute;O 10 &ndash; O&ugrave; se loge-t-on en ville&nbsp;?</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #b2dfdb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #004d40 0%, #00796b 40%, #26a69a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--teal); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--teal);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--teal);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== EXAMPLES ===== */
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+        .example-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .example-tag.teal { background: var(--teal-bg); color: var(--teal); }
+        .example-tag.blue { background: var(--blue-bg); color: var(--blue); }
+        .example-tag.orange { background: var(--orange-bg); color: var(--orange); }
+        .example-tag.green { background: var(--green-bg); color: var(--green); }
+        .example-tag.purple { background: var(--purple-bg); color: var(--purple); }
+        .example-tag.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== ZONE DIAGRAM ===== */
+        .zone-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            margin: 1rem 0;
+        }
+        .zone-ring {
+            width: 100%;
+            text-align: center;
+            padding: 1rem 1.2rem;
+            font-weight: 700;
+            font-size: 0.95rem;
+            border-radius: var(--radius);
+        }
+        .zone-ring.centre {
+            background: var(--red-bg);
+            color: var(--red);
+            border: 3px solid var(--red);
+            border-radius: var(--radius) var(--radius) 0 0;
+        }
+        .zone-ring.quartiers {
+            background: var(--orange-bg);
+            color: var(--orange);
+            border: 3px solid var(--orange);
+            border-top: none;
+        }
+        .zone-ring.peripherie {
+            background: var(--green-bg);
+            color: var(--green);
+            border: 3px solid var(--green);
+            border-top: none;
+            border-radius: 0 0 var(--radius) var(--radius);
+        }
+        .zone-ring small {
+            display: block;
+            font-weight: 400;
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+        }
+        .zone-arrow {
+            font-size: 1.2rem;
+            color: var(--gray);
+            margin: -0.2rem 0;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .exercise-text { font-size: 1rem; line-height: 1.8; }
+
+        /* ===== ANSWER ZONE ===== */
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127961;&#65039;</div>
+    <h1>G&Eacute;O 10 &ndash; O&ugrave; se loge-t-on en ville&nbsp;?</h1>
+    <p class="subtitle">Le logement dans une grande ville</p>
+    <p class="collection">CM1 &bull; G&eacute;ographie</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#centre">Centre</a>
+    <a href="#quartiers">Quartiers r&eacute;cents</a>
+    <a href="#peripherie">P&eacute;riph&eacute;rie</a>
+    <a href="#lyon">Exemple : Lyon</a>
+    <a href="#exercices">Exercices</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+        <div class="card">
+            <p>Une grande ville est constitu&eacute;e d'un <strong>centre</strong>, souvent <strong>historique</strong>, avec des immeubles anciens. Quand on s'&eacute;loigne de ce centre, on constate que les logements sont des immeubles plus r&eacute;cents, de quelques &eacute;tages. En <strong>p&eacute;riph&eacute;rie</strong>, la population est concentr&eacute;e dans de vastes immeubles ou dans des <strong>zones pavillonnaires</strong>, constitu&eacute;es de <strong>maisons individuelles</strong> entour&eacute;es de jardins privatifs.</p>
+        </div>
+
+        <!-- SCHÉMA DES ZONES -->
+        <div class="card blue">
+            <div class="key blue">Les 3 zones d'une grande ville</div>
+            <div class="zone-diagram">
+                <div class="zone-ring centre">
+                    Centre historique
+                    <small>Immeubles anciens, rues &eacute;troites, monuments</small>
+                </div>
+                <div class="zone-ring quartiers">
+                    Quartiers plus r&eacute;cents
+                    <small>Immeubles d'habitat collectif de quelques &eacute;tages</small>
+                </div>
+                <div class="zone-ring peripherie">
+                    P&eacute;riph&eacute;rie (banlieue)
+                    <small>Zones pavillonnaires &ndash; maisons individuelles avec jardins</small>
+                </div>
+            </div>
+            <div class="tip">
+                <strong>&Agrave; retenir :</strong> plus on s'&eacute;loigne du centre, plus les logements sont r&eacute;cents et plus on trouve de maisons individuelles.
+            </div>
+        </div>
+    </section>
+
+    <!-- CENTRE HISTORIQUE -->
+    <section id="centre">
+        <div class="section-header">
+            <span class="section-icon">&#127963;&#65039;</span>
+            <h2>Le centre historique</h2>
+        </div>
+        <div class="card red">
+            <div class="key red">Centre-ville</div>
+            <p>C'est la partie la plus <strong>ancienne</strong> de la ville. On y trouve&nbsp;:</p>
+            <div class="examples">
+                <span class="example-tag red">Immeubles anciens</span>
+                <span class="example-tag red">Rues &eacute;troites</span>
+                <span class="example-tag red">Monuments historiques</span>
+                <span class="example-tag red">Commerces</span>
+                <span class="example-tag red">&Eacute;glises, cath&eacute;drales</span>
+            </div>
+            <div class="tip">
+                <strong>Exemple &agrave; Lyon :</strong> le Vieux-Lyon, la colline de Fourvi&egrave;re, la Presqu'&icirc;le entre Rh&ocirc;ne et Sa&ocirc;ne.
+            </div>
+        </div>
+    </section>
+
+    <!-- QUARTIERS RÉCENTS -->
+    <section id="quartiers">
+        <div class="section-header">
+            <span class="section-icon">&#127960;&#65039;</span>
+            <h2>Les quartiers plus r&eacute;cents</h2>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Autour du centre</div>
+            <p>En s'&eacute;loignant du centre, on trouve des <strong>immeubles d'habitat collectif</strong> plus r&eacute;cents, de quelques &eacute;tages. Ces quartiers ont souvent &eacute;t&eacute; construits au XX<sup>e</sup> si&egrave;cle pour loger une population grandissante.</p>
+            <div class="examples">
+                <span class="example-tag orange">Immeubles collectifs</span>
+                <span class="example-tag orange">Quelques &eacute;tages</span>
+                <span class="example-tag orange">Constructions r&eacute;centes</span>
+                <span class="example-tag orange">&Eacute;coles, parcs</span>
+            </div>
+            <div class="tip">
+                <strong>Exemple &agrave; Lyon :</strong> Villeurbanne, une partie de Caluire-et-Cuire, &Eacute;cully.
+            </div>
+        </div>
+    </section>
+
+    <!-- PÉRIPHÉRIE -->
+    <section id="peripherie">
+        <div class="section-header">
+            <span class="section-icon">&#127968;</span>
+            <h2>La p&eacute;riph&eacute;rie (banlieue)</h2>
+        </div>
+        <div class="card green">
+            <div class="key green">En p&eacute;riph&eacute;rie</div>
+            <p>Encore plus loin du centre, on trouve les <strong>zones pavillonnaires</strong>&nbsp;: des <strong>maisons individuelles</strong> entour&eacute;es de <strong>jardins privatifs</strong>. On y trouve aussi de grands ensembles d'immeubles (cit&eacute;s, HLM).</p>
+            <div class="examples">
+                <span class="example-tag green">Maisons avec jardin</span>
+                <span class="example-tag green">Lotissements</span>
+                <span class="example-tag green">Zones commerciales</span>
+                <span class="example-tag green">Grands ensembles</span>
+            </div>
+            <div class="tip">
+                <strong>Exemple &agrave; Lyon :</strong> Bron, V&eacute;nissieux, Saint-Priest, D&eacute;cines-Charpieu, Chassieu.
+            </div>
+        </div>
+    </section>
+
+    <!-- EXEMPLE : LYON -->
+    <section id="lyon">
+        <div class="section-header">
+            <span class="section-icon">&#128205;</span>
+            <h2>Exemple : l'agglom&eacute;ration de Lyon</h2>
+        </div>
+        <div class="card">
+            <div class="key teal">Le croquis de Lyon</div>
+            <p>Sur le croquis de Lyon, on distingue bien les <strong>3 zones</strong>&nbsp;:</p>
+            <ul style="list-style: none; padding: 0; margin: 0.5rem 0;">
+                <li style="padding: 0.4rem 0; border-bottom: 1px solid var(--light);">
+                    <span style="display: inline-block; width: 16px; height: 16px; background: #c62828; border-radius: 3px; vertical-align: middle; margin-right: 0.5rem;"></span>
+                    <strong>Rouge</strong> &ndash; Centre historique (Vieux-Lyon, Fourvi&egrave;re)
+                </li>
+                <li style="padding: 0.4rem 0; border-bottom: 1px solid var(--light);">
+                    <span style="display: inline-block; width: 16px; height: 16px; background: #e67e22; border-radius: 3px; vertical-align: middle; margin-right: 0.5rem;"></span>
+                    <strong>Orange</strong> &ndash; Quartiers plus r&eacute;cents (immeubles d'habitat collectif)
+                </li>
+                <li style="padding: 0.4rem 0;">
+                    <span style="display: inline-block; width: 16px; height: 16px; background: #f1c40f; border-radius: 3px; vertical-align: middle; margin-right: 0.5rem;"></span>
+                    <strong>Jaune</strong> &ndash; P&eacute;riph&eacute;rie pavillonnaire (maisons individuelles)
+                </li>
+            </ul>
+            <p>La ville de Lyon est travers&eacute;e par deux fleuves&nbsp;: le <strong>Rh&ocirc;ne</strong> et la <strong>Sa&ocirc;ne</strong>. Les communes autour de Lyon (Villeurbanne, Vaulx-en-Velin, Bron, V&eacute;nissieux, Oullins&hellip;) forment l'<strong>agglom&eacute;ration lyonnaise</strong>.</p>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Associer zone et type de logement</h2>
+        </div>
+        <div class="card exercise">
+            <p>Associe chaque description &agrave; la bonne zone de la ville&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Des maisons individuelles avec des jardins privatifs.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Des immeubles anciens et des monuments historiques.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Des immeubles collectifs r&eacute;cents de quelques &eacute;tages.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Des rues &eacute;troites et des b&acirc;timents tr&egrave;s anciens.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">Des lotissements et des zones commerciales.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> Maisons individuelles avec jardins &rarr; <span class="answer">P&eacute;riph&eacute;rie (zone pavillonnaire)</span>
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> Immeubles anciens et monuments &rarr; <span class="answer">Centre historique</span>
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> Immeubles collectifs r&eacute;cents &rarr; <span class="answer">Quartiers plus r&eacute;cents</span>
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> Rues &eacute;troites, b&acirc;timents anciens &rarr; <span class="answer">Centre historique</span>
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> Lotissements et zones commerciales &rarr; <span class="answer">P&eacute;riph&eacute;rie (banlieue)</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 -->
+    <section id="ex-vrai-faux">
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 2 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Le centre-ville est la partie la plus r&eacute;cente de la ville.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">En p&eacute;riph&eacute;rie, on trouve surtout des maisons individuelles.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Les zones pavillonnaires sont situ&eacute;es au centre de la ville.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">Plus on s'&eacute;loigne du centre, plus les logements sont r&eacute;cents.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">Lyon est travers&eacute;e par le Rh&ocirc;ne et la Sa&ocirc;ne.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">f</span>
+                <span class="exercise-text">L'agglom&eacute;ration de Lyon ne comprend que la ville de Lyon.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> <span class="answer">FAUX</span> &ndash; Le centre-ville est la partie la plus <strong>ancienne</strong> (centre historique).
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> <span class="answer">VRAI</span> &ndash; En p&eacute;riph&eacute;rie, on trouve des zones pavillonnaires avec des maisons individuelles.
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> <span class="answer">FAUX</span> &ndash; Les zones pavillonnaires sont en <strong>p&eacute;riph&eacute;rie</strong>, pas au centre.
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> <span class="answer">VRAI</span> &ndash; Les constructions sont de plus en plus r&eacute;centes quand on s'&eacute;loigne du centre.
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> <span class="answer">VRAI</span> &ndash; Le Rh&ocirc;ne et la Sa&ocirc;ne traversent Lyon.
+                </div>
+                <div class="correction-item">
+                    <strong>f)</strong> <span class="answer">FAUX</span> &ndash; L'agglom&eacute;ration comprend aussi Villeurbanne, Bron, V&eacute;nissieux, Oullins, etc.
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 -->
+    <section id="ex-lyon">
+        <div class="section-header">
+            <span class="section-icon">&#128205;</span>
+            <h2>Exercice 3 &ndash; Le croquis de Lyon</h2>
+        </div>
+        <div class="card exercise">
+            <p>R&eacute;ponds aux questions sur l'agglom&eacute;ration lyonnaise&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">a</span>
+                <span class="exercise-text">Quels sont les deux cours d'eau qui traversent Lyon&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">b</span>
+                <span class="exercise-text">Cite 3 communes de la banlieue de Lyon.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">c</span>
+                <span class="exercise-text">Quel type de logement trouve-t-on dans le centre historique de Lyon&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">d</span>
+                <span class="exercise-text">O&ugrave; se trouvent les zones pavillonnaires sur le croquis de Lyon&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">e</span>
+                <span class="exercise-text">O&ugrave; se situe l'a&eacute;roport Lyon-Bron&nbsp;: au centre ou en p&eacute;riph&eacute;rie&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>a)</strong> Les deux cours d'eau sont le <span class="answer">Rh&ocirc;ne</span> et la <span class="answer">Sa&ocirc;ne</span>.
+                </div>
+                <div class="correction-item">
+                    <strong>b)</strong> 3 communes de la banlieue&nbsp;: <span class="answer">Villeurbanne, Vaulx-en-Velin, Bron</span> (ou V&eacute;nissieux, Oullins, Caluire-et-Cuire, &Eacute;cully, Saint-Priest, D&eacute;cines-Charpieu&hellip;)
+                </div>
+                <div class="correction-item">
+                    <strong>c)</strong> Dans le centre historique, on trouve des <span class="answer">immeubles anciens</span>.
+                </div>
+                <div class="correction-item">
+                    <strong>d)</strong> Les zones pavillonnaires se trouvent <span class="answer">en p&eacute;riph&eacute;rie</span>, dans les communes les plus &eacute;loign&eacute;es du centre (Chassieu, D&eacute;cines-Charpieu, Saint-Priest&hellip;).
+                </div>
+                <div class="correction-item">
+                    <strong>e)</strong> L'a&eacute;roport Lyon-Bron se situe <span class="answer">en p&eacute;riph&eacute;rie</span>, dans la commune de Bron.
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>G&Eacute;O 10 &bull; O&ugrave; se loge-t-on en ville&nbsp;?</p>
+    <p>CM1 &bull; G&eacute;ographie</p>
+</footer>
+
+</body>
+</html>

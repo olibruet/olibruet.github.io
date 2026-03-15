@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G&Eacute;O 11 &ndash; O&ugrave; travaille-t-on en ville&nbsp;?</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #b2dfdb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #004d40 0%, #00796b 40%, #26a69a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--teal); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--teal);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--teal);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== EXAMPLES ===== */
+        .examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.6rem;
+        }
+        .example-tag {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .example-tag.teal { background: var(--teal-bg); color: var(--teal); }
+        .example-tag.blue { background: var(--blue-bg); color: var(--blue); }
+        .example-tag.orange { background: var(--orange-bg); color: var(--orange); }
+        .example-tag.green { background: var(--green-bg); color: var(--green); }
+        .example-tag.purple { background: var(--purple-bg); color: var(--purple); }
+        .example-tag.red { background: var(--red-bg); color: var(--red); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .exercise-text { font-size: 1rem; line-height: 1.8; }
+
+        /* ===== ANSWER ZONE ===== */
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127970;</div>
+    <h1>G&Eacute;O 11 &ndash; O&ugrave; travaille-t-on en ville&nbsp;?</h1>
+    <p class="subtitle">Le travail en ville et l'organisation des quartiers</p>
+    <p class="collection">CM1 &bull; G&eacute;ographie</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#tertiaire">Secteur tertiaire</a>
+    <a href="#quartiers">Les quartiers</a>
+    <a href="#exercices">Exercices</a>
+    <a href="#retenir">&Agrave; retenir</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+        <div class="card">
+            <p>Le principal secteur d'activit&eacute; &eacute;conomique en ville est le <strong>secteur tertiaire</strong> (les services).</p>
+            <p>Une ville est constitu&eacute;e de <strong>diff&eacute;rents quartiers</strong> avec divers types d'activit&eacute;s, en fonction de la <strong>proximit&eacute; du centre-ville</strong>.</p>
+        </div>
+    </section>
+
+    <!-- SECTEUR TERTIAIRE -->
+    <section id="tertiaire">
+        <div class="section-header">
+            <span class="section-icon">&#128188;</span>
+            <h2>Le secteur tertiaire</h2>
+        </div>
+        <div class="card blue">
+            <div class="key blue">Secteur tertiaire = les services</div>
+            <p>Le <strong>secteur tertiaire</strong> regroupe toutes les activit&eacute;s qui ne produisent pas directement des biens mat&eacute;riels. C'est le secteur principal en ville.</p>
+            <div class="examples">
+                <span class="example-tag blue">Commerces (boulangeries, magasins)</span>
+                <span class="example-tag blue">Bureaux (banques, assurances)</span>
+                <span class="example-tag blue">Sant&eacute; (h&ocirc;pitaux, m&eacute;decins)</span>
+                <span class="example-tag blue">&Eacute;ducation (&eacute;coles, universit&eacute;s)</span>
+                <span class="example-tag blue">Transports (bus, trains)</span>
+                <span class="example-tag blue">Administration (mairie, pr&eacute;fecture)</span>
+            </div>
+        </div>
+        <div class="tip">
+            <strong>Rappel :</strong> il existe 3 secteurs d'activit&eacute;&nbsp;: le secteur <strong>primaire</strong> (agriculture, p&ecirc;che), le secteur <strong>secondaire</strong> (industrie, construction) et le secteur <strong>tertiaire</strong> (services).
+        </div>
+    </section>
+
+    <!-- LES QUARTIERS DE LA VILLE -->
+    <section id="quartiers">
+        <div class="section-header">
+            <span class="section-icon">&#127961;&#65039;</span>
+            <h2>Les diff&eacute;rents quartiers de la ville</h2>
+        </div>
+
+        <div class="card red">
+            <div class="key red">Le centre-ville</div>
+            <p>Au c&oelig;ur de la ville, on trouve des <strong>commerces de proximit&eacute;</strong> situ&eacute;s au rez-de-chauss&eacute;e des immeubles (boulangeries, pharmacies, restaurants&hellip;).</p>
+            <div class="examples">
+                <span class="example-tag red">Boutiques</span>
+                <span class="example-tag red">Restaurants</span>
+                <span class="example-tag red">March&eacute;s</span>
+                <span class="example-tag red">Petits commerces</span>
+            </div>
+        </div>
+
+        <div class="card orange">
+            <div class="key orange">Le quartier d'affaires</div>
+            <p>Proche du centre, le <strong>quartier d'affaires</strong> regroupe de grands immeubles de bureaux o&ugrave; travaillent des employ&eacute;s dans les banques, les assurances, les entreprises de services&hellip;</p>
+            <div class="examples">
+                <span class="example-tag orange">Tours de bureaux</span>
+                <span class="example-tag orange">Si&egrave;ges d'entreprises</span>
+                <span class="example-tag orange">Banques</span>
+            </div>
+        </div>
+
+        <div class="card purple">
+            <div class="key purple">Les zones commerciales (p&eacute;riph&eacute;rie)</div>
+            <p>Les <strong>zones commerciales</strong> ont &eacute;t&eacute; construites en <strong>p&eacute;riph&eacute;rie</strong> de la ville. On y trouve de grandes surfaces, des magasins sp&eacute;cialis&eacute;s et de grands parkings.</p>
+            <div class="examples">
+                <span class="example-tag purple">Hypermarch&eacute;s</span>
+                <span class="example-tag purple">Magasins de meubles</span>
+                <span class="example-tag purple">Magasins de bricolage</span>
+                <span class="example-tag purple">Grands parkings</span>
+            </div>
+        </div>
+
+        <div class="card green">
+            <div class="key green">Les zones industrielles (loin du centre)</div>
+            <p>Les <strong>zones industrielles</strong> sont situ&eacute;es <strong>loin du centre</strong> car elles ont besoin d'<strong>espaces importants</strong> pour les usines, les entrep&ocirc;ts et le stationnement des camions.</p>
+            <div class="examples">
+                <span class="example-tag green">Usines</span>
+                <span class="example-tag green">Entrep&ocirc;ts</span>
+                <span class="example-tag green">Ateliers</span>
+                <span class="example-tag green">Zones logistiques</span>
+            </div>
+        </div>
+
+        <div class="tip">
+            <strong>R&egrave;gle g&eacute;n&eacute;rale :</strong> plus on s'&eacute;loigne du centre-ville, plus les activit&eacute;s ont besoin d'espace. Le centre accueille les commerces et bureaux&nbsp;; la p&eacute;riph&eacute;rie accueille les zones commerciales et industrielles.
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 : ASSOCIER -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; O&ugrave; trouve-t-on ces activit&eacute;s&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Indique si chaque activit&eacute; se trouve plut&ocirc;t au <strong>centre-ville</strong>, dans un <strong>quartier d'affaires</strong>, en <strong>zone commerciale</strong> ou en <strong>zone industrielle</strong>&nbsp;:</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span class="exercise-text">Une boulangerie au rez-de-chauss&eacute;e d'un immeuble</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span class="exercise-text">Un hypermarch&eacute; avec un immense parking</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span class="exercise-text">Une tour de bureaux d'une grande banque</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span class="exercise-text">Une usine automobile avec de grands hangars</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span class="exercise-text">Un restaurant dans une petite rue pi&eacute;tonne</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span class="exercise-text">Un magasin de meubles g&eacute;ant &agrave; l'entr&eacute;e de la ville</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>1)</strong> Boulangerie &rarr; <span class="answer">centre-ville</span> (commerce de proximit&eacute; au rez-de-chauss&eacute;e)
+                </div>
+                <div class="correction-item">
+                    <strong>2)</strong> Hypermarch&eacute; &rarr; <span class="answer">zone commerciale</span> (en p&eacute;riph&eacute;rie, besoin de place pour le parking)
+                </div>
+                <div class="correction-item">
+                    <strong>3)</strong> Tour de bureaux d'une banque &rarr; <span class="answer">quartier d'affaires</span>
+                </div>
+                <div class="correction-item">
+                    <strong>4)</strong> Usine automobile &rarr; <span class="answer">zone industrielle</span> (loin du centre, besoin d'espace)
+                </div>
+                <div class="correction-item">
+                    <strong>5)</strong> Restaurant dans une rue pi&eacute;tonne &rarr; <span class="answer">centre-ville</span>
+                </div>
+                <div class="correction-item">
+                    <strong>6)</strong> Magasin de meubles g&eacute;ant &rarr; <span class="answer">zone commerciale</span> (en p&eacute;riph&eacute;rie)
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 : VOCABULAIRE -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128214;</span>
+            <h2>Exercice 2 &ndash; Compl&egrave;te les phrases</h2>
+        </div>
+        <div class="card exercise">
+            <p>Compl&egrave;te avec le bon mot&nbsp;: <strong>tertiaire</strong>, <strong>proximit&eacute;</strong>, <strong>p&eacute;riph&eacute;rie</strong>, <strong>industrielles</strong>, <strong>quartier d'affaires</strong>.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span class="exercise-text">Le principal secteur d'activit&eacute; en ville est le secteur ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span class="exercise-text">Les commerces de ___ se trouvent au rez-de-chauss&eacute;e des immeubles du centre-ville.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span class="exercise-text">Les zones commerciales ont &eacute;t&eacute; construites en ___ de la ville.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span class="exercise-text">Les zones ___ sont loin du centre car elles ont besoin d'espaces importants.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span class="exercise-text">Les grandes tours de bureaux se trouvent dans le ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>1)</strong> <span class="answer">tertiaire</span>
+                </div>
+                <div class="correction-item">
+                    <strong>2)</strong> <span class="answer">proximit&eacute;</span>
+                </div>
+                <div class="correction-item">
+                    <strong>3)</strong> <span class="answer">p&eacute;riph&eacute;rie</span>
+                </div>
+                <div class="correction-item">
+                    <strong>4)</strong> <span class="answer">industrielles</span>
+                </div>
+                <div class="correction-item">
+                    <strong>5)</strong> <span class="answer">quartier d'affaires</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 : VRAI OU FAUX -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 3 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span class="exercise-text">Le secteur tertiaire concerne les services (commerces, bureaux, sant&eacute;&hellip;).</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span class="exercise-text">Les zones industrielles se trouvent en centre-ville.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span class="exercise-text">Les zones commerciales sont construites en p&eacute;riph&eacute;rie de la ville.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span class="exercise-text">Le principal secteur d'activit&eacute; en ville est le secteur primaire (agriculture).</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span class="exercise-text">Plus on s'&eacute;loigne du centre-ville, plus les activit&eacute;s ont besoin d'espace.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>1)</strong> <span class="answer">VRAI</span> &ndash; Le secteur tertiaire regroupe tous les services.
+                </div>
+                <div class="correction-item">
+                    <strong>2)</strong> <span class="answer">FAUX</span> &ndash; Les zones industrielles sont <strong>loin du centre</strong> car elles ont besoin d'espaces importants.
+                </div>
+                <div class="correction-item">
+                    <strong>3)</strong> <span class="answer">VRAI</span> &ndash; Elles sont en p&eacute;riph&eacute;rie avec de grands parkings.
+                </div>
+                <div class="correction-item">
+                    <strong>4)</strong> <span class="answer">FAUX</span> &ndash; C'est le secteur <strong>tertiaire</strong> (les services) qui domine en ville.
+                </div>
+                <div class="correction-item">
+                    <strong>5)</strong> <span class="answer">VRAI</span> &ndash; Centre-ville = petits commerces&nbsp;; p&eacute;riph&eacute;rie = zones commerciales et industrielles.
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card green">
+            <p>Le principal secteur d'activit&eacute; en ville est le <strong>secteur tertiaire</strong> (les services).</p>
+            <p>La ville est organis&eacute;e en diff&eacute;rents quartiers selon la distance au centre&nbsp;:</p>
+        </div>
+        <div class="card">
+            <div class="key teal">Du centre vers la p&eacute;riph&eacute;rie</div>
+            <div class="examples">
+                <span class="example-tag red">Centre-ville &rarr; commerces de proximit&eacute;</span>
+                <span class="example-tag orange">Quartier d'affaires &rarr; bureaux, si&egrave;ges d'entreprises</span>
+                <span class="example-tag purple">P&eacute;riph&eacute;rie &rarr; zones commerciales (grandes surfaces)</span>
+                <span class="example-tag green">Loin du centre &rarr; zones industrielles (usines, entrep&ocirc;ts)</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>G&Eacute;O 11 &bull; O&ugrave; travaille-t-on en ville&nbsp;?</p>
+    <p>CM1 &bull; G&eacute;ographie</p>
+</footer>
+
+</body>
+</html>
