@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Focus Pays Basque espagnol — Ete 2026</title>
+  <style>
+    :root {
+      --blue: #2563eb; --blue-light: #dbeafe;
+      --green: #16a34a; --green-light: #dcfce7;
+      --orange: #ea580c; --orange-light: #fff7ed;
+      --red: #dc2626;
+      --purple: #7c3aed; --purple-light: #ede9fe;
+      --amber: #b45309; --amber-light: #fef3c7;
+      --teal: #0d9488; --teal-light: #ccfbf1;
+      --wine: #9f1239; --wine-light: #fff1f2;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb;
+      --gray-300: #d1d5db; --gray-500: #6b7280; --gray-700: #374151; --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-900); background: var(--gray-50); line-height: 1.6; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+    .header { background: linear-gradient(135deg, #4a0420 0%, #9f1239 40%, #e11d48 70%, #fb7185 100%); color: white; padding: 2.5rem 1.5rem; text-align: center; }
+    .header h1 { font-size: 2rem; margin-bottom: .25rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: .9; }
+    .header .dates { display: inline-block; margin-top: .75rem; background: rgba(255,255,255,.2); padding: .4rem 1.2rem; border-radius: 2rem; font-weight: 600; font-size: .95rem; }
+    .header .status { display: inline-block; margin-top: .5rem; background: rgba(255,255,255,.3); padding: .25rem .9rem; border-radius: 2rem; font-size: .82rem; font-weight: 500; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    nav.toc { background: white; border-radius: .75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); display: flex; flex-wrap: wrap; gap: .5rem; }
+    nav.toc a { display: inline-block; padding: .35rem .9rem; background: var(--wine-light); color: var(--wine); border-radius: .4rem; text-decoration: none; font-size: .85rem; font-weight: 500; transition: background .15s; }
+    nav.toc a:hover { background: #fecdd3; }
+    section { background: white; border-radius: .75rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    section h2 { font-size: 1.3rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--wine); color: var(--wine); }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 .75rem; color: var(--gray-700); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 1rem; }
+    th, td { text-align: left; padding: .55rem .65rem; border-bottom: 1px solid var(--gray-200); }
+    th { background: var(--gray-100); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; color: var(--gray-500); }
+    tr:hover td { background: var(--gray-50); }
+    .badge { display: inline-block; padding: .15rem .55rem; border-radius: .3rem; font-size: .75rem; font-weight: 600; }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-blue { background: var(--blue-light); color: var(--blue); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-red { background: #fee2e2; color: var(--red); }
+    .badge-gray { background: var(--gray-100); color: var(--gray-500); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-amber { background: var(--amber-light); color: var(--amber); }
+    .badge-teal { background: var(--teal-light); color: var(--teal); }
+    .badge-wine { background: var(--wine-light); color: var(--wine); }
+    .callout { border-left: 4px solid var(--wine); background: var(--wine-light); padding: .85rem 1rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; font-size: .9rem; }
+    .callout-green { border-color: var(--green); background: var(--green-light); }
+    .callout-orange { border-color: var(--orange); background: var(--orange-light); }
+    .callout-amber { border-color: var(--amber); background: var(--amber-light); }
+    .callout-blue { border-color: var(--blue); background: var(--blue-light); }
+    .callout-red { border-color: var(--red); background: #fee2e2; }
+    .zone-card { border: 1px solid var(--gray-200); border-radius: .75rem; padding: 1.25rem; margin-bottom: 1rem; background: var(--gray-50); }
+    .zone-card h3 { margin-top: 0 !important; }
+    .zone-card table { margin-bottom: 0; }
+    .spot-card { display: grid; grid-template-columns: 2.5rem 1fr; gap: .75rem; padding: .85rem 0; border-bottom: 1px solid var(--gray-200); align-items: start; }
+    .spot-card:last-child { border-bottom: none; }
+    .spot-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--wine-light); color: var(--wine); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .95rem; flex-shrink: 0; }
+    .spot-content .spot-name { font-weight: 700; font-size: .95rem; margin-bottom: .15rem; }
+    .spot-content .spot-desc { font-size: .88rem; color: var(--gray-700); line-height: 1.5; }
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .75rem; margin: 1rem 0; }
+    .score-card { background: var(--gray-50); border-radius: .5rem; padding: .85rem; text-align: center; border: 1px solid var(--gray-200); }
+    .score-card .sc-label { font-size: .78rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .03em; margin-bottom: .25rem; }
+    .score-card .sc-value { font-size: 1.5rem; font-weight: 700; color: var(--wine); }
+    .score-card .sc-note { font-size: .75rem; color: var(--gray-500); margin-top: .15rem; }
+    .score-card.highlight { background: var(--wine-light); border-color: var(--wine); }
+    .score-card.highlight .sc-value { color: #4a0420; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .pros-cons ul { list-style: none; padding: 0; font-size: .85rem; }
+    .pros-cons li { padding: .2rem 0; padding-left: 1.2rem; position: relative; }
+    .pros-cons .pros li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .pros-cons .cons li::before { content: '\2212'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+    .compare-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0; }
+    .compare-table table { min-width: 700px; }
+    .compare-table td:first-child, .compare-table th:first-child { position: sticky; left: 0; background: white; z-index: 1; font-weight: 600; }
+    .compare-table th:first-child { background: var(--gray-100); }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--wine); text-decoration: none; font-size: .9rem; font-weight: 500; }
+    .back-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: .5rem; overflow-x: hidden; }
+      section { padding: .75rem; margin-bottom: 1rem; }
+      table { font-size: .82rem; }
+      th, td { padding: .4rem .5rem; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+      nav.toc { gap: .35rem; padding: .75rem; }
+      nav.toc a { font-size: .78rem; padding: .3rem .65rem; }
+      .compare-table { max-width: 100vw; margin-left: -.75rem; margin-right: -.75rem; padding: 0 .75rem; }
+    }
+    @media (max-width: 400px) {
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+      .container { padding: .35rem; }
+      section { padding: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Focus Pays Basque espagnol</h1>
+  <div class="subtitle">Etude de faisabilite &mdash; Ete 2026</div>
+  <div class="dates">Famille Bruet &bull; 6 pers + 2 Cairn Terriers &bull; ~2 semaines sur place</div>
+  <div class="status">Destination #7 &mdash; Pintxos + Surf + Zero Fatigue &mdash; 3h de route</div>
+</div>
+
+<div class="container">
+
+<a href="plan-ete-2026.html" class="back-link">&larr; Retour au plan general</a>
+
+<nav class="toc">
+  <a href="#contexte">Contexte</a>
+  <a href="#trajet">Trajet</a>
+  <a href="#zones">Zones</a>
+  <a href="#spots">Top 12</a>
+  <a href="#gastro">Gastronomie</a>
+  <a href="#budget">Budget</a>
+  <a href="#faisabilite">Faisabilite</a>
+  <a href="#verdict">Verdict</a>
+</nav>
+
+<!-- CONTEXTE -->
+<section id="contexte">
+  <h2>Contexte</h2>
+  <table>
+    <tr><td style="font-weight:600;width:35%">Famille</td><td>6 personnes (2 adultes + 4 ados : 17, 15, 13, 10 ans)</td></tr>
+    <tr><td style="font-weight:600">Chiens</td><td>2 Cairn Terriers &mdash; viennent, NON NEGOCIABLE</td></tr>
+    <tr><td style="font-weight:600">Depart</td><td>Vayres, Gironde (33)</td></tr>
+    <tr><td style="font-weight:600">Dates</td><td>~3 sem enveloppe : 29-30 juil &rarr; 16-17 aout. <strong>2 semaines sur place</strong></td></tr>
+    <tr><td style="font-weight:600">Type</td><td><span class="badge badge-blue">Montagne + Mer</span></td></tr>
+  </table>
+
+  <h3>Pourquoi le Pays Basque espagnol attire</h3>
+  <div class="pros-cons" style="grid-template-columns:1fr">
+    <ul class="pros">
+      <li><strong>San Sebastian</strong> &mdash; capitale gastronomique d'Europe (record mondial etoiles Michelin par habitant). Playa de la Concha = top 5 plages urbaines du monde</li>
+      <li><strong>Pintxos</strong> &mdash; culture culinaire unique : mini-plats au comptoir, chacun choisit ce qu'il veut. Parfait en famille</li>
+      <li><strong>Guggenheim Bilbao</strong> &mdash; chef-d'oeuvre Gehry, art contemporain. Enfants &lt;18 ans = gratuit</li>
+      <li><strong>Surf</strong> &mdash; Mundaka (top mondial), Zarautz (3 km de sable), Sopelana. Ideal initiation ados</li>
+      <li><strong>Gaztelugatxe</strong> &mdash; ermitage sur un ilot, 241 marches. Game of Thrones (Dragonstone)</li>
+      <li><strong>3h de route</strong> &mdash; LE trajet le plus court des 12 destinations. Zero fatigue</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-green">
+    <strong>Atout decisif : 3h de route.</strong> Depart le matin, installe l'apres-midi. Zero etape, zero hotel de transit, zero journee perdue. Le gain de temps = ~4 jours de vacances en plus vs Croatie ou Slovenie.
+  </div>
+</section>
+
+<!-- TRAJET -->
+<section id="trajet">
+  <h2>Comment y aller</h2>
+
+  <h3>Itineraire : Vayres &rarr; Bayonne &rarr; San Sebastian</h3>
+  <table>
+    <tr><td style="font-weight:600;width:35%">Distance</td><td><strong>~350 km</strong></td></tr>
+    <tr><td style="font-weight:600">Duree</td><td><strong>~3h-3h30 &mdash; arrivee le jour meme</strong></td></tr>
+    <tr><td style="font-weight:600">Etape</td><td>Aucune necessaire &mdash; depart le matin, installe l'apres-midi</td></tr>
+  </table>
+
+  <h3>Couts detailles</h3>
+  <table>
+    <thead><tr><th>Troncon</th><th>Montant</th></tr></thead>
+    <tbody>
+      <tr><td>Peages France (Vayres &rarr; Bayonne, A63)</td><td>~25-30 EUR</td></tr>
+      <tr><td>Peages Espagne (frontiere &rarr; San Sebastian / Bilbao, AP-8)</td><td>~10-20 EUR</td></tr>
+      <tr><td style="font-weight:600">Total peages aller</td><td style="font-weight:600">~35-50 EUR</td></tr>
+      <tr><td style="font-weight:600">Total peages A/R</td><td style="font-weight:600">~70-100 EUR</td></tr>
+      <tr><td>Carburant A/R (~700 km)</td><td>~55-65 EUR</td></tr>
+      <tr><td style="font-weight:700">TOTAL TRAJET A/R</td><td style="font-weight:700">~125-165 EUR</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Le trajet le moins cher des 12 destinations.</strong> 700 km A/R, pas d'etape, pas de tunnel, pas de vignette. Le gain sur le transport (~800 EUR vs Croatie) compense partiellement le cout de vie plus eleve sur place.
+  </div>
+</section>
+
+<!-- ZONES -->
+<section id="zones">
+  <h2>Les zones a explorer</h2>
+
+  <div class="zone-card">
+    <h3>San Sebastian (Donostia) &mdash; La star <span class="badge badge-wine">Capitale gastronomique</span></h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Population</td><td>190 000 hab.</td></tr>
+      <tr><td style="font-weight:600">Star</td><td>Playa de la Concha &mdash; arc parfait de sable, eau turquoise, cerclée de collines</td></tr>
+      <tr><td style="font-weight:600">Gastronomie</td><td><strong>126 etoiles Michelin dans un rayon de 25 km</strong> (record mondial par densite)</td></tr>
+      <tr><td style="font-weight:600">Parte Vieja</td><td>Vieille ville = epicentre des pintxos. Ruelles etroites, bars a touche-touche</td></tr>
+      <tr><td style="font-weight:600">Mont Urgull</td><td>Forteresse + statue du Christ, vue 360&deg; sur la baie. Gratuit</td></tr>
+      <tr><td style="font-weight:600">Mont Igueldo</td><td>Funiculaire Art Deco + parc d'attractions retro + panorama iconique</td></tr>
+    </table>
+    <div class="callout callout-amber">
+      <strong>Semana Grande (mi-aout) :</strong> fete majeure de San Sebastian. Feux d'artifice chaque soir, concerts, ambiance de folie. MAIS foules extremes + prix max. Parking = galere &mdash; privilege logement avec parking prive ou P+R Amara.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3>Bilbao &mdash; La culturelle <span class="badge badge-purple">Guggenheim</span></h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Distance de San Sebastian</td><td>100 km (~1h15)</td></tr>
+      <tr><td style="font-weight:600">Star</td><td>Guggenheim &mdash; Frank Gehry, titanium, araignee "Maman" + chien fleuri "Puppy"</td></tr>
+      <tr><td style="font-weight:600">Tarif adulte</td><td>~16 EUR</td></tr>
+      <tr><td style="font-weight:600">Tarif enfant (&lt;18 ans)</td><td><strong>Gratuit</strong></td></tr>
+      <tr><td style="font-weight:600">Famille 6 : Guggenheim</td><td><strong>~32 EUR</strong></td></tr>
+      <tr><td style="font-weight:600">Casco Viejo</td><td>Vieille ville medievale, 7 rues + Plaza Nueva. Pintxos, ambiance</td></tr>
+      <tr><td style="font-weight:600">Marche de la Ribera</td><td>Plus grand marche couvert d'Europe. Produits frais + bar a pintxos a l'etage</td></tr>
+    </table>
+    <div class="callout callout-green">
+      <strong>Guggenheim = experience architecturale meme si on n'aime pas l'art.</strong> Le batiment seul vaut le deplacement. Enfants &lt;18 ans = gratuit = ~32 EUR pour toute la famille. Prevoir 2-3h.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3>Cote basque &mdash; Villages de pecheurs <span class="badge badge-green">Charme</span></h3>
+    <table>
+      <thead><tr><th>Village</th><th>Distance de San Seb</th><th>Star</th><th>Commentaire</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Getaria</strong></td><td>25 km</td><td>Port, turbot grille, Balenciaga</td><td>Authentique, musee Balenciaga</td></tr>
+        <tr><td><strong>Zarautz</strong></td><td>20 km</td><td>Plage 3 km, surf</td><td>Plus longue plage du Pays Basque</td></tr>
+        <tr><td><strong>Hondarribia</strong></td><td>20 km</td><td>Vieille ville fortifiee</td><td>Le "petit Saint-Jean-de-Luz" espagnol</td></tr>
+        <tr><td><strong>Lekeitio</strong></td><td>55 km</td><td>Ile San Nicolas (maree basse)</td><td>Moins touristique</td></tr>
+        <tr><td><strong>Mundaka</strong></td><td>40 km (de Bilbao)</td><td>Gauche mythique (surf)</td><td>Reserve biosphere Urdaibai</td></tr>
+        <tr><td><strong>Pasaia</strong></td><td>10 km</td><td>Port naturel, Victor Hugo</td><td>Traversee en barque, 1 EUR</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong>La cote basque = un collier de perles.</strong> Chaque village a son caractere : Getaria pour le poisson, Zarautz pour le surf, Hondarribia pour le charme, Lekeitio pour la tranquillite. Tout dans un rayon de 50 km.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3>Flysch de Zumaia &mdash; La merveille geologique <span class="badge badge-blue">GoT</span></h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Situation</td><td>Entre Zumaia et Deba, 30 km de San Sebastian</td></tr>
+      <tr><td style="font-weight:600">Ce que c'est</td><td>Falaises de strates inclinees &mdash; 60 millions d'annees de geologie a ciel ouvert</td></tr>
+      <tr><td style="font-weight:600">Game of Thrones</td><td>Lieu de tournage de Dragonstone (saisons 7-8)</td></tr>
+      <tr><td style="font-weight:600">Randonnee</td><td>Sentier cotier Zumaia &rarr; Deba : ~14 km, 4-5h (version courte 5 km, 2h)</td></tr>
+      <tr><td style="font-weight:600">Acces</td><td>A pied depuis le port de Zumaia, ou bateau touristique. Gratuit</td></tr>
+    </table>
+    <div class="callout callout-green">
+      <strong>Le Flysch = le moment "wow" du voyage.</strong> Strates de roche verticales plongeant dans la mer, formees il y a 60 millions d'annees. Gratuit. Lieu de tournage Game of Thrones (Dragonstone).
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3>San Juan de Gaztelugatxe &mdash; L'icone <span class="badge badge-blue">GoT</span></h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Situation</td><td>Entre Bilbao et Bermeo (35 km de Bilbao)</td></tr>
+      <tr><td style="font-weight:600">Ce que c'est</td><td>Ermitage du Xe siecle sur un ilot rocheux relie par <strong>241 marches</strong></td></tr>
+      <tr><td style="font-weight:600">Game of Thrones</td><td>Dragonstone (vue exterieure)</td></tr>
+      <tr><td style="font-weight:600">Reservation</td><td><strong>Obligatoire en ete</strong> (gratuit mais quota journalier)</td></tr>
+      <tr><td style="font-weight:600">Chiens</td><td><span class="badge badge-red">Interdits sur le sentier</span> &mdash; un adulte reste avec les chiens</td></tr>
+      <tr><td style="font-weight:600">Duree</td><td>~1h30-2h A/R</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3>Montagnes basques &mdash; Fraicheur et randonnees</h3>
+    <table>
+      <thead><tr><th>Massif</th><th>Distance</th><th>Altitude</th><th>Interet</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Urkiola</strong></td><td>40 km de Bilbao</td><td>1 330 m</td><td>Parc naturel, sentiers, sanctuaire. Fraicheur</td></tr>
+        <tr><td><strong>Aizkorri-Aratz</strong></td><td>60 km de San Seb</td><td>1 528 m</td><td>Plus haut du Pays Basque, forets de hetres</td></tr>
+        <tr><td><strong>Gorbeia</strong></td><td>50 km de Bilbao</td><td>1 482 m</td><td>Croix sommitale iconique, cascades</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <strong>La montagne basque = douce et accessible.</strong> Pas les Dolomites, mais des randonnees en foret de hetres, des cascades, de la fraicheur quand la cote etouffe. Ideal pour les jours de pluie cotiere.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3>Rioja Alavesa &mdash; L'excursion vin</h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Distance de San Sebastian</td><td>120 km (~1h30)</td></tr>
+      <tr><td style="font-weight:600">Ce que c'est</td><td>Versant basque de la Rioja &mdash; vignobles + bodegas architecturales + villages medievaux</td></tr>
+      <tr><td style="font-weight:600">Stars</td><td>Bodega Marques de Riscal (Gehry), Laguardia (village perche)</td></tr>
+      <tr><td style="font-weight:600">Interet ados</td><td>Limite &mdash; mais Laguardia est joli et les bodegas futuristes impressionnent</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- TOP 12 -->
+<section id="spots">
+  <h2>Top 12 des spots</h2>
+
+  <div class="spot-card">
+    <div class="spot-num">1</div>
+    <div class="spot-content">
+      <div class="spot-name">Pintxos dans la Parte Vieja (San Sebastian)</div>
+      <div class="spot-desc">Le tour des bars a pintxos dans les ruelles de la vieille ville. Chaque bar a sa specialite. On mange debout, on decouvre, on compare. Chacun choisit ce qu'il veut. 15-25 EUR/pers pour un festin.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">2</div>
+    <div class="spot-content">
+      <div class="spot-name">Playa de la Concha (San Sebastian)</div>
+      <div class="spot-desc">Arc parfait de sable dore entre deux collines, eau turquoise (mais 20-22&deg;C). Top 5 des plus belles plages urbaines du monde. Bondee en aout &mdash; arriver avant 10h.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">3</div>
+    <div class="spot-content">
+      <div class="spot-name">Guggenheim Bilbao</div>
+      <div class="spot-desc">Musee d'art contemporain dans un ecrin de titanium signe Gehry. Araignee geante "Maman" + chien fleuri "Puppy". Enfants &lt;18 ans = gratuit. ~32 EUR pour la famille. LE lieu culturel du voyage.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">4</div>
+    <div class="spot-content">
+      <div class="spot-name">San Juan de Gaztelugatxe</div>
+      <div class="spot-desc">241 marches au-dessus de l'Atlantique vers un ermitage du Xe siecle. Dragonstone dans Game of Thrones. Reservation obligatoire en ete. Vue a couper le souffle.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">5</div>
+    <div class="spot-content">
+      <div class="spot-name">Flysch de Zumaia</div>
+      <div class="spot-desc">60 millions d'annees de strates geologiques inclinees plongeant dans la mer. Sentier cotier spectaculaire (2h version courte). Game of Thrones (Dragonstone). Gratuit.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">6</div>
+    <div class="spot-content">
+      <div class="spot-name">Surf a Zarautz / Mundaka</div>
+      <div class="spot-desc">Zarautz = 3 km de plage, parfait pour initiation. Mundaka = gauche mythique. Ecoles de surf partout : ~35-45 EUR/pers pour 2h de cours.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">7</div>
+    <div class="spot-content">
+      <div class="spot-name">Getaria &mdash; Village + turbot grille</div>
+      <div class="spot-desc">Port de pecheurs, bateaux colores, et le meilleur turbot grille de la cote basque. Musee Balenciaga (ne ici). Le dejeuner parfait face au port.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">8</div>
+    <div class="spot-content">
+      <div class="spot-name">Hondarribia &mdash; Vieille ville fortifiee</div>
+      <div class="spot-desc">Maisons a colombages colorees, remparts de Charles Quint, port de pecheurs. Face a Hendaye. Pintxos dans la calle San Pedro.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">9</div>
+    <div class="spot-content">
+      <div class="spot-name">Mont Igueldo (San Sebastian)</div>
+      <div class="spot-desc">Funiculaire Art Deco de 1912, parc d'attractions retro kitsch, et LE panorama iconique de San Sebastian. Vue sur toute la Concha. Funiculaire ~4 EUR.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">10</div>
+    <div class="spot-content">
+      <div class="spot-name">Pasaia (Pasajes)</div>
+      <div class="spot-desc">Village de pecheurs coupe en deux par un goulet naturel. Traversee en barque (1 EUR). Victor Hugo y a vecu. Moins de touristes &mdash; authenticite pure.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">11</div>
+    <div class="spot-content">
+      <div class="spot-name">Marche de la Ribera (Bilbao)</div>
+      <div class="spot-desc">Plus grand marche couvert d'Europe. Etals de poissons, jambon, fromages. Bar a pintxos a l'etage avec vue sur le fleuve. Le spot dejeuner ideal a Bilbao.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">12</div>
+    <div class="spot-content">
+      <div class="spot-name">Parc naturel d'Urkiola</div>
+      <div class="spot-desc">Forets de hetres, sentiers balises, fraicheur (20-25&deg;C quand la cote est a 30&deg;C). Rando familiale du sanctuaire aux cretes : 2-3h. Le plan B montagne parfait.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GASTRONOMIE -->
+<section id="gastro">
+  <h2>Gastronomie basque</h2>
+
+  <table>
+    <thead><tr><th style="width:25%">Specialite</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pintxos</strong></td><td>Mini-plats sur pain, alignes au comptoir. Chaque bar a sa specialite. 2-4 EUR le pintxo. <strong>LA</strong> raison de venir au Pays Basque. Format ideal en famille : chacun choisit</td></tr>
+      <tr><td><strong>Txakoli</strong></td><td>Vin blanc petillant local, verse de haut (chorro). Sec, leger, fruite. 2-3 EUR le verre</td></tr>
+      <tr><td><strong>Marmitako</strong></td><td>Ragout de thon aux pommes de terre, poivrons, tomates. Plat de pecheurs traditionnel</td></tr>
+      <tr><td><strong>Bacalao al pil-pil</strong></td><td>Morue en emulsion d'huile d'olive, ail et piment. Chef-d'oeuvre technique de la cuisine basque</td></tr>
+      <tr><td><strong>Txuleta</strong></td><td>Cote de boeuf "vieille vache" grillee, 800g-1kg. Viande mature, savoureuse. ~40-60 EUR a partager</td></tr>
+      <tr><td><strong>Kokotxas</strong></td><td>Joues de merlu en sauce pil-pil. Delicatesse locale, texture fondante</td></tr>
+      <tr><td><strong>Idiazabal</strong></td><td>Fromage de brebis fume AOP. Parfait avec confiture de cerises noires</td></tr>
+      <tr><td><strong>Gateau basque</strong></td><td>Fourre a la creme patissiere ou confiture de cerises noires. Gouter incontournable</td></tr>
+      <tr><td><strong>Sidra (cidre)</strong></td><td>Cidre naturel, verse de haut. Cidreries (sagardotegiak) = menu fixe (morue, txuleta, fromage) + cidre a volonte</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Prix des repas</h3>
+  <table>
+    <thead><tr><th>Poste</th><th>Prix Pays Basque</th><th>vs France</th></tr></thead>
+    <tbody>
+      <tr><td>Pintxo individuel</td><td>2-4 EUR</td><td>Pas d'equivalent</td></tr>
+      <tr><td>Tour pintxos / pers (6-8 pintxos + boisson)</td><td>20-30 EUR</td><td>vs 30-45 EUR un resto</td></tr>
+      <tr><td>Repas famille 6 (pintxos tour)</td><td>100-150 EUR</td><td><span class="badge badge-green">Festin imbattable</span></td></tr>
+      <tr><td>Repas famille 6 (restaurant midi)</td><td>100-160 EUR</td><td>vs 130-200 EUR</td></tr>
+      <tr><td>Menu del dia (midi)</td><td>14-20 EUR</td><td><span class="badge badge-green">Meilleur rapport Q/P</span></td></tr>
+      <tr><td>Biere (cana, 0,25L)</td><td>2-3 EUR</td><td></td></tr>
+      <tr><td>Courses hebdo (famille 6)</td><td>200-250 EUR</td><td>vs 250-300 EUR</td></tr>
+      <tr><td><strong>San Sebastian centre</strong></td><td><strong>+30-40% sur tout</strong></td><td><span class="badge badge-orange">Premium</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Astuce budget : le menu del dia.</strong> Midi en semaine, les restos proposent entree + plat + dessert + boisson pour 14-20 EUR. Qualite souvent bluffante. LE bon plan famille.
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <h2>Budget (2 semaines sur place)</h2>
+
+  <h3>Logement</h3>
+  <table>
+    <thead><tr><th>Zone</th><th>Prix / semaine</th><th>Commentaire</th></tr></thead>
+    <tbody>
+      <tr><td><strong>San Sebastian centre</strong></td><td>1 200-2 000+ EUR</td><td><span class="badge badge-red">Tres cher</span></td></tr>
+      <tr><td>San Seb peripherie</td><td>800-1 300 EUR</td><td>Meilleur rapport Q/P</td></tr>
+      <tr><td><strong>Zarautz / Getaria / Zumaia</strong></td><td><strong>700-1 200 EUR</strong></td><td><span class="badge badge-green">Recommande</span></td></tr>
+      <tr><td>Bilbao et environs</td><td>700-1 100 EUR</td><td>Ville, moins "vacances"</td></tr>
+      <tr><td>Lekeitio / cote Biscaye</td><td>600-1 000 EUR</td><td>Plus abordable, plus isole</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>Base recommandee : Zarautz / Getaria / Zumaia.</strong> 20-30 min de San Sebastian, sur la cote, prix 30-40% inferieurs. Acces Flysch, surf, villages. Revenir a San Seb le soir pour les pintxos.
+  </div>
+
+  <h3>Budget total estime</h3>
+  <table>
+    <thead><tr><th>Poste</th><th>Estimation</th></tr></thead>
+    <tbody>
+      <tr><td>Trajet A/R (peages + carburant)</td><td>~125-165 EUR</td></tr>
+      <tr><td>Logement (2 semaines, base Zarautz/Getaria)</td><td>~1 400-2 400 EUR</td></tr>
+      <tr><td>Courses alimentaires (2 sem)</td><td>~400-500 EUR</td></tr>
+      <tr><td>Restaurants / pintxos (8-10 sorties)</td><td>~700-1 100 EUR</td></tr>
+      <tr><td>Surf (2-3 cours &times; 4 ados)</td><td>~280-540 EUR</td></tr>
+      <tr><td>Activites (Guggenheim, funiculaire, bateaux)</td><td>~100-150 EUR</td></tr>
+      <tr><td>Parking (si logement sans)</td><td>~100-200 EUR</td></tr>
+      <tr><td>Divers (glaces, souvenirs, cidre)</td><td>~100-200 EUR</td></tr>
+      <tr><td style="font-weight:700">TOTAL VOYAGE</td><td style="font-weight:700">~3 200-5 250 EUR</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Scenario realiste : ~3 800-4 200 EUR.</strong> Le transport ultra-leger (~150 EUR vs ~950 EUR Croatie) compense en partie le cout de vie. Le poste "pintxos/restos" est le plus variable : facile de se laisser emporter (et on aurait tort de se priver).
+  </div>
+</section>
+
+<!-- FAISABILITE -->
+<section id="faisabilite">
+  <h2>Faisabilite globale</h2>
+
+  <h3>Bilan temps</h3>
+  <table>
+    <tr><td style="font-weight:600;width:40%">Trajet aller</td><td><strong>0,5 jour</strong> (matin depart, apres-midi sur place)</td></tr>
+    <tr><td style="font-weight:600">Trajet retour</td><td>0,5 jour</td></tr>
+    <tr><td style="font-weight:700">Temps sur place</td><td style="font-weight:700">~17 jours</td></tr>
+    <tr><td style="font-weight:600">Total</td><td>~18 jours</td></tr>
+  </table>
+  <div class="callout callout-green">
+    <strong>Ratio temps sur place / total = ~94%.</strong> Le meilleur ratio des 12 destinations. Zero journee perdue sur la route. On maximise le temps de vacances.
+  </div>
+
+  <h3>Contraintes chiens</h3>
+  <table>
+    <thead><tr><th style="width:35%">Aspect</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>Entree Espagne</td><td><span class="badge badge-green">UE</span> &mdash; passeport europeen + vaccin rage. ZERO complication</td></tr>
+      <tr><td>Plages ete (juin-sept)</td><td><span class="badge badge-red">Interdites majorite</span> &mdash; rares plages dog-friendly (Sopelana zone canine, tolerance Zarautz tot le matin)</td></tr>
+      <tr><td>Gaztelugatxe</td><td><span class="badge badge-red">Interdit</span> &mdash; un adulte reste avec les chiens</td></tr>
+      <tr><td>Randonnees / montagne</td><td><span class="badge badge-green">OK partout</span> &mdash; en laisse</td></tr>
+      <tr><td>Villes / terrasses</td><td><span class="badge badge-green">Tolerant</span> &mdash; culture chien developpee</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-red">
+    <strong>Score chiens : 5/10.</strong> Le point noir. L'entree est triviale (UE), villes et montagnes OK, mais l'interdiction quasi-totale des plages en ete = vrai probleme. Les chiens restent au logement pendant les journees plage &mdash; faisable mais frustrant.
+  </div>
+
+  <h3>Affluence en aout</h3>
+  <table>
+    <thead><tr><th>Lieu</th><th>Niveau</th></tr></thead>
+    <tbody>
+      <tr><td>San Sebastian (Concha)</td><td><span class="badge badge-red">Extreme</span> &mdash; plage saturee des 11h</td></tr>
+      <tr><td>San Seb (Semana Grande, mi-aout)</td><td><span class="badge badge-red">Extreme+</span> &mdash; pic absolu</td></tr>
+      <tr><td>Zarautz</td><td><span class="badge badge-orange">Eleve</span> &mdash; grande plage = un peu plus gerable</td></tr>
+      <tr><td>Getaria / Hondarribia</td><td><span class="badge badge-amber">Modere a eleve</span></td></tr>
+      <tr><td>Bilbao (Guggenheim)</td><td><span class="badge badge-green">Modere</span></td></tr>
+      <tr><td>Flysch de Zumaia</td><td><span class="badge badge-green">Modere</span></td></tr>
+      <tr><td>Montagnes</td><td><span class="badge badge-green">Faible</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-orange">
+    <strong>San Sebastian en aout = ville bondee.</strong> La Concha deborde, la Parte Vieja epaule contre epaule. Strategie : plage avant 10h, pintxos a 13h (quand les touristes mangent au resto), alterner avec villages alentour.
+  </div>
+
+  <h3>Meteo en aout</h3>
+  <table>
+    <thead><tr><th>Parametre</th><th>Valeur</th></tr></thead>
+    <tbody>
+      <tr><td>Temperature max</td><td>25-28&deg;C (rarement &gt;30&deg;C)</td></tr>
+      <tr><td>Temperature nuit</td><td>17-19&deg;C</td></tr>
+      <tr><td>Temperature ocean</td><td><strong>20-22&deg;C</strong></td></tr>
+      <tr><td>Jours de pluie</td><td><strong>8-10/mois</strong></td></tr>
+      <tr><td>Ensoleillement</td><td>~7-8h/jour</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-amber">
+    <strong>Meteo : 6/10.</strong> Le Pays Basque est VERT pour une raison. Pluie possible 1j/3 (averses courtes). Temperature agreable (25-28&deg;C, jamais caniculaire), mais ocean frais (20-22&deg;C). Avantage : les chiens supportent bien, pas de canicule.
+  </div>
+
+  <h3>Points de vigilance</h3>
+  <table>
+    <thead><tr><th style="width:30%">Point</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Plages et chiens</td><td>Quasi-interdites en ete. Prevoir alternance journees plage (chiens au logement) / journees montagne-ville (avec les chiens)</td></tr>
+      <tr><td>Logement San Sebastian</td><td>Reserver tres tot &mdash; stock pour 6+ pers fond en mars/avril. Viser peripherie ou Zarautz</td></tr>
+      <tr><td>Parking</td><td>San Sebastian = galere. Viser logement avec parking prive. Sinon P+R Amara + bus</td></tr>
+      <tr><td>Semana Grande</td><td>Mi-aout : foules + prix max + ambiance festive. A savoir avant de reserver</td></tr>
+      <tr><td>Budget pintxos</td><td>Facile de depenser 150 EUR pour 6 en un soir de bar en bar. Fixer un budget par sortie</td></tr>
+      <tr><td>Monnaie / Langue</td><td><strong>Euro.</strong> Basque + espagnol. Francais souvent compris (proximite frontiere)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <h2>Verdict</h2>
+
+  <div class="score-grid">
+    <div class="score-card highlight"><div class="sc-label">Trajet</div><div class="sc-value">9</div><div class="sc-note">/10 &mdash; 350 km, 3h</div></div>
+    <div class="score-card"><div class="sc-label">Activites</div><div class="sc-value">7</div><div class="sc-note">/10 &mdash; Surf, rando, musee</div></div>
+    <div class="score-card"><div class="sc-label">Ados</div><div class="sc-value">7</div><div class="sc-note">/10 &mdash; Surf + kayak</div></div>
+    <div class="score-card"><div class="sc-label">Baignade</div><div class="sc-value">6</div><div class="sc-note">/10 &mdash; Frais, restrictions</div></div>
+    <div class="score-card"><div class="sc-label">Budget</div><div class="sc-value">6</div><div class="sc-note">/10 &mdash; San Seb = cher</div></div>
+    <div class="score-card"><div class="sc-label">Chiens</div><div class="sc-value">5</div><div class="sc-note">/10 &mdash; Plages interdites!</div></div>
+    <div class="score-card highlight"><div class="sc-label">Gastro</div><div class="sc-value">10</div><div class="sc-note">/10 &mdash; Capitale mondiale</div></div>
+    <div class="score-card"><div class="sc-label">Depaysement</div><div class="sc-value">4</div><div class="sc-note">/10 &mdash; Proche, connu</div></div>
+    <div class="score-card"><div class="sc-label">Charme</div><div class="sc-value">8</div><div class="sc-note">/10 &mdash; Getaria, Hondarribia</div></div>
+    <div class="score-card"><div class="sc-label">Meteo</div><div class="sc-value">6</div><div class="sc-note">/10 &mdash; Pluie, ocean frais</div></div>
+  </div>
+
+  <div class="callout" style="background: linear-gradient(135deg, var(--wine-light), #fce7f3); border-color: var(--wine); text-align: center; padding: 1.25rem;">
+    <div style="font-size: 2rem; font-weight: 800; color: #4a0420;">6.8 / 10</div>
+    <div style="font-size: 1rem; font-weight: 600; color: var(--wine); margin-top: .25rem;">Pintxos + Surf + Zero Fatigue</div>
+    <div style="font-size: .85rem; color: var(--gray-700); margin-top: .25rem;">3h de route + meilleure gastronomie des 12 destinations. Mais plages-chiens et meteo = points faibles</div>
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <h3 style="color:var(--green);margin-top:0">Pour</h3>
+      <ul>
+        <li>3h de route = zero stress, 17 jours sur place sur 18</li>
+        <li>Gastronomie 10/10 : pintxos = format famille ideal</li>
+        <li>Surf pour les ados (Zarautz, ecoles partout)</li>
+        <li>Guggenheim gratuit &lt;18 ans, Flysch + Gaztelugatxe = GoT</li>
+        <li>Villages charme : Getaria, Hondarribia, Pasaia, Lekeitio</li>
+        <li>Transport ~150 EUR A/R (vs 950 EUR Croatie)</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3 style="color:var(--orange);margin-top:0">Contre</h3>
+      <ul>
+        <li>Plages interdites aux chiens en ete = vrai probleme</li>
+        <li>Ocean frais (20-22&deg;C) — pas la Mediterranee</li>
+        <li>Pluie possible 1 jour sur 3 meme en aout</li>
+        <li>Peu de depaysement (proche, culture connue)</li>
+        <li>San Sebastian en aout = bondee et chere</li>
+        <li>Moins d'aventure/activites que Croatie ou Slovenie</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Comparaison</h3>
+  <div class="compare-table">
+    <table>
+      <thead>
+        <tr><th>Critere</th><th>Pays Basque</th><th>Croatie</th><th>Asturies</th><th>Lacs italiens</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Trajet</td><td><strong>3h</strong></td><td>2 jours</td><td>7h</td><td>10-12h</td></tr>
+        <tr><td>Cout trajet A/R</td><td><strong>~150 EUR</strong></td><td>~950 EUR</td><td>~350 EUR</td><td>~650 EUR</td></tr>
+        <tr><td>Budget total (2 sem)</td><td>~3 800-4 200</td><td>~4 500-5 200</td><td>~3 200-3 800</td><td>~5 500-6 000</td></tr>
+        <tr><td>Wow visuel</td><td>7/10</td><td>8/10</td><td>8/10</td><td>8/10</td></tr>
+        <tr><td>Activites ados</td><td>7/10</td><td><strong>9/10</strong></td><td>8/10</td><td>7/10</td></tr>
+        <tr><td>Chiens</td><td style="color:var(--red)">5/10</td><td><strong>8/10</strong></td><td>6/10</td><td>6/10</td></tr>
+        <tr><td>Gastro</td><td><strong>10/10</strong></td><td>9/10</td><td>8/10</td><td>9/10</td></tr>
+        <tr><td>Meteo</td><td>6/10</td><td><strong>9/10</strong></td><td>6/10</td><td>8/10</td></tr>
+        <tr><td>Monde aout</td><td>4/10</td><td>4/10</td><td>6/10</td><td>5/10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-blue">
+    <strong>Verdict final :</strong> Le Pays Basque espagnol est le choix du <strong>confort logistique + gastronomie supreme</strong>. 3h de route, zero fatigue, 17 jours sur place. On mange mieux ici qu'a n'importe quelle autre destination. Mais il perd des points importants sur les <strong>plages-chiens</strong> (interdites en ete), la <strong>meteo</strong> (pluie + ocean frais) et le <strong>depaysement</strong> (trop proche, trop connu). C'est le choix ideal si "bien manger + zero fatigue" est la priorite, mais pas si c'est "aventure + baignade + depaysement".
+  </div>
+</section>
+
+</div>
+</body>
+</html>

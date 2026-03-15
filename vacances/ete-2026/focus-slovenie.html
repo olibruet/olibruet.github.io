@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Focus Slovenie — Ete 2026</title>
+  <style>
+    :root {
+      --blue: #2563eb; --blue-light: #dbeafe;
+      --green: #16a34a; --green-light: #dcfce7;
+      --orange: #ea580c; --orange-light: #fff7ed;
+      --red: #dc2626;
+      --purple: #7c3aed; --purple-light: #ede9fe;
+      --amber: #b45309; --amber-light: #fef3c7;
+      --teal: #0d9488; --teal-light: #ccfbf1;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb;
+      --gray-300: #d1d5db; --gray-500: #6b7280; --gray-700: #374151; --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-900); background: var(--gray-50); line-height: 1.6; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+    .header { background: linear-gradient(135deg, #065f46 0%, #0d9488 40%, #5eead4 80%, #99f6e4 100%); color: white; padding: 2.5rem 1.5rem; text-align: center; }
+    .header h1 { font-size: 2rem; margin-bottom: .25rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: .9; }
+    .header .dates { display: inline-block; margin-top: .75rem; background: rgba(255,255,255,.2); padding: .4rem 1.2rem; border-radius: 2rem; font-weight: 600; font-size: .95rem; }
+    .header .status { display: inline-block; margin-top: .5rem; background: rgba(255,255,255,.3); padding: .25rem .9rem; border-radius: 2rem; font-size: .82rem; font-weight: 500; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    nav.toc { background: white; border-radius: .75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); display: flex; flex-wrap: wrap; gap: .5rem; }
+    nav.toc a { display: inline-block; padding: .35rem .9rem; background: var(--teal-light); color: var(--teal); border-radius: .4rem; text-decoration: none; font-size: .85rem; font-weight: 500; transition: background .15s; }
+    nav.toc a:hover { background: #a7f3d0; }
+    section { background: white; border-radius: .75rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    section h2 { font-size: 1.3rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--teal); color: var(--teal); }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 .75rem; color: var(--gray-700); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 1rem; }
+    th, td { text-align: left; padding: .55rem .65rem; border-bottom: 1px solid var(--gray-200); }
+    th { background: var(--gray-100); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; color: var(--gray-500); }
+    tr:hover td { background: var(--gray-50); }
+    .badge { display: inline-block; padding: .15rem .55rem; border-radius: .3rem; font-size: .75rem; font-weight: 600; }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-blue { background: var(--blue-light); color: var(--blue); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-red { background: #fee2e2; color: var(--red); }
+    .badge-gray { background: var(--gray-100); color: var(--gray-500); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-amber { background: var(--amber-light); color: var(--amber); }
+    .badge-teal { background: var(--teal-light); color: var(--teal); }
+    .callout { border-left: 4px solid var(--teal); background: var(--teal-light); padding: .85rem 1rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; font-size: .9rem; }
+    .callout-green { border-color: var(--green); background: var(--green-light); }
+    .callout-orange { border-color: var(--orange); background: var(--orange-light); }
+    .callout-amber { border-color: var(--amber); background: var(--amber-light); }
+    .callout-blue { border-color: var(--blue); background: var(--blue-light); }
+    .zone-card { border: 1px solid var(--gray-200); border-radius: .75rem; padding: 1.25rem; margin-bottom: 1rem; background: var(--gray-50); }
+    .zone-card h3 { margin-top: 0 !important; }
+    .zone-card table { margin-bottom: 0; }
+    .spot-card { display: grid; grid-template-columns: 2.5rem 1fr; gap: .75rem; padding: .85rem 0; border-bottom: 1px solid var(--gray-200); align-items: start; }
+    .spot-card:last-child { border-bottom: none; }
+    .spot-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--teal-light); color: var(--teal); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .95rem; flex-shrink: 0; }
+    .spot-content .spot-name { font-weight: 700; font-size: .95rem; margin-bottom: .15rem; }
+    .spot-content .spot-desc { font-size: .88rem; color: var(--gray-700); line-height: 1.5; }
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .75rem; margin: 1rem 0; }
+    .score-card { background: var(--gray-50); border-radius: .5rem; padding: .85rem; text-align: center; border: 1px solid var(--gray-200); }
+    .score-card .sc-label { font-size: .78rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .03em; margin-bottom: .25rem; }
+    .score-card .sc-value { font-size: 1.5rem; font-weight: 700; color: var(--teal); }
+    .score-card .sc-note { font-size: .75rem; color: var(--gray-500); margin-top: .15rem; }
+    .score-card.highlight { background: var(--teal-light); border-color: var(--teal); }
+    .score-card.highlight .sc-value { color: #065f46; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .pros-cons ul { list-style: none; padding: 0; font-size: .85rem; }
+    .pros-cons li { padding: .2rem 0; padding-left: 1.2rem; position: relative; }
+    .pros-cons .pros li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .pros-cons .cons li::before { content: '\2212'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+    .compare-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0; }
+    .compare-table table { min-width: 700px; }
+    .compare-table td:first-child, .compare-table th:first-child { position: sticky; left: 0; background: white; z-index: 1; font-weight: 600; }
+    .compare-table th:first-child { background: var(--gray-100); }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--teal); text-decoration: none; font-size: .9rem; font-weight: 500; }
+    .back-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: .5rem; overflow-x: hidden; }
+      section { padding: .75rem; margin-bottom: 1rem; }
+      table { font-size: .82rem; }
+      th, td { padding: .4rem .5rem; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+      nav.toc { gap: .35rem; padding: .75rem; }
+      nav.toc a { font-size: .78rem; padding: .3rem .65rem; }
+      .compare-table { max-width: 100vw; margin-left: -.75rem; margin-right: -.75rem; padding: 0 .75rem; }
+    }
+    @media (max-width: 400px) {
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+      .container { padding: .35rem; }
+      section { padding: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Focus Slovenie</h1>
+  <div class="subtitle">Etude de faisabilite &mdash; Ete 2026</div>
+  <div class="dates">Famille Bruet &bull; 6 pers + 2 Cairn Terriers &bull; ~2 semaines sur place</div>
+  <div class="status">Destination #3 &mdash; Le Joyau Cache &mdash; Bled + Soca = Wow + Aventure</div>
+</div>
+
+<div class="container">
+
+<a href="plan-ete-2026.html" class="back-link">&larr; Retour au plan general</a>
+
+<nav class="toc">
+  <a href="#contexte">Contexte</a>
+  <a href="#trajet">Trajet</a>
+  <a href="#lacs">Les lacs</a>
+  <a href="#zones">Zones</a>
+  <a href="#spots">Top 12</a>
+  <a href="#gastro">Gastronomie</a>
+  <a href="#budget">Budget</a>
+  <a href="#faisabilite">Faisabilite</a>
+  <a href="#verdict">Verdict</a>
+</nav>
+
+<!-- CONTEXTE -->
+<section id="contexte">
+  <h2>Contexte</h2>
+  <table>
+    <tr><td style="width:30%"><strong>Famille</strong></td><td>6 personnes &mdash; Olivier, Aurelie, Candice (17), Clementine (15), Timeo (13), Flavie (10)</td></tr>
+    <tr><td><strong>Chiens</strong></td><td>2 Cairn Terriers &mdash; viennent. <span class="badge badge-green">NON NEGOCIABLE</span></td></tr>
+    <tr><td><strong>Depart</strong></td><td>Vayres, Gironde (33)</td></tr>
+    <tr><td><strong>Dates</strong></td><td>~3 semaines enveloppe (29-30 juil &rarr; 16-17 aout). <strong>2 semaines sur place</strong></td></tr>
+    <tr><td><strong>Type</strong></td><td><span class="badge badge-teal">Montagne + Lac</span> <span class="badge badge-blue">+ Mer en excursion</span></td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Le pitch :</strong> En 2h de route depuis Bohinj : lacs alpins (Bled, Bohinj), riviere turquoise unique en Europe (Soca), grottes geantes (Postojna), cote Adriatique (Piran). <strong>Aucun autre pays n'offre cette diversite dans un si petit perimetre.</strong> Et c'est 30% moins cher que la France.
+  </div>
+</section>
+
+<!-- TRAJET -->
+<section id="trajet">
+  <h2>Comment y aller</h2>
+
+  <h3>Vayres &rarr; Lyon &rarr; Frejus &rarr; Turin &rarr; Verone (etape) &rarr; Bled</h3>
+  <table>
+    <tr><th style="width:40%">Critere</th><th>Detail</th></tr>
+    <tr><td>Distance</td><td><strong>~1 450-1 500 km</strong></td></tr>
+    <tr><td>Duree</td><td><strong>~13h30-14h30</strong> &mdash; 2 jours de route obligatoires</td></tr>
+    <tr><td>Peages France</td><td>~80-100 &euro;</td></tr>
+    <tr><td>Tunnel Frejus A/R</td><td>~55-60 &euro;</td></tr>
+    <tr><td>Peages Italie</td><td>~35-50 &euro;</td></tr>
+    <tr><td>E-vignette Slovenie</td><td><strong>16 &euro;/semaine</strong> (acheter en ligne avant)</td></tr>
+    <tr><td>Tunnel Karavanke A/R</td><td>~18 &euro;</td></tr>
+    <tr><td>Carburant A/R (~3 000 km)</td><td>~470-500 &euro;</td></tr>
+    <tr><td>Etapes hotel (4 nuits A/R)</td><td>~400-550 &euro;</td></tr>
+    <tr style="font-weight:700;background:var(--teal-light)"><td><strong>TOTAL TRAJET A/R</strong></td><td><strong>~1 000-1 120 &euro;</strong></td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>2 nuits d'etape a l'aller + 2 au retour</strong> = le trajet devient un vrai morceau de vacances. ~4h30 de route max/jour, tres confortable avec 4 enfants et 2 chiens. La famille adore l'Italie : les etapes italiennes sont un bonus, pas une corvee.
+  </div>
+
+  <h3>Plan d'etapes &mdash; Aller (2 nuits)</h3>
+  <table>
+    <tr><th>Jour</th><th>Trajet</th><th>Km</th><th>Duree</th><th>Etape</th><th>Interet</th></tr>
+    <tr><td><strong>J1</strong> (mer 29 juil)</td><td>Vayres &rarr; Annecy</td><td>~550</td><td>~5h</td><td><strong>Annecy</strong></td><td>Lac + vieille ville, balade en soiree</td></tr>
+    <tr><td><strong>J2</strong> (jeu 30 juil)</td><td>Annecy &rarr; Verone</td><td>~450</td><td>~4h30</td><td><strong>Verone</strong></td><td>Arenes romaines, balcon Juliette, aperitivo piazza Bra</td></tr>
+    <tr><td><strong>J3</strong> (ven 31 juil)</td><td>Verone &rarr; Bohinj</td><td>~350</td><td>~3h30</td><td><strong>Arrivee !</strong></td><td>Arrivee tot &rarr; baignade au lac l'apres-midi</td></tr>
+  </table>
+
+  <h3>Plan d'etapes &mdash; Retour (2 nuits)</h3>
+  <table>
+    <tr><th>Jour</th><th>Trajet</th><th>Km</th><th>Duree</th><th>Etape</th><th>Interet</th></tr>
+    <tr><td><strong>J1</strong></td><td>Bohinj &rarr; Sirmione (Lac de Garde)</td><td>~300</td><td>~3h</td><td><strong>Sirmione</strong></td><td>Presqu'ile thermale, chateau Scaligero, gelati, baignade lac</td></tr>
+    <tr><td><strong>J2</strong></td><td>Sirmione &rarr; Turin</td><td>~300</td><td>~3h30</td><td><strong>Turin</strong></td><td>Musee egyptien (top enfants), piazzas baroques, chocolat</td></tr>
+    <tr><td><strong>J3</strong></td><td>Turin &rarr; Vayres</td><td>~750</td><td>~7h</td><td><strong>Retour</strong></td><td>Longue journee mais derniere ligne droite</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>Variantes retour :</strong> remplacer Sirmione par Bergame (ville haute medievale) ou Parme (parmigiano + prosciutto). Turin remplacable par Milan (Duomo, Navigli). Cinque Terre = deja fait.
+  </div>
+
+  <h3>Recherche de logement &mdash; Sites recommandes</h3>
+  <table>
+    <tr><th>Site</th><th>Description</th><th>Filtre chiens</th></tr>
+    <tr><td><strong>Booking.com</strong></td><td>N&deg;1 en Slovenie, enorme choix</td><td>"Animaux domestiques admis"</td></tr>
+    <tr><td><strong>Airbnb</strong></td><td>Bon choix maisons/apparts avec jardin</td><td>"Animaux acceptes"</td></tr>
+    <tr><td><strong>Vrbo</strong> (ex-Abritel)</td><td>Maisons familiales, souvent avec jardin</td><td>"Pets allowed"</td></tr>
+    <tr><td><strong>apartma.si</strong></td><td>Le "Airbnb slovene" &mdash; listings locaux pas toujours sur Booking</td><td>Filtre animaux</td></tr>
+    <tr><td><strong>sloveniaholidays.com</strong></td><td>Portail officiel tourisme slovene</td><td>&mdash;</td></tr>
+    <tr><td><strong>direktno.si</strong></td><td>Locations directes sans commission</td><td>&mdash;</td></tr>
+  </table>
+  <div class="callout">
+    <strong>Ou chercher :</strong> autour de Bohinj &mdash; villages de Ribcev Laz, Stara Fuzina, Bohinjska Bistrica, Srednja Vas. Viser T4/T5, jardin ou terrasse, 600-1 100 &euro;/semaine. <strong>Reserver MAINTENANT.</strong>
+  </div>
+</section>
+
+<!-- LES LACS -->
+<section id="lacs">
+  <h2>Les lacs &mdash; Bled vs Bohinj</h2>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-teal">Lac de Bled</span> L'icone <span class="badge badge-amber">Excursion 1-2 jours</span></h3>
+    <table>
+      <tr><th style="width:30%">Donnee</th><th>Valeur</th></tr>
+      <tr><td>Surface</td><td>2,12 km&sup2; (~6 km de tour a pied)</td></tr>
+      <tr><td>Temperature eau aout</td><td><strong>21-23&deg;C</strong> (pointes 26&deg;C)</td></tr>
+      <tr><td>L'ile</td><td>Seule ile naturelle de Slovenie &mdash; eglise baroque + cloche a voeux</td></tr>
+      <tr><td>Le chateau</td><td>Perche 130 m au-dessus du lac, XIe siecle</td></tr>
+      <tr><td>Affluence aout</td><td><span class="badge badge-red">Tres elevee</span> Destination Instagram. Weekends cauchemar</td></tr>
+    </table>
+    <table>
+      <tr><th>Activite</th><th>Prix</th><th>Notes</th></tr>
+      <tr><td>Pletna (bateau traditionnel A/R + ile)</td><td>18 &euro;/pers (cash)</td><td>Famille 6 = 108 &euro;</td></tr>
+      <tr><td>Entree eglise ile</td><td>12 &euro; adulte / 5 &euro; enfant</td><td>Cloche a voeux</td></tr>
+      <tr><td>Chateau de Bled</td><td>18 &euro;/pers</td><td>Musee + vue</td></tr>
+      <tr><td>Tour du lac a pied</td><td>Gratuit</td><td>1h30-2h, plat</td></tr>
+      <tr><td>Luge d'ete Straza</td><td>~10 &euro;</td><td>Fun enfants</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-green">Lac de Bohinj</span> LA base recommandee <span class="badge badge-green">2 semaines</span></h3>
+    <table>
+      <tr><th style="width:30%">Donnee</th><th>Valeur</th></tr>
+      <tr><td>Surface</td><td><strong>4,18 km&sup2;</strong> (double de Bled)</td></tr>
+      <tr><td>Temperature eau aout</td><td><strong>22-25&deg;C</strong> &mdash; plus chaud que Bled !</td></tr>
+      <tr><td>Parc national</td><td>A l'interieur du Parc National du Triglav</td></tr>
+      <tr><td>Affluence</td><td><span class="badge badge-green">Moderee</span> Bien plus calme que Bled</td></tr>
+      <tr><td>Ambiance</td><td>Sauvage, authentique, moins commercial</td></tr>
+    </table>
+    <table>
+      <tr><th>Activite</th><th>Prix</th><th>Notes</th></tr>
+      <tr><td><strong>Telecabine Vogel</strong> (1 922 m)</td><td>~20 &euro; adulte / 12-14 &euro; enfant</td><td><span class="badge badge-green">Chiens OK</span> (laisse + museliere, billet ~5 &euro;)</td></tr>
+      <tr><td>Cascade Savica</td><td>~3-4 &euro;/pers</td><td>Chute de 78 m. Chiens OK en laisse</td></tr>
+      <tr><td>Kayak/SUP</td><td>15-20 &euro;/h</td><td>Plusieurs loueurs</td></tr>
+      <tr><td>Rando vallee de Voje</td><td>Gratuit</td><td>Accessible, cascade, chiens OK</td></tr>
+    </table>
+  </div>
+
+  <div class="callout">
+    <strong>Pourquoi Bohinj &gt; Bled comme base :</strong> Double surface, moitie prix logement (600-1 100 vs 800-2 000 &euro;/sem), affluence moderee vs tres elevee, ambiance parc national vs Instagram. Bled = excursion d'une journee depuis Bohinj (30 min).
+  </div>
+</section>
+
+<!-- ZONES -->
+<section id="zones">
+  <h2>Les zones d'excursion</h2>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-teal">Zone star</span> Vallee de la Soca / Bovec <span class="badge badge-orange">1h depuis Bohinj</span></h3>
+    <p style="font-size:.9rem;color:var(--gray-700);margin-bottom:.75rem;">Riviere d'un <strong>turquoise-emeraude unique en Europe</strong>. Couleur due a la farine glaciaire. Rien de comparable en France. Le col du Vrsic (1 611 m, 26 lacets) qui y mene est lui-meme spectaculaire.</p>
+    <table>
+      <tr><th>Activite</th><th>Prix/pers</th><th>Age min</th><th>Notes</th></tr>
+      <tr><td><strong>Rafting famille (Kobarid-Tolmin)</strong></td><td>45-55 &euro;</td><td>Des 3-5 ans</td><td>Ideal pour Flavie</td></tr>
+      <tr><td><strong>Rafting standard (Bovec)</strong></td><td>70-75 &euro;</td><td>Des 7-10 ans</td><td>Plus engage, top Timeo+</td></tr>
+      <tr><td><strong>Canyoning</strong></td><td>65-80 &euro;</td><td>Des 12 ans</td><td>Rappels, sauts, toboggans</td></tr>
+      <tr><td><strong>Zipline Canyon Ucja</strong></td><td><strong>60-70 &euro;</strong></td><td>Des 7 ans</td><td><strong>10 cables, 4 km, 200 m au-dessus du canyon.</strong> Toute la famille !</td></tr>
+      <tr><td><strong>Kayak</strong></td><td>60-80 &euro;/demi-j</td><td>Des 10 ans</td><td>Sur la Soca</td></tr>
+    </table>
+    <div class="callout callout-green" style="margin-bottom:0">
+      <strong>Budget 1 journee zipline + rafting pour 6 = ~400-450 &euro;.</strong> Cher mais c'est LE moment fort du voyage. La Soca est un des top spots aventure d'Europe.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-teal">Excursions</span> Depuis la base Bohinj</h3>
+    <table>
+      <tr><th style="width:25%">Destination</th><th style="width:20%">Distance</th><th>Interet</th></tr>
+      <tr><td><strong>Gorges de Vintgar</strong></td><td>35 km / 30 min</td><td>Passerelles bois dans gorges spectaculaires. 1,6 km. <span class="badge badge-green">Chiens OK</span> (museliere bus). ~8-10 &euro;/pers. Y aller a 8h</td></tr>
+      <tr><td><strong>Ljubljana</strong></td><td>80 km / 1h</td><td>Capitale charmante et compacte. Chateau, Triple Pont, marche, cafes Ljubljanica. Demi-journee suffit</td></tr>
+      <tr><td><strong>Kranjska Gora + Lac Jasna</strong></td><td>39 km / 35 min</td><td>Village montagne + lac turquoise glaciaire. VTT, via ferrata, parapente</td></tr>
+      <tr><td><strong>Grotte Postojna + Predjama</strong></td><td>100 km / 1h10</td><td>Plus grande grotte touristique d'Europe (train). Chateau XIII&deg;s dans falaise. <span class="badge badge-amber">Chenils gratuits surveilles</span></td></tr>
+      <tr><td><strong>Piran (cote)</strong></td><td>170 km / 1h45</td><td>Ville medievale venitienne sur Adriatique. Mer 25-27&deg;C. Gelato. Trafic dense aout</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- TOP 12 -->
+<section id="spots">
+  <h2>Top 12 des spots</h2>
+
+  <div class="spot-card">
+    <div class="spot-num">1</div>
+    <div class="spot-content">
+      <div class="spot-name">Riviere Soca &mdash; L'emeraude d'Europe</div>
+      <div class="spot-desc">Couleur turquoise-emeraude unique en Europe (farine glaciaire). Juste la voir = moment "wow". Baignade dans les vasques naturelles, rafting, canyoning. <strong>L'experience signature.</strong></div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">2</div>
+    <div class="spot-content">
+      <div class="spot-name">Zipline Canyon Ucja <span class="badge badge-green">Des 7 ans</span></div>
+      <div class="spot-desc">10 cables, 4 km total, 200 m au-dessus du canyon. Un des plus grands parcs zipline d'Europe. Toute la famille peut le faire. 2-2h30 d'experience.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">3</div>
+    <div class="spot-content">
+      <div class="spot-name">Lac de Bled + Ile</div>
+      <div class="spot-desc">L'image carte postale : ile avec eglise, chateau perche, Alpes Juliennes en fond. Pletna boat + cloche a voeux. Kremsnita obligatoire. Y aller tot le matin.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">4</div>
+    <div class="spot-content">
+      <div class="spot-name">Gorges de Vintgar <span class="badge badge-green">Chiens OK</span></div>
+      <div class="spot-desc">1,6 km de passerelles en bois dans des gorges etroites, cascades, eaux turquoise. Spectaculaire. Ouvre a 8h &mdash; y aller a l'ouverture.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">5</div>
+    <div class="spot-content">
+      <div class="spot-name">Telecabine Vogel (1 922 m) <span class="badge badge-green">Chiens OK</span></div>
+      <div class="spot-desc">Depuis Bohinj, 8 min de montee, vue sur tout le massif du Triglav. Randos en altitude au sommet. Chiens avec laisse + museliere.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">6</div>
+    <div class="spot-content">
+      <div class="spot-name">Col du Vrsic &mdash; 26 lacets</div>
+      <div class="spot-desc">1 611 m. Route mythique reliant Kranjska Gora a la Soca. Pave d'un cote, absolument magnifique. Le trajet EST l'attraction.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">7</div>
+    <div class="spot-content">
+      <div class="spot-name">Lac de Bohinj &mdash; Baignade</div>
+      <div class="spot-desc">Eau cristalline 22-25&deg;C, cadre parc national, bien moins de monde que Bled. La base parfaite pour 2 semaines.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">8</div>
+    <div class="spot-content">
+      <div class="spot-name">Ljubljana</div>
+      <div class="spot-desc">Capitale a taille humaine. Chateau, pont aux dragons, marche couvert, cafes sur la Ljubljanica. Charmante, compacte, chiens bienvenus.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">9</div>
+    <div class="spot-content">
+      <div class="spot-name">Grotte de Postojna + Chateau Predjama</div>
+      <div class="spot-desc">Immense systeme souterrain avec train. Protee (poisson humain). Chateau XIII&deg;s encastre dans une falaise a 10 min. Journee complete. Chenils gratuits pour les chiens.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">10</div>
+    <div class="spot-content">
+      <div class="spot-name">Cascade Savica</div>
+      <div class="spot-desc">Chute de 78 m au-dessus de Bohinj. 15 min de marche, spectaculaire. Chiens OK en laisse. ~3-4 &euro;/pers.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">11</div>
+    <div class="spot-content">
+      <div class="spot-name">Rafting Soca <span class="badge badge-green">Des 5 ans section famille</span></div>
+      <div class="spot-desc">Section famille (Kobarid-Tolmin) pour Flavie, section sportive pour les grands. Eau turquoise, paysage de dingue. L'activite famille parfaite.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">12</div>
+    <div class="spot-content">
+      <div class="spot-name">Piran &mdash; Escapade Adriatique</div>
+      <div class="spot-desc">Ville venitienne medievale, mer 25-27&deg;C, gelato. 1h45 de Bohinj. Le contraste parfait apres la montagne. Journee depaysante.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GASTRONOMIE -->
+<section id="gastro">
+  <h2>Gastronomie slovenienne</h2>
+
+  <table>
+    <tr><th style="width:25%">Specialite</th><th>Description</th></tr>
+    <tr><td><strong>Kremsnita</strong></td><td>Creme vanille + creme fouettee entre pate feuilletee. Inventee 1953 au Hotel Park Bled. <strong>15 millions servis.</strong> 4-5 &euro; la part. OBLIGATOIRE</td></tr>
+    <tr><td><strong>Truite de la Soca</strong></td><td>Truite marbree (Salmo marmoratus) endemique. Qualite exceptionnelle. ~18-25 &euro; le plat</td></tr>
+    <tr><td><strong>Potica</strong></td><td>Gateau roule aux noix/pavot, le gateau national slovene</td></tr>
+    <tr><td><strong>Struklji</strong></td><td>Strudels roules sucres ou sales (noix, fromage blanc, pomme)</td></tr>
+    <tr><td><strong>Kraski prsut</strong></td><td>Jambon sec du Karst (type prosciutto). Excellent</td></tr>
+    <tr><td><strong>Idrijski zlikrofi</strong></td><td>Raviolis farcis d'Idrija, DOP protege</td></tr>
+    <tr><td><strong>Vins slovenes</strong></td><td>Excellents et meconnus : Rebula (blanc), Teran (rouge Karst), Malvazija (blanc cotier)</td></tr>
+    <tr><td><strong>Medica</strong></td><td>Eau-de-vie au miel, digestif traditionnel</td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Decouverte culinaire garantie.</strong> Cuisine au carrefour Alpes/Balkans/Mediterranee, totalement inconnue en France. Restos 30-50% moins chers qu'en France pour une qualite excellente.
+  </div>
+
+  <h3>Prix des repas</h3>
+  <table>
+    <tr><th style="width:50%">Poste</th><th>Prix</th><th>vs France</th></tr>
+    <tr><td>Plat principal restaurant</td><td>12-18 &euro;</td><td><span class="badge badge-green">30-50% moins cher</span></td></tr>
+    <tr><td>Repas famille 6 (midi)</td><td>80-120 &euro;</td><td>vs 130-200 &euro;</td></tr>
+    <tr><td>Repas famille 6 (soir, mid-range)</td><td>100-150 &euro;</td><td>vs 160-250 &euro;</td></tr>
+    <tr><td>Pizza</td><td>10-14 &euro;</td><td>Excellente qualite</td></tr>
+    <tr><td>Biere locale (0,5L)</td><td>2,50-3,50 &euro;</td><td>Moins cher</td></tr>
+    <tr><td>Courses hebdo (famille 6)</td><td>150-200 &euro;</td><td>vs 250-300 &euro;</td></tr>
+  </table>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <h2>Budget (2 semaines sur place)</h2>
+
+  <h3>Logement</h3>
+  <table>
+    <tr><th>Zone</th><th>Prix / semaine</th><th>Commentaire</th></tr>
+    <tr><td>Bled ville / bord de lac</td><td>1 200-2 000+ &euro;</td><td>Premium, peu de maisons pet-friendly</td></tr>
+    <tr><td>Bled peripherie (5-10 km)</td><td>800-1 400 &euro;</td><td>Plus realiste</td></tr>
+    <tr><td><strong>Bohinj vallee</strong></td><td><strong>600-1 100 &euro;</strong></td><td><span class="badge badge-green">Meilleur rapport qualite/prix</span></td></tr>
+    <tr><td>Vallee de la Soca / Bovec</td><td>500-900 &euro;</td><td>Bon prix, moins de choix</td></tr>
+  </table>
+  <p style="font-size:.88rem;color:var(--gray-700);margin:.5rem 0;"><strong>Estimation 2 semaines (base Bohinj) : ~1 400-2 200 &euro;</strong></p>
+
+  <div class="callout callout-amber">
+    <strong>Reserver MAINTENANT.</strong> Les maisons pet-friendly avec jardin pour 6 a Bohinj en aout partent tres vite. Deja des reservations visibles pour aout 2026.
+  </div>
+
+  <h3>Budget total estime (2 semaines sur place)</h3>
+  <table>
+    <tr><th style="width:50%">Poste</th><th>Estimation</th></tr>
+    <tr><td>Trajet A/R (peages + tunnel + vignette + carburant + 4 nuits etape)</td><td><strong>~1 000-1 120 &euro;</strong></td></tr>
+    <tr><td>Logement (2 sem, base Bohinj)</td><td><strong>~1 400-2 200 &euro;</strong></td></tr>
+    <tr><td>Courses alimentaires (2 sem)</td><td><strong>~300-400 &euro;</strong></td></tr>
+    <tr><td>Restaurants (6-8 sorties)</td><td><strong>~500-800 &euro;</strong></td></tr>
+    <tr><td>Activites (zipline, rafting, grottes, telecabine, pletna, gorges)</td><td><strong>~600-900 &euro;</strong></td></tr>
+    <tr><td>Divers (locations SUP, glaces, souvenirs)</td><td><strong>~150-250 &euro;</strong></td></tr>
+    <tr style="font-weight:700;background:var(--teal-light)"><td><strong>TOTAL VOYAGE</strong></td><td><strong>~3 950-5 670 &euro;</strong></td></tr>
+  </table>
+  <div class="callout">
+    <strong>Scenario realiste : ~4 500-5 100 &euro;.</strong> Le trajet pese lourd (~1 000 &euro; avec 4 nuits d'etape) mais les etapes italiennes (Verone, Sirmione, Turin) sont un vrai bonus vacances. Et la vie sur place est nettement moins chere que l'Autriche ou l'Italie.
+  </div>
+</section>
+
+<!-- FAISABILITE -->
+<section id="faisabilite">
+  <h2>Faisabilite globale</h2>
+
+  <h3>Bilan temps</h3>
+  <table>
+    <tr><th style="width:50%"></th><th>Jours</th></tr>
+    <tr><td>Trajet aller (2 nuits etape : Annecy + Verone)</td><td>3 jours</td></tr>
+    <tr><td>Trajet retour (2 nuits etape : Sirmione + Turin)</td><td>3 jours</td></tr>
+    <tr><td><strong>Temps sur place</strong></td><td><strong>~12-13 jours</strong></td></tr>
+    <tr style="font-weight:700"><td>Total</td><td>~18-19 jours</td></tr>
+  </table>
+  <div class="callout">
+    <strong>Ratio temps sur place / total = ~68%.</strong> Les 4 nuits d'etape en Italie (Verone, Sirmione, Turin) + Annecy sont de vraies mini-vacances &mdash; la famille adore l'Italie. Pas de corvee, du bonus.
+  </div>
+
+  <h3>Contraintes chiens</h3>
+  <table>
+    <tr><th style="width:30%">Aspect</th><th>Verdict</th></tr>
+    <tr><td><strong>Entree Slovenie</strong></td><td><span class="badge badge-green">UE = simple</span> Passeport europeen + vaccin rage. Zero titrage</td></tr>
+    <tr><td>Parc National Triglav</td><td><strong>Laisse obligatoire en permanence.</strong> Interdit de nager dans lacs/ruisseaux de montagne</td></tr>
+    <tr><td>Plages lacs</td><td><span class="badge badge-amber">Interdites</span> dans zones officielles. Autorise ailleurs</td></tr>
+    <tr><td>Gorges de Vintgar</td><td><span class="badge badge-green">Chiens OK en laisse</span> (museliere bus navette)</td></tr>
+    <tr><td>Telecabine Vogel</td><td><span class="badge badge-green">Chiens OK</span> (laisse + museliere, billet ~5 &euro;)</td></tr>
+    <tr><td>Grotte Postojna</td><td><span class="badge badge-amber">Chiens interdits</span> mais chenils gratuits surveilles</td></tr>
+    <tr><td>Terrasses/restos</td><td><span class="badge badge-green">Dog-friendly</span> Culture d'accueil des chiens</td></tr>
+  </table>
+
+  <h3>Meteo en aout</h3>
+  <table>
+    <tr><th style="width:40%">Parametre</th><th>Valeur</th></tr>
+    <tr><td>Temperature max</td><td>24-26&deg;C</td></tr>
+    <tr><td>Temperature nuit</td><td>12-15&deg;C <span class="badge badge-green">Nuits fraiches</span></td></tr>
+    <tr><td>Jours de pluie</td><td><span class="badge badge-amber">~15 jours/mois</span> (33% probabilite quotidienne)</td></tr>
+    <tr><td>Type</td><td>Orages apres-midi (30 min-2h), puis soleil. Possible 3-4 jours consecutifs</td></tr>
+    <tr><td>Precipitations</td><td>~160 mm/mois &mdash; une des zones alpines les plus humides</td></tr>
+  </table>
+  <div class="callout callout-orange">
+    <strong>C'est le point faible meteo.</strong> Plus humide que l'Autriche, bien plus que les Asturies (6-8j/mois) ou la Costa Brava (~3j/mois). Prevoir alternatives pluie (grottes, Ljubljana). Mais la vegetation luxuriante et la couleur intense de la Soca en sont la consequence directe.
+  </div>
+
+  <h3>Points de vigilance</h3>
+  <table>
+    <tr><th style="width:30%">Point</th><th>Detail</th></tr>
+    <tr><td><strong>E-vignette</strong></td><td>Obligatoire avant d'entrer sur autoroute slovene. 16 &euro;/semaine sur evinjeta.dars.si</td></tr>
+    <tr><td><strong>Col du Vrsic</strong></td><td>Route montagne avec virages paves. Rouler doucement, pas de probleme en voiture familiale</td></tr>
+    <tr><td><strong>Monnaie</strong></td><td><span class="badge badge-green">Euro</span> (zone euro depuis 2007). Pletna = cash uniquement</td></tr>
+    <tr><td><strong>Langue</strong></td><td>Slovene, mais anglais tres bien parle partout</td></tr>
+    <tr><td><strong>Reservation activites</strong></td><td>Zipline, rafting Soca = reserver a l'avance en aout</td></tr>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <h2>Verdict</h2>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <strong style="font-size:.85rem;color:var(--green)">POUR QUI C'EST FAIT</strong>
+      <ul>
+        <li><strong>Wow + Aventure</strong> &mdash; Soca + Bled + grottes = programme exceptionnel</li>
+        <li><strong>Ados adrenaline</strong> &mdash; zipline, rafting, canyoning = top europeen</li>
+        <li><strong>Diversite en 2h</strong> &mdash; lacs, riviere, grottes, mer, capitale</li>
+        <li><strong>Depaysement reel</strong> &mdash; culture, gastronomie, paysages = different</li>
+        <li><strong>Budget maitrise</strong> &mdash; vie sur place 30% moins chere que France</li>
+        <li><strong>Kremsnita a Bled</strong> &mdash; ca justifie le voyage</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <strong style="font-size:.85rem;color:var(--orange)">POUR QUI C'EST PAS FAIT</strong>
+      <ul>
+        <li><strong>3 jours de route par sens</strong> &mdash; 2 nuits d'etape, ~1 000 &euro; A/R (mais etapes = bonus vacances)</li>
+        <li><strong>Meteo incertaine</strong> &mdash; 33% pluie aout, possible 3-4 jours d'affilee</li>
+        <li><strong>Pas de mer quotidienne</strong> &mdash; Piran a 1h45, excursion</li>
+        <li><strong>Bled sature en aout</strong> &mdash; baser a Bohinj obligatoire</li>
+        <li><strong>Chiens contraignant</strong> &mdash; laisse permanente en parc national</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Comparaison finale</h3>
+  <div class="compare-table">
+    <table>
+      <tr><th></th><th>Slovenie</th><th>Autriche</th><th>Dolomites</th><th>Asturies</th></tr>
+      <tr><td><strong>Trajet</strong></td><td>14h (2 jours)</td><td>12-13h</td><td>11-12h</td><td><span class="badge badge-green">5h30</span></td></tr>
+      <tr><td><strong>Cout A/R</strong></td><td><span class="badge badge-red">~800 &euro;</span></td><td>~500 &euro;</td><td>~620 &euro;</td><td><span class="badge badge-green">~200 &euro;</span></td></tr>
+      <tr><td><strong>Budget (2 sem)</strong></td><td>~4 200-4 800 &euro;</td><td>~3 400-4 700 &euro;</td><td><span class="badge badge-red">~4 460-6 270 &euro;</span></td><td><span class="badge badge-green">~3 500-4 000 &euro;</span></td></tr>
+      <tr><td><strong>Baignade</strong></td><td>Lacs 22-25&deg;C</td><td>Lacs 20-27&deg;C</td><td><span class="badge badge-amber">1 lac chaud</span></td><td>Ocean 19-22&deg;C</td></tr>
+      <tr><td><strong>Wow visuel</strong></td><td><strong>9/10</strong></td><td>8/10</td><td><strong>11/10</strong></td><td>7/10</td></tr>
+      <tr><td><strong>Ados</strong></td><td><span class="badge badge-green">10/10</span></td><td><span class="badge badge-green">10/10</span></td><td>7/10</td><td>8/10</td></tr>
+      <tr><td><strong>Meteo</strong></td><td><span class="badge badge-amber">5/10</span></td><td>7/10</td><td>7/10</td><td><span class="badge badge-green">8/10</span></td></tr>
+      <tr><td><strong>Chiens</strong></td><td>7/10</td><td>8/10</td><td>7/10</td><td><span class="badge badge-green">9/10</span></td></tr>
+    </table>
+  </div>
+
+  <h3>Score faisabilite</h3>
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="sc-label">Trajet</div>
+      <div class="sc-value" style="color:var(--orange)">4/10</div>
+      <div class="sc-note">14h, 2 jours, cout eleve</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Activites</div>
+      <div class="sc-value">10/10</div>
+      <div class="sc-note">Soca = top europeen</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Ados</div>
+      <div class="sc-value">10/10</div>
+      <div class="sc-note">Zipline, rafting, canyoning</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Baignade</div>
+      <div class="sc-value">7/10</div>
+      <div class="sc-note">Lacs chauds + Adriatique</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Budget</div>
+      <div class="sc-value">7/10</div>
+      <div class="sc-note">Sur place pas cher, trajet cher</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Chiens</div>
+      <div class="sc-value">7/10</div>
+      <div class="sc-note">Gerable mais laisse permanente</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Gastro</div>
+      <div class="sc-value">8/10</div>
+      <div class="sc-note">Decouverte reelle</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Depaysement</div>
+      <div class="sc-value">8/10</div>
+      <div class="sc-note">Vraiment different</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Meteo</div>
+      <div class="sc-value" style="color:var(--orange)">5/10</div>
+      <div class="sc-note">33% pluie = point noir</div>
+    </div>
+    <div class="score-card highlight">
+      <div class="sc-label">Global</div>
+      <div class="sc-value">7.3/10</div>
+      <div class="sc-note">Le joyau cache</div>
+    </div>
+  </div>
+
+  <div class="callout" style="border-color:#065f46;background:linear-gradient(135deg, var(--teal-light), #d1fae5);">
+    <strong>En resume :</strong> Meme score que Serre-Poncon (7.3/10) mais pour des raisons <strong>completement opposees</strong>. Ici c'est depaysement maximal, wow visuel, aventure ados exceptionnelle... mais trajet long, meteo capricieuse et cout route eleve. <strong>Si la Soca vous fait rever, ca vaut chaque kilometre.</strong> Compare aux Asturies (meme budget, 5h30 de route, meteo fiable, score 9.3/10), la Slovenie offre plus de "wow" mais moins de confort logistique.
+  </div>
+</section>
+
+</div>
+
+<footer style="text-align:center;padding:2rem 1rem;color:var(--gray-500);font-size:.8rem;">
+  Focus Slovenie &mdash; Etude de faisabilite &mdash; Mis a jour 07/03/2026 (etapes detaillees + sites logement)<br>
+  <a href="plan-ete-2026.html" style="color:var(--teal);text-decoration:none;">&larr; Retour au plan general</a>
+</footer>
+
+</body>
+</html>

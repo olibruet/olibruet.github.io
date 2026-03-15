@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Focus Serre-Poncon — Ete 2026</title>
+  <style>
+    :root {
+      --blue: #2563eb; --blue-light: #dbeafe;
+      --green: #16a34a; --green-light: #dcfce7;
+      --orange: #ea580c; --orange-light: #fff7ed;
+      --red: #dc2626;
+      --purple: #7c3aed; --purple-light: #ede9fe;
+      --amber: #b45309; --amber-light: #fef3c7;
+      --teal: #0d9488; --teal-light: #ccfbf1;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb;
+      --gray-300: #d1d5db; --gray-500: #6b7280; --gray-700: #374151; --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-900); background: var(--gray-50); line-height: 1.6;
+      -webkit-text-size-adjust: 100%; overflow-x: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #065f46 0%, #0d9488 40%, #5eead4 80%, #99f6e4 100%);
+      color: white; padding: 2.5rem 1.5rem; text-align: center;
+    }
+    .header h1 { font-size: 2rem; margin-bottom: .25rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: .9; }
+    .header .dates {
+      display: inline-block; margin-top: .75rem;
+      background: rgba(255,255,255,.2); padding: .4rem 1.2rem;
+      border-radius: 2rem; font-weight: 600; font-size: .95rem;
+    }
+    .header .status {
+      display: inline-block; margin-top: .5rem;
+      background: rgba(255,255,255,.3); padding: .25rem .9rem;
+      border-radius: 2rem; font-size: .82rem; font-weight: 500;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    nav.toc {
+      background: white; border-radius: .75rem; padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      display: flex; flex-wrap: wrap; gap: .5rem;
+    }
+    nav.toc a {
+      display: inline-block; padding: .35rem .9rem;
+      background: var(--teal-light); color: var(--teal);
+      border-radius: .4rem; text-decoration: none;
+      font-size: .85rem; font-weight: 500; transition: background .15s;
+    }
+    nav.toc a:hover { background: #a7f3d0; }
+    section { background: white; border-radius: .75rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    section h2 { font-size: 1.3rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--teal); color: var(--teal); }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 .75rem; color: var(--gray-700); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 1rem; }
+    th, td { text-align: left; padding: .55rem .65rem; border-bottom: 1px solid var(--gray-200); }
+    th { background: var(--gray-100); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; color: var(--gray-500); }
+    tr:hover td { background: var(--gray-50); }
+    .badge { display: inline-block; padding: .15rem .55rem; border-radius: .3rem; font-size: .75rem; font-weight: 600; }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-blue { background: var(--blue-light); color: var(--blue); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-red { background: #fee2e2; color: var(--red); }
+    .badge-gray { background: var(--gray-100); color: var(--gray-500); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-amber { background: var(--amber-light); color: var(--amber); }
+    .badge-teal { background: var(--teal-light); color: var(--teal); }
+    .callout { border-left: 4px solid var(--teal); background: var(--teal-light); padding: .85rem 1rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; font-size: .9rem; }
+    .callout-green { border-color: var(--green); background: var(--green-light); }
+    .callout-orange { border-color: var(--orange); background: var(--orange-light); }
+    .callout-amber { border-color: var(--amber); background: var(--amber-light); }
+    .callout-blue { border-color: var(--blue); background: var(--blue-light); }
+    .zone-card { border: 1px solid var(--gray-200); border-radius: .75rem; padding: 1.25rem; margin-bottom: 1rem; background: var(--gray-50); }
+    .zone-card h3 { margin-top: 0 !important; }
+    .zone-card table { margin-bottom: 0; }
+    .spot-card { display: grid; grid-template-columns: 2.5rem 1fr; gap: .75rem; padding: .85rem 0; border-bottom: 1px solid var(--gray-200); align-items: start; }
+    .spot-card:last-child { border-bottom: none; }
+    .spot-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--teal-light); color: var(--teal); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .95rem; flex-shrink: 0; }
+    .spot-content .spot-name { font-weight: 700; font-size: .95rem; margin-bottom: .15rem; }
+    .spot-content .spot-desc { font-size: .88rem; color: var(--gray-700); line-height: 1.5; }
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .75rem; margin: 1rem 0; }
+    .score-card { background: var(--gray-50); border-radius: .5rem; padding: .85rem; text-align: center; border: 1px solid var(--gray-200); }
+    .score-card .sc-label { font-size: .78rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .03em; margin-bottom: .25rem; }
+    .score-card .sc-value { font-size: 1.5rem; font-weight: 700; color: var(--teal); }
+    .score-card .sc-note { font-size: .75rem; color: var(--gray-500); margin-top: .15rem; }
+    .score-card.highlight { background: var(--teal-light); border-color: var(--teal); }
+    .score-card.highlight .sc-value { color: #065f46; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .pros-cons ul { list-style: none; padding: 0; font-size: .85rem; }
+    .pros-cons li { padding: .2rem 0; padding-left: 1.2rem; position: relative; }
+    .pros-cons .pros li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .pros-cons .cons li::before { content: '\2212'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+    .compare-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0; }
+    .compare-table table { min-width: 700px; }
+    .compare-table td:first-child, .compare-table th:first-child { position: sticky; left: 0; background: white; z-index: 1; font-weight: 600; }
+    .compare-table th:first-child { background: var(--gray-100); }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--teal); text-decoration: none; font-size: .9rem; font-weight: 500; }
+    .back-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: .5rem; overflow-x: hidden; }
+      section { padding: .75rem; margin-bottom: 1rem; }
+      table { font-size: .82rem; }
+      th, td { padding: .4rem .5rem; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+      nav.toc { gap: .35rem; padding: .75rem; }
+      nav.toc a { font-size: .78rem; padding: .3rem .65rem; }
+      .compare-table { max-width: 100vw; margin-left: -.75rem; margin-right: -.75rem; padding: 0 .75rem; }
+    }
+    @media (max-width: 400px) {
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+      .container { padding: .35rem; }
+      section { padding: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Focus Lac de Serre-Poncon</h1>
+  <div class="subtitle">Etude de faisabilite &mdash; Ete 2026</div>
+  <div class="dates">Famille Bruet &bull; 6 pers + 2 Cairn Terriers &bull; ~2 semaines sur place</div>
+  <div class="status">Destination #5 &mdash; Le Plan B Confort &mdash; Montagne + Lac sans prise de tete</div>
+</div>
+
+<div class="container">
+
+<a href="plan-ete-2026.html" class="back-link">&larr; Retour au plan general</a>
+
+<nav class="toc">
+  <a href="#contexte">Contexte</a>
+  <a href="#trajet">Trajet</a>
+  <a href="#lac">Le lac</a>
+  <a href="#zones">Zones</a>
+  <a href="#spots">Top 12</a>
+  <a href="#gastro">Gastronomie</a>
+  <a href="#budget">Budget</a>
+  <a href="#faisabilite">Faisabilite</a>
+  <a href="#verdict">Verdict</a>
+</nav>
+
+<!-- CONTEXTE -->
+<section id="contexte">
+  <h2>Contexte</h2>
+  <table>
+    <tr><td style="width:30%"><strong>Famille</strong></td><td>6 personnes — Olivier, Aurelie, Candice (17), Clementine (15), Timeo (13), Flavie (10)</td></tr>
+    <tr><td><strong>Chiens</strong></td><td>2 Cairn Terriers &mdash; viennent. <span class="badge badge-green">NON NEGOCIABLE</span></td></tr>
+    <tr><td><strong>Depart</strong></td><td>Vayres, Gironde (33)</td></tr>
+    <tr><td><strong>Dates</strong></td><td>~3 semaines enveloppe (29-30 juil &rarr; 16-17 aout). <strong>2 semaines sur place</strong></td></tr>
+    <tr><td><strong>Type</strong></td><td><span class="badge badge-teal">Montagne + Lac</span></td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Le pitch :</strong> Plus grand lac artificiel de France (2 800 ha), eau turquoise a 780 m d'altitude, 300 jours de soleil/an, offre sportive ados dense (rafting Durance + Ubaye), et surtout : <strong>6h de route, zero paperasse, zero frontiere.</strong>
+  </div>
+
+  <div class="callout callout-amber">
+    <strong>L'elephant dans la piece :</strong> C'est la France. Pas de choc culturel, pas de depaysement radical. Savines-le-Lac n'a aucun charme (reconstruit annees 60). Le lac est un barrage EDF &mdash; les berges varient selon le niveau d'eau. Moins "Instagram" que Bled, Come ou Braies.
+  </div>
+</section>
+
+<!-- TRAJET -->
+<section id="trajet">
+  <h2>Comment y aller</h2>
+
+  <h3>Vayres &rarr; A10/A89 &rarr; A7 &rarr; A51 &rarr; Embrun</h3>
+  <table>
+    <tr><th style="width:40%">Critere</th><th>Detail</th></tr>
+    <tr><td>Distance</td><td><strong>~620-650 km</strong></td></tr>
+    <tr><td>Duree</td><td><strong>6h00-6h30</strong> &mdash; depart 7h = arrivee ~14h</td></tr>
+    <tr><td>Peages</td><td>~55-75 &euro;</td></tr>
+    <tr><td>Carburant (aller)</td><td>~55-65 &euro; (~8 L/100 km)</td></tr>
+    <tr><td><strong>Cout aller</strong></td><td><strong>~110-140 &euro;</strong></td></tr>
+    <tr style="font-weight:700;background:var(--teal-light)"><td><strong>Total A/R</strong></td><td><strong>~220-280 &euro;</strong></td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Le trajet le moins cher de toutes les destinations montagne+lac.</strong> Comparaison : Autriche ~480-520 &euro;, Dolomites ~600-620 &euro;. Ici c'est <strong>3x moins cher</strong>. Pas d'etape necessaire, pas de tunnel, pas de vignette.
+  </div>
+</section>
+
+<!-- LE LAC -->
+<section id="lac">
+  <h2>Le lac &mdash; Donnees cles</h2>
+
+  <table>
+    <tr><th style="width:40%">Donnee</th><th>Valeur</th></tr>
+    <tr><td>Surface</td><td><strong>2 800 hectares</strong> (plus grand lac artificiel de France)</td></tr>
+    <tr><td>Altitude</td><td>780 m</td></tr>
+    <tr><td>Longueur</td><td>~28 km</td></tr>
+    <tr><td>Profondeur max</td><td>~100 m</td></tr>
+    <tr><td>Temperature eau aout</td><td><strong>22-24&deg;C</strong> (max 27&deg;C)</td></tr>
+    <tr><td>Qualite</td><td><span class="badge badge-green">9 plages Pavillon Bleu</span></td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>Comparaison eau :</strong> Serre-Poncon 22-24&deg;C &bull; Lacs autrichiens 20-27&deg;C &bull; Bled 20-22&deg;C &bull; Dolomites 15-18&deg;C. <strong>Eau confortable</strong>, bien plus chaude que les lacs de montagne italiens.
+  </div>
+
+  <h3>Activites nautiques</h3>
+  <table>
+    <tr><th>Activite</th><th>Ou</th><th>Prix indicatif</th></tr>
+    <tr><td><strong>Paddle / Kayak</strong></td><td>Partout autour du lac</td><td>12-18 &euro;/h</td></tr>
+    <tr><td><strong>Pedalo</strong></td><td>Savines, Embrun</td><td>15-20 &euro;/h</td></tr>
+    <tr><td><strong>Wakeboard / Ski nautique</strong></td><td>Base Bois Vieux, Savines</td><td>25-40 &euro;/session</td></tr>
+    <tr><td><strong>Voile</strong></td><td>Centre Nautique Embrun</td><td>20-35 &euro;</td></tr>
+    <tr><td><strong>Bouee tractee</strong></td><td>Savines</td><td>15-20 &euro;</td></tr>
+    <tr><td><strong>Bateau sans permis</strong></td><td>Sbrava Nautique</td><td>50-90 &euro;/demi-journee</td></tr>
+    <tr><td><strong>Bapteme hydravion</strong></td><td>Jennif'Air Embrun</td><td>~100 &euro;</td></tr>
+  </table>
+</section>
+
+<!-- ZONES -->
+<section id="zones">
+  <h2>Les zones a faire</h2>
+
+  <div class="callout">
+    <strong>Organisation suggeree :</strong> Base a Embrun ou Chorges (2 semaines). Alterner journees lac / excursions montagne. Sorties Briancon, Queyras et Ubaye en excursion a la journee.
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-teal">Zone 1</span> Embrun et environs <span class="badge badge-green">Base recommandee</span></h3>
+    <table>
+      <tr><th style="width:30%">Spot</th><th>Description</th></tr>
+      <tr><td><strong>Centre historique Embrun</strong></td><td>Cathedrale XIIe, ruelles medievales, marches, commerces. Ville de caractere (~6 500 hab)</td></tr>
+      <tr><td><strong>Plan d'eau d'Embrun</strong></td><td>Plan d'eau separe du lac, plus chaud (24&deg;C). <strong>Plus grand parc aquatique de Serre-Poncon</strong>, plage surveillee, voile, pedalo</td></tr>
+      <tr><td><strong>Crots / Saint-Andre</strong></td><td>Rive moins frequentee, criques sauvages. <span class="badge badge-green">Chiens toleres</span></td></tr>
+      <tr><td><strong>Mont-Dauphin</strong></td><td>Place forte Vauban <span class="badge badge-blue">UNESCO</span>. 20 min d'Embrun</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-teal">Zone 2</span> Savines-le-Lac <span class="badge badge-gray">Animation</span></h3>
+    <table>
+      <tr><th style="width:30%">Spot</th><th>Description</th></tr>
+      <tr><td><strong>Savin'plage</strong></td><td>Centre nautique de reference : ski nautique, wakeboard, toboggan, <strong>ponton jeux ados</strong> (tremplin, toboggan aquatique)</td></tr>
+      <tr><td><strong>Mercredis de Feu</strong></td><td>Feux d'artifice + spectacles chaque mercredi soir de mi-juillet a fin aout</td></tr>
+      <tr><td><strong>Location bateaux</strong></td><td>Bateaux avec ou sans permis pour explorer le lac</td></tr>
+    </table>
+    <div class="callout callout-amber" style="margin-bottom:0">
+      <strong>Savines = fonctionnel mais sans charme.</strong> Village reconstruit apres la mise en eau du barrage (annees 60). Architecture utilitaire, pas de vieilles pierres. On y va pour les activites, pas pour le charme.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-teal">Zone 3</span> Rive nord <span class="badge badge-gray">Calme</span></h3>
+    <table>
+      <tr><th style="width:30%">Spot</th><th>Description</th></tr>
+      <tr><td><strong>Chorges</strong></td><td>Village perche, calme, bon rapport qualite/prix logement. 92% des gites acceptent les animaux</td></tr>
+      <tr><td><strong>Sauze-du-Lac</strong></td><td><strong>Demoiselles Coiffees</strong> &mdash; colonnes de terre surmontees de rochers. Phenomene geologique spectaculaire</td></tr>
+      <tr><td><strong>Saint-Vincent-les-Forts</strong></td><td>Rive calme, vue panoramique</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-teal">Zone 4</span> Excursions montagne <span class="badge badge-gray">45 min &mdash; 1h</span></h3>
+    <table>
+      <tr><th style="width:25%">Destination</th><th style="width:20%">Distance</th><th>Interet</th></tr>
+      <tr><td><strong>Vallouise / Ecrins</strong></td><td>50 km / 50 min</td><td>Randonnees alpines, cascades, lacs d'altitude. <span class="badge badge-red">Chiens interdits Parc National</span></td></tr>
+      <tr><td><strong>Briancon</strong></td><td>40 km / 45 min</td><td>Cite Vauban <span class="badge badge-blue">UNESCO</span>, plus haute ville de France (1 326 m)</td></tr>
+      <tr><td><strong>Queyras</strong></td><td>45 km / 50 min</td><td>Parc regional preserve. Randos familiales. <span class="badge badge-green">Chiens OK en laisse</span></td></tr>
+      <tr><td><strong>Barcelonnette / Ubaye</strong></td><td>65 km / 1h</td><td><strong>Rafting niveau II-IV</strong>, eaux vives, ambiance montagne</td></tr>
+      <tr><td><strong>Gap</strong></td><td>35 km / 35 min</td><td>Ville, commerces, Decathlon, cinema, tourtons du Champsaur</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- TOP 12 -->
+<section id="spots">
+  <h2>Top 12 des spots</h2>
+
+  <div class="spot-card">
+    <div class="spot-num">1</div>
+    <div class="spot-content">
+      <div class="spot-name">Demoiselles Coiffees de Sauze-du-Lac</div>
+      <div class="spot-desc">Colonnes de terre surmontees de rochers. Phenomene geologique unique, rando familiale 1h30 AR. Gratuit, spectaculaire.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">2</div>
+    <div class="spot-content">
+      <div class="spot-name">Rafting sur la Durance <span class="badge badge-green">Des 12 ans</span></div>
+      <div class="spot-desc">Eau vive niveau I-III. La "Vague du Rabioux" a Chateauroux-les-Alpes = spot de surf en riviere. ~30-50 &euro;/personne demi-journee.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">3</div>
+    <div class="spot-content">
+      <div class="spot-name">Plan d'eau d'Embrun + Parc aquatique <span class="badge badge-green">Ideal Flavie</span></div>
+      <div class="spot-desc">Le plus grand parc aquatique de Serre-Poncon. Toboggans, jeux d'eau, plage surveillee. Eau a 24&deg;C. La journee parfaite pour les plus jeunes.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">4</div>
+    <div class="spot-content">
+      <div class="spot-name">Via ferrata des Orres <span class="badge badge-green">Des 6 ans</span></div>
+      <div class="spot-desc">Au-dessus du lac, vue panoramique sur Serre-Poncon. Avec guide, ~50-70 &euro;/personne. Accessible a toute la famille.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">5</div>
+    <div class="spot-content">
+      <div class="spot-name">Ponton jeux ados de Savines <span class="badge badge-teal">Le spot 10-17 ans</span></div>
+      <div class="spot-desc">Tremplin plongeant, toboggan aquatique, structures de jeux sur eau. Le rendez-vous des ados du lac tout l'ete.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">6</div>
+    <div class="spot-content">
+      <div class="spot-name">Canyoning gorges d'Embrun <span class="badge badge-green">Des 10 ans</span></div>
+      <div class="spot-desc">Descente de canyon avec rappels, sauts, toboggans naturels. Niveau decouverte accessible a Flavie, version sportive pour les grands.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">7</div>
+    <div class="spot-content">
+      <div class="spot-name">Mont-Dauphin &mdash; Vauban <span class="badge badge-blue">UNESCO</span></div>
+      <div class="spot-desc">Place forte du XVIIe siecle, 20 min d'Embrun. Visite guidee + vue sur la vallee de la Durance. Gratuit (exterieur).</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">8</div>
+    <div class="spot-content">
+      <div class="spot-name">Briancon &mdash; Cite Vauban <span class="badge badge-blue">UNESCO</span></div>
+      <div class="spot-desc">Plus haute ville de France (1 326 m). Remparts, vieille ville, ambiance montagne. 45 min d'Embrun. Excursion a la journee.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">9</div>
+    <div class="spot-content">
+      <div class="spot-name">Accrobranche Serre-Poncon Aventure</div>
+      <div class="spot-desc">8 parcours des 3 ans, foret de cedres et chenes, a 500 m de la plage Baie Saint-Michel. Journee complete possible.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">10</div>
+    <div class="spot-content">
+      <div class="spot-name">Rafting sportif sur l'Ubaye <span class="badge badge-orange">Des 14 ans</span></div>
+      <div class="spot-desc">Depuis Barcelonnette (1h), niveau II-IV. Plus engage que la Durance. Le kiff des ados &mdash; Candice, Clementine et Timeo vont adorer.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">11</div>
+    <div class="spot-content">
+      <div class="spot-name">Via ferrata de Chateau-Queyras</div>
+      <div class="spot-desc">Suspendu au-dessus des gorges du Guil. Sensations fortes garanties. Plusieurs niveaux de difficulte.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">12</div>
+    <div class="spot-content">
+      <div class="spot-name">Bapteme parapente <span class="badge badge-orange">Des 14-15 ans</span></div>
+      <div class="spot-desc">Vol decouverte ~90-110 &euro;. Vue sur le lac depuis les airs. Accessible a Candice, Clementine et Timeo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GASTRONOMIE -->
+<section id="gastro">
+  <h2>Gastronomie locale</h2>
+
+  <h3>Specialites des Hautes-Alpes</h3>
+  <table>
+    <tr><th style="width:25%">Specialite</th><th>Description</th></tr>
+    <tr><td><strong>Tourtons du Champsaur</strong></td><td>Petits coussins de pate frits, farcis sales (pomme de terre + tomme) ou sucres (pruneaux, pomme). <strong>Introuvables hors de la region</strong></td></tr>
+    <tr><td><strong>Ravioles du Valgaudemar</strong></td><td>Proches des ravioli italiens, farce pommes de terre + tomme + aromates, servies a la creme</td></tr>
+    <tr><td><strong>Oreille d'ane</strong></td><td>Gratin d'herbes sauvages (epinards sauvages, blettes) lie a la bechamel</td></tr>
+    <tr><td><strong>Fromages</strong></td><td>Tomme fraiche de brebis/vache, chevres des Hautes-Alpes</td></tr>
+    <tr><td><strong>Truite de riviere</strong></td><td>Des torrents alpins, dans les bonnes tables</td></tr>
+    <tr><td><strong>Genepi</strong></td><td>Liqueur d'armoise des Alpes, digestif emblematique</td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Surprise culinaire reelle</strong> &mdash; Les tourtons et ravioles sont totalement inconnus du Sud-Ouest. Effet decouverte garanti malgre le "c'est la France". A noter : "Le Tourton des Alpes" a Gap, menus des 12,50 &euro;.
+  </div>
+
+  <h3>Prix des repas</h3>
+  <table>
+    <tr><th style="width:50%">Poste</th><th>Prix</th></tr>
+    <tr><td>Menu midi bistrot</td><td>14-22 &euro;/pers</td></tr>
+    <tr><td>Menu enfant</td><td>9-12 &euro;</td></tr>
+    <tr><td>Repas complet (famille 6)</td><td>80-130 &euro;</td></tr>
+    <tr><td>Pizzeria (alternative eco)</td><td>10-15 &euro;/pers</td></tr>
+    <tr><td>Courses hebdo (famille 6)</td><td>130-170 &euro;</td></tr>
+  </table>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <h2>Budget (2 semaines sur place)</h2>
+
+  <h3>Logement</h3>
+  <table>
+    <tr><th>Type</th><th>Prix / semaine</th><th>Commentaire</th></tr>
+    <tr><td>Gite rural Gites de France (3 epis)</td><td><strong>600-900 &euro;</strong></td><td>Souvent jardin, chiens OK</td></tr>
+    <tr><td>Maison independante avec jardin</td><td><strong>900-1 500 &euro;</strong></td><td>Variable selon vue lac</td></tr>
+    <tr><td>Chalet vue lac (Abritel)</td><td><strong>1 100-2 000 &euro;</strong></td><td>Les prix s'envolent avec la vue</td></tr>
+    <tr><td><strong>Budget cible realiste</strong></td><td><strong>800-1 200 &euro;/sem</strong></td><td>Chorges, Savines, Embrun peripherie</td></tr>
+  </table>
+  <p style="font-size:.88rem;color:var(--gray-700);margin:.5rem 0;"><strong>Estimation 2 semaines : ~1 600-2 500 &euro;</strong></p>
+
+  <div class="callout callout-green">
+    <strong>92% des gites a Chorges acceptent les animaux.</strong> 109 locations pet-friendly autour du lac. Reserver avant mai 2026 pour les meilleurs biens avec jardin clos.
+  </div>
+
+  <h3>Budget total estime (2 semaines sur place)</h3>
+  <table>
+    <tr><th style="width:50%">Poste</th><th>Estimation</th></tr>
+    <tr><td>Trajet A/R (peages + carburant)</td><td><strong>~220-280 &euro;</strong></td></tr>
+    <tr><td>Logement (2 semaines)</td><td><strong>~1 600-2 500 &euro;</strong></td></tr>
+    <tr><td>Courses alimentaires (2 sem)</td><td><strong>~260-340 &euro;</strong></td></tr>
+    <tr><td>Restaurants (4-6 sorties)</td><td><strong>~400-650 &euro;</strong></td></tr>
+    <tr><td>Activites (rafting, via ferrata, wakeboard, accrobranche)</td><td><strong>~600-1 000 &euro;</strong></td></tr>
+    <tr><td>Divers (locations nautiques, glaces...)</td><td><strong>~150-250 &euro;</strong></td></tr>
+    <tr style="font-weight:700;background:var(--teal-light)"><td><strong>TOTAL VOYAGE (2 sem)</strong></td><td><strong>~3 230-5 020 &euro;</strong></td></tr>
+  </table>
+  <div class="callout callout-green">
+    <strong>Scenario realiste : ~3 500-4 000 &euro;.</strong> Le budget le plus bas de toutes les destinations montagne+lac grace au trajet court et a l'absence de frais frontiere/tunnel/ferry.
+  </div>
+</section>
+
+<!-- FAISABILITE -->
+<section id="faisabilite">
+  <h2>Faisabilite globale</h2>
+
+  <h3>Bilan temps</h3>
+  <table>
+    <tr><th style="width:50%"></th><th>Jours</th></tr>
+    <tr><td>Trajet aller</td><td>1 jour (6h-6h30)</td></tr>
+    <tr><td>Trajet retour</td><td>1 jour</td></tr>
+    <tr><td><strong>Temps sur place</strong></td><td><strong>~14 jours (2 semaines)</strong></td></tr>
+    <tr style="font-weight:700"><td>Total</td><td>~16 jours</td></tr>
+  </table>
+  <div class="callout callout-green">
+    <strong>Ratio temps sur place / total = ~88%.</strong> Le meilleur ratio de toutes les destinations montagne+lac. Pas de temps perdu en transit.
+  </div>
+
+  <h3>Contraintes chiens</h3>
+  <table>
+    <tr><th style="width:30%">Aspect</th><th>Verdict</th></tr>
+    <tr><td>Plages amenagees</td><td><strong>Interdites</strong> (9 plages Pavillon Bleu = pas de chiens)</td></tr>
+    <tr><td>Criques sauvages</td><td><span class="badge badge-green">Chiens toleres</span> Crots, Rousset, secteurs non amenages</td></tr>
+    <tr><td>Rando</td><td>Autorise quasi partout en laisse. <span class="badge badge-red">SAUF Parc National des Ecrins = INTERDIT</span></td></tr>
+    <tr><td>Queyras</td><td><span class="badge badge-green">Chiens toleres en laisse</span></td></tr>
+    <tr><td>Hebergement</td><td><span class="badge badge-green">Offre massive</span> 92% pet-friendly a Chorges</td></tr>
+    <tr><td>Climat</td><td>27-30&deg;C journee, 11-15&deg;C nuit. Chaud mais nuits fraiches</td></tr>
+    <tr><td><strong>Documents</strong></td><td><span class="badge badge-green">AUCUN</span> &mdash; C'est la France. Zero paperasse veterinaire</td></tr>
+  </table>
+  <div class="callout callout-green">
+    <strong>Score chiens : 10/10.</strong> Aucun document, offre pet-friendly massive, climat OK. C'est LE gros avantage par rapport a l'Albanie (titrage antirabique obligatoire) ou aux destinations hors UE.
+  </div>
+
+  <h3>Affluence en aout</h3>
+  <table>
+    <tr><th style="width:30%">Donnee</th><th>Detail</th></tr>
+    <tr><td>Frequentation</td><td>~40 000 vacanciers sur la saison. 82% taux d'occupation aout</td></tr>
+    <tr><td>Plages amenagees</td><td><span class="badge badge-amber">Bondees les jours de beau temps</span> (Savines, plan d'eau Embrun)</td></tr>
+    <tr><td>Routes</td><td>Embouteillages possibles week-ends de pointe cote Savines</td></tr>
+    <tr><td>Criques sauvages</td><td>Accessibles mais moins vierges qu'en juin</td></tr>
+    <tr><td>Verdict</td><td><strong>Populaire mais pas surcharge.</strong> La taille du lac (2 800 ha) dilue la foule</td></tr>
+  </table>
+
+  <h3>Meteo en aout</h3>
+  <table>
+    <tr><th style="width:40%">Parametre</th><th>Valeur</th></tr>
+    <tr><td>Temperature max</td><td>27-30&deg;C</td></tr>
+    <tr><td>Temperature nuit</td><td>11-15&deg;C <span class="badge badge-green">Nuits fraiches</span></td></tr>
+    <tr><td>Ensoleillement</td><td><strong>~300 jours/an</strong> (parmi les plus ensoleilles des Alpes francaises)</td></tr>
+    <tr><td>Pluie aout</td><td>~5 jours significatifs sur le mois (~17%)</td></tr>
+    <tr><td>Orages</td><td>Frequents mais courts (30-60 min l'apres-midi), puis beau</td></tr>
+  </table>
+
+  <h3>Points de vigilance</h3>
+  <table>
+    <tr><th style="width:30%">Point</th><th>Detail</th></tr>
+    <tr><td><strong>Niveau du lac</strong></td><td>Variable selon EDF. Berges parfois peu esthetiques en fin d'ete (zones de laisse a sec)</td></tr>
+    <tr><td><strong>Parc des Ecrins</strong></td><td>Chiens <strong>STRICTEMENT interdits</strong> (ni en laisse, ni portes). Attention aux randos Vallouise</td></tr>
+    <tr><td><strong>Reservation activites</strong></td><td>Wakeboard, bateaux = reserver a l'avance en aout</td></tr>
+    <tr><td><strong>Vent thermique</strong></td><td>Brises lacustres l'apres-midi = ideal voile, mais fraicheur possible</td></tr>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <h2>Verdict</h2>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <strong style="font-size:.85rem;color:var(--green)">POUR QUI C'EST FAIT</strong>
+      <ul>
+        <li><strong>Famille qui veut la simplicite</strong> &mdash; zero frontiere, zero paperasse</li>
+        <li><strong>Ados sportifs</strong> &mdash; rafting + via ferrata + wakeboard + canyoning</li>
+        <li><strong>Budget serre</strong> &mdash; le moins cher des destinations montagne+lac</li>
+        <li><strong>Chiens sans prise de tete</strong> &mdash; zero document, offre massive</li>
+        <li><strong>Trajet court</strong> &mdash; 6h, pas d'etape</li>
+        <li><strong>Meteo fiable</strong> &mdash; 300 jours de soleil</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <strong style="font-size:.85rem;color:var(--orange)">POUR QUI C'EST PAS FAIT</strong>
+      <ul>
+        <li><strong>Cherche le depaysement</strong> &mdash; c'est la France, point</li>
+        <li><strong>Veut des villages de charme</strong> &mdash; Savines = neant</li>
+        <li><strong>Veut le "wow" visuel</strong> &mdash; beau mais pas Bled/Come/Braies</li>
+        <li><strong>Veut la mer</strong> &mdash; c'est un lac, pas de sel, pas de vagues</li>
+        <li><strong>Veut 2 semaines de contenu</strong> &mdash; risque de tourner en rond la 2e semaine</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Comparaison finale</h3>
+  <div class="compare-table">
+    <table>
+      <tr><th></th><th>Serre-Poncon</th><th>Autriche</th><th>Asturies</th><th>Dolomites</th></tr>
+      <tr><td><strong>Trajet</strong></td><td><span class="badge badge-green">6h (direct)</span></td><td>12-13h</td><td><span class="badge badge-green">5h30</span></td><td>11-12h</td></tr>
+      <tr><td><strong>Budget (2 sem)</strong></td><td><strong>~3 500-4 000 &euro;</strong></td><td>~3 400-4 700 &euro;</td><td>~3 500-4 000 &euro;</td><td><span class="badge badge-red">4 460-6 270 &euro;</span></td></tr>
+      <tr><td><strong>Baignade</strong></td><td>Lac 22-24&deg;C</td><td>Lacs 20-27&deg;C</td><td>Ocean 19-22&deg;C</td><td><span class="badge badge-amber">1 lac chaud</span></td></tr>
+      <tr><td><strong>Wow visuel</strong></td><td>6/10</td><td>8/10</td><td>7/10</td><td><strong>11/10</strong></td></tr>
+      <tr><td><strong>Depaysement</strong></td><td><span class="badge badge-red">3/10</span></td><td>7/10</td><td>6/10</td><td>8/10</td></tr>
+      <tr><td><strong>Activites ados</strong></td><td><span class="badge badge-green">9/10</span></td><td><span class="badge badge-green">10/10</span></td><td>8/10</td><td>7/10</td></tr>
+      <tr><td><strong>Chiens</strong></td><td><span class="badge badge-green">10/10</span></td><td>8/10</td><td>9/10</td><td>7/10</td></tr>
+      <tr><td><strong>Monde aout</strong></td><td>Modere</td><td>Modere</td><td><span class="badge badge-green">Faible</span></td><td><span class="badge badge-red">Tres eleve</span></td></tr>
+    </table>
+  </div>
+
+  <h3>Score faisabilite</h3>
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="sc-label">Trajet</div>
+      <div class="sc-value">9/10</div>
+      <div class="sc-note">6h direct, cout minimal</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Activites</div>
+      <div class="sc-value">8/10</div>
+      <div class="sc-note">Eau vive + montagne</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Ados</div>
+      <div class="sc-value">9/10</div>
+      <div class="sc-note">Rafting, via ferrata, wake</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Baignade</div>
+      <div class="sc-value">7/10</div>
+      <div class="sc-note">Lac chaud mais pas la mer</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Budget</div>
+      <div class="sc-value">9/10</div>
+      <div class="sc-note">Le moins cher</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Chiens</div>
+      <div class="sc-value">10/10</div>
+      <div class="sc-note">Zero contrainte</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Gastro</div>
+      <div class="sc-value">6/10</div>
+      <div class="sc-note">Tourtons = surprise</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Depaysement</div>
+      <div class="sc-value" style="color:var(--orange)">3/10</div>
+      <div class="sc-note">C'est la France</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Charme</div>
+      <div class="sc-value" style="color:var(--orange)">4/10</div>
+      <div class="sc-note">Embrun OK, Savines = neant</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Meteo</div>
+      <div class="sc-value">8/10</div>
+      <div class="sc-note">300 jours de soleil</div>
+    </div>
+    <div class="score-card highlight">
+      <div class="sc-label">Global</div>
+      <div class="sc-value">7.3/10</div>
+      <div class="sc-note">Plan B confort</div>
+    </div>
+  </div>
+
+  <div class="callout" style="border-color:#065f46;background:linear-gradient(135deg, var(--teal-light), #d1fae5);">
+    <strong>En resume :</strong> Serre-Poncon est le choix <strong>rationnel</strong> : budget mini, trajet mini, zero stress chiens, offre ados solide. Mais c'est un choix de <strong>raison, pas de coeur</strong>. Si vous cherchez le "waouh", l'exotisme, les villages de carte postale &mdash; ce n'est pas ici. Ideal en <strong>plan B</strong> ou pour "l'annee ou on veut pas se prendre la tete". Compare aux Asturies (meme budget, 5h30 de route, depaysement espagnol, score 9.3/10), Serre-Poncon a du mal a rivaliser.
+  </div>
+</section>
+
+</div>
+
+<footer style="text-align:center;padding:2rem 1rem;color:var(--gray-500);font-size:.8rem;">
+  Focus Serre-Poncon &mdash; Etude de faisabilite &mdash; Mars 2026<br>
+  <a href="plan-ete-2026.html" style="color:var(--teal);text-decoration:none;">&larr; Retour au plan general</a>
+</footer>
+
+</body>
+</html>

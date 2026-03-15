@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Focus Lacs Italiens — Ete 2026</title>
+  <style>
+    :root{--blue:#2563eb;--blue-light:#dbeafe;--green:#16a34a;--green-light:#dcfce7;--orange:#ea580c;--orange-light:#fff7ed;--red:#dc2626;--purple:#7c3aed;--purple-light:#ede9fe;--amber:#b45309;--amber-light:#fef3c7;--teal:#0d9488;--teal-light:#ccfbf1;--gray-50:#f9fafb;--gray-100:#f3f4f6;--gray-200:#e5e7eb;--gray-300:#d1d5db;--gray-500:#6b7280;--gray-700:#374151;--gray-900:#111827}
+    *{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--gray-900);background:var(--gray-50);line-height:1.6;-webkit-text-size-adjust:100%;overflow-x:hidden}
+    .header{background:linear-gradient(135deg,#065f46 0%,#0d9488 40%,#5eead4 80%,#99f6e4 100%);color:white;padding:2.5rem 1.5rem;text-align:center}.header h1{font-size:2rem;margin-bottom:.25rem}.header .subtitle{font-size:1.1rem;opacity:.9}.header .dates{display:inline-block;margin-top:.75rem;background:rgba(255,255,255,.2);padding:.4rem 1.2rem;border-radius:2rem;font-weight:600;font-size:.95rem}.header .status{display:inline-block;margin-top:.5rem;background:rgba(255,255,255,.3);padding:.25rem .9rem;border-radius:2rem;font-size:.82rem;font-weight:500}
+    .container{max-width:1100px;margin:0 auto;padding:1.5rem}nav.toc{background:white;border-radius:.75rem;padding:1.25rem 1.5rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.08);display:flex;flex-wrap:wrap;gap:.5rem}nav.toc a{display:inline-block;padding:.35rem .9rem;background:var(--teal-light);color:var(--teal);border-radius:.4rem;text-decoration:none;font-size:.85rem;font-weight:500;transition:background .15s}nav.toc a:hover{background:#a7f3d0}
+    section{background:white;border-radius:.75rem;padding:1.5rem;margin-bottom:1.5rem;box-shadow:0 1px 3px rgba(0,0,0,.08)}section h2{font-size:1.3rem;margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--teal);color:var(--teal)}section h3{font-size:1.05rem;margin:1.25rem 0 .75rem;color:var(--gray-700)}
+    table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:1rem}th,td{text-align:left;padding:.55rem .65rem;border-bottom:1px solid var(--gray-200)}th{background:var(--gray-100);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.03em;color:var(--gray-500)}tr:hover td{background:var(--gray-50)}
+    .badge{display:inline-block;padding:.15rem .55rem;border-radius:.3rem;font-size:.75rem;font-weight:600}.badge-green{background:var(--green-light);color:var(--green)}.badge-blue{background:var(--blue-light);color:var(--blue)}.badge-orange{background:var(--orange-light);color:var(--orange)}.badge-red{background:#fee2e2;color:var(--red)}.badge-gray{background:var(--gray-100);color:var(--gray-500)}.badge-purple{background:var(--purple-light);color:var(--purple)}.badge-amber{background:var(--amber-light);color:var(--amber)}.badge-teal{background:var(--teal-light);color:var(--teal)}
+    .callout{border-left:4px solid var(--teal);background:var(--teal-light);padding:.85rem 1rem;border-radius:0 .5rem .5rem 0;margin:1rem 0;font-size:.9rem}.callout-green{border-color:var(--green);background:var(--green-light)}.callout-orange{border-color:var(--orange);background:var(--orange-light)}.callout-amber{border-color:var(--amber);background:var(--amber-light)}.callout-blue{border-color:var(--blue);background:var(--blue-light)}
+    .zone-card{border:1px solid var(--gray-200);border-radius:.75rem;padding:1.25rem;margin-bottom:1rem;background:var(--gray-50)}.zone-card h3{margin-top:0!important}.zone-card table{margin-bottom:0}
+    .spot-card{display:grid;grid-template-columns:2.5rem 1fr;gap:.75rem;padding:.85rem 0;border-bottom:1px solid var(--gray-200);align-items:start}.spot-card:last-child{border-bottom:none}.spot-num{width:2.5rem;height:2.5rem;border-radius:50%;background:var(--teal-light);color:var(--teal);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem;flex-shrink:0}.spot-content .spot-name{font-weight:700;font-size:.95rem;margin-bottom:.15rem}.spot-content .spot-desc{font-size:.88rem;color:var(--gray-700);line-height:1.5}
+    .score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.75rem;margin:1rem 0}.score-card{background:var(--gray-50);border-radius:.5rem;padding:.85rem;text-align:center;border:1px solid var(--gray-200)}.score-card .sc-label{font-size:.78rem;color:var(--gray-500);text-transform:uppercase;letter-spacing:.03em;margin-bottom:.25rem}.score-card .sc-value{font-size:1.5rem;font-weight:700;color:var(--teal)}.score-card .sc-note{font-size:.75rem;color:var(--gray-500);margin-top:.15rem}.score-card.highlight{background:var(--teal-light);border-color:var(--teal)}.score-card.highlight .sc-value{color:#065f46}
+    .pros-cons{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}.pros-cons ul{list-style:none;padding:0;font-size:.85rem}.pros-cons li{padding:.2rem 0;padding-left:1.2rem;position:relative}.pros-cons .pros li::before{content:'+';position:absolute;left:0;color:var(--green);font-weight:700}.pros-cons .cons li::before{content:'\2212';position:absolute;left:0;color:var(--orange);font-weight:700}
+    .compare-table{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1rem 0}.compare-table table{min-width:700px}.compare-table td:first-child,.compare-table th:first-child{position:sticky;left:0;background:white;z-index:1;font-weight:600}.compare-table th:first-child{background:var(--gray-100)}
+    .back-link{display:inline-block;margin-bottom:1rem;color:var(--teal);text-decoration:none;font-size:.9rem;font-weight:500}.back-link:hover{text-decoration:underline}
+    @media(max-width:768px){.header h1{font-size:1.5rem}.container{padding:.5rem;overflow-x:hidden}section{padding:.75rem;margin-bottom:1rem}table{font-size:.82rem}th,td{padding:.4rem .5rem}.pros-cons{grid-template-columns:1fr}.score-grid{grid-template-columns:repeat(3,1fr)}nav.toc{gap:.35rem;padding:.75rem}nav.toc a{font-size:.78rem;padding:.3rem .65rem}.compare-table{max-width:100vw;margin-left:-.75rem;margin-right:-.75rem;padding:0 .75rem}}
+    @media(max-width:400px){.score-grid{grid-template-columns:repeat(2,1fr)}.container{padding:.35rem}section{padding:.6rem}}
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Focus Lacs Italiens</h1>
+  <div class="subtitle">Come &bull; Garde &bull; Majeur &mdash; Ete 2026</div>
+  <div class="dates">Famille Bruet &bull; 6 pers + 2 Cairn Terriers &bull; ~2 semaines sur place</div>
+  <div class="status">Destination #1 &mdash; La Dolce Vita &mdash; Lac + Montagne + Aperitivo</div>
+</div>
+
+<div class="container">
+
+<a href="plan-ete-2026.html" class="back-link">&larr; Retour au plan general</a>
+
+<nav class="toc">
+  <a href="#contexte">Contexte</a>
+  <a href="#trajet">Trajet</a>
+  <a href="#comparatif">3 lacs</a>
+  <a href="#garde">Lac de Garde</a>
+  <a href="#spots">Top 12</a>
+  <a href="#gastro">Gastronomie</a>
+  <a href="#budget">Budget</a>
+  <a href="#faisabilite">Faisabilite</a>
+  <a href="#verdict">Verdict</a>
+</nav>
+
+<!-- CONTEXTE -->
+<section id="contexte">
+  <h2>Contexte</h2>
+  <table>
+    <tr><td style="width:30%"><strong>Famille</strong></td><td>6 personnes &mdash; Olivier, Aurelie, Candice (17), Clementine (15), Timeo (13), Flavie (10)</td></tr>
+    <tr><td><strong>Chiens</strong></td><td>2 Cairn Terriers &mdash; viennent. <span class="badge badge-green">NON NEGOCIABLE</span></td></tr>
+    <tr><td><strong>Depart</strong></td><td>Vayres, Gironde (33)</td></tr>
+    <tr><td><strong>Dates</strong></td><td>~3 semaines enveloppe (29-30 juil &rarr; 16-17 aout). <strong>2 semaines sur place</strong></td></tr>
+    <tr><td><strong>Type</strong></td><td><span class="badge badge-teal">Montagne + Lac</span></td></tr>
+  </table>
+  <div class="callout callout-green">
+    <strong>Le pitch :</strong> 3 lacs iconiques a 10-12h de Vayres. Garde = paradis ados (windsurf, Gardaland, canyoning). Come = glamour + ferries. Eau a 24-25&deg;C. Pizza + gelato + aperitivo. Verone a 30 min. <strong>Le choix "dolce vita" familial.</strong>
+  </div>
+</section>
+
+<!-- TRAJET -->
+<section id="trajet">
+  <h2>Comment y aller</h2>
+  <h3>Vayres &rarr; Lyon &rarr; Tunnel Mont-Blanc &rarr; Milan &rarr; Lac</h3>
+  <table>
+    <tr><th style="width:40%">Critere</th><th>Detail</th></tr>
+    <tr><td>Distance</td><td><strong>~1 050-1 150 km</strong> (selon le lac)</td></tr>
+    <tr><td>Duree</td><td><strong>10h30-12h</strong> &mdash; 1 etape recommandee</td></tr>
+    <tr><td>Peages France</td><td>~80-85 &euro;</td></tr>
+    <tr><td>Tunnel Mont-Blanc A/R</td><td>~65-110 &euro;</td></tr>
+    <tr><td>Peages Italie</td><td>~20-35 &euro;</td></tr>
+    <tr><td>Carburant A/R (~2 300 km)</td><td>~280-380 &euro;</td></tr>
+    <tr><td>Etapes hotel (2 nuits A/R)</td><td>~180-260 &euro;</td></tr>
+    <tr style="font-weight:700;background:var(--teal-light)"><td><strong>TOTAL TRAJET A/R</strong></td><td><strong>~500-640 &euro;</strong></td></tr>
+  </table>
+  <div class="callout">
+    <strong>Etape recommandee : Annecy</strong> (7h de Vayres). Lac magnifique, vieille ville, chiens OK. Ou <strong>Verone</strong> au retour (arenes romaines, 30 min du Lac de Garde).
+  </div>
+</section>
+
+<!-- COMPARATIF 3 LACS -->
+<section id="comparatif">
+  <h2>Les 3 lacs &mdash; Comparatif</h2>
+  <div class="compare-table">
+    <table>
+      <tr><th></th><th>Lac de Come</th><th>Lac de Garde</th><th>Lac Majeur</th></tr>
+      <tr><td><strong>Surface</strong></td><td>146 km&sup2;</td><td><strong>370 km&sup2;</strong></td><td>212 km&sup2;</td></tr>
+      <tr><td><strong>Eau aout</strong></td><td>22-24&deg;C</td><td><span class="badge badge-green">24-25&deg;C</span></td><td>23-24&deg;C</td></tr>
+      <tr><td><strong>Ambiance</strong></td><td>Glamour, romantique</td><td><strong>Sportif, familial</strong></td><td>Serein, culturel</td></tr>
+      <tr><td><strong>Ados</strong></td><td>Moyen</td><td><span class="badge badge-green">Excellent</span></td><td>Faible</td></tr>
+      <tr><td><strong>Plages</strong></td><td>Rares (rives abruptes)</td><td><strong>Nombreuses</strong></td><td>Correctes</td></tr>
+      <tr><td><strong>Chiens plage</strong></td><td>Peu de plages = OK</td><td><span class="badge badge-green">Bracco Baldo Beach</span></td><td>Toleres</td></tr>
+      <tr><td><strong>Logement</strong></td><td><span class="badge badge-red">Le + cher</span></td><td>Milieu de gamme</td><td>Milieu-haut</td></tr>
+      <tr><td><strong>Affluence</strong></td><td><span class="badge badge-red">Bellagio surcharge</span></td><td><span class="badge badge-amber">Sirmione surcharge</span></td><td><span class="badge badge-green">Le + calme</span></td></tr>
+      <tr><td><strong>Montagne</strong></td><td>Pre-Alpes ~2 000 m</td><td>Monte Baldo 1 760 m</td><td>Mottarone (telecabine fermee)</td></tr>
+    </table>
+  </div>
+  <div class="callout callout-green">
+    <strong>Verdict : Lac de Garde en base principale.</strong> Activites ados incomparables, plages + plage pet-friendly officielle, budget plus accessible que Come, Verone a 30 min, Dolomites a 1h15. Come = excursion 1-2 jours.
+  </div>
+</section>
+
+<!-- LAC DE GARDE -->
+<section id="garde">
+  <h2>Le Lac de Garde en detail</h2>
+
+  <h3>Les villes cles</h3>
+  <div class="zone-card">
+    <table>
+      <tr><th style="width:20%">Ville</th><th style="width:15%">Position</th><th>Description</th></tr>
+      <tr><td><strong>Riva del Garda</strong></td><td>Nord</td><td>La plus "alpine". <strong>Mecca mondiale windsurf</strong> (vent thermique quotidien). Grande plage Sabbioni</td></tr>
+      <tr><td><strong>Malcesine</strong></td><td>Est</td><td>Vieux centre medieval. <strong>Telecabine Monte Baldo</strong> (1 760 m, cabine rotative 360&deg;)</td></tr>
+      <tr><td><strong>Limone sul Garda</strong></td><td>Ouest</td><td>Village carte postale accroche a la falaise. Tres photogenique, tres frequente</td></tr>
+      <tr><td><strong>Sirmione</strong></td><td>Sud</td><td>Peninsule iconique, chateau Scaliger, thermes. <span class="badge badge-amber">Saturee en aout</span></td></tr>
+      <tr><td><strong>Desenzano</strong></td><td>Sud</td><td>Plus grande ville (30 000 hab). Base logistique, vie nocturne, gare</td></tr>
+      <tr><td><strong>Bardolino</strong></td><td>Est</td><td>Vignobles, route des vins. Plage pet-friendly San Vigilio</td></tr>
+    </table>
+  </div>
+
+  <h3>Activites ados (13-17 ans)</h3>
+  <table>
+    <tr><th>Activite</th><th>Ou</th><th>Prix</th><th>Notes</th></tr>
+    <tr><td><strong>Windsurf / Kitesurf</strong></td><td>Riva, Torbole</td><td>60-80 &euro;/cours 3h</td><td>Le spot le + populaire d'Europe. Vent quotidien</td></tr>
+    <tr><td><strong>Wakeboard</strong></td><td>Lazise</td><td>25-40 &euro;/session</td><td>Lac calme au sud</td></tr>
+    <tr><td><strong>Canyoning</strong></td><td>Tignale</td><td>60-80 &euro;/pers</td><td>14 gorges, sauts, glissades. Des 12 ans</td></tr>
+    <tr><td><strong>Via ferrata</strong></td><td>Arco</td><td>40-80 &euro; guide</td><td>Capitale mondiale escalade</td></tr>
+    <tr><td><strong>Telecabine Monte Baldo</strong></td><td>Malcesine</td><td>25-30 &euro; AR</td><td>Cabine rotative 360&deg;, randos + VTT</td></tr>
+    <tr><td><strong>SUP</strong></td><td>Partout</td><td>15-25 &euro;/h</td><td>Tres accessible</td></tr>
+    <tr><td><strong>Gardaland</strong></td><td>Castelnuovo</td><td><strong>56 &euro;/pers</strong></td><td>Le Disneyland italien. Famille 6 = ~336 &euro;. <span class="badge badge-amber">Chiens interdits</span> (chenil)</td></tr>
+  </table>
+
+  <h3>Plages et baignade</h3>
+  <table>
+    <tr><th>Plage</th><th>Type</th><th>Notes</th></tr>
+    <tr><td><strong>Sabbioni (Riva)</strong></td><td>Grande, graviers fins</td><td>Bien equipee, bar, sports. La meilleure famille</td></tr>
+    <tr><td><strong>Jamaica Beach (Sirmione)</strong></td><td>Roches plates</td><td>Tres populaire, photogenique, saut possible</td></tr>
+    <tr><td><strong>Bracco Baldo Beach</strong></td><td><span class="badge badge-green">Pet-friendly</span></td><td><strong>1ere plage pet-friendly d'Italie.</strong> Acces libre, gratuit</td></tr>
+    <tr><td><strong>San Vigilio (Bardolino)</strong></td><td><span class="badge badge-green">Pet-friendly</span></td><td>Chiens acceptes</td></tr>
+    <tr><td><strong>Baia Bianca (Lazise)</strong></td><td>Sable importe</td><td>Style "caraibes" artificiel</td></tr>
+  </table>
+
+  <h3>Excursions depuis le Lac de Garde</h3>
+  <table>
+    <tr><th style="width:25%">Destination</th><th style="width:20%">Distance</th><th>Interet</th></tr>
+    <tr><td><strong>Verone</strong></td><td>30 min sud</td><td>Arenes romaines, opera plein air (juil-aout), Romeo et Juliette</td></tr>
+    <tr><td><strong>Bellagio (Come)</strong></td><td>2h</td><td>Le joyau de Come. Ferry + village + glaces. Journee complete</td></tr>
+    <tr><td><strong>Dolomites (Brenta)</strong></td><td>1h15 nord</td><td>Excursion journee depuis Riva. Randos, via ferrata</td></tr>
+    <tr><td><strong>Cascades de Varone</strong></td><td>15 min de Riva</td><td>Cascade spectaculaire dans gorge. ~6 &euro;. Accessible a tous</td></tr>
+    <tr><td><strong>Route des vins</strong></td><td>Sur le lac</td><td>Bardolino, Valpolicella, Amarone. Degustation</td></tr>
+  </table>
+</section>
+
+<!-- TOP 12 -->
+<section id="spots">
+  <h2>Top 12 des spots</h2>
+  <div class="spot-card"><div class="spot-num">1</div><div class="spot-content"><div class="spot-name">Windsurf a Riva del Garda / Torbole</div><div class="spot-desc">Le spot de windsurf le plus populaire d'Europe. Vent thermique quotidien (Peler le matin, Ora l'apres-midi). Cours des 6 ans. L'experience signature du lac.</div></div></div>
+  <div class="spot-card"><div class="spot-num">2</div><div class="spot-content"><div class="spot-name">Telecabine Monte Baldo (Malcesine) <span class="badge badge-green">Chiens OK</span></div><div class="spot-desc">Cabine rotative 360&deg; jusqu'a 1 760 m. Vue sur les Alpes et les Dolomites. Randos plateau, VTT descente. ~25-30 &euro; AR.</div></div></div>
+  <div class="spot-card"><div class="spot-num">3</div><div class="spot-content"><div class="spot-name">Sirmione &mdash; Chateau Scaliger + Thermes</div><div class="spot-desc">Peninsule iconique. Chateau medieval sur l'eau (XIVe s.), thermes de Catulle (ruines romaines). Incontournable. Y aller tot pour eviter la foule.</div></div></div>
+  <div class="spot-card"><div class="spot-num">4</div><div class="spot-content"><div class="spot-name">Gardaland <span class="badge badge-orange">336 &euro; famille 6</span></div><div class="spot-desc">Le Disneyland italien. Manges, attractions, spectacles. En semaine et le matin pour eviter les files. Chiens interdits (chenil sur place).</div></div></div>
+  <div class="spot-card"><div class="spot-num">5</div><div class="spot-content"><div class="spot-name">Bellagio (Lac de Come) &mdash; Excursion journee</div><div class="spot-desc">Le joyau des lacs italiens. Village au croisement des 3 branches du lac. Ferries + ruelles + villas + gelato. 2h de Garde.</div></div></div>
+  <div class="spot-card"><div class="spot-num">6</div><div class="spot-content"><div class="spot-name">Verone &mdash; Arenes + Opera plein air</div><div class="spot-desc">A 30 min du sud du lac. Arenes romaines (opera en juillet-aout), centre medieval, balcon de Juliette. Demi-journee ou soiree opera.</div></div></div>
+  <div class="spot-card"><div class="spot-num">7</div><div class="spot-content"><div class="spot-name">Canyoning gorges de Tignale <span class="badge badge-orange">Des 12 ans</span></div><div class="spot-desc">14 gorges, sauts, glissades, nage. 2h avec guide, ~60-80 &euro;/pers. L'activite adrenaline du sejour.</div></div></div>
+  <div class="spot-card"><div class="spot-num">8</div><div class="spot-content"><div class="spot-name">Ferry tour du lac</div><div class="spot-desc">Ferries reguliers entre toutes les rives. Pass journee ~30-40 &euro; adulte. Sirmione, Riva, Malcesine, Limone depuis l'eau. Chiens acceptes.</div></div></div>
+  <div class="spot-card"><div class="spot-num">9</div><div class="spot-content"><div class="spot-name">Via ferrata a Arco</div><div class="spot-desc">Capitale mondiale de l'escalade. Via ferrata debutant a confirme. Voies pour tous niveaux. Materiel louable. Vue sur le lac depuis le sommet.</div></div></div>
+  <div class="spot-card"><div class="spot-num">10</div><div class="spot-content"><div class="spot-name">Cascades de Varone</div><div class="spot-desc">Cascade spectaculaire dans une gorge etroite pres de Riva. 15 min de visite, ~6 &euro;. Accessible a tous, meme Flavie.</div></div></div>
+  <div class="spot-card"><div class="spot-num">11</div><div class="spot-content"><div class="spot-name">Route des vins Bardolino / Valpolicella</div><div class="spot-desc">Vignobles sur la rive est. Degustation Bardolino, Custoza, Lugana, et l'Amarone. Pour Olivier et Aurelie pendant que les ados font du SUP.</div></div></div>
+  <div class="spot-card"><div class="spot-num">12</div><div class="spot-content"><div class="spot-name">Limone sul Garda</div><div class="spot-desc">Village carte postale accroche a la falaise. Ruelles, limonaia (serres a citrons), front de lac. Tres photogenique. Accessible en ferry.</div></div></div>
+</section>
+
+<!-- GASTRONOMIE -->
+<section id="gastro">
+  <h2>Gastronomie</h2>
+  <table>
+    <tr><th style="width:25%">Specialite</th><th>Description</th></tr>
+    <tr><td><strong>Carne salada</strong></td><td>Boeuf marine, specialite trentine (nord du lac). Servi en fines tranches avec huile d'olive et roquette</td></tr>
+    <tr><td><strong>Bigoli con le sarde</strong></td><td>Pates fraiches aux sardines du lac, huile DOP Garda</td></tr>
+    <tr><td><strong>Tortellini di Valeggio</strong></td><td>Tortellini de la region, servis en bouillon. La Fete du nodo d'amore en juin</td></tr>
+    <tr><td><strong>Huile d'olive Garda DOP</strong></td><td>Une des meilleures d'Italie, produite sur les rives</td></tr>
+    <tr><td><strong>Vins</strong></td><td>Bardolino, Custoza, Lugana, Valpolicella, <strong>Amarone</strong>. Route des vins = excursion</td></tr>
+    <tr><td><strong>Gelato artisanal</strong></td><td>2-4 &euro;/boule. Indispensable quotidien. Qualite incomparable</td></tr>
+  </table>
+  <div class="callout callout-green">
+    <strong>C'est l'Italie.</strong> Pas une decouverte culinaire mais une qualite incomparable. Pizza + pasta + gelato + aperitivo spritz = le confort absolu. 10-20% moins cher que les stations balnaires francaises.
+  </div>
+  <h3>Prix des repas</h3>
+  <table>
+    <tr><th style="width:50%">Poste</th><th>Prix</th></tr>
+    <tr><td>Pizza/pasta en trattoria</td><td>12-18 &euro;/pers</td></tr>
+    <tr><td>Repas famille 6 (milieu gamme)</td><td>150-240 &euro;</td></tr>
+    <tr><td>Gelato artisanal</td><td>2-4 &euro;/boule</td></tr>
+    <tr><td>Aperitivo spritz</td><td>8-15 &euro;/pers adulte</td></tr>
+    <tr><td>Courses hebdo (famille 6)</td><td>120-170 &euro;</td></tr>
+  </table>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <h2>Budget (2 semaines sur place)</h2>
+  <h3>Logement</h3>
+  <table>
+    <tr><th>Zone</th><th>Prix / semaine</th><th>Commentaire</th></tr>
+    <tr><td>Garde hors premium (Torbole, Gargnano)</td><td><strong>1 200-2 000 &euro;</strong></td><td>Meilleur rapport qualite/prix</td></tr>
+    <tr><td>Garde premium (Sirmione, Lazise)</td><td>1 800-3 500 &euro;</td><td><span class="badge badge-red">Hors budget</span></td></tr>
+    <tr><td>Come hors Bellagio</td><td>1 500-2 500 &euro;</td><td>Plus cher</td></tr>
+    <tr><td>Majeur (Cannobio, Verbania)</td><td>900-1 600 &euro;</td><td>Le moins cher</td></tr>
+  </table>
+  <p style="font-size:.88rem;color:var(--gray-700);margin:.5rem 0;"><strong>Estimation 2 semaines (base Garde hors premium) : ~2 400-4 000 &euro;.</strong> Supplement chiens : 50-150 &euro;/sejour.</p>
+  <div class="callout callout-orange">
+    <strong>C'est le point faible budget.</strong> Logement haute saison aout aux lacs italiens = premium. Chercher dans les villages en retrait du lac (Tremosine, Nago, Gargnano) = 30-40% moins cher.
+  </div>
+
+  <h3>Budget total estime (2 semaines sur place)</h3>
+  <table>
+    <tr><th style="width:50%">Poste</th><th>Estimation</th></tr>
+    <tr><td>Trajet A/R (peages + tunnel + carburant + etapes)</td><td><strong>~500-640 &euro;</strong></td></tr>
+    <tr><td>Logement (2 semaines, base Garde)</td><td><strong>~2 400-4 000 &euro;</strong></td></tr>
+    <tr><td>Courses alimentaires (2 sem)</td><td><strong>~240-340 &euro;</strong></td></tr>
+    <tr><td>Restaurants (6-8 sorties)</td><td><strong>~700-1 100 &euro;</strong></td></tr>
+    <tr><td>Activites (Gardaland, telecabine, windsurf, canyoning, ferries)</td><td><strong>~600-1 000 &euro;</strong></td></tr>
+    <tr><td>Divers (gelato, parking, SUP)</td><td><strong>~200-350 &euro;</strong></td></tr>
+    <tr style="font-weight:700;background:var(--teal-light)"><td><strong>TOTAL VOYAGE</strong></td><td><strong>~4 640-7 430 &euro;</strong></td></tr>
+  </table>
+  <div class="callout callout-orange">
+    <strong>Scenario realiste : ~5 500-6 000 &euro;.</strong> Fourchette haute, principalement a cause du logement. Comparable aux Dolomites mais avec baignade et plus d'activites ados.
+  </div>
+</section>
+
+<!-- FAISABILITE -->
+<section id="faisabilite">
+  <h2>Faisabilite globale</h2>
+
+  <h3>Bilan temps</h3>
+  <table>
+    <tr><th style="width:50%"></th><th>Jours</th></tr>
+    <tr><td>Trajet aller (etape Annecy/Lyon)</td><td>2 jours</td></tr>
+    <tr><td>Trajet retour (etape)</td><td>2 jours</td></tr>
+    <tr><td><strong>Temps sur place</strong></td><td><strong>~14 jours (2 semaines)</strong></td></tr>
+    <tr style="font-weight:700"><td>Total</td><td>~18 jours</td></tr>
+  </table>
+
+  <h3>Contraintes chiens</h3>
+  <table>
+    <tr><th style="width:30%">Aspect</th><th>Verdict</th></tr>
+    <tr><td><strong>Entree Italie</strong></td><td><span class="badge badge-green">UE = simple</span> Passeport + vaccin rage</td></tr>
+    <tr><td>Plages</td><td>Plupart interdites. <span class="badge badge-green">Bracco Baldo Beach</span> + San Vigilio = pet-friendly</td></tr>
+    <tr><td>Ferries</td><td><span class="badge badge-green">Chiens acceptes</span> Petits chiens gratuits. Museliere parfois</td></tr>
+    <tr><td>Monte Baldo telecabine</td><td><span class="badge badge-green">Chiens OK</span> (billet ~5-10 &euro;, museliere)</td></tr>
+    <tr><td>Gardaland</td><td><span class="badge badge-amber">Chiens interdits</span> Chenil sur place</td></tr>
+    <tr><td>Terrasses/restos</td><td><span class="badge badge-green">Tres dog-friendly</span> L'Italie adore les chiens</td></tr>
+    <tr><td>Chaleur</td><td><span class="badge badge-amber">29-31&deg;C + nuits 22-23&deg;C</span> Chaud pour les Cairns</td></tr>
+  </table>
+
+  <h3>Affluence en aout</h3>
+  <table>
+    <tr><th style="width:30%">Lieu</th><th>Niveau</th></tr>
+    <tr><td>Sirmione</td><td><span class="badge badge-red">Tres eleve</span> Acces voiture reglemente</td></tr>
+    <tr><td>Bellagio (Come)</td><td><span class="badge badge-red">Tres eleve</span> Files pour le ferry</td></tr>
+    <tr><td>Riva del Garda</td><td><span class="badge badge-amber">Eleve mais gere</span></td></tr>
+    <tr><td>Routes tour du lac</td><td><span class="badge badge-red">Embouteillages chroniques</span> Tunnels voie unique</td></tr>
+    <tr><td>Lac Majeur (hors Stresa)</td><td><span class="badge badge-green">Modere</span></td></tr>
+  </table>
+  <div class="callout callout-amber">
+    <strong>Privilegier les ferries</strong> pour les deplacements inter-villes sur le lac. La route qui fait le tour du Lac de Garde est etroite (tunnels a voie unique) et bouchee en aout.
+  </div>
+
+  <h3>Meteo en aout</h3>
+  <table>
+    <tr><th style="width:40%">Parametre</th><th>Valeur</th></tr>
+    <tr><td>Temperature max</td><td><strong>29-31&deg;C</strong></td></tr>
+    <tr><td>Temperature nuit</td><td>22-23&deg;C (nuits chaudes)</td></tr>
+    <tr><td>Jours de pluie</td><td>~12/mois (~95 mm)</td></tr>
+    <tr><td>Ensoleillement</td><td>~8-9h/jour</td></tr>
+    <tr><td>Type</td><td>Orages d'apres-midi. Matinees belles</td></tr>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <h2>Verdict</h2>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <strong style="font-size:.85rem;color:var(--green)">POUR QUI C'EST FAIT</strong>
+      <ul>
+        <li><strong>Aurelie</strong> &mdash; terrasses, aperitivo, flaner, petits commerces = paradis</li>
+        <li><strong>Ados sportifs</strong> &mdash; windsurf, canyoning, Monte Baldo, Gardaland</li>
+        <li><strong>Fans d'Italie</strong> &mdash; pizza, gelato, vins, dolce vita</li>
+        <li><strong>Baignade quotidienne</strong> &mdash; eau 24-25&deg;C, nombreuses plages</li>
+        <li><strong>Culture</strong> &mdash; Verone 30 min, Bellagio excursion, opera plein air</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <strong style="font-size:.85rem;color:var(--orange)">POUR QUI C'EST PAS FAIT</strong>
+      <ul>
+        <li><strong>Budget serre</strong> &mdash; logement aout = tres cher (2 400-4 000 &euro;)</li>
+        <li><strong>Cherche le calme</strong> &mdash; aout = sature, routes bouchees</li>
+        <li><strong>Chaleur</strong> &mdash; 29-31&deg;C, nuits chaudes. Cairn Terriers souffrent</li>
+        <li><strong>Montagne pure</strong> &mdash; Pre-Alpes, pas Dolomites</li>
+        <li><strong>Depaysement radical</strong> &mdash; Italie accessible, pas le choc Slovenie/Albanie</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Comparaison finale</h3>
+  <div class="compare-table">
+    <table>
+      <tr><th></th><th>Lacs Italiens</th><th>Slovenie</th><th>Autriche</th><th>Asturies</th></tr>
+      <tr><td><strong>Trajet</strong></td><td>10-12h</td><td>14h (2 jours)</td><td>12-13h</td><td><span class="badge badge-green">5h30</span></td></tr>
+      <tr><td><strong>Budget (2 sem)</strong></td><td><span class="badge badge-red">~5 500-6 000 &euro;</span></td><td>~4 200-4 800 &euro;</td><td>~3 400-4 700 &euro;</td><td><span class="badge badge-green">~3 500-4 000 &euro;</span></td></tr>
+      <tr><td><strong>Baignade</strong></td><td><span class="badge badge-green">24-25&deg;C</span></td><td>22-25&deg;C</td><td>20-27&deg;C</td><td>19-22&deg;C</td></tr>
+      <tr><td><strong>Ados</strong></td><td>9/10</td><td><span class="badge badge-green">10/10</span></td><td><span class="badge badge-green">10/10</span></td><td>8/10</td></tr>
+      <tr><td><strong>Aurelie</strong></td><td><span class="badge badge-green">10/10</span></td><td>7/10</td><td>7/10</td><td>8/10</td></tr>
+      <tr><td><strong>Monde aout</strong></td><td><span class="badge badge-red">Eleve</span></td><td>Modere</td><td>Modere</td><td><span class="badge badge-green">Faible</span></td></tr>
+      <tr><td><strong>Chiens</strong></td><td>7/10</td><td>7/10</td><td>8/10</td><td><span class="badge badge-green">9/10</span></td></tr>
+    </table>
+  </div>
+
+  <h3>Score faisabilite</h3>
+  <div class="score-grid">
+    <div class="score-card"><div class="sc-label">Trajet</div><div class="sc-value">5/10</div><div class="sc-note">10-12h, tunnel, etape</div></div>
+    <div class="score-card"><div class="sc-label">Activites</div><div class="sc-value">9/10</div><div class="sc-note">Windsurf, canyoning, Monte Baldo</div></div>
+    <div class="score-card"><div class="sc-label">Ados</div><div class="sc-value">9/10</div><div class="sc-note">Garde = paradis ados</div></div>
+    <div class="score-card"><div class="sc-label">Baignade</div><div class="sc-value">9/10</div><div class="sc-note">Eau 24-25&deg;C</div></div>
+    <div class="score-card"><div class="sc-label">Budget</div><div class="sc-value" style="color:var(--orange)">4/10</div><div class="sc-note">Logement tres cher</div></div>
+    <div class="score-card"><div class="sc-label">Chiens</div><div class="sc-value">7/10</div><div class="sc-note">2 plages pet-friendly, chaleur</div></div>
+    <div class="score-card"><div class="sc-label">Gastro</div><div class="sc-value">9/10</div><div class="sc-note">Pizza, gelato, Amarone</div></div>
+    <div class="score-card"><div class="sc-label">Aurelie</div><div class="sc-value">10/10</div><div class="sc-note">Terrasses, aperitivo, flaner</div></div>
+    <div class="score-card"><div class="sc-label">Meteo</div><div class="sc-value">7/10</div><div class="sc-note">Chaud, orages PM</div></div>
+    <div class="score-card highlight"><div class="sc-label">Global</div><div class="sc-value">7.5/10</div><div class="sc-note">La dolce vita familiale</div></div>
+  </div>
+
+  <div class="callout" style="border-color:#065f46;background:linear-gradient(135deg, var(--teal-light), #d1fae5);">
+    <strong>En resume :</strong> L'option "dolce vita" familiale. Le Lac de Garde coche presque toutes les cases &mdash; ados, baignade, gastronomie, Aurelie &mdash; mais le <strong>logement en aout est tres cher</strong> et l'affluence est un vrai probleme. Si le budget passe et que vous gerez les embouteillages (ferries !), c'est un excellent choix. Compare aux Asturies (meme trajet, budget moitie prix, moins de monde, score 9.3/10), les lacs italiens offrent plus de "glamour" mais moins de rapport qualite/prix.
+  </div>
+</section>
+
+</div>
+
+<footer style="text-align:center;padding:2rem 1rem;color:var(--gray-500);font-size:.8rem;">
+  Focus Lacs Italiens &mdash; Etude de faisabilite &mdash; Mars 2026<br>
+  <a href="plan-ete-2026.html" style="color:var(--teal);text-decoration:none;">&larr; Retour au plan general</a>
+</footer>
+
+</body>
+</html>

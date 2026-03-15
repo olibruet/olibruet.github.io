@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Focus Sardaigne — Ete 2026</title>
+  <style>
+    :root {
+      --blue: #2563eb; --blue-light: #dbeafe;
+      --green: #16a34a; --green-light: #dcfce7;
+      --orange: #ea580c; --orange-light: #fff7ed;
+      --red: #dc2626;
+      --purple: #7c3aed; --purple-light: #ede9fe;
+      --amber: #b45309; --amber-light: #fef3c7;
+      --teal: #0d9488; --teal-light: #ccfbf1;
+      --terracotta: #c2410c; --terracotta-light: #fff7ed;
+      --sand: #a16207; --sand-light: #fefce8;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb;
+      --gray-300: #d1d5db; --gray-500: #6b7280; --gray-700: #374151; --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-900); background: var(--gray-50); line-height: 1.6; -webkit-text-size-adjust: 100%; overflow-x: hidden; }
+    .header { background: linear-gradient(135deg, #7c2d12 0%, #c2410c 35%, #ea580c 60%, #fb923c 80%, #fdba74 100%); color: white; padding: 2.5rem 1.5rem; text-align: center; }
+    .header h1 { font-size: 2rem; margin-bottom: .25rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: .9; }
+    .header .dates { display: inline-block; margin-top: .75rem; background: rgba(255,255,255,.2); padding: .4rem 1.2rem; border-radius: 2rem; font-weight: 600; font-size: .95rem; }
+    .header .status { display: inline-block; margin-top: .5rem; background: rgba(255,255,255,.3); padding: .25rem .9rem; border-radius: 2rem; font-size: .82rem; font-weight: 500; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    nav.toc { background: white; border-radius: .75rem; padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); display: flex; flex-wrap: wrap; gap: .5rem; }
+    nav.toc a { display: inline-block; padding: .35rem .9rem; background: var(--terracotta-light); color: var(--terracotta); border-radius: .4rem; text-decoration: none; font-size: .85rem; font-weight: 500; transition: background .15s; }
+    nav.toc a:hover { background: #fed7aa; }
+    section { background: white; border-radius: .75rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    section h2 { font-size: 1.3rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--terracotta); color: var(--terracotta); }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 .75rem; color: var(--gray-700); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 1rem; }
+    th, td { text-align: left; padding: .55rem .65rem; border-bottom: 1px solid var(--gray-200); }
+    th { background: var(--gray-100); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; color: var(--gray-500); }
+    tr:hover td { background: var(--gray-50); }
+    .badge { display: inline-block; padding: .15rem .55rem; border-radius: .3rem; font-size: .75rem; font-weight: 600; }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-blue { background: var(--blue-light); color: var(--blue); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-red { background: #fee2e2; color: var(--red); }
+    .badge-gray { background: var(--gray-100); color: var(--gray-500); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-amber { background: var(--amber-light); color: var(--amber); }
+    .badge-teal { background: var(--teal-light); color: var(--teal); }
+    .badge-terracotta { background: var(--terracotta-light); color: var(--terracotta); }
+    .callout { border-left: 4px solid var(--terracotta); background: var(--terracotta-light); padding: .85rem 1rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; font-size: .9rem; }
+    .callout-green { border-color: var(--green); background: var(--green-light); }
+    .callout-orange { border-color: var(--orange); background: var(--orange-light); }
+    .callout-amber { border-color: var(--amber); background: var(--amber-light); }
+    .callout-blue { border-color: var(--blue); background: var(--blue-light); }
+    .callout-red { border-color: var(--red); background: #fee2e2; }
+    .zone-card { border: 1px solid var(--gray-200); border-radius: .75rem; padding: 1.25rem; margin-bottom: 1rem; background: var(--gray-50); }
+    .zone-card h3 { margin-top: 0 !important; }
+    .zone-card table { margin-bottom: 0; }
+    .spot-card { display: grid; grid-template-columns: 2.5rem 1fr; gap: .75rem; padding: .85rem 0; border-bottom: 1px solid var(--gray-200); align-items: start; }
+    .spot-card:last-child { border-bottom: none; }
+    .spot-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--terracotta-light); color: var(--terracotta); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .95rem; flex-shrink: 0; }
+    .spot-content .spot-name { font-weight: 700; font-size: .95rem; margin-bottom: .15rem; }
+    .spot-content .spot-desc { font-size: .88rem; color: var(--gray-700); line-height: 1.5; }
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .75rem; margin: 1rem 0; }
+    .score-card { background: var(--gray-50); border-radius: .5rem; padding: .85rem; text-align: center; border: 1px solid var(--gray-200); }
+    .score-card .sc-label { font-size: .78rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .03em; margin-bottom: .25rem; }
+    .score-card .sc-value { font-size: 1.5rem; font-weight: 700; color: var(--terracotta); }
+    .score-card .sc-note { font-size: .75rem; color: var(--gray-500); margin-top: .15rem; }
+    .score-card.highlight { background: var(--terracotta-light); border-color: var(--terracotta); }
+    .score-card.highlight .sc-value { color: #7c2d12; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .pros-cons ul { list-style: none; padding: 0; font-size: .85rem; }
+    .pros-cons li { padding: .2rem 0; padding-left: 1.2rem; position: relative; }
+    .pros-cons .pros li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .pros-cons .cons li::before { content: '\2212'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+    .compare-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0; }
+    .compare-table table { min-width: 700px; }
+    .compare-table td:first-child, .compare-table th:first-child { position: sticky; left: 0; background: white; z-index: 1; font-weight: 600; }
+    .compare-table th:first-child { background: var(--gray-100); }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--terracotta); text-decoration: none; font-size: .9rem; font-weight: 500; }
+    .back-link:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: .5rem; overflow-x: hidden; }
+      section { padding: .75rem; margin-bottom: 1rem; }
+      table { font-size: .82rem; }
+      th, td { padding: .4rem .5rem; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+      nav.toc { gap: .35rem; padding: .75rem; }
+      nav.toc a { font-size: .78rem; padding: .3rem .65rem; }
+      .compare-table { max-width: 100vw; margin-left: -.75rem; margin-right: -.75rem; padding: 0 .75rem; }
+    }
+    @media (max-width: 400px) {
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+      .container { padding: .35rem; }
+      section { padding: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Focus Sardaigne</h1>
+  <div class="subtitle">Etude de faisabilite &mdash; Ete 2026</div>
+  <div class="dates">Famille Bruet &bull; 6 pers + 2 Cairn Terriers &bull; ~2 semaines sur place</div>
+  <div class="status">Destination #11 &mdash; Mer + Montagne &mdash; Plages de reve + Supramonte sauvage</div>
+</div>
+
+<div class="container">
+
+<a href="plan-ete-2026.html" class="back-link">&larr; Retour au plan general</a>
+
+<nav class="toc">
+  <a href="#contexte">Contexte</a>
+  <a href="#trajet">Trajet</a>
+  <a href="#zones">Zones</a>
+  <a href="#spots">Top 12</a>
+  <a href="#gastro">Gastronomie</a>
+  <a href="#budget">Budget</a>
+  <a href="#faisabilite">Faisabilite</a>
+  <a href="#verdict">Verdict</a>
+</nav>
+
+<!-- CONTEXTE -->
+<section id="contexte">
+  <h2>Contexte</h2>
+  <table>
+    <tr><td style="font-weight:600;width:35%">Famille</td><td>6 personnes (2 adultes + 4 ados : 17, 15, 13, 10 ans)</td></tr>
+    <tr><td style="font-weight:600">Chiens</td><td>2 Cairn Terriers &mdash; viennent, NON NEGOCIABLE</td></tr>
+    <tr><td style="font-weight:600">Depart</td><td>Vayres, Gironde (33)</td></tr>
+    <tr><td style="font-weight:600">Dates</td><td>~3 sem enveloppe : 29-30 juil &rarr; 16-17 aout. <strong>2 semaines sur place</strong></td></tr>
+    <tr><td style="font-weight:600">Type</td><td><span class="badge badge-blue">Mer + Montagne</span></td></tr>
+  </table>
+
+  <h3>Pourquoi la Sardaigne attire</h3>
+  <div class="pros-cons" style="grid-template-columns:1fr">
+    <ul class="pros">
+      <li><strong>Plages paradisiaques</strong> &mdash; eaux turquoise a faire palir les Caraibes. La Pelosa, Cala Mariolu, Cala Gonone</li>
+      <li><strong>Golfo di Orosei</strong> &mdash; criques sauvages accessibles uniquement en bateau. Spectaculaire</li>
+      <li><strong>Supramonte + Gorropu</strong> &mdash; montagne sauvage, canyon le plus profond d'Europe</li>
+      <li><strong>Nuraghi</strong> &mdash; tours de l'Age du Bronze, uniques au monde. Su Nuraxi = UNESCO</li>
+      <li><strong>Gastronomie</strong> &mdash; porceddu, culurgiones, bottarga, seadas, cannonau</li>
+      <li><strong>Italie = UE</strong> &mdash; passeport europeen chiens = suffisant. ZERO paperasse</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-amber">
+    <strong>Point d'attention :</strong> La famille a deja fait la Corse en ete 2025 (ferry + chiens = OK). La Sardaigne = ile mediterraneenne similaire. Le depaysement sera moindre qu'une destination continentale ou balkanique.
+  </div>
+</section>
+
+<!-- TRAJET -->
+<section id="trajet">
+  <h2>Comment y aller</h2>
+
+  <h3>Option 1 (recommandee) : Vayres &rarr; Toulon + ferry nuit &rarr; Porto Torres</h3>
+  <table>
+    <tr><td style="font-weight:600;width:35%">Route</td><td>Vayres &rarr; Toulon (~720 km, <strong>~7h</strong>)</td></tr>
+    <tr><td style="font-weight:600">Ferry</td><td>Toulon &rarr; Porto Torres (Corsica Ferries) : <strong>depart ~19h, arrivee ~7h</strong> = traversee nuit ~12h</td></tr>
+    <tr><td style="font-weight:600">Alternative</td><td>Toulon &rarr; Olbia (Corsica Ferries) : ~10h de nuit</td></tr>
+    <tr><td style="font-weight:600">Avantage</td><td><strong>On dort sur le ferry = zero nuit d'hotel perdue.</strong> Arrivee fraiche le matin</td></tr>
+  </table>
+
+  <h3>Option 2 : Vayres &rarr; Livorno + ferry &rarr; Olbia</h3>
+  <table>
+    <tr><td style="font-weight:600;width:35%">Route</td><td>Vayres &rarr; Livorno (~1 050 km, ~10h, etape obligatoire)</td></tr>
+    <tr><td style="font-weight:600">Ferry</td><td>Livorno &rarr; Olbia (Moby / Tirrenia) : <strong>6-8h</strong></td></tr>
+    <tr><td style="font-weight:600">Inconvenient</td><td>Plus long en route (10h vs 7h) mais traversee plus courte</td></tr>
+  </table>
+
+  <h3>Option 3 : Via la Corse (Toulon &rarr; Ajaccio &rarr; Bonifacio &rarr; Santa Teresa)</h3>
+  <table>
+    <tr><td style="font-weight:600;width:35%">Principe</td><td>Ferry Toulon &rarr; Ajaccio (~6h), route Corse (~3h), ferry Bonifacio &rarr; Santa Teresa (<strong>1h</strong>)</td></tr>
+    <tr><td style="font-weight:600">Avantage</td><td>Mini-traversee Corse-Sardaigne (1h). Couper le voyage en 2</td></tr>
+    <tr><td style="font-weight:600">Inconvenient</td><td>3 etapes = fatiguant. Plus complexe a organiser</td></tr>
+  </table>
+
+  <h3>Couts de traversee</h3>
+  <table>
+    <thead><tr><th>Poste</th><th>Montant</th></tr></thead>
+    <tbody>
+      <tr><td>Route Vayres &rarr; Toulon A/R (~1 440 km)</td><td>~150-160 EUR (peages + carburant)</td></tr>
+      <tr><td><strong>Ferry A/R Toulon &rarr; Porto Torres (voiture + 6 pers + cabine pet-friendly)</strong></td><td><strong>~700-1 000 EUR</strong></td></tr>
+      <tr><td>Carburant sur l'ile (2 semaines)</td><td>~100-150 EUR</td></tr>
+      <tr><td style="font-weight:700">TOTAL TRAJET A/R</td><td style="font-weight:700">~950-1 310 EUR</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-red">
+    <strong>Ferry aout = reserver TRES tot.</strong> Les prix doublent entre mars et juillet. Cabines pet-friendly en nombre limite. Corsica Ferries = supplement ~15-30 EUR pour les animaux. <strong>Deja fait avec la Corse en 2025 = la famille connait le fonctionnement.</strong>
+  </div>
+</section>
+
+<!-- ZONES -->
+<section id="zones">
+  <h2>Les zones a explorer</h2>
+
+  <div class="zone-card">
+    <h3>Cala Gonone + Golfo di Orosei <span class="badge badge-terracotta">LA star</span></h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Situation</td><td>Cote est, province de Nuoro</td></tr>
+      <tr><td style="font-weight:600">Star</td><td>Criques accessibles uniquement en bateau : Cala Luna, Cala Mariolu, Cala Golorize</td></tr>
+      <tr><td style="font-weight:600">Eau</td><td>Turquoise transparent, fond visible a 10-15 m</td></tr>
+      <tr><td style="font-weight:600">Excursion bateau</td><td>~35-50 EUR/adulte, ~20-30 EUR/enfant. Journee avec arrets baignade</td></tr>
+      <tr><td style="font-weight:600">Logement</td><td><strong>Zone la plus raisonnable de la cote est</strong></td></tr>
+    </table>
+    <div class="callout callout-green">
+      <strong>Cala Gonone = base ideale Famille Bruet.</strong> Prix contenus, acces aux plus belles criques en bateau, Supramonte a 30 min, Gorropu a 1h. Petit port de peche, ambiance decontractee, restos sur le port.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3>Alghero &mdash; La Barceloneta sarde <span class="badge badge-purple">Heritage catalan</span></h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Heritage</td><td>Ville fondee par les Catalans (XIVe s.) &mdash; on entend encore le catalan dans les rues</td></tr>
+      <tr><td style="font-weight:600">Star</td><td><strong>Grotta di Nettuno</strong> &mdash; acces par bateau ou 654 marches (Escala del Cabirol)</td></tr>
+      <tr><td style="font-weight:600">Plages</td><td>Bombarde, Lazzaretto &mdash; sable dore, eau cristalline</td></tr>
+      <tr><td style="font-weight:600">Ambiance</td><td>Remparts face au coucher de soleil, restos de poisson, aperitivo</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3>Supramonte + Gorropu &mdash; La montagne sauvage <span class="badge badge-orange">Aventure</span></h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Gorropu</td><td><strong>Canyon le plus profond d'Europe</strong> &mdash; parois 400-500 m. Rando A/R ~4h</td></tr>
+      <tr><td style="font-weight:600">Supramonte</td><td>Massif calcaire sauvage, grottes, forets de chenes-verts</td></tr>
+      <tr><td style="font-weight:600">Tiscali</td><td>Village nuragique cache dans une doline &mdash; rando spectaculaire 3-4h A/R</td></tr>
+      <tr><td style="font-weight:600">Chiens</td><td><span class="badge badge-green">OK sur sentiers</span> &mdash; randonnee libre. Eau rare = prevoir gamelles</td></tr>
+    </table>
+    <div class="callout callout-orange">
+      <strong>Attention chaleur :</strong> en aout, les randonnees dans le Supramonte = 35-38&deg;C. Depart a l'aube obligatoire (6h-7h). Prevoir 3L d'eau/pers minimum. Avec les chiens = tres exigeant.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3>Cagliari + Sud &mdash; La capitale et ses flamants</h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Cagliari</td><td>Quartier Castello (medieval), vue sur la baie, flamants roses de Molentargius</td></tr>
+      <tr><td style="font-weight:600">Poetto</td><td>Plage urbaine de 8 km &mdash; sable fin, eau peu profonde. Familiale</td></tr>
+      <tr><td style="font-weight:600">Nora</td><td>Cite phenicienne/romaine au bord de l'eau. Ruines + plage</td></tr>
+      <tr><td style="font-weight:600">Prix</td><td><span class="badge badge-green">Zone la plus abordable</span></td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3>Barumini &mdash; Su Nuraxi <span class="badge badge-blue">UNESCO</span></h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Quoi</td><td><strong>Complexe nuragique de l'Age du Bronze</strong> (1500-500 av. J.-C.). Tour + village. UNESCO</td></tr>
+      <tr><td style="font-weight:600">Visite</td><td>Guidee uniquement, ~1h. ~14 EUR/adulte, ~8 EUR/enfant</td></tr>
+      <tr><td style="font-weight:600">Famille 6</td><td><strong>~60-70 EUR</strong></td></tr>
+      <tr><td style="font-weight:600">Interet</td><td><strong>Unique au monde</strong> &mdash; 7 000+ nuraghi sur l'ile, nulle part ailleurs</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3>La Maddalena + Stintino + Nord</h3>
+    <table>
+      <thead><tr><th>Lieu</th><th>Interet</th><th>Affluence aout</th></tr></thead>
+      <tbody>
+        <tr><td><strong>La Maddalena</strong></td><td>Archipel 7 iles, eaux cristallines, Spiaggia Rosa (Budelli, visible en bateau)</td><td><span class="badge badge-orange">Elevee</span></td></tr>
+        <tr><td><strong>La Pelosa (Stintino)</strong></td><td>LA plage carte postale : sable blanc, tour aragonaise. Reservation obligatoire</td><td><span class="badge badge-red">Extreme</span></td></tr>
+        <tr><td>Castelsardo</td><td>Village perche spectaculaire, chateau, artisanat de paniers</td><td><span class="badge badge-green">Moderee</span></td></tr>
+        <tr><td>Costa Smeralda</td><td>Porto Cervo &mdash; traverser pour les vues, <strong>NE PAS s'arreter</strong></td><td><span class="badge badge-red">Extreme + hors budget</span></td></tr>
+      </tbody>
+    </table>
+    <div class="callout callout-amber">
+      <strong>La Pelosa = reservation obligatoire en aout.</strong> Bracelet + nombre limite par jour. Reserver en ligne plusieurs jours a l'avance.
+    </div>
+  </div>
+
+  <div class="zone-card">
+    <h3>Orgosolo + Interieur &mdash; L'ame de la Sardaigne</h3>
+    <table>
+      <tr><td style="font-weight:600;width:35%">Orgosolo</td><td><strong>Murales</strong> &mdash; fresques politiques et sociales sur les murs du village. Art de rue saisissant, gratuit</td></tr>
+      <tr><td style="font-weight:600">Mamoiada</td><td>Masques traditionnels des Mamuthones &mdash; musee ethnographique</td></tr>
+      <tr><td style="font-weight:600">Oliena</td><td>Village au pied du Supramonte, cannonau, huile d'olive. Agriturismo authentique</td></tr>
+      <tr><td style="font-weight:600">Bosa</td><td>Village pastel au bord du Temo, chateau Malaspina. Le plus beau village de la cote ouest</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- TOP 12 -->
+<section id="spots">
+  <h2>Top 12 des spots</h2>
+
+  <div class="spot-card">
+    <div class="spot-num">1</div>
+    <div class="spot-content">
+      <div class="spot-name">Golfo di Orosei en bateau</div>
+      <div class="spot-desc">Cala Luna, Cala Mariolu, Cala Golorize : criques turquoise accessibles uniquement par la mer. Arche naturelle de Golorize = icone de la Sardaigne. Journee bateau depuis Cala Gonone = LE moment du voyage.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">2</div>
+    <div class="spot-content">
+      <div class="spot-name">Gorropu</div>
+      <div class="spot-desc">Canyon le plus profond d'Europe (parois 400-500 m). Rando 4h A/R dans un decor mineral lunaire. Pour les ados qui aiment l'aventure.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">3</div>
+    <div class="spot-content">
+      <div class="spot-name">Grotta di Nettuno (Alghero)</div>
+      <div class="spot-desc">Grotte marine spectaculaire, stalactites geantes, lac souterrain. Acces par bateau ou 654 marches sculptees dans la falaise.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">4</div>
+    <div class="spot-content">
+      <div class="spot-name">Su Nuraxi (Barumini)</div>
+      <div class="spot-desc">Tour nuragique UNESCO, Age du Bronze. Unique au monde &mdash; les nuraghi n'existent qu'en Sardaigne. L'histoire millenaire de l'ile en 1h de visite guidee.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">5</div>
+    <div class="spot-content">
+      <div class="spot-name">La Pelosa (Stintino)</div>
+      <div class="spot-desc">Plage carte postale : sable blanc, eau turquoise peu profonde, tour aragonaise en arriere-plan. Reservation obligatoire en ete.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">6</div>
+    <div class="spot-content">
+      <div class="spot-name">Remparts d'Alghero au coucher de soleil</div>
+      <div class="spot-desc">Promenade sur les bastions catalans face a la mer. Aperitivo + coucher de soleil = moment magique. Heritage catalan unique en Italie.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">7</div>
+    <div class="spot-content">
+      <div class="spot-name">Orgosolo murales</div>
+      <div class="spot-desc">Village de montagne couvert de fresques politiques et sociales. Art de rue puissant, inattendu, gratuit. Detour culturel unique.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">8</div>
+    <div class="spot-content">
+      <div class="spot-name">Archipel de La Maddalena</div>
+      <div class="spot-desc">Eaux cristallines, plages de sable rose (Budelli), iles sauvages. Excursion bateau journee depuis Palau. Paysages d'un autre monde.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">9</div>
+    <div class="spot-content">
+      <div class="spot-name">Tiscali</div>
+      <div class="spot-desc">Village nuragique cache dans une doline au sommet du Supramonte. Rando spectaculaire a travers foret et rochers. Archeologie + aventure.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">10</div>
+    <div class="spot-content">
+      <div class="spot-name">Cagliari &mdash; Quartier Castello</div>
+      <div class="spot-desc">Vieille ville medievale perchee, cathedrale, bastions, vue panoramique sur la baie et les flamants roses de Molentargius.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">11</div>
+    <div class="spot-content">
+      <div class="spot-name">Bosa</div>
+      <div class="spot-desc">Village pastel au bord du Temo (seul fleuve navigable de Sardaigne). Chateau des Malaspina, ruelles colorees. Le plus beau village de la cote ouest.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">12</div>
+    <div class="spot-content">
+      <div class="spot-name">Cala Gonone au coucher de soleil</div>
+      <div class="spot-desc">Petit port de peche, restos pieds dans l'eau, falaises illuminees par le soleil couchant. La base quotidienne, simple et belle.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GASTRONOMIE -->
+<section id="gastro">
+  <h2>Gastronomie sarde</h2>
+
+  <table>
+    <thead><tr><th style="width:25%">Specialite</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Porceddu</strong></td><td>Cochon de lait roti au feu de bois, laque au myrte. <strong>LE plat de fete sarde.</strong> Festif, communautaire = le diner en famille par excellence en agriturismo</td></tr>
+      <tr><td><strong>Culurgiones</strong></td><td>Raviolis sardes farcis pomme de terre + menthe + pecorino, refermes en epi de ble. Oeuvre d'art culinaire. Les enfants adorent</td></tr>
+      <tr><td><strong>Bottarga</strong></td><td>Oeufs de mulet seches et rapes &mdash; l'or de la Sardaigne. En copeaux sur spaghetti al dente. Umami pur</td></tr>
+      <tr><td><strong>Fregola con arselle</strong></td><td>Petites pates roulees a la main, grillees, servies avec palourdes. La signature de l'ile</td></tr>
+      <tr><td><strong>Pecorino sardo</strong></td><td>Fromage de brebis DOP &mdash; jeune (dolce) ou affine (maturo). Incontournable</td></tr>
+      <tr><td><strong>Seadas</strong></td><td>Beignet de fromage frais frit, nappe de miel d'arbousier. LE dessert sarde</td></tr>
+      <tr><td><strong>Pane carasau</strong></td><td>Pain plat croustillant, fin comme du papier. Pain des bergers. Nature ou en pane frattau</td></tr>
+      <tr><td><strong>Malloreddus</strong></td><td>Gnocchetti sardes stries, sauce saucisse + safran + tomate. Comfort food</td></tr>
+      <tr><td><strong>Cannonau</strong></td><td>Vin rouge autochtone &mdash; fruits rouges, tannins doux. Le grenache originel</td></tr>
+      <tr><td><strong>Mirto</strong></td><td>Liqueur de myrte &mdash; rouge (baies) ou blanc (feuilles). Le digestif sarde, frais en fin de repas</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Prix des repas</h3>
+  <table>
+    <thead><tr><th>Poste</th><th>Prix Sardaigne</th><th>vs France</th></tr></thead>
+    <tbody>
+      <tr><td>Plat principal restaurant</td><td>10-16 EUR</td><td><span class="badge badge-green">-30 a -40%</span></td></tr>
+      <tr><td>Repas famille 6 (midi)</td><td>70-120 EUR</td><td>vs 130-200 EUR</td></tr>
+      <tr><td>Repas famille 6 (soir, poisson)</td><td>90-150 EUR</td><td>vs 160-250 EUR</td></tr>
+      <tr><td>Agriturismo (menu complet + vin)</td><td><strong>18-30 EUR/pers</strong></td><td><span class="badge badge-green">Imbattable</span></td></tr>
+      <tr><td>Pizza</td><td>7-11 EUR</td><td></td></tr>
+      <tr><td>Courses hebdo (famille 6)</td><td>140-190 EUR</td><td>vs 250-300 EUR</td></tr>
+      <tr><td><strong>Costa Smeralda</strong></td><td><strong>+100-200% sur tout</strong></td><td><span class="badge badge-red">A eviter</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Les agriturismo = le bon plan Sardaigne.</strong> Menu complet (antipasti + primo + secondo + dessert + vin + mirto) pour 25-30 EUR/pers. En famille de 6 = ~150-180 EUR pour un festin pantagruelique. Mieux que n'importe quel restaurant.
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <h2>Budget (2 semaines sur place)</h2>
+
+  <h3>Logement</h3>
+  <table>
+    <thead><tr><th>Zone</th><th>Prix / semaine</th><th>Commentaire</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Cala Gonone / Orosei</strong></td><td><strong>800-1 400 EUR</strong></td><td><span class="badge badge-green">Recommande</span></td></tr>
+      <tr><td>Alghero environs</td><td>900-1 500 EUR</td><td>Bonne offre</td></tr>
+      <tr><td>Cagliari / Sud</td><td>700-1 200 EUR</td><td>Le moins cher</td></tr>
+      <tr><td>La Maddalena / Nord-Est</td><td>1 200-2 000 EUR</td><td>Cher en aout</td></tr>
+      <tr><td>Costa Smeralda</td><td>2 500-5 000+ EUR</td><td><span class="badge badge-red">Hors budget</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-red">
+    <strong>Reserver MAINTENANT (mars 2026).</strong> Les maisons pet-friendly pour 6 en aout partent tot. Filtre "animali ammessi" + "casa" + "giardino". Les agriturismo avec chambres = alternative dog-friendly.
+  </div>
+
+  <h3>Budget total estime</h3>
+  <table>
+    <thead><tr><th>Poste</th><th>Estimation</th></tr></thead>
+    <tbody>
+      <tr><td>Ferry A/R (voiture + 6 pers + cabines pet-friendly)</td><td>~700-1 000 EUR</td></tr>
+      <tr><td>Route Vayres &rarr; port A/R (peages + carburant)</td><td>~150-200 EUR</td></tr>
+      <tr><td>Etape hotel (si option Livorno)</td><td>~0-150 EUR</td></tr>
+      <tr><td>Logement (2 semaines, base Cala Gonone)</td><td>~1 600-2 800 EUR</td></tr>
+      <tr><td>Courses alimentaires (2 sem)</td><td>~280-380 EUR</td></tr>
+      <tr><td>Restaurants (6-8 sorties dont 2 agriturismo)</td><td>~500-900 EUR</td></tr>
+      <tr><td>Excursions bateau (Golfo di Orosei + Maddalena)</td><td>~200-350 EUR</td></tr>
+      <tr><td>Activites (Grotta di Nettuno, Su Nuraxi, kayak)</td><td>~150-300 EUR</td></tr>
+      <tr><td>Carburant sur l'ile (2 sem)</td><td>~100-150 EUR</td></tr>
+      <tr><td>Divers (glaces, parking, La Pelosa, souvenirs)</td><td>~150-250 EUR</td></tr>
+      <tr><td style="font-weight:700">TOTAL VOYAGE</td><td style="font-weight:700">~3 830-6 480 EUR</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>Scenario realiste : ~4 500-5 200 EUR.</strong> Le ferry est le poste lourd (~700-1 000 EUR) mais il remplace 2 jours de route + 2 nuits d'hotel. La vie sur place est plus abordable grace aux agriturismo. Le vrai risque = derive vers la Costa Smeralda.
+  </div>
+</section>
+
+<!-- FAISABILITE -->
+<section id="faisabilite">
+  <h2>Faisabilite globale</h2>
+
+  <h3>Bilan temps</h3>
+  <table>
+    <tr><td style="font-weight:600;width:40%">Trajet aller (route + ferry nuit)</td><td>1-1,5 jours</td></tr>
+    <tr><td style="font-weight:600">Trajet retour (ferry nuit + route)</td><td>1-1,5 jours</td></tr>
+    <tr><td style="font-weight:700">Temps sur place</td><td style="font-weight:700">~15 jours</td></tr>
+    <tr><td style="font-weight:600">Total</td><td>~18 jours</td></tr>
+  </table>
+  <div class="callout callout-green">
+    <strong>Ratio temps sur place / total = ~83%.</strong> Meilleur que la Croatie (78%) grace au ferry de nuit. On dort en traversant = zero temps perdu.
+  </div>
+
+  <h3>Contraintes chiens</h3>
+  <table>
+    <thead><tr><th style="width:35%">Aspect</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td>Entree Sardaigne (Italie)</td><td><span class="badge badge-green">UE</span> &mdash; passeport europeen + vaccin rage. ZERO complication</td></tr>
+      <tr><td>Ferry</td><td><span class="badge badge-green">Cabines pet-friendly</span> &mdash; Corsica Ferries, Moby. Deja fait Corse 2025</td></tr>
+      <tr><td>Plages</td><td><span class="badge badge-red">Problematique</span> &mdash; ordinanze comunali interdisent les chiens sur la plupart des plages ete. Spiagge per cani rares</td></tr>
+      <tr><td>Chaleur</td><td><span class="badge badge-red">38&deg;C en aout</span> &mdash; Cairn Terriers a pelage dense. Climatisation obligatoire</td></tr>
+      <tr><td>Randonnees</td><td><span class="badge badge-green">OK sur sentiers</span> &mdash; prevoir eau +++</td></tr>
+      <tr><td>Restos/terrasses</td><td>Generalement dog-friendly en Italie</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-orange">
+    <strong>Score chiens : 5/10.</strong> L'administratif est parfait (UE, ferry deja fait) mais les restrictions plages en ete et surtout la chaleur extreme (38&deg;C) posent un vrai probleme pour 2 Cairn Terriers a pelage dense.
+  </div>
+
+  <h3>Affluence en aout</h3>
+  <table>
+    <thead><tr><th>Lieu</th><th>Niveau</th></tr></thead>
+    <tbody>
+      <tr><td>Costa Smeralda</td><td><span class="badge badge-red">Extreme</span> &mdash; jet-set + tourisme de masse</td></tr>
+      <tr><td>La Pelosa (Stintino)</td><td><span class="badge badge-red">Extreme</span> &mdash; reservation obligatoire</td></tr>
+      <tr><td>Cala Gonone / Golfo di Orosei</td><td><span class="badge badge-orange">Eleve</span> &mdash; bateaux charges</td></tr>
+      <tr><td>Alghero centre</td><td><span class="badge badge-orange">Eleve</span></td></tr>
+      <tr><td>Cagliari (Poetto)</td><td><span class="badge badge-orange">Eleve</span></td></tr>
+      <tr><td>Orgosolo / interieur</td><td><span class="badge badge-green">Faible</span></td></tr>
+      <tr><td>Supramonte / Gorropu</td><td><span class="badge badge-green">Faible</span></td></tr>
+    </tbody>
+  </table>
+  <div class="callout">
+    <strong>La cote sarde est tres frequentee en aout, mais l'interieur reste sauvage et deserte.</strong> Astuce : plage le matin (tot), montagne/interieur l'apres-midi.
+  </div>
+
+  <h3>Meteo en aout</h3>
+  <table>
+    <thead><tr><th>Parametre</th><th>Valeur</th></tr></thead>
+    <tbody>
+      <tr><td>Temperature max</td><td>30-38&deg;C</td></tr>
+      <tr><td>Temperature nuit</td><td>22-25&deg;C</td></tr>
+      <tr><td>Temperature mer</td><td><strong>25-27&deg;C</strong></td></tr>
+      <tr><td>Jours de pluie</td><td>~1-2/mois</td></tr>
+      <tr><td>Ensoleillement</td><td><strong>12h/jour</strong></td></tr>
+      <tr><td>Vent dominant</td><td>Maestrale (NW) &mdash; rafraichissant, agite la cote ouest</td></tr>
+    </tbody>
+  </table>
+  <div class="callout callout-amber">
+    <strong>Soleil garanti mais potentiellement trop chaud.</strong> 35-38&deg;C avec 2 Cairn Terriers = vigilance permanente. Logement climatise obligatoire. Pas de chiens en voiture aux heures chaudes. Mer a 25-27&deg;C = baignade paradisiaque.
+  </div>
+
+  <h3>Points de vigilance</h3>
+  <table>
+    <thead><tr><th style="width:30%">Point</th><th>Detail</th></tr></thead>
+    <tbody>
+      <tr><td>Ferry aout</td><td>Reserver TRES tot (mars = deja tard). Prix doublent entre mars et juillet</td></tr>
+      <tr><td>Plages + chiens</td><td>Verifier ordinanze comunali de chaque commune. Spiagge per cani rares</td></tr>
+      <tr><td>Chaleur + chiens</td><td>Climatisation obligatoire. Pas de chiens en voiture 12h-17h</td></tr>
+      <tr><td>Routes interieur</td><td>Sinueuses, etroites, lentes. Prevoir 2x le temps Google Maps</td></tr>
+      <tr><td>Costa Smeralda</td><td>NE PAS s'arreter. Cafe a 8 EUR, parking a 15 EUR/h</td></tr>
+      <tr><td>La Pelosa</td><td>Reservation + bracelet obligatoires en ete</td></tr>
+      <tr><td>Carburant interieur</td><td>Stations-service rares. Faire le plein avant la montagne</td></tr>
+      <tr><td>Monnaie</td><td><strong>Euro</strong> &mdash; pas de change</td></tr>
+      <tr><td>Langue</td><td>Italien + sarde. Anglais correct en zone touristique</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <h2>Verdict</h2>
+
+  <div class="score-grid">
+    <div class="score-card"><div class="sc-label">Trajet</div><div class="sc-value">5</div><div class="sc-note">/10 &mdash; 7h + ferry nuit</div></div>
+    <div class="score-card"><div class="sc-label">Activites</div><div class="sc-value">7</div><div class="sc-note">/10 &mdash; Bateaux, grottes, rando</div></div>
+    <div class="score-card"><div class="sc-label">Ados</div><div class="sc-value">6</div><div class="sc-note">/10 &mdash; Contemplatif</div></div>
+    <div class="score-card highlight"><div class="sc-label">Baignade</div><div class="sc-value">9</div><div class="sc-note">/10 &mdash; Eaux caraibes</div></div>
+    <div class="score-card"><div class="sc-label">Budget</div><div class="sc-value">5</div><div class="sc-note">/10 &mdash; Ferry cher</div></div>
+    <div class="score-card"><div class="sc-label">Chiens</div><div class="sc-value">5</div><div class="sc-note">/10 &mdash; Chaleur + plages</div></div>
+    <div class="score-card highlight"><div class="sc-label">Gastro</div><div class="sc-value">8</div><div class="sc-note">/10 &mdash; Porceddu, bottarga</div></div>
+    <div class="score-card"><div class="sc-label">Depaysement</div><div class="sc-value">6</div><div class="sc-note">/10 &mdash; Corse-like</div></div>
+    <div class="score-card"><div class="sc-label">Charme</div><div class="sc-value">7</div><div class="sc-note">/10 &mdash; Alghero, Bosa</div></div>
+    <div class="score-card"><div class="sc-label">Meteo</div><div class="sc-value">7</div><div class="sc-note">/10 &mdash; Trop chaud?</div></div>
+  </div>
+
+  <div class="callout" style="background: linear-gradient(135deg, #fff7ed, #ffedd5); border-color: var(--terracotta); text-align: center; padding: 1.25rem;">
+    <div style="font-size: 2rem; font-weight: 800; color: #7c2d12;">6.5 / 10</div>
+    <div style="font-size: 1rem; font-weight: 600; color: var(--terracotta); margin-top: .25rem;">Plages de reve, mais chaleur + chiens = frein</div>
+    <div style="font-size: .85rem; color: var(--gray-700); margin-top: .25rem;">Parmi les plus belles plages de Mediterranee, mais 38&deg;C avec 2 Cairn Terriers en aout + Corse deja faite = depaysement limite</div>
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <h3 style="color:var(--green);margin-top:0">Pour</h3>
+      <ul>
+        <li>Plages parmi les plus belles de Mediterranee (Golfo di Orosei)</li>
+        <li>Gastronomie exceptionnelle (porceddu, agriturismo)</li>
+        <li>Ferry deja maitrise (Corse 2025)</li>
+        <li>UE = zero paperasse chiens</li>
+        <li>Montagne sauvage (Gorropu, Supramonte)</li>
+        <li>Sites uniques au monde (nuraghi, UNESCO)</li>
+        <li>Ferry nuit = ratio temps sur place excellent (83%)</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h3 style="color:var(--orange);margin-top:0">Contre</h3>
+      <ul>
+        <li>38&deg;C en aout + 2 Cairn Terriers = galere</li>
+        <li>Plages interdites aux chiens en ete (ordinanze comunali)</li>
+        <li>Deja fait la Corse = moins de depaysement</li>
+        <li>Ferry cher (~700-1 000 EUR A/R)</li>
+        <li>Moins d'adrenaline ados que Balkans</li>
+        <li>Costa Smeralda = piege a touristes si on s'y aventure</li>
+        <li>Routes interieures sinueuses et lentes</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Comparaison</h3>
+  <div class="compare-table">
+    <table>
+      <thead>
+        <tr><th>Critere</th><th>Sardaigne</th><th>Croatie</th><th>Slovenie</th><th>Asturies</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Trajet</td><td>7h + ferry nuit</td><td>2 jours</td><td>2 jours</td><td><strong>7h</strong></td></tr>
+        <tr><td>Cout trajet A/R</td><td>~950-1 200 EUR</td><td>~950 EUR</td><td>~800 EUR</td><td><strong>~350 EUR</strong></td></tr>
+        <tr><td>Budget total (2 sem)</td><td>~4 500-5 200</td><td>~4 500-5 200</td><td>~4 200-4 800</td><td>~3 200-4 000</td></tr>
+        <tr><td>Baignade</td><td><strong>9/10</strong></td><td>7/10</td><td>5/10</td><td>6/10</td></tr>
+        <tr><td>Wow visuel</td><td>8/10</td><td>8/10</td><td>9/10</td><td>7/10</td></tr>
+        <tr><td>Activites ados</td><td>6/10</td><td><strong>9/10</strong></td><td>10/10</td><td>8/10</td></tr>
+        <tr><td>Chiens</td><td style="color:var(--orange)">5/10</td><td><strong>8/10</strong></td><td>7/10</td><td>7/10</td></tr>
+        <tr><td>Gastro</td><td>8/10</td><td><strong>9/10</strong></td><td>8/10</td><td>8/10</td></tr>
+        <tr><td>Meteo</td><td>7/10</td><td><strong>9/10</strong></td><td>5/10</td><td>7/10</td></tr>
+        <tr><td>Monde aout</td><td>5/10</td><td>4/10</td><td>6/10</td><td><strong>7/10</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout callout-blue">
+    <strong>Verdict final :</strong> La Sardaigne offre objectivement parmi les plus belles plages de Mediterranee et une gastronomie sarde exceptionnelle. Mais pour la famille Bruet <strong>specifiquement</strong>, trois freins plombent le score : la <strong>chaleur extreme pour les Cairn Terriers</strong> (38&deg;C + plages interdites aux chiens en ete), le <strong>manque de depaysement</strong> (ile mediterraneenne deja faite avec la Corse en 2025), et le <strong>cout du ferry</strong> (700-1 000 EUR). Sans les chiens, la Sardaigne serait a 7.5/10. Avec 2 Cairn Terriers en aout a 38&deg;C... c'est un candidat moyen dans le classement des 12.
+  </div>
+</section>
+
+</div>
+</body>
+</html>

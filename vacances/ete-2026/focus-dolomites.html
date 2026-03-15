@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Focus Dolomites — Ete 2026</title>
+  <style>
+    :root {
+      --blue: #2563eb; --blue-light: #dbeafe;
+      --green: #16a34a; --green-light: #dcfce7;
+      --orange: #ea580c; --orange-light: #fff7ed;
+      --red: #dc2626;
+      --purple: #7c3aed; --purple-light: #ede9fe;
+      --amber: #b45309; --amber-light: #fef3c7;
+      --teal: #0d9488; --teal-light: #ccfbf1;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb;
+      --gray-300: #d1d5db; --gray-500: #6b7280; --gray-700: #374151; --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-900); background: var(--gray-50); line-height: 1.6;
+      -webkit-text-size-adjust: 100%; overflow-x: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #065f46 0%, #0d9488 40%, #5eead4 80%, #99f6e4 100%);
+      color: white; padding: 2.5rem 1.5rem; text-align: center;
+    }
+    .header h1 { font-size: 2rem; margin-bottom: .25rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: .9; }
+    .header .dates {
+      display: inline-block; margin-top: .75rem;
+      background: rgba(255,255,255,.2); padding: .4rem 1.2rem;
+      border-radius: 2rem; font-weight: 600; font-size: .95rem;
+    }
+    .header .status {
+      display: inline-block; margin-top: .5rem;
+      background: rgba(255,255,255,.3); padding: .25rem .9rem;
+      border-radius: 2rem; font-size: .82rem; font-weight: 500;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    nav.toc {
+      background: white; border-radius: .75rem; padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      display: flex; flex-wrap: wrap; gap: .5rem;
+    }
+    nav.toc a {
+      display: inline-block; padding: .35rem .9rem;
+      background: var(--teal-light); color: var(--teal);
+      border-radius: .4rem; text-decoration: none;
+      font-size: .85rem; font-weight: 500; transition: background .15s;
+    }
+    nav.toc a:hover { background: #a7f3d0; }
+    section { background: white; border-radius: .75rem; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    section h2 { font-size: 1.3rem; margin-bottom: 1rem; padding-bottom: .5rem; border-bottom: 2px solid var(--teal); color: var(--teal); }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 .75rem; color: var(--gray-700); }
+    section h4 { font-size: .95rem; margin: 1rem 0 .5rem; color: var(--gray-500); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 1rem; }
+    th, td { text-align: left; padding: .55rem .65rem; border-bottom: 1px solid var(--gray-200); }
+    th { background: var(--gray-100); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .03em; color: var(--gray-500); }
+    tr:hover td { background: var(--gray-50); }
+    .badge { display: inline-block; padding: .15rem .55rem; border-radius: .3rem; font-size: .75rem; font-weight: 600; }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-blue { background: var(--blue-light); color: var(--blue); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-red { background: #fee2e2; color: var(--red); }
+    .badge-gray { background: var(--gray-100); color: var(--gray-500); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-amber { background: var(--amber-light); color: var(--amber); }
+    .badge-teal { background: var(--teal-light); color: var(--teal); }
+    .callout { border-left: 4px solid var(--teal); background: var(--teal-light); padding: .85rem 1rem; border-radius: 0 .5rem .5rem 0; margin: 1rem 0; font-size: .9rem; }
+    .callout-green { border-color: var(--green); background: var(--green-light); }
+    .callout-orange { border-color: var(--orange); background: var(--orange-light); }
+    .callout-amber { border-color: var(--amber); background: var(--amber-light); }
+    .callout-blue { border-color: var(--blue); background: var(--blue-light); }
+    .callout-red { border-color: var(--red); background: #fef2f2; }
+    .zone-card { border: 1px solid var(--gray-200); border-radius: .75rem; padding: 1.25rem; margin-bottom: 1rem; background: var(--gray-50); }
+    .zone-card h3 { margin-top: 0 !important; }
+    .zone-card table { margin-bottom: 0; }
+    .spot-card { display: grid; grid-template-columns: 2.5rem 1fr; gap: .75rem; padding: .85rem 0; border-bottom: 1px solid var(--gray-200); align-items: start; }
+    .spot-card:last-child { border-bottom: none; }
+    .spot-num { width: 2.5rem; height: 2.5rem; border-radius: 50%; background: var(--teal-light); color: var(--teal); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: .95rem; flex-shrink: 0; }
+    .spot-content .spot-name { font-weight: 700; font-size: .95rem; margin-bottom: .15rem; }
+    .spot-content .spot-desc { font-size: .88rem; color: var(--gray-700); line-height: 1.5; }
+    .score-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: .75rem; margin: 1rem 0; }
+    .score-card { background: var(--gray-50); border-radius: .5rem; padding: .85rem; text-align: center; border: 1px solid var(--gray-200); }
+    .score-card .sc-label { font-size: .78rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .03em; margin-bottom: .25rem; }
+    .score-card .sc-value { font-size: 1.5rem; font-weight: 700; color: var(--teal); }
+    .score-card .sc-note { font-size: .75rem; color: var(--gray-500); margin-top: .15rem; }
+    .score-card.highlight { background: var(--teal-light); border-color: var(--teal); }
+    .score-card.highlight .sc-value { color: #065f46; }
+    .pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+    .pros-cons ul { list-style: none; padding: 0; font-size: .85rem; }
+    .pros-cons li { padding: .2rem 0; padding-left: 1.2rem; position: relative; }
+    .pros-cons .pros li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .pros-cons .cons li::before { content: '\2212'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+    .compare-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0; }
+    .compare-table table { min-width: 700px; }
+    .compare-table td:first-child, .compare-table th:first-child { position: sticky; left: 0; background: white; z-index: 1; font-weight: 600; }
+    .compare-table th:first-child { background: var(--gray-100); }
+    .back-link { display: inline-block; margin-bottom: 1rem; color: var(--teal); text-decoration: none; font-size: .9rem; font-weight: 500; }
+    .back-link:hover { text-decoration: underline; }
+    .lake-temp { display: inline-block; padding: .1rem .4rem; border-radius: .25rem; font-weight: 600; font-size: .8rem; }
+    .lake-hot { background: #fef3c7; color: #b45309; }
+    .lake-cold { background: #dbeafe; color: #2563eb; }
+    .lake-frozen { background: #e0e7ff; color: #4338ca; }
+    .crowd-tag { display: inline-block; padding: .1rem .4rem; border-radius: .25rem; font-weight: 600; font-size: .75rem; }
+    .crowd-extreme { background: #fee2e2; color: #dc2626; }
+    .crowd-high { background: #fff7ed; color: #ea580c; }
+    .crowd-moderate { background: #fef3c7; color: #b45309; }
+    .crowd-low { background: #dcfce7; color: #16a34a; }
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: .5rem; overflow-x: hidden; }
+      section { padding: .75rem; margin-bottom: 1rem; }
+      table { font-size: .82rem; }
+      th, td { padding: .4rem .5rem; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+      nav.toc { gap: .35rem; padding: .75rem; }
+      nav.toc a { font-size: .78rem; padding: .3rem .65rem; }
+      .compare-table { max-width: 100vw; margin-left: -.75rem; margin-right: -.75rem; padding: 0 .75rem; }
+    }
+    @media (max-width: 400px) {
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+      .container { padding: .35rem; }
+      section { padding: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Focus Dolomites + Lacs</h1>
+  <div class="subtitle">Etude de faisabilite &mdash; Ete 2026</div>
+  <div class="dates">Famille Bruet &bull; 6 pers + 2 Cairn Terriers &bull; ~3 semaines</div>
+  <div class="status">Destination #2 &mdash; Les plus belles montagnes d'Europe &mdash; Montagne + Lac</div>
+</div>
+
+<div class="container">
+
+<a href="plan-ete-2026.html" class="back-link">&larr; Retour au plan general</a>
+
+<nav class="toc">
+  <a href="#contexte">Contexte</a>
+  <a href="#trajet">Trajet</a>
+  <a href="#zones">Zones</a>
+  <a href="#lacs">Lacs</a>
+  <a href="#randos">Randos</a>
+  <a href="#ados">Activites ados</a>
+  <a href="#spots">Top 12</a>
+  <a href="#gastro">Gastronomie</a>
+  <a href="#budget">Budget</a>
+  <a href="#affluence">Affluence</a>
+  <a href="#faisabilite">Faisabilite</a>
+  <a href="#verdict">Verdict</a>
+</nav>
+
+<!-- CONTEXTE -->
+<section id="contexte">
+  <h2>Contexte</h2>
+  <table>
+    <tr><th style="width:30%">Parametre</th><th>Valeur</th></tr>
+    <tr><td>Famille</td><td>6 personnes (2 adultes + 4 enfants/ados : 17, 15, 13, 10 ans)</td></tr>
+    <tr><td>Chiens</td><td>2 Cairn Terriers &mdash; <strong>viennent, non negociable</strong></td></tr>
+    <tr><td>Depart</td><td>Vayres, Gironde (33)</td></tr>
+    <tr><td>Dates</td><td>~3 semaines : mer 29 / jeu 30 juillet &rarr; retour ~16-17 aout <span class="badge badge-teal">~18-19 jours</span></td></tr>
+    <tr><td>Type</td><td><span class="badge badge-purple">Montagne + Lac</span> &mdash; un autre monde</td></tr>
+  </table>
+
+  <div class="callout" style="border-color:#065f46;background:linear-gradient(135deg, var(--teal-light), #d1fae5);">
+    <strong>Les plus belles montagnes d'Europe, point.</strong> Tours de calcaire verticales, lacs turquoise irreels, enrosadira (roches roses au coucher du soleil). Culture double italo-tyrolienne unique : pizza + Strudel au meme repas. Rifugi d'altitude, via ferrata, Tre Cime di Lavaredo. Le "wow" visuel absolu.
+  </div>
+</section>
+
+<!-- TRAJET -->
+<section id="trajet">
+  <h2>Comment y aller</h2>
+  <p style="font-size:.9rem;color:var(--gray-700);margin-bottom:1rem;">Vayres &rarr; Lyon &rarr; Chambery &rarr; Tunnel du Frejus &rarr; Turin &rarr; Verone &rarr; A22 Brennero &rarr; Bolzano</p>
+  <table>
+    <tr><th style="width:30%">Critere</th><th>Detail</th></tr>
+    <tr><td>Distance</td><td><strong>~1 200 km</strong></td></tr>
+    <tr><td>Duree</td><td><strong>11-12h</strong> &mdash; <span class="badge badge-orange">1 etape obligatoire</span></td></tr>
+    <tr><td>Peages France</td><td>A89 + A43 : <strong>~80-95 &euro;</strong></td></tr>
+    <tr><td>Tunnel du Frejus</td><td><strong>~57 &euro;</strong> (aller simple)</td></tr>
+    <tr><td>Peages Italie</td><td>Turin &rarr; Bolzano (A22) : <strong>~25-30 &euro;</strong></td></tr>
+    <tr><td>Carburant (aller)</td><td>~85 L &times; ~1,55 &euro;/L = <strong>~130 &euro;</strong></td></tr>
+    <tr><td><strong>Cout aller</strong></td><td><strong>~300-310 &euro;</strong></td></tr>
+    <tr><td><strong>Total A/R</strong></td><td><span class="badge badge-red">~600-620 &euro;</span> &mdash; le plus cher de la liste</td></tr>
+  </table>
+
+  <div class="callout callout-orange">
+    <strong>Trajet le plus cher de la liste.</strong> Peages France + tunnel Frejus + peages Italie = 600+ &euro; A/R. A comparer : Asturies 200 &euro;, Autriche 480-520 &euro;.
+  </div>
+
+  <h3>Etapes recommandees</h3>
+  <table>
+    <tr><th>Etape</th><th>Detail</th><th>Interet</th></tr>
+    <tr><td><strong>Lyon</strong></td><td>~5h30 depuis Vayres</td><td>6h restantes le lendemain</td></tr>
+    <tr><td><strong>Turin</strong></td><td>~8-9h depuis Vayres</td><td>Visiter Turin (Mole, chocolat). 3-4h restantes</td></tr>
+    <tr><td><strong>Verone (retour)</strong></td><td>Sur le chemin</td><td>Arenes romaines, aperitivo</td></tr>
+  </table>
+</section>
+
+<!-- ZONES -->
+<section id="zones">
+  <h2>Les zones a faire</h2>
+
+  <div class="callout callout-green">
+    <strong>Organisation suggeree :</strong> Val Gardena / base Ortisei (sem 1) &rarr; Cortina + lacs (sem 2, base Cortina ou San Candido) &rarr; Val di Fassa / Bolzano (derniers jours).
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-teal">Zone 1</span> Val Gardena &mdash; Le coeur des Dolomites <span class="badge badge-gray">5-7 jours</span></h3>
+    <table>
+      <tr><th style="width:25%">Spot</th><th>Description</th></tr>
+      <tr><td><strong>Ortisei</strong></td><td>Village principal. Sculptures en bois (tradition ladine), commerces, telecabines. Base ideale</td></tr>
+      <tr><td><strong>Seceda</strong></td><td>Telepherique &rarr; panorama iconique aretes rocheuses. <strong>LE spot photo des Dolomites</strong></td></tr>
+      <tr><td><strong>Alpe di Siusi</strong></td><td><strong>Plus grand alpage d'Europe</strong> (56 km&sup2;) a 1 800-2 350 m. Randos douces, rifugi partout, vue Sassolungo</td></tr>
+      <tr><td><strong>Selva / Santa Cristina</strong></td><td>Villages charmants, acces massif du Sella. Telecabines multiples</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-blue">Zone 2</span> Cortina d'Ampezzo + Lacs <span class="badge badge-gray">4-5 jours</span></h3>
+    <table>
+      <tr><th style="width:25%">Spot</th><th>Description</th></tr>
+      <tr><td><strong>Cortina</strong></td><td>"Perle des Dolomites". Station chic (Veneto). <strong>30+ via ferratas.</strong> Cafes, boutiques</td></tr>
+      <tr><td><strong>Tre Cime</strong></td><td>3 tours de roche iconiques. Tour de 10 km faisable en famille (D+ 425 m)</td></tr>
+      <tr><td><strong>Lago di Misurina</strong></td><td>Lac calme a 1 756 m, vue Tre Cime. Pique-nique ideal</td></tr>
+      <tr><td><strong>Lago di Sorapis</strong></td><td>Eau bleu laiteux irreelle. 2h a pied. <strong>Pas pour les chiens</strong> (passages cables)</td></tr>
+      <tr><td><strong>Cinque Torri</strong></td><td>5 tours rocheuses + musee Grande Guerre en altitude. Telecabine + rando douce</td></tr>
+      <tr><td><strong>Rifugio Lagazuoi</strong></td><td>Vue 360&deg; depuis Passo Falzarego. Tunnels de guerre dans la roche</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-purple">Zone 3</span> Val Pusteria + Lago di Braies <span class="badge badge-gray">3-4 jours</span></h3>
+    <table>
+      <tr><th style="width:25%">Spot</th><th>Description</th></tr>
+      <tr><td><strong>Lago di Braies</strong></td><td>Le lac le plus iconique. Eau turquoise. <strong>Reservation obligatoire en aout</strong>. Arriver avant 8h30</td></tr>
+      <tr><td><strong>San Candido</strong></td><td>Beau village austro-tyrolien. Base pour Braies et Tre Cime</td></tr>
+      <tr><td><strong>Lago di Landro</strong></td><td><span class="badge badge-green">Bon plan</span> &mdash; peu connu, baignade possible, eau 16-20&deg;C, chiens OK</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card">
+    <h3><span class="badge badge-amber">Zone 4</span> Bolzano + Val di Fassa <span class="badge badge-gray">2-3 jours</span></h3>
+    <table>
+      <tr><th style="width:25%">Spot</th><th>Description</th></tr>
+      <tr><td><strong>Bolzano</strong></td><td>Capitale Sudtirol. <strong>Musee Otzi</strong> (momie 5 300 ans). Marches, arcades medievales</td></tr>
+      <tr><td><strong>Lago di Carezza</strong></td><td>Emeraude en foret de pins, vue Latemar. 10 min a pied. Baignade interdite</td></tr>
+      <tr><td><strong>Lago di Caldaro</strong></td><td><span class="badge badge-amber">26-28&deg;C</span> &mdash; <strong>le seul lac ou on nage vraiment</strong>. Pres de Bolzano, vignobles</td></tr>
+      <tr><td><strong>Canazei</strong></td><td>Val di Fassa. Acces Marmolada (3 343 m, telepherique). Moins cher que Val Gardena</td></tr>
+      <tr><td><strong>Passo Pordoi</strong></td><td>Col 2 239 m. Telepherique Sass Pordoi (2 952 m). Vue Marmolada + Sella</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- LACS -->
+<section id="lacs">
+  <h2>Les lacs &mdash; La verite</h2>
+
+  <div class="callout callout-orange">
+    <strong>Attention :</strong> contrairement a l'Autriche, la plupart des lacs des Dolomites sont en altitude et <strong>trop froids pour nager</strong> (10-18&deg;C). Ce sont des lacs de contemplation, pas de baignade. Le seul vrai lac baignable est le <strong>Lago di Caldaro</strong> pres de Bolzano (26-28&deg;C).
+  </div>
+
+  <table>
+    <tr><th>Lac</th><th>Alt.</th><th>Baignade</th><th>Temp.</th><th>Chiens</th><th>Foule aout</th></tr>
+    <tr><td><strong>Lago di Braies</strong></td><td>1 496 m</td><td><span class="badge badge-red">Interdite</span></td><td><span class="lake-temp lake-frozen">10-14&deg;C</span></td><td>En laisse</td><td><span class="crowd-tag crowd-extreme">Extreme</span></td></tr>
+    <tr><td><strong>Lago di Carezza</strong></td><td>1 534 m</td><td><span class="badge badge-red">Interdite</span></td><td>&mdash;</td><td>En laisse</td><td><span class="crowd-tag crowd-high">Tres fort</span></td></tr>
+    <tr><td><strong>Lago di Misurina</strong></td><td>1 756 m</td><td><span class="badge badge-amber">Possible (rives)</span></td><td><span class="lake-temp lake-cold">12-16&deg;C</span></td><td>En laisse</td><td><span class="crowd-tag crowd-high">Fort</span></td></tr>
+    <tr><td><strong>Lago di Sorapis</strong></td><td>1 923 m</td><td><span class="badge badge-red">Interdite</span></td><td>&mdash;</td><td>Non recomm.</td><td><span class="crowd-tag crowd-high">Fort</span></td></tr>
+    <tr><td><strong>Lago di Landro</strong></td><td>1 400 m</td><td><span class="badge badge-green">Oui</span></td><td><span class="lake-temp lake-cold">16-20&deg;C</span></td><td>En laisse</td><td><span class="crowd-tag crowd-low">Faible</span></td></tr>
+    <tr><td><strong>Lago di Caldaro</strong></td><td>216 m</td><td><span class="badge badge-green">Oui &mdash; chaud !</span></td><td><span class="lake-temp lake-hot">26-28&deg;C</span></td><td>Zones dediees</td><td><span class="crowd-tag crowd-high">Tres fort</span></td></tr>
+  </table>
+</section>
+
+<!-- RANDOS -->
+<section id="randos">
+  <h2>Randonnees famille</h2>
+  <table>
+    <tr><th>Rando</th><th>Zone</th><th>Duree</th><th>D+</th><th>Interet</th></tr>
+    <tr><td><strong>Tour Lago di Braies</strong></td><td>Val Pusteria</td><td>1h30</td><td>~0 m</td><td>Lac turquoise iconique. Facile, plat. Arriver avant 8h30</td></tr>
+    <tr><td><strong>Tour des Tre Cime</strong></td><td>Cortina</td><td>3h30-5h</td><td>425 m</td><td><span class="badge badge-teal">Must absolu</span> Faisable a 10 ans. Alt. 2 200 m. Terrain caillouteux</td></tr>
+    <tr><td><strong>Alpe di Siusi &mdash; boucle Bullaccia</strong></td><td>Val Gardena</td><td>3-4h</td><td>200-300 m</td><td>Plus grand alpage d'Europe. Rifugi tous les 2 km. Vue Sassolungo</td></tr>
+    <tr><td><strong>Seceda</strong></td><td>Val Gardena</td><td>2-4h</td><td>300 m</td><td>Panorama iconique. Telepherique a la montee, descente a pied vers Ortisei</td></tr>
+    <tr><td><strong>Cinque Torri</strong></td><td>Cortina</td><td>2h30-3h</td><td>300 m</td><td>5 tours rocheuses + musee Grande Guerre. Telecabine dispo</td></tr>
+    <tr><td><strong>Lago di Sorapis</strong></td><td>Cortina</td><td>4-5h</td><td>500 m</td><td>Lac bleu laiteux irreal. 2 passages cables. <strong>Pas pour les chiens</strong></td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Chiens en rando :</strong> autorises quasi partout en laisse. Eviter Sorapis (passages cables). Rifugi = chiens OK en terrasse. Remontees mecaniques ete = petits chiens (&lt;10 kg) acceptes, souvent gratuits. Museliere a avoir.
+  </div>
+</section>
+
+<!-- ADOS -->
+<section id="ados">
+  <h2>Activites ados</h2>
+  <table>
+    <tr><th>Activite</th><th>Ou</th><th>Detail</th></tr>
+    <tr><td><strong>Via Ferrata</strong></td><td>Cortina (30+), Val Gardena (9)</td><td>Debutant : Brigata Tridentina, Trincee (Cinque Torri + histoire Grande Guerre). ~80-120 &euro;/pers avec guide</td></tr>
+    <tr><td><strong>Luge d'ete</strong></td><td>Ortisei, Kronplatz, Alpe di Siusi</td><td>Toboggan alpin sur rails. ~4-8 &euro;/descente</td></tr>
+    <tr><td><strong>VTT en altitude</strong></td><td>Partout</td><td>Pass Dolomiti SuperSummer inclut velos dans remontees. Location VTT-e ~30-50 &euro;/j</td></tr>
+    <tr><td><strong>Rafting</strong></td><td>Riviere Noce (Val di Sole)</td><td>Des 12 ans. ~50-70 &euro;/pers</td></tr>
+    <tr><td><strong>Parapente biplace</strong></td><td>Cortina, Val Gardena</td><td>~120-150 &euro;/vol</td></tr>
+    <tr><td><strong>Escalade initiation</strong></td><td>Val Gardena</td><td>Ecoles d'escalade famille. Dolomites = mecque mondiale</td></tr>
+    <tr><td><strong>Parcs aventure</strong></td><td>Forets du Sudtirol</td><td>Abenteuerpark Seis, plusieurs en Val Gardena et Val di Fassa</td></tr>
+  </table>
+</section>
+
+<!-- TOP 12 -->
+<section id="spots">
+  <h2>Top 12 spots incontournables</h2>
+
+  <div class="spot-card">
+    <div class="spot-num">1</div>
+    <div class="spot-content">
+      <div class="spot-name">Tre Cime di Lavaredo</div>
+      <div class="spot-desc">3 tours de roche monumentales. La rando de 10 km autour = le must absolu des Dolomites. Faisable en famille. Vue a couper le souffle.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">2</div>
+    <div class="spot-content">
+      <div class="spot-name">Lago di Braies</div>
+      <div class="spot-desc">Eau turquoise irreelle entre falaises. Le lac le plus photographie d'Italie. Tour en 1h30 ou barque. <strong>Arriver a 7h30 en aout.</strong></div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">3</div>
+    <div class="spot-content">
+      <div class="spot-name">Seceda (Val Gardena)</div>
+      <div class="spot-desc">Telepherique depuis Ortisei &rarr; panorama iconique sur les aretes rocheuses. La photo la plus "Dolomites" possible.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">4</div>
+    <div class="spot-content">
+      <div class="spot-name">Alpe di Siusi</div>
+      <div class="spot-desc">Plus grand alpage d'Europe (56 km&sup2;). Plateau suspendu a 2 000 m avec Sassolungo en toile de fond. Rifugi, fleurs alpines, randos douces.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">5</div>
+    <div class="spot-content">
+      <div class="spot-name">Lago di Sorapis</div>
+      <div class="spot-desc">Eau bleu laiteux irreelle (pigments mineraux). 2h de rando. Un des plus beaux lacs d'Europe. <strong>Pas pour les chiens</strong> (passages cables).</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">6</div>
+    <div class="spot-content">
+      <div class="spot-name">Lago di Carezza</div>
+      <div class="spot-desc">Emeraude en foret de pins, reflet du Latemar. 10 min a pied du parking. La "carte postale" classique des Dolomites.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">7</div>
+    <div class="spot-content">
+      <div class="spot-name">Cinque Torri + Musee Grande Guerre</div>
+      <div class="spot-desc">5 tours rocheuses spectaculaires. Musee en plein air avec tranchees de la Premiere Guerre mondiale. Telecabine + rando douce.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">8</div>
+    <div class="spot-content">
+      <div class="spot-name">Rifugio Lagazuoi</div>
+      <div class="spot-desc">Telecabine depuis Passo Falzarego &rarr; vue 360&deg; extraordinaire. Tunnels de guerre creuses dans la roche. Dejeuner au sommet.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">9</div>
+    <div class="spot-content">
+      <div class="spot-name">Musee Otzi (Bolzano)</div>
+      <div class="spot-desc">La momie de l'Homme des glaces (5 300 ans). Fascinant pour les ados. Parfait jour de pluie ou d'orage.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">10</div>
+    <div class="spot-content">
+      <div class="spot-name">Passo Pordoi + Sass Pordoi</div>
+      <div class="spot-desc">Col a 2 239 m + telepherique pour le Sass Pordoi (2 952 m). Vue sur Marmolada et massif du Sella. Au sommet du monde.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">11</div>
+    <div class="spot-content">
+      <div class="spot-name">Ortisei &mdash; Culture ladine</div>
+      <div class="spot-desc">Coeur de la culture ladine. Tradition millenaire de sculpture sur bois (creches, animaux). Gelaterias, balades, ambiance unique.</div>
+    </div>
+  </div>
+  <div class="spot-card">
+    <div class="spot-num">12</div>
+    <div class="spot-content">
+      <div class="spot-name">Lago di Caldaro</div>
+      <div class="spot-desc">Le lac "secret" pres de Bolzano. <strong>Le seul ou on nage vraiment</strong> (26-28&deg;C). Entoure de vignobles. Journee plage obligatoire.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GASTRONOMIE -->
+<section id="gastro">
+  <h2>Gastronomie &mdash; Le meilleur des deux mondes</h2>
+  <table>
+    <tr><th style="width:25%">Specialite</th><th>Description</th></tr>
+    <tr><td><strong>Knodel (Canederli)</strong></td><td>Grosses boulettes de pain au Speck, fromage ou epinards. En soupe ou avec beurre fondu. LE plat emblematique</td></tr>
+    <tr><td><strong>Speck Alto Adige IGP</strong></td><td>Jambon fume a sec, plus sec que le prosciutto. Sur Schuttelbrot = l'apero parfait</td></tr>
+    <tr><td><strong>Schlutzkrapfen</strong></td><td>Raviolis epinards/ricotta, beurres. La "pasta" tyrolienne</td></tr>
+    <tr><td><strong>Kaiserschmarrn</strong></td><td>Crepe epaisse dechiquetee, compote de prune. Le dessert des rifugi</td></tr>
+    <tr><td><strong>Apfelstrudel</strong></td><td>Version tyrolienne, cannelle, raisins. Sauce vanille ou creme</td></tr>
+    <tr><td><strong>Goulash</strong></td><td>Ragout de boeuf tyrolien. Present dans tous les rifugi</td></tr>
+    <tr><td><strong>Pizza</strong></td><td>On est en Italie quand meme. Pizza + Strudel au meme repas = la magie du Sudtirol</td></tr>
+    <tr><td><strong>Vins du Sudtirol</strong></td><td>Gewurztraminer, Lagrein (rouge), Pinot Grigio. Excellents et abordables. Vignobles autour de Bolzano/Caldaro</td></tr>
+    <tr><td><strong>Bieres Forst / Merano</strong></td><td>Brasseries locales, biere tyrolienne excellente</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>1er producteur de pommes d'Europe.</strong> Jus de pomme frais (Apfelsaft) partout. L'Apfelsaft gespritzt (petillant) = la boisson des enfants autrichiens et sudtyroliens. Marches fermiers dans chaque village : Speck, fromages d'alpage, miel, confitures.
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <h2>Budget</h2>
+
+  <h3>Hebergement</h3>
+  <table>
+    <tr><th>Type</th><th>Zone</th><th>Prix/semaine (aout)</th></tr>
+    <tr><td>Appartement 3 ch pet-friendly</td><td>Val Gardena</td><td><strong>1 200-1 800 &euro;</strong></td></tr>
+    <tr><td>Agriturismo 3-4 ch (ferme)</td><td>Sudtirol</td><td><strong>1 000-1 800 &euro;</strong> <span class="badge badge-green">Pepite</span></td></tr>
+    <tr><td>Appartement 3 ch</td><td>Cortina</td><td><strong>1 400-2 200 &euro;</strong></td></tr>
+    <tr><td>Village satellite</td><td>Val di Fassa, Val Pusteria</td><td><strong>900-1 400 &euro;</strong></td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Agriturismo (Maso) :</strong> fermes de montagne reconverties en hebergement. Jardin, souvent pet-friendly, petit-dejeuner tyrolien. La pepite locale. Sites : agriturismo.farm, south-tirol.com, muse.holiday.
+  </div>
+
+  <p style="font-size:.88rem;color:var(--gray-700);margin:.5rem 0;"><strong>Supplement chiens :</strong> compter 10-20 &euro;/nuit par chien en agriturismo/appartement = <strong>280-400 &euro; sur 2 semaines</strong> pour les 2 Cairns.</p>
+
+  <h3>Budget total estime (2 semaines sur place)</h3>
+  <table>
+    <tr><th style="width:50%">Poste</th><th>Estimation</th></tr>
+    <tr><td>Logement (2 sem)</td><td>2 000-3 000 &euro;</td></tr>
+    <tr><td>Transport A/R (peages + tunnel + carburant)</td><td>600-620 &euro;</td></tr>
+    <tr><td>Supplement chiens hebergement</td><td>280-400 &euro;</td></tr>
+    <tr><td>Courses alimentaires</td><td>430-500 &euro;</td></tr>
+    <tr><td>Restaurants / Rifugi</td><td>350-550 &euro;</td></tr>
+    <tr><td>Activites (remontees, via ferrata, musees)</td><td>800-1 200 &euro;</td></tr>
+    <tr><td><strong>TOTAL</strong></td><td><strong><span class="badge badge-red">~4 460-6 270 &euro;</span></strong></td></tr>
+  </table>
+
+  <div class="callout callout-orange">
+    <strong>Destination la plus chere de la liste.</strong> Trajet 600+ &euro; A/R, supplement chiens 280-400 &euro;, remontees mecaniques payantes, logement haute saison. Compare : Asturies ~3 500-4 000 &euro;, Albanie ~3 500-5 000 &euro;.
+  </div>
+</section>
+
+<!-- AFFLUENCE -->
+<section id="affluence">
+  <h2>Affluence en aout &mdash; Le gros point noir</h2>
+
+  <div class="callout callout-red">
+    <strong>Les Dolomites = spot de montagne le plus frequente d'Europe en aout.</strong> L'effet Instagram (Braies, Seceda, Sorapis) a fait exploser la frequentation. Systemes de reservation obligatoires (parking Braies, parking Tre Cime). Gerable avec la regle du lever tot, mais c'est un vrai point faible.
+  </div>
+
+  <table>
+    <tr><th>Spot</th><th>Affluence</th><th>Strategie</th></tr>
+    <tr><td><strong>Lago di Braies</strong></td><td><span class="crowd-tag crowd-extreme">Extreme</span></td><td>Navette obligatoire 9h-16h ou parking reserve (40 &euro;). Arriver avant 8h30</td></tr>
+    <tr><td><strong>Lago di Carezza</strong></td><td><span class="crowd-tag crowd-high">Tres fort</span></td><td>Parking sature des 10h. Arriver 8h</td></tr>
+    <tr><td><strong>Seceda</strong></td><td><span class="crowd-tag crowd-high">Fort</span></td><td>Files telepherique. Monter a l'ouverture (8h)</td></tr>
+    <tr><td><strong>Tre Cime</strong></td><td><span class="crowd-tag crowd-high">Fort</span></td><td>Parking reservable en ligne (pass.auronzo.info, 40 &euro;) ou navette Misurina</td></tr>
+    <tr><td>Val di Fassa</td><td><span class="crowd-tag crowd-moderate">Modere</span></td><td>Alternative moins chargee que Val Gardena</td></tr>
+    <tr><td>Alta Badia</td><td><span class="crowd-tag crowd-moderate">Modere</span></td><td>Elegant, moins mass-market</td></tr>
+    <tr><td><strong>Lago di Landro</strong></td><td><span class="crowd-tag crowd-low">Faible</span></td><td><span class="badge badge-green">Bon plan</span> &mdash; peu connu, baignade possible</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>Regle d'or :</strong> partir a 7h-8h chaque matin. Midi = rifugio. Retour avant les orages (14h-17h). Apres-midi libre : village, agriturismo, artisanat, gelato.
+  </div>
+</section>
+
+<!-- FAISABILITE -->
+<section id="faisabilite">
+  <h2>Faisabilite globale</h2>
+
+  <h3>Contraintes chiens</h3>
+  <table>
+    <tr><th style="width:30%">Aspect</th><th>Verdict</th></tr>
+    <tr><td><strong>UE = zero paperasse</strong></td><td><span class="badge badge-green">Simple</span> Passeport + puce + vaccin rage = suffisant</td></tr>
+    <tr><td>Chaleur</td><td>20-25&deg;C en station, nuits fraiches. <strong>Climat ideal</strong></td></tr>
+    <tr><td>Rando</td><td>Autorises quasi partout en laisse. Eviter Sorapis (cables)</td></tr>
+    <tr><td>Telecabines</td><td>Petits chiens (&lt;10 kg) acceptes, souvent gratuits. Museliere a avoir</td></tr>
+    <tr><td>Terrasses</td><td>Chiens bienvenus quasi partout. L'Italie est dog-friendly</td></tr>
+    <tr><td>Logement</td><td>Agriturismo souvent OK. <strong>Supplement 10-20 &euro;/nuit/chien</strong></td></tr>
+  </table>
+
+  <h3>Meteo aout</h3>
+  <table>
+    <tr><th>Zone</th><th>Temp. jour</th><th>Temp. nuit</th><th>Pluie</th></tr>
+    <tr><td>Vallees (Bolzano)</td><td>28-33&deg;C</td><td>16-18&deg;C</td><td>Orages possibles</td></tr>
+    <tr><td>Stations (Ortisei, Cortina)</td><td>20-25&deg;C</td><td>10-13&deg;C</td><td><span class="badge badge-amber">Orages apres-midi frequents</span></td></tr>
+    <tr><td>Alpages (1 800 m+)</td><td>15-20&deg;C</td><td>5-10&deg;C</td><td>Plus frequent</td></tr>
+  </table>
+
+  <h3>Points de vigilance</h3>
+  <table>
+    <tr><th style="width:25%">Point</th><th>Detail</th></tr>
+    <tr><td><strong>Pas de vignette Italie</strong></td><td>Peages au km (~7 cts/km). CB acceptee. Badge Liber-t/Bip&Go fonctionne</td></tr>
+    <tr><td><strong>Tunnel Frejus</strong></td><td>~57 &euro;/aller. Retour A/R ~100 &euro;</td></tr>
+    <tr><td><strong>Langue</strong></td><td>Sudtirol = allemand + italien + ladin. Cortina = italien. Anglais OK en zone touristique</td></tr>
+    <tr><td><strong>Electricite</strong></td><td>Prises italiennes (type L, 3 broches). <strong>Adaptateur necessaire</strong> pour appareils francais</td></tr>
+    <tr><td><strong>Eau</strong></td><td><span class="badge badge-green">Excellente</span> &mdash; source alpine. Pas besoin de bouteilles</td></tr>
+    <tr><td><strong>Sante</strong></td><td>CEAM valable. Assurance renforcee recommandee (helicoptere en altitude = cher)</td></tr>
+    <tr><td><strong>Parking Braies/Tre Cime</strong></td><td><strong>Reservation obligatoire en ligne</strong> en aout. Anticiper !</td></tr>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <h2>Verdict</h2>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <h4 style="color:var(--green);margin-bottom:.5rem;">Pour</h4>
+      <ul>
+        <li><strong>"Wow" visuel absolu</strong> &mdash; les plus belles montagnes d'Europe</li>
+        <li>Enrosadira (roches roses au coucher du soleil)</li>
+        <li>Culture double italo-tyrolienne unique</li>
+        <li>Rifugi d'altitude (dejeuner a 2 500 m)</li>
+        <li>Via ferrata (30+ a Cortina)</li>
+        <li>Gastronomie pizza + Strudel</li>
+        <li>UE = zero paperasse chiens</li>
+        <li>Climat ideal en station</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <h4 style="color:var(--orange);margin-bottom:.5rem;">Contre</h4>
+      <ul>
+        <li><strong>Pas de mer ni de baignade</strong> (lacs trop froids sauf Caldaro)</li>
+        <li><strong>Budget le plus eleve</strong> de la liste</li>
+        <li><strong>Affluence extreme en aout</strong> (effet Instagram)</li>
+        <li>Trajet cher (600+ &euro; A/R)</li>
+        <li>Supplement chiens hebergement (280-400 &euro;)</li>
+        <li>Orages apres-midi frequents</li>
+        <li>Pas de base unique (il faut bouger)</li>
+        <li>Reservations parking obligatoires</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Comparaison rapide</h3>
+  <div class="compare-table">
+    <table>
+      <tr><th>Critere</th><th>Dolomites</th><th>Autriche</th><th>Asturies</th><th>Albanie</th></tr>
+      <tr><td>Trajet</td><td>11-12h (1 etape)</td><td>12-13h</td><td><strong>5h30 (direct)</strong></td><td>2 jours</td></tr>
+      <tr><td>Cout A/R</td><td><span class="badge badge-red">600-620 &euro;</span></td><td>480-520 &euro;</td><td><span class="badge badge-green">200 &euro;</span></td><td>350-500 &euro;</td></tr>
+      <tr><td>Baignade</td><td><span class="badge badge-amber">1 lac chaud</span></td><td>Lacs 20-27&deg;C</td><td>Ocean 18-22&deg;C</td><td>Mer 24-27&deg;C</td></tr>
+      <tr><td>Wow visuel</td><td><strong>11/10</strong></td><td>8/10</td><td>7/10</td><td>8/10</td></tr>
+      <tr><td>Monde aout</td><td><span class="badge badge-red">Tres eleve</span></td><td>Modere</td><td><span class="badge badge-green">Faible</span></td><td><span class="badge badge-green">Faible</span></td></tr>
+      <tr><td>Budget</td><td>4 460-6 270 &euro;</td><td>3 400-4 700 &euro;</td><td>3 500-4 000 &euro;</td><td>3 500-5 000 &euro;</td></tr>
+    </table>
+  </div>
+
+  <h3>Score faisabilite</h3>
+  <div class="score-grid">
+    <div class="score-card">
+      <div class="sc-label">Trajet</div>
+      <div class="sc-value">5/10</div>
+      <div class="sc-note">11-12h, Frejus, le + cher</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Budget</div>
+      <div class="sc-value">5/10</div>
+      <div class="sc-note">Destination la + chere</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Chiens</div>
+      <div class="sc-value">7/10</div>
+      <div class="sc-note">UE, ideal mais supplement</div>
+    </div>
+    <div class="score-card highlight">
+      <div class="sc-label">Activites</div>
+      <div class="sc-value">9/10</div>
+      <div class="sc-note">Tre Cime + rifugi + via ferrata</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Logement</div>
+      <div class="sc-value">6/10</div>
+      <div class="sc-note">Cher aout, agriturismo = bon plan</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Aurelie</div>
+      <div class="sc-value">7/10</div>
+      <div class="sc-note">Ortisei, gelaterias, Bolzano</div>
+    </div>
+    <div class="score-card highlight">
+      <div class="sc-label">Ados</div>
+      <div class="sc-value">9/10</div>
+      <div class="sc-note">Via ferrata, VTT altitude</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">MOYENNE</div>
+      <div class="sc-value">6.9/10</div>
+      <div class="sc-note">Spectaculaire mais cher et bonde</div>
+    </div>
+  </div>
+
+  <div class="callout" style="border-color:#065f46;background:linear-gradient(135deg, var(--teal-light), #d1fae5);">
+    <strong>En resume :</strong> Les Dolomites sont visuellement incomparables &mdash; c'est la destination la plus "wow" de la liste, et de loin. Mais c'est aussi la plus chere et la plus bondee en aout. Pas de mer, pas de baignade (sauf Caldaro). Si le budget n'est pas un frein et que le "wow" paysager est la priorite, c'est un choix de coeur. Sinon, l'Autriche offre une experience similaire (montagne + lacs) avec plus de baignade et un budget inferieur. Et les Asturies restent imbattables en rapport qualite/prix (9.3/10).
+  </div>
+</section>
+
+</div>
+
+<footer style="text-align:center;padding:2rem 1rem;color:var(--gray-500);font-size:.8rem;">
+  Focus Dolomites + Lacs &mdash; Etude de faisabilite &mdash; Mars 2026<br>
+  <a href="plan-ete-2026.html" style="color:var(--teal);text-decoration:none;">&larr; Retour au plan general</a>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Focus Costa Brava — Ete 2026</title>
+  <style>
+    :root {
+      --blue: #2563eb; --blue-light: #dbeafe;
+      --green: #16a34a; --green-light: #dcfce7;
+      --orange: #ea580c; --orange-light: #fff7ed;
+      --red: #dc2626;
+      --purple: #7c3aed; --purple-light: #ede9fe;
+      --amber: #b45309; --amber-light: #fef3c7;
+      --teal: #0d9488; --teal-light: #ccfbf1;
+      --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb;
+      --gray-300: #d1d5db; --gray-500: #6b7280; --gray-700: #374151; --gray-900: #111827;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-900); background: var(--gray-50); line-height: 1.6;
+      -webkit-text-size-adjust: 100%; overflow-x: hidden;
+    }
+    .header {
+      background: linear-gradient(135deg, #065f46 0%, #0d9488 40%, #5eead4 80%, #99f6e4 100%);
+      color: white; padding: 2.5rem 1.5rem; text-align: center;
+    }
+    .header h1 { font-size: 2rem; margin-bottom: .25rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: .9; }
+    .header .dates {
+      display: inline-block; margin-top: .75rem;
+      background: rgba(255,255,255,.2); padding: .4rem 1.2rem;
+      border-radius: 2rem; font-weight: 600; font-size: .95rem;
+    }
+    .header .status {
+      display: inline-block; margin-top: .5rem;
+      background: rgba(255,255,255,.3); padding: .25rem .9rem;
+      border-radius: 2rem; font-size: .82rem; font-weight: 500;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+    nav.toc {
+      background: white; border-radius: .75rem; padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      display: flex; flex-wrap: wrap; gap: .5rem;
+    }
+    nav.toc a {
+      display: inline-block; padding: .35rem .9rem;
+      background: var(--teal-light); color: var(--teal);
+      border-radius: .4rem; text-decoration: none;
+      font-size: .85rem; font-weight: 500; transition: background .15s;
+    }
+    nav.toc a:hover { background: #a7f3d0; }
+    section {
+      background: white; border-radius: .75rem; padding: 1.5rem;
+      margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    section h2 {
+      font-size: 1.3rem; margin-bottom: 1rem;
+      padding-bottom: .5rem; border-bottom: 2px solid var(--teal); color: var(--teal);
+    }
+    section h3 { font-size: 1.05rem; margin: 1.25rem 0 .75rem; color: var(--gray-700); }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; margin-bottom: 1rem; }
+    th, td { text-align: left; padding: .55rem .65rem; border-bottom: 1px solid var(--gray-200); }
+    th {
+      background: var(--gray-100); font-weight: 600; font-size: .8rem;
+      text-transform: uppercase; letter-spacing: .03em; color: var(--gray-500);
+    }
+    tr:hover td { background: var(--gray-50); }
+    .badge {
+      display: inline-block; padding: .15rem .55rem; border-radius: .3rem;
+      font-size: .75rem; font-weight: 600;
+    }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-blue { background: var(--blue-light); color: var(--blue); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-red { background: #fee2e2; color: var(--red); }
+    .badge-gray { background: var(--gray-100); color: var(--gray-500); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+    .badge-amber { background: var(--amber-light); color: var(--amber); }
+    .badge-teal { background: var(--teal-light); color: var(--teal); }
+    .callout {
+      border-left: 4px solid var(--teal); background: var(--teal-light);
+      padding: .85rem 1rem; border-radius: 0 .5rem .5rem 0;
+      margin: 1rem 0; font-size: .9rem;
+    }
+    .callout-green { border-color: var(--green); background: var(--green-light); }
+    .callout-orange { border-color: var(--orange); background: var(--orange-light); }
+    .callout-amber { border-color: var(--amber); background: var(--amber-light); }
+    .callout-blue { border-color: var(--blue); background: var(--blue-light); }
+
+    .zone-card {
+      border: 1px solid var(--gray-200); border-radius: .75rem;
+      padding: 1.25rem; margin-bottom: 1rem; background: var(--gray-50);
+    }
+    .zone-card h3 { margin-top: 0 !important; }
+    .zone-card table { margin-bottom: 0; }
+
+    .spot-card {
+      display: grid; grid-template-columns: 2.5rem 1fr; gap: .75rem;
+      padding: .85rem 0; border-bottom: 1px solid var(--gray-200);
+      align-items: start;
+    }
+    .spot-card:last-child { border-bottom: none; }
+    .spot-num {
+      width: 2.5rem; height: 2.5rem; border-radius: 50%;
+      background: var(--teal-light); color: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: .95rem; flex-shrink: 0;
+    }
+    .spot-content .spot-name { font-weight: 700; font-size: .95rem; margin-bottom: .15rem; }
+    .spot-content .spot-desc { font-size: .88rem; color: var(--gray-700); line-height: 1.5; }
+
+    .score-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: .75rem; margin: 1rem 0;
+    }
+    .score-card {
+      background: var(--gray-50); border-radius: .5rem; padding: .85rem;
+      text-align: center; border: 1px solid var(--gray-200);
+    }
+    .score-card .sc-label { font-size: .78rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .03em; margin-bottom: .25rem; }
+    .score-card .sc-value { font-size: 1.5rem; font-weight: 700; color: var(--teal); }
+    .score-card .sc-note { font-size: .75rem; color: var(--gray-500); margin-top: .15rem; }
+    .score-card.highlight { background: var(--teal-light); border-color: var(--teal); }
+    .score-card.highlight .sc-value { color: #065f46; }
+
+    .compare-table { overflow-x: auto; -webkit-overflow-scrolling: touch; margin: 1rem 0; }
+    .compare-table table { min-width: 700px; }
+    .compare-table td:first-child, .compare-table th:first-child {
+      position: sticky; left: 0; background: white; z-index: 1; font-weight: 600;
+    }
+    .compare-table th:first-child { background: var(--gray-100); }
+
+    .pros-cons {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;
+    }
+    .pros-cons ul { list-style: none; padding: 0; font-size: .85rem; }
+    .pros-cons li { padding: .2rem 0; padding-left: 1.2rem; position: relative; }
+    .pros-cons .pros li::before { content: '+'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+    .pros-cons .cons li::before { content: '\2212'; position: absolute; left: 0; color: var(--orange); font-weight: 700; }
+
+    .back-link {
+      display: inline-block; margin-bottom: 1rem;
+      color: var(--teal); text-decoration: none; font-size: .9rem; font-weight: 500;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    .crique-tag {
+      display: inline-block; padding: .1rem .45rem; border-radius: .25rem;
+      font-size: .72rem; font-weight: 600; margin-left: .35rem;
+    }
+    .crique-rando { background: var(--green-light); color: var(--green); }
+    .crique-voiture { background: var(--blue-light); color: var(--blue); }
+
+    @media (max-width: 768px) {
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: .5rem; overflow-x: hidden; }
+      section { padding: .75rem; margin-bottom: 1rem; }
+      table { font-size: .82rem; }
+      th, td { padding: .4rem .5rem; }
+      .pros-cons { grid-template-columns: 1fr; }
+      .score-grid { grid-template-columns: repeat(3, 1fr); }
+      nav.toc { gap: .35rem; padding: .75rem; }
+      nav.toc a { font-size: .78rem; padding: .3rem .65rem; }
+      .compare-table { max-width: 100vw; margin-left: -.75rem; margin-right: -.75rem; padding: 0 .75rem; }
+    }
+    @media (max-width: 400px) {
+      .score-grid { grid-template-columns: repeat(2, 1fr); }
+      .container { padding: .35rem; }
+      section { padding: .6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Focus Costa Brava</h1>
+  <div class="subtitle">Etude de faisabilite &mdash; Ete 2026</div>
+  <div class="dates">Famille Bruet &bull; 6 pers + 2 Cairn Terriers &bull; ~3 semaines</div>
+  <div class="status">Destination #8 &mdash; Criques sauvages + Culture catalane</div>
+</div>
+
+<div class="container">
+
+<a href="plan-ete-2026.html" class="back-link">&larr; Retour au plan general</a>
+
+<nav class="toc">
+  <a href="#contexte">Contexte</a>
+  <a href="#trajet">Trajet</a>
+  <a href="#criques">Criques</a>
+  <a href="#montagne">Montagne</a>
+  <a href="#culture">Culture</a>
+  <a href="#spots">Top 10</a>
+  <a href="#budget">Budget</a>
+  <a href="#faisabilite">Faisabilite</a>
+  <a href="#verdict">Verdict</a>
+</nav>
+
+<!-- CONTEXTE -->
+<section id="contexte">
+  <h2>Contexte</h2>
+  <table>
+    <tr><th style="width:30%">Parametre</th><th>Valeur</th></tr>
+    <tr><td>Famille</td><td>6 personnes (2 adultes + 4 enfants/ados : 17, 15, 13, 10 ans)</td></tr>
+    <tr><td>Chiens</td><td>2 Cairn Terriers &mdash; <strong>viennent, non negociable</strong></td></tr>
+    <tr><td>Depart</td><td>Vayres, Gironde (33)</td></tr>
+    <tr><td>Dates</td><td>~3 semaines : mer 29 / jeu 30 juillet &rarr; retour ~16-17 aout <span class="badge badge-teal">~18-19 jours</span></td></tr>
+    <tr><td>Type</td><td><span class="badge badge-blue">Mer + Culture</span> (montagne en excursion)</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>Les criques, les criques, les criques.</strong> Des dizaines de calas turquoise entre pins et falaises, certaines accessibles uniquement a pied par le Cami de Ronda. Culture Dali, villages medievaux, gastronomie catalane. Et seulement 5-6h de Vayres.
+  </div>
+</section>
+
+<!-- TRAJET -->
+<section id="trajet">
+  <h2>Comment y aller</h2>
+
+  <p style="font-size:.9rem;color:var(--gray-700);margin-bottom:1rem;">Vayres &rarr; Toulouse (A62) &rarr; Perpignan (A61/A9) &rarr; Le Perthus (frontiere) &rarr; Figueres &rarr; Begur/Pals</p>
+
+  <table>
+    <tr><th style="width:30%">Critere</th><th>Detail</th></tr>
+    <tr><td>Distance</td><td>~580 km</td></tr>
+    <tr><td>Duree</td><td><strong>5h30-6h</strong> &mdash; pas d'etape necessaire</td></tr>
+    <tr><td>Peages France</td><td>Bordeaux &rarr; Le Perthus : <strong>~51 &euro;</strong></td></tr>
+    <tr><td>Peages Espagne</td><td><span class="badge badge-green">GRATUIT</span> (AP-7 gratuite depuis 2021)</td></tr>
+    <tr><td>Carburant (aller)</td><td>~42-46 L &times; ~1,55 &euro;/L = <strong>~65-75 &euro;</strong></td></tr>
+    <tr><td><strong>Cout aller</strong></td><td><strong>~115-125 &euro;</strong></td></tr>
+    <tr><td><strong>Total A/R</strong></td><td><strong>~230-250 &euro;</strong></td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Gros atout :</strong> trajet le plus court de toutes les destinations mer du plan (sauf Pays Basque). Pas de ferry, pas d'etape, pas de stress. On part le matin, on arrive pour le diner.
+  </div>
+</section>
+
+<!-- CRIQUES -->
+<section id="criques">
+  <h2>Les criques &mdash; Le coeur du sejour</h2>
+
+  <div class="zone-card" style="border-left: 4px solid var(--teal);">
+    <h3 style="color:var(--teal)">Zone Nord : Cap de Creus <span class="badge badge-teal">LA PLUS SAUVAGE</span></h3>
+    <table>
+      <tr><th>#</th><th>Crique</th><th>Acces</th><th>Description</th></tr>
+      <tr><td>1</td><td><strong>Cala Tavallera</strong> <span class="crique-tag crique-rando">1h30 rando</span></td><td>Port de la Selva</td><td>Galets, decor lunaire de falaises. Quasi deserte.</td></tr>
+      <tr><td>2</td><td><strong>Cala Jugadora</strong> <span class="crique-tag crique-rando">10-15 min</span></td><td>Phare Cap de Creus</td><td>Criques jumelles pres du phare. Rochers sculptes par le vent.</td></tr>
+      <tr><td>3</td><td><strong>Cala Portalo</strong> <span class="crique-tag crique-rando">30-40 min</span></td><td>Cadaques</td><td>Cachee entre falaises. Galets, eau peu profonde, calme absolu.</td></tr>
+      <tr><td>4</td><td><strong>Cala Fredosa</strong> <span class="crique-tag crique-rando">45 min</span></td><td>Cadaques</td><td>Isolee. Pins maritimes jusqu'a l'eau. A pied ou bateau uniquement.</td></tr>
+      <tr><td>5</td><td><strong>Cala Culip</strong> <span class="crique-tag crique-rando">20-30 min</span></td><td>Phare Cap de Creus</td><td>Ancien village de pecheurs en ruines. Decor mineral sauvage.</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card" style="border-left: 4px solid var(--blue);">
+    <h3 style="color:var(--blue)">Zone Centre : Begur / Palafrugell / Palamos <span class="badge badge-blue">COEUR DES CRIQUES</span></h3>
+    <table>
+      <tr><th>#</th><th>Crique</th><th>Acces</th><th>Description</th></tr>
+      <tr><td>6</td><td><strong>Cala Pedrosa</strong> <span class="crique-tag crique-rando">45 min</span></td><td>L'Estartit</td><td>Falaises du Montgri, iles Medes. Reserve marine = snorkeling exceptionnel.</td></tr>
+      <tr><td>7</td><td><strong>Platja de Castell</strong> <span class="crique-tag crique-voiture">10 min</span></td><td>Palamos</td><td>Derniere plage non urbanisee de la Costa Brava. Sable, pins, protegee.</td></tr>
+      <tr><td>8</td><td><strong>Cala Estreta</strong> <span class="crique-tag crique-rando">30 min</span></td><td>Depuis Castell</td><td>Demi-lune turquoise, cabane de pecheur. Un des joyaux de la Costa Brava.</td></tr>
+      <tr><td>9</td><td><strong>Sa Tuna</strong> <span class="crique-tag crique-voiture">voiture</span></td><td>Begur</td><td>Village de pecheurs miniature, maisons blanches. Eau bleu profond.</td></tr>
+      <tr><td>10</td><td><strong>Aiguablava</strong> <span class="crique-tag crique-voiture">voiture</span></td><td>Begur</td><td>Sable fin, eau turquoise cristalline. Familiale, magnifique.</td></tr>
+      <tr><td>11</td><td><strong>Cala Pola</strong> <span class="crique-tag crique-rando">15 min</span></td><td>Tossa de Mar</td><td>Crique entouree de pins, petite et protegee.</td></tr>
+    </table>
+  </div>
+
+  <h3>Le Cami de Ronda (GR-92) &mdash; le sentier qui relie les criques</h3>
+  <p style="font-size:.9rem;color:var(--gray-700);margin-bottom:.75rem;">Sentier cotier historique (ancien chemin des douaniers). Le troncon <strong>Sant Feliu de Guixols &rarr; Begur</strong> (43 km) passe par les criques les plus sauvages.</p>
+
+  <table>
+    <tr><th>Troncon</th><th>Duree</th><th>Difficulte</th><th>Pourquoi</th></tr>
+    <tr><td>Calella de Palafrugell &rarr; Begur</td><td>~3h</td><td>Modere</td><td>Llafranc, Tamariu, criques sauvages</td></tr>
+    <tr><td>Sa Tuna &rarr; Aiguafreda &rarr; Fornells</td><td>~1h30</td><td>Facile-modere</td><td>Spectaculaire, falaises</td></tr>
+    <tr><td>Palamos (Castell) &rarr; Cala Estreta</td><td>~1h</td><td>Facile</td><td>Criques les plus sauvages</td></tr>
+    <tr><td>Cap de Creus : phare &rarr; calas</td><td>30 min-2h</td><td>Variable</td><td>Boucles dans le parc naturel</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>Le Cami de Ronda = la killer feature.</strong> Rando cotiere le matin, crique deserte a midi, baignade, retour en fin d'apres-midi. Exactement ce que vous cherchez.
+  </div>
+</section>
+
+<!-- MONTAGNE -->
+<section id="montagne">
+  <h2>Excursions montagne</h2>
+
+  <div class="callout callout-amber">
+    <strong>Important :</strong> la montagne est une excursion a la journee (1h-2h30 de route), PAS un combo quotidien comme aux Asturies/Picos. C'est le principal bemol de la Costa Brava pour le critere "mer + montagne".
+  </div>
+
+  <div class="zone-card" style="border-left: 4px solid var(--green);">
+    <h3 style="color:var(--green)">Garrotxa &mdash; Zone volcanique <span class="badge badge-green">LA PLUS ACCESSIBLE</span></h3>
+    <table>
+      <tr><th style="width:25%">Critere</th><th>Detail</th></tr>
+      <tr><td>Distance</td><td><strong>~1h</strong> depuis Begur/Pals</td></tr>
+      <tr><td>Description</td><td>40 cones volcaniques + 20 coulees de lave. Forets de hetres, villages medievaux.</td></tr>
+      <tr><td>Randos</td><td>Volcan Croscat (facile, 1h) &bull; Fageda d'en Jorda (hetraie sur lave, 1h) &bull; Santa Margarida (eglise dans un cratere, 2h)</td></tr>
+      <tr><td>Verdict</td><td><strong>Excellente excursion a la journee.</strong> Combine bien avec Besalu. Accessible Flavie (10 ans).</td></tr>
+    </table>
+  </div>
+
+  <div class="zone-card" style="border-left: 4px solid var(--purple);">
+    <h3 style="color:var(--purple)">Pyrenees catalanes</h3>
+    <table>
+      <tr><th style="width:25%">Critere</th><th>Detail</th></tr>
+      <tr><td>Distance</td><td><strong>1h30-2h30</strong> depuis Begur</td></tr>
+      <tr><td>Destinations</td><td>Val de Nuria (2 000 m, train a cremaillere), Vall de Camprodon, Ribes de Freser</td></tr>
+      <tr><td>Verdict</td><td>Longue journee ou nuit sur place. <strong>Val de Nuria = ideal famille</strong> (train + lac + rando en altitude).</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- CULTURE -->
+<section id="culture">
+  <h2>Culture &mdash; Les incontournables</h2>
+
+  <h3>Le Triangle Dali</h3>
+  <table>
+    <tr><th>Site</th><th>Lieu</th><th>Distance Begur</th><th>Prix adulte</th><th>Prix enfant</th><th>Duree</th></tr>
+    <tr><td><strong>Theatre-Musee Dali</strong></td><td>Figueres</td><td>50 min</td><td>18,50 &euro;</td><td>15 &euro; (9-17), gratuit &lt;8</td><td>2-3h</td></tr>
+    <tr><td><strong>Maison-Musee Dali</strong></td><td>Portlligat</td><td>1h10</td><td>~19 &euro;</td><td>Reduit, gratuit &lt;8</td><td>1h30</td></tr>
+    <tr><td><strong>Chateau Gala-Dali</strong></td><td>Pubol</td><td>30 min</td><td>~9-11 &euro;</td><td>Reduit, gratuit &lt;8</td><td>1-1h30</td></tr>
+  </table>
+  <p style="font-size:.88rem;color:var(--gray-700)"><strong>Budget Triangle Dali (famille 6)</strong> : ~130-170 &euro; pour les 3 sites.</p>
+
+  <div class="callout">
+    <strong>Figueres = incontournable.</strong> Spectaculaire meme pour les ados. Portlligat : reserver a l'avance (creneaux limites, groupes de 8 max).
+  </div>
+
+  <h3>Villages medievaux</h3>
+  <table>
+    <tr><th>Village</th><th>Distance Begur</th><th>Description</th><th>Duree</th></tr>
+    <tr><td><strong>Peratallada</strong></td><td>15 min</td><td>"Pierre taillee" — un des mieux preserves de Catalogne. Ruelles, murailles, restaurants.</td><td>1-2h</td></tr>
+    <tr><td><strong>Pals</strong></td><td>10 min</td><td>Village perche, tour romane, vues sur rizieres et mer. Boutiques artisanales.</td><td>1-2h</td></tr>
+    <tr><td><strong>Besalu</strong></td><td>45 min</td><td>Pont roman XIIe s., quartier juif, mikveh unique en Espagne. Bord de riviere.</td><td>2-3h</td></tr>
+    <tr><td><strong>Monells</strong></td><td>20 min</td><td>Place a arcades, calme, decor de cinema.</td><td>30 min-1h</td></tr>
+  </table>
+</section>
+
+<!-- SPOTS -->
+<section id="spots">
+  <h2>Top 10 spots de folie</h2>
+
+  <div class="spot-card">
+    <div class="spot-num">1</div>
+    <div class="spot-content">
+      <div class="spot-name">Cala Estreta <span class="crique-tag crique-rando">30 min rando</span></div>
+      <div class="spot-desc">Demi-lune turquoise, cabane de pecheur, 30 min de rando cotiere depuis Platja de Castell. Un des joyaux secrets de la Costa Brava.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">2</div>
+    <div class="spot-content">
+      <div class="spot-name">Cap de Creus</div>
+      <div class="spot-desc">Paysage lunaire : rochers sculptes par le vent, point le plus a l'est de la peninsule. Dali y a puise son inspiration. Criques sauvages a chaque detour.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">3</div>
+    <div class="spot-content">
+      <div class="spot-name">Cami de Ronda (Calella &rarr; Begur)</div>
+      <div class="spot-desc">3h de sentier cotier spectaculaire entre criques, falaises et pins. Baignade a chaque etape. La rando cotiere parfaite.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">4</div>
+    <div class="spot-content">
+      <div class="spot-name">Cadaques</div>
+      <div class="spot-desc">Village blanc mythique, ancien repaire de Dali. Terrasses au port, galeries d'art, calas en contrebas. L'ambiance.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">5</div>
+    <div class="spot-content">
+      <div class="spot-name">Theatre-Musee Dali <span class="badge badge-purple">FIGUERES</span></div>
+      <div class="spot-desc">Le musee le plus surrealiste du monde. Meme les ados qui s'en fichent de l'art en ressortent scotches.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">6</div>
+    <div class="spot-content">
+      <div class="spot-name">Cala Tavallera <span class="crique-tag crique-rando">1h30 rando</span></div>
+      <div class="spot-desc">1h30 de rando pour une plage deserte dans un decor mineral. Cap de Creus dans toute sa splendeur.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">7</div>
+    <div class="spot-content">
+      <div class="spot-name">Besalu</div>
+      <div class="spot-desc">Pont roman du XIIe s. au-dessus de la riviere Fluvia. Village medieval intact. Ambiance medievale-fantastique.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">8</div>
+    <div class="spot-content">
+      <div class="spot-name">Peratallada</div>
+      <div class="spot-desc">Village fortifie en pierre de taille. Ruelles labyrinthiques, terrasses cachees. A 15 min de Begur.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">9</div>
+    <div class="spot-content">
+      <div class="spot-name">Iles Medes <span class="badge badge-blue">SNORKELING</span></div>
+      <div class="spot-desc">Reserve marine protegee face a L'Estartit. Snorkeling dans les eaux les plus riches de la Mediterranee occidentale.</div>
+    </div>
+  </div>
+
+  <div class="spot-card">
+    <div class="spot-num">10</div>
+    <div class="spot-content">
+      <div class="spot-name">Volcans de la Garrotxa</div>
+      <div class="spot-desc">Eglise romane dans un cratere (Santa Margarida). Hetraie sur coulee de lave. Surrealiste &mdash; a 1h de la plage.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <h2>Budget estime</h2>
+
+  <h3>Logement (maison 3-4 chambres, pet-friendly, jardin)</h3>
+  <table>
+    <tr><th>Zone</th><th>Prix / semaine</th><th>Commentaire</th></tr>
+    <tr><td>Arriere-pays (Peratallada, Pals)</td><td><strong>1 000-1 500 &euro;</strong></td><td>Meilleur rapport qualite-prix. 15-20 min des plages.</td></tr>
+    <tr><td>Begur village</td><td><strong>1 500-2 500 &euro;</strong></td><td>Plus cher, plus proche des criques.</td></tr>
+    <tr><td>Begur avec piscine</td><td><strong>1 800-3 000 &euro;</strong></td><td>Piscine = +30-50%.</td></tr>
+    <tr><td><strong>Estimation 2 semaines</strong></td><td><strong>~2 000-3 500 &euro;</strong></td><td>Eco (Pals) &rarr; Confort (Begur)</td></tr>
+  </table>
+
+  <div class="callout callout-amber">
+    <strong>Reserver tot</strong> (avant avril). En aout, l'offre pet-friendly est tres demandee sur Begur/Pals.
+  </div>
+
+  <h3>Cout de la vie sur place</h3>
+  <table>
+    <tr><th>Poste</th><th>Prix moyen</th><th>En France</th></tr>
+    <tr><td>Menu del dia (midi)</td><td><strong>10-15 &euro;</strong> (entree+plat+dessert+boisson)</td><td>Imbattable</td></tr>
+    <tr><td>Repas resto (famille 6)</td><td><strong>90-150 &euro;</strong></td><td>10-20% moins cher</td></tr>
+    <tr><td>Tapas / pizza (famille 6)</td><td><strong>60-90 &euro;</strong></td><td>Nettement moins cher</td></tr>
+    <tr><td>Biere</td><td><strong>2,50-4 &euro;</strong></td><td>~30% moins cher</td></tr>
+    <tr><td>Cafe</td><td><strong>1,20-1,80 &euro;</strong></td><td>~30% moins cher</td></tr>
+    <tr><td>Courses hebdo (famille)</td><td><strong>150-200 &euro;</strong></td><td>~15-20% moins cher</td></tr>
+    <tr><td>Kayak + snorkeling (demi-journee)</td><td><strong>35-50 &euro;/pers</strong></td><td>&mdash;</td></tr>
+    <tr><td>Excursion bateau criques (3-4h)</td><td><strong>25-45 &euro;/pers</strong></td><td>&mdash;</td></tr>
+    <tr><td>Paddle (SUP) 1h</td><td><strong>10-15 &euro;</strong></td><td>&mdash;</td></tr>
+  </table>
+
+  <h3>Budget total estime</h3>
+  <table>
+    <tr><th>Poste</th><th>Estimation</th></tr>
+    <tr><td>Trajet A/R (peages + carburant)</td><td><strong>~230-250 &euro;</strong></td></tr>
+    <tr><td>Logement (2 semaines)</td><td><strong>~2 000-3 500 &euro;</strong></td></tr>
+    <tr><td>Courses alimentaires (2 sem)</td><td><strong>~300-400 &euro;</strong></td></tr>
+    <tr><td>Restaurants (5-6 sorties)</td><td><strong>~400-700 &euro;</strong></td></tr>
+    <tr><td>Activites (kayak, bateau, Dali)</td><td><strong>~400-750 &euro;</strong></td></tr>
+    <tr><td>Divers (parking, glaces, souvenirs)</td><td><strong>~100-200 &euro;</strong></td></tr>
+    <tr style="font-weight:700;background:var(--teal-light)"><td><strong>TOTAL VOYAGE</strong></td><td><strong>~3 500-5 800 &euro;</strong></td></tr>
+  </table>
+
+  <div class="callout callout-green">
+    <strong>Scenario realiste</strong> (logement milieu de gamme, mix courses/restos) : <strong>~4 000-4 500 &euro;</strong> pour ~2 semaines. Nettement plus cher que l'Albanie (~3 500-5 000 &euro; pour 3 semaines ferry inclus) mais trajet incomparablement plus simple.
+  </div>
+</section>
+
+<!-- FAISABILITE -->
+<section id="faisabilite">
+  <h2>Faisabilite globale</h2>
+
+  <h3>Bilan temps trajet vs temps sur place</h3>
+  <table>
+    <tr><th style="width:50%"></th><th>Jours</th></tr>
+    <tr><td>Trajet aller</td><td>1 jour (5-6h, arrivee le soir)</td></tr>
+    <tr><td>Trajet retour</td><td>1 jour</td></tr>
+    <tr><td><strong>Temps sur place</strong></td><td><strong>~14 jours (2 semaines)</strong></td></tr>
+    <tr style="font-weight:700"><td>Total vacances</td><td>~16 jours</td></tr>
+  </table>
+  <div class="callout">
+    <strong>Ratio temps sur place / total = ~75%.</strong> Tres correct. Trajet court = peu de temps perdu.
+  </div>
+
+  <h3>Contraintes chiens</h3>
+  <table>
+    <tr><th style="width:30%">Aspect</th><th>Verdict</th></tr>
+    <tr><td>Plages ete</td><td><span class="badge badge-red">Interdites</span> (amende 3 000 &euro;). Quelques plages autorisees (Port de la Selva, La Rubina).</td></tr>
+    <tr><td>Impact</td><td><strong>Aucun</strong> &mdash; les chiens restent au logement la journee.</td></tr>
+    <tr><td>Terrasses / restos</td><td><span class="badge badge-green">Tres dog-friendly</span> Gamelles d'eau proposees spontanement.</td></tr>
+    <tr><td>Promenades soir</td><td>Cami de Ronda, villages medievaux = parfait avec les chiens.</td></tr>
+    <tr><td>Chaleur</td><td>28-32&deg;C jour, <strong>16-19&deg;C nuit</strong>. Gerable. Pas de canicule extreme (tramontane rafraichit).</td></tr>
+  </table>
+
+  <h3>Points de vigilance</h3>
+  <table>
+    <tr><th style="width:30%">Point</th><th>Detail</th></tr>
+    <tr><td>Affluence aout</td><td>Criques accessibles en voiture (Aiguablava, Sa Tuna) = bondees. <strong>Solution = criques rando</strong> (Cala Estreta, Cala Pedrosa, Cap de Creus).</td></tr>
+    <tr><td>Parking plages</td><td>Payant en ete (5-10 &euro;/jour). Arriver tot ou privilegier les criques rando.</td></tr>
+    <tr><td>Reservation Dali</td><td>Portlligat = reserver a l'avance (creneaux limites). Figueres = achat en ligne recommande.</td></tr>
+    <tr><td>Logement aout</td><td>Reserver avant avril pour le pet-friendly.</td></tr>
+    <tr><td>Tramontane</td><td>Vent du nord, surtout Cap de Creus. Peut rendre la mer agitee. Rafraichissant.</td></tr>
+    <tr><td>Pas de surf</td><td>Mediterranee = pas de vagues. Kayak et snorkeling a la place.</td></tr>
+  </table>
+</section>
+
+<!-- VERDICT -->
+<section id="verdict">
+  <h2>Verdict</h2>
+
+  <h3>Score faisabilite</h3>
+  <div class="score-grid">
+    <div class="score-card highlight">
+      <div class="sc-label">Trajet</div>
+      <div class="sc-value">10/10</div>
+      <div class="sc-note">5-6h, pas d'etape</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Budget</div>
+      <div class="sc-value">6/10</div>
+      <div class="sc-note">Logement aout cher</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Chiens</div>
+      <div class="sc-value">8/10</div>
+      <div class="sc-note">Chaleur gerable, terrasses ok</div>
+    </div>
+    <div class="score-card highlight">
+      <div class="sc-label">Activites</div>
+      <div class="sc-value">9/10</div>
+      <div class="sc-note">Criques + kayak + Dali</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Logement</div>
+      <div class="sc-value">7/10</div>
+      <div class="sc-note">Pet-friendly a reserver tot</div>
+    </div>
+    <div class="score-card highlight">
+      <div class="sc-label">Aurelie</div>
+      <div class="sc-value">9/10</div>
+      <div class="sc-note">Cadaques, villages, terrasses</div>
+    </div>
+    <div class="score-card highlight">
+      <div class="sc-label">Ados</div>
+      <div class="sc-value">9/10</div>
+      <div class="sc-note">Criques, snorkeling, Dali</div>
+    </div>
+    <div class="score-card">
+      <div class="sc-label">Montagne</div>
+      <div class="sc-value">5/10</div>
+      <div class="sc-note">Excursion 1h+, pas integre</div>
+    </div>
+    <div class="score-card highlight">
+      <div class="sc-label">MOYENNE</div>
+      <div class="sc-value">7,9/10</div>
+      <div class="sc-note">Tres attractif</div>
+    </div>
+  </div>
+
+  <div class="pros-cons">
+    <div class="pros">
+      <strong style="font-size:.85rem;color:var(--green)">POUR QUI C'EST FAIT</strong>
+      <ul>
+        <li>Familles fan de <strong>criques sauvages</strong> et baignade eau turquoise</li>
+        <li>Amateurs de <strong>rando cotiere</strong> (Cami de Ronda = reve)</li>
+        <li>Amoureux de <strong>culture</strong> (Dali, villages medievaux)</li>
+        <li>Ceux qui veulent un <strong>trajet simple</strong> et maximiser le temps sur place</li>
+        <li><strong>Aurelie</strong> : Cadaques, Peratallada, terrasses, marches</li>
+      </ul>
+    </div>
+    <div class="cons">
+      <strong style="font-size:.85rem;color:var(--orange)">POUR QUI C'EST PAS FAIT</strong>
+      <ul>
+        <li>Combo <strong>mer + montagne quotidien</strong> (montagne a 1h+)</li>
+        <li>Plages <strong>desertes en aout</strong> (mais criques rando = tranquilles)</li>
+        <li><strong>Surf</strong> (Mediterranee = pas de vagues)</li>
+        <li><strong>Depaysement radical</strong> (Espagne = familier)</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Comparaison avec les alternatives proches</h3>
+  <div class="compare-table">
+    <table>
+      <tr><th></th><th>Costa Brava</th><th>Asturies</th><th>Albanie</th></tr>
+      <tr><td><strong>Trajet</strong></td><td><span class="badge badge-green">5-6h</span></td><td><span class="badge badge-green">7h</span></td><td><span class="badge badge-orange">2 jours</span></td></tr>
+      <tr><td><strong>Budget total</strong></td><td>~4 000-4 500 &euro;</td><td>~3 000-3 500 &euro;</td><td>~3 500-5 000 &euro;</td></tr>
+      <tr><td><strong>Mer</strong></td><td>Mediterranee 24-26&deg;C, criques</td><td>Atlantique 19-21&deg;C, plages</td><td>Ionienne 24-26&deg;C, vierges</td></tr>
+      <tr><td><strong>Montagne</strong></td><td>Excursion (1h+)</td><td><strong>Integree (Picos 30 min)</strong></td><td>Integree (Llogara 30 min)</td></tr>
+      <tr><td><strong>Culture</strong></td><td><span class="badge badge-green">Top</span> (Dali, villages)</td><td>Bonne</td><td>Forte (2 UNESCO)</td></tr>
+      <tr><td><strong>Criques</strong></td><td><span class="badge badge-green">Top</span> (Cami de Ronda)</td><td>Grandes plages</td><td>Plages vierges</td></tr>
+      <tr><td><strong>Climat aout</strong></td><td>28-32&deg;C</td><td><span class="badge badge-green">22-26&deg;C ideal</span></td><td>30-35&deg;C</td></tr>
+      <tr><td><strong>Depaysement</strong></td><td><span class="badge badge-gray">Moyen</span></td><td><span class="badge badge-blue">Fort</span></td><td><span class="badge badge-green">Maximal</span></td></tr>
+      <tr><td><strong>Tourisme aout</strong></td><td><span class="badge badge-amber">Eleve</span></td><td><span class="badge badge-green">Faible</span></td><td><span class="badge badge-green">Quasi vierge</span></td></tr>
+    </table>
+  </div>
+
+  <div class="callout" style="border-color:#065f46;background:linear-gradient(135deg, var(--teal-light), #d1fae5);font-size:.95rem;">
+    <strong>En resume :</strong> la Costa Brava c'est le choix de la <strong>facilite + criques + culture</strong>. Trajet imbattable, eau chaude, Dali, Cami de Ronda. Le bemol = la montagne n'est pas integree au quotidien et c'est plus touristique que les Asturies ou l'Albanie. Mais pour les criques et la rando cotiere, c'est le top de la Mediterranee.
+  </div>
+</section>
+
+<p style="text-align:center;color:var(--gray-500);font-size:.82rem;padding:1rem 0;">
+  Focus Costa Brava &mdash; Etude de faisabilite &mdash; Mars 2026
+</p>
+
+</div>
+
+</body>
+</html>

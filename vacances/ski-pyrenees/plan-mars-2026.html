@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vacances Ski Pyrenees - Mars 2026</title>
+  <style>
+    :root {
+      --blue: #2563eb;
+      --blue-light: #dbeafe;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --orange: #ea580c;
+      --orange-light: #fff7ed;
+      --red: #dc2626;
+      --purple: #7c3aed;
+      --purple-light: #ede9fe;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-500: #6b7280;
+      --gray-700: #374151;
+      --gray-900: #111827;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: var(--gray-900);
+      background: var(--gray-50);
+      line-height: 1.6;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #93c5fd 100%);
+      color: white;
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    .header h1 { font-size: 2rem; margin-bottom: .25rem; }
+    .header .subtitle { font-size: 1.1rem; opacity: .9; }
+    .header .dates {
+      display: inline-block;
+      margin-top: .75rem;
+      background: rgba(255,255,255,.2);
+      padding: .4rem 1.2rem;
+      border-radius: 2rem;
+      font-weight: 600;
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 1.5rem; }
+
+    nav.toc {
+      background: white;
+      border-radius: .75rem;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    nav.toc a {
+      display: inline-block;
+      padding: .35rem .9rem;
+      background: var(--blue-light);
+      color: var(--blue);
+      border-radius: .4rem;
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 500;
+      transition: background .15s;
+    }
+    nav.toc a:hover { background: #bfdbfe; }
+
+    section {
+      background: white;
+      border-radius: .75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--blue);
+      color: var(--blue);
+    }
+    section h3 {
+      font-size: 1.05rem;
+      margin: 1.25rem 0 .75rem;
+      color: var(--gray-700);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+      margin-bottom: 1rem;
+    }
+    th, td {
+      text-align: left;
+      padding: .55rem .65rem;
+      border-bottom: 1px solid var(--gray-200);
+    }
+    th {
+      background: var(--gray-100);
+      font-weight: 600;
+      font-size: .8rem;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+      color: var(--gray-500);
+    }
+    tr:hover td { background: var(--gray-50); }
+    td.price { font-weight: 700; color: var(--green); white-space: nowrap; }
+    td.price-high { font-weight: 600; color: var(--orange); white-space: nowrap; }
+
+    .badge {
+      display: inline-block;
+      padding: .15rem .55rem;
+      border-radius: .3rem;
+      font-size: .75rem;
+      font-weight: 600;
+    }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-blue { background: var(--blue-light); color: var(--blue); }
+    .badge-orange { background: var(--orange-light); color: var(--orange); }
+    .badge-red { background: #fee2e2; color: var(--red); }
+    .badge-gray { background: var(--gray-100); color: var(--gray-500); }
+    .badge-purple { background: var(--purple-light); color: var(--purple); }
+
+    .callout {
+      border-left: 4px solid var(--blue);
+      background: var(--blue-light);
+      padding: .85rem 1rem;
+      border-radius: 0 .5rem .5rem 0;
+      margin: 1rem 0;
+      font-size: .9rem;
+    }
+    .callout-green { border-color: var(--green); background: var(--green-light); }
+    .callout-orange { border-color: var(--orange); background: var(--orange-light); }
+    .callout-purple { border-color: var(--purple); background: var(--purple-light); }
+
+    .family-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: .75rem;
+      margin: 1rem 0;
+    }
+    .family-card {
+      background: var(--gray-50);
+      border-radius: .5rem;
+      padding: .85rem;
+      text-align: center;
+      border: 1px solid var(--gray-200);
+    }
+    .family-card .name { font-weight: 700; font-size: 1rem; margin-bottom: .2rem; }
+    .family-card .age { color: var(--gray-500); font-size: .82rem; }
+    .family-card .level { margin-top: .4rem; }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+      margin: 1rem 0;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: .55rem;
+      top: .25rem;
+      bottom: .25rem;
+      width: 3px;
+      background: var(--blue-light);
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.55rem;
+      top: .35rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--blue);
+      border: 2px solid white;
+      box-shadow: 0 0 0 2px var(--blue-light);
+    }
+    .timeline-item .day {
+      font-weight: 700;
+      color: var(--blue);
+      font-size: .95rem;
+    }
+    .timeline-item .detail {
+      color: var(--gray-700);
+      font-size: .88rem;
+      margin-top: .15rem;
+    }
+
+    .budget-row-total td {
+      font-weight: 700;
+      font-size: 1rem;
+      border-top: 2px solid var(--gray-900);
+      background: var(--gray-100);
+    }
+
+    .compare-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 900px) { .compare-cards { grid-template-columns: 1fr; } }
+    .compare-card {
+      border: 2px solid var(--gray-200);
+      border-radius: .75rem;
+      padding: 1.25rem;
+      position: relative;
+    }
+    .compare-card.highlight { border-color: var(--blue); }
+    .compare-card.recommended { border-color: var(--green); background: #f0fdf4; }
+    .compare-card .cc-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: .15rem;
+    }
+    .compare-card .cc-sub { color: var(--gray-500); font-size: .85rem; margin-bottom: .75rem; }
+    .compare-card .cc-price {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--green);
+      margin-bottom: .5rem;
+    }
+    .compare-card .cc-detail { font-size: .85rem; color: var(--gray-700); line-height: 1.7; }
+    .compare-card .cc-detail strong { color: var(--gray-900); }
+    .compare-card .cc-badge {
+      position: absolute;
+      top: -.6rem;
+      right: 1rem;
+      background: var(--green);
+      color: white;
+      padding: .2rem .75rem;
+      border-radius: .3rem;
+      font-size: .75rem;
+      font-weight: 700;
+    }
+
+    .lodging-card {
+      border: 1px solid var(--gray-200);
+      border-radius: .5rem;
+      padding: 1rem;
+      margin-bottom: .75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .lodging-card:hover { border-color: var(--blue); }
+    .lodging-card.star { border-color: var(--green); border-width: 2px; background: #f0fdf4; }
+    .lodging-info { flex: 1; }
+    .lodging-info .l-name { font-weight: 700; font-size: .95rem; }
+    .lodging-info .l-loc { color: var(--gray-500); font-size: .82rem; margin-bottom: .35rem; }
+    .lodging-info .l-details { font-size: .85rem; color: var(--gray-700); }
+    .lodging-price {
+      text-align: right;
+      white-space: nowrap;
+    }
+    .lodging-price .lp-amount { font-size: 1.2rem; font-weight: 800; color: var(--green); }
+    .lodging-price .lp-label { font-size: .75rem; color: var(--gray-500); }
+    .lodging-price a {
+      display: inline-block;
+      margin-top: .35rem;
+      font-size: .8rem;
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .lodging-price a:hover { text-decoration: underline; }
+
+    .star-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 2px;
+      width: 80px;
+      margin: .2rem 0;
+    }
+    .star-grid .star-filled { width: 14px; height: 14px; background: #fbbf24; border-radius: 2px; }
+    .star-grid .star-empty { width: 14px; height: 14px; background: var(--gray-200); border-radius: 2px; }
+
+    .activity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    @media (max-width: 900px) { .activity-grid { grid-template-columns: 1fr; } }
+    .activity-col {
+      border: 1px solid var(--gray-200);
+      border-radius: .5rem;
+      padding: 1rem;
+    }
+    .activity-col h4 {
+      font-size: .95rem;
+      margin-bottom: .75rem;
+      padding-bottom: .4rem;
+      border-bottom: 2px solid var(--gray-200);
+    }
+    .activity-col .act-item {
+      margin-bottom: .75rem;
+      font-size: .85rem;
+    }
+    .activity-col .act-item strong { display: block; color: var(--gray-900); }
+    .activity-col .act-item span { color: var(--gray-500); }
+
+    .notes { list-style: none; }
+    .notes li {
+      padding: .4rem 0;
+      padding-left: 1.4rem;
+      position: relative;
+      font-size: .9rem;
+    }
+    .notes li::before {
+      content: '\2753';
+      position: absolute;
+      left: 0;
+    }
+
+    .source {
+      font-size: .78rem;
+      color: var(--gray-500);
+      margin-top: .5rem;
+    }
+    .source a { color: var(--blue); text-decoration: none; }
+    .source a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .header h1 { font-size: 1.5rem; }
+      .container { padding: 1rem; }
+      section { padding: 1rem; }
+      table { font-size: .8rem; }
+      th, td { padding: .4rem; }
+      .family-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Vacances Ski Pyrenees</h1>
+  <div class="subtitle">Famille Bruet &mdash; 6 personnes + 2 Cairn Terriers</div>
+  <div class="dates">Jeudi 5 mars (soir) &rarr; Dimanche 8 mars 2026 &bull; 3 jours de ski</div>
+</div>
+
+<div class="container">
+
+<nav class="toc">
+  <a href="#famille">Famille</a>
+  <a href="#stations">Stations</a>
+  <a href="#forfaits">Forfaits</a>
+  <a href="#aurelie">Aurelie</a>
+  <a href="#logement">Logements</a>
+  <a href="#comparatif">Comparatif</a>
+  <a href="#programme">Programme</a>
+  <a href="#budget">Budget</a>
+  <a href="#notes">Notes</a>
+</nav>
+
+<!-- PARAMETRES -->
+<section>
+  <h2>Parametres du sejour</h2>
+  <table>
+    <tr><th style="width:35%">Parametre</th><th>Valeur</th></tr>
+    <tr><td>Dates</td><td>Jeudi 5 mars (soir) &rarr; Dimanche 8 mars 2026 <span class="badge badge-blue">3 nuits</span></td></tr>
+    <tr><td>Ski</td><td><strong>3 jours</strong> : vendredi 6, samedi 7, dimanche 8. Retour dimanche soir.</td></tr>
+    <tr><td>Depart</td><td>Vayres, Gironde (33)</td></tr>
+    <tr><td>Hebergement</td><td>Maison / gite spacieux (PAS de petit appart) &mdash; max <strong>150 &euro;/nuit</strong></td></tr>
+    <tr><td>Chiens</td><td>2 Cairn Terriers &mdash; restent au logement la journee, besoin d'espace</td></tr>
+    <tr><td>Budget forfaits</td><td>Le prix n'est <strong>pas determinant</strong>. On privilegie la qualite du domaine.</td></tr>
+  </table>
+</section>
+
+<!-- FAMILLE -->
+<section id="famille">
+  <h2>La famille</h2>
+  <div class="family-grid">
+    <div class="family-card">
+      <div class="name">Olivier</div>
+      <div class="age">45 ans &middot; Adulte</div>
+      <div class="level">
+        <span class="badge badge-blue">Bleu</span>
+        <span class="badge badge-orange">Rouge</span>
+        <span class="badge badge-red">Noir</span>
+      </div>
+    </div>
+    <div class="family-card">
+      <div class="name">Aurelie</div>
+      <div class="age">43 ans &middot; Adulte</div>
+      <div class="level">
+        <span class="badge badge-green">Vert</span>
+        <span class="badge badge-blue">Bleu</span>
+      </div>
+    </div>
+    <div class="family-card">
+      <div class="name">Candice</div>
+      <div class="age">17 ans &middot; Enfant</div>
+      <div class="level">
+        <span class="badge badge-blue">Bleu</span>
+        <span class="badge badge-orange">Rouge</span>
+      </div>
+    </div>
+    <div class="family-card">
+      <div class="name">Clementine</div>
+      <div class="age">14 ans &middot; Enfant</div>
+      <div class="level">
+        <span class="badge badge-blue">Bleu</span>
+        <span class="badge badge-orange">Rouge</span>
+      </div>
+    </div>
+    <div class="family-card">
+      <div class="name">Timeo</div>
+      <div class="age">12 ans &middot; Enfant</div>
+      <div class="level">
+        <span class="badge badge-blue">Bleu</span>
+        <span class="badge badge-orange">Rouge</span>
+      </div>
+    </div>
+    <div class="family-card">
+      <div class="name">Flavie</div>
+      <div class="age">9 ans &middot; Enfant</div>
+      <div class="level">
+        <span class="badge badge-green">Vert</span>
+        <span class="badge badge-blue">Bleu</span>
+      </div>
+    </div>
+  </div>
+  <div class="callout">
+    Aurelie peut ne pas skier une 1/2 journee &rarr; il lui faut une <strong>activite interessante</strong> a proximite (thermes, village, balade avec les chiens).
+  </div>
+</section>
+
+<!-- HISTORIQUE -->
+<section>
+  <h2>Historique &amp; contexte</h2>
+  <ul style="margin: .75rem 0; padding-left: 1.3rem; font-size: .9rem; line-height: 1.8;">
+    <li>3 dernieres annees : logement a <strong>Arudy</strong>, ski a <strong>Gourette</strong> (parking du Ley)</li>
+    <li>Gourette connue par coeur &rarr; <strong>on veut changer</strong></li>
+    <li>Gourette reste un <span class="badge badge-gray">plan de repli</span></li>
+    <li>Cauterets deja fait &mdash; parking/acces penible &rarr; <span class="badge badge-red">ecartee</span></li>
+    <li>Le prix du forfait n'est <strong>pas determinant</strong> &mdash; on privilegie la qualite du domaine</li>
+    <li>Preference : <strong>loger proche station</strong></li>
+  </ul>
+</section>
+
+<!-- STATIONS -->
+<section id="stations">
+  <h2>Stations de ski &mdash; Comparatif</h2>
+
+  <h3>Criteres de selection (par ordre d'importance)</h3>
+  <ol style="margin: .5rem 0 1rem; padding-left: 1.3rem; font-size: .9rem; line-height: 1.8;">
+    <li><strong>Domaine skiable</strong> : assez grand et varie pour 3 jours pleins</li>
+    <li><strong>Enneigement mars</strong> : altitude elevee</li>
+    <li><strong>Logement spacieux</strong> : maison/gite avec espace pour 2 Cairn Terriers</li>
+    <li><strong>Activites Aurelie</strong> : village vivant, thermes, commerces</li>
+    <li>Prix forfait (secondaire)</li>
+  </ol>
+
+  <h3>Les 3 candidates principales</h3>
+  <table>
+    <tr>
+      <th>Station</th><th>Domaine</th><th>Altitude</th><th>Trajet Vayres</th><th>Village/Activites</th><th>Statut</th>
+    </tr>
+    <tr>
+      <td><strong>Grand Tourmalet</strong></td><td>69 pistes &mdash; plus vaste</td><td>1400-2500m</td><td>~3h30</td>
+      <td>Bareges (thermes Cieleo) + Bagnieres (Aquensis, halles, marche samedi)</td>
+      <td><span class="badge badge-green">Candidate 1</span></td>
+    </tr>
+    <tr>
+      <td><strong>Saint-Lary Soulan</strong></td><td>59 pistes, 100+ km</td><td>1620-2515m</td><td>~4h</td>
+      <td>Village tres anime, Sensoria Rio, patinoire, Maison de l'Ours</td>
+      <td><span class="badge badge-green">Candidate 2</span></td>
+    </tr>
+    <tr>
+      <td><strong>Luz-Ardiden</strong></td><td>60 km, 3 versants</td><td>1680-2500m</td><td>~3h45</td>
+      <td>Luz-St-Sauveur (Luzea, eglise fortifiee), Gavarnie a 30 min</td>
+      <td><span class="badge badge-blue">Candidate 3</span></td>
+    </tr>
+  </table>
+
+  <h3>Stations ecartees</h3>
+  <table>
+    <tr><th>Station</th><th>Raison</th></tr>
+    <tr><td>Gourette</td><td><span class="badge badge-orange">Repli</span> uniquement (connue par coeur)</td></tr>
+    <tr><td>Cauterets</td><td><span class="badge badge-red">Ecartee</span> deja fait, parking penible</td></tr>
+    <tr><td>Piau Engaly</td><td>Meilleur enneigement mais station beton, pas de village, rien pour Aurelie</td></tr>
+    <tr><td>Peyragudes</td><td>60 km, pas de vie de village a proximite</td></tr>
+    <tr><td>Artouste / La Pierre St-Martin</td><td>Trop petits pour 3 jours</td></tr>
+  </table>
+</section>
+
+<!-- FORFAITS -->
+<section id="forfaits">
+  <h2>Forfaits ski &mdash; 3 jours, 6 personnes</h2>
+  <p style="font-size:.88rem; color: var(--gray-500); margin-bottom:.75rem;">
+    2 adultes + 4 enfants (5-17 ans) &middot; Carte magnetique N'PY
+  </p>
+
+  <table>
+    <tr>
+      <th>Station</th><th>Adulte 3j</th><th>Enfant 3j</th><th>Total 3j (2A+4E)</th><th>Famille 3j ?</th>
+    </tr>
+    <tr>
+      <td><strong>Luz-Ardiden</strong></td><td>120 &euro;</td><td>120 &euro;</td>
+      <td class="price">720 &euro;</td><td><span class="badge badge-green">Oui</span> adultes au tarif enfant</td>
+    </tr>
+    <tr>
+      <td>Piau Engaly</td><td>132 &euro;</td><td>115,50 &euro;</td>
+      <td class="price">726 &euro;</td><td>Non (6-7j)</td>
+    </tr>
+    <tr>
+      <td>Peyragudes</td><td>~132 &euro;</td><td>132 &euro;</td>
+      <td>~792 &euro;</td><td>Probable (a confirmer)</td>
+    </tr>
+    <tr>
+      <td><strong>Saint-Lary</strong> <span class="badge badge-orange">Hors N'PY</span></td><td>156 &euro;</td><td>137,50 &euro;</td>
+      <td class="price-high">862 &euro;</td><td>Non pour 3j</td>
+    </tr>
+    <tr>
+      <td><strong>Grand Tourmalet</strong></td><td>159 &euro;</td><td>144 &euro;</td>
+      <td class="price-high">894 &euro;</td><td>Non (6-7j)</td>
+    </tr>
+  </table>
+
+  <div class="callout">
+    <strong>Le prix du forfait n'est pas le critere principal.</strong><br>
+    L'ecart max est ~170 &euro; entre Luz et Tourmalet, soit ~28 &euro;/personne sur 3 jours.
+  </div>
+</section>
+
+<!-- ACTIVITES AURELIE -->
+<section id="aurelie">
+  <h2>Activites Aurelie &mdash; Demi-journee hors ski</h2>
+
+  <div class="activity-grid">
+    <div class="activity-col">
+      <h4>Grand Tourmalet <span class="badge badge-blue">4/5</span></h4>
+      <div class="act-item">
+        <strong>Thermes Cieleo</strong> (Bareges, a cote des pistes)<br>
+        <span>18 &euro;/2h &middot; 15h30-19h30</span>
+      </div>
+      <div class="act-item">
+        <strong>Thermes Aquensis</strong> (Bagnieres, 30 min route)<br>
+        <span>17 &euro;/2h &middot; 10h30-20h &middot; Plus complet</span>
+      </div>
+      <div class="act-item">
+        <strong>Marche samedi matin</strong> Bagnieres<br>
+        <span>200 exposants ! Producteurs locaux</span>
+      </div>
+      <div class="act-item">
+        <strong>Pic du Midi</strong> (telepherique La Mongie)<br>
+        <span>42-53 &euro; &middot; Observatoire 2877m &middot; Exceptionnel</span>
+      </div>
+      <div class="act-item">
+        <strong>Lac de Payolle</strong><br>
+        <span>Balade facile, "petit Canada", chiens OK</span>
+      </div>
+      <div class="act-item" style="color:var(--orange); font-size:.82rem;">
+        Bemol : tout est eclate, voiture necessaire
+      </div>
+    </div>
+
+    <div class="activity-col" style="border-color: var(--green); border-width: 2px; background: #f0fdf4;">
+      <h4>Saint-Lary <span class="badge badge-green">5/5</span></h4>
+      <div class="act-item">
+        <strong>Sensoria Rio</strong> (dans le village !)<br>
+        <span>19-21 &euro;/2h &middot; Piscines ext. vue montagne &middot; Spa Nuxe</span>
+      </div>
+      <div class="act-item">
+        <strong>Village tres anime</strong><br>
+        <span>Rue Vincent Mir : boutiques, restos, bars</span>
+      </div>
+      <div class="act-item">
+        <strong>Marche samedi matin</strong><br>
+        <span>Producteurs vallee d'Aure</span>
+      </div>
+      <div class="act-item">
+        <strong>Maison de l'Ours</strong><br>
+        <span>Musee original &middot; 9h-12h / 14h-18h</span>
+      </div>
+      <div class="act-item">
+        <strong>Patinoire exterieure</strong><br>
+        <span>275m2, lumieres, musique</span>
+      </div>
+      <div class="act-item">
+        <strong>Balade Granges Grascoueou</strong><br>
+        <span>Depuis le village, chiens OK, vue superbe</span>
+      </div>
+      <div class="act-item" style="color:var(--green); font-size:.82rem; font-weight:600;">
+        Tout a pied, sans voiture !
+      </div>
+    </div>
+
+    <div class="activity-col">
+      <h4>Luz-Saint-Sauveur <span class="badge badge-gray">3,5/5</span></h4>
+      <div class="act-item">
+        <strong>Thermes Luzea</strong><br>
+        <span>18 &euro;/2h &middot; <strong>15h-19h30 seulement</strong> (pas le matin)</span>
+      </div>
+      <div class="act-item">
+        <strong>Village authentique</strong><br>
+        <span>62 commerces, ruelles, charme</span>
+      </div>
+      <div class="act-item">
+        <strong>Eglise fortifiee des Templiers</strong> (XIIe)<br>
+        <span>Visite libre, unique dans les Pyrenees</span>
+      </div>
+      <div class="act-item">
+        <strong>Cirque de Gavarnie</strong> (30 min route)<br>
+        <span>UNESCO, cascade en glace, chiens en laisse OK</span>
+      </div>
+      <div class="act-item">
+        <strong>Marche lundi matin</strong><br>
+        <span>Pas le week-end...</span>
+      </div>
+      <div class="act-item" style="color:var(--orange); font-size:.82rem;">
+        Thermes ouvrent tard, marche pas le WE, village modeste
+      </div>
+    </div>
+  </div>
+
+  <div class="callout-green callout">
+    <strong>Saint-Lary est le grand gagnant pour Aurelie :</strong> Sensoria Rio (piscines ext. face aux montagnes), village anime, musees, patinoire, marche samedi &mdash; tout a pied, sans voiture.
+  </div>
+</section>
+
+<!-- LOGEMENTS -->
+<section id="logement">
+  <h2>Logements &mdash; Recherche</h2>
+
+  <p style="font-size:.88rem; margin-bottom:.5rem;">
+    <strong>Criteres :</strong> 6 pers. min &middot; 2 Cairn Terriers acceptes (seuls la journee) &middot; maison/gite spacieux &middot; max 150 &euro;/nuit &middot; jardin clos = gros bonus
+  </p>
+
+  <!-- ZONE 1 : GRAND TOURMALET -->
+  <h3>Zone 1 : Grand Tourmalet <span class="badge badge-blue">Forfaits 894 &euro;</span></h3>
+  <p style="font-size:.85rem; color:var(--gray-500); margin-bottom:.75rem;">
+    La Mongie a 10-15 min de route depuis la vallee de Campan. Bareges cote nord.
+  </p>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">T1 &middot; Chalet du Tourmalet &mdash; 4 ch, cheminee insert, jardin 1400m&sup2;</div>
+      <div class="l-loc">Campan, 10 min La Mongie &middot; 10 pers &middot; <span class="badge badge-green">Chien OK</span></div>
+      <div class="l-details">Salon cuir, TV 82cm, balcon, veranda, barbecue, garage skis/velos. Confort haut.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~348 &euro;</div>
+      <div class="lp-label">3 nuits (~116 &euro;/n)</div>
+      <a href="https://www.abritel.fr/location-vacances/p1471198" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">T3 &middot; Maison Campan &mdash; jardin clos securise, ideal chiens</div>
+      <div class="l-loc">Ste-Marie-de-Campan, 8 km La Mongie &middot; 6 pers &middot; <span class="badge badge-green">Chien OK</span></div>
+      <div class="l-details">Terrain clos et securise (mentionne "ideal pour les chiens"). Vue montagne, route du Tourmalet.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~350-420 &euro;</div>
+      <div class="lp-label">3 nuits (est.)</div>
+      <a href="https://www.amivac.com/location-vacances/annonce-91938278" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">T2 &middot; Gite Bareges 120m&sup2; &mdash; 3 ch, cheminee, parking</div>
+      <div class="l-loc">Bareges village (thermes Cieleo a pied) &middot; 8 pers &middot; <span class="badge badge-green">Chien OK gratuit</span></div>
+      <div class="l-details">Cheminee, 2 SdB, lave-linge, seche-linge, LV, WiFi, barbecue. Chauffage gaz inclus.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~430-462 &euro;</div>
+      <div class="lp-label">3 nuits (limite budget)</div>
+      <a href="https://www.gites-de-france-65.com/location-vacances-Gite-a-Bareges-Hautes-pyrenees-65G159312.html" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">T5 &middot; Chalet Ste-Marie &mdash; prairie 6000m&sup2;, bord Adour</div>
+      <div class="l-loc">Ste-Marie-de-Campan &middot; 6-8 pers &middot; <span class="badge badge-orange">Sur demande</span></div>
+      <div class="l-details">3 etoiles, prairie au bord de l'Adour, balan&ccedil;oire, barbecue, vue degagee.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~273 &euro;</div>
+      <div class="lp-label">3 nuits (~91 &euro;/n)</div>
+      <a href="https://www.abritel.fr/location-vacances/p631334" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ZONE 2 : SAINT-LARY -->
+  <h3>Zone 2 : Saint-Lary Soulan <span class="badge badge-blue">Forfaits 862 &euro;</span></h3>
+  <p style="font-size:.85rem; color:var(--gray-500); margin-bottom:.75rem;">
+    Telecabine dans le village. Navette gratuite depuis les communes voisines.
+  </p>
+
+  <div class="lodging-card star">
+    <div class="lodging-info">
+      <div class="l-name">S1 &middot; La Maison d'Aimee &mdash; jardin clos 1800m&sup2;, 5/5 (55 avis) &#11088;</div>
+      <div class="l-loc">Vielle-Aure, 2 km St-Lary &middot; 8 pers &middot; <span class="badge badge-green">Chien OK gratuit</span> (100 &euro; caution)</div>
+      <div class="l-details">3 ch, poele a bois, 2 parkings, LV, lave-linge, barbecue, WiFi. Jardin clos 1800m&sup2; avec vue montagne = <strong>parfait pour les Cairn Terriers</strong>. 55 avis a 5/5.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~450-510 &euro;</div>
+      <div class="lp-label">3 nuits (negocier !)</div>
+      <a href="https://www.gites-de-france-65.com/location-Gite-Vielle-aure-Hautes-pyrenees-65G178411.html" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">S2 &middot; Gite de la Fontaine &mdash; 110m&sup2;, jardin clos, poele a bois</div>
+      <div class="l-loc">Bourisp, 1,5 km St-Lary &middot; 6 pers &middot; <span class="badge badge-green">Chien OK gratuit</span></div>
+      <div class="l-details">3 ch, seche-linge, LV, range-skis couvert, barbecue. Ancienne ferme restauree. Chauffage hors forfait + bois 60 &euro;/demi-stere.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~220-300 &euro;</div>
+      <div class="lp-label">3 nuits (appeler 05 62 44 02 37)</div>
+      <a href="https://www.gites-de-france-65.com/location-Gite-Bourisp-Hautes-pyrenees-65G187811.html" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">S3 &middot; Chalet Vallee d'Aure &mdash; 3 ch, cheminee, face Neouvielle</div>
+      <div class="l-loc">Camparan, 3 km St-Lary &middot; 8 pers &middot; <span class="badge badge-green">2 animaux OK</span></div>
+      <div class="l-details">Cheminee, TV, parking, chauffage. Face au massif du Neouvielle (UNESCO). Prix imbattable.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~192 &euro;</div>
+      <div class="lp-label">3 nuits (~64 &euro;/n !)</div>
+      <a href="https://www.abritel.fr/location-vacances/p902558" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">S4 &middot; La Ferme de Benedicte &mdash; 4 ch, 100m&sup2;, jardin clos, insert</div>
+      <div class="l-loc">Vielle-Aure, 4 km St-Lary &middot; 6 pers &middot; <span class="badge badge-green">Chien OK</span> (5 &euro;/j/animal)</div>
+      <div class="l-details">Cheminee insert, LV, TV, raclette/fondue fournis. 4,7/5 (10 avis). Verifier dispo WE 6-8 mars.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~300-360 &euro;</div>
+      <div class="lp-label">3 nuits (+ ~30 &euro; chiens)</div>
+      <a href="https://www.gites-de-france-65.com/location-Gite-Vielle-aure-Hautes-pyrenees-65G043311.html" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <!-- ZONE 3 : LUZ-ARDIDEN -->
+  <h3>Zone 3 : Luz-Ardiden <span class="badge badge-blue">Forfaits 720 &euro;</span></h3>
+  <p style="font-size:.85rem; color:var(--gray-500); margin-bottom:.75rem;">
+    Navette gratuite Luz-Saint-Sauveur &rarr; station (~20 min)
+  </p>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">L2 &middot; Gite a Sazos &mdash; 3 chambres</div>
+      <div class="l-loc">Sazos (5 min de Luz) &middot; 6 pers &middot; <span class="badge badge-green">Chien OK</span></div>
+      <div class="l-details">Terrasse, jardin privatif, chauffage. Verifier dispo WE 3 nuits.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">210 &euro;</div>
+      <div class="lp-label">3 nuits (70 &euro;/n)</div>
+      <a href="https://www.gites.fr/gites_sazos_28418.html" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">L1 &middot; Maison HOGON &mdash; plain-pied, jardin arbore</div>
+      <div class="l-loc">Luz-Saint-Sauveur &middot; 6 pers &middot; <span class="badge badge-green">Chien OK</span></div>
+      <div class="l-details">Plain-pied, jardin arbore, Wi-Fi, lave-vaisselle. Tel : 06 80 12 66 41.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">234-312 &euro;</div>
+      <div class="lp-label">3 nuits (78-104 &euro;/n)</div>
+      <a href="https://www.abritel.fr/location-vacances/p10008731a" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="lodging-card">
+    <div class="lodging-info">
+      <div class="l-name">L4 &middot; Pyrenees Paradis &mdash; 130m&sup2;, parc 1 ha, 9.6/10</div>
+      <div class="l-loc">Sazos &middot; 8 pers &middot; <span class="badge badge-green">Chien OK</span></div>
+      <div class="l-details">Grange renovee, 3 ch, cheminee, seche-linge. Parc d'1 hectare ideal pour les chiens.</div>
+    </div>
+    <div class="lodging-price">
+      <div class="lp-amount">~441 &euro;</div>
+      <div class="lp-label">3 nuits (~147 &euro;/n)</div>
+      <a href="https://www.abritel.fr/location-vacances/p1414247" target="_blank">Voir &rarr;</a>
+    </div>
+  </div>
+
+  <div class="callout-orange callout">
+    <strong>Points d'attention :</strong> Verifier dispo WE 3 nuits (certains imposent 7 nuits min).
+    Draps rarement inclus dans les gites (10-15 &euro; suppl.). Preciser "2 petits chiens Cairn Terriers (~6-7 kg)" a chaque demande.
+    <strong>Reserver vite</strong> &mdash; debut mars, certains WE sont deja pris.
+  </div>
+</section>
+
+<!-- COMPARATIF FINAL -->
+<section id="comparatif">
+  <h2>Comparatif final &mdash; Les 3 options</h2>
+
+  <div class="compare-cards">
+    <div class="compare-card highlight">
+      <div class="cc-title">Option A : Grand Tourmalet</div>
+      <div class="cc-sub">Bareges / La Mongie &middot; ~3h30 de Vayres</div>
+      <div class="cc-price">1 167 &ndash; 1 356 &euro;</div>
+      <div class="cc-detail">
+        <strong>Forfaits :</strong> 894 &euro;<br>
+        <strong>Logement :</strong> 273 &rarr; 462 &euro;<br>
+        <strong>+</strong> Plus grand domaine des Pyrenees (69 pistes)<br>
+        <strong>+</strong> Pic du Midi (exceptionnel)<br>
+        <strong>+</strong> 2 options thermes (Cieleo + Aquensis)<br>
+        <strong>+</strong> Marche Bagnieres samedi<br>
+        <strong>&minus;</strong> Activites eclatees geographiquement<br>
+        <strong>&minus;</strong> Voiture necessaire pour Aurelie
+      </div>
+    </div>
+    <div class="compare-card recommended">
+      <div class="cc-badge">Meilleur compromis</div>
+      <div class="cc-title">Option B : Saint-Lary</div>
+      <div class="cc-sub">Vallee d'Aure &middot; ~4h de Vayres</div>
+      <div class="cc-price">1 054 &ndash; 1 372 &euro;</div>
+      <div class="cc-detail">
+        <strong>Forfaits :</strong> 862 &euro; (hors N'PY)<br>
+        <strong>Logement :</strong> 192 &rarr; 510 &euro;<br>
+        <strong>+</strong> 100+ km de pistes (3 jours confortables)<br>
+        <strong>+</strong> Village tres anime, tout a pied<br>
+        <strong>+</strong> Sensoria Rio = meilleur spa<br>
+        <strong>+</strong> Maison d'Aimee : jardin 1800m&sup2;, 5/5<br>
+        <strong>&minus;</strong> Hors N'PY<br>
+        <strong>&minus;</strong> 30 min de plus depuis Vayres
+      </div>
+    </div>
+    <div class="compare-card">
+      <div class="cc-title">Option C : Luz-Ardiden</div>
+      <div class="cc-sub">Vallee de Luz &middot; ~3h45 de Vayres</div>
+      <div class="cc-price">930 &ndash; 1 161 &euro;</div>
+      <div class="cc-detail">
+        <strong>Forfaits :</strong> 720 &euro; (famille classique)<br>
+        <strong>Logement :</strong> 210 &rarr; 441 &euro;<br>
+        <strong>+</strong> Le moins cher<br>
+        <strong>+</strong> Gavarnie UNESCO (cascade en glace)<br>
+        <strong>+</strong> Pyrenees Paradis : parc 1 ha<br>
+        <strong>&minus;</strong> 60 km : peut-etre juste pour 3 jours<br>
+        <strong>&minus;</strong> Thermes Luzea : 15h-19h30 seulement<br>
+        <strong>&minus;</strong> Village modeste pour Aurelie
+      </div>
+    </div>
+  </div>
+
+  <h3>Budget total estime (logement + forfaits)</h3>
+  <table>
+    <tr><th>Combinaison</th><th>Logement</th><th>Forfaits</th><th>Total</th></tr>
+    <tr><td>Luz-Ardiden + Gite Sazos (L2)</td><td>210 &euro;</td><td>720 &euro;</td><td class="price">930 &euro;</td></tr>
+    <tr><td>Saint-Lary + Chalet Camparan (S3)</td><td>~192 &euro;</td><td>862 &euro;</td><td class="price">1 054 &euro;</td></tr>
+    <tr><td>Saint-Lary + Gite Fontaine (S2)</td><td>~260 &euro;</td><td>862 &euro;</td><td class="price">~1 122 &euro;</td></tr>
+    <tr><td>Grand Tourmalet + Chalet (T1)</td><td>~348 &euro;</td><td>894 &euro;</td><td class="price">1 242 &euro;</td></tr>
+    <tr><td>Saint-Lary + Maison Aimee (S1) &#11088;</td><td>~480 &euro;</td><td>862 &euro;</td><td class="price-high">~1 342 &euro;</td></tr>
+    <tr><td>Grand Tourmalet + Gite Bareges (T2)</td><td>~450 &euro;</td><td>894 &euro;</td><td class="price-high">~1 344 &euro;</td></tr>
+  </table>
+</section>
+
+<!-- PROGRAMME -->
+<section id="programme">
+  <h2>Programme jour par jour</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="day">Jeudi 5 mars &mdash; Trajet aller</div>
+      <div class="detail">
+        Depart Vayres en soiree<br>
+        Trajet : ~3h30 (Tourmalet) / ~3h45 (Luz) / ~4h (Saint-Lary)<br>
+        Arrivee logement, installation, courses si besoin
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="day">Vendredi 6 mars &mdash; Ski jour 1</div>
+      <div class="detail">
+        Ski journee complete pour tout le monde<br>
+        Decouverte du domaine<br>
+        Soiree : a definir
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="day">Samedi 7 mars &mdash; Ski jour 2</div>
+      <div class="detail">
+        Ski journee (ou 1/2 journee Aurelie + thermes/village/balade chiens)<br>
+        Marche du matin si Tourmalet (Bagnieres) ou Saint-Lary<br>
+        Soiree : a definir
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="day">Dimanche 8 mars &mdash; Ski jour 3 + Retour</div>
+      <div class="detail">
+        Ski journee complete<br>
+        Retour Vayres en soiree apres le ski
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget">
+  <h2>Budget previsionnel</h2>
+  <table>
+    <tr><th>Poste</th><th>Estimation</th><th>Reel</th></tr>
+    <tr><td>Logement (3 nuits)</td><td>192 &ndash; 510 &euro;</td><td>&mdash;</td></tr>
+    <tr><td>Forfaits ski (3j, 6 pers)</td><td>720 &ndash; 894 &euro;</td><td>&mdash;</td></tr>
+    <tr><td>Location materiel</td><td>A definir</td><td>&mdash;</td></tr>
+    <tr><td>Essence / peages AR</td><td>A definir</td><td>&mdash;</td></tr>
+    <tr><td>Alimentation</td><td>A definir</td><td>&mdash;</td></tr>
+    <tr><td>Activites (thermes, etc.)</td><td>~20-50 &euro;</td><td>&mdash;</td></tr>
+    <tr class="budget-row-total"><td>TOTAL (hors loc, essence, alim.)</td><td>~1 000 &ndash; 1 400 &euro;</td><td>&mdash;</td></tr>
+  </table>
+</section>
+
+<!-- NOTES -->
+<section id="notes">
+  <h2>Notes &amp; questions ouvertes</h2>
+  <ul class="notes">
+    <li>Choix a faire : Grand Tourmalet (plus grand domaine), Saint-Lary (meilleur compromis), ou Luz-Ardiden (moins cher + Gavarnie) ?</li>
+    <li>Equipements indispensables pour le logement ?</li>
+    <li>Location de materiel : qui a besoin ? Reservation a l'avance ?</li>
+    <li>2 Cairn Terriers (~6-7 kg chacun) : preciser lors des reservations</li>
+    <li>Verifier disponibilite WE 3 nuits (hors vacances scolaires = plus flexible)</li>
+    <li>Saint-Lary = hors N'PY, pas de carte No Souci</li>
+    <li>Reserver vite &mdash; certains gites sont deja pris pour debut mars</li>
+  </ul>
+</section>
+
+<footer style="text-align:center; padding: 2rem 0 1rem; font-size:.8rem; color:var(--gray-500);">
+  Mis a jour le 25/02/2026 &middot; Vacances Ski Pyrenees &mdash; Famille Bruet
+</footer>
+
+</div>
+</body>
+</html>
