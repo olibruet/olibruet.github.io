@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orthographe - &Eacute;crire c ou &ccedil;</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --green: #00897b;
+            --green-light: #26a69a;
+            --green-bg: #e0f2f1;
+            --orange: #e67e22;
+            --orange-light: #f39c12;
+            --orange-bg: #fef5e7;
+            --blue: #2980b9;
+            --blue-bg: #ebf5fb;
+            --purple: #8e44ad;
+            --purple-bg: #f4ecf7;
+            --red: #c0392b;
+            --red-bg: #fdedec;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafffe 0%, #b2dfdb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HEADER ===== */
+        .hero {
+            background: linear-gradient(135deg, #00695c 0%, #00897b 40%, #26a69a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.3rem;
+            position: relative;
+        }
+
+        .hero .author {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+            position: relative;
+        }
+
+        .hero .collection {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+            position: relative;
+        }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav::-webkit-scrollbar { display: none; }
+
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav a:hover, .nav a:active {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--green);
+        }
+
+        .section-icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .section-header h2 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--green);
+        }
+
+        .card.accent {
+            border-left-color: var(--orange);
+        }
+
+        .card.exercise {
+            border-left-color: var(--purple);
+        }
+
+        .card p {
+            margin-bottom: 0.8rem;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== RULE SPECIFICS ===== */
+        .rule-keyword {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1.4rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+
+        .rule-keyword.c-simple {
+            background: var(--green-bg);
+            color: var(--green);
+        }
+
+        .rule-keyword.c-cedille {
+            background: var(--orange-bg);
+            color: var(--orange);
+        }
+
+        .example {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+        }
+
+        .example strong {
+            color: var(--green);
+        }
+
+        .example.accent strong {
+            color: var(--orange);
+        }
+
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        .letters-table {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .letters-box {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            text-align: center;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .letters-box .letter {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .letters-box .letter.green { color: var(--green); }
+        .letters-box .letter.orange { color: var(--orange); }
+
+        .letters-box .desc {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+
+        /* ===== WORD TABLE ===== */
+        .word-table {
+            width: 100%;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+
+        .word-table-header {
+            background: var(--green);
+            color: var(--white);
+            padding: 0.8rem 1.2rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            text-align: center;
+        }
+
+        .word-row {
+            display: flex;
+            border-bottom: 1px solid var(--light);
+            align-items: stretch;
+        }
+
+        .word-row:last-child {
+            border-bottom: none;
+        }
+
+        .word-cat {
+            width: 120px;
+            flex-shrink: 0;
+            padding: 0.8rem 1rem;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            background: var(--green-bg);
+        }
+
+        .word-list {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            color: #444;
+        }
+
+        .word-list .important {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-sentence {
+            padding: 0.6rem 0;
+            font-size: 1rem;
+            line-height: 1.8;
+            display: flex;
+            gap: 0.5rem;
+            align-items: baseline;
+        }
+
+        .exercise-number {
+            font-weight: 700;
+            color: var(--purple);
+            flex-shrink: 0;
+            width: 1.8rem;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 1.5rem;
+            border-bottom: 2px dashed var(--purple);
+            text-align: center;
+            font-weight: 700;
+            color: transparent;
+            padding: 0 0.2rem;
+        }
+
+        /* ===== CORRECTION (native <details>) ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 137, 123, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+
+        .correction summary:hover,
+        .correction summary:active {
+            background: var(--green-bg);
+        }
+
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+
+        .correction[open] .correction-arrow {
+            transform: rotate(180deg);
+        }
+
+        .correction-inner {
+            padding: 0 1.2rem 1.2rem;
+        }
+
+        .correction-sentence {
+            padding: 0.4rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            display: flex;
+            gap: 0.5rem;
+            align-items: baseline;
+        }
+
+        .correction-sentence .exercise-number {
+            color: var(--green);
+        }
+
+        .answer {
+            font-weight: 700;
+            color: var(--green);
+        }
+
+        .answer.cedille {
+            color: var(--orange);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.6rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+            .word-cat { width: 140px; }
+        }
+
+        @media (max-width: 480px) {
+            .word-row { flex-direction: column; }
+            .word-cat {
+                width: 100%;
+                padding: 0.5rem 1rem;
+                border-bottom: 1px solid rgba(0,137,123,0.2);
+            }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .blank { border-bottom-style: solid; min-width: 2rem; }
+            .correction { display: none; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#9997;&#65039;</div>
+    <h1>&Eacute;crire c ou &ccedil;</h1>
+    <p class="author">Orthographe &bull; Le&ccedil;on 17</p>
+    <p class="collection">CM1 &bull; Dict&eacute;e La peinture aborig&egrave;ne (Australie)</p>
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">La le&ccedil;on</a>
+    <a href="#mots">Mots de la dict&eacute;e</a>
+    <a href="#exercice">Exercice</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+
+        <div class="card">
+            <div class="rule-keyword c-simple">c = [s]</div>
+            <p>La lettre <strong>c</strong> se prononce <strong>[s]</strong> quand elle est devant <strong>e</strong> et <strong>i</strong>.</p>
+            <div class="example">
+                leurs an<strong>c</strong>&ecirc;tres &bull; une <strong>c</strong>&eacute;r&eacute;monie &bull; un <strong>c</strong>ercle
+            </div>
+            <div class="letters-table">
+                <div class="letters-box">
+                    <div class="letter green">ce</div>
+                    <div class="desc">an<strong>ce</strong>stre</div>
+                </div>
+                <div class="letters-box">
+                    <div class="letter green">ci</div>
+                    <div class="desc">an<strong>ci</strong>en</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card accent">
+            <div class="rule-keyword c-cedille">&ccedil; = [s]</div>
+            <p>Pour obtenir le son <strong>[s]</strong> devant <strong>a</strong>, <strong>o</strong>, <strong>u</strong>, on &eacute;crit <strong>&ccedil;</strong> (c c&eacute;dille).</p>
+            <div class="example accent">
+                Ils re<strong>&ccedil;</strong>oivent l'inspiration. &bull; Il fa<strong>&ccedil;</strong>onne la terre. &bull; un aper<strong>&ccedil;</strong>u
+            </div>
+            <div class="letters-table">
+                <div class="letters-box">
+                    <div class="letter orange">&ccedil;a</div>
+                    <div class="desc">fa<strong>&ccedil;a</strong>de</div>
+                </div>
+                <div class="letters-box">
+                    <div class="letter orange">&ccedil;o</div>
+                    <div class="desc">fa<strong>&ccedil;o</strong>nner</div>
+                </div>
+                <div class="letters-box">
+                    <div class="letter orange">&ccedil;u</div>
+                    <div class="desc">aper<strong>&ccedil;u</strong></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="tip">
+                <strong>Astuce :</strong> devant <strong>e</strong> ou <strong>i</strong>, le c fait d&eacute;j&agrave; le son [s] &rarr; pas besoin de c&eacute;dille.<br>
+                Devant <strong>a</strong>, <strong>o</strong> ou <strong>u</strong>, le c fait le son [k] &rarr; il faut la c&eacute;dille <strong>&ccedil;</strong> pour obtenir [s].
+            </div>
+        </div>
+    </section>
+
+    <!-- MOTS DE LA DICTÉE -->
+    <section id="mots">
+        <div class="section-header">
+            <span class="section-icon">&#128209;</span>
+            <h2>Mots &agrave; apprendre pour la dict&eacute;e</h2>
+        </div>
+
+        <div class="word-table">
+            <div class="word-table-header">La peinture aborig&egrave;ne (Australie)</div>
+
+            <div class="word-row">
+                <div class="word-cat">Noms</div>
+                <div class="word-list">
+                    <span class="important">l'Australie</span>, <span class="important">une &oelig;uvre</span>, <span class="important">le temps</span>, <span class="important">le r&ecirc;ve</span>, <span class="important">une &eacute;poque</span>, <span class="important">la cr&eacute;ation</span>, <span class="important">un anc&ecirc;tre</span>, <span class="important">la rivi&egrave;re</span>, <span class="important">la montagne</span>, <span class="important">un &ecirc;tre</span>, le commencement, une c&eacute;r&eacute;monie, le sol, un &eacute;l&eacute;ment, <em>la ligne</em>, <em>le point</em>, <em>le cercle</em>, <em>le hasard</em>, <em>une vue</em>, <em>la r&eacute;gion</em>, <em>le r&eacute;cit</em>, <em>la l&eacute;gende</em>, <em>un aper&ccedil;u</em>
+                </div>
+            </div>
+
+            <div class="word-row">
+                <div class="word-cat">Verbes</div>
+                <div class="word-list">
+                    <span class="important">appeler</span>, <span class="important">raconter</span>, <span class="important">fa&ccedil;onner</span>, tracer, s'effacer, donner, faire
+                </div>
+            </div>
+
+            <div class="word-row">
+                <div class="word-cat">Adjectifs</div>
+                <div class="word-list">
+                    <span class="important">vivant</span>, rituel/elle, naturel/elle, trac&eacute;, a&eacute;rien/enne, ancien/enne
+                </div>
+            </div>
+
+            <div class="word-row">
+                <div class="word-cat">Mots invariables</div>
+                <div class="word-list">
+                    <span class="important">lors</span>, <span class="important">comment</span>, m&ecirc;me, avec, <em>parfois</em>, voil&agrave;
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXERCICE -->
+    <section id="exercice">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice &ndash; c ou &ccedil;&nbsp;?</h2>
+        </div>
+
+        <div class="card exercise">
+            <p>Compl&egrave;te chaque mot avec <strong>c</strong> ou <strong>&ccedil;</strong>. Regarde la lettre qui suit&nbsp;!</p>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">1.</span>
+                <span>Les aborig&egrave;nes re<span class="blank">&ccedil;</span>oivent l'inspiration de leurs anc&ecirc;tres.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">2.</span>
+                <span>La <span class="blank">c</span>&eacute;r&eacute;monie raconte l'histoire de la cr&eacute;ation.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">3.</span>
+                <span>L'artiste fa<span class="blank">&ccedil;</span>onne la terre avec ses mains.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">4.</span>
+                <span>Le <span class="blank">c</span>ercle est un symbole important de la peinture.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">5.</span>
+                <span>Voil&agrave; un aper<span class="blank">&ccedil;</span>u de l'art aborig&egrave;ne.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">6.</span>
+                <span>La le<span class="blank">&ccedil;</span>on des anc&ecirc;tres est vivante.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">7.</span>
+                <span>Il tra<span class="blank">c</span>e des lignes et des points sur le sol.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">8.</span>
+                <span>Le gar<span class="blank">&ccedil;</span>on &eacute;coute le r&eacute;cit de la l&eacute;gende.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">9.</span>
+                <span>Il effa<span class="blank">c</span>e le dessin pour recommencer.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">10.</span>
+                <span>La fa<span class="blank">&ccedil;</span>ade de la montagne est impressionnante.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">11.</span>
+                <span>Il avan<span class="blank">&ccedil;</span>ait lentement vers la rivi&egrave;re.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">12.</span>
+                <span>Nous commen<span class="blank">&ccedil;</span>ons une nouvelle &oelig;uvre.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">13.</span>
+                <span>La surfa<span class="blank">c</span>e du sol est lisse.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">14.</span>
+                <span>Nous pla<span class="blank">&ccedil;</span>ons des points de couleur.</span>
+            </div>
+
+            <div class="exercise-sentence">
+                <span class="exercise-number">15.</span>
+                <span>Cette r&eacute;gion est le ber<span class="blank">c</span>eau de l'art ancien.</span>
+            </div>
+        </div>
+
+        <!-- CORRECTION avec <details> natif -->
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-sentence">
+                    <span class="exercise-number">1.</span>
+                    <span>re<span class="answer cedille">&ccedil;</span>oivent &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">2.</span>
+                    <span><span class="answer">c</span>&eacute;r&eacute;monie &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">3.</span>
+                    <span>fa<span class="answer cedille">&ccedil;</span>onne &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">4.</span>
+                    <span><span class="answer">c</span>ercle &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">5.</span>
+                    <span>aper<span class="answer cedille">&ccedil;</span>u &rarr; <em>devant <strong>u</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">6.</span>
+                    <span>le<span class="answer cedille">&ccedil;</span>on &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">7.</span>
+                    <span>tra<span class="answer">c</span>e &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">8.</span>
+                    <span>gar<span class="answer cedille">&ccedil;</span>on &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">9.</span>
+                    <span>effa<span class="answer">c</span>e &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">10.</span>
+                    <span>fa<span class="answer cedille">&ccedil;</span>ade &rarr; <em>devant <strong>a</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">11.</span>
+                    <span>avan<span class="answer cedille">&ccedil;</span>ait &rarr; <em>devant <strong>a</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">12.</span>
+                    <span>commen<span class="answer cedille">&ccedil;</span>ons &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">13.</span>
+                    <span>surfa<span class="answer">c</span>e &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">14.</span>
+                    <span>pla<span class="answer cedille">&ccedil;</span>ons &rarr; <em>devant <strong>o</strong> &rarr; &ccedil;</em></span>
+                </div>
+                <div class="correction-sentence">
+                    <span class="exercise-number">15.</span>
+                    <span>ber<span class="answer">c</span>eau &rarr; <em>devant <strong>e</strong> &rarr; c</em></span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>Orthographe &bull; &Eacute;crire c ou &ccedil;</p>
+    <p>CM1 &bull; Dict&eacute;e La peinture aborig&egrave;ne (Australie)</p>
+</footer>
+
+</body>
+</html>
