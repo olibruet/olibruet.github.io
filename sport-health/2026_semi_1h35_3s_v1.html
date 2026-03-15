@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Semi-Marathon 1h35 — 2026</title>
+<style>
+  :root {
+    --vma: #fff0e6;
+    --vma-border: #e8712a;
+    --seuil: #fff0e6;
+    --seuil-border: #e8712a;
+    --allure: #e8f0fe;
+    --allure-border: #3b78e7;
+    --ef: #e6f4ea;
+    --ef-border: #34a853;
+    --sl: #f3e8fd;
+    --sl-border: #9334e6;
+    --piscine: #e0f7fa;
+    --piscine-border: #00acc1;
+    --renfo: #fff8e1;
+    --renfo-border: #f9a825;
+    --repos: #f5f5f5;
+    --repos-border: #bdbdbd;
+    --course: #fff3cd;
+    --course-border: #d4a017;
+    --kine: #fce4ec;
+    --kine-border: #e91e63;
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --muted: #666;
+    --card-bg: #fff;
+    --shadow: 0 1px 3px rgba(0,0,0,.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: .25rem;
+    color: #111;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: .75rem;
+    margin-bottom: 2rem;
+  }
+
+  .meta-item {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: .75rem 1rem;
+    box-shadow: var(--shadow);
+    font-size: .9rem;
+  }
+
+  .meta-item strong { display: block; font-size: .75rem; text-transform: uppercase; color: var(--muted); letter-spacing: .5px; margin-bottom: .15rem; }
+
+  /* Overview grid */
+  .overview { margin-bottom: 2.5rem; }
+  .overview h2 { font-size: 1.25rem; margin-bottom: .75rem; }
+
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+    gap: .5rem;
+  }
+
+  .ov-cell {
+    border-radius: 8px;
+    padding: .5rem .6rem;
+    text-align: center;
+    font-size: .78rem;
+    line-height: 1.35;
+    box-shadow: var(--shadow);
+    border: 2px solid transparent;
+    position: relative;
+  }
+  .ov-cell .ov-label { font-weight: 700; font-size: .85rem; display: block; }
+  .ov-cell .ov-km { display: block; font-size: .75rem; color: var(--muted); margin-top: 2px; }
+  .ov-cell .ov-bonus { display: inline-block; font-size: .65rem; background: #ff6f00; color: #fff; border-radius: 3px; padding: 0 4px; margin-top: 3px; font-weight: 700; }
+  .ov-reprise { background: #e8f5e9; border-color: #66bb6a; }
+  .ov-dev { background: #e3f2fd; border-color: #42a5f5; }
+  .ov-recup { background: #eeeeee; border-color: #bdbdbd; }
+  .ov-spe { background: #fff3e0; border-color: #ff9800; }
+  .ov-precomp { background: #f3e5f5; border-color: #ab47bc; }
+  .ov-course { background: var(--course); border-color: var(--course-border); }
+
+  /* Sections */
+  h2 {
+    font-size: 1.35rem;
+    margin-top: 2.5rem;
+    margin-bottom: .75rem;
+    padding-bottom: .3rem;
+    border-bottom: 2px solid #e0e0e0;
+  }
+
+  h3 { font-size: 1.1rem; margin-top: 1.5rem; margin-bottom: .5rem; color: #333; }
+
+  p, li { font-size: .93rem; }
+  ul, ol { padding-left: 1.3rem; margin-bottom: .75rem; }
+  li { margin-bottom: .3rem; }
+
+  /* Tables */
+  .table-wrapper { overflow-x: auto; margin-bottom: 1rem; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .88rem;
+    background: var(--card-bg);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  th {
+    background: #263238;
+    color: #fff;
+    text-align: left;
+    padding: .55rem .65rem;
+    font-weight: 600;
+    font-size: .8rem;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+  }
+
+  td {
+    padding: .5rem .65rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  /* Colored rows */
+  tr.row-vma { background: var(--vma); }
+  tr.row-seuil { background: var(--seuil); }
+  tr.row-allure { background: var(--allure); }
+  tr.row-ef { background: var(--ef); }
+  tr.row-sl { background: var(--sl); }
+  tr.row-piscine { background: var(--piscine); }
+  tr.row-renfo { background: var(--renfo); }
+  tr.row-repos { background: var(--repos); }
+  tr.row-course { background: var(--course); }
+  tr.row-kine { background: var(--kine); }
+
+  /* Bonus Saturday indicator */
+  .bonus-badge {
+    display: inline-block;
+    font-size: .7rem;
+    background: #ff6f00;
+    color: #fff;
+    border-radius: 3px;
+    padding: 0 5px;
+    font-weight: 700;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+
+  .volume { font-weight: 600; font-size: .9rem; margin: .5rem 0 1.25rem; color: #444; }
+
+  /* Callouts */
+  blockquote, .callout {
+    background: #fff3e0;
+    border-left: 4px solid #ff9800;
+    padding: .75rem 1rem;
+    margin: .75rem 0;
+    border-radius: 0 6px 6px 0;
+    font-size: .9rem;
+  }
+
+  .callout-green { background: #e8f5e9; border-left-color: #4caf50; }
+
+  .rule-or {
+    background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    font-size: .95rem;
+    margin: 1rem 0;
+    box-shadow: 0 2px 8px rgba(255,23,68,.25);
+    text-align: center;
+    letter-spacing: .3px;
+  }
+
+  /* Race strategy */
+  .race-strategy {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: #fff;
+    border-radius: 12px;
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0;
+    box-shadow: 0 4px 12px rgba(26,35,126,.3);
+  }
+
+  .race-strategy h2 { color: #fff; border-bottom-color: rgba(255,255,255,.3); margin-top: 0; }
+  .race-strategy h3 { color: #ffca28; }
+  .race-strategy table { background: rgba(255,255,255,.1); }
+  .race-strategy th { background: rgba(0,0,0,.25); }
+  .race-strategy td { color: #e8eaf6; border-bottom-color: rgba(255,255,255,.1); }
+  .race-strategy strong { color: #ffca28; }
+
+  .race-strategy .avoid { background: rgba(244,67,54,.15); border-radius: 6px; padding: .6rem .8rem; margin: .5rem 0; }
+  .race-strategy .reassure { background: rgba(76,175,80,.15); border-radius: 6px; padding: .6rem .8rem; margin: .5rem 0; }
+
+  /* Allures ref table */
+  .allures-table tr.zone-ef td { background: var(--ef); }
+  .allures-table tr.zone-seuil td { background: #fff3e0; }
+  .allures-table tr.zone-as21 td { background: var(--allure); font-weight: 600; }
+  .allures-table tr.zone-as10 td { background: #e8eaf6; }
+  .allures-table tr.zone-vma td { background: #fce4ec; }
+
+  /* Comparison */
+  .compare-good { color: #2e7d32; font-weight: 600; }
+
+  /* Renfo */
+  .renfo-section { background: var(--card-bg); border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: var(--shadow); margin: 1rem 0; }
+  .renfo-section h3 { margin-top: .75rem; }
+  .renfo-section h3:first-child { margin-top: 0; }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 1rem 0 1.5rem;
+  }
+  .legend-item {
+    display: inline-flex;
+    align-items: center;
+    font-size: .78rem;
+    gap: .3rem;
+  }
+  .legend-swatch {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border-radius: 3px;
+  }
+
+  hr { border: none; border-top: 2px solid #e0e0e0; margin: 2rem 0; }
+
+  .notes-section { background: var(--card-bg); border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: var(--shadow); margin: 1rem 0; }
+
+  /* Print */
+  @media print {
+    body { padding: 0; background: #fff; font-size: 11pt; }
+    .race-strategy { color: #000; background: #e8eaf6 !important; box-shadow: none; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .race-strategy h2, .race-strategy h3, .race-strategy td, .race-strategy strong { color: #000 !important; }
+    .race-strategy th { background: #333 !important; color: #fff !important; }
+    .rule-or { background: #ff5252 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    table { box-shadow: none; page-break-inside: avoid; }
+    .ov-cell, .meta-item, .renfo-section, .notes-section { box-shadow: none; border: 1px solid #ddd; }
+    tr { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  @media (max-width: 600px) {
+    body { padding: .75rem; }
+    h1 { font-size: 1.5rem; }
+    .meta-grid { grid-template-columns: 1fr 1fr; }
+    .overview-grid { grid-template-columns: repeat(5, 1fr); }
+    .race-strategy { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<h1>Plan : Semi-Marathon en 1h35</h1>
+<p class="subtitle">Semi des Jalles — 14/06/2026 · 10 semaines · 3 running/sem + piscine + renfo</p>
+
+<div class="meta-grid">
+  <div class="meta-item"><strong>Objectif chrono</strong>1h35 (4'29/km)</div>
+  <div class="meta-item"><strong>Course cible</strong>Semi des Jalles — 14/06/2026</div>
+  <div class="meta-item"><strong>Dur&eacute;e</strong>10 sem. (2 reprise + 8 sp&eacute;cifique)</div>
+  <div class="meta-item"><strong>S&eacute;ances/sem.</strong>3 running + 1 piscine + 1 renfo</div>
+  <div class="meta-item"><strong>Niveau requis</strong>10 km en ~43' (43'21 en 02/2025)</div>
+  <div class="meta-item"><strong>VMA estim&eacute;e</strong>15-16 km/h</div>
+</div>
+
+<!-- OVERVIEW GRID -->
+<div class="overview">
+  <h2>Vue d'ensemble des 10 semaines</h2>
+  <div class="overview-grid">
+    <div class="ov-cell ov-reprise"><span class="ov-label">R1</span>07-13/04<br>Reprise douce<span class="ov-km">~10-13 km</span><span class="ov-bonus">SAM BONUS</span></div>
+    <div class="ov-cell ov-reprise"><span class="ov-label">R2</span>14-20/04<br>Reprise + accels<span class="ov-km">~20 km</span></div>
+    <div class="ov-cell ov-dev"><span class="ov-label">S1</span>21-27/04<br>Red&eacute;couverte allures<span class="ov-km">~27 km</span></div>
+    <div class="ov-cell ov-dev"><span class="ov-label">S2</span>28/04-04/05<br>Mont&eacute;e en charge<span class="ov-km">~33 km</span></div>
+    <div class="ov-cell ov-dev"><span class="ov-label">S3</span>05-11/05<br>Charge max cycle 1<span class="ov-km">~40 km</span><span class="ov-bonus">SAM BONUS</span></div>
+    <div class="ov-cell ov-recup"><span class="ov-label">S4</span>12-18/05<br>R&eacute;cup&eacute;ration<span class="ov-km">~25 km</span></div>
+    <div class="ov-cell ov-spe"><span class="ov-label">S5</span>19-25/05<br>Sp&eacute;cifique 1<span class="ov-km">~40 km</span></div>
+    <div class="ov-cell ov-spe"><span class="ov-label">S6</span>26/05-01/06<br>Charge max<span class="ov-km">~43 km</span></div>
+    <div class="ov-cell ov-precomp"><span class="ov-label">S7</span>02-08/06<br>Pr&eacute;-comp&eacute;tition<span class="ov-km">~38 km</span><span class="ov-bonus">SAM BONUS</span></div>
+    <div class="ov-cell ov-course"><span class="ov-label">S8</span>09-14/06<br>Aff&ucirc;tage + COURSE<span class="ov-km">21.1 km</span></div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--vma)"></span> VMA / Seuil</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--allure)"></span> Allure AS21</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--ef)"></span> EF</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--sl)"></span> Sortie longue</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--piscine)"></span> Piscine</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--renfo)"></span> Renfo</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--repos)"></span> Repos</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--course)"></span> Course</div>
+  <div class="legend-item"><span class="legend-swatch" style="background:var(--kine)"></span> Kin&eacute;</div>
+  <div class="legend-item"><span class="bonus-badge">BONUS</span> Samedi dispo</div>
+</div>
+
+<!-- PRINCIPES -->
+<h2>Principes du plan</h2>
+
+<h3>Ce qu'on corrige par rapport aux pr&eacute;pas pr&eacute;c&eacute;dentes</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Erreur pass&eacute;e</th><th>Correction</th></tr>
+  <tr><td>Allure sp&eacute; trop rapide (4'10 pour un 10 km &agrave; 4'20)</td><td>AS21 = 4'28-4'32 (allure r&eacute;aliste)</td></tr>
+  <tr><td>S&eacute;ances EF pas assez faciles (cardiologue : 192 bpm)</td><td><strong>EF &lt; 150 bpm strictement</strong></td></tr>
+  <tr><td>S&eacute;ance 2 (seuil/EF) supprim&eacute;e</td><td>Int&eacute;gr&eacute;e dans les s&eacute;ances qualit&eacute;</td></tr>
+  <tr><td>Pas de blocs AS21 en sortie longue</td><td>SL avec blocs &agrave; allure cible en fin de sortie</td></tr>
+  <tr><td>Renfo non cibl&eacute;</td><td>Renfo sp&eacute;cifique ischios/mollets/PPG</td></tr>
+  <tr><td>D&eacute;part trop rapide en course</td><td>Strat&eacute;gie de course d&eacute;finie (voir fin du plan)</td></tr>
+</table>
+</div>
+
+<h3>Ce qu'on garde</h3>
+<ul>
+  <li>Structure 3 running/semaine qui fonctionne bien</li>
+  <li>Progression VMA &rarr; Allure &rarr; Sp&eacute;cifique</li>
+  <li>Piscine en cross-training (atout majeur : 14 ans de natation comp&eacute;tition)</li>
+  <li>R&eacute;gularit&eacute; &gt; volume (pas de s&eacute;ance manqu&eacute;e &gt; km en plus)</li>
+</ul>
+
+<!-- ALLURES -->
+<h2>Allures de r&eacute;f&eacute;rence</h2>
+<div class="table-wrapper">
+<table class="allures-table">
+  <tr><th>Zone</th><th>Allure</th><th>FC cible</th><th>Sensation</th></tr>
+  <tr class="zone-ef"><td><strong>EF</strong></td><td>5'30-6'00/km</td><td><strong>&lt; 150 bpm</strong></td><td>Conversation facile, jamais essouffl&eacute;</td></tr>
+  <tr class="zone-seuil"><td><strong>Seuil</strong></td><td>4'40-4'50/km</td><td>160-170 bpm</td><td>Phrases courtes</td></tr>
+  <tr class="zone-as21"><td><strong>AS21</strong></td><td>4'28-4'32/km</td><td>170-178 bpm</td><td>Effort soutenu mais contr&ocirc;l&eacute;</td></tr>
+  <tr class="zone-as10"><td><strong>AS10</strong></td><td>4'15-4'22/km</td><td>175-185 bpm</td><td>Conversation difficile</td></tr>
+  <tr class="zone-vma"><td><strong>VMA</strong></td><td>3'48-3'58/km</td><td>185-197 bpm</td><td>Effort maximal, tenu 30s &agrave; 3'</td></tr>
+</table>
+</div>
+
+<div class="rule-or">
+  R&Egrave;GLE D'OR : si une s&eacute;ance EF d&eacute;passe 150 bpm, ralentir imm&eacute;diatement.<br>
+  C'est LA condition pour que le mollet tienne. En 2025 (EF cool) = z&eacute;ro blessure. En 2023-2024 (EF &agrave; 192 bpm) = mollet cass&eacute; &agrave; chaque fois.
+</div>
+
+<!-- STRUCTURE TYPE -->
+<h2>Structure type de semaine</h2>
+<p style="margin-bottom:.5rem;">Running le midi (Lun/Mer/Ven), renfo le mardi matin, piscine facultative mardi ou jeudi midi.<br>
+Sortie longue le vendredi midi si &lt; 1h45, sinon le samedi matin.</p>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>Matin</th><th>Midi</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-vma"><td>Lun</td><td>&mdash;</td><td><strong>Running 1 &mdash; Qualit&eacute;</strong> (VMA ou seuil)</td><td>1h-1h15</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo (ischios, mollets, PPG)</td><td>Piscine (facultatif)</td><td>50' + 30-40'</td></tr>
+  <tr class="row-allure"><td>Mer</td><td>&mdash;</td><td><strong>Running 2 &mdash; Allure sp&eacute;cifique</strong></td><td>1h-1h25</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>&mdash;</td><td>Piscine (facultatif) ou Repos</td><td>30-40'</td></tr>
+  <tr class="row-sl"><td>Ven</td><td>&mdash;</td><td><strong>Running 3 &mdash; Sortie longue</strong> (si &lt; 1h45)</td><td>1h15-1h35</td></tr>
+  <tr class="row-sl"><td>Sam</td><td><strong>Sortie longue</strong> (matin, si &ge; 1h45)</td><td>&mdash;</td><td>1h45-1h50</td></tr>
+</table>
+</div>
+
+<blockquote>
+  <strong>Sortie longue</strong> : vendredi midi si &lt; 1h45 (S1, S2, S3, S4, S7, S8). Samedi matin si &ge; 1h45 (S5, S6).<br>
+  <strong>Samedis bonus (femme travaille)</strong> : 11/04 (R1), 09/05 (S3), 06/06 (S7) &rarr; 4e s&eacute;ance running.<br>
+  <strong>&Eacute;cart entre s&eacute;ances</strong> : 48h minimum (Lun &rarr; Mer &rarr; Ven). Jamais 2 s&eacute;ances intenses cons&eacute;cutives.<br>
+  <strong>Piscine</strong> : facultative, mardi ou jeudi midi quand c'est possible.<br>
+  <strong>Renfo + piscine le m&ecirc;me jour</strong> (mardi) : renfo le matin, piscine le midi &mdash; &ccedil;a fonctionne bien.
+</blockquote>
+
+<hr>
+
+<!-- PHASE REPRISE -->
+<h2>Phase de reprise (2 semaines : 07/04 &rarr; 20/04)</h2>
+<blockquote class="callout-green">
+  Objectif : reprendre la course en douceur, tester le mollet, retrouver les sensations.<br>
+  <strong>UNIQUEMENT de l'EF.</strong> Aucun fractionn&eacute;, aucune allure. Si le mollet tire &rarr; stop et retour au kin&eacute;.
+</blockquote>
+
+<!-- Semaine R1 -->
+<h3>Semaine R1 (07/04 - 13/04)</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-ef"><td>Lun</td><td><strong>Run EF</strong></td><td>Footing tr&egrave;s facile, plat, 5'40-6'00/km. <strong>STOP si le mollet tire.</strong></td><td>25-30'</td></tr>
+  <tr class="row-kine"><td>Mar</td><td>Kin&eacute; + Piscine</td><td>Kin&eacute; matin, pullbuoy 30' midi</td><td>&mdash; + 30'</td></tr>
+  <tr class="row-ef"><td>Mer</td><td><strong>Run EF</strong></td><td>Footing facile, plat, 5'30-6'00/km</td><td>30-35'</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-kine"><td>Ven</td><td>Kin&eacute;</td><td>S&eacute;ance habituelle</td><td>&mdash;</td></tr>
+  <tr class="row-ef"><td><strong>Sam</strong></td><td><strong>Run EF</strong> <span class="bonus-badge">BONUS</span></td><td>Footing 30-35', test du mollet sur un peu plus long</td><td>30-35'</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~10-13 km (3 s&eacute;ances). Le mollet est la priorit&eacute; absolue.</p>
+
+<!-- Semaine R2 -->
+<h3>Semaine R2 (14/04 - 20/04)</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-ef"><td>Lun</td><td><strong>Run EF</strong></td><td>Footing 5'30-6'00/km</td><td>35-40'</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo l&eacute;ger + Piscine</td><td>PPG + ischios (matin), pullbuoy 35' (midi)</td><td>40' + 35'</td></tr>
+  <tr class="row-ef"><td>Mer</td><td><strong>Run EF</strong></td><td>Footing 5'30-5'50/km + 3 acc&eacute;l&eacute;rations progressives 80m</td><td>35'</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-ef"><td>Ven</td><td><strong>Run EF</strong></td><td>Sortie facile, 1re sortie &gt; 40' depuis f&eacute;vrier</td><td>45-50'</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~20 km (3 s&eacute;ances). Si tout va bien &rarr; on attaque la pr&eacute;pa sp&eacute;cifique.</p>
+
+<hr>
+
+<!-- PHASE SPECIFIQUE -->
+<h2>Phase sp&eacute;cifique (8 semaines : 21/04 &rarr; 14/06)</h2>
+
+<!-- S1 -->
+<h3>Semaine 1 (21/04 - 27/04) &mdash; Red&eacute;couverte des allures</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-vma"><td>Lun</td><td><strong>VMA courte</strong></td><td>20' EF + PPG + 3 acc&eacute;l&eacute;rations &rarr; <strong>10&times;200m &agrave; 3'50-3'55/km</strong> (r=1' trot) &rarr; 10' EF</td><td>~1h05</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo + Piscine</td><td>Ischios + mollets + PPG (matin), pullbuoy 35' pyramide (midi)</td><td>50' + 35'</td></tr>
+  <tr class="row-allure"><td>Mer</td><td><strong>Allure AS21 (d&eacute;couverte)</strong></td><td>20' EF &rarr; <strong>4&times;1km &agrave; 4'28-4'30</strong> (r=2' trot) &rarr; 10' EF</td><td>~1h05</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos ou Piscine</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-sl"><td>Ven</td><td><strong>Sortie longue</strong></td><td>1h15 en EF (5'30-5'50/km), terrain plat</td><td>1h15</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~27 km. Reprise du fractionn&eacute; en douceur + 1re prise de contact avec l'allure semi.</p>
+
+<!-- S2 -->
+<h3>Semaine 2 (28/04 - 04/05) &mdash; Mont&eacute;e en charge</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-vma"><td>Lun</td><td><strong>VMA</strong></td><td>20' EF + PPG &rarr; <strong>8&times;300m &agrave; 3'50-3'55/km</strong> (r=1' trot) &rarr; 10' EF</td><td>~1h10</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo + Piscine</td><td>Ischios + mollets + PPG (matin), pullbuoy 35' (midi)</td><td>50' + 35'</td></tr>
+  <tr class="row-allure"><td>Mer</td><td><strong>Allure AS21</strong></td><td>20' EF &rarr; <strong>3&times;1.5km &agrave; 4'28-4'30</strong> (r=2' trot) &rarr; 10' EF</td><td>~1h10</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-sl"><td>Ven</td><td><strong>Sortie longue</strong></td><td>1h25 en EF</td><td>1h25</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~33 km. Volume allure sp&eacute; en progression (4 km &rarr; 4.5 km).</p>
+
+<!-- S3 -->
+<h3>Semaine 3 (05/05 - 11/05) &mdash; Charge max cycle 1</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-seuil"><td>Lun</td><td><strong>Seuil</strong></td><td>20' EF &rarr; <strong>3&times;8' &agrave; 4'45/km</strong> (r=2' trot) &rarr; 10' EF</td><td>~1h15</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo + Piscine</td><td>Ischios + mollets + PPG (matin), pullbuoy 35' avec 6&times;100m vite (midi)</td><td>50' + 35'</td></tr>
+  <tr class="row-allure"><td>Mer</td><td><strong>Allure AS21</strong></td><td>20' EF &rarr; <strong>3&times;2km &agrave; 4'28-4'30</strong> (r=2'30 trot) &rarr; 10' EF</td><td>~1h20</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-ef"><td>Ven</td><td><strong>EF</strong></td><td>Footing 50' facile (5'30-6'00)</td><td>50'</td></tr>
+  <tr class="row-sl"><td><strong>Sam</strong></td><td><strong>Sortie longue</strong> <span class="bonus-badge">BONUS</span></td><td>1h35 en EF</td><td>1h35</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~40 km (4 s&eacute;ances !). Semaine de charge max cycle 1, profiter du samedi bonus.</p>
+
+<!-- S4 -->
+<h3>Semaine 4 (12/05 - 18/05) &mdash; R&eacute;cup&eacute;ration</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-ef"><td>Lun</td><td><strong>EF</strong></td><td>45' footing + 5 acc&eacute;l&eacute;rations progressives 100m</td><td>50'</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo l&eacute;ger + Piscine</td><td>PPG uniquement (matin), piscine cool 30' (midi)</td><td>30' + 30'</td></tr>
+  <tr class="row-ef"><td>Mer</td><td><strong>EF</strong></td><td>40' footing facile</td><td>40'</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-ef"><td>Ven</td><td><strong>EF</strong></td><td>1h footing facile (sortie plaisir)</td><td>1h</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~25 km. Laisser le corps absorber les 3 premi&egrave;res semaines.</p>
+
+<blockquote>
+  Optionnel : si un 10 km de pr&eacute;paration est disponible mi-mai, le placer le vendredi de S4 ou le samedi. Courir &agrave; ~4'20-4'25 pour valider la forme, pas &agrave; fond.
+</blockquote>
+
+<!-- S5 -->
+<h3>Semaine 5 (19/05 - 25/05) &mdash; Sp&eacute;cifique 1</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-vma"><td>Lun</td><td><strong>VMA</strong></td><td>20' EF + PPG &rarr; <strong>10&times;400m &agrave; 3'52/km</strong> (r=1'15 trot) &rarr; 10' EF</td><td>~1h15</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo + Piscine</td><td>Ischios + mollets + PPG (matin), pullbuoy pyramide avec plaquettes (midi)</td><td>50' + 35'</td></tr>
+  <tr class="row-allure"><td>Mer</td><td><strong>Allure AS21</strong></td><td>20' EF &rarr; <strong>2&times;3km &agrave; 4'28-4'30</strong> (r=2'30 trot) &rarr; 10' EF</td><td>~1h20</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-sl"><td>Sam</td><td><strong>Sortie longue avec blocs AS21</strong></td><td>1h45 : 1h05 EF + <strong>20' &agrave; 4'30</strong> + 20' EF retour au calme</td><td>1h45</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~40 km. SL &ge; 1h45 &rarr; samedi. 1re sortie longue avec bloc &agrave; allure cible.</p>
+
+<!-- S6 -->
+<h3>Semaine 6 (26/05 - 01/06) &mdash; Sp&eacute;cifique 2 (charge maximale)</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-seuil"><td>Lun</td><td><strong>Seuil</strong></td><td>20' EF &rarr; <strong>2&times;12' &agrave; 4'45/km</strong> (r=2'30 trot) &rarr; 10' EF</td><td>~1h15</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo + Piscine</td><td>Ischios + mollets + PPG (matin), pullbuoy cardio 8&times;50m vite (midi)</td><td>50' + 35'</td></tr>
+  <tr class="row-allure"><td>Mer</td><td><strong>Allure AS21</strong></td><td>20' EF &rarr; <strong>4km + 3km + 2km &agrave; 4'28-4'30</strong> (r=2'30 trot) &rarr; 10' EF</td><td>~1h25</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-sl"><td>Sam</td><td><strong>Sortie longue avec blocs AS21</strong></td><td>1h50 : 55' EF + <strong>30' &agrave; 4'30</strong> + 25' EF</td><td>1h50</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~43 km. Semaine de charge maximale. NE PAS la sauter. SL &ge; 1h45 &rarr; samedi.</p>
+
+<!-- S7 -->
+<h3>Semaine 7 (02/06 - 08/06) &mdash; Pr&eacute;-comp&eacute;tition</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-vma"><td>Lun</td><td><strong>VMA l&eacute;g&egrave;re</strong></td><td>20' EF &rarr; <strong>8&times;200m &agrave; 3'50</strong> (r=1' trot) &rarr; 10' EF</td><td>~1h</td></tr>
+  <tr class="row-renfo"><td>Mar</td><td>Renfo l&eacute;ger + Piscine</td><td>PPG + &eacute;tirements (matin), piscine cool 30' (midi)</td><td>30' + 30'</td></tr>
+  <tr class="row-allure"><td>Mer</td><td><strong>Allure AS21</strong></td><td>20' EF &rarr; <strong>4&times;2km &agrave; 4'28-4'30</strong> (r=2'30 trot) &rarr; 10' EF</td><td>~1h20</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-sl"><td>Ven</td><td><strong>Sortie longue</strong></td><td>1h15 footing facile &mdash; derni&egrave;re sortie longue</td><td>1h15</td></tr>
+  <tr class="row-ef"><td><strong>Sam</strong></td><td><strong>EF</strong> <span class="bonus-badge">BONUS</span></td><td>50' footing facile, jambes fra&icirc;ches</td><td>50'</td></tr>
+</table>
+</div>
+<p class="volume">Volume running : ~38 km (4 s&eacute;ances). R&eacute;duction du volume, samedi bonus pour un dernier run relax avant l'aff&ucirc;tage.</p>
+
+<!-- S8 -->
+<h3>Semaine 8 (09/06 - 14/06) &mdash; Aff&ucirc;tage et COURSE</h3>
+<div class="table-wrapper">
+<table>
+  <tr><th>Jour</th><th>S&eacute;ance</th><th>D&eacute;tail</th><th>Dur&eacute;e</th></tr>
+  <tr class="row-ef"><td>Lun</td><td><strong>EF + rappel d'allure</strong></td><td>35' EF + <strong>1km &agrave; 4'28</strong> + 5' EF retour au calme</td><td>~45'</td></tr>
+  <tr class="row-piscine"><td>Mar</td><td>Piscine cool</td><td>25' tr&egrave;s cool (derni&egrave;re piscine)</td><td>25'</td></tr>
+  <tr class="row-ef"><td>Mer</td><td><strong>EF courte</strong></td><td>20' footing + 5 acc&eacute;l&eacute;rations progressives 80m</td><td>~25'</td></tr>
+  <tr class="row-repos"><td>Jeu</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-repos"><td>Ven</td><td>Repos</td><td>&mdash;</td><td>&mdash;</td></tr>
+  <tr class="row-repos"><td>Sam</td><td>Repos</td><td>Pr&eacute;paration mat&eacute;riel, hydratation, alimentation</td><td>&mdash;</td></tr>
+  <tr class="row-course"><td><strong>Dim</strong></td><td><strong>SEMI DES JALLES</strong></td><td><strong>Objectif : 1h35 &mdash; voir strat&eacute;gie de course</strong></td><td><strong>1h35</strong></td></tr>
+</table>
+</div>
+
+<hr>
+
+<!-- RENFO -->
+<h2>Programme de renforcement musculaire</h2>
+<p style="margin-bottom:.75rem;">1x/semaine, cibl&eacute; sur les faiblesses identifi&eacute;es (ischios + mollets + PPG) :</p>
+
+<div class="renfo-section">
+  <h3>Ischios-jambiers (priorit&eacute; n&deg;1 &mdash; casse au km 37 du marathon)</h3>
+  <ul>
+    <li>Nordic hamstring curls : 3&times;6 (ou excentrique avec &eacute;lastique)</li>
+    <li>Pont fessier unipodal : 3&times;10 chaque jambe</li>
+    <li>Soulev&eacute; de terre roumain (poids de corps ou l&eacute;ger) : 3&times;10</li>
+  </ul>
+
+  <h3>Mollets (priorit&eacute; n&deg;2 &mdash; fragilit&eacute; chronique)</h3>
+  <ul>
+    <li>Mont&eacute;es sur pointes bilat&eacute;rales lentes : 3&times;15</li>
+    <li>Mont&eacute;es sur pointes unipodales : 3&times;8 chaque jambe (excentrique lent)</li>
+    <li>&Eacute;tirements mollets post-s&eacute;ance (30" par c&ocirc;t&eacute;)</li>
+  </ul>
+
+  <h3>PPG / Gainage</h3>
+  <ul>
+    <li>Planche : 3&times;30-45"</li>
+    <li>Planche lat&eacute;rale : 3&times;20" chaque c&ocirc;t&eacute;</li>
+    <li>Fentes march&eacute;es : 2&times;10</li>
+  </ul>
+
+  <blockquote>S&eacute;ance de ~45-50 min. Adapter selon les recommandations du kin&eacute;.</blockquote>
+</div>
+
+<hr>
+
+<!-- STRATEGIE DE COURSE -->
+<div class="race-strategy">
+  <h2>Strat&eacute;gie de course &mdash; Jour J</h2>
+
+  <h3>Plan d'allure</h3>
+  <p style="margin-bottom:.75rem;">
+    Bas&eacute; sur l'analyse de tes 7 courses. Le pattern r&eacute;current : tu pars trop vite et tu craques.<br>
+    En 2008 (20 km Paris) tu as fait un negative split en partant &agrave; 4'41. <strong>Le seul moyen d'aller chercher 1h35 c'est de partir SAGE.</strong>
+  </p>
+
+  <div class="table-wrapper">
+  <table>
+    <tr><th>Phase</th><th>km</th><th>Allure</th><th>FC cible</th><th>Consigne</th></tr>
+    <tr><td><strong>D&eacute;part</strong></td><td>1-3</td><td><strong>4'32-4'35</strong></td><td>&lt; 170</td><td><strong>Retenir. C'est ici que tu gagnes la course.</strong></td></tr>
+    <tr><td>Croisi&egrave;re</td><td>4-15</td><td><strong>4'28-4'30</strong></td><td>170-178</td><td>Rythme de croisi&egrave;re, r&eacute;gulier</td></tr>
+    <tr><td>Sp&eacute;cifique</td><td>16-19</td><td><strong>4'28-4'30</strong></td><td>175-180</td><td>Tenir l'allure, ne pas acc&eacute;l&eacute;rer</td></tr>
+    <tr><td><strong>Finish</strong></td><td>20-21.1</td><td><strong>4'22-4'28</strong></td><td>&gt; 180 OK</td><td>L&acirc;cher les chevaux si les jambes r&eacute;pondent</td></tr>
+  </table>
+  </div>
+
+  <h3>Temps de passage vis&eacute;s</h3>
+  <div class="table-wrapper">
+  <table>
+    <tr><th>Point</th><th>Temps</th><th>Allure cumul&eacute;e</th></tr>
+    <tr><td>km 5</td><td>22'25-22'35</td><td>~4'29-4'31</td></tr>
+    <tr><td>km 10</td><td>44'50-45'00</td><td>~4'29-4'30</td></tr>
+    <tr><td>km 15</td><td>67'15-67'30</td><td>~4'29-4'30</td></tr>
+    <tr><td><strong>km 21.1</strong></td><td><strong>1h34'30-1h35'00</strong></td><td><strong>4'28-4'29</strong></td></tr>
+  </table>
+  </div>
+
+  <h3>Ce qu'il faut ABSOLUMENT &eacute;viter</h3>
+  <div class="avoid">
+    <ul>
+      <li>Partir &agrave; 4'14-4'20 comme d'habitude &rarr; tu vas craquer au km 17 comme en 2025</li>
+      <li>Suivre un groupe qui part trop vite &mdash; tu connais ta cible, reste dessus</li>
+      <li>Acc&eacute;l&eacute;rer avant le km 16, m&ecirc;me si tu te sens bien</li>
+    </ul>
+  </div>
+
+  <h3>Ce qui doit te rassurer</h3>
+  <div class="reassure">
+    <ul>
+      <li>En 2025 tu as tenu 16 km &agrave; 4'27 avant de craquer &rarr; tu as le niveau</li>
+      <li>Le craquage venait de l'allure trop haute au d&eacute;part + manque d'EF en pr&eacute;pa</li>
+      <li>Cette fois : allure calibr&eacute;e + EF respect&eacute;e + renfo ischios + blocs AS21 en SL</li>
+    </ul>
+  </div>
+</div>
+
+<!-- NOTES -->
+<h2>Notes / points cl&eacute;s</h2>
+
+<div class="notes-section">
+  <h3>Adaptations possibles</h3>
+  <ul>
+    <li><strong>Si le mollet tire pendant la reprise</strong> : pas de panique, prolonger la phase R1/R2 d'une semaine et d&eacute;caler le plan. Mieux vaut d&eacute;marrer la pr&eacute;pa en S2 que se reblesser.</li>
+    <li><strong>Si un samedi est disponible (1x/mois)</strong> : ajouter un footing EF de 40-50' &rarr; excellent pour le volume sans fatigue.</li>
+    <li><strong>Si un 10 km est disponible mi-mai</strong> : le placer en S4 (semaine de r&eacute;cup) ou d&eacute;but S5. Courir &agrave; 4'20-4'25, pas &agrave; fond. C'est une r&eacute;p&eacute;tition, pas un record.</li>
+    <li><strong>Si la piscine n'est pas possible certaines semaines</strong> : ce n'est pas grave, la priorit&eacute; reste les 3 s&eacute;ances running.</li>
+    <li><strong>Si fatigue ou Body Battery bas</strong> : remplacer la s&eacute;ance qualit&eacute; par de l'EF. Jamais forcer.</li>
+  </ul>
+
+  <h3>Comparaison avec le plan Semi Jalles 2025</h3>
+  <div class="table-wrapper">
+  <table>
+    <tr><th></th><th>2025</th><th>2026</th></tr>
+    <tr><td>Objectif</td><td>1h30 (irr&eacute;aliste)</td><td>1h35 (r&eacute;aliste)</td></tr>
+    <tr><td>Allure sp&eacute;</td><td>4'10/km (&gt; 10 km PR)</td><td><span class="compare-good">4'28-4'30 (15s sous 10 km PR)</span></td></tr>
+    <tr><td>EF</td><td>S&eacute;ance supprim&eacute;e</td><td><span class="compare-good">Int&eacute;gr&eacute;e, FC &lt; 150 bpm</span></td></tr>
+    <tr><td>Blocs AS21 en SL</td><td>Non</td><td><span class="compare-good">Oui (S5-S6)</span></td></tr>
+    <tr><td>Piscine</td><td>Non</td><td><span class="compare-good">1x/semaine</span></td></tr>
+    <tr><td>Renfo cibl&eacute; ischios</td><td>Non sp&eacute;cifique</td><td><span class="compare-good">Oui</span></td></tr>
+    <tr><td>R&eacute;sultat</td><td>1h37'50</td><td><strong>Objectif 1h35</strong></td></tr>
+  </table>
+  </div>
+</div>
+
+</body>
+</html>
