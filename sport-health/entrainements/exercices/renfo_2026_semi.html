@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programme Renfo — Prépa Semi 2026</title>
+<style>
+  :root {
+    --color-ischios: #8B1A1A;
+    --color-ischios-light: #f5e6e6;
+    --color-mollets: #D2691E;
+    --color-mollets-light: #fdf0e6;
+    --color-gainage: #2563EB;
+    --color-gainage-light: #e8f0fe;
+    --color-fentes: #1B7A3D;
+    --color-fentes-light: #e6f4ec;
+    --color-info: #e8f0fe;
+    --color-info-border: #93b4f0;
+    --color-warn: #fff8e1;
+    --color-warn-border: #f5c542;
+    --color-now-bg: #d4edda;
+    --color-now-border: #28a745;
+    --color-later-bg: #fff3cd;
+    --color-later-border: #e0a800;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #222;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 0.2em;
+    color: #111;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 2em;
+    font-size: 0.95rem;
+  }
+
+  /* --- Objective & Format --- */
+  .intro-section {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .intro-section h2 {
+    font-size: 1.15rem;
+    margin-top: 0;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+  }
+
+  .intro-section ol, .intro-section ul {
+    padding-left: 1.3em;
+  }
+
+  /* --- Status badges --- */
+  .status-badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .status-now {
+    background: var(--color-now-bg);
+    color: #155724;
+    border: 1px solid var(--color-now-border);
+  }
+
+  .status-later {
+    background: var(--color-later-bg);
+    color: #856404;
+    border: 1px solid var(--color-later-border);
+  }
+
+  /* --- Exercise cards --- */
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .card-header {
+    padding: 14px 24px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .card-body { padding: 20px 24px; }
+
+  .card-body h3 {
+    font-size: 1rem;
+    margin-top: 1.2em;
+    margin-bottom: 0.4em;
+  }
+
+  .card-body h3:first-child { margin-top: 0; }
+
+  .card-body ol, .card-body ul { padding-left: 1.3em; }
+
+  /* Header colors */
+  .header-ischios  { background: var(--color-ischios); }
+  .header-mollets  { background: var(--color-mollets); }
+  .header-gainage  { background: var(--color-gainage); }
+  .header-fentes   { background: var(--color-fentes); }
+
+  /* --- Info box (Pourquoi) --- */
+  .info-box {
+    background: var(--color-info);
+    border-left: 4px solid var(--color-info-border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+    color: #1a3a6a;
+  }
+
+  /* --- Warning box (Points d'attention) --- */
+  .warn-box {
+    background: var(--color-warn);
+    border-left: 4px solid var(--color-warn-border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+    color: #6b4f00;
+  }
+
+  .warn-box ul { padding-left: 1.2em; margin: 4px 0 0; }
+
+  /* --- Note block (kiné) --- */
+  .kine-note {
+    background: var(--color-later-bg);
+    border: 1px solid var(--color-later-border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin-bottom: 14px;
+    font-size: 0.92rem;
+    color: #6b4f00;
+  }
+
+  /* --- Dosage grid --- */
+  .dosage {
+    background: #fafafa;
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 10px 0;
+  }
+
+  .dosage ul { margin: 0; padding-left: 1.2em; }
+
+  /* --- Materiel mini-table --- */
+  .materiel-mini {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 8px;
+  }
+
+  /* --- Summary table --- */
+  .summary-section {
+    background: #fff;
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .summary-section h2 {
+    font-size: 1.2rem;
+    margin-top: 0;
+  }
+
+  table.summary {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 0.9rem;
+  }
+
+  table.summary th {
+    background: #333;
+    color: #fff;
+    text-align: left;
+    padding: 10px 12px;
+    font-weight: 600;
+  }
+
+  table.summary td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  table.summary tr.row-ischios  { background: var(--color-ischios-light); }
+  table.summary tr.row-mollets  { background: var(--color-mollets-light); }
+  table.summary tr.row-gainage  { background: var(--color-gainage-light); }
+  table.summary tr.row-fentes   { background: var(--color-fentes-light); }
+  table.summary tr.row-total    { font-weight: 700; background: #f0f0f0; }
+
+  /* --- Materiel table --- */
+  table.materiel {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    font-size: 0.9rem;
+  }
+
+  table.materiel th {
+    text-align: left;
+    padding: 8px 12px;
+    background: #eee;
+    font-weight: 600;
+  }
+
+  table.materiel td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* --- Green callout (version courte) --- */
+  .green-callout {
+    background: #e6f9ed;
+    border: 2px solid #34a853;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+  }
+
+  .green-callout h2 {
+    color: #1a6b32;
+    margin-top: 0;
+    font-size: 1.15rem;
+  }
+
+  .green-callout ol { padding-left: 1.3em; }
+
+  .green-callout .total {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #1a6b32;
+    margin-top: 12px;
+  }
+
+  /* --- Ordre section --- */
+  .order-list ol {
+    counter-reset: step;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .order-list ol li {
+    counter-increment: step;
+    padding: 6px 0 6px 36px;
+    position: relative;
+  }
+
+  .order-list ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 5px;
+    width: 24px;
+    height: 24px;
+    background: #333;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* --- Print --- */
+  @media print {
+    body { background: #fff; }
+    .container { padding: 0; }
+    .card, .summary-section, .intro-section, .green-callout { box-shadow: none; break-inside: avoid; }
+  }
+
+  /* --- Responsive --- */
+  @media (max-width: 600px) {
+    .container { padding: 12px 8px; }
+    h1 { font-size: 1.4rem; }
+    .card-header { padding: 12px 16px; font-size: 1rem; }
+    .card-body { padding: 16px; }
+    .summary-section, .intro-section, .green-callout { padding: 16px; }
+    table.summary, table.materiel { font-size: 0.82rem; }
+    table.summary th, table.summary td,
+    table.materiel th, table.materiel td { padding: 7px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <h1>Programme Renfo — Prépa Semi 2026</h1>
+  <p class="subtitle">Renforcement ciblé course à pied &middot; 1&times;/semaine &middot; 30-45 min</p>
+
+  <!-- Objectif & Format -->
+  <div class="intro-section">
+    <h2>Objectif</h2>
+    <p>Renforcement ciblé sur les 3 faiblesses identifiées dans l'historique de courses d'Olivier :</p>
+    <ol>
+      <li><strong>Ischios-jambiers</strong> (priorité n°1) — casse au km 37 du marathon de La Rochelle</li>
+      <li><strong>Mollets</strong> (priorité n°2) — fragilité chronique depuis 2009</li>
+      <li><strong>Gainage / PPG</strong> — stabilité du bassin en fin de course</li>
+    </ol>
+
+    <h2>Format</h2>
+    <ul>
+      <li><strong>Fréquence :</strong> 1&times;/semaine minimum (mardi matin)</li>
+      <li><strong>Durée :</strong> 30-45 minutes</li>
+      <li><strong>Matériel :</strong> tapis de sol + point d'ancrage pour les pieds</li>
+      <li><strong>Quand :</strong> tant que le kiné suit le mollet, faire uniquement ischios + gainage (15-20 min). Après le kiné, programme complet.</li>
+    </ul>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+      <span style="display:inline-flex;align-items:center;gap:6px"><span class="status-badge status-now">Maintenant</span> Ischios + Gainage + Fentes</span>
+      <span style="display:inline-flex;align-items:center;gap:6px"><span class="status-badge status-later">Après kiné</span> Mollets</span>
+    </div>
+  </div>
+
+  <!-- Exercice 1 : Nordic Hamstring Curls -->
+  <div class="card">
+    <div class="card-header header-ischios">
+      <span>1. Nordic Hamstring Curls</span>
+      <span class="status-badge status-now">Maintenant</span>
+    </div>
+    <div class="card-body">
+      <p><strong>Cible :</strong> Ischios-jambiers (excentrique) — l'exercice le plus important du programme.</p>
+
+      <h3>Pourquoi</h3>
+      <div class="info-box">
+        Les ischios travaillent en excentrique à chaque foulée (ils freinent l'extension du genou quand le pied va vers le sol). C'est exactement le type de contraction qui les fait lâcher en fin de course quand ils sont fatigués. Le nordic curl renforce spécifiquement cette capacité excentrique.
+      </div>
+
+      <h3>Comment faire</h3>
+      <ol>
+        <li><strong>Position de départ :</strong> à genoux sur un tapis, buste droit, pieds bloqués sous un point fixe.</li>
+        <li><strong>Descente :</strong> en gardant le corps aligné (pas de flexion au niveau des hanches), laisse-toi tomber vers l'avant <strong>le plus lentement possible</strong>. Les ischios résistent à la chute — c'est la phase excentrique, la plus importante.</li>
+        <li><strong>Fin de descente :</strong> quand tu ne peux plus retenir, pose les mains au sol pour amortir.</li>
+        <li><strong>Remontée :</strong> repousse-toi du sol avec les mains pour revenir à la position de départ. Avec le temps, tu pourras remonter de plus en plus avec les ischios seuls.</li>
+      </ol>
+
+      <h3>Dosage</h3>
+      <div class="dosage">
+        <ul>
+          <li><strong>3 séries de 6 répétitions</strong></li>
+          <li>Récup : 1'30 entre les séries</li>
+          <li>Progression : augmenter le temps de descente (viser 3-5 secondes de descente contrôlée)</li>
+        </ul>
+      </div>
+
+      <h3>Points d'attention</h3>
+      <div class="warn-box">
+        <ul>
+          <li>Les premiers jours tu ne contrôleras que les 20-30 premiers degrés avant de tomber — <strong>c'est normal</strong>, c'est un exercice très exigeant</li>
+          <li>Ne force PAS la remontée avec les ischios au début, utilise les mains</li>
+          <li>Courbatures importantes les premiers jours &rarr; commencer par 2&times;4 la première semaine</li>
+          <li><strong>Ne pas faire la veille d'une séance qualité</strong> (faire le mardi pour courir le mercredi = OK si on débute doucement)</li>
+        </ul>
+      </div>
+
+      <p class="materiel-mini"><strong>Matériel :</strong> Tapis de sol + point d'ancrage (canapé lourd, pied de lit, sangle de porte ~15&euro;, ou un partenaire)</p>
+    </div>
+  </div>
+
+  <!-- Exercice 2 : Pont fessier unipodal -->
+  <div class="card">
+    <div class="card-header header-ischios">
+      <span>2. Pont fessier unipodal</span>
+      <span class="status-badge status-now">Maintenant</span>
+    </div>
+    <div class="card-body">
+      <p><strong>Cible :</strong> Fessiers + ischios en co-contraction — stabilité du bassin.</p>
+
+      <h3>Pourquoi</h3>
+      <div class="info-box">
+        Le pont unipodal fait travailler les fessiers et les ischios ensemble, comme pendant la course. L'appui sur une seule jambe corrige aussi les déséquilibres gauche/droite.
+      </div>
+
+      <h3>Comment faire</h3>
+      <ol>
+        <li><strong>Position de départ :</strong> allongé sur le dos, bras le long du corps, genoux fléchis, pieds au sol.</li>
+        <li><strong>Lever une jambe :</strong> tendre une jambe en l'air (ou genou plié vers la poitrine).</li>
+        <li><strong>Monter le bassin :</strong> en poussant sur le pied au sol, lever le bassin jusqu'à ce que le corps forme une ligne droite épaule-hanche-genou. Serrer la fesse en haut.</li>
+        <li><strong>Descendre lentement :</strong> redescendre le bassin sans le poser au sol (effleurer) et remonter.</li>
+      </ol>
+
+      <h3>Dosage</h3>
+      <div class="dosage">
+        <ul>
+          <li><strong>3 séries de 10 répétitions par jambe</strong></li>
+          <li>Alterner : 10 à droite, 10 à gauche, repos 1', recommencer</li>
+          <li>Progression : poser le pied d'appui sur une marche ou un banc bas pour augmenter l'amplitude</li>
+        </ul>
+      </div>
+
+      <h3>Points d'attention</h3>
+      <div class="warn-box">
+        <ul>
+          <li>Le bassin doit rester <strong>horizontal</strong> — ne pas laisser un côté tomber</li>
+          <li>Pousser à travers le <strong>talon</strong>, pas la pointe de pied</li>
+          <li>Si trop facile : poser le haut du dos sur un canapé/chaise pour augmenter l'amplitude (hip thrust surélevé)</li>
+        </ul>
+      </div>
+
+      <p class="materiel-mini"><strong>Matériel :</strong> Tapis de sol. C'est tout.</p>
+    </div>
+  </div>
+
+  <!-- Exercice 3 : Soulevé de terre roumain -->
+  <div class="card">
+    <div class="card-header header-ischios">
+      <span>3. Soulevé de terre roumain (RDL)</span>
+      <span class="status-badge status-now">Maintenant</span>
+    </div>
+    <div class="card-body">
+      <p><strong>Cible :</strong> Ischios + fessiers + bas du dos — en étirement sous charge.</p>
+
+      <h3>Pourquoi</h3>
+      <div class="info-box">
+        Le RDL étire les ischios en charge — c'est complémentaire du nordic curl (qui les travaille en raccourcissement). Ensemble, ils renforcent les ischios sur toute leur amplitude de mouvement.
+      </div>
+
+      <h3>Comment faire</h3>
+      <ol>
+        <li><strong>Position de départ :</strong> debout, pieds largeur de hanches, poids dans les mains (ou poids de corps au début), épaules en arrière.</li>
+        <li><strong>Descente :</strong> pousser les fesses vers l'arrière comme pour s'asseoir sur une chaise loin derrière soi. Les jambes restent quasi tendues (léger fléchissement du genou, jamais verrouillé). Le dos reste <strong>plat</strong>. Les mains/poids descendent le long des jambes.</li>
+        <li><strong>Amplitude :</strong> descendre jusqu'à mi-tibia ou jusqu'à sentir un bon étirement à l'arrière des cuisses — ne pas forcer au-delà.</li>
+        <li><strong>Remontée :</strong> pousser les hanches vers l'avant en serrant les fessiers. Le dos reste plat.</li>
+      </ol>
+
+      <h3>Dosage</h3>
+      <div class="dosage">
+        <ul>
+          <li><strong>3 séries de 10 répétitions</strong></li>
+          <li>Récup : 1' entre les séries</li>
+          <li>Progression de charge : poids de corps &rarr; pack d'eau 6L &rarr; sac à dos lesté &rarr; haltères 8-12 kg</li>
+        </ul>
+      </div>
+
+      <h3>Points d'attention</h3>
+      <div class="warn-box">
+        <ul>
+          <li><strong>Dos PLAT obligatoire</strong> — si le dos s'arrondit, tu es descendu trop bas ou la charge est trop lourde</li>
+          <li>Penser "fesses vers le mur derrière" plutôt que "se pencher en avant"</li>
+          <li>Le mouvement vient des <strong>hanches</strong>, pas du dos</li>
+          <li>Regarder 2 mètres devant soi au sol (pas ses pieds)</li>
+        </ul>
+      </div>
+
+      <p class="materiel-mini"><strong>Matériel :</strong> Rien au début. Pour progresser : pack d'eau 6L, sac à dos lesté, ou 2 haltères 8-12 kg (~30-40&euro;)</p>
+    </div>
+  </div>
+
+  <!-- Exercice 4 : Montées sur pointes -->
+  <div class="card">
+    <div class="card-header header-mollets">
+      <span>4. Montées sur pointes (mollets)</span>
+      <span class="status-badge status-later">Après kiné</span>
+    </div>
+    <div class="card-body">
+      <p><strong>Cible :</strong> Mollets — renforcement + excentrique lent.</p>
+
+      <div class="kine-note">
+        <strong>Note :</strong> tant que le kiné suit la rééducation mollet, ne pas faire cet exercice en autonome. Le kiné fait déjà ce travail avec des charges progressives. Reprendre cet exercice quand le kiné donnera le feu vert.
+      </div>
+
+      <h3>Comment faire</h3>
+      <p><strong>Variante A — Bilatérale (échauffement) :</strong></p>
+      <ol>
+        <li>Debout sur le bord d'une marche, talons dans le vide.</li>
+        <li>Monter sur la pointe des pieds (2 secondes), puis redescendre <strong>lentement</strong> (3-4 secondes) sous le niveau de la marche.</li>
+        <li><strong>3&times;15 répétitions.</strong></li>
+      </ol>
+
+      <p><strong>Variante B — Unipodal excentrique (le vrai travail) :</strong></p>
+      <ol>
+        <li>Même position, sur une seule jambe.</li>
+        <li>Monter sur la pointe (2 sec), redescendre <strong>très lentement</strong> (4-5 secondes).</li>
+        <li><strong>3&times;8 par jambe.</strong></li>
+        <li>Commencer par la jambe non blessée, finir par la gauche (blessée).</li>
+      </ol>
+
+      <h3>Dosage</h3>
+      <div class="dosage">
+        <ul>
+          <li>Bilatéral : 3&times;15 (échauffement)</li>
+          <li>Unipodal : 3&times;8 par jambe</li>
+          <li>Progression : ajouter du poids (haltère dans la main, sac à dos)</li>
+        </ul>
+      </div>
+
+      <h3>Points d'attention</h3>
+      <div class="warn-box">
+        <ul>
+          <li>L'excentrique (descente lente) est plus important que le concentrique (montée)</li>
+          <li><strong>Aucune douleur</strong> — si ça tire sur le mollet gauche, réduire l'amplitude ou repasser en bilatéral</li>
+          <li>Faire les étirements mollets après (30" par côté, pied contre un mur)</li>
+        </ul>
+      </div>
+
+      <p class="materiel-mini"><strong>Matériel :</strong> Une marche d'escalier. Optionnel : un haltère pour lester.</p>
+    </div>
+  </div>
+
+  <!-- Exercice 5 : Planche -->
+  <div class="card">
+    <div class="card-header header-gainage">
+      <span>5. Planche (gainage)</span>
+      <span class="status-badge status-now">Maintenant</span>
+    </div>
+    <div class="card-body">
+      <p><strong>Cible :</strong> Gainage central — stabilité du bassin pendant la course.</p>
+
+      <h3>Comment faire</h3>
+      <p><strong>Planche ventrale :</strong></p>
+      <ol>
+        <li>Sur les avant-bras et les pointes de pieds.</li>
+        <li>Corps parfaitement aligné : tête, épaules, hanches, chevilles sur la même ligne.</li>
+        <li>Ventre serré (nombril rentré vers la colonne), fessiers contractés.</li>
+        <li><strong>Tenir 30 à 45 secondes. 3 séries.</strong> Récup 30".</li>
+      </ol>
+
+      <p><strong>Planche latérale :</strong></p>
+      <ol>
+        <li>Sur un avant-bras, pieds empilés (ou décalés pour plus de stabilité).</li>
+        <li>Hanches hautes — le corps forme une ligne droite.</li>
+        <li><strong>Tenir 20 à 30 secondes par côté. 3 séries.</strong> Récup 30".</li>
+      </ol>
+
+      <h3>Points d'attention</h3>
+      <div class="warn-box">
+        <ul>
+          <li>Si les hanches tombent &rarr; arrêter la série. Mieux vaut 20" propre que 45" en pont cassé.</li>
+          <li>Respirer normalement (ne pas bloquer la respiration).</li>
+        </ul>
+      </div>
+
+      <p class="materiel-mini"><strong>Matériel :</strong> Tapis de sol.</p>
+    </div>
+  </div>
+
+  <!-- Exercice 6 : Fentes marchées -->
+  <div class="card">
+    <div class="card-header header-fentes">
+      <span>6. Fentes marchées</span>
+      <span class="status-badge status-now">Maintenant</span>
+    </div>
+    <div class="card-body">
+      <p><strong>Cible :</strong> Quadriceps + fessiers + stabilité — fonctionnel course.</p>
+
+      <h3>Comment faire</h3>
+      <ol>
+        <li>Debout, faire un grand pas en avant.</li>
+        <li>Descendre le genou arrière vers le sol (sans toucher), genou avant au-dessus de la cheville (pas au-delà des orteils).</li>
+        <li>Remonter en poussant avec la jambe avant et enchaîner avec l'autre jambe en avançant.</li>
+        <li><strong>2 séries de 10 pas (5 par jambe).</strong> Récup 1'.</li>
+      </ol>
+
+      <h3>Points d'attention</h3>
+      <div class="warn-box">
+        <ul>
+          <li>Buste droit (ne pas se pencher en avant)</li>
+          <li>Pas larges et contrôlés</li>
+          <li>Si l'espace manque : fentes sur place en alternant</li>
+        </ul>
+      </div>
+
+      <p class="materiel-mini"><strong>Matériel :</strong> 2-3 mètres d'espace libre. Poids de corps.</p>
+    </div>
+  </div>
+
+  <!-- Résumé -->
+  <div class="summary-section">
+    <h2>Résumé de la séance</h2>
+    <table class="summary">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Exercice</th>
+          <th>Séries &times; Reps</th>
+          <th>Cible</th>
+          <th>Temps</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-ischios">
+          <td>1</td>
+          <td>Nordic curls</td>
+          <td>3&times;6</td>
+          <td>Ischios (excentrique)</td>
+          <td>5 min</td>
+        </tr>
+        <tr class="row-ischios">
+          <td>2</td>
+          <td>Pont fessier unipodal</td>
+          <td>3&times;10/jambe</td>
+          <td>Fessiers + ischios</td>
+          <td>5 min</td>
+        </tr>
+        <tr class="row-ischios">
+          <td>3</td>
+          <td>Soulevé de terre roumain</td>
+          <td>3&times;10</td>
+          <td>Ischios + fessiers</td>
+          <td>5 min</td>
+        </tr>
+        <tr class="row-mollets">
+          <td>4</td>
+          <td>Montées sur pointes <span class="status-badge status-later" style="font-size:0.65rem">Après kiné</span></td>
+          <td>3&times;15 bilat + 3&times;8/jambe</td>
+          <td>Mollets</td>
+          <td>7 min</td>
+        </tr>
+        <tr class="row-gainage">
+          <td>5</td>
+          <td>Planche + planche latérale</td>
+          <td>3&times;30-45" + 3&times;20"/côté</td>
+          <td>Gainage</td>
+          <td>5 min</td>
+        </tr>
+        <tr class="row-fentes">
+          <td>6</td>
+          <td>Fentes marchées</td>
+          <td>2&times;10</td>
+          <td>Quadri + fessiers + stabilité</td>
+          <td>3 min</td>
+        </tr>
+        <tr class="row-total">
+          <td></td>
+          <td>TOTAL</td>
+          <td></td>
+          <td></td>
+          <td>~30-45 min</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Ordre de la séance -->
+  <div class="summary-section order-list">
+    <h2>Ordre de la séance</h2>
+    <ol>
+      <li>Échauffement : 5 min de mobilité (rotations chevilles, genoux, hanches, balanciers jambes)</li>
+      <li>Nordic curls (ischios frais = le plus exigeant en premier)</li>
+      <li>Pont fessier unipodal</li>
+      <li>Soulevé de terre roumain</li>
+      <li>Mollets (si kiné OK)</li>
+      <li>Fentes marchées</li>
+      <li>Planche + planche latérale</li>
+      <li>Étirements mollets (30" par côté) + étirements ischios (30" par côté)</li>
+    </ol>
+  </div>
+
+  <!-- Matériel -->
+  <div class="summary-section">
+    <h2>Matériel nécessaire</h2>
+
+    <h3 style="margin-top:8px">Indispensable</h3>
+    <table class="materiel">
+      <thead><tr><th>Item</th><th>Coût</th></tr></thead>
+      <tbody>
+        <tr><td>Tapis de sol</td><td>~10&euro; (ou gratuit si existant)</td></tr>
+        <tr><td>Point d'ancrage pieds (pour nordic curls)</td><td>Meuble lourd = gratuit, ou sangle de porte ~15&euro;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Pour progresser (pas urgent)</h3>
+    <table class="materiel">
+      <thead><tr><th>Item</th><th>Coût</th></tr></thead>
+      <tbody>
+        <tr><td>Pack d'eau 6L ou sac à dos</td><td>Gratuit</td></tr>
+        <tr><td>2 haltères 8-12 kg (pour RDL)</td><td>~30-40&euro;</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Version courte -->
+  <div class="green-callout">
+    <h2>Version courte (tant que le kiné suit les mollets)</h2>
+    <p>Si le kiné fait déjà le travail mollet, la séance autonome se réduit à :</p>
+    <ol>
+      <li>Nordic curls (3&times;6) — 5 min</li>
+      <li>Pont fessier unipodal (3&times;10/jambe) — 5 min</li>
+      <li>Soulevé de terre roumain (3&times;10) — 5 min</li>
+      <li>Planche + planche latérale — 5 min</li>
+    </ol>
+    <p class="total">= 20 minutes. Faisable le mardi matin avant le boulot.</p>
+  </div>
+
+</div>
+
+</body>
+</html>

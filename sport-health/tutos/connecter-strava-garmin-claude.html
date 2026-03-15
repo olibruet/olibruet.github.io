@@ -8,7 +8,7 @@
   :root {
     --strava: #fc4c02;
     --garmin: #007cc3;
-    --garmin-workouts: #00a651;
+    /* --garmin-workouts: supprimé */
     --bg: #f8f9fa;
     --card: #ffffff;
     --text: #1a1a2e;
@@ -91,7 +91,6 @@
   }
   .section.strava { border-left-color: var(--strava); }
   .section.garmin { border-left-color: var(--garmin); }
-  .section.garmin-workouts { border-left-color: var(--garmin-workouts); }
   .section-header {
     padding: 1.25rem;
     cursor: pointer;
@@ -113,7 +112,6 @@
   }
   .strava .icon { background: #fff0eb; }
   .garmin .icon { background: #e6f3fb; }
-  .garmin-workouts .icon { background: #e6f7ed; }
   .section-header h2 {
     font-size: 1.15rem;
     flex: 1;
@@ -127,7 +125,6 @@
   }
   .strava .badge { background: var(--strava); }
   .garmin .badge { background: var(--garmin); }
-  .garmin-workouts .badge { background: var(--garmin-workouts); }
   .section-header .chevron {
     font-size: 1.2rem;
     color: var(--muted);
@@ -364,7 +361,7 @@
   <div class="section-header" onclick="toggle(this)">
     <div class="icon">⌚</div>
     <h2>Garmin Connect</h2>
-    <span class="badge">Données & Santé</span>
+    <span class="badge">Données, Santé & Entraînements</span>
     <span class="chevron">›</span>
   </div>
   <div class="section-body">
@@ -389,55 +386,30 @@
 
     <div class="step">
       <h3><span class="step-num">3</span> Ce que tu peux faire</h3>
+      <p><strong>Lecture de données :</strong></p>
       <ul>
         <li>Consulter tes activités (détails, splits, FC, météo...)</li>
         <li>Lire tes données de santé (sommeil, stress, Body Battery, SpO2)</li>
         <li>Voir ton profil, tes records personnels, ton score d'endurance</li>
         <li>Gérer tes pesées et ta composition corporelle</li>
-        <li>Consulter tes entraînements planifiés</li>
       </ul>
-    </div>
-
-    <div class="verify">
-      <strong>Test :</strong> Dans Claude Code, demande <em>"Donne-moi mon résumé d'activité de la semaine"</em>
-    </div>
-  </div>
-</div>
-
-<!-- GARMIN WORKOUTS -->
-<div class="section garmin-workouts">
-  <div class="section-header" onclick="toggle(this)">
-    <div class="icon">📲</div>
-    <h2>Garmin Workouts</h2>
-    <span class="badge">Envoi de séances</span>
-    <span class="chevron">›</span>
-  </div>
-  <div class="section-body">
-
-    <div class="step">
-      <h3><span class="step-num">1</span> Installer le serveur MCP</h3>
-      <pre><code><span class="cmd">claude</span> mcp add garmin-workouts -- npx -y garmin-workouts-mcp</code><button class="copy-btn" onclick="copyCmd(this)">Copier</button></pre>
-    </div>
-
-    <div class="step">
-      <h3><span class="step-num">2</span> Authentification</h3>
-      <p>La première utilisation ouvre une fenêtre de navigateur (via Puppeteer) pour te connecter à Garmin Connect. Suis les instructions à l'écran.</p>
+      <p style="margin-top: 0.75rem"><strong>Gestion des entraînements :</strong></p>
+      <ul>
+        <li>Créer des séances structurées (running, natation piscine, vélo...) avec <code>upload_workout</code></li>
+        <li>Planifier des séances dans le calendrier Garmin avec <code>schedule_workout</code></li>
+        <li>Supprimer des séances avec <code>delete_workout</code></li>
+        <li>Consulter les entraînements planifiés avec <code>get_scheduled_workouts</code></li>
+      </ul>
       <div class="note">
-        Puppeteer a besoin de Chrome ou Chromium installé sur ta machine.
+        Un seul MCP suffit pour tout. Le paquet <code>garmin-workouts-mcp</code> n'est <strong>pas nécessaire</strong> — <code>upload_workout</code> offre un contrôle plus fin (repeat groups, repos manuels lap button, allures précises, taille de piscine, etc.).
+      </div>
+      <div class="note">
+        <strong>Envoi vers la montre :</strong> les séances créées via l'API apparaissent dans ta bibliothèque Garmin Connect, mais ne sont <strong>pas envoyées automatiquement</strong> sur la montre. Pour les voir dans la liste d'entraînements de ta montre, clique sur <strong>"Envoyer vers l'appareil"</strong> depuis la page web ou l'app Garmin Connect.
       </div>
     </div>
 
-    <div class="step">
-      <h3><span class="step-num">3</span> Ce que tu peux faire</h3>
-      <p>Décrire un entraînement en langage naturel et l'envoyer directement sur ta montre :</p>
-      <pre><code><span class="comment"># Dans Claude Code :</span>
-<span class="str">"Crée un entraînement fractionné :
-20' EF puis 6x(1' vite / 1' récup) puis 10' retour au calme"</span></code></pre>
-      <p>La séance apparaît dans ton calendrier Garmin Connect et peut être envoyée sur ta montre.</p>
-    </div>
-
     <div class="verify">
-      <strong>Test :</strong> Demande à Claude de créer un footing simple de 40 minutes
+      <strong>Test :</strong> Dans Claude Code, demande <em>"Donne-moi mon résumé d'activité de la semaine"</em> ou <em>"Crée un entraînement fractionné : 20' EF puis 6x(1' vite / 1' récup) puis 10' retour au calme"</em>
     </div>
   </div>
 </div>
@@ -447,9 +419,8 @@
   <h2>Vérifier que tout est connecté</h2>
   <pre><code><span class="cmd">claude</span> mcp list</code><button class="copy-btn" onclick="copyCmd(this)">Copier</button></pre>
   <p>Tu devrais voir :</p>
-  <pre><code>garmin-workouts  npx -y garmin-workouts-mcp        <span class="str">✓ Connected</span>
-garmin           uvx --python 3.12 --from [...]     <span class="str">✓ Connected</span>
-strava           npx -y @r-huijts/strava-mcp-server <span class="str">✓ Connected</span></code></pre>
+  <pre><code>garmin  uvx --python 3.12 --from [...]     <span class="str">✓ Connected</span>
+strava  npx -y @r-huijts/strava-mcp-server <span class="str">✓ Connected</span></code></pre>
 </div>
 
 <!-- TROUBLESHOOTING -->
@@ -481,10 +452,6 @@ strava           npx -y @r-huijts/strava-mcp-server <span class="str">✓ Connec
           <td><code>Disconnected</code> dans <code>mcp list</code></td>
           <td><code>claude mcp remove &lt;nom&gt;</code> puis réinstalle</td>
         </tr>
-        <tr>
-          <td>Garmin Workouts bloqué</td>
-          <td>Puppeteer a besoin de Chrome/Chromium installé</td>
-        </tr>
       </tbody>
     </table>
   </div>
@@ -495,13 +462,14 @@ strava           npx -y @r-huijts/strava-mcp-server <span class="str">✓ Connec
   <h2>Exemples de prompts</h2>
   <div class="example-prompt">"Analyse ma charge d'entraînement des 4 dernières semaines"</div>
   <div class="example-prompt">"Compare mes allures sur mes 3 dernières sorties longues"</div>
-  <div class="example-prompt">"Envoie cette séance de fractionné sur ma montre pour demain"</div>
+  <div class="example-prompt">"Crée un entraînement fractionné : 20' EF puis 6x(1' vite / 1' récup) puis 10' retour au calme"</div>
+  <div class="example-prompt">"Planifie cette séance dans le calendrier pour lundi prochain"</div>
   <div class="example-prompt">"Quel est mon temps de sommeil moyen cette semaine ?"</div>
   <div class="example-prompt">"Génère un plan d'entraînement basé sur mes données récentes"</div>
 </div>
 
 <footer>
-  <p>Serveurs MCP : <a href="https://github.com/r-huijts/strava-mcp">strava-mcp</a> · <a href="https://github.com/Taxuspt/garmin_mcp">garmin_mcp</a> · <a href="https://www.npmjs.com/package/garmin-workouts-mcp">garmin-workouts-mcp</a></p>
+  <p>Serveurs MCP : <a href="https://github.com/r-huijts/strava-mcp">strava-mcp</a> · <a href="https://github.com/Taxuspt/garmin_mcp">garmin_mcp</a></p>
 </footer>
 
 <script>
