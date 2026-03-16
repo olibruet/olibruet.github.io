@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse Solaire - Vayres, Gironde</title>
+    <style>
+        :root {
+            --sun: #f59e0b;
+            --sun-light: #fef3c7;
+            --green: #10b981;
+            --green-light: #d1fae5;
+            --red: #ef4444;
+            --red-light: #fee2e2;
+            --blue: #3b82f6;
+            --blue-light: #dbeafe;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: var(--gray-50);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        header .subtitle {
+            opacity: 0.85;
+            font-size: 1.1em;
+        }
+        header .date {
+            opacity: 0.6;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        section h2 {
+            font-size: 1.4em;
+            color: var(--gray-900);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--sun);
+        }
+        section h3 {
+            font-size: 1.1em;
+            color: var(--gray-700);
+            margin: 25px 0 12px;
+        }
+        section h4 {
+            font-size: 1em;
+            color: var(--gray-700);
+            margin: 20px 0 10px;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .kpi-card {
+            background: var(--gray-50);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+        .kpi-card.highlight {
+            background: var(--sun-light);
+            border-color: var(--sun);
+        }
+        .kpi-card.good {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+        .kpi-card .value {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .kpi-card.highlight .value { color: #b45309; }
+        .kpi-card.good .value { color: #065f46; }
+        .kpi-card .label {
+            font-size: 0.85em;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.92em;
+        }
+        th {
+            background: var(--gray-100);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 2px solid var(--gray-300);
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        tr:hover td { background: var(--gray-50); }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .highlight-row td { background: var(--sun-light); font-weight: 600; }
+        .positive { color: var(--green); font-weight: 600; }
+        .negative { color: var(--red); }
+        .breakeven td { background: var(--green-light); font-weight: 700; }
+
+        /* Bars */
+        .bar-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bar {
+            height: 18px;
+            background: linear-gradient(90deg, var(--sun), #f97316);
+            border-radius: 3px;
+            min-width: 4px;
+        }
+
+        /* Alert boxes */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        .alert-warning {
+            background: #fef3c7;
+            border-left: 4px solid var(--sun);
+            color: #92400e;
+        }
+        .alert-info {
+            background: var(--blue-light);
+            border-left: 4px solid var(--blue);
+            color: #1e40af;
+        }
+        .alert-success {
+            background: var(--green-light);
+            border-left: 4px solid var(--green);
+            color: #065f46;
+        }
+
+        /* Scenario tabs */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .scenario-card {
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .scenario-card.recommended {
+            border-color: var(--green);
+        }
+        .scenario-card .card-header {
+            padding: 12px 16px;
+            background: var(--gray-100);
+            font-weight: 700;
+            font-size: 1.05em;
+        }
+        .scenario-card.recommended .card-header {
+            background: var(--green);
+            color: white;
+        }
+        .scenario-card .card-body {
+            padding: 16px;
+        }
+        .scenario-card .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .scenario-card .metric:last-child { border-bottom: none; }
+        .scenario-card .metric .label { color: var(--gray-500); font-size: 0.9em; }
+        .scenario-card .metric .val { font-weight: 600; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--gray-500);
+            font-size: 0.85em;
+        }
+        footer a { color: var(--blue); }
+
+        /* Chart placeholder */
+        .chart-bars { margin: 15px 0; }
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin: 3px 0;
+        }
+        .chart-label {
+            width: 85px;
+            font-size: 0.85em;
+            color: var(--gray-500);
+            text-align: right;
+            padding-right: 10px;
+        }
+        .chart-value {
+            width: 55px;
+            font-size: 0.82em;
+            color: var(--gray-700);
+            text-align: right;
+            padding-left: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            section { padding: 20px; }
+            header h1 { font-size: 1.5em; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .scenario-grid { grid-template-columns: 1fr; }
+            table { font-size: 0.82em; }
+            th, td { padding: 6px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Analyse de rentabilite photovoltaique</h1>
+        <div class="subtitle">Vayres, Gironde (33) &mdash; Orientation Sud-Est, inclinaison 30&deg;</div>
+        <div class="date">Mars 2026 (v2 &mdash; prix actualises, micro-onduleurs)</div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- =============== SYNTHESE =============== -->
+    <section>
+        <h2>Synthese</h2>
+
+        <div class="kpi-grid">
+            <div class="kpi-card highlight">
+                <div class="value">15 900</div>
+                <div class="label">kWh/an consommes</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="value">6 600</div>
+                <div class="label">kWh/an produits (6 kWc)</div>
+            </div>
+            <div class="kpi-card good">
+                <div class="value">10 ans</div>
+                <div class="label">Retour invest. (tarif actuel)</div>
+            </div>
+            <div class="kpi-card good">
+                <div class="value">+21 985 &euro;</div>
+                <div class="label">Gain cumule sur 25 ans</div>
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <strong>Point d'attention :</strong> ton tarif electrique actuel (17,6 cts/kWh en HP) est 30% inferieur au tarif reglemente (25,2 cts). Si ton contrat fixe expire, le retour sur investissement passe de <strong>10 ans a 7 ans</strong>.
+        </div>
+
+        <div class="alert alert-info">
+            <strong>Changement 2026 :</strong> la vente totale n'est plus disponible pour les installations &le; 9 kWc. Le surplus est rachete a seulement 4 cts/kWh. La rentabilite repose a 95% sur l'autoconsommation.
+        </div>
+    </section>
+
+    <!-- =============== CONTEXTE =============== -->
+    <section>
+        <h2>1. Contexte du projet</h2>
+
+        <h3>Installation</h3>
+        <table>
+            <tr><td>Localisation</td><td>Vayres, Gironde (33) &mdash; Lat. 44,9&deg;N</td></tr>
+            <tr><td>Orientation du toit</td><td>Sud-Est / Nord-Ouest (2 versants)</td></tr>
+            <tr><td>Inclinaison</td><td>~30&deg;</td></tr>
+            <tr><td>Surface toit SE exploitable</td><td>~55 m&sup2; (maison principale 15m x 8m)</td></tr>
+            <tr><td>Ombrage</td><td>Aucun sur versant SE maison principale. Extension ombragee l'apres-midi (non retenue)</td></tr>
+            <tr><td>Foyer</td><td>6 personnes</td></tr>
+            <tr><td>Puissance max installable</td><td>~11 kWc (55 m&sup2; / 5 m&sup2; par kWc)</td></tr>
+        </table>
+
+        <h3>Maison</h3>
+        <ul style="margin: 10px 0 10px 20px; line-height: 2;">
+            <li><strong>Maison principale</strong> : 130 m&sup2; au sol (15m x 8m), versant SE ~69 m&sup2; brut, ~55 m&sup2; exploitable</li>
+            <li><strong>Extension</strong> : 50 m&sup2; au sol &mdash; non retenue (ombrage apres-midi)</li>
+            <li><strong>Porche jardin</strong> : 8m x 2m &mdash; non pertinent pour le solaire</li>
+        </ul>
+
+        <h3>Consommation electrique (15 900 kWh/an &mdash; 2 576 &euro;/an)</h3>
+        <table>
+            <thead>
+                <tr><th>Poste</th><th class="num">kWh/an</th><th class="num">Part</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>PAC chauffage/clim (Hitachi bi-split + Mitsubishi)</td><td class="num">5 000</td><td class="num">31%</td></tr>
+                <tr><td>Eau chaude (2 ballons electriques)</td><td class="num">3 500</td><td class="num">22%</td></tr>
+                <tr><td>Gros electromenager</td><td class="num">2 000</td><td class="num">13%</td></tr>
+                <tr><td>Piscine (filtration, dome Abrisud)</td><td class="num">1 800</td><td class="num">11%</td></tr>
+                <tr><td>Froid (frigo, congelateur, caves a vin)</td><td class="num">1 500</td><td class="num">9%</td></tr>
+                <tr><td>Eclairage (20 zones)</td><td class="num">800</td><td class="num">5%</td></tr>
+                <tr><td>Multimedia / IT</td><td class="num">800</td><td class="num">5%</td></tr>
+                <tr><td>Divers (aquarium, etc.)</td><td class="num">500</td><td class="num">3%</td></tr>
+                <tr class="highlight-row"><td><strong>TOTAL</strong></td><td class="num"><strong>15 900</strong></td><td class="num"><strong>100%</strong></td></tr>
+            </tbody>
+        </table>
+
+        <h3>Tarifs electricite</h3>
+        <table>
+            <thead>
+                <tr><th>Tarif</th><th class="num">Contrat actuel</th><th class="num">Operateur alternatif</th><th class="num">Reglemente EDF</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Heures Pleines (HP)</td><td class="num"><strong>17,60 cts/kWh</strong></td><td class="num">16,58 cts/kWh</td><td class="num">25,16 cts/kWh</td></tr>
+                <tr><td>Heures Creuses (HC)</td><td class="num">13,61 cts/kWh</td><td class="num">12,89 cts/kWh</td><td class="num">&mdash;</td></tr>
+                <tr><td>Abonnement</td><td class="num">&mdash;</td><td class="num">23,32 &euro;/mois</td><td class="num">&mdash;</td></tr>
+            </tbody>
+        </table>
+        <div class="alert alert-info">
+            <strong>Point important :</strong> les deux contrats marche sont ~30% moins cher que le tarif reglemente. Cela impacte directement la rentabilite du solaire (les economies par kWh autoconsomme sont plus faibles). L'operateur alternatif est ~6% moins cher que le contrat actuel en HP.
+        </div>
+    </section>
+
+    <!-- =============== TARIFS SOLAIRES =============== -->
+    <section>
+        <h2>2. Cadre reglementaire solaire &mdash; T1 2026</h2>
+
+        <h3>Tarifs EDF OA (fixes 20 ans)</h3>
+        <table>
+            <thead>
+                <tr><th>Mode</th><th>Puissance</th><th class="num">Tarif rachat</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Autoconso + surplus</td><td>&le; 9 kWc</td><td class="num"><strong>0,04 &euro;/kWh</strong></td></tr>
+                <tr><td>Autoconso + surplus</td><td>9-100 kWc</td><td class="num">0,0536 &euro;/kWh</td></tr>
+                <tr><td>Vente totale</td><td>&le; 9 kWc</td><td class="num" style="color: var(--red)">Non disponible</td></tr>
+                <tr><td>Vente totale</td><td>9-36 kWc</td><td class="num">0,0911 &euro;/kWh</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Prime a l'autoconsommation</h3>
+        <table>
+            <tr><td>&le; 9 kWc</td><td class="num"><strong>80 &euro;/kWc</strong> (versee en 1 fois)</td></tr>
+            <tr><td>9-36 kWc</td><td class="num">140 &euro;/kWc</td></tr>
+        </table>
+
+        <h3>Changements majeurs 2026</h3>
+        <ol style="margin: 10px 0 10px 20px; line-height: 2;">
+            <li><strong>La vente totale est supprimee</strong> pour les installations &le; 9 kWc</li>
+            <li>Le tarif de rachat du surplus est tres bas (4 cts/kWh)</li>
+            <li>TVA reduite a 5,5% pour les installations &le; 9 kWc en autoconsommation</li>
+        </ol>
+    </section>
+
+    <!-- =============== HYPOTHESES =============== -->
+    <section>
+        <h2>3. Hypotheses de calcul</h2>
+        <table>
+            <thead>
+                <tr><th>Parametre</th><th>Valeur</th><th>Source</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Production specifique</td><td>1 100 kWh/kWc/an</td><td>PVGIS Bordeaux, corrige SE 30&deg;</td></tr>
+                <tr><td>Degradation panneaux</td><td>0,5%/an</td><td>Standard industrie</td></tr>
+                <tr><td>Inflation electricite</td><td>3%/an</td><td>Tendance historique (conservateur)</td></tr>
+                <tr><td>Remplacement onduleur string</td><td>1 500 &euro; a l'annee 12</td><td>Cout moyen marche</td></tr>
+                <tr><td>Micro-onduleurs</td><td>+500 &euro;, pas de remplacement</td><td>Garantie 20-25 ans</td></tr>
+                <tr><td>Taux d'actualisation (VAN)</td><td>2%/an</td><td>Taux sans risque</td></tr>
+                <tr><td>Duree d'etude</td><td>25 ans</td><td>Garantie constructeur</td></tr>
+                <tr><td>Surface par kWc</td><td>5 m&sup2;</td><td>Panneaux modernes ~200 W/m&sup2;</td></tr>
+                <tr><td>Fraction conso diurne</td><td>45%</td><td>Estime (PAC + piscine en journee)</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Couts d'installation (TTC, TVA 5,5%) &mdash; Actualises mars 2026</h3>
+        <table>
+            <thead>
+                <tr><th>Puissance</th><th class="num">Bas</th><th class="num">Median</th><th class="num">Haut</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>3 kWc (~8 panneaux)</td><td class="num">5 500 &euro;</td><td class="num">7 000 &euro;</td><td class="num">9 500 &euro;</td></tr>
+                <tr class="highlight-row"><td>6 kWc (~16 panneaux)</td><td class="num">9 000 &euro;</td><td class="num">10 500 &euro;</td><td class="num">14 000 &euro;</td></tr>
+                <tr><td>9 kWc (~24 panneaux)</td><td class="num">12 000 &euro;</td><td class="num">15 500 &euro;</td><td class="num">20 000 &euro;</td></tr>
+            </tbody>
+        </table>
+        <div class="alert alert-info">
+            <strong>Evolution des prix :</strong> les fourchettes ont ete revues a la baisse par rapport a l'estimation initiale. Le median 6 kWc passe de 13 000 a 10 500 &euro;, en ligne avec les prix constates sur le marche (sources : HelloWatt, Ecair, EDF Solutions Solaires).
+        </div>
+    </section>
+
+    <!-- =============== PRODUCTION =============== -->
+    <section>
+        <h2>4. Production mensuelle estimee (6 kWc)</h2>
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Source : PVGIS Bordeaux, corrige pour orientation SE a 30&deg; &mdash; Production specifique : 1 100 kWh/kWc/an</p>
+
+        <div class="chart-bars">
+            <div class="chart-row"><span class="chart-label">Janvier</span><div class="bar" style="width: 62px;"></div><span class="chart-value">239</span></div>
+            <div class="chart-row"><span class="chart-label">Fevrier</span><div class="bar" style="width: 85px;"></div><span class="chart-value">327</span></div>
+            <div class="chart-row"><span class="chart-label">Mars</span><div class="bar" style="width: 139px;"></div><span class="chart-value">534</span></div>
+            <div class="chart-row"><span class="chart-label">Avril</span><div class="bar" style="width: 172px;"></div><span class="chart-value">660</span></div>
+            <div class="chart-row"><span class="chart-label">Mai</span><div class="bar" style="width: 205px;"></div><span class="chart-value">786</span></div>
+            <div class="chart-row"><span class="chart-label">Juin</span><div class="bar" style="width: 221px;"></div><span class="chart-value">849</span></div>
+            <div class="chart-row"><span class="chart-label">Juillet</span><div class="bar" style="width: 237px;"></div><span class="chart-value">911</span></div>
+            <div class="chart-row"><span class="chart-label">Aout</span><div class="bar" style="width: 213px;"></div><span class="chart-value">817</span></div>
+            <div class="chart-row"><span class="chart-label">Septembre</span><div class="bar" style="width: 164px;"></div><span class="chart-value">629</span></div>
+            <div class="chart-row"><span class="chart-label">Octobre</span><div class="bar" style="width: 107px;"></div><span class="chart-value">409</span></div>
+            <div class="chart-row"><span class="chart-label">Novembre</span><div class="bar" style="width: 65px;"></div><span class="chart-value">251</span></div>
+            <div class="chart-row"><span class="chart-label">Decembre</span><div class="bar" style="width: 49px;"></div><span class="chart-value">189</span></div>
+        </div>
+        <p style="text-align: right; font-weight: 700; color: var(--gray-700);">Total : 6 600 kWh/an</p>
+    </section>
+
+    <!-- =============== SCENARIOS =============== -->
+    <section>
+        <h2>5. Resultats par scenario</h2>
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Tous les scenarios sont en autoconsommation avec revente du surplus (seul modele disponible &le; 9 kWc depuis 2026). Le cout utilise est le cout median du marche.</p>
+
+        <h3>Avec tarif HP actuel (17,6 cts/kWh)</h3>
+        <div class="scenario-grid">
+            <div class="scenario-card">
+                <div class="card-header">3 kWc</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Cout net (apres prime)</span><span class="val">6 760 &euro;</span></div>
+                    <div class="metric"><span class="label">Production an 1</span><span class="val">3 300 kWh</span></div>
+                    <div class="metric"><span class="label">Taux autoconso</span><span class="val">91%</span></div>
+                    <div class="metric"><span class="label">Economie autoconso an 1</span><span class="val">527 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu surplus an 1</span><span class="val">12 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">539 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--sun);">11 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">6 305 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">7,9%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+10 442 &euro;</span></div>
+                </div>
+            </div>
+            <div class="scenario-card recommended">
+                <div class="card-header">6 kWc &mdash; Recommande</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Cout net (apres prime)</span><span class="val">10 020 &euro;</span></div>
+                    <div class="metric"><span class="label">Production an 1</span><span class="val">6 600 kWh</span></div>
+                    <div class="metric"><span class="label">Taux autoconso</span><span class="val">79%</span></div>
+                    <div class="metric"><span class="label">Economie autoconso an 1</span><span class="val">923 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu surplus an 1</span><span class="val">54 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">977 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">10 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">14 341 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">10,5%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+21 985 &euro;</span></div>
+                </div>
+            </div>
+            <div class="scenario-card">
+                <div class="card-header">9 kWc</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Cout net (apres prime)</span><span class="val">14 780 &euro;</span></div>
+                    <div class="metric"><span class="label">Production an 1</span><span class="val">9 900 kWh</span></div>
+                    <div class="metric"><span class="label">Taux autoconso</span><span class="val">64%</span></div>
+                    <div class="metric"><span class="label">Economie autoconso an 1</span><span class="val">1 116 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu surplus an 1</span><span class="val">142 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">1 258 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--sun);">11 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">16 351 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">8,9%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+26 051 &euro;</span></div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Avec tarif operateur alternatif (HP 16,58 cts/kWh)</h3>
+        <div class="scenario-grid">
+            <div class="scenario-card">
+                <div class="card-header">3 kWc</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">509 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--red);">14 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">5 496 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">7,2%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+9 378 &euro;</span></div>
+                </div>
+            </div>
+            <div class="scenario-card recommended">
+                <div class="card-header">6 kWc &mdash; Recommande</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">924 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">10 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">12 924 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">9,8%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+20 124 &euro;</span></div>
+                </div>
+            </div>
+            <div class="scenario-card">
+                <div class="card-header">9 kWc</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">1 194 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--sun);">11 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">14 636 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">8,2%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+23 799 &euro;</span></div>
+                </div>
+            </div>
+        </div>
+
+        <h3>Si passage au tarif reglemente (25,2 cts/kWh)</h3>
+        <div class="scenario-grid">
+            <div class="scenario-card">
+                <div class="card-header">3 kWc</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">766 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">8 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">12 334 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">12,4%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+18 358 &euro;</span></div>
+                </div>
+            </div>
+            <div class="scenario-card recommended">
+                <div class="card-header">6 kWc &mdash; Recommande</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">1 373 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">7 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">24 893 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">15,4%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+35 841 &euro;</span></div>
+                </div>
+            </div>
+            <div class="scenario-card">
+                <div class="card-header">9 kWc</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">1 738 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">8 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">29 116 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">13,1%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+42 815 &euro;</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============== SENSIBILITE =============== -->
+    <section>
+        <h2>6. Analyse de sensibilite (6 kWc, cout median)</h2>
+
+        <h3>Impact du tarif electrique</h3>
+        <table>
+            <thead>
+                <tr><th>Tarif electrique</th><th class="num">Eco. an 1</th><th class="num">Retour invest.</th><th class="num">VAN 25 ans</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>HC alt. (12,9 cts)</td><td class="num">730 &euro;</td><td class="num">14 ans</td><td class="num">7 777 &euro;</td></tr>
+                <tr><td>HC actuel (13,6 cts)</td><td class="num">768 &euro;</td><td class="num">13 ans</td><td class="num">8 781 &euro;</td></tr>
+                <tr class="highlight-row"><td>HP alt. (16,58 cts)</td><td class="num">924 &euro;</td><td class="num">10 ans</td><td class="num">12 924 &euro;</td></tr>
+                <tr class="highlight-row"><td>HP actuel (17,6 cts)</td><td class="num">977 &euro;</td><td class="num">10 ans</td><td class="num">14 341 &euro;</td></tr>
+                <tr><td>20 cts/kWh</td><td class="num">1 103 &euro;</td><td class="num">9 ans</td><td class="num">17 695 &euro;</td></tr>
+                <tr><td>Reglemente (25,2 cts)</td><td class="num">1 373 &euro;</td><td class="num">7 ans</td><td class="num">24 893 &euro;</td></tr>
+                <tr><td>30 cts/kWh</td><td class="num">1 627 &euro;</td><td class="num">6 ans</td><td class="num">31 644 &euro;</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Impact du cout d'installation</h3>
+        <table>
+            <thead>
+                <tr><th>Cout installation</th><th class="num">Cout net</th><th class="num">Retour invest.</th><th class="num">VAN 25 ans</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Bas (9 000 &euro;)</td><td class="num">8 520 &euro;</td><td class="num">8 ans</td><td class="num">15 841 &euro;</td></tr>
+                <tr class="highlight-row"><td>Median (10 500 &euro;)</td><td class="num">10 020 &euro;</td><td class="num">10 ans</td><td class="num">14 341 &euro;</td></tr>
+                <tr><td>Moyen-haut (12 000 &euro;)</td><td class="num">11 520 &euro;</td><td class="num">11 ans</td><td class="num">12 841 &euro;</td></tr>
+                <tr><td>Haut (14 000 &euro;)</td><td class="num">13 520 &euro;</td><td class="num">14 ans</td><td class="num">10 841 &euro;</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Onduleur string vs micro-onduleurs</h3>
+        <table>
+            <thead>
+                <tr><th>Type onduleur</th><th class="num">Cout net</th><th class="num">Retour invest.</th><th class="num">VAN 25 ans</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>String (remplacement an 12)</td><td class="num">10 020 &euro;</td><td class="num">10 ans</td><td class="num">14 341 &euro;</td></tr>
+                <tr class="highlight-row"><td>Micro-onduleurs (+500 &euro;)</td><td class="num">10 520 &euro;</td><td class="num">10 ans</td><td class="num">15 024 &euro;</td></tr>
+            </tbody>
+        </table>
+        <div class="alert alert-success">
+            Les micro-onduleurs coutent ~500 &euro; de plus a l'achat mais evitent le remplacement de l'onduleur string a 1 500 &euro; a l'annee 12. Resultat : meme retour sur investissement, mais <strong>+683 &euro; de VAN</strong> sur 25 ans. Meilleur choix economique et technique (garantie 20-25 ans, monitoring par panneau).
+        </div>
+
+        <h3>Impact de l'inflation du prix de l'electricite</h3>
+        <table>
+            <thead>
+                <tr><th>Inflation/an</th><th class="num">Retour invest.</th><th class="num">VAN 25 ans</th><th class="num">Gain 25 ans</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>0% (prix stable)</td><td class="num">11 ans</td><td class="num">6 769 &euro;</td><td class="num">11 375 &euro;</td></tr>
+                <tr><td>2%/an</td><td class="num">10 ans</td><td class="num">11 419 &euro;</td><td class="num">17 865 &euro;</td></tr>
+                <tr class="highlight-row"><td>3%/an (hypothese de base)</td><td class="num">10 ans</td><td class="num">14 341 &euro;</td><td class="num">21 985 &euro;</td></tr>
+                <tr><td>5%/an</td><td class="num">9 ans</td><td class="num">21 767 &euro;</td><td class="num">32 560 &euro;</td></tr>
+                <tr><td>7%/an (forte hausse)</td><td class="num">8 ans</td><td class="num">32 000 &euro;</td><td class="num">47 305 &euro;</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- =============== FLUX DE TRESORERIE =============== -->
+    <section>
+        <h2>7. Flux de tresorerie &mdash; 6 kWc, tarif HP actuel</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="num">Annee</th>
+                    <th class="num">Production</th>
+                    <th class="num">Autoconso</th>
+                    <th class="num">Surplus</th>
+                    <th class="num">Eco. &euro;</th>
+                    <th class="num">Surp. &euro;</th>
+                    <th class="num">Ond. &euro;</th>
+                    <th class="num">Net &euro;</th>
+                    <th class="num">Cumul &euro;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="num">1</td><td class="num">6 567</td><td class="num">5 217</td><td class="num">1 350</td><td class="num">945</td><td class="num">54</td><td class="num">0</td><td class="num">999</td><td class="num negative">-9 021</td></tr>
+                <tr><td class="num">2</td><td class="num">6 534</td><td class="num">5 191</td><td class="num">1 343</td><td class="num">969</td><td class="num">54</td><td class="num">0</td><td class="num">1 023</td><td class="num negative">-7 998</td></tr>
+                <tr><td class="num">3</td><td class="num">6 501</td><td class="num">5 165</td><td class="num">1 337</td><td class="num">993</td><td class="num">53</td><td class="num">0</td><td class="num">1 047</td><td class="num negative">-6 951</td></tr>
+                <tr><td class="num">4</td><td class="num">6 469</td><td class="num">5 139</td><td class="num">1 330</td><td class="num">1 018</td><td class="num">53</td><td class="num">0</td><td class="num">1 071</td><td class="num negative">-5 880</td></tr>
+                <tr><td class="num">5</td><td class="num">6 437</td><td class="num">5 113</td><td class="num">1 323</td><td class="num">1 043</td><td class="num">53</td><td class="num">0</td><td class="num">1 096</td><td class="num negative">-4 784</td></tr>
+                <tr><td class="num">6</td><td class="num">6 404</td><td class="num">5 088</td><td class="num">1 317</td><td class="num">1 069</td><td class="num">53</td><td class="num">0</td><td class="num">1 122</td><td class="num negative">-3 663</td></tr>
+                <tr><td class="num">7</td><td class="num">6 372</td><td class="num">5 062</td><td class="num">1 310</td><td class="num">1 096</td><td class="num">52</td><td class="num">0</td><td class="num">1 148</td><td class="num negative">-2 515</td></tr>
+                <tr><td class="num">8</td><td class="num">6 341</td><td class="num">5 037</td><td class="num">1 304</td><td class="num">1 123</td><td class="num">52</td><td class="num">0</td><td class="num">1 175</td><td class="num negative">-1 340</td></tr>
+                <tr><td class="num">9</td><td class="num">6 309</td><td class="num">5 012</td><td class="num">1 297</td><td class="num">1 151</td><td class="num">52</td><td class="num">0</td><td class="num">1 203</td><td class="num negative">-137</td></tr>
+                <tr class="breakeven"><td class="num">10</td><td class="num">6 277</td><td class="num">4 987</td><td class="num">1 291</td><td class="num">1 179</td><td class="num">52</td><td class="num">0</td><td class="num">1 231</td><td class="num positive">+1 093</td></tr>
+                <tr><td class="num">11</td><td class="num">6 246</td><td class="num">4 962</td><td class="num">1 284</td><td class="num">1 209</td><td class="num">51</td><td class="num">0</td><td class="num">1 260</td><td class="num positive">+2 353</td></tr>
+                <tr><td class="num">12</td><td class="num">6 215</td><td class="num">4 937</td><td class="num">1 278</td><td class="num">1 239</td><td class="num">51</td><td class="num negative">1 500</td><td class="num negative">-210</td><td class="num positive">+2 143</td></tr>
+                <tr><td class="num">13</td><td class="num">6 184</td><td class="num">4 912</td><td class="num">1 271</td><td class="num">1 269</td><td class="num">51</td><td class="num">0</td><td class="num">1 320</td><td class="num positive">+3 463</td></tr>
+                <tr><td class="num">14</td><td class="num">6 153</td><td class="num">4 888</td><td class="num">1 265</td><td class="num">1 301</td><td class="num">51</td><td class="num">0</td><td class="num">1 351</td><td class="num positive">+4 815</td></tr>
+                <tr><td class="num">15</td><td class="num">6 122</td><td class="num">4 863</td><td class="num">1 259</td><td class="num">1 333</td><td class="num">50</td><td class="num">0</td><td class="num">1 384</td><td class="num positive">+6 198</td></tr>
+                <tr><td class="num">16</td><td class="num">6 091</td><td class="num">4 839</td><td class="num">1 252</td><td class="num">1 366</td><td class="num">50</td><td class="num">0</td><td class="num">1 416</td><td class="num positive">+7 615</td></tr>
+                <tr><td class="num">17</td><td class="num">6 061</td><td class="num">4 815</td><td class="num">1 246</td><td class="num">1 400</td><td class="num">50</td><td class="num">0</td><td class="num">1 450</td><td class="num positive">+9 065</td></tr>
+                <tr><td class="num">18</td><td class="num">6 031</td><td class="num">4 791</td><td class="num">1 240</td><td class="num">1 435</td><td class="num">50</td><td class="num">0</td><td class="num">1 485</td><td class="num positive">+10 549</td></tr>
+                <tr><td class="num">19</td><td class="num">6 000</td><td class="num">4 767</td><td class="num">1 234</td><td class="num">1 471</td><td class="num">49</td><td class="num">0</td><td class="num">1 520</td><td class="num positive">+12 070</td></tr>
+                <tr><td class="num">20</td><td class="num">5 970</td><td class="num">4 743</td><td class="num">1 228</td><td class="num">1 507</td><td class="num">49</td><td class="num">0</td><td class="num">1 556</td><td class="num positive">+13 626</td></tr>
+                <tr><td class="num">21</td><td class="num">5 941</td><td class="num">4 719</td><td class="num">1 221</td><td class="num">1 545</td><td class="num">49</td><td class="num">0</td><td class="num">1 594</td><td class="num positive">+15 220</td></tr>
+                <tr><td class="num">22</td><td class="num">5 911</td><td class="num">4 696</td><td class="num">1 215</td><td class="num">1 583</td><td class="num">49</td><td class="num">0</td><td class="num">1 632</td><td class="num positive">+16 851</td></tr>
+                <tr><td class="num">23</td><td class="num">5 881</td><td class="num">4 672</td><td class="num">1 209</td><td class="num">1 622</td><td class="num">48</td><td class="num">0</td><td class="num">1 671</td><td class="num positive">+18 522</td></tr>
+                <tr><td class="num">24</td><td class="num">5 852</td><td class="num">4 649</td><td class="num">1 203</td><td class="num">1 663</td><td class="num">48</td><td class="num">0</td><td class="num">1 711</td><td class="num positive">+20 233</td></tr>
+                <tr class="highlight-row"><td class="num">25</td><td class="num">5 823</td><td class="num">4 625</td><td class="num">1 197</td><td class="num">1 704</td><td class="num">48</td><td class="num">0</td><td class="num">1 752</td><td class="num positive">+21 985</td></tr>
+            </tbody>
+        </table>
+        <div class="alert alert-success" style="margin-top: 15px;">
+            Le seuil de rentabilite est atteint a l'<strong>annee 10</strong> (cumul positif a +1 093 &euro;). Le remplacement de l'onduleur a l'annee 12 (1 500 &euro;) fait baisser le cumul temporairement mais ne repasse pas en negatif. Avec micro-onduleurs, cette baisse n'existe pas.
+        </div>
+    </section>
+
+    <!-- =============== IMPACT EV =============== -->
+    <section>
+        <h2>8. Impact vehicule electrique sur l'autoconsommation</h2>
+
+        <p style="color: var(--gray-500); margin-bottom: 15px;">L'ajout d'un vehicule electrique augmente l'autoconsommation solaire en absorbant une partie du surplus. Donnees issues de l'etude voiture (kilometrage reel mesure au compteur).</p>
+
+        <h3>Donnees vehicule</h3>
+        <table>
+            <tr><td>Kilometrage reel mesure (Aurelie)</td><td class="num">12 840 km/an</td></tr>
+            <tr><td>Usage WE Olivier (remplacement diesel 5008)</td><td class="num">~2 500 km/an</td></tr>
+            <tr><td>Consommation EV</td><td class="num">15 kWh/100 km</td></tr>
+            <tr class="highlight-row"><td><strong>Consommation totale EV</strong></td><td class="num"><strong>~2 300 kWh/an</strong></td></tr>
+            <tr><td>Fraction recharge solaire (conservateur)</td><td class="num">38%</td></tr>
+            <tr><td>Recharge solaire</td><td class="num"><strong>~874 kWh/an</strong></td></tr>
+            <tr><td>Recharge HC nuit</td><td class="num">~1 427 kWh/an</td></tr>
+        </table>
+
+        <h3>Planning type (Aurelie temps partiel, 180 j/an)</h3>
+        <table>
+            <thead>
+                <tr><th>Jour</th><th>Voiture a la maison ?</th><th>Recharge solaire ?</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Lundi</td><td>Non (travail)</td><td>Non</td></tr>
+                <tr><td>Mardi matin</td><td>Non (travail)</td><td><strong>Apres-midi ~50%</strong></td></tr>
+                <tr><td>Mercredi OU vendredi</td><td><strong>~50%</strong> (activites enfants)</td><td>Oui quand presente</td></tr>
+                <tr><td>Jeudi</td><td><strong>~60%</strong></td><td>Oui quand presente</td></tr>
+                <tr><td>Week-end</td><td><strong>~30%</strong> (Olivier l'utilise)</td><td>Peu</td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-warning">
+            L'estimation de 38% de recharge solaire est conservative : Aurelie ne reste pas a la maison tout son temps libre (activites enfants, courses, RDV). Seules les heures ou la voiture est effectivement branchee pendant la production solaire comptent.
+        </div>
+
+        <h3>Impact sur le scenario 6 kWc (tarif HP actuel)</h3>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="value">79% &rarr; 93%</div>
+                <div class="label">Taux autoconsommation</div>
+            </div>
+            <div class="kpi-card good">
+                <div class="value">9 ans</div>
+                <div class="label">Retour invest. (vs 10 sans EV)</div>
+            </div>
+            <div class="kpi-card good">
+                <div class="value">+3 593 &euro;</div>
+                <div class="label">Gain supplementaire 25 ans</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr><th></th><th class="num">Sans EV</th><th class="num">Avec EV</th><th class="num">Delta</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Taux autoconsommation</td><td class="num">79%</td><td class="num"><strong>93%</strong></td><td class="num positive">+13 pts</td></tr>
+                <tr><td>Surplus annuel</td><td class="num">1 357 kWh</td><td class="num">483 kWh</td><td class="num">-874 kWh</td></tr>
+                <tr><td>Revenu total an 1</td><td class="num">977 &euro;</td><td class="num"><strong>1 061 &euro;</strong></td><td class="num positive">+84 &euro;</td></tr>
+                <tr><td>Retour sur investissement</td><td class="num">10 ans</td><td class="num"><strong>9 ans</strong></td><td class="num positive">-1 an</td></tr>
+                <tr><td>VAN a 25 ans</td><td class="num">14 341 &euro;</td><td class="num"><strong>17 043 &euro;</strong></td><td class="num positive">+2 702 &euro;</td></tr>
+                <tr class="highlight-row"><td>Gain cumule 25 ans</td><td class="num">21 985 &euro;</td><td class="num"><strong>25 578 &euro;</strong></td><td class="num positive">+3 593 &euro;</td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-success" style="margin-top: 15px;">
+            Gain supplementaire d'environ 84 &euro;/an la premiere annee (croissant avec l'inflation) : chaque kWh redirige de la revente surplus (4 cts) vers la recharge EV evite un achat en HC nuit (13,6 cts). Le <strong>6 kWc reste le bon dimensionnement</strong> : avec l'EV, l'autoconsommation atteint 93% &mdash; passer a 9 kWc ajouterait surtout du surplus faiblement valorise.
+        </div>
+    </section>
+
+    <!-- =============== BATTERIE VIRTUELLE =============== -->
+    <section>
+        <h2>9. Batterie virtuelle &mdash; alternative au surplus EDF OA</h2>
+
+        <p style="color: var(--gray-500); margin-bottom: 15px;">La batterie virtuelle est un service ou le surplus injecte dans le reseau est "stocke virtuellement" et restitue comme credit sur la facture, au lieu d'etre vendu a 4 cts/kWh via EDF OA.</p>
+
+        <table>
+            <thead>
+                <tr><th></th><th class="num">EDF OA (surplus)</th><th class="num">Batterie virtuelle</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Valorisation du surplus</td><td class="num">0,04 &euro;/kWh (fixe 20 ans)</td><td class="num">~0,20 &euro;/kWh (prix reseau)</td></tr>
+                <tr><td>Cout annuel</td><td class="num">0 &euro;</td><td class="num">180-240 &euro;/an (6 kWc)</td></tr>
+                <tr><td>Surplus 6 kWc (~1 350 kWh/an)</td><td class="num">~54 &euro;/an</td><td class="num">~270 &euro;/an brut</td></tr>
+                <tr class="highlight-row"><td><strong>Gain net annuel</strong></td><td class="num"><strong>54 &euro;</strong></td><td class="num"><strong>~30-90 &euro;</strong> (apres abo)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-warning" style="margin-top: 15px;">
+            Le gain net est marginal pour un 6 kWc avec 79% d'autoconsommation (peu de surplus). <strong>Avec un vehicule electrique (section 8), le surplus tombe a ~483 kWh/an</strong> : la batterie virtuelle rapporterait ~97 &euro; brut - 180 &euro; d'abo = deficit. Elle n'a donc aucun interet si un EV absorbe deja le surplus. A reevaluer uniquement sans EV ou avec une installation surdimensionnee (9 kWc+).
+        </div>
+    </section>
+
+    <!-- =============== CONCLUSION =============== -->
+    <section>
+        <h2>10. Conclusion et recommandations</h2>
+
+        <div class="alert alert-success">
+            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios, meme avec le tarif electrique le plus bas envisage. Le retour sur investissement s'est ameliore par rapport a l'estimation initiale grace a la baisse des couts d'installation.
+        </div>
+
+        <h3>Resume des retours sur investissement</h3>
+        <table>
+            <thead>
+                <tr><th>Scenario</th><th class="num">Retour</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Tarif HP actuel (17,6 cts) + cout median</td><td class="num"><strong>10 ans</strong></td></tr>
+                <tr><td>Tarif operateur alt. (16,58 cts) + cout median</td><td class="num"><strong>10 ans</strong></td></tr>
+                <tr><td>Tarif reglemente (25,2 cts) + cout median</td><td class="num"><strong>7 ans</strong></td></tr>
+                <tr><td>Tarif HP actuel + cout bas (bon devis)</td><td class="num"><strong>8 ans</strong></td></tr>
+                <tr><td>Pire cas (tarif bas alt. + cout haut)</td><td class="num">14 ans</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Points cles</h3>
+        <ol style="margin: 10px 0 10px 20px; line-height: 2;">
+            <li><strong>La vente totale n'existe plus</strong> pour &le; 9 kWc. Le surplus vendu a 4 cts/kWh ne rapporte presque rien. La rentabilite repose a 95% sur l'autoconsommation.</li>
+            <li><strong>Tes tarifs sont bas (~16-17 cts HP)</strong> par rapport au reglemente (~25 cts). Le changement d'operateur a 16,58 cts HP degrade marginalement la rentabilite solaire (-53 &euro;/an) mais le gain sur la facture globale peut compenser.</li>
+            <li><strong>6 kWc = meilleur compromis</strong> : taux d'autoconsommation eleve (79%), ~30 m&sup2; de toit, meilleur TRI (10,5%), gain cumule de +21 985 &euro; sur 25 ans.</li>
+            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, mais pas de remplacement onduleur a 1 500 &euro; en annee 12. VAN superieure de 683 &euro;, garantie 20-25 ans, monitoring par panneau.</li>
+            <li><strong>Facteurs favorables</strong> : forte consommation (15 900 kWh/an), piscine + PAC = forte conso diurne, orientation SE correcte (perte ~7% vs plein Sud), pas d'ombrage.</li>
+            <li><strong>L'inflation joue en ta faveur</strong> : meme a 3%/an, le kWh autoconsomme vaut de plus en plus cher chaque annee, alors que le cout du solaire est fixe.</li>
+        </ol>
+
+        <h3>Points cles</h3>
+        <ol style="margin: 10px 0 10px 20px; line-height: 2;">
+            <li><strong>La vente totale n'existe plus</strong> pour &le; 9 kWc. Le surplus vendu a 4 cts/kWh ne rapporte presque rien. La rentabilite repose a 95% sur l'autoconsommation.</li>
+            <li><strong>Tes tarifs sont bas (~16-17 cts HP)</strong> par rapport au reglemente (~25 cts). Le changement d'operateur a 16,58 cts HP degrade marginalement la rentabilite solaire (-53 &euro;/an) mais le gain sur la facture globale peut compenser.</li>
+            <li><strong>6 kWc = meilleur compromis</strong> : taux d'autoconsommation eleve (79%), ~30 m&sup2; de toit, meilleur TRI (10,5%), gain cumule de +21 985 &euro; sur 25 ans.</li>
+            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, mais pas de remplacement onduleur a 1 500 &euro; en annee 12. VAN superieure de 683 &euro;, garantie 20-25 ans, monitoring par panneau.</li>
+            <li><strong>Facteurs favorables</strong> : forte consommation (15 900 kWh/an), piscine + PAC = forte conso diurne, orientation SE correcte (perte ~7% vs plein Sud), pas d'ombrage.</li>
+            <li><strong>L'inflation joue en ta faveur</strong> : meme a 3%/an, le kWh autoconsomme vaut de plus en plus cher chaque annee, alors que le cout du solaire est fixe.</li>
+            <li><strong>Vehicule electrique = levier d'autoconsommation</strong> (section 8) : avec un EV, l'autoconsommation passe de 79% a 93%, le retour de 10 a <strong>9 ans</strong>, et le gain 25 ans de 21 985 a <strong>25 578 &euro;</strong> (+3 593 &euro;).</li>
+        </ol>
+
+        <h3>Pour ameliorer la rentabilite</h3>
+        <ul style="margin: 10px 0 10px 20px; line-height: 2;">
+            <li><strong>Negocier le prix d'installation</strong> : faire 3 a 5 devis. Passer de 10 500 a 9 000 &euro; fait gagner 2 ans sur le retour.</li>
+            <li><strong>Maximiser l'autoconsommation</strong> : programmer piscine, lave-linge, lave-vaisselle, ballons ECS en journee.</li>
+            <li><strong>Vehicule electrique</strong> : absorbe le surplus a 17,6 cts au lieu de le vendre a 4 cts (+84 &euro;/an, croissant). Voir section 8.</li>
+            <li><strong>Micro-onduleurs</strong> : surcout faible, gain sur 25 ans, meilleure fiabilite.</li>
+            <li><strong>Batterie physique</strong> : NON rentable aux prix actuels (4 000-9 000 &euro; pour 5-10 kWh, duree de vie ~10 ans).</li>
+            <li><strong>Batterie virtuelle</strong> : sans interet avec un EV (surplus residuel trop faible). Sans EV, gain marginal (~30-90 &euro;/an net).</li>
+        </ul>
+
+        <h3>Synergie avec le projet maison connectee</h3>
+        <div class="alert alert-info">
+            L'installation solaire et la domotique sont complementaires : Home Assistant pourra piloter les appareils pour maximiser l'autoconsommation, monitorer la production vs consommation en temps reel, et programmer la filtration piscine et les ballons d'eau chaude sur les heures de production solaire.
+        </div>
+    </section>
+
+    <!-- =============== EVOLUTION V1 → V2 =============== -->
+    <section>
+        <h2>11. Evolution par rapport a l'estimation initiale (v1 &rarr; v2)</h2>
+
+        <table>
+            <thead>
+                <tr><th>Parametre</th><th class="num">v1 (mars 2026)</th><th class="num">v2 (actualise)</th><th class="num">Impact</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Cout median 6 kWc</td><td class="num">13 000 &euro;</td><td class="num">10 500 &euro;</td><td class="num positive">-2 500 &euro;</td></tr>
+                <tr><td>Retour invest. HP actuel (6 kWc)</td><td class="num">13 ans</td><td class="num">10 ans</td><td class="num positive"><strong>-3 ans</strong></td></tr>
+                <tr><td>TRI HP actuel (6 kWc)</td><td class="num">8,0%</td><td class="num">10,5%</td><td class="num positive">+2,5 pts</td></tr>
+                <tr><td>VAN 25 ans HP actuel (6 kWc)</td><td class="num">11 841 &euro;</td><td class="num">14 341 &euro;</td><td class="num positive">+2 500 &euro;</td></tr>
+                <tr><td>Gain cumule 25 ans (6 kWc)</td><td class="num">19 485 &euro;</td><td class="num">21 985 &euro;</td><td class="num positive">+2 500 &euro;</td></tr>
+                <tr><td>Onduleur</td><td class="num">Rempl. 1 500 &euro; an 12</td><td class="num">Micro-ond. +500 &euro;</td><td class="num positive">+683 &euro; VAN</td></tr>
+                <tr><td>Batterie virtuelle</td><td class="num">Non mentionnee</td><td class="num">Evaluee (gain marginal)</td><td class="num">Info</td></tr>
+                <tr><td>Tarif operateur alt.</td><td class="num">Non evalue</td><td class="num">HP 16,58 cts (retour 10 ans)</td><td class="num">Info</td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-success" style="margin-top: 15px;">
+            La revision principale est la baisse du cout median d'installation, qui ameliore significativement le retour sur investissement. La recommandation 6 kWc est confirmee et renforcee (TRI passe de 8% a 10,5%).
+        </div>
+    </section>
+
+    <!-- =============== SOURCES =============== -->
+    <section>
+        <h2>12. Sources</h2>
+        <ul style="margin-left: 20px; line-height: 2;">
+            <li><a href="https://www.groupe-apb.fr/particuliers/solaire/panneau-solaire-photovoltaique/prix-installation-6-kw/" target="_blank">Prix installation 6 kWc 2026 &mdash; Groupe APB</a></li>
+            <li><a href="https://www.ecair.eco/blog/article/prix-installation-panneau-solaire-6kw" target="_blank">Cout moyen constate 6 kWc &mdash; Ecair</a></li>
+            <li><a href="https://www.hellowatt.fr/panneaux-solaires-photovoltaiques/combien-coute-installation-photovoltaique" target="_blank">Prix panneaux solaires 2026 &mdash; HelloWatt</a></li>
+            <li><a href="https://www.hellowatt.fr/panneaux-solaires-photovoltaiques/tarif-rachat-photovoltaique" target="_blank">Tarifs rachat EDF OA T1 2026 &mdash; HelloWatt</a></li>
+            <li><a href="https://www.hellowatt.fr/blog/mise-a-jour-tarifs-primes-solaire-t1-2026/" target="_blank">Mise a jour tarifs et primes T1 2026 &mdash; HelloWatt</a></li>
+            <li><a href="https://www.quelleenergie.fr/economies-energie/panneaux-solaires-photovoltaiques/aides-subventions/prime-autoconsommation" target="_blank">Prime autoconsommation 2026 &mdash; QuelleEnergie</a></li>
+            <li><a href="https://www.edf-solutions-solaires.com/guide-solaire/prix-panneau-solaire-3kwc-6kwc-9kwc/" target="_blank">Prix panneaux solaires 3/6/9 kWc &mdash; EDF Solutions Solaires</a></li>
+            <li><a href="https://www.goensol.com/nouvelle-aquitaine/photovoltaique-33" target="_blank">Production PVGIS Bordeaux &mdash; GoEnSol</a></li>
+            <li><a href="https://www.edf-oa.fr/le-contrat-s21" target="_blank">Contrat S21 &mdash; EDF OA</a></li>
+            <li><a href="https://www.hmgroup.fr/article/rentabilite-dune-batterie-virtuelle-chiffres-et-cas-pratiques" target="_blank">Rentabilite batterie virtuelle 2026 &mdash; HM Group</a></li>
+            <li><a href="https://www.monabee.fr/blog/prix-batterie-panneau-solaire-comparatif/" target="_blank">Prix batterie solaire 2026 &mdash; Monabee</a></li>
+        </ul>
+    </section>
+
+</div>
+
+<footer>
+    <div class="container">
+        <p>Analyse generee en mars 2026 (v2) &mdash; Simulateur Python : <code>simulateur_solaire.py</code></p>
+        <p>Les tarifs EDF OA et primes evoluent chaque trimestre. Verifier les valeurs en vigueur au moment de la signature.</p>
+    </div>
+</footer>
+
+</body>
+</html>
