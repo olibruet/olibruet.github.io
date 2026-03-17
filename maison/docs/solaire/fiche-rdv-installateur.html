@@ -335,6 +335,367 @@
         </ul>
     </section>
 
+    <!-- =============== CONSO VS PRODUCTION =============== -->
+    <section id="conso-vs-prod">
+        <h2>Ma consommation vs production solaire</h2>
+        <p style="color: var(--gray-500); font-size: 0.85em; margin-bottom: 14px;">Donnees reelles Linky (demi-heures) + production PVGIS simulee. Cliquer sur un profil pour l'afficher.</p>
+
+        <div class="profile-tabs">
+            <button class="profile-tab active" onclick="showProfile('ete_moyen', this)">Ete moyen</button>
+            <button class="profile-tab" onclick="showProfile('canicule', this)">Canicule</button>
+            <button class="profile-tab" onclick="showProfile('hiver', this)">Hiver</button>
+        </div>
+
+        <div id="chart-title" style="font-weight: 700; font-size: 0.95em; margin: 10px 0 4px; color: var(--gray-700);"></div>
+        <div id="chart-date" style="font-size: 0.8em; color: var(--gray-500); margin-bottom: 10px;"></div>
+
+        <!-- Legend -->
+        <div class="chart-legend">
+            <span class="legend-item"><span class="legend-swatch" style="background: var(--blue);"></span> Conso</span>
+            <span class="legend-item"><span class="legend-swatch" style="background: var(--sun);"></span> 6 kWc</span>
+            <span class="legend-item"><span class="legend-swatch legend-dashed"></span> 9 kWc</span>
+            <span class="legend-item"><span class="legend-swatch" style="background: var(--green); opacity: 0.5;"></span> Autoconso</span>
+        </div>
+
+        <!-- Chart area -->
+        <div id="profile-chart" class="profile-chart"></div>
+
+        <!-- Summary line -->
+        <div id="profile-summary" class="profile-summary"></div>
+
+        <!-- Stats table -->
+        <div id="profile-stats"></div>
+    </section>
+
+    <style>
+        /* Profile tabs */
+        .profile-tabs {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+        .profile-tab {
+            flex: 1;
+            padding: 7px 4px;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            background: white;
+            font-size: 0.82em;
+            font-weight: 600;
+            color: var(--gray-700);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.15s;
+        }
+        .profile-tab.active {
+            background: var(--sun-light);
+            border-color: var(--sun);
+            color: #92400e;
+        }
+
+        /* Chart legend */
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 0.78em;
+            color: var(--gray-700);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .legend-swatch {
+            display: inline-block;
+            width: 16px;
+            height: 8px;
+            border-radius: 2px;
+        }
+        .legend-dashed {
+            width: 16px;
+            height: 0;
+            border-top: 2px dashed #ea580c;
+        }
+
+        /* Profile chart */
+        .profile-chart {
+            position: relative;
+            border-left: 1px solid var(--gray-300);
+            border-bottom: 1px solid var(--gray-300);
+            padding-left: 0;
+            margin-bottom: 6px;
+        }
+        .pc-row {
+            display: flex;
+            align-items: stretch;
+            height: 12px;
+            position: relative;
+        }
+        .pc-row:hover {
+            background: rgba(0,0,0,0.03);
+        }
+        .pc-row:hover .pc-tooltip {
+            display: block;
+        }
+        .pc-bars {
+            position: relative;
+            flex: 1;
+            height: 100%;
+        }
+        .pc-bar-conso {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--blue);
+            opacity: 0.45;
+            border-radius: 0 2px 2px 0;
+        }
+        .pc-bar-autoconso {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: var(--green);
+            opacity: 0.55;
+            border-radius: 0 2px 2px 0;
+        }
+        .pc-bar-prod6 {
+            position: absolute;
+            top: 1px;
+            left: 0;
+            height: calc(100% - 2px);
+            border: 2px solid var(--sun);
+            border-left: none;
+            border-radius: 0 3px 3px 0;
+            background: transparent;
+            box-sizing: border-box;
+        }
+        .pc-bar-prod9 {
+            position: absolute;
+            top: 2px;
+            left: 0;
+            height: calc(100% - 4px);
+            border-right: 2px dashed #ea580c;
+            background: transparent;
+        }
+        .pc-time-label {
+            position: absolute;
+            bottom: -16px;
+            font-size: 0.65em;
+            color: var(--gray-500);
+            transform: translateX(-50%);
+        }
+        .pc-xaxis {
+            position: relative;
+            height: 18px;
+            margin-top: 2px;
+        }
+        .pc-xaxis span {
+            position: absolute;
+            font-size: 0.65em;
+            color: var(--gray-500);
+            transform: translateX(-50%);
+        }
+        .pc-scale {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6em;
+            color: var(--gray-500);
+            padding: 0 0 2px;
+        }
+
+        /* Tooltip */
+        .pc-tooltip {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: -28px;
+            background: var(--gray-900);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7em;
+            white-space: nowrap;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* Summary */
+        .profile-summary {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 0.8em;
+            color: var(--gray-700);
+            margin: 10px 0;
+            line-height: 1.7;
+        }
+        .profile-summary .sum-label {
+            font-weight: 700;
+        }
+        .profile-summary .sum-blue { color: var(--blue); font-weight: 700; }
+        .profile-summary .sum-orange { color: #b45309; font-weight: 700; }
+        .profile-summary .sum-green { color: #065f46; font-weight: 700; }
+
+        /* Stats mini table */
+        .stats-mini {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78em;
+            margin-top: 8px;
+        }
+        .stats-mini th {
+            background: var(--gray-100);
+            padding: 5px 6px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 2px solid var(--gray-300);
+        }
+        .stats-mini td {
+            padding: 4px 6px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .stats-mini .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .stats-mini tr.row-6kwc td { background: var(--sun-light); }
+    </style>
+
+    <script>
+    (function() {
+        var PROFILES = {"ete_moyen":{"label":"Profil moyen juil-aout","date":"Moyenne juil-aout 2025","conso_total_kwh":40.0,"hours":["0:15","0:45","1:15","1:45","2:15","2:45","3:15","3:45","4:15","4:45","5:15","5:45","6:15","6:45","7:15","7:45","8:15","8:45","9:15","9:45","10:15","10:45","11:15","11:45","12:15","12:45","13:15","13:45","14:15","14:45","15:15","15:45","16:15","16:45","17:15","17:45","18:15","18:45","19:15","19:45","20:15","20:45","21:15","21:45","22:15","22:45","23:15","23:45"],"conso_w":[1328,1335,1300,1317,1181,1063,1008,839,734,724,709,507,528,486,495,461,641,1436,1458,1456,1454,1427,1448,1491,1508,1516,1624,1695,1749,1743,1703,1746,1779,1748,1704,1695,1677,1795,1842,1991,2375,2479,2474,5641,5153,4091,3542,1977],"prod_6kwc":[0,0,0,0,0,0,0,0,0,0,0,0,175,489,694,955,1273,1643,2054,2487,2917,3314,3647,3887,4013,4013,3887,3647,3314,2917,2487,2054,1643,1273,955,694,489,333,220,141,87,27,0,0,0,0,0,0],"prod_9kwc":[0,0,0,0,0,0,0,0,0,0,0,0,262,733,1042,1433,1910,2465,3081,3731,4376,4971,5470,5831,6019,6019,5831,5470,4971,4376,3731,3081,2465,1910,1433,1042,733,500,330,211,131,41,0,0,0,0,0,0],"autoconso_6kwc_kwh":15.8,"surplus_6kwc_kwh":12.1,"autoconso_9kwc_kwh":16.9,"surplus_9kwc_kwh":24.9,"prod_total_6kwc":27.9,"prod_total_9kwc":41.8},"canicule":{"label":"Journee canicule (PAC clim)","date":"26/08/2025","conso_total_kwh":62.1,"hours":["23:45","0:15","0:45","1:15","1:45","2:15","2:45","3:15","3:45","4:15","4:45","5:15","5:45","6:15","6:45","7:15","7:45","8:15","8:45","9:15","9:45","10:15","10:45","11:15","11:45","12:15","12:45","13:15","13:45","14:15","14:45","15:15","15:45","16:15","16:45","17:15","17:45","18:15","18:45","19:15","19:45","20:15","20:45","21:15","21:45","22:15","22:45","23:15"],"conso_w":[2948,2398,2596,2064,3506,3742,2816,2582,1026,1210,1906,898,860,914,904,906,876,1128,1980,2010,2004,1902,1994,1916,2048,2236,2332,2886,2356,3512,3790,4314,2866,2470,1536,1572,1730,1396,1426,1484,1672,2374,3486,2964,8610,8036,7238,6818],"prod_6kwc":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,464,659,906,1208,1559,1949,2360,2768,3145,3461,3689,3808,3808,3689,3461,3145,2768,2360,1949,1559,1208,906,659,464,316,209,133,82,0,0,0,0,0,0],"prod_9kwc":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,696,989,1360,1812,2339,2924,3541,4153,4718,5192,5533,5713,5713,5533,5192,4718,4153,3541,2924,2339,1812,1360,989,696,474,313,200,124,0,0,0,0,0,0],"autoconso_6kwc_kwh":21.0,"surplus_6kwc_kwh":5.3,"autoconso_9kwc_kwh":24.5,"surplus_9kwc_kwh":15.0,"prod_total_6kwc":26.4,"prod_total_9kwc":39.5},"hiver":{"label":"Journee hiver","date":"20/01/2025","conso_total_kwh":50.4,"hours":["23:45","0:15","0:45","1:15","1:45","2:15","2:45","3:15","3:45","4:15","4:45","5:15","5:45","6:15","6:45","7:15","7:45","8:15","8:45","9:15","9:45","10:15","10:45","11:15","11:45","12:15","12:45","13:15","13:45","14:15","14:45","15:15","15:45","16:15","16:45","17:15","17:45","18:15","18:45","19:15","19:45","20:15","20:45","21:15","21:45","22:15","22:45","23:15"],"conso_w":[5806,6888,5618,5090,5302,6526,6930,5866,4316,2536,4198,2924,266,446,454,314,282,226,232,256,292,240,222,252,378,340,278,398,444,316,350,344,288,274,358,422,458,426,466,710,956,548,620,1448,7014,5684,6684,6128],"prod_6kwc":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,433,630,861,1105,1333,1511,1609,1609,1511,1333,1105,861,630,433,279,169,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"prod_9kwc":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,649,945,1291,1658,2000,2267,2413,2413,2267,2000,1658,1291,945,649,419,254,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"autoconso_6kwc_kwh":2.4,"surplus_6kwc_kwh":5.3,"autoconso_9kwc_kwh":2.4,"surplus_9kwc_kwh":9.1,"prod_total_6kwc":7.7,"prod_total_9kwc":11.6}};
+
+        // Parse hour string to slot index (0-47 over 24h)
+        function hourToSlotIdx(h) {
+            var parts = h.split(':');
+            var hh = parseInt(parts[0]);
+            var mm = parseInt(parts[1]);
+            return hh * 2 + (mm >= 30 ? 1 : 0);
+        }
+
+        // Normalize a profile to 48 slots (0:00-23:30)
+        function normalize(p) {
+            var slots = [];
+            for (var i = 0; i < 48; i++) {
+                slots.push({ conso: 0, prod6: 0, prod9: 0, hour: Math.floor(i/2) + ':' + (i%2===0 ? '00' : '30') });
+            }
+            for (var j = 0; j < p.hours.length; j++) {
+                var idx = hourToSlotIdx(p.hours[j]);
+                if (idx >= 0 && idx < 48) {
+                    slots[idx].conso = p.conso_w[j] || 0;
+                    slots[idx].prod6 = p.prod_6kwc[j] || 0;
+                    slots[idx].prod9 = p.prod_9kwc[j] || 0;
+                }
+            }
+            return slots;
+        }
+
+        function renderChart(key) {
+            var p = PROFILES[key];
+            var slots = normalize(p);
+
+            // Find max value for scaling
+            var maxVal = 0;
+            for (var i = 0; i < slots.length; i++) {
+                maxVal = Math.max(maxVal, slots[i].conso, slots[i].prod6, slots[i].prod9);
+            }
+            // Round up to nearest 1000
+            maxVal = Math.ceil(maxVal / 1000) * 1000;
+            if (maxVal < 2000) maxVal = 2000;
+
+            document.getElementById('chart-title').textContent = p.label;
+            document.getElementById('chart-date').textContent = p.date;
+
+            // Build chart HTML
+            var html = '';
+            html += '<div class="pc-scale"><span>0 W</span><span>' + (maxVal/2/1000).toFixed(0) + ' kW</span><span>' + (maxVal/1000).toFixed(0) + ' kW</span></div>';
+
+            for (var i = 0; i < slots.length; i++) {
+                var s = slots[i];
+                var consoW = (s.conso / maxVal * 100).toFixed(1);
+                var prod6W = (s.prod6 / maxVal * 100).toFixed(1);
+                var prod9W = (s.prod9 / maxVal * 100).toFixed(1);
+                var autoconsoW = (Math.min(s.conso, s.prod6) / maxVal * 100).toFixed(1);
+
+                html += '<div class="pc-row">';
+                html += '<div class="pc-bars">';
+                html += '<div class="pc-bar-conso" style="width:' + consoW + '%"></div>';
+                if (s.prod6 > 0) {
+                    html += '<div class="pc-bar-autoconso" style="width:' + autoconsoW + '%"></div>';
+                    html += '<div class="pc-bar-prod6" style="width:' + prod6W + '%"></div>';
+                }
+                if (s.prod9 > 0) {
+                    html += '<div class="pc-bar-prod9" style="width:' + prod9W + '%"></div>';
+                }
+                html += '<div class="pc-tooltip">' + s.hour + ' &mdash; Conso: ' + s.conso + ' W | 6kWc: ' + s.prod6 + ' W | 9kWc: ' + s.prod9 + ' W</div>';
+                html += '</div>';
+                html += '</div>';
+            }
+
+            // X axis
+            html += '<div class="pc-xaxis">';
+            for (var h = 0; h <= 22; h += 2) {
+                var pct = (h * 2 / 48 * 100).toFixed(1);
+                html += '<span style="left:' + pct + '%">' + h + 'h</span>';
+            }
+            html += '</div>';
+
+            document.getElementById('profile-chart').innerHTML = html;
+
+            // Summary
+            var autoRate6 = p.prod_total_6kwc > 0 ? (p.autoconso_6kwc_kwh / p.prod_total_6kwc * 100).toFixed(0) : 0;
+            var autoRate9 = p.prod_total_9kwc > 0 ? (p.autoconso_9kwc_kwh / p.prod_total_9kwc * 100).toFixed(0) : 0;
+            var consoAutoRate6 = p.conso_total_kwh > 0 ? (p.autoconso_6kwc_kwh / p.conso_total_kwh * 100).toFixed(0) : 0;
+            var consoAutoRate9 = p.conso_total_kwh > 0 ? (p.autoconso_9kwc_kwh / p.conso_total_kwh * 100).toFixed(0) : 0;
+
+            var sumHtml = '';
+            sumHtml += '<span class="sum-blue">Conso : ' + p.conso_total_kwh.toFixed(1) + ' kWh</span><br>';
+            sumHtml += '<span class="sum-orange">6 kWc</span> : autoconso <span class="sum-green">' + p.autoconso_6kwc_kwh.toFixed(1) + ' kWh (' + consoAutoRate6 + '% de la conso)</span>, surplus ' + p.surplus_6kwc_kwh.toFixed(1) + ' kWh<br>';
+            sumHtml += '<span class="sum-orange">9 kWc</span> : autoconso <span class="sum-green">' + p.autoconso_9kwc_kwh.toFixed(1) + ' kWh (' + consoAutoRate9 + '% de la conso)</span>, surplus ' + p.surplus_9kwc_kwh.toFixed(1) + ' kWh';
+            document.getElementById('profile-summary').innerHTML = sumHtml;
+
+            // Stats table
+            var sHtml = '<table class="stats-mini">';
+            sHtml += '<thead><tr><th></th><th class="num">Conso</th><th class="num">6 kWc</th><th class="num">9 kWc</th></tr></thead><tbody>';
+            sHtml += '<tr><td>Total journee</td><td class="num">' + p.conso_total_kwh.toFixed(1) + ' kWh</td>';
+            sHtml += '<td class="num">' + p.prod_total_6kwc.toFixed(1) + ' kWh</td>';
+            sHtml += '<td class="num">' + p.prod_total_9kwc.toFixed(1) + ' kWh</td></tr>';
+            sHtml += '<tr class="row-6kwc"><td>Autoconsomme</td><td class="num">&mdash;</td>';
+            sHtml += '<td class="num">' + p.autoconso_6kwc_kwh.toFixed(1) + ' kWh (' + consoAutoRate6 + '%)</td>';
+            sHtml += '<td class="num">' + p.autoconso_9kwc_kwh.toFixed(1) + ' kWh (' + consoAutoRate9 + '%)</td></tr>';
+            sHtml += '<tr><td>Surplus (vendu 4 cts)</td><td class="num">&mdash;</td>';
+            sHtml += '<td class="num">' + p.surplus_6kwc_kwh.toFixed(1) + ' kWh</td>';
+            sHtml += '<td class="num">' + p.surplus_9kwc_kwh.toFixed(1) + ' kWh</td></tr>';
+            sHtml += '<tr><td>Taux utilisation prod.</td><td class="num">&mdash;</td>';
+            sHtml += '<td class="num">' + autoRate6 + '%</td>';
+            sHtml += '<td class="num">' + autoRate9 + '%</td></tr>';
+
+            // Economy calculation
+            var eco6 = (p.autoconso_6kwc_kwh * 0.176 + p.surplus_6kwc_kwh * 0.04).toFixed(2);
+            var eco9 = (p.autoconso_9kwc_kwh * 0.176 + p.surplus_9kwc_kwh * 0.04).toFixed(2);
+            sHtml += '<tr style="font-weight:700"><td>Economie / jour</td><td class="num">&mdash;</td>';
+            sHtml += '<td class="num">' + eco6 + ' &euro;</td>';
+            sHtml += '<td class="num">' + eco9 + ' &euro;</td></tr>';
+            sHtml += '</tbody></table>';
+
+            document.getElementById('profile-stats').innerHTML = sHtml;
+        }
+
+        window.showProfile = function(key, btn) {
+            var tabs = document.querySelectorAll('.profile-tab');
+            for (var i = 0; i < tabs.length; i++) tabs[i].classList.remove('active');
+            btn.classList.add('active');
+            renderChart(key);
+        };
+
+        // Initial render
+        renderChart('ete_moyen');
+    })();
+    </script>
+
     <!-- =============== ARGUMENTS =============== -->
     <section>
         <h2>Arguments a avoir en tete</h2>
