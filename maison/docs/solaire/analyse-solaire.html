@@ -289,18 +289,18 @@
                 <div class="value">6 600</div>
                 <div class="label">kWh/an produits (6 kWc)</div>
             </div>
-            <div class="kpi-card good">
-                <div class="value">10 ans</div>
-                <div class="label">Retour invest. (tarif actuel)</div>
+            <div class="kpi-card">
+                <div class="value">~13 ans</div>
+                <div class="label">Retour sans optimisation (donnees reelles)</div>
             </div>
             <div class="kpi-card good">
-                <div class="value">+21 985 &euro;</div>
-                <div class="label">Gain cumule sur 25 ans</div>
+                <div class="value">~9 ans</div>
+                <div class="label">Retour avec domotique + EV</div>
             </div>
         </div>
 
         <div class="alert alert-warning">
-            <strong>Point d'attention :</strong> ton tarif electrique actuel (17,6 cts/kWh en HP) est 30% inferieur au tarif reglemente (25,2 cts). Si ton contrat fixe expire, le retour sur investissement passe de <strong>10 ans a 7 ans</strong>.
+            <strong>Donnees reelles Linky 2025 :</strong> seulement 26% de la consommation est diurne (vs 45% suppose). Sans optimisation, le retour est de ~13 ans. <strong>Avec domotique (decalage ECS, electromenager) + EV, le retour descend a ~9 ans.</strong> Le solaire et la domotique sont indissociables.
         </div>
 
         <div class="alert alert-info">
@@ -315,20 +315,27 @@
         <h3>Installation</h3>
         <table>
             <tr><td>Localisation</td><td>Vayres, Gironde (33) &mdash; Lat. 44,9&deg;N</td></tr>
-            <tr><td>Orientation du toit</td><td>Sud-Est / Nord-Ouest (2 versants)</td></tr>
-            <tr><td>Inclinaison</td><td>~30&deg;</td></tr>
-            <tr><td>Surface toit SE exploitable</td><td>~55 m&sup2; (maison principale 15m x 8m)</td></tr>
-            <tr><td>Ombrage</td><td>Aucun sur versant SE maison principale. Extension ombragee l'apres-midi (non retenue)</td></tr>
+            <tr><td>Orientation des toits</td><td>Sud-Est / Nord-Ouest (2 versants)</td></tr>
             <tr><td>Foyer</td><td>6 personnes</td></tr>
-            <tr><td>Puissance max installable</td><td>~11 kWc (55 m&sup2; / 5 m&sup2; par kWc)</td></tr>
         </table>
 
-        <h3>Maison</h3>
-        <ul style="margin: 10px 0 10px 20px; line-height: 2;">
-            <li><strong>Maison principale</strong> : 130 m&sup2; au sol (15m x 8m), versant SE ~69 m&sup2; brut, ~55 m&sup2; exploitable</li>
-            <li><strong>Extension</strong> : 50 m&sup2; au sol &mdash; non retenue (ombrage apres-midi)</li>
-            <li><strong>Porche jardin</strong> : 8m x 2m &mdash; non pertinent pour le solaire</li>
-        </ul>
+        <h3>Surfaces disponibles</h3>
+        <p style="color: var(--gray-500); margin-bottom: 10px;">Dimensions corrigees par photo satellite Google Maps (mars 2026).</p>
+
+        <table>
+            <thead>
+                <tr><th>Toit</th><th class="num">Surface exploitable</th><th class="num">Puissance max</th><th>Inclinaison</th><th>Ombrage</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Maison versant SE</strong> (7,5m x 18m au sol)</td><td class="num"><strong>~58-62 m&sup2;</strong></td><td class="num">~11,5-12,5 kWc</td><td>30&deg;</td><td>Aucun</td></tr>
+                <tr><td><strong>Pool house</strong> (7m x 2,5m, bac acier)</td><td class="num"><strong>~15-17 m&sup2;</strong></td><td class="num">~3 kWc</td><td>15&deg;</td><td>Aucun</td></tr>
+                <tr class="highlight-row"><td><strong>Total</strong></td><td class="num"><strong>~75 m&sup2;</strong></td><td class="num"><strong>~14,5-15,5 kWc</strong></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-info" style="margin-top: 10px;">
+            Le 6 kWc recommande (~30 m&sup2;) tient largement sur la maison seule. Pour un 9 kWc : maison (6 kWc) + pool house (3 kWc) = combo ideal, zero ombre, bac acier = fixation simple et moins chere que tuiles. L'extension est ecartee (ombrage coniferes du voisin confirme par photos : ~40-50% de perte annuelle).
+        </div>
 
         <h3>Consommation electrique (15 900 kWh/an &mdash; 2 576 &euro;/an)</h3>
         <table>
@@ -760,9 +767,147 @@
         </div>
     </section>
 
+    <!-- =============== DONNEES REELLES =============== -->
+    <section>
+        <h2>9. Confrontation aux donnees reelles (Linky 2025)</h2>
+
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Analyse croisee des donnees de consommation Linky demi-horaires (annee complete 2025, 17 421 creneaux) avec la production solaire simulee 6 kWc.</p>
+
+        <h3>Consommation reelle vs hypothese</h3>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="value">15 904</div>
+                <div class="label">kWh/an mesures (vs 15 900 estime)</div>
+            </div>
+            <div class="kpi-card" style="background: var(--red-light); border-color: var(--red);">
+                <div class="value" style="color: #991b1b;">25,9%</div>
+                <div class="label">Fraction diurne reelle (vs 45% suppose)</div>
+            </div>
+            <div class="kpi-card" style="background: var(--red-light); border-color: var(--red);">
+                <div class="value" style="color: #991b1b;">59,1%</div>
+                <div class="label">Autoconsommation reelle (vs 79% theorique)</div>
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            <strong>Ecart significatif :</strong> la consommation totale est correcte, mais seulement 26% a lieu pendant les heures solaires (9h-17h) au lieu de 45%. Cause principale : les ballons ECS (4-5 kW entre 21h30 et minuit en HC) et la PAC chauffage la nuit en hiver.
+        </div>
+
+        <h3>Autoconsommation reelle simulee (6 kWc)</h3>
+        <table>
+            <thead>
+                <tr><th></th><th class="num">Modele theorique</th><th class="num">Donnees reelles</th><th class="num">Ecart</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Taux autoconsommation</td><td class="num">79%</td><td class="num"><strong>59,1%</strong></td><td class="num negative">-20 pts</td></tr>
+                <tr><td>Autoconsommation</td><td class="num">5 214 kWh</td><td class="num"><strong>3 904 kWh</strong></td><td class="num negative">-1 310 kWh</td></tr>
+                <tr><td>Surplus</td><td class="num">1 386 kWh</td><td class="num"><strong>2 697 kWh</strong></td><td class="num negative">+1 311 kWh</td></tr>
+                <tr><td>Economie autoconso an 1</td><td class="num">923 &euro;</td><td class="num"><strong>687 &euro;</strong></td><td class="num negative">-236 &euro;</td></tr>
+                <tr><td>Revenu surplus</td><td class="num">54 &euro;</td><td class="num"><strong>108 &euro;</strong></td><td class="num positive">+54 &euro;</td></tr>
+                <tr class="highlight-row"><td><strong>Gain total an 1</strong></td><td class="num"><strong>977 &euro;</strong></td><td class="num"><strong>794 &euro;</strong></td><td class="num negative"><strong>-183 &euro;</strong></td></tr>
+                <tr class="highlight-row"><td><strong>Retour sur investissement</strong></td><td class="num"><strong>10 ans</strong></td><td class="num"><strong>~13 ans</strong></td><td class="num negative"><strong>+3 ans</strong></td></tr>
+            </tbody>
+        </table>
+
+        <h3>Detail mensuel</h3>
+        <table>
+            <thead>
+                <tr><th>Mois</th><th class="num">Conso</th><th class="num">Production</th><th class="num">Autoconso</th><th class="num">Surplus</th><th class="num">Tx auto</th><th class="num">Tx couv.</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Janvier</td><td class="num">1 514</td><td class="num">239</td><td class="num">155</td><td class="num">84</td><td class="num">65%</td><td class="num">10%</td></tr>
+                <tr><td>Fevrier</td><td class="num">1 469</td><td class="num">327</td><td class="num">237</td><td class="num">90</td><td class="num">72%</td><td class="num">16%</td></tr>
+                <tr><td>Mars</td><td class="num">1 374</td><td class="num">534</td><td class="num">303</td><td class="num">231</td><td class="num">57%</td><td class="num">22%</td></tr>
+                <tr><td>Avril</td><td class="num">1 119</td><td class="num">660</td><td class="num">315</td><td class="num">345</td><td class="num">48%</td><td class="num">28%</td></tr>
+                <tr><td>Mai</td><td class="num">1 317</td><td class="num">786</td><td class="num">472</td><td class="num">314</td><td class="num">60%</td><td class="num">36%</td></tr>
+                <tr><td>Juin</td><td class="num">1 208</td><td class="num">849</td><td class="num">441</td><td class="num">408</td><td class="num">52%</td><td class="num">37%</td></tr>
+                <tr style="background: var(--sun-light);"><td><strong>Juillet</strong></td><td class="num">1 013</td><td class="num">911</td><td class="num">438</td><td class="num">473</td><td class="num">48%</td><td class="num"><strong>43%</strong></td></tr>
+                <tr><td>Aout</td><td class="num">1 469</td><td class="num">817</td><td class="num">511</td><td class="num">306</td><td class="num">63%</td><td class="num">35%</td></tr>
+                <tr><td>Septembre</td><td class="num">1 190</td><td class="num">629</td><td class="num">385</td><td class="num">244</td><td class="num">61%</td><td class="num">32%</td></tr>
+                <tr><td>Octobre</td><td class="num">1 062</td><td class="num">409</td><td class="num">278</td><td class="num">131</td><td class="num">68%</td><td class="num">26%</td></tr>
+                <tr><td>Novembre</td><td class="num">1 456</td><td class="num">251</td><td class="num">201</td><td class="num">50</td><td class="num">80%</td><td class="num">14%</td></tr>
+                <tr><td>Decembre</td><td class="num">1 714</td><td class="num">189</td><td class="num">168</td><td class="num">21</td><td class="num">89%</td><td class="num">10%</td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-info" style="margin-top: 15px;">
+            En hiver, l'autoconsommation est elevee (80-89%) mais la production est faible : presque tout est consomme mais ca ne couvre que 10-16% de la facture. En ete, la production est forte mais l'autoconsommation est basse (48-63%) car la conso diurne est limitee a la piscine + talon.
+        </div>
+
+        <h3>Potentiel d'optimisation (decalage de charge)</h3>
+
+        <p style="margin-bottom: 10px;">Le surplus annuel de 2 697 kWh represente 367 &euro; de gain potentiel. Les creneaux 10h30-14h30 concentrent l'essentiel du surplus. <strong>La plupart des leviers sont realisables manuellement</strong>, sans domotique.</p>
+
+        <h4>Leviers manuels (sans domotique)</h4>
+        <table>
+            <thead>
+                <tr><th>Levier</th><th>Comment</th><th class="num">kWh/an</th><th class="num">Gain supp.</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Lave-linge en journee</td><td>Depart differe ou lancer avant de partir</td><td class="num">~350</td><td class="num">~50 &euro;</td></tr>
+                <tr><td>Seche-linge en journee</td><td>Idem</td><td class="num">~200</td><td class="num">~25 &euro;</td></tr>
+                <tr><td>1 lave-vaisselle sur 2 en journee</td><td>Lancer apres le dejeuner</td><td class="num">~275</td><td class="num">~35 &euro;</td></tr>
+                <tr><td>Piscine resserree 10h-16h</td><td>Reprogrammer l'horloge du coffret</td><td class="num">~100</td><td class="num">~14 &euro;</td></tr>
+                <tr><td>Vehicule electrique</td><td>Brancher en arrivant, borne mode eco solaire</td><td class="num">~874</td><td class="num">~85 &euro;</td></tr>
+                <tr class="highlight-row"><td><strong>Total manuel</strong></td><td></td><td class="num"><strong>~1 800</strong></td><td class="num"><strong>~209 &euro;</strong></td></tr>
+            </tbody>
+        </table>
+
+        <h4>Levier necessitant la domotique</h4>
+        <table>
+            <thead>
+                <tr><th>Levier</th><th>Comment</th><th class="num">kWh/an</th><th class="num">Gain supp.</th></tr>
+            </thead>
+            <tbody>
+                <tr class="highlight-row"><td><strong>Ballon ECS boost solaire 12h-15h</strong></td><td>Relais Shelly (~15 &euro;) sur contacteur HC, pilote par HA</td><td class="num"><strong>~600-900</strong></td><td class="num"><strong>~80-120 &euro;</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-info" style="margin-top: 10px;">
+            Le ballon ECS est asservi au signal HC du compteur Linky (declenchement automatique ~22h30). Il n'est pas possible de le forcer en journee sans un relais connecte qui court-circuite le contacteur HC. C'est le seul levier qui necessite la domotique, mais aussi le plus impactant.
+        </div>
+
+        <div class="alert alert-success" style="margin-top: 10px;">
+            <strong>Perspective : HC en journee (fin 2026-2027).</strong> Enedis prevoit de deployer 2h d'heures creuses en journee (~13h-15h) pour 9,3 millions de foyers, entre fin 2026 et fin 2027 (horaires differencies ete/hiver). Le ballon ECS se declenchera alors automatiquement sur ce creneau sans aucun equipement &mdash; le retour sur investissement passera a <strong>~9 ans sans domotique</strong>.
+        </div>
+
+        <h3>Synthese : scenarios avec et sans optimisation</h3>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="value">794 &euro;</div>
+                <div class="label">Gain/an sans optimisation (~13 ans)</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="value">~1 003 &euro;</div>
+                <div class="label">Gain/an decalage manuel (~10 ans)</div>
+            </div>
+            <div class="kpi-card good">
+                <div class="value">~1 100 &euro;</div>
+                <div class="label">Gain/an manuel + domotique ECS (~9 ans)</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr><th>Scenario</th><th class="num">Gain an 1</th><th class="num">Retour invest.</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Donnees brutes (aucune optimisation)</td><td class="num">794 &euro;</td><td class="num">~13 ans</td></tr>
+                <tr class="highlight-row"><td><strong>Decalage manuel sans domotique</strong></td><td class="num"><strong>~1 003 &euro;</strong></td><td class="num"><strong>~10 ans</strong></td></tr>
+                <tr class="breakeven"><td><strong>Decalage manuel + domotique ECS</strong></td><td class="num"><strong>~1 083-1 123 &euro;</strong></td><td class="num"><strong>~9 ans</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-success" style="margin-top: 15px;">
+            <strong>Conclusion cle :</strong> les donnees reelles montrent que le solaire sans optimisation rapporte ~794 &euro;/an (retour ~13 ans). En decalant manuellement l'electromenager et l'EV en journee <strong>(sans aucune domotique)</strong>, le gain monte a ~1 003 &euro;/an (retour ~10 ans). L'ajout d'un relais ECS (~15 &euro;) avec Home Assistant apporte ~80-120 &euro;/an supplementaires (retour ~9 ans). <strong>L'essentiel du gain est accessible par de simples changements d'habitudes.</strong>
+        </div>
+    </section>
+
     <!-- =============== BATTERIE VIRTUELLE =============== -->
     <section>
-        <h2>9. Batterie virtuelle &mdash; alternative au surplus EDF OA</h2>
+        <h2>10. Batterie virtuelle &mdash; alternative au surplus EDF OA</h2>
 
         <p style="color: var(--gray-500); margin-bottom: 15px;">La batterie virtuelle est un service ou le surplus injecte dans le reseau est "stocke virtuellement" et restitue comme credit sur la facture, au lieu d'etre vendu a 4 cts/kWh via EDF OA.</p>
 
@@ -785,10 +930,10 @@
 
     <!-- =============== CONCLUSION =============== -->
     <section>
-        <h2>10. Conclusion et recommandations</h2>
+        <h2>11. Conclusion et recommandations</h2>
 
         <div class="alert alert-success">
-            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios, meme avec le tarif electrique le plus bas envisage. Le retour sur investissement s'est ameliore par rapport a l'estimation initiale grace a la baisse des couts d'installation.
+            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios, mais les donnees reelles Linky 2025 (section 9) montrent que l'optimisation est indispensable : sans decalage de charge, le retour est de ~13 ans ; avec domotique + EV, il descend a ~9 ans.
         </div>
 
         <h3>Resume des retours sur investissement</h3>
@@ -797,10 +942,11 @@
                 <tr><th>Scenario</th><th class="num">Retour</th></tr>
             </thead>
             <tbody>
-                <tr><td>Tarif HP actuel (17,6 cts) + cout median</td><td class="num"><strong>10 ans</strong></td></tr>
-                <tr><td>Tarif operateur alt. (16,58 cts) + cout median</td><td class="num"><strong>10 ans</strong></td></tr>
-                <tr><td>Tarif reglemente (25,2 cts) + cout median</td><td class="num"><strong>7 ans</strong></td></tr>
-                <tr><td>Tarif HP actuel + cout bas (bon devis)</td><td class="num"><strong>8 ans</strong></td></tr>
+                <tr style="background: var(--red-light);"><td><strong>Donnees reelles brutes (sans optimisation)</strong></td><td class="num"><strong>~13 ans</strong></td></tr>
+                <tr class="breakeven"><td><strong>Donnees reelles + domotique + EV</strong></td><td class="num"><strong>~9 ans</strong></td></tr>
+                <tr><td>Modele theorique tarif HP actuel + cout median</td><td class="num">10 ans</td></tr>
+                <tr><td>Tarif reglemente (25,2 cts) + cout median</td><td class="num">7 ans</td></tr>
+                <tr><td>Tarif HP actuel + cout bas (bon devis)</td><td class="num">8 ans</td></tr>
                 <tr><td>Pire cas (tarif bas alt. + cout haut)</td><td class="num">14 ans</td></tr>
             </tbody>
         </table>
@@ -844,7 +990,7 @@
 
     <!-- =============== EVOLUTION V1 → V2 =============== -->
     <section>
-        <h2>11. Evolution par rapport a l'estimation initiale (v1 &rarr; v2)</h2>
+        <h2>12. Evolution par rapport a l'estimation initiale (v1 &rarr; v2)</h2>
 
         <table>
             <thead>
@@ -869,7 +1015,7 @@
 
     <!-- =============== SOURCES =============== -->
     <section>
-        <h2>12. Sources</h2>
+        <h2>13. Sources</h2>
         <ul style="margin-left: 20px; line-height: 2;">
             <li><a href="https://www.groupe-apb.fr/particuliers/solaire/panneau-solaire-photovoltaique/prix-installation-6-kw/" target="_blank">Prix installation 6 kWc 2026 &mdash; Groupe APB</a></li>
             <li><a href="https://www.ecair.eco/blog/article/prix-installation-panneau-solaire-6kw" target="_blank">Cout moyen constate 6 kWc &mdash; Ecair</a></li>
