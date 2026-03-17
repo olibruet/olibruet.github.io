@@ -349,6 +349,81 @@
 
 <div class="container">
 
+    <!-- =============== COMPRENDRE LES COMPOSANTS =============== -->
+    <section>
+        <h2>Comprendre les composants d'une installation</h2>
+        <p style="margin-bottom: 20px;">Une installation solaire se compose de 3 elements principaux :</p>
+
+        <h3>Les panneaux (sur le toit)</h3>
+        <p style="margin-bottom: 10px;">Ce qui produit l'electricite. Chaque panneau fait ~1m x 2m et produit entre 400 et 500 Wc (Watt-crete = puissance max en plein soleil).</p>
+        <p style="margin-bottom: 10px;">Pour un 6 kWc : <strong>12 panneaux de 500 Wc</strong> (ou 15 de 400 Wc). C'est l'installateur qui determine le nombre en fonction de la puissance unitaire des panneaux proposes et de la surface disponible.</p>
+        <p style="margin-bottom: 15px;"><strong>Marques reconnues</strong> : Dualsun (francais), Longi, Trina Solar, Jinko, REC, SunPower. Eviter les marques inconnues sans garantie serieuse.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Critere</th>
+                    <th>Ce qu'il faut</th>
+                    <th>Drapeau rouge</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Puissance unitaire</td><td>&ge; 400 Wc</td><td class="negative">&lt; 350 Wc (ancienne generation)</td></tr>
+                <tr><td>Garantie produit</td><td>&ge; 25 ans</td><td class="negative">&lt; 20 ans</td></tr>
+                <tr><td>Garantie production</td><td>80% a 25 ans</td><td class="negative">Pas de garantie lineaire</td></tr>
+                <tr><td>Technologie</td><td>Monocristallin</td><td class="negative">Polycristallin (moins performant)</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Les micro-onduleurs (1 par panneau)</h3>
+        <p style="margin-bottom: 15px;">Les panneaux produisent du courant continu (DC). La maison consomme du courant alternatif (AC). Le micro-onduleur convertit le courant, panneau par panneau.</p>
+
+        <div class="scenario-grid">
+            <div class="scenario-card">
+                <div class="card-header">Onduleur string (central)</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Principe</span><span class="val">1 boitier pour tous les panneaux</span></div>
+                    <div class="metric"><span class="label">Duree de vie</span><span class="val">~12 ans &rarr; remplacement ~1 500 &euro;</span></div>
+                    <div class="metric"><span class="label">Ombre/panne</span><span class="val">1 panneau ombre = toute la chaine ralentie</span></div>
+                    <div class="metric"><span class="label">Monitoring</span><span class="val">Production globale uniquement</span></div>
+                    <div class="metric"><span class="label">Prix</span><span class="val">Moins cher a l'achat</span></div>
+                </div>
+            </div>
+            <div class="scenario-card recommended">
+                <div class="card-header">Micro-onduleurs (recommande)</div>
+                <div class="card-body">
+                    <div class="metric"><span class="label">Principe</span><span class="val">1 petit boitier par panneau</span></div>
+                    <div class="metric"><span class="label">Duree de vie</span><span class="val"><strong>20-25 ans</strong> (pas de remplacement)</span></div>
+                    <div class="metric"><span class="label">Ombre/panne</span><span class="val">Chaque panneau est independant</span></div>
+                    <div class="metric"><span class="label">Monitoring</span><span class="val"><strong>Production par panneau</strong> (detection panne)</span></div>
+                    <div class="metric"><span class="label">Prix</span><span class="val">+500 &euro; mais gagne sur 25 ans (+683 &euro; VAN)</span></div>
+                </div>
+            </div>
+        </div>
+
+        <p style="margin-top: 10px;"><strong>Marques de reference</strong> : <strong>Enphase IQ8</strong> (leader mondial, reference) ou <strong>APsystems</strong> (bon rapport qualite/prix). Eviter les marques sans garantie 20 ans+.</p>
+
+        <h3>Le systeme de fixation (rails sur le toit)</h3>
+        <p style="margin-bottom: 10px;">Des rails metalliques fixes sur la charpente a travers les tuiles (surimposition) ou directement sur bac acier. Rien a choisir de ton cote, mais verifier que l'installateur utilise un systeme de marque.</p>
+        <p><strong>Reference</strong> : K2 Systems (allemand), Schletter, Esdec. Eviter le &laquo; sur-mesure maison &raquo;.</p>
+
+        <h3>Ce que l'installateur decide vs ce que tu verifies</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>L'installateur decide</th>
+                    <th>Tu decides / verifies</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Nombre exact de panneaux et disposition (calepinage)</td><td>La puissance totale (6 kWc)</td></tr>
+                <tr><td>Marque/modele precis</td><td>Que c'est une marque reconnue (voir ci-dessus)</td></tr>
+                <tr><td>Type de fixation et passage de cables</td><td>Rien (c'est technique)</td></tr>
+                <tr><td>Raccordement au tableau electrique</td><td>Rien (c'est technique)</td></tr>
+            </tbody>
+        </table>
+    </section>
+
     <!-- =============== PROJET EN BREF =============== -->
     <section>
         <h2>Mon projet en bref</h2>
