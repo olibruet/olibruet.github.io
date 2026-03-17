@@ -953,23 +953,12 @@
 
         <h3>Points cles</h3>
         <ol style="margin: 10px 0 10px 20px; line-height: 2;">
-            <li><strong>La vente totale n'existe plus</strong> pour &le; 9 kWc. Le surplus vendu a 4 cts/kWh ne rapporte presque rien. La rentabilite repose a 95% sur l'autoconsommation.</li>
-            <li><strong>Tes tarifs sont bas (~16-17 cts HP)</strong> par rapport au reglemente (~25 cts). Le changement d'operateur a 16,58 cts HP degrade marginalement la rentabilite solaire (-53 &euro;/an) mais le gain sur la facture globale peut compenser.</li>
-            <li><strong>6 kWc = meilleur compromis</strong> : taux d'autoconsommation eleve (79%), ~30 m&sup2; de toit, meilleur TRI (10,5%), gain cumule de +21 985 &euro; sur 25 ans.</li>
-            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, mais pas de remplacement onduleur a 1 500 &euro; en annee 12. VAN superieure de 683 &euro;, garantie 20-25 ans, monitoring par panneau.</li>
-            <li><strong>Facteurs favorables</strong> : forte consommation (15 900 kWh/an), piscine + PAC = forte conso diurne, orientation SE correcte (perte ~7% vs plein Sud), pas d'ombrage.</li>
-            <li><strong>L'inflation joue en ta faveur</strong> : meme a 3%/an, le kWh autoconsomme vaut de plus en plus cher chaque annee, alors que le cout du solaire est fixe.</li>
-        </ol>
-
-        <h3>Points cles</h3>
-        <ol style="margin: 10px 0 10px 20px; line-height: 2;">
-            <li><strong>La vente totale n'existe plus</strong> pour &le; 9 kWc. Le surplus vendu a 4 cts/kWh ne rapporte presque rien. La rentabilite repose a 95% sur l'autoconsommation.</li>
-            <li><strong>Tes tarifs sont bas (~16-17 cts HP)</strong> par rapport au reglemente (~25 cts). Le changement d'operateur a 16,58 cts HP degrade marginalement la rentabilite solaire (-53 &euro;/an) mais le gain sur la facture globale peut compenser.</li>
-            <li><strong>6 kWc = meilleur compromis</strong> : taux d'autoconsommation eleve (79%), ~30 m&sup2; de toit, meilleur TRI (10,5%), gain cumule de +21 985 &euro; sur 25 ans.</li>
-            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, mais pas de remplacement onduleur a 1 500 &euro; en annee 12. VAN superieure de 683 &euro;, garantie 20-25 ans, monitoring par panneau.</li>
-            <li><strong>Facteurs favorables</strong> : forte consommation (15 900 kWh/an), piscine + PAC = forte conso diurne, orientation SE correcte (perte ~7% vs plein Sud), pas d'ombrage.</li>
-            <li><strong>L'inflation joue en ta faveur</strong> : meme a 3%/an, le kWh autoconsomme vaut de plus en plus cher chaque annee, alors que le cout du solaire est fixe.</li>
-            <li><strong>Vehicule electrique = levier d'autoconsommation</strong> (section 8) : avec un EV, l'autoconsommation passe de 79% a 93%, le retour de 10 a <strong>9 ans</strong>, et le gain 25 ans de 21 985 a <strong>25 578 &euro;</strong> (+3 593 &euro;).</li>
+            <li><strong>Donnees reelles Linky 2025</strong> (section 9) : seulement 26% de conso diurne au lieu de 45% suppose. Sans optimisation : autoconso 59%, gain 794 &euro;/an, retour ~13 ans.</li>
+            <li><strong>Decalage manuel + EV = retour ~9 ans</strong> : en decalant l'electromenager en journee et avec un EV, le gain monte a ~1 003-1 100 &euro;/an sans domotique.</li>
+            <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), meilleur TRI, marge pour EV.</li>
+            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, pas de remplacement onduleur a 1 500 &euro; en annee 12. Garantie 20-25 ans, monitoring par panneau.</li>
+            <li><strong>HC en journee (fin 2026-2027)</strong> : quand Enedis deploiera 2h HC en journee, le ballon ECS se declenchera automatiquement sur le pic solaire &mdash; retour ~9 ans sans aucune domotique.</li>
+            <li><strong>Facteurs favorables</strong> : forte consommation (15 900 kWh/an), piscine + PAC en journee, orientation SE correcte, pas d'ombrage sur maison + pool house.</li>
         </ol>
 
         <h3>Pour ameliorer la rentabilite</h3>
@@ -988,9 +977,87 @@
         </div>
     </section>
 
+    <!-- =============== FINANCEMENT =============== -->
+    <section>
+        <h2>12. Simulation de financement (emprunt 100%)</h2>
+
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Simulation d'un pret travaux pour financer l'integralite de l'installation 6 kWc, sans apport. Objectif : trouver la duree ou l'economie solaire couvre la mensualite du pret. Sources taux : <a href="https://www.meilleurtaux.com/credit-consommation/credit-travaux/taux-pret-travaux.html" target="_blank">Meilleurtaux</a>, <a href="https://www.empruntis.com/credits-consommation/pret-travaux/taux-pret-travaux/" target="_blank">Empruntis</a> (mars 2026).</p>
+
+        <h3>Hypotheses</h3>
+        <table>
+            <tr><td>Montant emprunte</td><td class="num">10 020 &euro; (cout median - prime)</td></tr>
+            <tr><td>Taux marche mars 2026</td><td class="num">3,5% / 4,5% / 5,5% TAEG</td></tr>
+            <tr><td>Gain solaire an 1</td><td class="num">794 &euro; (brut) / 1 003 &euro; (decalage) / 1 100 &euro; (domotique)</td></tr>
+            <tr><td>Inflation electricite</td><td class="num">3%/an (gain croissant)</td></tr>
+        </table>
+
+        <div class="alert alert-info" style="margin-top: 10px;">
+            Les taux pret travaux vont de ~3% (excellents dossiers, pret vert) a ~5,5% (credit conso classique). L'eco-PTZ a 0% n'est pas eligible pour le photovoltaique seul.
+        </div>
+
+        <h3>Mensualite du pret vs economie solaire</h3>
+        <table>
+            <thead>
+                <tr><th>Duree</th><th class="num">Mensualite 3,5%</th><th class="num">Mensualite 4,5%</th><th class="num">Mensualite 5,5%</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>5 ans</td><td class="num">182 &euro;</td><td class="num">187 &euro;</td><td class="num">191 &euro;</td></tr>
+                <tr><td>7 ans</td><td class="num">134 &euro;</td><td class="num">138 &euro;</td><td class="num">143 &euro;</td></tr>
+                <tr><td>10 ans</td><td class="num">99 &euro;</td><td class="num">104 &euro;</td><td class="num">109 &euro;</td></tr>
+                <tr class="highlight-row"><td><strong>12 ans</strong></td><td class="num"><strong>85 &euro;</strong></td><td class="num"><strong>90 &euro;</strong></td><td class="num"><strong>95 &euro;</strong></td></tr>
+                <tr><td>15 ans</td><td class="num">72 &euro;</td><td class="num">77 &euro;</td><td class="num">82 &euro;</td></tr>
+            </tbody>
+        </table>
+
+        <table style="margin-top: 15px;">
+            <thead>
+                <tr><th>Scenario</th><th class="num">Economie/mois an 1</th><th class="num">Economie/mois an 5</th><th class="num">Economie/mois an 10</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Sans optimisation</td><td class="num">66 &euro;</td><td class="num">74 &euro;</td><td class="num">86 &euro;</td></tr>
+                <tr class="highlight-row"><td><strong>Decalage manuel</strong></td><td class="num"><strong>84 &euro;</strong></td><td class="num"><strong>94 &euro;</strong></td><td class="num"><strong>109 &euro;</strong></td></tr>
+                <tr><td>Avec domotique ECS</td><td class="num">92 &euro;</td><td class="num">103 &euro;</td><td class="num">120 &euro;</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Reste a charge mensuel &mdash; taux 4,5%, decalage manuel</h3>
+
+        <table>
+            <thead>
+                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Economie an 1</th><th class="num">Reste a charge</th><th>Auto-finance</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>5 ans</td><td class="num">187 &euro;</td><td class="num">84 &euro;</td><td class="num negative">103 &euro;</td><td>Jamais (fini avant)</td></tr>
+                <tr><td>7 ans</td><td class="num">138 &euro;</td><td class="num">84 &euro;</td><td class="num negative">54 &euro;</td><td>Annee 7</td></tr>
+                <tr><td>10 ans</td><td class="num">104 &euro;</td><td class="num">84 &euro;</td><td class="num">20 &euro;</td><td>Annee 3</td></tr>
+                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>90 &euro;</strong></td><td class="num"><strong>84 &euro;</strong></td><td class="num"><strong>6 &euro;</strong></td><td><strong>Annee 2</strong></td></tr>
+                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>77 &euro;</strong></td><td class="num"><strong>84 &euro;</strong></td><td class="num positive"><strong>-7 &euro; (gain net)</strong></td><td><strong>Des le depart</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div class="kpi-grid" style="margin-top: 20px;">
+            <div class="kpi-card good">
+                <div class="value">6 &euro;/mois</div>
+                <div class="label">Reste a charge pret 12 ans &agrave; 4,5%</div>
+            </div>
+            <div class="kpi-card good">
+                <div class="value">0 &euro;</div>
+                <div class="label">Auto-finance des l'annee 2</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="value">~15 000 &euro;</div>
+                <div class="label">Gain net apres remboursement (25 ans)</div>
+            </div>
+        </div>
+
+        <div class="alert alert-success" style="margin-top: 15px;">
+            <strong>Recommandation :</strong> un pret 12 ans a 4,5% coute 90 &euro;/mois. L'economie solaire (decalage manuel) est de 84 &euro;/mois des la 1ere annee &rarr; <strong>reste a charge : 6 &euro;/mois</strong>. Des l'annee 2-3, le solaire couvre entierement la mensualite grace a l'inflation electrique. Apres le credit, l'economie continue 13 ans de plus &mdash; soit ~15 000 &euro; de gain net supplementaire.
+        </div>
+    </section>
+
     <!-- =============== EVOLUTION V1 → V2 =============== -->
     <section>
-        <h2>12. Evolution par rapport a l'estimation initiale (v1 &rarr; v2)</h2>
+        <h2>13. Evolution par rapport a l'estimation initiale (v1 &rarr; v2)</h2>
 
         <table>
             <thead>
@@ -1015,7 +1082,7 @@
 
     <!-- =============== SOURCES =============== -->
     <section>
-        <h2>13. Sources</h2>
+        <h2>14. Sources</h2>
         <ul style="margin-left: 20px; line-height: 2;">
             <li><a href="https://www.groupe-apb.fr/particuliers/solaire/panneau-solaire-photovoltaique/prix-installation-6-kw/" target="_blank">Prix installation 6 kWc 2026 &mdash; Groupe APB</a></li>
             <li><a href="https://www.ecair.eco/blog/article/prix-installation-panneau-solaire-6kw" target="_blank">Cout moyen constate 6 kWc &mdash; Ecair</a></li>
