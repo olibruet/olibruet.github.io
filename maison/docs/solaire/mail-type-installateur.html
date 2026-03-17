@@ -7,32 +7,33 @@
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 700px;
+            max-width: 650px;
             margin: 40px auto;
             padding: 20px;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.5;
+            font-size: 14px;
         }
         .toolbar {
             background: #f0f4ff;
             border: 1px solid #c5d5f5;
             border-radius: 8px;
-            padding: 16px 20px;
-            margin-bottom: 30px;
+            padding: 14px 20px;
+            margin-bottom: 24px;
             text-align: center;
         }
         .toolbar p {
-            margin: 0 0 10px;
-            font-size: 0.9em;
+            margin: 0 0 8px;
+            font-size: 0.85em;
             color: #555;
         }
         .toolbar button {
             background: #3b82f6;
             color: white;
             border: none;
-            padding: 10px 24px;
+            padding: 8px 20px;
             border-radius: 6px;
-            font-size: 1em;
+            font-size: 0.9em;
             cursor: pointer;
             font-weight: 600;
         }
@@ -41,38 +42,39 @@
             color: #065f46;
             font-weight: 600;
             display: none;
-            margin-top: 8px;
+            margin-top: 6px;
+            font-size: 0.85em;
         }
         .subject {
             background: #fef3c7;
             border-left: 4px solid #f59e0b;
-            padding: 10px 16px;
-            margin-bottom: 20px;
+            padding: 8px 14px;
+            margin-bottom: 16px;
             border-radius: 4px;
-            font-size: 0.9em;
+            font-size: 0.85em;
         }
         .subject strong { color: #92400e; }
         #mail-content {
             border: 1px solid #e5e7eb;
             border-radius: 8px;
-            padding: 24px;
+            padding: 20px;
             background: white;
+            font-size: 14px;
         }
-        #mail-content p { margin: 0 0 12px; }
-        #mail-content strong { color: #1e3a5f; }
+        #mail-content p { margin: 0 0 10px; }
         #mail-content ul {
-            margin: 6px 0 14px 20px;
+            margin: 4px 0 10px 18px;
             padding: 0;
         }
-        #mail-content li { margin-bottom: 4px; }
+        #mail-content li { margin-bottom: 2px; }
     </style>
 </head>
 <body>
 
 <div class="toolbar">
-    <p>Selectionne le texte ci-dessous et copie-le dans Gmail, ou clique sur le bouton :</p>
+    <p>Copie le mail et colle-le dans Gmail (le formatage est preserve) :</p>
     <button onclick="copyMail()">Copier le mail</button>
-    <p class="success" id="copied">Copie dans le presse-papier !</p>
+    <p class="success" id="copied">Copie !</p>
 </div>
 
 <div class="subject">
@@ -83,39 +85,18 @@
 
 <p>Bonjour,</p>
 
-<p>Je souhaite installer des panneaux solaires en autoconsommation avec revente du surplus sur ma maison a Vayres (33870).</p>
+<p>Je souhaite faire installer des panneaux solaires en autoconsommation avec revente du surplus sur ma maison a Vayres (33870). Voici les elements cles :</p>
 
-<p>Voici les elements de mon projet :</p>
-
-<p><strong>Ma maison :</strong></p>
 <ul>
-    <li>Toit tuiles, versant Sud-Est, pente ~30°, surface exploitable ~60 m²</li>
-    <li>Aucun ombrage sur le versant concerne</li>
-    <li>Compteur Linky, consommation mesuree : 15 900 kWh/an</li>
-    <li>Foyer de 6 personnes</li>
+    <li>Toit tuiles, versant Sud-Est, pente ~30°, ~60 m² exploitables, aucun ombrage</li>
+    <li>Consommation mesuree (Linky) : 15 900 kWh/an, foyer de 6 personnes</li>
+    <li>Puissance souhaitee : <strong>6 kWc</strong> avec <strong>micro-onduleurs</strong></li>
+    <li>Panneaux marque reconnue, puissance >= 400 Wc</li>
 </ul>
 
-<p><strong>Ce que je recherche :</strong></p>
-<ul>
-    <li>Installation 6 kWc en autoconsommation + revente surplus (contrat EDF OA)</li>
-    <li>Micro-onduleurs (pas d'onduleur string central)</li>
-    <li>Panneaux de marque reconnue (Dualsun, Longi, Trina, Jinko, REC ou equivalent), puissance >= 400 Wc</li>
-    <li>Monitoring de production inclus (application de suivi)</li>
-</ul>
+<p>Je dispose aussi d'un second toit (pool house, tuiles, ~16 m², pente 15°, meme orientation SE). Si pertinent, j'aimerais egalement un chiffrage en option pour 9 kWc (maison + pool house).</p>
 
-<p><strong>Ce que j'attends dans le devis :</strong></p>
-<ul>
-    <li>Detail du materiel : marque et modele des panneaux, micro-onduleurs, systeme de fixation</li>
-    <li>Prix TTC avec TVA applicable</li>
-    <li>Garanties detaillees (panneaux, micro-onduleurs, pose/etancheite)</li>
-    <li>Prise en charge des demarches administratives (declaration mairie, raccordement Enedis, contrat EDF OA, Consuel)</li>
-    <li>Delai estimatif entre la signature et la mise en service</li>
-</ul>
-
-<p><strong>Option supplementaire :</strong></p>
-<p>Je dispose egalement d'un toit secondaire (pool house, tuiles, ~16 m², pente ~15°, meme orientation SE, sans ombrage). Si possible, j'aimerais aussi un devis pour une extension a 9 kWc (6 kWc maison + 3 kWc pool house).</p>
-
-<p>Je suis disponible pour une visite technique a votre convenance. N'hesitez pas a me contacter par mail ou par telephone.</p>
+<p>Je suis disponible pour une visite technique a votre convenance.</p>
 
 <p>Cordialement,<br>
 Olivier Bruet<br>
