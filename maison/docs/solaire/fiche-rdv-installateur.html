@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche RDV Installateur Solaire</title>
+    <style>
+        :root {
+            --sun: #f59e0b;
+            --sun-light: #fef3c7;
+            --green: #10b981;
+            --green-light: #d1fae5;
+            --red: #ef4444;
+            --red-light: #fee2e2;
+            --blue: #3b82f6;
+            --blue-light: #dbeafe;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.5;
+            color: var(--gray-900);
+            background: var(--gray-50);
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            color: white;
+            padding: 20px 0;
+            margin-bottom: 12px;
+        }
+        header h1 {
+            font-size: 1.3em;
+            margin-bottom: 2px;
+        }
+        header .subtitle {
+            opacity: 0.85;
+            font-size: 0.9em;
+        }
+        header .date {
+            opacity: 0.6;
+            font-size: 0.8em;
+            margin-top: 4px;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        section h2 {
+            font-size: 1.15em;
+            color: var(--gray-900);
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 2px solid var(--sun);
+        }
+        section h3 {
+            font-size: 1em;
+            color: var(--gray-700);
+            margin: 16px 0 8px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0;
+            font-size: 0.85em;
+        }
+        th {
+            background: var(--gray-100);
+            padding: 6px 8px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 2px solid var(--gray-300);
+        }
+        td {
+            padding: 5px 8px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .highlight-row td { background: var(--sun-light); font-weight: 600; }
+
+        /* Alert boxes */
+        .alert {
+            padding: 10px 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+            font-size: 0.9em;
+            line-height: 1.45;
+        }
+        .alert-warning {
+            background: #fef3c7;
+            border-left: 4px solid var(--sun);
+            color: #92400e;
+        }
+        .alert-success {
+            background: var(--green-light);
+            border-left: 4px solid var(--green);
+            color: #065f46;
+        }
+        .alert-info {
+            background: var(--blue-light);
+            border-left: 4px solid var(--blue);
+            color: #1e40af;
+        }
+        .alert-danger {
+            background: var(--red-light);
+            border-left: 4px solid var(--red);
+            color: #991b1b;
+        }
+
+        /* Argument cards */
+        .argument-card {
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .argument-card .arg-header {
+            background: var(--gray-100);
+            padding: 8px 12px;
+            font-weight: 700;
+            font-size: 0.9em;
+            color: var(--gray-700);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .argument-card .arg-header::after {
+            content: '\25BC';
+            font-size: 0.7em;
+            color: var(--gray-500);
+            transition: transform 0.2s;
+        }
+        .argument-card.collapsed .arg-header::after {
+            transform: rotate(-90deg);
+        }
+        .argument-card .arg-body {
+            padding: 0 10px 10px;
+        }
+        .argument-card.collapsed .arg-body {
+            display: none;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 0.9em;
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+        .checklist li::before {
+            content: '\25A2';
+            font-size: 1.2em;
+            color: var(--gray-500);
+            flex-shrink: 0;
+        }
+        .checklist li:last-child { border-bottom: none; }
+
+        /* KPI compact */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .kpi-card {
+            background: var(--gray-50);
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+        .kpi-card.highlight {
+            background: var(--sun-light);
+            border-color: var(--sun);
+        }
+        .kpi-card.good {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+        .kpi-card .value {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .kpi-card.highlight .value { color: #b45309; }
+        .kpi-card.good .value { color: #065f46; }
+        .kpi-card .label {
+            font-size: 0.75em;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        /* Wants list */
+        .wants-list {
+            list-style: none;
+            padding: 0;
+        }
+        .wants-list li {
+            padding: 5px 0;
+            font-size: 0.92em;
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .wants-list .icon {
+            font-size: 1.1em;
+            flex-shrink: 0;
+            width: 22px;
+            text-align: center;
+        }
+        .wants-list .tag-yes { color: var(--green); font-weight: 700; }
+        .wants-list .tag-no { color: var(--red); font-weight: 700; }
+        .wants-list .tag-opt { color: var(--blue); font-weight: 700; }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 16px 0;
+            color: var(--gray-500);
+            font-size: 0.75em;
+        }
+
+        /* Expand/collapse all */
+        .toggle-all {
+            display: inline-block;
+            background: var(--gray-100);
+            border: 1px solid var(--gray-300);
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 0.82em;
+            color: var(--gray-700);
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .toggle-all:active {
+            background: var(--gray-200);
+        }
+
+        /* Responsive - already mobile-first but extra small screens */
+        @media (max-width: 380px) {
+            body { font-size: 13px; }
+            .container { padding: 6px; }
+            section { padding: 12px; }
+            .kpi-card .value { font-size: 1.1em; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Fiche RDV Installateur</h1>
+        <div class="subtitle">Aide-memoire &mdash; Panneaux solaires 6 kWc</div>
+        <div class="date">Mars 2026 &mdash; Vayres, Gironde</div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- =============== MES CHIFFRES =============== -->
+    <section>
+        <h2>Mes chiffres (donnees reelles)</h2>
+
+        <div class="kpi-grid">
+            <div class="kpi-card highlight">
+                <div class="value">15 904</div>
+                <div class="label">kWh/an (Linky 2025)</div>
+            </div>
+            <div class="kpi-card">
+                <div class="value">2 576 &euro;</div>
+                <div class="label">Facture annuelle</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="value">26%</div>
+                <div class="label">Conso diurne (9h-17h)</div>
+            </div>
+            <div class="kpi-card good">
+                <div class="value">59%</div>
+                <div class="label">Autoconso simulee</div>
+            </div>
+        </div>
+
+        <table>
+            <tr>
+                <td>Tarif HP</td>
+                <td class="num"><strong>17,60 cts/kWh</strong> (fixe &rarr; 02/2028)</td>
+            </tr>
+            <tr>
+                <td>Production 6 kWc</td>
+                <td class="num"><strong>6 600 kWh/an</strong> (PVGIS SE 30&deg;)</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- =============== CE QUE JE VEUX =============== -->
+    <section>
+        <h2>Ce que je veux</h2>
+        <ul class="wants-list">
+            <li><span class="icon tag-yes">&check;</span> <strong>6 kWc</strong> sur toit maison (versant SE, 30&deg;, ~60 m&sup2;, aucun ombrage)</li>
+            <li><span class="icon tag-yes">&check;</span> <strong>Micro-onduleurs</strong> (pas string)</li>
+            <li><span class="icon tag-no">&times;</span> <strong>Pas de batterie</strong></li>
+            <li><span class="icon tag-opt">?</span> Option 9 kWc (maison + pool house) pour comparaison</li>
+        </ul>
+    </section>
+
+    <!-- =============== ARGUMENTS =============== -->
+    <section>
+        <h2>Arguments a avoir en tete</h2>
+        <span class="toggle-all" onclick="toggleAll()">Tout deplier / replier</span>
+
+        <!-- Argument 1 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"6 kWc ca ne couvrira pas toute votre conso"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> Avec 15 900 kWh/an, 6 kWc ne suffit pas.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> C'est volontaire. Seulement 26% de ma conso est diurne (donnees Linky). Un 6 kWc produit 6 600 kWh dont 59% est autoconsomme. Monter a 9 kWc ajouterait surtout du surplus vendu a 4 cts &mdash; pas rentable.
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 2 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"Il vous faut un 9 kWc voire plus"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> Avec 15 900 kWh il faut dimensionner plus grand.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> Le dimensionnement depend de la conso <em>diurne</em>, pas de la conso totale. Entre 9h et 17h je consomme ~1 200-1 700 W en moyenne. Un 6 kWc produit ~4 000 W a midi. C'est deja largement dimensionne. Le surplus serait vendu a 4 cts au lieu d'etre autoconsomme a 17,6 cts.
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 3 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"Il faut une batterie pour rentabiliser"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> Sans batterie vous perdez le surplus.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> A 3 500-5 000 &euro; pour 5-7 kWh, duree de vie ~10 ans, la batterie se rembourse en ~10 ans et dure ~10 ans. Gain net = quasi zero. Je prefere decaler ma conso en journee (lave-linge, piscine) et attendre que les prix baissent.
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 4 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"Avec la batterie vous etes autonome"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> La batterie vous rend independant du reseau.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> Une batterie 5 kWh stocke ~5 kWh. Ma conso du soir (18h-minuit) c'est ~15-20 kWh. La batterie couvre 2-3 heures, pas la soiree. Et en hiver, la production est faible &mdash; la batterie serait vide a 16h.
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 5 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"Un onduleur string, c'est moins cher"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> Le string est plus economique.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> Un string dure ~10-12 ans puis remplacement a ~1 500 &euro;. Les micro-onduleurs durent 20-25 ans sans remplacement. Sur 25 ans, les micro-onduleurs sont plus rentables (+683 &euro; de VAN). Et le monitoring par panneau permet de detecter les pannes.
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 6 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"Nos panneaux sont les meilleurs"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> On utilise les meilleurs panneaux du marche.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> Quelle marque exactement ? Quelle puissance unitaire ? Quelle garantie produit et production ? Je veux du &ge; 400 Wc, garantie &ge; 25 ans, marque reconnue (SunPower, Dualsun, Trina, Jinko, REC).
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 7 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"Le tarif de rachat va remonter"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> Le tarif de rachat va augmenter, investissez maintenant.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> Peut-etre, mais je ne base pas ma rentabilite la-dessus. Le surplus a 4 cts represente seulement ~108 &euro;/an dans mon cas. Ma rentabilite repose a 95% sur l'autoconsommation.
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 8 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"Votre tarif electrique est tres bas"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> A 17,6 cts c'est peu rentable.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> Je sais, j'ai un tarif fixe a 17,6 cts jusqu'en fevrier 2028. Apres, passage probable au reglemente ~25 cts. Le retour passe alors de 13 a 7-8 ans. Je prends le tarif actuel comme scenario conservateur.
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 9 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"Il faut signer aujourd'hui, les primes baissent"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> Signez maintenant, les primes diminuent chaque trimestre.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> Non. Je prends 3 a 5 devis et je compare. La prime est de 80 &euro;/kWc (480 &euro; pour 6 kWc), meme si elle baisse de 10-20 &euro;/kWc au prochain trimestre ca ne change rien a la decision.
+                </div>
+            </div>
+        </div>
+
+        <!-- Argument 10 -->
+        <div class="argument-card collapsed">
+            <div class="arg-header" onclick="toggleCard(this)">"On s'occupe du financement"</div>
+            <div class="arg-body">
+                <div class="alert alert-warning">
+                    <strong>L'installateur dit :</strong> On peut vous proposer un financement integre.
+                </div>
+                <div class="alert alert-success">
+                    <strong>Ma reponse :</strong> Non merci, j'ai deja mon financement. Je veux juste le prix de l'installation.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============== PRIX REFERENCE =============== -->
+    <section>
+        <h2>Prix de reference (interne)</h2>
+        <div class="alert alert-danger">
+            <strong>Ne pas communiquer ces prix</strong> &mdash; utiliser comme reference interne pour evaluer le devis.
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Installateur</th>
+                    <th class="num">6 kWc</th>
+                    <th>Matos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Courant Naturel</td>
+                    <td class="num">~8 200-8 700 &euro;</td>
+                    <td>SunPower + Enphase</td>
+                </tr>
+                <tr>
+                    <td>Concept'Energy</td>
+                    <td class="num">8 900 &euro;</td>
+                    <td>Dualsun + Hoymiles</td>
+                </tr>
+                <tr>
+                    <td>Force Eco</td>
+                    <td class="num">9 000 &euro;</td>
+                    <td>Bifacial 500 Wc</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>Cible</strong></td>
+                    <td class="num"><strong>&lt; 9 000 &euro;</strong></td>
+                    <td><strong>Marque reconnue + Enphase</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- =============== QUESTIONS =============== -->
+    <section>
+        <h2>Questions a poser</h2>
+        <ol class="checklist" style="list-style: none; counter-reset: q;">
+            <li>Marque et modele exact des panneaux ?</li>
+            <li>Marque et garantie des micro-onduleurs ?</li>
+            <li>Prix TTC tout compris (pose + demarches + Consuel + Enedis) ?</li>
+            <li>Delai entre signature et mise en service ?</li>
+            <li>Option 9 kWc (maison + pool house) : surcout ?</li>
+            <li>Assurance decennale : attestation disponible ?</li>
+        </ol>
+    </section>
+
+</div>
+
+<footer>
+    Fiche generee mars 2026 &mdash; Donnees basees sur analyse Linky + PVGIS
+</footer>
+
+<script>
+    function toggleCard(header) {
+        header.parentElement.classList.toggle('collapsed');
+    }
+
+    function toggleAll() {
+        const cards = document.querySelectorAll('.argument-card');
+        const allCollapsed = Array.from(cards).every(c => c.classList.contains('collapsed'));
+        cards.forEach(c => {
+            if (allCollapsed) {
+                c.classList.remove('collapsed');
+            } else {
+                c.classList.add('collapsed');
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
