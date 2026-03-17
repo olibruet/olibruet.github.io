@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mail type - Demande de devis solaire</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+        .toolbar {
+            background: #f0f4ff;
+            border: 1px solid #c5d5f5;
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .toolbar p {
+            margin: 0 0 10px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        .toolbar button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .toolbar button:hover { background: #2563eb; }
+        .toolbar .success {
+            color: #065f46;
+            font-weight: 600;
+            display: none;
+            margin-top: 8px;
+        }
+        .subject {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 10px 16px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .subject strong { color: #92400e; }
+        #mail-content {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 24px;
+            background: white;
+        }
+        #mail-content p { margin: 0 0 12px; }
+        #mail-content strong { color: #1e3a5f; }
+        #mail-content ul {
+            margin: 6px 0 14px 20px;
+            padding: 0;
+        }
+        #mail-content li { margin-bottom: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="toolbar">
+    <p>Selectionne le texte ci-dessous et copie-le dans Gmail, ou clique sur le bouton :</p>
+    <button onclick="copyMail()">Copier le mail</button>
+    <p class="success" id="copied">Copie dans le presse-papier !</p>
+</div>
+
+<div class="subject">
+    <strong>Objet :</strong> Demande de devis installation photovoltaique 6 kWc - Vayres (33)
+</div>
+
+<div id="mail-content">
+
+<p>Bonjour,</p>
+
+<p>Je souhaite installer des panneaux solaires en autoconsommation avec revente du surplus sur ma maison a Vayres (33870).</p>
+
+<p>Voici les elements de mon projet :</p>
+
+<p><strong>Ma maison :</strong></p>
+<ul>
+    <li>Toit tuiles, versant Sud-Est, pente ~30°, surface exploitable ~60 m²</li>
+    <li>Aucun ombrage sur le versant concerne</li>
+    <li>Compteur Linky, consommation mesuree : 15 900 kWh/an</li>
+    <li>Foyer de 6 personnes</li>
+</ul>
+
+<p><strong>Ce que je recherche :</strong></p>
+<ul>
+    <li>Installation 6 kWc en autoconsommation + revente surplus (contrat EDF OA)</li>
+    <li>Micro-onduleurs (pas d'onduleur string central)</li>
+    <li>Panneaux de marque reconnue (Dualsun, Longi, Trina, Jinko, REC ou equivalent), puissance >= 400 Wc</li>
+    <li>Monitoring de production inclus (application de suivi)</li>
+</ul>
+
+<p><strong>Ce que j'attends dans le devis :</strong></p>
+<ul>
+    <li>Detail du materiel : marque et modele des panneaux, micro-onduleurs, systeme de fixation</li>
+    <li>Prix TTC avec TVA applicable</li>
+    <li>Garanties detaillees (panneaux, micro-onduleurs, pose/etancheite)</li>
+    <li>Prise en charge des demarches administratives (declaration mairie, raccordement Enedis, contrat EDF OA, Consuel)</li>
+    <li>Delai estimatif entre la signature et la mise en service</li>
+</ul>
+
+<p><strong>Option supplementaire :</strong></p>
+<p>Je dispose egalement d'un toit secondaire (pool house, tuiles, ~16 m², pente ~15°, meme orientation SE, sans ombrage). Si possible, j'aimerais aussi un devis pour une extension a 9 kWc (6 kWc maison + 3 kWc pool house).</p>
+
+<p>Je suis disponible pour une visite technique a votre convenance. N'hesitez pas a me contacter par mail ou par telephone.</p>
+
+<p>Cordialement,<br>
+Olivier Bruet<br>
+Vayres (33870)<br>
+Tel : [a completer]</p>
+
+</div>
+
+<script>
+function copyMail() {
+    const content = document.getElementById('mail-content');
+    const range = document.createRange();
+    range.selectNodeContents(content);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand('copy');
+    selection.removeAllRanges();
+    document.getElementById('copied').style.display = 'block';
+    setTimeout(() => { document.getElementById('copied').style.display = 'none'; }, 3000);
+}
+</script>
+
+</body>
+</html>
