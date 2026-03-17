@@ -294,8 +294,8 @@
                 <div class="label">Economie sur la facture (donnees reelles)</div>
             </div>
             <div class="kpi-card">
-                <div class="value">16-29 &euro;/mois</div>
-                <div class="label">Cout reel avec credit (pire cas)</div>
+                <div class="value">16-125 &euro;/mois</div>
+                <div class="label">Cout reel avec credit (pire cas, 5-15 ans)</div>
             </div>
             <div class="kpi-card good">
                 <div class="value">~9-13 ans</div>
@@ -303,7 +303,20 @@
             </div>
         </div>
 
-        <div class="alert alert-warning">
+        <h3 style="margin-top: 20px;">Pire cas : taux 5,5% + aucune optimisation</h3>
+        <table>
+            <thead>
+                <tr><th>Credit</th><th class="num">Mensualite</th><th class="num">Economie solaire</th><th class="num">Cout reel/mois</th><th>Commentaire</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>5 ans</td><td class="num">191 &euro;</td><td class="num">66 &euro;</td><td class="num negative"><strong>125 &euro;</strong></td><td>Rembourse vite, mais effort important</td></tr>
+                <tr><td>10 ans</td><td class="num">109 &euro;</td><td class="num">66 &euro;</td><td class="num"><strong>43 &euro;</strong></td><td>Auto-finance en annee 7</td></tr>
+                <tr style="background: var(--green-light);"><td>15 ans</td><td class="num">82 &euro;</td><td class="num">66 &euro;</td><td class="num"><strong>16 &euro;</strong></td><td>Auto-finance en annee 3</td></tr>
+            </tbody>
+        </table>
+        <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">Ces couts baissent chaque annee avec l'inflation electrique (+3%/an). Avec decalage manuel (lave-linge, piscine en journee), l'economie passe a 84 &euro;/mois et le cout reel diminue de ~18 &euro;.</p>
+
+        <div class="alert alert-warning" style="margin-top: 15px;">
             <strong>Tarif fixe Gaz de Bordeaux (17,6 cts HP) jusqu'au 28/02/2028.</strong> Apres cette date, passage probable au tarif reglemente (~25 cts) qui ameliore la rentabilite de 13 a 7-8 ans.
         </div>
 
