@@ -346,6 +346,14 @@
             <button class="profile-tab" onclick="showProfile('hiver', this)">Hiver</button>
         </div>
 
+        <div style="margin: 8px 0; display: flex; align-items: center; gap: 10px;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.85em; font-weight: 600; color: var(--gray-700); background: var(--green-light); border: 2px solid var(--green); border-radius: 8px; padding: 8px 14px;">
+                <input type="checkbox" id="toggle-optim" onchange="rerender()" style="width: 18px; height: 18px; accent-color: var(--green);">
+                Optimise avec ECS + EV
+            </label>
+            <span id="optim-detail" style="font-size: 0.75em; color: var(--gray-500); display: none;">ECS +2 kW (12h-14h30) + EV absorbe surplus (~2,3 kW max)</span>
+        </div>
+
         <div id="chart-title" style="font-weight: 700; font-size: 0.95em; margin: 10px 0 4px; color: var(--gray-700);"></div>
         <div id="chart-date" style="font-size: 0.8em; color: var(--gray-500); margin-bottom: 10px;"></div>
 
@@ -593,9 +601,41 @@
             return slots;
         }
 
+        var currentKey = 'ete_moyen';
+
+        window.rerender = function() {
+            var detail = document.getElementById('optim-detail');
+            detail.style.display = document.getElementById('toggle-optim').checked ? 'inline' : 'none';
+            renderChart(currentKey);
+        };
+
         function renderChart(key) {
+            currentKey = key;
             var p = PROFILES[key];
             var slots = normalize(p);
+            var optimOn = document.getElementById('toggle-optim').checked;
+
+            // Appliquer optimisations
+            if (optimOn) {
+                for (var i = 0; i < slots.length; i++) {
+                    var h = i / 2; // heure decimale
+                    var surplus6 = slots[i].prod6 - slots[i].conso;
+
+                    // ECS boost : +2000W entre 12h et 14h30 (slots 24-28)
+                    if (h >= 12 && h < 14.5) {
+                        slots[i].conso += 2000;
+                        slots[i].ecsAdded = 2000;
+                    }
+
+                    // EV : absorbe le surplus restant (apres ECS), max 2300W, seulement si surplus > 1400W
+                    var newSurplus6 = slots[i].prod6 - slots[i].conso;
+                    if (newSurplus6 > 1400) {
+                        var evCharge = Math.min(newSurplus6 - 200, 2300); // garde 200W de marge
+                        slots[i].conso += evCharge;
+                        slots[i].evAdded = evCharge;
+                    }
+                }
+            }
 
             // Find max value for scaling
             var maxVal = 0;
@@ -645,37 +685,56 @@
 
             document.getElementById('profile-chart').innerHTML = html;
 
+            // Recalculate stats from slots (works for both normal and optimized)
+            var totalConso = 0, totalProd6 = 0, totalProd9 = 0, totalAc6 = 0, totalAc9 = 0;
+            var totalEcs = 0, totalEv = 0;
+            for (var i = 0; i < slots.length; i++) {
+                totalConso += slots[i].conso * 0.5 / 1000;
+                totalProd6 += slots[i].prod6 * 0.5 / 1000;
+                totalProd9 += slots[i].prod9 * 0.5 / 1000;
+                totalAc6 += Math.min(slots[i].conso, slots[i].prod6) * 0.5 / 1000;
+                totalAc9 += Math.min(slots[i].conso, slots[i].prod9) * 0.5 / 1000;
+                if (slots[i].ecsAdded) totalEcs += slots[i].ecsAdded * 0.5 / 1000;
+                if (slots[i].evAdded) totalEv += slots[i].evAdded * 0.5 / 1000;
+            }
+            var totalSurp6 = totalProd6 - totalAc6;
+            var totalSurp9 = totalProd9 - totalAc9;
+
             // Summary
-            var autoRate6 = p.prod_total_6kwc > 0 ? (p.autoconso_6kwc_kwh / p.prod_total_6kwc * 100).toFixed(0) : 0;
-            var autoRate9 = p.prod_total_9kwc > 0 ? (p.autoconso_9kwc_kwh / p.prod_total_9kwc * 100).toFixed(0) : 0;
-            var consoAutoRate6 = p.conso_total_kwh > 0 ? (p.autoconso_6kwc_kwh / p.conso_total_kwh * 100).toFixed(0) : 0;
-            var consoAutoRate9 = p.conso_total_kwh > 0 ? (p.autoconso_9kwc_kwh / p.conso_total_kwh * 100).toFixed(0) : 0;
+            var autoRate6 = totalProd6 > 0 ? (totalAc6 / totalProd6 * 100).toFixed(0) : 0;
+            var autoRate9 = totalProd9 > 0 ? (totalAc9 / totalProd9 * 100).toFixed(0) : 0;
+            var consoAutoRate6 = totalConso > 0 ? (totalAc6 / totalConso * 100).toFixed(0) : 0;
+            var consoAutoRate9 = totalConso > 0 ? (totalAc9 / totalConso * 100).toFixed(0) : 0;
 
             var sumHtml = '';
-            sumHtml += '<span class="sum-blue">Conso : ' + p.conso_total_kwh.toFixed(1) + ' kWh</span><br>';
-            sumHtml += '<span class="sum-orange">6 kWc</span> : autoconso <span class="sum-green">' + p.autoconso_6kwc_kwh.toFixed(1) + ' kWh (' + consoAutoRate6 + '% de la conso)</span>, surplus ' + p.surplus_6kwc_kwh.toFixed(1) + ' kWh<br>';
-            sumHtml += '<span class="sum-orange">9 kWc</span> : autoconso <span class="sum-green">' + p.autoconso_9kwc_kwh.toFixed(1) + ' kWh (' + consoAutoRate9 + '% de la conso)</span>, surplus ' + p.surplus_9kwc_kwh.toFixed(1) + ' kWh';
+            sumHtml += '<span class="sum-blue">Conso : ' + totalConso.toFixed(1) + ' kWh</span>';
+            if (optimOn && (totalEcs > 0 || totalEv > 0)) {
+                sumHtml += ' <span style="font-size:0.85em; color: var(--green);">(dont ECS +' + totalEcs.toFixed(1) + ', EV +' + totalEv.toFixed(1) + ')</span>';
+            }
+            sumHtml += '<br>';
+            sumHtml += '<span class="sum-orange">6 kWc</span> : autoconso <span class="sum-green">' + totalAc6.toFixed(1) + ' kWh (' + consoAutoRate6 + '% de la conso)</span>, surplus ' + totalSurp6.toFixed(1) + ' kWh<br>';
+            sumHtml += '<span class="sum-orange">9 kWc</span> : autoconso <span class="sum-green">' + totalAc9.toFixed(1) + ' kWh (' + consoAutoRate9 + '% de la conso)</span>, surplus ' + totalSurp9.toFixed(1) + ' kWh';
             document.getElementById('profile-summary').innerHTML = sumHtml;
 
             // Stats table
             var sHtml = '<table class="stats-mini">';
             sHtml += '<thead><tr><th></th><th class="num">Conso</th><th class="num">6 kWc</th><th class="num">9 kWc</th></tr></thead><tbody>';
-            sHtml += '<tr><td>Total journee</td><td class="num">' + p.conso_total_kwh.toFixed(1) + ' kWh</td>';
-            sHtml += '<td class="num">' + p.prod_total_6kwc.toFixed(1) + ' kWh</td>';
-            sHtml += '<td class="num">' + p.prod_total_9kwc.toFixed(1) + ' kWh</td></tr>';
+            sHtml += '<tr><td>Total journee</td><td class="num">' + totalConso.toFixed(1) + ' kWh</td>';
+            sHtml += '<td class="num">' + totalProd6.toFixed(1) + ' kWh</td>';
+            sHtml += '<td class="num">' + totalProd9.toFixed(1) + ' kWh</td></tr>';
             sHtml += '<tr class="row-6kwc"><td>Autoconsomme</td><td class="num">&mdash;</td>';
-            sHtml += '<td class="num">' + p.autoconso_6kwc_kwh.toFixed(1) + ' kWh (' + consoAutoRate6 + '%)</td>';
-            sHtml += '<td class="num">' + p.autoconso_9kwc_kwh.toFixed(1) + ' kWh (' + consoAutoRate9 + '%)</td></tr>';
+            sHtml += '<td class="num">' + totalAc6.toFixed(1) + ' kWh (' + consoAutoRate6 + '%)</td>';
+            sHtml += '<td class="num">' + totalAc9.toFixed(1) + ' kWh (' + consoAutoRate9 + '%)</td></tr>';
             sHtml += '<tr><td>Surplus (vendu 4 cts)</td><td class="num">&mdash;</td>';
-            sHtml += '<td class="num">' + p.surplus_6kwc_kwh.toFixed(1) + ' kWh</td>';
-            sHtml += '<td class="num">' + p.surplus_9kwc_kwh.toFixed(1) + ' kWh</td></tr>';
+            sHtml += '<td class="num">' + totalSurp6.toFixed(1) + ' kWh</td>';
+            sHtml += '<td class="num">' + totalSurp9.toFixed(1) + ' kWh</td></tr>';
             sHtml += '<tr><td>Taux utilisation prod.</td><td class="num">&mdash;</td>';
             sHtml += '<td class="num">' + autoRate6 + '%</td>';
             sHtml += '<td class="num">' + autoRate9 + '%</td></tr>';
 
             // Economy calculation
-            var eco6 = (p.autoconso_6kwc_kwh * 0.176 + p.surplus_6kwc_kwh * 0.04).toFixed(2);
-            var eco9 = (p.autoconso_9kwc_kwh * 0.176 + p.surplus_9kwc_kwh * 0.04).toFixed(2);
+            var eco6 = (totalAc6 * 0.176 + totalSurp6 * 0.04).toFixed(2);
+            var eco9 = (totalAc9 * 0.176 + totalSurp9 * 0.04).toFixed(2);
             sHtml += '<tr style="font-weight:700"><td>Economie / jour</td><td class="num">&mdash;</td>';
             sHtml += '<td class="num">' + eco6 + ' &euro;</td>';
             sHtml += '<td class="num">' + eco9 + ' &euro;</td></tr>';
