@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devis panneaux solaires - Fiche installateurs</title>
+    <style>
+        :root {
+            --sun: #f59e0b;
+            --sun-light: #fef3c7;
+            --green: #10b981;
+            --green-light: #d1fae5;
+            --red: #ef4444;
+            --red-light: #fee2e2;
+            --blue: #3b82f6;
+            --blue-light: #dbeafe;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: var(--gray-50);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        header .subtitle {
+            opacity: 0.85;
+            font-size: 1.1em;
+        }
+        header .date {
+            opacity: 0.6;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        section h2 {
+            font-size: 1.4em;
+            color: var(--gray-900);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--sun);
+        }
+        section h3 {
+            font-size: 1.1em;
+            color: var(--gray-700);
+            margin: 25px 0 12px;
+        }
+        section h4 {
+            font-size: 1em;
+            color: var(--gray-700);
+            margin: 20px 0 10px;
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .kpi-card {
+            background: var(--gray-50);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+        .kpi-card.highlight {
+            background: var(--sun-light);
+            border-color: var(--sun);
+        }
+        .kpi-card.good {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+        .kpi-card .value {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .kpi-card.highlight .value { color: #b45309; }
+        .kpi-card.good .value { color: #065f46; }
+        .kpi-card .label {
+            font-size: 0.85em;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.92em;
+        }
+        th {
+            background: var(--gray-100);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 2px solid var(--gray-300);
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        tr:hover td { background: var(--gray-50); }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .highlight-row td { background: var(--sun-light); font-weight: 600; }
+        .positive { color: var(--green); font-weight: 600; }
+        .negative { color: var(--red); }
+        .breakeven td { background: var(--green-light); font-weight: 700; }
+
+        /* Bars */
+        .bar-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .bar {
+            height: 18px;
+            background: linear-gradient(90deg, var(--sun), #f97316);
+            border-radius: 3px;
+            min-width: 4px;
+        }
+
+        /* Alert boxes */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        .alert-warning {
+            background: var(--red-light);
+            border-left: 4px solid var(--red);
+            color: #991b1b;
+        }
+        .alert-info {
+            background: var(--blue-light);
+            border-left: 4px solid var(--blue);
+            color: #1e40af;
+        }
+        .alert-success {
+            background: var(--green-light);
+            border-left: 4px solid var(--green);
+            color: #065f46;
+        }
+
+        /* Scenario cards */
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .scenario-card {
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .scenario-card.recommended {
+            border-color: var(--green);
+        }
+        .scenario-card .card-header {
+            padding: 12px 16px;
+            background: var(--gray-100);
+            font-weight: 700;
+            font-size: 1.05em;
+        }
+        .scenario-card.recommended .card-header {
+            background: var(--green);
+            color: white;
+        }
+        .scenario-card .card-body {
+            padding: 16px;
+        }
+        .scenario-card .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .scenario-card .metric:last-child { border-bottom: none; }
+        .scenario-card .metric .label { color: var(--gray-500); font-size: 0.9em; }
+        .scenario-card .metric .val { font-weight: 600; }
+
+        /* Installer card - full width variant */
+        .installer-card {
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .installer-card .card-header {
+            padding: 12px 16px;
+            background: var(--gray-100);
+            font-weight: 700;
+            font-size: 1.05em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .installer-card .card-header a {
+            font-size: 0.85em;
+            font-weight: 400;
+            color: var(--blue);
+            text-decoration: none;
+        }
+        .installer-card .card-header a:hover {
+            text-decoration: underline;
+        }
+        .installer-card .card-body {
+            padding: 16px;
+        }
+        .installer-card .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .installer-card .metric:last-child { border-bottom: none; }
+        .installer-card .metric .label { color: var(--gray-500); font-size: 0.9em; }
+        .installer-card .metric .val { font-weight: 600; }
+        .installer-card .status {
+            display: flex;
+            gap: 16px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--gray-200);
+        }
+        .installer-card .status label {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 0.9em;
+            color: var(--gray-500);
+            cursor: default;
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .checklist li {
+            padding: 6px 0;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 0.95em;
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .checklist li input[type="checkbox"] {
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--gray-500);
+            font-size: 0.85em;
+        }
+        footer a { color: var(--blue); }
+
+        /* Chart placeholder */
+        .chart-bars { margin: 15px 0; }
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin: 3px 0;
+        }
+        .chart-label {
+            width: 85px;
+            font-size: 0.85em;
+            color: var(--gray-500);
+            text-align: right;
+            padding-right: 10px;
+        }
+        .chart-value {
+            width: 55px;
+            font-size: 0.82em;
+            color: var(--gray-700);
+            text-align: right;
+            padding-left: 8px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            section { padding: 20px; }
+            header h1 { font-size: 1.5em; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            .scenario-grid { grid-template-columns: 1fr; }
+            table { font-size: 0.82em; }
+            th, td { padding: 6px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Devis panneaux solaires &mdash; Fiche installateurs</h1>
+        <div class="subtitle">Vayres, Gironde (33) &mdash; Mars 2026</div>
+        <div class="date">6 kWc, autoconsommation + surplus, micro-onduleurs</div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- =============== PROJET EN BREF =============== -->
+    <section>
+        <h2>Mon projet en bref</h2>
+        <p style="color: var(--gray-500); margin-bottom: 15px; font-size: 0.95em;">A communiquer aux installateurs lors de la prise de contact.</p>
+        <table>
+            <tbody>
+                <tr><td><strong>Localisation</strong></td><td>Vayres, Gironde (33)</td></tr>
+                <tr><td><strong>Surface toit maison (versant SE)</strong></td><td>~60 m&sup2;, tuiles, pente ~30&deg;</td></tr>
+                <tr><td><strong>Surface pool house (bac acier)</strong></td><td>~16 m&sup2;, pente ~15&deg;, meme orientation SE</td></tr>
+                <tr><td><strong>Ombrage</strong></td><td>Aucun sur les 2 toits</td></tr>
+                <tr><td><strong>Consommation annuelle</strong></td><td>15 900 kWh/an (Linky 2025)</td></tr>
+                <tr><td><strong>Puissance souhaitee</strong></td><td>6 kWc (maison) &mdash; devis 9 kWc (maison + pool house) en option</td></tr>
+                <tr><td><strong>Preference onduleur</strong></td><td><strong>Micro-onduleurs</strong> (pas string)</td></tr>
+                <tr><td><strong>Mode</strong></td><td>Autoconsommation + revente surplus EDF OA</td></tr>
+                <tr><td><strong>Financement</strong></td><td>Pret familial (pas besoin de financement installateur)</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- =============== INSTALLATEURS =============== -->
+    <section>
+        <h2>Installateurs a contacter</h2>
+
+        <div class="installer-card">
+            <div class="card-header">
+                <span>1. Azelec 33</span>
+                <a href="https://www.azelec33.fr/" target="_blank">azelec33.fr</a>
+            </div>
+            <div class="card-body">
+                <div class="metric"><span class="label">Localisation</span><span class="val">Haute Gironde</span></div>
+                <div class="metric"><span class="label">Points forts</span><span class="val">Prix competitifs, techniciens minutieux, RGE depuis 2015</span></div>
+                <div class="metric"><span class="label">Avis</span><span class="val">Bons retours (Picbleu, Google)</span></div>
+                <div class="metric"><span class="label">Prix</span><span class="val">&mdash;</span></div>
+                <div class="metric"><span class="label">Notes</span><span class="val">&mdash;</span></div>
+                <div class="status">
+                    <label><input type="checkbox" disabled> Contacte</label>
+                    <label><input type="checkbox" disabled> Visite</label>
+                    <label><input type="checkbox" disabled> Devis recu</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="installer-card">
+            <div class="card-header">
+                <span>2. JPSUN / Soleil Aquitain</span>
+                <a href="https://jpsun.fr/" target="_blank">jpsun.fr</a>
+            </div>
+            <div class="card-body">
+                <div class="metric"><span class="label">Localisation</span><span class="val">Mios (bassin d'Arcachon)</span></div>
+                <div class="metric"><span class="label">Points forts</span><span class="val">Visite terrain systematique, bien implante Nouvelle-Aquitaine</span></div>
+                <div class="metric"><span class="label">Avis</span><span class="val">Entreprise tres professionnelle, a l'ecoute</span></div>
+                <div class="metric"><span class="label">Prix</span><span class="val">&mdash;</span></div>
+                <div class="metric"><span class="label">Notes</span><span class="val">&mdash;</span></div>
+                <div class="status">
+                    <label><input type="checkbox" disabled> Contacte</label>
+                    <label><input type="checkbox" disabled> Visite</label>
+                    <label><input type="checkbox" disabled> Devis recu</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="installer-card">
+            <div class="card-header">
+                <span>3. Force Eco</span>
+                <a href="https://force-eco.fr/panneaux-solaires/gironde/" target="_blank">force-eco.fr</a>
+            </div>
+            <div class="card-body">
+                <div class="metric"><span class="label">Localisation</span><span class="val">Bordeaux</span></div>
+                <div class="metric"><span class="label">Points forts</span><span class="val">Delais respectes, chantier propre, tarifs bien places</span></div>
+                <div class="metric"><span class="label">Avis</span><span class="val">Tres bonne experience, equipe professionnelle</span></div>
+                <div class="metric"><span class="label">Prix</span><span class="val">&mdash;</span></div>
+                <div class="metric"><span class="label">Notes</span><span class="val">&mdash;</span></div>
+                <div class="status">
+                    <label><input type="checkbox" disabled> Contacte</label>
+                    <label><input type="checkbox" disabled> Visite</label>
+                    <label><input type="checkbox" disabled> Devis recu</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="installer-card">
+            <div class="card-header">
+                <span>4. Le Solarman</span>
+                <a href="https://lesolarman.fr/" target="_blank">lesolarman.fr</a>
+            </div>
+            <div class="card-body">
+                <div class="metric"><span class="label">Localisation</span><span class="val">Bordeaux</span></div>
+                <div class="metric"><span class="label">Points forts</span><span class="val">4,9 etoiles / 500+ avis, pas de sous-traitance, devis 48h</span></div>
+                <div class="metric"><span class="label">Avis</span><span class="val">Excellents avis Google</span></div>
+                <div class="metric"><span class="label">Prix</span><span class="val">&mdash;</span></div>
+                <div class="metric"><span class="label">Notes</span><span class="val">&mdash;</span></div>
+                <div class="status">
+                    <label><input type="checkbox" disabled> Contacte</label>
+                    <label><input type="checkbox" disabled> Visite</label>
+                    <label><input type="checkbox" disabled> Devis recu</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="installer-card">
+            <div class="card-header">
+                <span>5. Concept'Energy 33</span>
+                <a href="https://www.conceptenergy33.fr/" target="_blank">conceptenergy33.fr</a>
+            </div>
+            <div class="card-body">
+                <div class="metric"><span class="label">Localisation</span><span class="val">Gironde</span></div>
+                <div class="metric"><span class="label">Points forts</span><span class="val">Pose quotidienne, bons retours clients</span></div>
+                <div class="metric"><span class="label">Avis</span><span class="val">Satisfaits du systeme, equipe parfaite</span></div>
+                <div class="metric"><span class="label">Prix</span><span class="val">&mdash;</span></div>
+                <div class="metric"><span class="label">Notes</span><span class="val">&mdash;</span></div>
+                <div class="status">
+                    <label><input type="checkbox" disabled> Contacte</label>
+                    <label><input type="checkbox" disabled> Visite</label>
+                    <label><input type="checkbox" disabled> Devis recu</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="installer-card">
+            <div class="card-header">
+                <span>6. Via HelloWatt (comparateur)</span>
+                <a href="https://www.hellowatt.fr/panneaux-solaires-photovoltaiques/installateurs/gironde/" target="_blank">hellowatt.fr</a>
+            </div>
+            <div class="card-body">
+                <div class="metric"><span class="label">Type</span><span class="val">Comparateur gratuit, mise en relation avec installateurs locaux</span></div>
+                <div class="metric"><span class="label">Prix</span><span class="val">&mdash;</span></div>
+                <div class="metric"><span class="label">Notes</span><span class="val">&mdash;</span></div>
+                <div class="status">
+                    <label><input type="checkbox" disabled> Demande envoyee</label>
+                    <label><input type="checkbox" disabled> Devis recu</label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =============== CHECKLIST =============== -->
+    <section>
+        <h2>Checklist : ce qu'il faut demander a chaque installateur</h2>
+
+        <h3>Avant la visite</h3>
+        <ul class="checklist">
+            <li><input type="checkbox" disabled> Certification <strong>RGE QualiPV</strong> en cours de validite (obligatoire pour la prime et la TVA 5,5%)</li>
+            <li><input type="checkbox" disabled> <strong>Assurance decennale</strong> (demander l'attestation)</li>
+            <li><input type="checkbox" disabled> Pose en <strong>propre</strong> ou sous-traitance ?</li>
+            <li><input type="checkbox" disabled> Delai pour la visite technique</li>
+        </ul>
+
+        <h3>Pendant la visite technique</h3>
+        <ul class="checklist">
+            <li><input type="checkbox" disabled> Validation de la surface toit et orientation (visite sur place obligatoire)</li>
+            <li><input type="checkbox" disabled> Verification charpente / portance</li>
+            <li><input type="checkbox" disabled> Point sur le tableau electrique (place pour le disjoncteur AC, liaison onduleur)</li>
+            <li><input type="checkbox" disabled> Passage de cables (distance toit &rarr; tableau)</li>
+            <li><input type="checkbox" disabled> Compteur Linky compatible injection ? (normalement oui)</li>
+        </ul>
+
+        <h3>Dans le devis (tout doit y figurer)</h3>
+
+        <h4>Materiel &mdash; exiger le detail</h4>
+        <ul class="checklist">
+            <li><input type="checkbox" disabled> <strong>Panneaux</strong> : marque, modele, puissance unitaire (Wc), nombre, garantie produit + production</li>
+            <li><input type="checkbox" disabled> <strong>Micro-onduleurs</strong> : marque (Enphase, APsystems...), modele, nombre, garantie (20-25 ans ?)</li>
+            <li><input type="checkbox" disabled> <strong>Systeme de montage</strong> : type (surimposition tuiles, bac acier), marque</li>
+            <li><input type="checkbox" disabled> <strong>Coffret de protection DC/AC</strong> : inclus ?</li>
+            <li><input type="checkbox" disabled> <strong>Monitoring</strong> : application de suivi de production ? (Enphase Enlighten, APsystems EMA...)</li>
+        </ul>
+
+        <h4>Prix &mdash; tout TTC</h4>
+        <ul class="checklist">
+            <li><input type="checkbox" disabled> <strong>Prix total TTC</strong> (verifier TVA 5,5% appliquee)</li>
+            <li><input type="checkbox" disabled> Detail : materiel / pose / raccordement / demarches</li>
+            <li><input type="checkbox" disabled> <strong>Prime autoconsommation</strong> deduite ou non ? (480 &euro; pour 6 kWc, 720 &euro; pour 9 kWc)</li>
+            <li><input type="checkbox" disabled> Frais de raccordement Enedis : inclus ou en sus ? (~50-150 &euro;)</li>
+            <li><input type="checkbox" disabled> Frais Consuel : inclus ou en sus ? (~150 &euro;)</li>
+        </ul>
+
+        <h4>Demarches administratives &mdash; qui fait quoi ?</h4>
+        <ul class="checklist">
+            <li><input type="checkbox" disabled> Declaration prealable de travaux (mairie) : installateur ou moi ?</li>
+            <li><input type="checkbox" disabled> Demande de raccordement Enedis : installateur ou moi ?</li>
+            <li><input type="checkbox" disabled> Contrat EDF OA (revente surplus) : installateur ou moi ?</li>
+            <li><input type="checkbox" disabled> Attestation Consuel : installateur ou moi ?</li>
+            <li><input type="checkbox" disabled> Demande de prime autoconsommation : installateur ou moi ?</li>
+        </ul>
+
+        <h4>Garanties et SAV</h4>
+        <ul class="checklist">
+            <li><input type="checkbox" disabled> Garantie panneaux : <strong>produit</strong> (combien d'annees ?) + <strong>production</strong> (80% a 25 ans ?)</li>
+            <li><input type="checkbox" disabled> Garantie micro-onduleurs : 20 ou 25 ans ?</li>
+            <li><input type="checkbox" disabled> Garantie pose / etancheite : 10 ans (decennale) ?</li>
+            <li><input type="checkbox" disabled> SAV : delai d'intervention en cas de panne ?</li>
+            <li><input type="checkbox" disabled> Que se passe-t-il si l'installateur fait faillite ? (assurance decennale couvre)</li>
+        </ul>
+
+        <h4>Delais</h4>
+        <ul class="checklist">
+            <li><input type="checkbox" disabled> Delai entre signature et pose</li>
+            <li><input type="checkbox" disabled> Delai raccordement Enedis apres pose</li>
+            <li><input type="checkbox" disabled> Delai mise en service EDF OA</li>
+        </ul>
+
+        <h3>Option 9 kWc (maison + pool house)</h3>
+        <ul class="checklist">
+            <li><input type="checkbox" disabled> Devis separe ou combine 6 + 3 kWc</li>
+            <li><input type="checkbox" disabled> Impact sur le prix au kWc (degressif ?)</li>
+            <li><input type="checkbox" disabled> Micro-onduleurs : meme marque/modele sur les 2 toits ?</li>
+            <li><input type="checkbox" disabled> Pool house bac acier : fixation speciale ? surcout ?</li>
+            <li><input type="checkbox" disabled> Pente 15&deg; du pool house : pose a plat ou chassis incline ?</li>
+        </ul>
+    </section>
+
+    <!-- =============== GRILLE COMPARAISON =============== -->
+    <section>
+        <h2>Grille de comparaison des devis</h2>
+        <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Critere</th>
+                    <th>Installateur 1</th>
+                    <th>Installateur 2</th>
+                    <th>Installateur 3</th>
+                    <th>Installateur 4</th>
+                    <th>Installateur 5</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Nom</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Prix TTC 6 kWc</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Prix TTC 9 kWc</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Prix au kWc</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Panneaux (marque/modele)</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Puissance unitaire</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Micro-onduleurs (marque)</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Garantie panneaux</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Garantie micro-onduleurs</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Monitoring inclus</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Demarches incluses</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Delai pose</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Assurance decennale</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Avis Google</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Impression visite</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- =============== POINTS DE VIGILANCE =============== -->
+    <section>
+        <h2>Points de vigilance</h2>
+
+        <h3>Drapeaux rouges (fuir)</h3>
+        <div class="alert alert-warning">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="padding: 4px 0;">&#10060; Pas de certification RGE &rarr; pas de prime, pas de TVA 5,5%</li>
+                <li style="padding: 4px 0;">&#10060; Pas d'assurance decennale &rarr; aucune protection sur 10 ans</li>
+                <li style="padding: 4px 0;">&#10060; Demarchage telephonique agressif / &laquo; offre speciale aujourd'hui seulement &raquo;</li>
+                <li style="padding: 4px 0;">&#10060; Pas de visite technique sur place avant le devis</li>
+                <li style="padding: 4px 0;">&#10060; Onduleur string au lieu de micro-onduleurs (sauf justification)</li>
+                <li style="padding: 4px 0;">&#10060; Prix anormalement bas (&lt;7 000 &euro; pour 6 kWc) ou haut (&gt;14 000 &euro;)</li>
+                <li style="padding: 4px 0;">&#10060; Promesse de rentabilite en 3-4 ans (irrealiste a 17,6 cts HP)</li>
+                <li style="padding: 4px 0;">&#10060; Credit integre au devis avec taux cache</li>
+            </ul>
+        </div>
+
+        <h3>Drapeaux verts (bon signe)</h3>
+        <div class="alert alert-success">
+            <ul style="list-style: none; padding: 0; margin: 0;">
+                <li style="padding: 4px 0;">&#10004; Visite technique detaillee avec verification charpente</li>
+                <li style="padding: 4px 0;">&#10004; Devis clair avec detail materiel marque/modele</li>
+                <li style="padding: 4px 0;">&#10004; Micro-onduleurs proposes d'office (Enphase IQ7/IQ8, APsystems)</li>
+                <li style="padding: 4px 0;">&#10004; Prise en charge des demarches administratives</li>
+                <li style="padding: 4px 0;">&#10004; Monitoring de production inclus</li>
+                <li style="padding: 4px 0;">&#10004; Exemples d'installations dans le secteur (references locales)</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- =============== FOURCHETTE DE PRIX =============== -->
+    <section>
+        <h2>Fourchette de prix attendue (marche mars 2026)</h2>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="value">9 000 &euro;</div>
+                <div class="label">6 kWc &mdash; Bas (bon devis)</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="value">10 500 &euro;</div>
+                <div class="label">6 kWc &mdash; Median</div>
+            </div>
+            <div class="kpi-card">
+                <div class="value">14 000 &euro;</div>
+                <div class="label">6 kWc &mdash; Haut</div>
+            </div>
+        </div>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="value">12 000 &euro;</div>
+                <div class="label">9 kWc &mdash; Bas (bon devis)</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="value">15 500 &euro;</div>
+                <div class="label">9 kWc &mdash; Median</div>
+            </div>
+            <div class="kpi-card">
+                <div class="value">20 000 &euro;</div>
+                <div class="label">9 kWc &mdash; Haut</div>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <strong>Objectif</strong> : obtenir un devis 6 kWc micro-onduleurs a <strong>9 000 - 10 500 &euro; TTC</strong>. Au-dela de 12 000 &euro;, negocier ou passer au suivant.
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>Fiche generee en mars 2026 &mdash; Analyse complete : <a href="analyse-solaire.html">analyse-solaire.html</a></p>
+</footer>
+
+</body>
+</html>
