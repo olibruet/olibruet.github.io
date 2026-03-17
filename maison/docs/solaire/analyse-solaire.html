@@ -278,29 +278,33 @@
 
     <!-- =============== SYNTHESE =============== -->
     <section>
-        <h2>Synthese</h2>
+        <h2 id="synthese">Synthese</h2>
+
+        <p style="font-size: 1.1em; color: var(--gray-700); margin-bottom: 20px; line-height: 1.7;">
+            Un 6 kWc sur le toit de la maison produit 6 600 kWh/an et reduit la facture de 31 a 43%. Finance a credit, le cout reel est de 16 a 29 &euro;/mois &mdash; l'equivalent d'un abonnement streaming.
+        </p>
 
         <div class="kpi-grid">
             <div class="kpi-card highlight">
-                <div class="value">15 900</div>
-                <div class="label">kWh/an consommes</div>
+                <div class="value">10 020 &euro;</div>
+                <div class="label">Investissement net (apres prime)</div>
             </div>
             <div class="kpi-card highlight">
-                <div class="value">6 600</div>
-                <div class="label">kWh/an produits (6 kWc)</div>
+                <div class="value">794 - 1 003 &euro;/an</div>
+                <div class="label">Economie sur la facture (donnees reelles)</div>
             </div>
             <div class="kpi-card">
-                <div class="value">~13 ans</div>
-                <div class="label">Retour sans optimisation (donnees reelles)</div>
+                <div class="value">16-29 &euro;/mois</div>
+                <div class="label">Cout reel avec credit (pire cas)</div>
             </div>
             <div class="kpi-card good">
-                <div class="value">~9 ans</div>
-                <div class="label">Retour avec domotique + EV</div>
+                <div class="value">~9-13 ans</div>
+                <div class="label">Retour sur investissement</div>
             </div>
         </div>
 
         <div class="alert alert-warning">
-            <strong>Donnees reelles Linky 2025 :</strong> seulement 26% de la consommation est diurne (vs 45% suppose). Sans optimisation, le retour est de ~13 ans. <strong>Avec domotique (decalage ECS, electromenager) + EV, le retour descend a ~9 ans.</strong> Le solaire et la domotique sont indissociables.
+            <strong>Tarif fixe Gaz de Bordeaux (17,6 cts HP) jusqu'au 28/02/2028.</strong> Apres cette date, passage probable au tarif reglemente (~25 cts) qui ameliore la rentabilite de 13 a 7-8 ans.
         </div>
 
         <div class="alert alert-info">
@@ -308,9 +312,30 @@
         </div>
     </section>
 
+    <!-- =============== TABLE DES MATIERES =============== -->
+    <section>
+        <h2 id="toc">Table des matieres</h2>
+        <ol style="margin: 10px 0 10px 20px; line-height: 2.2;">
+            <li><a href="#s1" style="color: var(--blue); text-decoration: none;">Contexte du projet</a></li>
+            <li><a href="#s2" style="color: var(--blue); text-decoration: none;">Cadre reglementaire solaire &mdash; T1 2026</a></li>
+            <li><a href="#s3" style="color: var(--blue); text-decoration: none;">Hypotheses de calcul</a></li>
+            <li><a href="#s4" style="color: var(--blue); text-decoration: none;">Production mensuelle estimee (6 kWc)</a></li>
+            <li><a href="#s5" style="color: var(--blue); text-decoration: none;">Resultats par scenario</a></li>
+            <li><a href="#s6" style="color: var(--blue); text-decoration: none;">Analyse de sensibilite (6 kWc)</a></li>
+            <li><a href="#s7" style="color: var(--blue); text-decoration: none;">Flux de tresorerie</a></li>
+            <li><a href="#s8" style="color: var(--blue); text-decoration: none;">Impact vehicule electrique</a></li>
+            <li><a href="#s9" style="color: var(--blue); text-decoration: none;">Confrontation aux donnees reelles (Linky 2025)</a></li>
+            <li><a href="#s10" style="color: var(--blue); text-decoration: none;">Batterie virtuelle</a></li>
+            <li><a href="#s11" style="color: var(--blue); text-decoration: none;">Conclusion et recommandations</a></li>
+            <li><a href="#s12" style="color: var(--blue); text-decoration: none;">Simulation de financement</a></li>
+            <li><a href="#s13" style="color: var(--blue); text-decoration: none;">Evolution v1 &rarr; v2</a></li>
+            <li><a href="#s14" style="color: var(--blue); text-decoration: none;">Sources</a></li>
+        </ol>
+    </section>
+
     <!-- =============== CONTEXTE =============== -->
     <section>
-        <h2>1. Contexte du projet</h2>
+        <h2 id="s1">1. Contexte du projet</h2>
 
         <h3>Installation</h3>
         <table>
@@ -369,11 +394,15 @@
         <div class="alert alert-info">
             <strong>Point important :</strong> les deux contrats marche sont ~30% moins cher que le tarif reglemente. Cela impacte directement la rentabilite du solaire (les economies par kWh autoconsomme sont plus faibles). L'operateur alternatif est ~6% moins cher que le contrat actuel en HP.
         </div>
+
+        <div class="alert alert-warning">
+            <strong>Contrat Gaz de Bordeaux :</strong> tarif fixe jusqu'au 28/02/2028 (HP 17,60 cts, HC 13,61 cts). Apres cette date, passage probable au tarif reglemente (~25 cts HP), ce qui ameliore significativement la rentabilite du solaire (retour de 13 a 7-8 ans).
+        </div>
     </section>
 
     <!-- =============== TARIFS SOLAIRES =============== -->
     <section>
-        <h2>2. Cadre reglementaire solaire &mdash; T1 2026</h2>
+        <h2 id="s2">2. Cadre reglementaire solaire &mdash; T1 2026</h2>
 
         <h3>Tarifs EDF OA (fixes 20 ans)</h3>
         <table>
@@ -404,7 +433,7 @@
 
     <!-- =============== HYPOTHESES =============== -->
     <section>
-        <h2>3. Hypotheses de calcul</h2>
+        <h2 id="s3">3. Hypotheses de calcul</h2>
         <table>
             <thead>
                 <tr><th>Parametre</th><th>Valeur</th><th>Source</th></tr>
@@ -440,7 +469,7 @@
 
     <!-- =============== PRODUCTION =============== -->
     <section>
-        <h2>4. Production mensuelle estimee (6 kWc)</h2>
+        <h2 id="s4">4. Production mensuelle estimee (6 kWc)</h2>
         <p style="color: var(--gray-500); margin-bottom: 15px;">Source : PVGIS Bordeaux, corrige pour orientation SE a 30&deg; &mdash; Production specifique : 1 100 kWh/kWc/an</p>
 
         <div class="chart-bars">
@@ -462,7 +491,10 @@
 
     <!-- =============== SCENARIOS =============== -->
     <section>
-        <h2>5. Resultats par scenario</h2>
+        <h2 id="s5">5. Resultats par scenario</h2>
+        <div class="alert alert-info" style="margin-bottom: 15px;">
+            <strong>Note :</strong> ces resultats utilisent un modele theorique (45% de conso diurne, taux autoconsommation 79%). Les resultats bases sur les donnees reelles Linky 2025 sont presentes en <a href="#s9">section 9</a>.
+        </div>
         <p style="color: var(--gray-500); margin-bottom: 15px;">Tous les scenarios sont en autoconsommation avec revente du surplus (seul modele disponible &le; 9 kWc depuis 2026). Le cout utilise est le cout median du marche.</p>
 
         <h3>Avec tarif HP actuel (17,6 cts/kWh)</h3>
@@ -585,7 +617,11 @@
 
     <!-- =============== SENSIBILITE =============== -->
     <section>
-        <h2>6. Analyse de sensibilite (6 kWc, cout median)</h2>
+        <h2 id="s6">6. Analyse de sensibilite (6 kWc, cout median)</h2>
+
+        <div class="alert alert-info" style="margin-bottom: 15px;">
+            <strong>Note :</strong> ces resultats utilisent un modele theorique. Les resultats bases sur les donnees reelles Linky 2025 sont presentes en <a href="#s9">section 9</a>.
+        </div>
 
         <h3>Impact du tarif electrique</h3>
         <table>
@@ -602,6 +638,10 @@
                 <tr><td>30 cts/kWh</td><td class="num">1 627 &euro;</td><td class="num">6 ans</td><td class="num">31 644 &euro;</td></tr>
             </tbody>
         </table>
+
+        <div class="alert alert-warning" style="margin-top: 10px;">
+            <strong>Apres fevrier 2028</strong>, le contrat fixe Gaz de Bordeaux expire. Le passage au tarif reglemente (~25 cts) est le scenario le plus probable. La ligne "Reglemente (25,2 cts)" devient alors la reference pour la rentabilite : retour en <strong>7 ans</strong>.
+        </div>
 
         <h3>Impact du cout d'installation</h3>
         <table>
@@ -647,7 +687,11 @@
 
     <!-- =============== FLUX DE TRESORERIE =============== -->
     <section>
-        <h2>7. Flux de tresorerie &mdash; 6 kWc, tarif HP actuel</h2>
+        <h2 id="s7">7. Flux de tresorerie &mdash; 6 kWc, tarif HP actuel</h2>
+
+        <p style="color: var(--gray-700); margin-bottom: 15px; line-height: 1.7;">
+            Ce tableau montre l'evolution financiere annee par annee d'une installation 6 kWc. Chaque ligne = une annee. Les colonnes montrent la production (qui baisse de 0,5%/an avec la degradation des panneaux), l'economie realisee (qui augmente avec l'inflation electrique de 3%/an), et le cumul. <strong>Quand le cumul passe en positif, l'investissement est rembourse.</strong>
+        </p>
 
         <table>
             <thead>
@@ -698,7 +742,7 @@
 
     <!-- =============== IMPACT EV =============== -->
     <section>
-        <h2>8. Impact vehicule electrique sur l'autoconsommation</h2>
+        <h2 id="s8">8. Impact vehicule electrique sur l'autoconsommation</h2>
 
         <p style="color: var(--gray-500); margin-bottom: 15px;">L'ajout d'un vehicule electrique augmente l'autoconsommation solaire en absorbant une partie du surplus. Donnees issues de l'etude voiture (kilometrage reel mesure au compteur).</p>
 
@@ -769,7 +813,7 @@
 
     <!-- =============== DONNEES REELLES =============== -->
     <section>
-        <h2>9. Confrontation aux donnees reelles (Linky 2025)</h2>
+        <h2 id="s9">9. Confrontation aux donnees reelles (Linky 2025)</h2>
 
         <p style="color: var(--gray-500); margin-bottom: 15px;">Analyse croisee des donnees de consommation Linky demi-horaires (annee complete 2025, 17 421 creneaux) avec la production solaire simulee 6 kWc.</p>
 
@@ -869,7 +913,7 @@
         </div>
 
         <div class="alert alert-success" style="margin-top: 10px;">
-            <strong>Perspective : HC en journee (fin 2026-2027).</strong> Enedis prevoit de deployer 2h d'heures creuses en journee (~13h-15h) pour 9,3 millions de foyers, entre fin 2026 et fin 2027 (horaires differencies ete/hiver). Le ballon ECS se declenchera alors automatiquement sur ce creneau sans aucun equipement &mdash; le retour sur investissement passera a <strong>~9 ans sans domotique</strong>.
+            <strong>Perspective : HC en journee (~2028 pour ce foyer).</strong> Enedis prevoit de deployer 2h d'heures creuses en journee (~13h-15h) pour 9,3 millions de foyers, entre fin 2026 et fin 2027. Pour ce foyer, le changement sera effectif vers ~2028 (apres expiration du contrat fixe Gaz de Bordeaux le 28/02/2028). <strong>Timing favorable</strong> : la hausse du tarif (passage au reglemente ~25 cts) et les HC en journee arrivent en meme temps, ameliorant la rentabilite sur les deux tableaux. Le ballon ECS se declenchera alors automatiquement sur le pic solaire sans aucun equipement &mdash; le retour sur investissement passera a <strong>~9 ans sans domotique</strong>, et potentiellement mieux avec le tarif reglemente.
         </div>
 
         <h3>Synthese : scenarios avec et sans optimisation</h3>
@@ -907,7 +951,7 @@
 
     <!-- =============== BATTERIE VIRTUELLE =============== -->
     <section>
-        <h2>10. Batterie virtuelle &mdash; alternative au surplus EDF OA</h2>
+        <h2 id="s10">10. Batterie virtuelle &mdash; alternative au surplus EDF OA</h2>
 
         <p style="color: var(--gray-500); margin-bottom: 15px;">La batterie virtuelle est un service ou le surplus injecte dans le reseau est "stocke virtuellement" et restitue comme credit sur la facture, au lieu d'etre vendu a 4 cts/kWh via EDF OA.</p>
 
@@ -924,16 +968,16 @@
         </table>
 
         <div class="alert alert-warning" style="margin-top: 15px;">
-            Le gain net est marginal pour un 6 kWc avec 79% d'autoconsommation (peu de surplus). <strong>Avec un vehicule electrique (section 8), le surplus tombe a ~483 kWh/an</strong> : la batterie virtuelle rapporterait ~97 &euro; brut - 180 &euro; d'abo = deficit. Elle n'a donc aucun interet si un EV absorbe deja le surplus. A reevaluer uniquement sans EV ou avec une installation surdimensionnee (9 kWc+).
+            Le gain net est marginal pour un 6 kWc avec 79% d'autoconsommation (peu de surplus). <strong>Avec un vehicule electrique (<a href="#s8">section 8</a>), le surplus tombe a ~483 kWh/an</strong> : la batterie virtuelle rapporterait ~97 &euro; brut - 180 &euro; d'abo = deficit. Elle n'a donc aucun interet si un EV absorbe deja le surplus. A reevaluer uniquement sans EV ou avec une installation surdimensionnee (9 kWc+).
         </div>
     </section>
 
     <!-- =============== CONCLUSION =============== -->
     <section>
-        <h2>11. Conclusion et recommandations</h2>
+        <h2 id="s11">11. Conclusion et recommandations</h2>
 
         <div class="alert alert-success">
-            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios, mais les donnees reelles Linky 2025 (section 9) montrent que l'optimisation est indispensable : sans decalage de charge, le retour est de ~13 ans ; avec domotique + EV, il descend a ~9 ans.
+            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios, mais les donnees reelles Linky 2025 (<a href="#s9">section 9</a>) montrent que l'optimisation est indispensable : sans decalage de charge, le retour est de ~13 ans ; avec domotique + EV, il descend a ~9 ans.
         </div>
 
         <h3>Resume des retours sur investissement</h3>
@@ -953,19 +997,19 @@
 
         <h3>Points cles</h3>
         <ol style="margin: 10px 0 10px 20px; line-height: 2;">
-            <li><strong>Donnees reelles Linky 2025</strong> (section 9) : seulement 26% de conso diurne au lieu de 45% suppose. Sans optimisation : autoconso 59%, gain 794 &euro;/an, retour ~13 ans.</li>
-            <li><strong>Decalage manuel + EV = retour ~9 ans</strong> : en decalant l'electromenager en journee et avec un EV, le gain monte a ~1 003-1 100 &euro;/an sans domotique.</li>
-            <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), meilleur TRI, marge pour EV.</li>
+            <li><strong>Donnees reelles Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Sans optimisation : autoconso 59%, gain 794 &euro;/an, retour ~13 ans. Avec decalage manuel : 1 003 &euro;/an, retour ~10 ans. Avec domotique ECS : 1 083-1 123 &euro;/an, retour ~9 ans.</li>
+            <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente (~25 cts) qui ameliore le retour de 13 a 7-8 ans.</li>
+            <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 6 600 kWh/an, reduction de 31 a 43% de la facture selon optimisation.</li>
             <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, pas de remplacement onduleur a 1 500 &euro; en annee 12. Garantie 20-25 ans, monitoring par panneau.</li>
-            <li><strong>HC en journee (fin 2026-2027)</strong> : quand Enedis deploiera 2h HC en journee, le ballon ECS se declenchera automatiquement sur le pic solaire &mdash; retour ~9 ans sans aucune domotique.</li>
-            <li><strong>Facteurs favorables</strong> : forte consommation (15 900 kWh/an), piscine + PAC en journee, orientation SE correcte, pas d'ombrage sur maison + pool house.</li>
+            <li><strong>HC en journee (~2028)</strong> : quand Enedis deploiera 2h HC en journee, le ballon ECS se declenchera automatiquement sur le pic solaire. Timing favorable : arrive en meme temps que la fin du contrat fixe. Retour ~9 ans sans domotique, potentiellement mieux avec le tarif reglemente.</li>
+            <li><strong>Facteurs favorables</strong> : forte consommation (15 904 kWh/an mesures), piscine + PAC en journee, orientation SE correcte, pas d'ombrage sur maison + pool house.</li>
         </ol>
 
         <h3>Pour ameliorer la rentabilite</h3>
         <ul style="margin: 10px 0 10px 20px; line-height: 2;">
             <li><strong>Negocier le prix d'installation</strong> : faire 3 a 5 devis. Passer de 10 500 a 9 000 &euro; fait gagner 2 ans sur le retour.</li>
             <li><strong>Maximiser l'autoconsommation</strong> : programmer piscine, lave-linge, lave-vaisselle, ballons ECS en journee.</li>
-            <li><strong>Vehicule electrique</strong> : absorbe le surplus a 17,6 cts au lieu de le vendre a 4 cts (+84 &euro;/an, croissant). Voir section 8.</li>
+            <li><strong>Vehicule electrique</strong> : absorbe le surplus a 17,6 cts au lieu de le vendre a 4 cts (+84 &euro;/an, croissant). Voir <a href="#s8">section 8</a>.</li>
             <li><strong>Micro-onduleurs</strong> : surcout faible, gain sur 25 ans, meilleure fiabilite.</li>
             <li><strong>Batterie physique</strong> : NON rentable aux prix actuels (4 000-9 000 &euro; pour 5-10 kWh, duree de vie ~10 ans).</li>
             <li><strong>Batterie virtuelle</strong> : sans interet avec un EV (surplus residuel trop faible). Sans EV, gain marginal (~30-90 &euro;/an net).</li>
@@ -979,7 +1023,7 @@
 
     <!-- =============== FINANCEMENT =============== -->
     <section>
-        <h2>12. Simulation de financement (emprunt 100%)</h2>
+        <h2 id="s12">12. Simulation de financement (emprunt 100%)</h2>
 
         <p style="color: var(--gray-500); margin-bottom: 15px;">Simulation d'un pret travaux pour financer l'integralite de l'installation 6 kWc, sans apport. Objectif : trouver la duree ou l'economie solaire couvre la mensualite du pret. Sources taux : <a href="https://www.meilleurtaux.com/credit-consommation/credit-travaux/taux-pret-travaux.html" target="_blank">Meilleurtaux</a>, <a href="https://www.empruntis.com/credits-consommation/pret-travaux/taux-pret-travaux/" target="_blank">Empruntis</a> (mars 2026).</p>
 
@@ -1076,7 +1120,7 @@
 
     <!-- =============== EVOLUTION V1 → V2 =============== -->
     <section>
-        <h2>13. Evolution par rapport a l'estimation initiale (v1 &rarr; v2)</h2>
+        <h2 id="s13">13. Evolution par rapport a l'estimation initiale (v1 &rarr; v2)</h2>
 
         <table>
             <thead>
@@ -1101,7 +1145,7 @@
 
     <!-- =============== SOURCES =============== -->
     <section>
-        <h2>14. Sources</h2>
+        <h2 id="s14">14. Sources</h2>
         <ul style="margin-left: 20px; line-height: 2;">
             <li><a href="https://www.groupe-apb.fr/particuliers/solaire/panneau-solaire-photovoltaique/prix-installation-6-kw/" target="_blank">Prix installation 6 kWc 2026 &mdash; Groupe APB</a></li>
             <li><a href="https://www.ecair.eco/blog/article/prix-installation-panneau-solaire-6kw" target="_blank">Cout moyen constate 6 kWc &mdash; Ecair</a></li>
