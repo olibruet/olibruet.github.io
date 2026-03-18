@@ -317,7 +317,7 @@
         <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">L'economie augmente chaque annee avec l'inflation electrique (+3%/an). Sur 12 ans avec decalage manuel, l'installation rapporte 3 &euro;/mois des le depart.</p>
 
         <div class="alert alert-warning" style="margin-top: 15px;">
-            <strong>Tarif fixe Gaz de Bordeaux (17,6 cts HP) jusqu'au 28/02/2028.</strong> Apres cette date, passage probable au tarif reglemente (~25 cts) qui ameliore la rentabilite de 11 a 8 ans.
+            <strong>Tarif fixe Gaz de Bordeaux (17,6 cts HP) jusqu'au 28/02/2028.</strong> Apres cette date, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore la rentabilite de 11 a ~10 ans.
         </div>
 
         <div class="alert alert-info">
@@ -396,20 +396,20 @@
         <h3>Tarifs electricite</h3>
         <table>
             <thead>
-                <tr><th>Tarif</th><th class="num">Contrat actuel</th><th class="num">Operateur alternatif</th><th class="num">Reglemente EDF</th></tr>
+                <tr><th>Tarif</th><th class="num">Contrat actuel</th><th class="num">Operateur alternatif</th><th class="num">Reglemente EDF HP/HC</th></tr>
             </thead>
             <tbody>
-                <tr><td>Heures Pleines (HP)</td><td class="num"><strong>17,60 cts/kWh</strong></td><td class="num">16,58 cts/kWh</td><td class="num">25,16 cts/kWh</td></tr>
-                <tr><td>Heures Creuses (HC)</td><td class="num">13,61 cts/kWh</td><td class="num">12,89 cts/kWh</td><td class="num">&mdash;</td></tr>
+                <tr><td>Heures Pleines (HP)</td><td class="num"><strong>17,60 cts/kWh</strong></td><td class="num">16,58 cts/kWh</td><td class="num">20,65 cts/kWh</td></tr>
+                <tr><td>Heures Creuses (HC)</td><td class="num">13,61 cts/kWh</td><td class="num">12,89 cts/kWh</td><td class="num">15,79 cts/kWh</td></tr>
                 <tr><td>Abonnement</td><td class="num">&mdash;</td><td class="num">23,32 &euro;/mois</td><td class="num">&mdash;</td></tr>
             </tbody>
         </table>
         <div class="alert alert-info">
-            <strong>Point important :</strong> les deux contrats marche sont ~30% moins cher que le tarif reglemente. Cela impacte directement la rentabilite du solaire (les economies par kWh autoconsomme sont plus faibles). L'operateur alternatif est ~6% moins cher que le contrat actuel en HP.
+            <strong>Point important :</strong> les deux contrats marche sont ~15-20% moins cher que le tarif reglemente HP/HC. Cela impacte directement la rentabilite du solaire (les economies par kWh autoconsomme sont plus faibles). L'operateur alternatif est ~6% moins cher que le contrat actuel en HP.
         </div>
 
         <div class="alert alert-warning">
-            <strong>Contrat Gaz de Bordeaux :</strong> tarif fixe jusqu'au 28/02/2028 (HP 17,60 cts, HC 13,61 cts). Apres cette date, passage probable au tarif reglemente (~25 cts HP), ce qui ameliore significativement la rentabilite du solaire (retour de 11 a 8 ans).
+            <strong>Contrat Gaz de Bordeaux :</strong> tarif fixe jusqu'au 28/02/2028 (HP 17,60 cts, HC 13,61 cts). Apres cette date, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts), ce qui ameliore la rentabilite du solaire (retour de 11 a ~10 ans).
         </div>
     </section>
 
@@ -593,6 +593,10 @@
             </div>
         </div>
 
+        <div class="alert alert-warning">
+            <strong>Attention :</strong> ce scenario utilise le tarif reglemente BASE (25,2 cts plat). En option HP/HC reglementee (HP 20,65 / HC 15,79 cts), les gains sont plus modestes. Voir <a href="#s9">section 9</a> pour les chiffres corriges.
+        </div>
+
         <h3>Si passage au tarif reglemente (25,2 cts/kWh)</h3>
         <div class="scenario-grid">
             <div class="scenario-card">
@@ -648,12 +652,13 @@
                 <tr class="highlight-row"><td>HP actuel (17,6 cts)</td><td class="num">977 &euro;</td><td class="num">10 ans</td><td class="num">14 341 &euro;</td></tr>
                 <tr><td>20 cts/kWh</td><td class="num">1 103 &euro;</td><td class="num">9 ans</td><td class="num">17 695 &euro;</td></tr>
                 <tr><td>Reglemente (25,2 cts)</td><td class="num">1 373 &euro;</td><td class="num">7 ans</td><td class="num">24 893 &euro;</td></tr>
+                <tr class="highlight-row"><td>Reglemente HP/HC (20,65/15,79 cts)</td><td class="num">890 &euro;</td><td class="num">~10 ans</td><td class="num">~20 000 &euro;</td></tr>
                 <tr><td>30 cts/kWh</td><td class="num">1 627 &euro;</td><td class="num">6 ans</td><td class="num">31 644 &euro;</td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-warning" style="margin-top: 10px;">
-            <strong>Apres fevrier 2028</strong>, le contrat fixe Gaz de Bordeaux expire. Le passage au tarif reglemente (~25 cts) est le scenario le plus probable. La ligne "Reglemente (25,2 cts)" devient alors la reference pour la rentabilite : retour en <strong>7 ans</strong>.
+            <strong>Apres fevrier 2028</strong>, le contrat fixe Gaz de Bordeaux expire. Le passage au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) est le scenario le plus probable. La ligne "Reglemente HP/HC" devient alors la reference pour la rentabilite : retour en <strong>~10 ans</strong>. La ligne "Reglemente (25,2 cts)" correspond au tarif BASE plat, moins probable pour ce foyer en HP/HC.
         </div>
 
         <h3>Impact du cout d'installation</h3>
@@ -925,7 +930,7 @@
         </div>
 
         <div class="alert alert-success" style="margin-top: 10px;">
-            <strong>Perspective : HC en journee (~2028 pour ce foyer).</strong> Enedis prevoit de deployer 2h d'heures creuses en journee (~13h-15h) pour 9,3 millions de foyers, entre fin 2026 et fin 2027. Pour ce foyer, le changement sera effectif vers ~2028 (apres expiration du contrat fixe Gaz de Bordeaux le 28/02/2028). <strong>Timing favorable</strong> : la hausse du tarif (passage au reglemente ~25 cts) et les HC en journee arrivent en meme temps, ameliorant la rentabilite sur les deux tableaux. Le ballon ECS se declenchera alors automatiquement sur le pic solaire sans aucun equipement &mdash; le retour sur investissement passera a <strong>~9 ans sans domotique</strong>, et potentiellement mieux avec le tarif reglemente.
+            <strong>Perspective : HC en journee (~2028 pour ce foyer).</strong> Enedis prevoit de deployer 2h d'heures creuses en journee (~13h-15h) pour 9,3 millions de foyers, entre fin 2026 et fin 2027. Pour ce foyer, le changement sera effectif vers ~2028 (apres expiration du contrat fixe Gaz de Bordeaux le 28/02/2028). <strong>Timing favorable</strong> : la hausse du tarif (passage au reglemente HP/HC) et les HC en journee arrivent en meme temps, ameliorant la rentabilite sur les deux tableaux. Le ballon ECS se declenchera alors automatiquement sur le pic solaire sans aucun equipement &mdash; le retour sur investissement passera a <strong>~9 ans sans domotique</strong>, et potentiellement mieux avec le tarif reglemente.
         </div>
 
         <h3>Synthese : scenarios avec et sans optimisation</h3>
@@ -954,11 +959,12 @@
                 <tr class="highlight-row"><td><strong>Decalage manuel sans domotique</strong></td><td class="num"><strong>~878 &euro;</strong></td><td class="num"><strong>~10 ans</strong></td></tr>
                 <tr><td>Decalage manuel + domotique ECS</td><td class="num">~1 012 &euro;</td><td class="num">~9 ans</td></tr>
                 <tr class="breakeven"><td><strong>Complet (domotique + ECS + EV)</strong></td><td class="num"><strong>~1 077 &euro;</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
+                <tr><td>Brut, tarif reglemente HP/HC (apres 2028)</td><td class="num">890 &euro;</td><td class="num">~10 ans</td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Conclusion cle :</strong> les donnees reelles montrent que le solaire sans optimisation rapporte ~771 &euro;/an (retour ~11 ans). En decalant manuellement l'electromenager en journee <strong>(sans aucune domotique)</strong>, le gain monte a ~878 &euro;/an (retour ~10 ans). L'ajout d'un relais ECS (~15 &euro;) avec Home Assistant apporte ~134 &euro;/an supplementaires (retour ~9 ans). Avec EV en plus : ~1 077 &euro;/an (retour ~8 ans). <strong>L'essentiel du gain est accessible par de simples changements d'habitudes.</strong>
+            <strong>Conclusion cle :</strong> les donnees reelles montrent que le solaire sans optimisation rapporte ~771 &euro;/an (retour ~11 ans). En decalant manuellement l'electromenager en journee <strong>(sans aucune domotique)</strong>, le gain monte a ~878 &euro;/an (retour ~10 ans). L'ajout d'un relais ECS (~15 &euro;) avec Home Assistant apporte ~134 &euro;/an supplementaires (retour ~9 ans). Avec EV en plus : ~1 077 &euro;/an (retour ~8 ans). Apres 2028, le passage au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) ameliore encore la rentabilite (~10 ans sans optimisation). <strong>L'essentiel du gain est accessible par de simples changements d'habitudes + un relais a 15 &euro;.</strong>
         </div>
     </section>
 
@@ -1002,7 +1008,7 @@
                 <tr style="background: var(--red-light);"><td><strong>Donnees reelles brutes (sans optimisation)</strong></td><td class="num"><strong>~11 ans</strong></td></tr>
                 <tr class="breakeven"><td><strong>Donnees reelles + domotique + EV</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
                 <tr><td>Modele theorique tarif HP actuel + cout median</td><td class="num">10 ans</td></tr>
-                <tr><td>Tarif reglemente (25,2 cts) + cout median</td><td class="num">7 ans</td></tr>
+                <tr><td>Brut, tarif reglemente HP/HC (apres 2028)</td><td class="num">~10 ans</td></tr>
                 <tr><td>Tarif HP actuel + cout bas (bon devis)</td><td class="num">8 ans</td></tr>
                 <tr><td>Pire cas (tarif bas alt. + cout haut)</td><td class="num">14 ans</td></tr>
             </tbody>
@@ -1011,7 +1017,7 @@
         <h3>Points cles</h3>
         <ol style="margin: 10px 0 10px 20px; line-height: 2;">
             <li><strong>Donnees reelles Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Sans optimisation : autoconso 59%, gain 771 &euro;/an, retour ~11 ans. Avec decalage manuel : 878 &euro;/an, retour ~10 ans. Avec domotique ECS : 1 012 &euro;/an, retour ~9 ans.</li>
-            <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente (~25 cts) qui ameliore le retour de 11 a 8 ans.</li>
+            <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore le retour de 11 a ~10 ans.</li>
             <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 6 440 kWh/an, reduction de 30 a 40% de la facture selon optimisation.</li>
             <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, pas de remplacement onduleur a 1 500 &euro; en annee 12. Garantie 20-25 ans, monitoring par panneau.</li>
             <li><strong>HC en journee (~2028)</strong> : quand Enedis deploiera 2h HC en journee, le ballon ECS se declenchera automatiquement sur le pic solaire. Timing favorable : arrive en meme temps que la fin du contrat fixe. Retour ~9 ans sans domotique, potentiellement mieux avec le tarif reglemente.</li>
