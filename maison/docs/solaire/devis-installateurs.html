@@ -557,22 +557,54 @@
             </div>
         </div>
 
-        <div class="installer-card">
-            <div class="card-header">
-                <span>5. Concept'Energy 33</span>
-                <a href="https://www.conceptenergy33.fr/" target="_blank">conceptenergy33.fr</a>
+        <div class="installer-card" style="border-color: var(--sun);">
+            <div class="card-header" style="background: var(--sun); color: white;">
+                <span>5. Concept'Energy 33 &mdash; DEVIS RECU</span>
+                <a href="https://www.conceptenergy33.fr/" target="_blank" style="color: white;">conceptenergy33.fr</a>
             </div>
             <div class="card-body">
-                <div class="metric"><span class="label">Localisation</span><span class="val">Gironde</span></div>
-                <div class="metric"><span class="label">Points forts</span><span class="val">Pose quotidienne, bons retours clients</span></div>
-                <div class="metric"><span class="label">Avis</span><span class="val">Satisfaits du systeme, equipe parfaite</span></div>
-                <div class="metric"><span class="label">Prix catalogue</span><span class="val"><strong>8 900 &euro; TTC</strong> pour 6 kWc (pub site)</span></div>
-                <div class="metric"><span class="label">Matos</span><span class="val">Dualsun (30 ans) + micro-ond. Hoymiles (garantie a verifier) + batterie Atmoce 7 kWh option</span></div>
-                <div class="metric"><span class="label">Notes</span><span class="val">Verifier garantie Hoymiles (12-15 ans ?) vs Enphase (25 ans)</span></div>
+                <div class="kpi-grid" style="margin-bottom: 15px;">
+                    <div class="kpi-card highlight">
+                        <div class="value">8 900 &euro;</div>
+                        <div class="label">6 kWc TTC (net 8 420 &euro;)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">10 900 &euro;</div>
+                        <div class="label">9 kWc TTC (net 10 180 &euro;)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">1 483 &euro;/kWc</div>
+                        <div class="label">Prix au kWc (6 kWc)</div>
+                    </div>
+                </div>
+
+                <h4 style="margin-top: 0;">Devis DEV8496 &mdash; 6 kWc</h4>
+                <table>
+                    <thead><tr><th>Poste</th><th>Detail</th><th class="num">Qte</th><th class="num">Prix HT</th></tr></thead>
+                    <tbody>
+                        <tr><td>Panneaux</td><td><strong>DualSun Flash TOPCon 500W</strong> bi-verre, bi-facial, garantie 30 ans</td><td class="num">12</td><td class="num">1 413 &euro;</td></tr>
+                        <tr><td>Micro-onduleurs</td><td><strong>ATMOCE MI-1000-2M</strong> (1000W, 2 MPPT, CPL, IP67, garantie 25 ans)</td><td class="num">6</td><td class="num">1 163 &euro;</td></tr>
+                        <tr><td>Contrat entretien</td><td>Formule Eco (obligatoire pour garantie a vie)</td><td class="num">1</td><td class="num">92 &euro;</td></tr>
+                        <tr><td>Accessoires</td><td>K2 SolidRail Light + coffret AC</td><td class="num">1</td><td class="num">1 790 &euro;</td></tr>
+                        <tr><td>Installation + mise en service</td><td>Pose + conformite</td><td class="num">1</td><td class="num">2 249 &euro;</td></tr>
+                        <tr><td>Demarches admin</td><td>Mairie + Consuel + Enedis + EDF OA</td><td class="num">1</td><td class="num">268 &euro;</td></tr>
+                        <tr><td>Passerelle</td><td><strong>M-Gateway ATMOCE</strong> MG100 (Wi-Fi, BLE, garantie 5 ans)</td><td class="num">1</td><td class="num">441 &euro;</td></tr>
+                        <tr><td>Garantie a vie</td><td>Option Concept Energy (1 &euro; symbolique)</td><td class="num">1</td><td class="num">1 &euro;</td></tr>
+                        <tr class="highlight-row"><td><strong>TOTAL TTC (TVA 20%)</strong></td><td></td><td></td><td class="num"><strong>8 900 &euro;</strong></td></tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-success" style="margin-top: 15px;">
+                    <strong>Points forts :</strong> DualSun (francais, 30 ans), micro-onduleurs ATMOCE garantie 25 ans directe, garantie a vie materiel pour 1 &euro;, option 9 kWc chiffree (+2 000 &euro;), demarches incluses, devis tres detaille.
+                </div>
+                <div class="alert alert-warning" style="margin-top: 10px;">
+                    <strong>Points d'attention :</strong> +1 606 &euro; vs Azelec. <strong>TVA a 20%</strong> (normalement 5,5% pour &le; 9 kWc, logement &gt; 2 ans &mdash; a verifier !). ATMOCE = marque peu connue. Passerelle garantie 5 ans seulement. Pas de routeur ECS. Pas de visite sur place (tel + Enedis + Google Maps).
+                </div>
+
                 <div class="status">
-                    <label><input type="checkbox" disabled checked> Contacté (17/03)</label>
-                    <label><input type="checkbox" disabled> Visite</label>
-                    <label><input type="checkbox" disabled> Devis recu</label>
+                    <label><input type="checkbox" disabled checked> Contacte (17/03)</label>
+                    <label><input type="checkbox" disabled> <s>Visite</s> (tel + Enedis + GMaps)</label>
+                    <label><input type="checkbox" disabled checked> <strong>Devis recu (18/03)</strong></label>
                 </div>
             </div>
         </div>
@@ -734,31 +766,33 @@
                 <tr>
                     <th>Critere</th>
                     <th style="background: var(--green-light);"><strong>Azelec</strong></th>
+                    <th style="background: var(--sun-light);"><strong>Concept'E</strong></th>
                     <th>Force Eco</th>
                     <th>Le Solarman</th>
-                    <th>Concept'E</th>
                     <th>Courant N.</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td><strong>Prix TTC 6 kWc</strong></td><td class="num" style="background: var(--green-light);"><strong>7 294 &euro;</strong></td><td class="num">9 000 &euro; (cat.)</td><td class="num">12-14 000 &euro; (cat.)</td><td class="num">8 900 &euro; (cat.)</td><td class="num">~8 200-8 700 &euro; (cat.)</td></tr>
-                <tr><td><strong>Net apres prime</strong></td><td class="num" style="background: var(--green-light);"><strong>6 814 &euro;</strong></td><td class="num">~8 520 &euro;</td><td class="num">~11 520-13 520 &euro;</td><td class="num">~8 420 &euro;</td><td class="num">~7 720-8 220 &euro;</td></tr>
-                <tr><td><strong>Prix au kWc</strong></td><td class="num" style="background: var(--green-light);"><strong>1 216 &euro;</strong></td><td class="num">1 500 &euro;</td><td class="num">2 000-2 333 &euro;</td><td class="num">1 483 &euro;</td><td class="num">~1 367-1 450 &euro;</td></tr>
-                <tr><td><strong>Panneaux</strong></td><td style="background: var(--green-light);">Jinko Tiger Neo 500W</td><td>Bifacial 500W (?)</td><td>Jinko Solar</td><td>Dualsun</td><td>SunPower P7/MAX6</td></tr>
-                <tr><td><strong>Garantie panneaux</strong></td><td style="background: var(--green-light);">30 ans</td><td>?</td><td>25 ans</td><td>30 ans</td><td>30-40 ans</td></tr>
-                <tr><td><strong>Micro-onduleurs</strong></td><td style="background: var(--green-light);">APsystems DS3H</td><td>Au choix</td><td>Enphase</td><td>Hoymiles</td><td>Enphase IQ7A / SMA</td></tr>
-                <tr><td><strong>Garantie micro-ond.</strong></td><td style="background: var(--green-light);">2 ans (&rarr;20 avec ECU)</td><td>?</td><td>25 ans</td><td>? (12-15?)</td><td>25 ans (Enphase)</td></tr>
-                <tr><td><strong>Monitoring</strong></td><td style="background: var(--green-light);">APS EMA (app)</td><td>?</td><td>Enphase Enlighten</td><td>?</td><td>Enphase Enlighten</td></tr>
-                <tr><td><strong>Routeur ECS</strong></td><td style="background: var(--green-light);"><strong>ARSUN offert</strong></td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
-                <tr><td><strong>Demarches incluses</strong></td><td style="background: var(--green-light);">Oui (354 &euro;)</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
-                <tr><td><strong>Visite sur place</strong></td><td class="negative">Non</td><td>Oui (25/03)</td><td>Oui (21/03)</td><td>?</td><td>Visio (24/03)</td></tr>
-                <tr><td><strong>Devis recu</strong></td><td style="background: var(--green-light);"><strong>Oui (18/03)</strong></td><td>Non</td><td>Non</td><td>Non</td><td>Non</td></tr>
+                <tr><td><strong>Prix TTC 6 kWc</strong></td><td class="num" style="background: var(--green-light);"><strong>7 294 &euro;</strong></td><td class="num" style="background: var(--sun-light);">8 900 &euro;</td><td class="num">9 000 &euro; (cat.)</td><td class="num">12-14 000 &euro; (cat.)</td><td class="num">~8 200-8 700 &euro; (cat.)</td></tr>
+                <tr><td><strong>Net apres prime</strong></td><td class="num" style="background: var(--green-light);"><strong>6 814 &euro;</strong></td><td class="num" style="background: var(--sun-light);">8 420 &euro;</td><td class="num">~8 520 &euro;</td><td class="num">~11 520-13 520 &euro;</td><td class="num">~7 720-8 220 &euro;</td></tr>
+                <tr><td><strong>Prix au kWc</strong></td><td class="num" style="background: var(--green-light);"><strong>1 216 &euro;</strong></td><td class="num" style="background: var(--sun-light);">1 483 &euro;</td><td class="num">1 500 &euro;</td><td class="num">2 000-2 333 &euro;</td><td class="num">~1 367-1 450 &euro;</td></tr>
+                <tr><td><strong>Panneaux</strong></td><td style="background: var(--green-light);">Jinko Tiger Neo 500W</td><td style="background: var(--sun-light);">DualSun TOPCon 500W</td><td>Bifacial 500W (?)</td><td>Jinko Solar</td><td>SunPower P7/MAX6</td></tr>
+                <tr><td><strong>Garantie panneaux</strong></td><td style="background: var(--green-light);">30 ans</td><td style="background: var(--sun-light);">30 ans</td><td>?</td><td>25 ans</td><td>30-40 ans</td></tr>
+                <tr><td><strong>Micro-onduleurs</strong></td><td style="background: var(--green-light);">APsystems DS3H</td><td style="background: var(--sun-light);">ATMOCE MI-1000</td><td>Au choix</td><td>Enphase</td><td>Enphase IQ7A / SMA</td></tr>
+                <tr><td><strong>Garantie micro-ond.</strong></td><td style="background: var(--green-light);">2 ans (&rarr;20 avec ECU)</td><td style="background: var(--sun-light);">25 ans</td><td>?</td><td>25 ans</td><td>25 ans (Enphase)</td></tr>
+                <tr><td><strong>Monitoring</strong></td><td style="background: var(--green-light);">APS EMA (app)</td><td style="background: var(--sun-light);">M-Gateway ATMOCE</td><td>?</td><td>Enphase Enlighten</td><td>Enphase Enlighten</td></tr>
+                <tr><td><strong>Routeur ECS</strong></td><td style="background: var(--green-light);"><strong>ARSUN offert</strong></td><td style="background: var(--sun-light);">Non</td><td>?</td><td>?</td><td>?</td></tr>
+                <tr><td><strong>Demarches incluses</strong></td><td style="background: var(--green-light);">Oui (354 &euro;)</td><td style="background: var(--sun-light);">Oui (268 &euro;)</td><td>?</td><td>?</td><td>?</td></tr>
+                <tr><td><strong>TVA</strong></td><td style="background: var(--green-light);">5,5%</td><td style="background: var(--red-light);"><strong>20% (a verifier!)</strong></td><td>?</td><td>?</td><td>?</td></tr>
+                <tr><td><strong>Garantie a vie</strong></td><td style="background: var(--green-light);">Non</td><td style="background: var(--green-light);"><strong>Oui (1 &euro;)</strong></td><td>?</td><td>?</td><td>?</td></tr>
+                <tr><td><strong>Visite sur place</strong></td><td class="negative">Non</td><td class="negative" style="background: var(--sun-light);">Non (tel + GMaps)</td><td>Oui (25/03)</td><td>Oui (21/03)</td><td>Visio (24/03)</td></tr>
+                <tr><td><strong>Devis recu</strong></td><td style="background: var(--green-light);"><strong>Oui (18/03)</strong></td><td style="background: var(--sun-light);"><strong>Oui (18/03)</strong></td><td>Non</td><td>Non</td><td>Non</td></tr>
             </tbody>
         </table>
         </div>
 
         <div class="alert alert-info" style="margin-top: 15px;">
-            <strong>Classement prix actuel :</strong> Azelec (7 294 &euro;) &lt; Courant Naturel (~8 200-8 700 &euro;) &lt; Concept'Energy (8 900 &euro;) &lt; Force Eco (9 000 &euro;) &lt; Le Solarman (12 000 &euro;+). <em>Les prix catalogue sont indicatifs. Seuls les devis personnalises font foi.</em>
+            <strong>Classement prix actuel :</strong> Azelec (<strong>7 294 &euro;</strong> devis) &lt; Courant Naturel (~8 200-8 700 &euro; cat.) &lt; Concept'Energy (<strong>8 900 &euro;</strong> devis) &lt; Force Eco (9 000 &euro; cat.) &lt; Le Solarman (12 000 &euro;+ cat.). <em>Les prix catalogue sont indicatifs. Seuls les devis personnalises font foi.</em>
         </div>
     </section>
 
