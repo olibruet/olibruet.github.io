@@ -290,7 +290,7 @@
                 <div class="label">Investissement net (apres prime)</div>
             </div>
             <div class="kpi-card highlight">
-                <div class="value">771 - 1 036 &euro;/an</div>
+                <div class="value">771 - 1 077 &euro;/an</div>
                 <div class="label">Economie sur la facture (donnees reelles)</div>
             </div>
             <div class="kpi-card">
@@ -382,7 +382,7 @@
             </thead>
             <tbody>
                 <tr><td>PAC chauffage/clim (Hitachi bi-split + Mitsubishi)</td><td class="num">5 000</td><td class="num">31%</td></tr>
-                <tr><td>Eau chaude (2 ballons electriques)</td><td class="num">3 500</td><td class="num">22%</td></tr>
+                <tr><td>Eau chaude (ballon 300L principal, 2e ponctuel)</td><td class="num">3 030</td><td class="num">19%</td></tr>
                 <tr><td>Gros electromenager</td><td class="num">2 000</td><td class="num">13%</td></tr>
                 <tr><td>Piscine (filtration, dome Abrisud)</td><td class="num">1 800</td><td class="num">11%</td></tr>
                 <tr><td>Froid (frigo, congelateur, caves a vin)</td><td class="num">1 500</td><td class="num">9%</td></tr>
@@ -916,7 +916,7 @@
                 <tr><th>Levier</th><th>Comment</th><th class="num">kWh/an</th><th class="num">Gain supp.</th></tr>
             </thead>
             <tbody>
-                <tr class="highlight-row"><td><strong>Ballon ECS boost solaire 12h-15h</strong></td><td>Relais Shelly (~15 &euro;) sur contacteur HC, pilote par HA</td><td class="num"><strong>~600-900</strong></td><td class="num"><strong>~80-120 &euro;</strong></td></tr>
+                <tr class="highlight-row"><td><strong>Ballon ECS 300L : boost solaire 12h-15h30</strong></td><td>Relais Shelly (~15 &euro;) sur contacteur HC, pilote par HA</td><td class="num"><strong>~1 394</strong></td><td class="num"><strong>~134 &euro;</strong></td></tr>
             </tbody>
         </table>
 
@@ -940,7 +940,7 @@
                 <div class="label">Gain/an decalage manuel (~10 ans)</div>
             </div>
             <div class="kpi-card good">
-                <div class="value">~971 &euro;</div>
+                <div class="value">~1 012 &euro;</div>
                 <div class="label">Gain/an manuel + domotique ECS (~9 ans)</div>
             </div>
         </div>
@@ -952,13 +952,13 @@
             <tbody>
                 <tr><td>Donnees brutes (aucune optimisation)</td><td class="num">771 &euro;</td><td class="num">~11 ans</td></tr>
                 <tr class="highlight-row"><td><strong>Decalage manuel sans domotique</strong></td><td class="num"><strong>~878 &euro;</strong></td><td class="num"><strong>~10 ans</strong></td></tr>
-                <tr><td>Decalage manuel + domotique ECS</td><td class="num">~971 &euro;</td><td class="num">~9 ans</td></tr>
-                <tr class="breakeven"><td><strong>Complet (domotique + EV)</strong></td><td class="num"><strong>~1 036 &euro;</strong></td><td class="num"><strong>~9 ans</strong></td></tr>
+                <tr><td>Decalage manuel + domotique ECS</td><td class="num">~1 012 &euro;</td><td class="num">~9 ans</td></tr>
+                <tr class="breakeven"><td><strong>Complet (domotique + ECS + EV)</strong></td><td class="num"><strong>~1 077 &euro;</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Conclusion cle :</strong> les donnees reelles montrent que le solaire sans optimisation rapporte ~771 &euro;/an (retour ~11 ans). En decalant manuellement l'electromenager en journee <strong>(sans aucune domotique)</strong>, le gain monte a ~878 &euro;/an (retour ~10 ans). L'ajout d'un relais ECS (~15 &euro;) avec Home Assistant apporte ~93 &euro;/an supplementaires (retour ~9 ans). Avec EV en plus : ~1 036 &euro;/an (retour ~9 ans). <strong>L'essentiel du gain est accessible par de simples changements d'habitudes.</strong>
+            <strong>Conclusion cle :</strong> les donnees reelles montrent que le solaire sans optimisation rapporte ~771 &euro;/an (retour ~11 ans). En decalant manuellement l'electromenager en journee <strong>(sans aucune domotique)</strong>, le gain monte a ~878 &euro;/an (retour ~10 ans). L'ajout d'un relais ECS (~15 &euro;) avec Home Assistant apporte ~134 &euro;/an supplementaires (retour ~9 ans). Avec EV en plus : ~1 077 &euro;/an (retour ~8 ans). <strong>L'essentiel du gain est accessible par de simples changements d'habitudes.</strong>
         </div>
     </section>
 
@@ -990,7 +990,7 @@
         <h2 id="s11">11. Conclusion et recommandations</h2>
 
         <div class="alert alert-success">
-            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios, mais les donnees reelles Linky 2025 (<a href="#s9">section 9</a>) montrent que l'optimisation est indispensable : sans decalage de charge, le retour est de ~11 ans ; avec domotique + EV, il descend a ~9 ans.
+            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios, mais les donnees reelles Linky 2025 (<a href="#s9">section 9</a>) montrent que l'optimisation est indispensable : sans decalage de charge, le retour est de ~11 ans ; avec domotique + EV, il descend a ~8 ans.
         </div>
 
         <h3>Resume des retours sur investissement</h3>
@@ -1000,7 +1000,7 @@
             </thead>
             <tbody>
                 <tr style="background: var(--red-light);"><td><strong>Donnees reelles brutes (sans optimisation)</strong></td><td class="num"><strong>~11 ans</strong></td></tr>
-                <tr class="breakeven"><td><strong>Donnees reelles + domotique + EV</strong></td><td class="num"><strong>~9 ans</strong></td></tr>
+                <tr class="breakeven"><td><strong>Donnees reelles + domotique + EV</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
                 <tr><td>Modele theorique tarif HP actuel + cout median</td><td class="num">10 ans</td></tr>
                 <tr><td>Tarif reglemente (25,2 cts) + cout median</td><td class="num">7 ans</td></tr>
                 <tr><td>Tarif HP actuel + cout bas (bon devis)</td><td class="num">8 ans</td></tr>
@@ -1010,7 +1010,7 @@
 
         <h3>Points cles</h3>
         <ol style="margin: 10px 0 10px 20px; line-height: 2;">
-            <li><strong>Donnees reelles Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Sans optimisation : autoconso 59%, gain 771 &euro;/an, retour ~11 ans. Avec decalage manuel : 878 &euro;/an, retour ~10 ans. Avec domotique ECS : 971 &euro;/an, retour ~9 ans.</li>
+            <li><strong>Donnees reelles Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Sans optimisation : autoconso 59%, gain 771 &euro;/an, retour ~11 ans. Avec decalage manuel : 878 &euro;/an, retour ~10 ans. Avec domotique ECS : 1 012 &euro;/an, retour ~9 ans.</li>
             <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente (~25 cts) qui ameliore le retour de 11 a 8 ans.</li>
             <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 6 440 kWh/an, reduction de 30 a 40% de la facture selon optimisation.</li>
             <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, pas de remplacement onduleur a 1 500 &euro; en annee 12. Garantie 20-25 ans, monitoring par panneau.</li>
@@ -1044,21 +1044,21 @@
         <table>
             <tr><td>Montant</td><td class="num">10 020 &euro; (cout median - prime)</td></tr>
             <tr><td>Interets</td><td class="num">Inclus dans la mensualite</td></tr>
-            <tr><td>Gain solaire an 1</td><td class="num">771 &euro; (brut) / 878 &euro; (decalage) / 971 &euro; (domotique ECS)</td></tr>
+            <tr><td>Gain solaire an 1</td><td class="num">771 &euro; (brut) / 878 &euro; (decalage) / 1 012 &euro; (domotique ECS)</td></tr>
         </table>
 
         <h3>Reste a charge mensuel par duree et scenario</h3>
 
         <table>
             <thead>
-                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optim (64 &euro;)</th><th class="num">Decalage manuel (73 &euro;)</th><th class="num">Domotique ECS (81 &euro;)</th></tr>
+                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optim (64 &euro;)</th><th class="num">Decalage manuel (73 &euro;)</th><th class="num">Domotique ECS (84 &euro;)</th></tr>
             </thead>
             <tbody>
-                <tr><td>5 ans</td><td class="num">167 &euro;</td><td class="num negative">103 &euro;</td><td class="num negative">94 &euro;</td><td class="num negative">86 &euro;</td></tr>
-                <tr><td>7 ans</td><td class="num">119 &euro;</td><td class="num">55 &euro;</td><td class="num">46 &euro;</td><td class="num">38 &euro;</td></tr>
-                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">20 &euro;</td><td class="num">11 &euro;</td><td class="num">3 &euro;</td></tr>
-                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>6 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain)</strong></td><td class="num positive"><strong>-11 &euro; (gain)</strong></td></tr>
-                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>56 &euro;</strong></td><td class="num positive"><strong>-8 &euro; (gain)</strong></td><td class="num positive"><strong>-17 &euro; (gain)</strong></td><td class="num positive"><strong>-25 &euro; (gain)</strong></td></tr>
+                <tr><td>5 ans</td><td class="num">167 &euro;</td><td class="num negative">103 &euro;</td><td class="num negative">94 &euro;</td><td class="num negative">83 &euro;</td></tr>
+                <tr><td>7 ans</td><td class="num">119 &euro;</td><td class="num">55 &euro;</td><td class="num">46 &euro;</td><td class="num">35 &euro;</td></tr>
+                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">20 &euro;</td><td class="num">11 &euro;</td><td class="num positive">0 &euro;</td></tr>
+                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>6 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain)</strong></td><td class="num positive"><strong>-14 &euro; (gain)</strong></td></tr>
+                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>56 &euro;</strong></td><td class="num positive"><strong>-8 &euro; (gain)</strong></td><td class="num positive"><strong>-17 &euro; (gain)</strong></td><td class="num positive"><strong>-28 &euro; (gain)</strong></td></tr>
             </tbody>
         </table>
 
