@@ -281,7 +281,7 @@
         <h2 id="synthese">Synthese</h2>
 
         <p style="font-size: 1.1em; color: var(--gray-700); margin-bottom: 20px; line-height: 1.7;">
-            Un 6 kWc sur le toit de la maison produit 6 440 kWh/an et reduit la facture de 30 a 40%. Finance a credit, le cout reel est de 18 a 31 &euro;/mois &mdash; l'equivalent d'un abonnement streaming.
+            Un 6 kWc sur le toit de la maison produit 6 440 kWh/an et reduit la facture de 30 a 40%. Finance par pret 0%, l'installation se paie quasiment toute seule.
         </p>
 
         <div class="kpi-grid">
@@ -294,8 +294,8 @@
                 <div class="label">Economie sur la facture (donnees reelles)</div>
             </div>
             <div class="kpi-card">
-                <div class="value">18-127 &euro;/mois</div>
-                <div class="label">Cout reel avec credit (pire cas, 5-15 ans)</div>
+                <div class="value">70-84 &euro;/mois</div>
+                <div class="label">Pret 0% &mdash; Mensualite (10-12 ans)</div>
             </div>
             <div class="kpi-card good">
                 <div class="value">~7-11 ans</div>
@@ -303,18 +303,18 @@
             </div>
         </div>
 
-        <h3 style="margin-top: 20px;">Pire cas : taux 5,5% + aucune optimisation</h3>
+        <h3 style="margin-top: 20px;">Financement pret 0% &mdash; cout median 10 020 &euro;</h3>
         <table>
             <thead>
-                <tr><th>Credit</th><th class="num">Mensualite</th><th class="num">Economie solaire</th><th class="num">Cout reel/mois</th><th>Commentaire</th></tr>
+                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Economie solaire</th><th class="num">Reste a charge</th><th>Commentaire</th></tr>
             </thead>
             <tbody>
-                <tr><td>5 ans</td><td class="num">191 &euro;</td><td class="num">64 &euro;</td><td class="num negative"><strong>127 &euro;</strong></td><td>Rembourse vite, mais effort important</td></tr>
-                <tr><td>10 ans</td><td class="num">109 &euro;</td><td class="num">64 &euro;</td><td class="num"><strong>45 &euro;</strong></td><td>Auto-finance en annee 8</td></tr>
-                <tr style="background: var(--green-light);"><td>15 ans</td><td class="num">82 &euro;</td><td class="num">64 &euro;</td><td class="num"><strong>18 &euro;</strong></td><td>Auto-finance en annee 3</td></tr>
+                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">64-73 &euro;</td><td class="num">11-20 &euro;</td><td>Auto-finance en annee 3-5</td></tr>
+                <tr style="background: var(--green-light);"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>64-73 &euro;</strong></td><td class="num"><strong>-3 a 6 &euro;</strong></td><td><strong>Quasi auto-finance des le 1er mois</strong></td></tr>
+                <tr><td>15 ans</td><td class="num">56 &euro;</td><td class="num">64-73 &euro;</td><td class="num positive">-8 a -17 &euro; (gain net)</td><td>Rapporte des le 1er mois</td></tr>
             </tbody>
         </table>
-        <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">Ces couts baissent chaque annee avec l'inflation electrique (+3%/an). Avec decalage manuel (lave-linge, piscine en journee), l'economie passe a 73 &euro;/mois et le cout reel diminue de ~9 &euro;.</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">L'economie augmente chaque annee avec l'inflation electrique (+3%/an). Sur 12 ans avec decalage manuel, l'installation rapporte 3 &euro;/mois des le depart.</p>
 
         <div class="alert alert-warning" style="margin-top: 15px;">
             <strong>Tarif fixe Gaz de Bordeaux (17,6 cts HP) jusqu'au 28/02/2028.</strong> Apres cette date, passage probable au tarif reglemente (~25 cts) qui ameliore la rentabilite de 11 a 8 ans.
@@ -340,7 +340,7 @@
             <li><a href="#s9" style="color: var(--blue); text-decoration: none;">Confrontation aux donnees reelles (Linky 2025)</a></li>
             <li><a href="#s10" style="color: var(--blue); text-decoration: none;">Batterie virtuelle</a></li>
             <li><a href="#s11" style="color: var(--blue); text-decoration: none;">Conclusion et recommandations</a></li>
-            <li><a href="#s12" style="color: var(--blue); text-decoration: none;">Simulation de financement</a></li>
+            <li><a href="#s12" style="color: var(--blue); text-decoration: none;">Financement &mdash; Pret 0%</a></li>
             <li><a href="#s13" style="color: var(--blue); text-decoration: none;">Evolution v1 &rarr; v2</a></li>
             <li><a href="#s14" style="color: var(--blue); text-decoration: none;">Sources</a></li>
         </ol>
@@ -1037,139 +1037,60 @@
 
     <!-- =============== FINANCEMENT =============== -->
     <section>
-        <h2 id="s12">12. Simulation de financement (emprunt 100%)</h2>
+        <h2 id="s12">12. Financement &mdash; Pret 0%</h2>
 
-        <p style="color: var(--gray-500); margin-bottom: 15px;">Simulation d'un pret travaux pour financer l'integralite de l'installation 6 kWc, sans apport. Objectif : trouver la duree ou l'economie solaire couvre la mensualite du pret. Sources taux : <a href="https://www.meilleurtaux.com/credit-consommation/credit-travaux/taux-pret-travaux.html" target="_blank">Meilleurtaux</a>, <a href="https://www.empruntis.com/credits-consommation/pret-travaux/taux-pret-travaux/" target="_blank">Empruntis</a> (mars 2026).</p>
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Financement confirme : pret a taux 0%, sans frais. Pas de surcout credit.</p>
 
         <h3>Hypotheses</h3>
         <table>
-            <tr><td>Montant emprunte</td><td class="num">10 020 &euro; (cout median - prime)</td></tr>
-            <tr><td>Taux marche mars 2026</td><td class="num">3,5% / 4,5% / 5,5% TAEG</td></tr>
-            <tr><td>Gain solaire an 1</td><td class="num">771 &euro; (brut) / 878 &euro; (decalage) / 971 &euro; (domotique)</td></tr>
-            <tr><td>Inflation electricite</td><td class="num">3%/an (gain croissant)</td></tr>
+            <tr><td>Montant</td><td class="num">10 020 &euro; (cout median - prime)</td></tr>
+            <tr><td>Taux</td><td class="num">0% (pret)</td></tr>
+            <tr><td>Surcout credit</td><td class="num">0 &euro;</td></tr>
+            <tr><td>Gain solaire an 1</td><td class="num">771 &euro; (brut) / 878 &euro; (decalage) / 971 &euro; (domotique ECS)</td></tr>
         </table>
 
-        <div class="alert alert-info" style="margin-top: 10px;">
-            Les taux pret travaux vont de ~3% (excellents dossiers, pret vert) a ~5,5% (credit conso classique). L'eco-PTZ a 0% n'est pas eligible pour le photovoltaique seul.
-        </div>
-
-        <h3>Mensualite du pret vs economie solaire</h3>
-        <table>
-            <thead>
-                <tr><th>Duree</th><th class="num">Mensualite 3,5%</th><th class="num">Mensualite 4,5%</th><th class="num">Mensualite 5,5%</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>5 ans</td><td class="num">182 &euro;</td><td class="num">187 &euro;</td><td class="num">191 &euro;</td></tr>
-                <tr><td>7 ans</td><td class="num">134 &euro;</td><td class="num">138 &euro;</td><td class="num">143 &euro;</td></tr>
-                <tr><td>10 ans</td><td class="num">99 &euro;</td><td class="num">104 &euro;</td><td class="num">109 &euro;</td></tr>
-                <tr class="highlight-row"><td><strong>12 ans</strong></td><td class="num"><strong>85 &euro;</strong></td><td class="num"><strong>90 &euro;</strong></td><td class="num"><strong>95 &euro;</strong></td></tr>
-                <tr><td>15 ans</td><td class="num">72 &euro;</td><td class="num">77 &euro;</td><td class="num">82 &euro;</td></tr>
-            </tbody>
-        </table>
-
-        <table style="margin-top: 15px;">
-            <thead>
-                <tr><th>Scenario</th><th class="num">Economie/mois an 1</th><th class="num">Economie/mois an 5</th><th class="num">Economie/mois an 10</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Sans optimisation</td><td class="num">64 &euro;</td><td class="num">72 &euro;</td><td class="num">84 &euro;</td></tr>
-                <tr class="highlight-row"><td><strong>Decalage manuel</strong></td><td class="num"><strong>73 &euro;</strong></td><td class="num"><strong>82 &euro;</strong></td><td class="num"><strong>95 &euro;</strong></td></tr>
-                <tr><td>Avec domotique ECS</td><td class="num">81 &euro;</td><td class="num">91 &euro;</td><td class="num">106 &euro;</td></tr>
-            </tbody>
-        </table>
-
-        <h3>Reste a charge mensuel &mdash; taux 4,5%, decalage manuel</h3>
+        <h3>Reste a charge mensuel par duree et scenario</h3>
 
         <table>
             <thead>
-                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Economie an 1</th><th class="num">Reste a charge</th><th>Auto-finance</th></tr>
+                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optim (64 &euro;)</th><th class="num">Decalage manuel (73 &euro;)</th><th class="num">Domotique ECS (81 &euro;)</th></tr>
             </thead>
             <tbody>
-                <tr><td>5 ans</td><td class="num">187 &euro;</td><td class="num">73 &euro;</td><td class="num negative">114 &euro;</td><td>Jamais (fini avant)</td></tr>
-                <tr><td>7 ans</td><td class="num">138 &euro;</td><td class="num">73 &euro;</td><td class="num negative">65 &euro;</td><td>Jamais (fini avant)</td></tr>
-                <tr><td>10 ans</td><td class="num">104 &euro;</td><td class="num">73 &euro;</td><td class="num">31 &euro;</td><td>Annee 5</td></tr>
-                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>90 &euro;</strong></td><td class="num"><strong>73 &euro;</strong></td><td class="num"><strong>17 &euro;</strong></td><td><strong>Annee 3</strong></td></tr>
-                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>77 &euro;</strong></td><td class="num"><strong>73 &euro;</strong></td><td class="num"><strong>4 &euro;</strong></td><td><strong>Annee 2</strong></td></tr>
+                <tr><td>5 ans</td><td class="num">167 &euro;</td><td class="num negative">103 &euro;</td><td class="num negative">94 &euro;</td><td class="num negative">86 &euro;</td></tr>
+                <tr><td>7 ans</td><td class="num">119 &euro;</td><td class="num">55 &euro;</td><td class="num">46 &euro;</td><td class="num">38 &euro;</td></tr>
+                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">20 &euro;</td><td class="num">11 &euro;</td><td class="num">3 &euro;</td></tr>
+                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>6 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain)</strong></td><td class="num positive"><strong>-11 &euro; (gain)</strong></td></tr>
+                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>56 &euro;</strong></td><td class="num positive"><strong>-8 &euro; (gain)</strong></td><td class="num positive"><strong>-17 &euro; (gain)</strong></td><td class="num positive"><strong>-25 &euro; (gain)</strong></td></tr>
             </tbody>
         </table>
 
-        <h3>Pire cas : taux 5,5% + aucune optimisation</h3>
-
-        <table>
-            <thead>
-                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Economie an 1</th><th class="num">Cout reel/mois</th><th class="num">Cout an 5</th><th class="num">Cout an 10</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>10 ans</td><td class="num">109 &euro;</td><td class="num">64 &euro;</td><td class="num negative">45 &euro;</td><td class="num">37 &euro;</td><td class="num">25 &euro;</td></tr>
-                <tr><td>12 ans</td><td class="num">95 &euro;</td><td class="num">64 &euro;</td><td class="num negative">31 &euro;</td><td class="num">23 &euro;</td><td class="num">11 &euro;</td></tr>
-                <tr class="highlight-row"><td><strong>15 ans</strong></td><td class="num"><strong>82 &euro;</strong></td><td class="num"><strong>64 &euro;</strong></td><td class="num"><strong>18 &euro;</strong></td><td class="num"><strong>10 &euro;</strong></td><td class="num positive"><strong>auto-finance</strong></td></tr>
-            </tbody>
-        </table>
+        <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">Valeurs negatives = l'economie solaire depasse la mensualite, l'installation rapporte de l'argent chaque mois. L'economie augmente chaque annee avec l'inflation electrique (+3%/an).</p>
 
         <div class="alert alert-warning" style="margin-top: 10px;">
-            Meme dans le pire scenario (taux eleve, aucun decalage de charge, pas de voiture electrique), le cout reel est de <strong>18 a 31 &euro;/mois</strong> selon la duree choisie. Ce cout baisse chaque annee avec l'inflation electrique.
+            <strong>Pire cas :</strong> pret 0% sur 10 ans + aucune optimisation = <strong>20 &euro;/mois</strong> en annee 1. Ce cout baisse chaque annee et l'installation s'auto-finance en annee 3-5.
         </div>
 
         <h3>Synthese financement</h3>
 
         <div class="kpi-grid" style="margin-top: 20px;">
             <div class="kpi-card good">
-                <div class="value">17 &euro;/mois</div>
-                <div class="label">Reste a charge pret 12 ans &agrave; 4,5%</div>
-            </div>
-            <div class="kpi-card good">
-                <div class="value">0 &euro;</div>
-                <div class="label">Auto-finance des l'annee 3</div>
-            </div>
-            <div class="kpi-card highlight">
-                <div class="value">~15 000 &euro;</div>
-                <div class="label">Gain net apres remboursement (25 ans)</div>
-            </div>
-        </div>
-
-        <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Recommandation :</strong> un pret 12 ans a 4,5% coute 90 &euro;/mois. L'economie solaire (decalage manuel) est de 73 &euro;/mois des la 1ere annee &rarr; <strong>reste a charge : 17 &euro;/mois</strong>. Des l'annee 3, le solaire couvre entierement la mensualite grace a l'inflation electrique. Apres le credit, l'economie continue 13 ans de plus &mdash; soit ~15 000 &euro; de gain net supplementaire.
-        </div>
-
-        <h3>Option pret familial a taux 0%</h3>
-
-        <p style="color: var(--gray-700); margin-bottom: 15px;">Un pret familial sans interet supprime le surcout du credit. La mensualite est simplement le montant divise par la duree.</p>
-
-        <table>
-            <thead>
-                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optimisation</th><th class="num">Decalage manuel</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>5 ans</td><td class="num">167 &euro;</td><td class="num negative">103 &euro;</td><td class="num negative">94 &euro;</td></tr>
-                <tr><td>7 ans</td><td class="num">119 &euro;</td><td class="num">55 &euro;</td><td class="num">46 &euro;</td></tr>
-                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">20 &euro;</td><td class="num">11 &euro;</td></tr>
-                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>6 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain net)</strong></td></tr>
-                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>56 &euro;</strong></td><td class="num positive"><strong>-8 &euro; (gain net)</strong></td><td class="num positive"><strong>-17 &euro; (gain net)</strong></td></tr>
-            </tbody>
-        </table>
-
-        <div class="kpi-grid" style="margin-top: 20px;">
-            <div class="kpi-card good">
-                <div class="value">11 &euro;/mois</div>
-                <div class="label">Pret familial 10 ans + decalage manuel</div>
-            </div>
-            <div class="kpi-card good">
                 <div class="value">-3 &euro;/mois</div>
-                <div class="label">Pret familial 12 ans + decalage (gain net !)</div>
+                <div class="label">Pret 12 ans + decalage manuel (gain net !)</div>
             </div>
             <div class="kpi-card good">
                 <div class="value">6 &euro;/mois</div>
-                <div class="label">Pret familial 12 ans sans rien faire</div>
+                <div class="label">Pret 12 ans sans rien faire</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="value">0 &euro;</div>
+                <div class="label">Surcout credit (taux 0%)</div>
             </div>
         </div>
 
         <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Avec un pret familial 0% sur 12 ans et un simple decalage de l'electromenager en journee, l'installation se finance quasi entierement toute seule : -3 &euro; de gain net des le depart.</strong> Sur 15 ans, le gain net monte a 17 &euro;/mois.
+            <strong>Recommandation : 10-12 ans.</strong> Sur 12 ans avec decalage manuel, l'installation rapporte 3 &euro;/mois des le depart. Sur 10 ans, le reste a charge est de 11-20 &euro;/mois en annee 1, auto-finance en annee 3-5. Apres remboursement, l'economie continue pendant 13-15 ans supplementaires.
         </div>
 
-        <div class="alert alert-info" style="margin-top: 10px;">
-            <strong>Obligation legale :</strong> un pret familial &gt; 5 000 &euro; doit etre declare aux impots (formulaire 2062). Un contrat ecrit est recommande. Cela n'a <strong>aucun impact</strong> sur les aides solaires (prime autoconsommation, tarif EDF OA, TVA 5,5%).
-        </div>
     </section>
 
     <!-- =============== EVOLUTION V1 → V2 =============== -->
