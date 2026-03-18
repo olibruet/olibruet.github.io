@@ -365,14 +365,14 @@
                 <tr><th>Toit</th><th class="num">Surface exploitable</th><th class="num">Puissance max</th><th>Inclinaison</th><th>Ombrage</th></tr>
             </thead>
             <tbody>
-                <tr><td><strong>Maison versant SE</strong> (7,5m x 18m au sol)</td><td class="num"><strong>~58-62 m&sup2;</strong></td><td class="num">~11,5-12,5 kWc</td><td>30&deg;</td><td>Aucun permanent. Arbres voisin : ombre apres-midi hiver (nov-fev)</td></tr>
+                <tr><td><strong>Maison versant SE</strong> (7,5m x 18m au sol)</td><td class="num"><strong>~58-62 m&sup2;</strong></td><td class="num">~11,5-12,5 kWc</td><td>30&deg;</td><td>Cedres voisin cote ouest : ombre progressive apres-midi (debut 15h30 equinoxe). Calepinage est impose. Perte ~1,5%</td></tr>
                 <tr><td><strong>Pool house</strong> (7m x 2,5m, tuiles)</td><td class="num"><strong>~15-17 m&sup2;</strong></td><td class="num">~3 kWc</td><td>15&deg;</td><td>Aucun</td></tr>
                 <tr class="highlight-row"><td><strong>Total</strong></td><td class="num"><strong>~75 m&sup2;</strong></td><td class="num"><strong>~14,5-15,5 kWc</strong></td><td></td><td></td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-info" style="margin-top: 10px;">
-            Le 6 kWc recommande (~30 m&sup2;) tient largement sur la maison seule. Pour un 9 kWc : maison (6 kWc) + pool house (3 kWc) = combo ideal, zero ombre, tuiles = fixation simple et moins chere que tuiles. L'extension est ecartee (ombrage coniferes du voisin confirme par photos : ~40-50% de perte annuelle).
+            Le <strong>6 kWc recommande</strong> (~30 m&sup2;) tient largement sur la maison seule. <s>9 kWc ecarte</s> : surplus supplementaire revendu a 4 cts (mauvais ROI), pas de wallbox prevue, surcout non justifie. <strong>Calepinage cote est du toit</strong> pour minimiser l'ombrage cedres.
         </div>
 
         <h3>Consommation electrique (15 900 kWh/an &mdash; 2 576 &euro;/an)</h3>
@@ -500,6 +500,10 @@
             <div class="chart-row"><span class="chart-label">Decembre</span><div class="bar" style="width: 49px;"></div><span class="chart-value">189</span></div>
         </div>
         <p style="text-align: right; font-weight: 700; color: var(--gray-700);">Total : 6 600 kWh/an</p>
+
+        <div class="alert alert-warning" style="margin-top: 15px;">
+            <strong>Correction ombrage :</strong> les cedres du voisin (cote ouest) projettent une ombre progressive l'apres-midi (debut 15h30 a l'equinoxe, confirme par releve terrain 18/03/2026). Matin inchange (plein soleil des ~8h45). Avec <strong>calepinage est</strong> (panneaux groupes cote est), production corrigee : <strong>~6 500 kWh/an</strong> (-1,5%). Ancienne estimation : 6 440 kWh/an (-2,4%) &mdash; legerement pessimiste, confirme par le releve terrain. Detail : <code>ombrage-parcelle.md</code>.
+        </div>
     </section>
 
     <!-- =============== SCENARIOS =============== -->
@@ -708,7 +712,7 @@
         <h2 id="s7">7. Flux de tresorerie &mdash; 6 kWc, micro-onduleurs, donnees reelles Linky 2025 (59% autoconsommation)</h2>
 
         <p style="color: var(--gray-700); margin-bottom: 15px; line-height: 1.7;">
-            Ce tableau montre l'evolution financiere annee par annee d'une installation 6 kWc avec micro-onduleurs, basee sur les donnees reelles de consommation Linky 2025 (6 440 kWh de production, 59% d'autoconsommation, corrige ombrage). Chaque ligne = une annee. Les colonnes montrent la production (qui baisse de 0,5%/an avec la degradation des panneaux), l'economie realisee (qui augmente avec l'inflation electrique de 3%/an), et le cumul. <strong>Quand le cumul passe en positif, l'investissement est rembourse.</strong>
+            Ce tableau montre l'evolution financiere annee par annee d'une installation 6 kWc avec <strong>micro-onduleurs</strong> (pas de remplacement onduleur). Base sur les <strong>donnees reelles Linky 2025</strong> (59% autoconsommation, production corrigee ombrage). La production baisse de 0,5%/an (degradation panneaux), l'economie augmente avec l'inflation electrique de 3%/an. <strong>Quand le cumul passe en positif, l'investissement est rembourse.</strong>
         </p>
 
         <table>
@@ -774,7 +778,7 @@
             <tr><td>Recharge HC nuit</td><td class="num">~1 427 kWh/an</td></tr>
         </table>
 
-        <h3>Planning type (Aurelie temps partiel, 180 j/an)</h3>
+        <h3>Planning type (Aurelie temps partiel, ~170 j/an)</h3>
         <table>
             <thead>
                 <tr><th>Jour</th><th>Voiture a la maison ?</th><th>Recharge solaire ?</th></tr>
@@ -865,7 +869,7 @@
                 <tr><td>Autoconsommation</td><td class="num">5 214 kWh</td><td class="num"><strong>3 776 kWh</strong></td><td class="num negative">-1 438 kWh</td></tr>
                 <tr><td>Surplus</td><td class="num">1 386 kWh</td><td class="num"><strong>2 664 kWh</strong></td><td class="num negative">+1 278 kWh</td></tr>
                 <tr><td>Economie autoconso an 1</td><td class="num">923 &euro;</td><td class="num"><strong>665 &euro;</strong></td><td class="num negative">-258 &euro;</td></tr>
-                <tr><td>Revenu surplus</td><td class="num">54 &euro;</td><td class="num"><strong>107 &euro;</strong></td><td class="num positive">+53 &euro;</td></tr>
+                <tr><td>Revenu surplus</td><td class="num">54 &euro;</td><td class="num"><strong>106 &euro;</strong></td><td class="num positive">+52 &euro;</td></tr>
                 <tr class="highlight-row"><td><strong>Gain total an 1</strong></td><td class="num"><strong>977 &euro;</strong></td><td class="num"><strong>771 &euro;</strong></td><td class="num negative"><strong>-206 &euro;</strong></td></tr>
                 <tr class="highlight-row"><td><strong>Retour sur investissement</strong></td><td class="num"><strong>10 ans</strong></td><td class="num"><strong>~11 ans</strong></td><td class="num negative"><strong>+1 an</strong></td></tr>
             </tbody>
@@ -877,23 +881,23 @@
                 <tr><th>Mois</th><th class="num">Conso</th><th class="num">Production</th><th class="num">Autoconso</th><th class="num">Surplus</th><th class="num">Tx auto</th><th class="num">Tx couv.</th></tr>
             </thead>
             <tbody>
-                <tr><td>Janvier</td><td class="num">1 514</td><td class="num">191</td><td class="num">131</td><td class="num">60</td><td class="num">69%</td><td class="num">9%</td></tr>
-                <tr><td>Fevrier</td><td class="num">1 469</td><td class="num">284</td><td class="num">210</td><td class="num">74</td><td class="num">74%</td><td class="num">14%</td></tr>
-                <tr><td>Mars</td><td class="num">1 374</td><td class="num">534</td><td class="num">303</td><td class="num">231</td><td class="num">57%</td><td class="num">22%</td></tr>
+                <tr><td>Janvier</td><td class="num">1 516</td><td class="num">191</td><td class="num">122</td><td class="num">70</td><td class="num">64%</td><td class="num">8%</td></tr>
+                <tr><td>Fevrier</td><td class="num">1 470</td><td class="num">284</td><td class="num">201</td><td class="num">84</td><td class="num">71%</td><td class="num">14%</td></tr>
+                <tr><td>Mars</td><td class="num">1 373</td><td class="num">534</td><td class="num">303</td><td class="num">231</td><td class="num">57%</td><td class="num">22%</td></tr>
                 <tr><td>Avril</td><td class="num">1 119</td><td class="num">660</td><td class="num">315</td><td class="num">345</td><td class="num">48%</td><td class="num">28%</td></tr>
-                <tr><td>Mai</td><td class="num">1 317</td><td class="num">786</td><td class="num">472</td><td class="num">314</td><td class="num">60%</td><td class="num">36%</td></tr>
-                <tr><td>Juin</td><td class="num">1 208</td><td class="num">849</td><td class="num">441</td><td class="num">408</td><td class="num">52%</td><td class="num">37%</td></tr>
-                <tr style="background: var(--sun-light);"><td><strong>Juillet</strong></td><td class="num">1 013</td><td class="num">911</td><td class="num">438</td><td class="num">473</td><td class="num">48%</td><td class="num"><strong>43%</strong></td></tr>
+                <tr><td>Mai</td><td class="num">1 318</td><td class="num">786</td><td class="num">472</td><td class="num">314</td><td class="num">60%</td><td class="num">36%</td></tr>
+                <tr><td>Juin</td><td class="num">1 205</td><td class="num">849</td><td class="num">441</td><td class="num">408</td><td class="num">52%</td><td class="num">37%</td></tr>
+                <tr style="background: var(--sun-light);"><td><strong>Juillet</strong></td><td class="num">1 014</td><td class="num">911</td><td class="num">438</td><td class="num">473</td><td class="num">48%</td><td class="num"><strong>43%</strong></td></tr>
                 <tr><td>Aout</td><td class="num">1 469</td><td class="num">817</td><td class="num">511</td><td class="num">306</td><td class="num">63%</td><td class="num">35%</td></tr>
-                <tr><td>Septembre</td><td class="num">1 190</td><td class="num">629</td><td class="num">385</td><td class="num">244</td><td class="num">61%</td><td class="num">32%</td></tr>
-                <tr><td>Octobre</td><td class="num">1 062</td><td class="num">409</td><td class="num">278</td><td class="num">131</td><td class="num">68%</td><td class="num">26%</td></tr>
-                <tr><td>Novembre</td><td class="num">1 456</td><td class="num">218</td><td class="num">178</td><td class="num">40</td><td class="num">82%</td><td class="num">12%</td></tr>
-                <tr><td>Decembre</td><td class="num">1 714</td><td class="num">151</td><td class="num">136</td><td class="num">15</td><td class="num">90%</td><td class="num">8%</td></tr>
+                <tr><td>Septembre</td><td class="num">1 191</td><td class="num">629</td><td class="num">385</td><td class="num">244</td><td class="num">61%</td><td class="num">32%</td></tr>
+                <tr><td>Octobre</td><td class="num">1 061</td><td class="num">409</td><td class="num">278</td><td class="num">131</td><td class="num">68%</td><td class="num">26%</td></tr>
+                <tr><td>Novembre</td><td class="num">1 457</td><td class="num">218</td><td class="num">177</td><td class="num">42</td><td class="num">81%</td><td class="num">12%</td></tr>
+                <tr><td>Decembre</td><td class="num">1 712</td><td class="num">151</td><td class="num">135</td><td class="num">17</td><td class="num">89%</td><td class="num">8%</td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-info" style="margin-top: 15px;">
-            En hiver, l'autoconsommation est elevee (80-89%) mais la production est faible : presque tout est consomme mais ca ne couvre que 10-16% de la facture. En ete, la production est forte mais l'autoconsommation est basse (48-63%) car la conso diurne est limitee a la piscine + talon.
+            En hiver, l'autoconsommation est elevee (80-89%) mais la production est faible (corrigee ombrage apres-midi) : presque tout est consomme mais ca ne represente que 8-14% de la facture. En ete, la production est forte mais l'autoconsommation est basse (48-63%) car la conso diurne est limitee a la piscine + talon. <strong>L'essentiel du gain (55%) vient du printemps et de l'ete ou il n'y a aucun ombrage.</strong>
         </div>
 
         <h3>Potentiel d'optimisation (decalage de charge)</h3>
@@ -910,7 +914,7 @@
                 <tr><td>Seche-linge en journee</td><td>Idem</td><td class="num">~200</td><td class="num">~25 &euro;</td></tr>
                 <tr><td>1 lave-vaisselle sur 2 en journee</td><td>Lancer apres le dejeuner</td><td class="num">~275</td><td class="num">~35 &euro;</td></tr>
                 <tr><td>Piscine resserree 10h-16h</td><td>Reprogrammer l'horloge du coffret</td><td class="num">~100</td><td class="num">~14 &euro;</td></tr>
-                <tr><td>Vehicule electrique</td><td>Brancher en arrivant, borne mode eco solaire</td><td class="num">~874</td><td class="num">~85 &euro;</td></tr>
+                <tr><td>Vehicule electrique (prise standard)</td><td>Brancher en journee, HA pilote via relais surplus/HC</td><td class="num">~874</td><td class="num">~85 &euro;</td></tr>
                 <tr class="highlight-row"><td><strong>Total manuel</strong></td><td></td><td class="num"><strong>~1 800</strong></td><td class="num"><strong>~209 &euro;</strong></td></tr>
             </tbody>
         </table>
@@ -926,7 +930,7 @@
         </table>
 
         <div class="alert alert-info" style="margin-top: 10px;">
-            Le ballon ECS est asservi au signal HC du compteur Linky (declenchement automatique ~22h30). Il n'est pas possible de le forcer en journee sans un relais connecte qui court-circuite le contacteur HC. C'est le seul levier qui necessite la domotique, mais aussi le plus impactant.
+            Le ballon ECS est asservi au signal HC du compteur Linky (declenchement automatique ~21h45). Il n'est pas possible de le forcer en journee sans un relais connecte qui court-circuite le contacteur HC. C'est le seul levier qui necessite la domotique, et c'est le <strong>plus gros levier unitaire</strong> du projet.
         </div>
 
         <div class="alert alert-success" style="margin-top: 10px;">
@@ -996,29 +1000,28 @@
         <h2 id="s11">11. Conclusion et recommandations</h2>
 
         <div class="alert alert-success">
-            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios, mais les donnees reelles Linky 2025 (<a href="#s9">section 9</a>) montrent que l'optimisation est indispensable : sans decalage de charge, le retour est de ~11 ans ; avec domotique + EV, il descend a ~8 ans.
+            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios. Les donnees reelles Linky 2025 (<a href="#s9">section 9</a>), corrigees pour l'ombrage hivernal, donnent un retour de ~11 ans sans optimisation (cout median) ou ~9 ans avec un bon devis. Avec decalage de charge + domotique + EV, le retour descend a ~7-9 ans. Apres 2028, le passage au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) ameliore encore d'environ 1 an.
         </div>
 
         <h3>Resume des retours sur investissement</h3>
         <table>
             <thead>
-                <tr><th>Scenario</th><th class="num">Retour</th></tr>
+                <tr><th>Scenario</th><th class="num">ROI (cout median)</th><th class="num">ROI (bon devis)</th></tr>
             </thead>
             <tbody>
-                <tr style="background: var(--red-light);"><td><strong>Donnees reelles brutes (sans optimisation)</strong></td><td class="num"><strong>~11 ans</strong></td></tr>
-                <tr class="breakeven"><td><strong>Donnees reelles + domotique + EV</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
-                <tr><td>Modele theorique tarif HP actuel + cout median</td><td class="num">10 ans</td></tr>
-                <tr><td>Brut, tarif reglemente HP/HC (apres 2028)</td><td class="num">~10 ans</td></tr>
-                <tr><td>Tarif HP actuel + cout bas (bon devis)</td><td class="num">8 ans</td></tr>
-                <tr><td>Pire cas (tarif bas alt. + cout haut)</td><td class="num">14 ans</td></tr>
+                <tr style="background: var(--red-light);"><td><strong>Donnees reelles brutes, tarif actuel</strong></td><td class="num"><strong>~11 ans</strong></td><td class="num"><strong>~9 ans</strong></td></tr>
+                <tr><td>Decalage manuel, tarif actuel</td><td class="num">~10 ans</td><td class="num">~9 ans</td></tr>
+                <tr class="breakeven"><td><strong>Domotique + ECS + EV, tarif actuel</strong></td><td class="num"><strong>~9 ans</strong></td><td class="num"><strong>~7 ans</strong></td></tr>
+                <tr class="highlight-row"><td><strong>Brut, tarif reglemente HP/HC (apres 2028)</strong></td><td class="num"><strong>~10 ans</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
+                <tr><td>Pire cas (tarif bas alt. + cout haut 14 000 &euro;)</td><td class="num">~14 ans</td><td class="num">&mdash;</td></tr>
             </tbody>
         </table>
 
         <h3>Points cles</h3>
         <ol style="margin: 10px 0 10px 20px; line-height: 2;">
-            <li><strong>Donnees reelles Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Sans optimisation : autoconso 59%, gain 771 &euro;/an, retour ~11 ans. Avec decalage manuel : 878 &euro;/an, retour ~10 ans. Avec domotique ECS : 1 012 &euro;/an, retour ~9 ans.</li>
+            <li><strong>Donnees reelles Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Production corrigee ombrage hiver : 6 440 kWh/an. Sans optimisation : autoconso 59%, gain 771 &euro;/an, retour ~11 ans (cout median) ou ~9 ans (bon devis). Avec decalage manuel : 878 &euro;/an, retour ~10 ans. Avec domotique ECS 300L + EV : ~1 077 &euro;/an, retour ~8 ans.</li>
             <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore le retour de 11 a ~10 ans.</li>
-            <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 6 440 kWh/an, reduction de 30 a 40% de la facture selon optimisation.</li>
+            <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 6 600 kWh/an, reduction de 31 a 43% de la facture selon optimisation.</li>
             <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, pas de remplacement onduleur a 1 500 &euro; en annee 12. Garantie 20-25 ans, monitoring par panneau.</li>
             <li><strong>HC en journee (~2028)</strong> : quand Enedis deploiera 2h HC en journee, le ballon ECS se declenchera automatiquement sur le pic solaire. Timing favorable : arrive en meme temps que la fin du contrat fixe. Retour ~9 ans sans domotique, potentiellement mieux avec le tarif reglemente.</li>
             <li><strong>Facteurs favorables</strong> : forte consommation (15 904 kWh/an mesures), piscine + PAC en journee, orientation SE correcte, pas d'ombrage sur maison + pool house.</li>
@@ -1044,34 +1047,36 @@
     <section>
         <h2 id="s12">12. Financement</h2>
 
-        <p style="color: var(--gray-500); margin-bottom: 15px;">Simulation de financement de l'installation 6 kWc (interets inclus).</p>
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Financement confirme : pret familial a taux 0%, sans frais. Pas de surcout credit. La mensualite est simplement le montant divise par la duree.</p>
 
         <h3>Hypotheses</h3>
         <table>
-            <tr><td>Montant</td><td class="num">10 020 &euro; (cout median - prime)</td></tr>
-            <tr><td>Interets</td><td class="num">Inclus dans la mensualite</td></tr>
-            <tr><td>Gain solaire an 1</td><td class="num">771 &euro; (brut) / 878 &euro; (decalage) / 1 012 &euro; (domotique ECS)</td></tr>
+            <tr><td>Montant</td><td class="num">10 020 &euro; (cout median 10 500 - prime 480)</td></tr>
+            <tr><td>Taux</td><td class="num"><strong>0%</strong> (pret familial)</td></tr>
+            <tr><td>Surcout credit</td><td class="num"><strong>0 &euro;</strong></td></tr>
+            <tr><td>Gain solaire an 1</td><td class="num">771 &euro;/an sans optimisation &mdash; 878 &euro;/an avec decalage manuel &mdash; 1 012 &euro;/an avec domotique ECS</td></tr>
+            <tr><td>Inflation electricite</td><td class="num">3%/an (le gain solaire augmente chaque annee)</td></tr>
         </table>
 
         <h3>Reste a charge mensuel par duree et scenario</h3>
 
         <table>
             <thead>
-                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optim (64 &euro;)</th><th class="num">Decalage manuel (73 &euro;)</th><th class="num">Domotique ECS (84 &euro;)</th></tr>
+                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optim (64 &euro;)</th><th class="num">Decalage manuel (73 &euro;)</th><th class="num">Domotique ECS (81 &euro;)</th></tr>
             </thead>
             <tbody>
-                <tr><td>5 ans</td><td class="num">167 &euro;</td><td class="num negative">103 &euro;</td><td class="num negative">94 &euro;</td><td class="num negative">83 &euro;</td></tr>
-                <tr><td>7 ans</td><td class="num">119 &euro;</td><td class="num">55 &euro;</td><td class="num">46 &euro;</td><td class="num">35 &euro;</td></tr>
-                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">20 &euro;</td><td class="num">11 &euro;</td><td class="num positive">0 &euro;</td></tr>
-                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>6 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain)</strong></td><td class="num positive"><strong>-14 &euro; (gain)</strong></td></tr>
-                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>56 &euro;</strong></td><td class="num positive"><strong>-8 &euro; (gain)</strong></td><td class="num positive"><strong>-17 &euro; (gain)</strong></td><td class="num positive"><strong>-28 &euro; (gain)</strong></td></tr>
+                <tr><td>5 ans</td><td class="num">167 &euro;</td><td class="num negative">103 &euro;</td><td class="num negative">94 &euro;</td><td class="num negative">86 &euro;</td></tr>
+                <tr><td>7 ans</td><td class="num">119 &euro;</td><td class="num">55 &euro;</td><td class="num">46 &euro;</td><td class="num">38 &euro;</td></tr>
+                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">20 &euro;</td><td class="num">11 &euro;</td><td class="num positive">3 &euro;</td></tr>
+                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>6 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain)</strong></td><td class="num positive"><strong>-11 &euro; (gain)</strong></td></tr>
+                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>56 &euro;</strong></td><td class="num positive"><strong>-8 &euro; (gain)</strong></td><td class="num positive"><strong>-17 &euro; (gain)</strong></td><td class="num positive"><strong>-25 &euro; (gain)</strong></td></tr>
             </tbody>
         </table>
 
         <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">Valeurs negatives = l'economie solaire depasse la mensualite, l'installation rapporte de l'argent chaque mois. L'economie augmente chaque annee avec l'inflation electrique (+3%/an).</p>
 
         <div class="alert alert-warning" style="margin-top: 10px;">
-            <strong>Pire cas :</strong> financement 10 ans + aucune optimisation = <strong>20 &euro;/mois</strong> en annee 1. Ce cout baisse chaque annee et l'installation s'auto-finance en annee 3-5.
+            <strong>Pire cas :</strong> pret familial 0% sur 10 ans + aucune optimisation = reste a charge de <strong>20 &euro;/mois</strong> en annee 1, auto-finance en annee 3-4 grace a l'inflation electrique.
         </div>
 
         <h3>Synthese financement</h3>
@@ -1092,7 +1097,11 @@
         </div>
 
         <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Recommandation : 10-12 ans.</strong> Sur 12 ans avec decalage manuel, l'installation rapporte 3 &euro;/mois des le depart. Sur 10 ans, le reste a charge est de 11-20 &euro;/mois en annee 1, auto-finance en annee 3-5. Apres remboursement, l'economie continue pendant 13-15 ans supplementaires.
+            <strong>Duree conseillee : 10-12 ans.</strong> Sur 12 ans avec decalage manuel, l'installation rapporte 3 &euro;/mois des le premier mois. Sur 10 ans, le reste a charge est de 11 &euro;/mois. <strong>Apres le remboursement</strong> : l'economie solaire continue pendant 13-15 ans supplementaires (duree de vie panneaux 25 ans), soit ~15 000-20 000 &euro; de gain net apres remboursement.
+        </div>
+
+        <div class="alert alert-warning" style="margin-top: 10px;">
+            <strong>Obligation legale :</strong> un pret familial &gt; 5 000 &euro; doit etre declare aux impots (formulaire 2062). Un contrat ecrit est recommande. Cela n'a aucun impact sur les aides solaires (prime autoconsommation, tarif EDF OA, TVA 5,5%).
         </div>
 
     </section>

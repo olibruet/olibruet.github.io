@@ -433,14 +433,27 @@
                 <tr><td><strong>Localisation</strong></td><td>Vayres, Gironde (33)</td></tr>
                 <tr><td><strong>Surface toit maison (versant SE)</strong></td><td>~60 m&sup2;, tuiles, pente ~30&deg;</td></tr>
                 <tr><td><strong>Surface pool house (tuiles)</strong></td><td>~16 m&sup2;, pente ~15&deg;, meme orientation SE</td></tr>
-                <tr><td><strong>Ombrage</strong></td><td>Aucun sur les 2 toits</td></tr>
+                <tr><td><strong>Ombrage</strong></td><td>Cedres voisin cote ouest &rarr; ombre apres-midi en hiver (debut 15h30 equinoxe). <strong>Calepinage cote est du toit imperatif</strong></td></tr>
                 <tr><td><strong>Consommation annuelle</strong></td><td>15 900 kWh/an (Linky 2025)</td></tr>
-                <tr><td><strong>Puissance souhaitee</strong></td><td>6 kWc (maison) &mdash; devis 9 kWc (maison + pool house) en option</td></tr>
+                <tr><td><strong>Puissance souhaitee</strong></td><td><strong>6 kWc</strong> (maison uniquement, 9 kWc ecarte &mdash; voir ci-dessous)</td></tr>
                 <tr><td><strong>Preference onduleur</strong></td><td><strong>Micro-onduleurs</strong> (pas string)</td></tr>
                 <tr><td><strong>Mode</strong></td><td>Autoconsommation + revente surplus EDF OA</td></tr>
-                <tr><td><strong>Financement</strong></td><td>Deja prevu (pas besoin de financement installateur)</td></tr>
+                <tr><td><strong>Financement</strong></td><td>Pret familial (pas besoin de financement installateur)</td></tr>
+                <tr><td><strong>Recharge EV</strong></td><td><strong>Prise standard</strong> (2,3 kW) ou Green'Up (3,7 kW) &mdash; pas de wallbox (voir ci-dessous)</td></tr>
             </tbody>
         </table>
+
+        <h3>Pourquoi 6 kWc et pas 9 kWc</h3>
+        <ul style="margin: 10px 0; padding-left: 20px;">
+            <li>Pas de wallbox prevue &rarr; pas de grosse charge EV a absorber en journee</li>
+            <li>Recharge EV en <strong>prise standard</strong> : 12 840 km/an &times; 15 kWh/100km = ~1 926 kWh/an, soit ~5,3 kWh/jour &rarr; <strong>2h20 de charge</strong> suffisent</li>
+            <li>Recharge en <strong>HC la nuit</strong> (13,6 cts) les jours de bureau, en <strong>surplus solaire</strong> les WE/teletravail</li>
+            <li>Les 3 kWc supplementaires produiraient surtout du surplus revendu a 4 cts &rarr; ROI mediocre</li>
+            <li>Le surcout 9 kWc (~2 000 &euro;) + wallbox (~1 200 &euro;) = <strong>3 200 &euro;</strong> sans gain proportionnel</li>
+        </ul>
+
+        <h3>Pourquoi pas de wallbox (recommandation JPSun)</h3>
+        <p style="margin: 10px 0;">Une wallbox 7,4 kW tire plus que le surplus solaire disponible (~2-3 kW apres conso maison) &rarr; le delta est soutire au reseau en HP = cher. Une prise standard 2,3 kW reste dans l'enveloppe du surplus et suffit pour le besoin quotidien (~5 kWh/jour). Home Assistant peut piloter la charge via un relais pour ne charger que pendant le surplus ou les HC.</p>
     </section>
 
     <!-- =============== INSTALLATEURS =============== -->
@@ -696,6 +709,7 @@
         <h3>Pendant la visite technique</h3>
         <ul class="checklist">
             <li><input type="checkbox" disabled> Validation de la surface toit et orientation (visite sur place obligatoire)</li>
+            <li><input type="checkbox" disabled> <strong>Calepinage cote EST du toit</strong> : ombre cedres voisin arrive par l'ouest (pignon) a 15h30 equinoxe &rarr; grouper les 12 panneaux au bout est pour maximiser le soleil</li>
             <li><input type="checkbox" disabled> Verification charpente / portance</li>
             <li><input type="checkbox" disabled> Point sur le tableau electrique (place pour le disjoncteur AC, liaison onduleur)</li>
             <li><input type="checkbox" disabled> Passage de cables (distance toit &rarr; tableau)</li>
@@ -747,14 +761,8 @@
             <li><input type="checkbox" disabled> Delai mise en service EDF OA</li>
         </ul>
 
-        <h3>Option 9 kWc (maison + pool house)</h3>
-        <ul class="checklist">
-            <li><input type="checkbox" disabled> Devis separe ou combine 6 + 3 kWc</li>
-            <li><input type="checkbox" disabled> Impact sur le prix au kWc (degressif ?)</li>
-            <li><input type="checkbox" disabled> Micro-onduleurs : meme marque/modele sur les 2 toits ?</li>
-            <li><input type="checkbox" disabled> Pool house tuiles : fixation speciale ? surcout ?</li>
-            <li><input type="checkbox" disabled> Pente 15&deg; du pool house : pose a plat ou chassis incline ?</li>
-        </ul>
+        <h3><s>Option 9 kWc</s> (ecartee)</h3>
+        <p style="margin: 10px 0; color: var(--gray-500);">9 kWc ecarte : surplus supplementaire revendu a 4 cts (mauvais ROI), pas de wallbox prevue, surcout ~3 200 &euro; (panneaux + wallbox) sans gain proportionnel. Voir justification dans &laquo; Mon projet en bref &raquo;.</p>
     </section>
 
     <!-- =============== GRILLE COMPARAISON =============== -->
@@ -791,8 +799,18 @@
         </table>
         </div>
 
+        <p style="margin-top: 15px;"><s>Option 9 kWc ecartee</s> (voir justification dans &laquo; Mon projet en bref &raquo;)</p>
+
         <div class="alert alert-info" style="margin-top: 15px;">
             <strong>Classement prix actuel :</strong> Azelec (<strong>7 294 &euro;</strong> devis) &lt; Courant Naturel (~8 200-8 700 &euro; cat.) &lt; Concept'Energy (<strong>8 900 &euro;</strong> devis) &lt; Force Eco (9 000 &euro; cat.) &lt; Le Solarman (12 000 &euro;+ cat.). <em>Les prix catalogue sont indicatifs. Seuls les devis personnalises font foi.</em>
+        </div>
+
+        <div class="alert alert-warning" style="margin-top: 10px;">
+            <strong>Impact TVA panneaux bas carbone</strong> : les panneaux certifies bas carbone (bilan CO2 &lt; seuil) beneficient de la TVA 5,5% au lieu de 20%. Sur un 6 kWc, l'ecart est de <strong>~1 100 &euro; TTC</strong>. Azelec (Jinko Tiger Neo, bas carbone certifie) en beneficie. Concept'Energy (DualSun, non bas carbone) non. L'ecart HT entre les deux n'est que de 503 &euro;. <strong>A demander systematiquement</strong> : les panneaux proposes sont-ils eligibles TVA 5,5% (bas carbone) ?
+        </div>
+
+        <div class="alert alert-info" style="margin-top: 10px;">
+            <em>Note : les prix &laquo; catalogue &raquo; sont indicatifs. Seuls les devis personnalises font foi. Courant Naturel (visio 24/03), Force Eco (RDV 25/03) et Le Solarman (RDV 21/03) n'ont pas encore rendu leur devis.</em>
         </div>
     </section>
 
@@ -833,11 +851,11 @@
 
         <div class="kpi-grid">
             <div class="kpi-card good">
-                <div class="value">7 294 &euro;</div>
-                <div class="label">6 kWc &mdash; Meilleur devis (Azelec)</div>
+                <div class="value">7 300 &euro;</div>
+                <div class="label">6 kWc &mdash; Bas (bon devis)</div>
             </div>
             <div class="kpi-card highlight">
-                <div class="value">10 500 &euro;</div>
+                <div class="value">9 000 &euro;</div>
                 <div class="label">6 kWc &mdash; Median</div>
             </div>
             <div class="kpi-card">
@@ -846,23 +864,12 @@
             </div>
         </div>
 
-        <div class="kpi-grid">
-            <div class="kpi-card">
-                <div class="value">12 000 &euro;</div>
-                <div class="label">9 kWc &mdash; Bas (bon devis)</div>
-            </div>
-            <div class="kpi-card highlight">
-                <div class="value">15 500 &euro;</div>
-                <div class="label">9 kWc &mdash; Median</div>
-            </div>
-            <div class="kpi-card">
-                <div class="value">20 000 &euro;</div>
-                <div class="label">9 kWc &mdash; Haut</div>
-            </div>
+        <div class="alert alert-info" style="margin-top: 10px;">
+            Fourchette revisee : Azelec a 7 294 &euro; TTC montre que des prix &lt; 8 000 &euro; sont possibles sur le marche girondin. Le &laquo; median &raquo; est desormais ~9 000 &euro; (anciennement 10 500 &euro; avant reception des devis).
         </div>
 
-        <div class="alert alert-info">
-            <strong>Objectif</strong> : Azelec a pose la reference a <strong>7 294 &euro; TTC</strong>. Comparer avec les devis a venir (Force Eco 25/03, Courant Naturel 24/03, Le Solarman 21/03). Au-dela de 10 000 &euro;, negocier ou passer.
+        <div class="alert alert-success" style="margin-top: 10px;">
+            <strong>Objectif</strong> : obtenir un devis 6 kWc micro-onduleurs a <strong>7 500 - 9 000 EUR TTC</strong>. Au-dela de 10 000 &euro;, negocier ou passer au suivant.
         </div>
     </section>
 
