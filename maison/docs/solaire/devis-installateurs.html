@@ -447,21 +447,53 @@
     <section>
         <h2>Installateurs a contacter</h2>
 
-        <div class="installer-card">
-            <div class="card-header">
-                <span>1. Azelec 33</span>
-                <a href="https://www.azelec33.fr/" target="_blank">azelec33.fr</a>
+        <div class="installer-card" style="border-color: var(--green);">
+            <div class="card-header" style="background: var(--green); color: white;">
+                <span>1. Azelec 33 &mdash; DEVIS RECU</span>
+                <a href="https://www.azelec33.fr/" target="_blank" style="color: white;">azelec33.fr</a>
             </div>
             <div class="card-body">
-                <div class="metric"><span class="label">Localisation</span><span class="val">Haute Gironde</span></div>
-                <div class="metric"><span class="label">Points forts</span><span class="val">Prix competitifs, techniciens minutieux, RGE depuis 2015</span></div>
-                <div class="metric"><span class="label">Avis</span><span class="val">Bons retours (Picbleu, Google)</span></div>
-                <div class="metric"><span class="label">Prix</span><span class="val">&mdash;</span></div>
-                <div class="metric"><span class="label">Notes</span><span class="val">&mdash;</span></div>
+                <div class="kpi-grid" style="margin-bottom: 15px;">
+                    <div class="kpi-card good">
+                        <div class="value">7 294 &euro;</div>
+                        <div class="label">6 kWc TTC (net 6 814 &euro;)</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="value">9 289 &euro;</div>
+                        <div class="label">6 kWc + batterie 10 kWh TTC</div>
+                    </div>
+                    <div class="kpi-card highlight">
+                        <div class="value">1 216 &euro;/kWc</div>
+                        <div class="label">Prix au kWc (le plus bas)</div>
+                    </div>
+                </div>
+
+                <h4 style="margin-top: 0;">Devis D202606740 &mdash; 6 kWc sans batterie</h4>
+                <table>
+                    <thead><tr><th>Poste</th><th>Detail</th><th class="num">Qte</th><th class="num">Prix TTC</th></tr></thead>
+                    <tbody>
+                        <tr><td>Panneaux</td><td><strong>Jinko Tiger Neo 500W</strong> bifacial bi-verre, garantie 30 ans, type N</td><td class="num">12</td><td class="num">2 640 &euro;</td></tr>
+                        <tr><td>Montage</td><td>Surimposition <strong>K2System</strong> (brevete)</td><td class="num">1</td><td class="num">1 700 &euro;</td></tr>
+                        <tr><td>Micro-onduleurs</td><td><strong>APsystems DS3H</strong> (960VA, 2 MPPT, Zigbee, garantie 2&rarr;20 ans avec ECU)</td><td class="num">6</td><td class="num">1 320 &euro;</td></tr>
+                        <tr><td>Passerelle</td><td><strong>APS ECU C</strong> (app EMA, supervision AC/DC)</td><td class="num">1</td><td class="num">400 &euro;</td></tr>
+                        <tr><td>Coffret protection</td><td>AC/DC, disjoncteur, differentiel, parafoudre</td><td class="num">1</td><td class="num">500 &euro;</td></tr>
+                        <tr style="background: var(--green-light);"><td>Routeur ECS</td><td><strong>ARSUN</strong> &mdash; envoie le surplus vers le chauffe-eau</td><td class="num">1</td><td class="num"><strong>OFFERT</strong></td></tr>
+                        <tr><td>Administratif</td><td>Consuel + mairie + Enedis</td><td class="num"></td><td class="num">354 &euro;</td></tr>
+                        <tr class="highlight-row"><td><strong>TOTAL TTC</strong></td><td></td><td></td><td class="num"><strong>7 294 &euro;</strong></td></tr>
+                    </tbody>
+                </table>
+
+                <div class="alert alert-success" style="margin-top: 15px;">
+                    <strong>Points forts :</strong> Prix le plus bas (7 294 &euro;), panneaux Jinko top tier, fixation K2System, micro-onduleurs APsystems (malgre reticence initiale), routeur ECS ARSUN offert, demarches incluses, TVA 5,5% appliquee, decennale QBE.
+                </div>
+                <div class="alert alert-warning" style="margin-top: 10px;">
+                    <strong>Points d'attention :</strong> Pas de visite sur place (devis sur elements fournis). APsystems DS3H garantie 2 ans de base (20 ans avec ECU incluse). APsystems = bon mais pas Enphase (le leader).
+                </div>
+
                 <div class="status">
-                    <label><input type="checkbox" disabled checked> Contacté (17/03)</label>
-                    <label><input type="checkbox" disabled> Visite</label>
-                    <label><input type="checkbox" disabled> Devis recu</label>
+                    <label><input type="checkbox" disabled checked> Contacte (17/03)</label>
+                    <label><input type="checkbox" disabled> <s>Visite</s> (pas de deplacement)</label>
+                    <label><input type="checkbox" disabled checked> <strong>Devis recu (18/03)</strong></label>
                 </div>
             </div>
         </div>
@@ -574,10 +606,10 @@
                 <div class="metric"><span class="label">Avis</span><span class="val">Tres repute sur Forum Photovoltaique</span></div>
                 <div class="metric"><span class="label">Prix catalogue</span><span class="val"><strong>~7 680 &euro;</strong> (5,85 kWc) / <strong>~8 220 &euro;</strong> (6,30 kWc) TTC pose comprise &mdash; offre SMA. Enphase: +500-1 000 &euro;</span></div>
                 <div class="metric"><span class="label">Matos</span><span class="val">SunPower 435-450 Wc (30-40 ans) + Enphase IQ7A (25 ans) ou SMA (10 ans) + Novotegra</span></div>
-                <div class="metric"><span class="label">Notes</span><span class="val">Prix catalogue, pas devis perso. Demander config Enphase micro-ond.</span></div>
+                <div class="metric"><span class="label">Notes</span><span class="val">Prix catalogue, pas devis perso. <strong>RDV visio 24/03 13h</strong>. Demander config Enphase micro-ond.</span></div>
                 <div class="status">
-                    <label><input type="checkbox" disabled> Contacté</label>
-                    <label><input type="checkbox" disabled> Visite</label>
+                    <label><input type="checkbox" disabled checked> Contacte (17/03)</label>
+                    <label><input type="checkbox" disabled> Visio 24/03 13h</label>
                     <label><input type="checkbox" disabled> Devis recu</label>
                 </div>
             </div>
@@ -701,35 +733,32 @@
             <thead>
                 <tr>
                     <th>Critere</th>
-                    <th>Azelec</th>
-                    <th>JPSUN</th>
+                    <th style="background: var(--green-light);"><strong>Azelec</strong></th>
                     <th>Force Eco</th>
                     <th>Le Solarman</th>
                     <th>Concept'E</th>
-                    <th>Havegeer</th>
                     <th>Courant N.</th>
-                    <th>Otovo</th>
-                    <th>HelloW.</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td><strong>Nom</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Prix TTC 6 kWc</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Prix TTC 9 kWc</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Prix au kWc</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Panneaux (marque/modele)</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Puissance unitaire</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Micro-onduleurs (marque)</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Garantie panneaux</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Garantie micro-onduleurs</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Monitoring inclus</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Demarches incluses</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Delai pose</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Assurance decennale</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Avis Google</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-                <tr><td><strong>Impression visite</strong></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td><strong>Prix TTC 6 kWc</strong></td><td class="num" style="background: var(--green-light);"><strong>7 294 &euro;</strong></td><td class="num">9 000 &euro; (cat.)</td><td class="num">12-14 000 &euro; (cat.)</td><td class="num">8 900 &euro; (cat.)</td><td class="num">~8 200-8 700 &euro; (cat.)</td></tr>
+                <tr><td><strong>Net apres prime</strong></td><td class="num" style="background: var(--green-light);"><strong>6 814 &euro;</strong></td><td class="num">~8 520 &euro;</td><td class="num">~11 520-13 520 &euro;</td><td class="num">~8 420 &euro;</td><td class="num">~7 720-8 220 &euro;</td></tr>
+                <tr><td><strong>Prix au kWc</strong></td><td class="num" style="background: var(--green-light);"><strong>1 216 &euro;</strong></td><td class="num">1 500 &euro;</td><td class="num">2 000-2 333 &euro;</td><td class="num">1 483 &euro;</td><td class="num">~1 367-1 450 &euro;</td></tr>
+                <tr><td><strong>Panneaux</strong></td><td style="background: var(--green-light);">Jinko Tiger Neo 500W</td><td>Bifacial 500W (?)</td><td>Jinko Solar</td><td>Dualsun</td><td>SunPower P7/MAX6</td></tr>
+                <tr><td><strong>Garantie panneaux</strong></td><td style="background: var(--green-light);">30 ans</td><td>?</td><td>25 ans</td><td>30 ans</td><td>30-40 ans</td></tr>
+                <tr><td><strong>Micro-onduleurs</strong></td><td style="background: var(--green-light);">APsystems DS3H</td><td>Au choix</td><td>Enphase</td><td>Hoymiles</td><td>Enphase IQ7A / SMA</td></tr>
+                <tr><td><strong>Garantie micro-ond.</strong></td><td style="background: var(--green-light);">2 ans (&rarr;20 avec ECU)</td><td>?</td><td>25 ans</td><td>? (12-15?)</td><td>25 ans (Enphase)</td></tr>
+                <tr><td><strong>Monitoring</strong></td><td style="background: var(--green-light);">APS EMA (app)</td><td>?</td><td>Enphase Enlighten</td><td>?</td><td>Enphase Enlighten</td></tr>
+                <tr><td><strong>Routeur ECS</strong></td><td style="background: var(--green-light);"><strong>ARSUN offert</strong></td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
+                <tr><td><strong>Demarches incluses</strong></td><td style="background: var(--green-light);">Oui (354 &euro;)</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
+                <tr><td><strong>Visite sur place</strong></td><td class="negative">Non</td><td>Oui (25/03)</td><td>Oui (21/03)</td><td>?</td><td>Visio (24/03)</td></tr>
+                <tr><td><strong>Devis recu</strong></td><td style="background: var(--green-light);"><strong>Oui (18/03)</strong></td><td>Non</td><td>Non</td><td>Non</td><td>Non</td></tr>
             </tbody>
         </table>
+        </div>
+
+        <div class="alert alert-info" style="margin-top: 15px;">
+            <strong>Classement prix actuel :</strong> Azelec (7 294 &euro;) &lt; Courant Naturel (~8 200-8 700 &euro;) &lt; Concept'Energy (8 900 &euro;) &lt; Force Eco (9 000 &euro;) &lt; Le Solarman (12 000 &euro;+). <em>Les prix catalogue sont indicatifs. Seuls les devis personnalises font foi.</em>
         </div>
     </section>
 
@@ -769,9 +798,9 @@
         <h2>Fourchette de prix attendue (marche mars 2026)</h2>
 
         <div class="kpi-grid">
-            <div class="kpi-card">
-                <div class="value">9 000 &euro;</div>
-                <div class="label">6 kWc &mdash; Bas (bon devis)</div>
+            <div class="kpi-card good">
+                <div class="value">7 294 &euro;</div>
+                <div class="label">6 kWc &mdash; Meilleur devis (Azelec)</div>
             </div>
             <div class="kpi-card highlight">
                 <div class="value">10 500 &euro;</div>
@@ -799,7 +828,7 @@
         </div>
 
         <div class="alert alert-info">
-            <strong>Objectif</strong> : obtenir un devis 6 kWc micro-onduleurs a <strong>9 000 - 10 500 &euro; TTC</strong>. Au-dela de 12 000 &euro;, negocier ou passer au suivant.
+            <strong>Objectif</strong> : Azelec a pose la reference a <strong>7 294 &euro; TTC</strong>. Comparer avec les devis a venir (Force Eco 25/03, Courant Naturel 24/03, Le Solarman 21/03). Au-dela de 10 000 &euro;, negocier ou passer.
         </div>
     </section>
 
