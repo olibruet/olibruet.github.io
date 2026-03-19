@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le routeur solaire ARSUN — Comment ça marche</title>
+    <style>
+        :root {
+            --sun: #f59e0b;
+            --sun-light: #fef3c7;
+            --green: #10b981;
+            --green-light: #d1fae5;
+            --red: #ef4444;
+            --red-light: #fee2e2;
+            --blue: #3b82f6;
+            --blue-light: #dbeafe;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: var(--gray-50);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+        header .subtitle {
+            opacity: 0.85;
+            font-size: 1.1em;
+        }
+        header .date {
+            opacity: 0.6;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        section h2 {
+            font-size: 1.4em;
+            color: var(--gray-900);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--sun);
+        }
+        section h3 {
+            font-size: 1.1em;
+            color: var(--gray-700);
+            margin: 25px 0 12px;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        strong {
+            color: var(--gray-900);
+        }
+
+        /* KPI Cards */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .kpi-card {
+            background: var(--gray-50);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+        .kpi-card.highlight {
+            background: var(--sun-light);
+            border-color: var(--sun);
+        }
+        .kpi-card.good {
+            background: var(--green-light);
+            border-color: var(--green);
+        }
+        .kpi-card .value {
+            font-size: 2em;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+        .kpi-card.highlight .value { color: #b45309; }
+        .kpi-card.good .value { color: #065f46; }
+        .kpi-card .label {
+            font-size: 0.85em;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.92em;
+        }
+        th {
+            background: var(--gray-100);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 2px solid var(--gray-300);
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        tr:hover td { background: var(--gray-50); }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .highlight-row td { background: var(--sun-light); font-weight: 600; }
+        .positive { color: var(--green); font-weight: 600; }
+        .negative { color: var(--red); }
+
+        /* Alert boxes */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        .alert-warning {
+            background: #fef3c7;
+            border-left: 4px solid var(--sun);
+            color: #92400e;
+        }
+        .alert-info {
+            background: var(--blue-light);
+            border-left: 4px solid var(--blue);
+            color: #1e40af;
+        }
+        .alert-success {
+            background: var(--green-light);
+            border-left: 4px solid var(--green);
+            color: #065f46;
+        }
+
+        /* Code / pre blocks */
+        pre {
+            background: var(--gray-900);
+            color: #e5e7eb;
+            border-radius: 10px;
+            padding: 20px 24px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.88em;
+            line-height: 1.5;
+        }
+        code {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+        }
+        .inline-code {
+            background: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-size: 0.9em;
+            color: var(--gray-700);
+        }
+
+        /* Diagram */
+        .diagram-block {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #a5f3fc;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin: 15px 0;
+            overflow-x: auto;
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+            border: 1px solid #334155;
+        }
+
+        /* Priority flow */
+        .priority-flow {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .priority-card {
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        .priority-card .rank {
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .priority-card .desc {
+            font-size: 0.95em;
+            margin: 8px 0 4px;
+        }
+        .priority-card .price {
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+        .priority-1 {
+            background: var(--green-light);
+            border: 2px solid var(--green);
+        }
+        .priority-1 .rank, .priority-1 .price { color: #065f46; }
+        .priority-2 {
+            background: var(--sun-light);
+            border: 2px solid var(--sun);
+        }
+        .priority-2 .rank, .priority-2 .price { color: #b45309; }
+        .priority-3 {
+            background: var(--gray-100);
+            border: 2px solid var(--gray-300);
+        }
+        .priority-3 .rank, .priority-3 .price { color: var(--gray-500); }
+
+        /* Bullet list */
+        ul {
+            margin: 10px 0 10px 20px;
+        }
+        li {
+            margin: 6px 0;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 0.85em;
+            padding: 20px 0 40px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Le routeur solaire ARSUN</h1>
+        <div class="subtitle">Comment ca marche &mdash; explications simples</div>
+        <div class="date">Mars 2026 &middot; Installation prevue : 6 kWc, maison de Vayres (Gironde)</div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- En une phrase -->
+    <section>
+        <h2>En une phrase</h2>
+        <div class="alert alert-success">
+            <strong>L'ARSUN</strong> est un petit boitier qui detecte le surplus de production des panneaux solaires et l'envoie automatiquement vers le ballon d'eau chaude, au lieu de le donner au reseau pour presque rien.
+        </div>
+    </section>
+
+    <!-- Le probleme sans ARSUN -->
+    <section>
+        <h2>Le probleme sans ARSUN</h2>
+        <p>Les panneaux solaires produisent en journee. Tout ce que la maison consomme a ce moment-la est &laquo;&nbsp;gratuit&nbsp;&raquo; (on evite d'acheter au fournisseur). Mais ce que la maison ne consomme pas part sur le reseau &mdash; et EDF le rachete a seulement <strong>4 centimes le kWh</strong>.</p>
+        <p>Or le ballon d'eau chaude, lui, chauffe la nuit en heures creuses a <strong>13,6 centimes le kWh</strong>.</p>
+        <div class="alert alert-warning">
+            <strong>L'idee :</strong> plutot que de donner le surplus au reseau pour 4 cts, autant chauffer l'eau avec, et economiser les 13,6 cts de la nuit.
+        </div>
+    </section>
+
+    <!-- Ce que fait l'ARSUN -->
+    <section>
+        <h2>Ce que fait l'ARSUN</h2>
+        <p>Il est installe au tableau electrique, entre le disjoncteur et le ballon d'eau chaude.</p>
+        <p>Il mesure en permanence ce qui se passe au compteur :</p>
+        <ul>
+            <li><strong>La maison consomme plus que les panneaux</strong> &rarr; il ne fait rien</li>
+            <li><strong>Les panneaux produisent plus que la maison</strong> &rarr; il envoie le surplus au ballon</li>
+        </ul>
+
+        <h3>Le point cle : c'est proportionnel</h3>
+        <p>L'ARSUN ne fonctionne pas en tout-ou-rien. Il dose la puissance envoyee au ballon, <strong>watt par watt</strong> :</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Surplus disponible</th>
+                    <th>Ce que fait l'ARSUN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0 W (pas de surplus)</td>
+                    <td>Rien, le ballon est eteint</td>
+                </tr>
+                <tr>
+                    <td>500 W</td>
+                    <td>Envoie 500 W au ballon</td>
+                </tr>
+                <tr>
+                    <td>1 500 W</td>
+                    <td>Envoie 1 500 W au ballon</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>3 000 W ou plus</td>
+                    <td>Envoie 3 000 W (max de la resistance du ballon)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Si un nuage passe et que le surplus tombe a 200 W &rarr; il envoie 200 W.<br>
+        Si le nuage part &rarr; il remonte instantanement.</p>
+
+        <div class="alert alert-info">
+            <strong>Precision :</strong> 5 a 30 W. C'est un variateur, pas un interrupteur.
+        </div>
+    </section>
+
+    <!-- Une journee type -->
+    <section>
+        <h2>Une journee type</h2>
+
+        <div class="diagram-block"><code>    Production solaire (kW)
+  5 |
+    |         /&macr;&macr;&macr;&macr;&macr;&macr;&macr;&macr;&macr;\
+  4 |       /              \
+    |     /     SURPLUS      \
+  3 |   /   &rarr; vers ballon      \
+    |  /                         \
+  2 | /                            \
+    |/   AUTOCONSOMMATION            \
+  1 |    (maison se sert en 1er)       \
+    |______________________________________
+    6h    9h    12h    15h    17h    20h</code></div>
+
+        <h3>Deroulement heure par heure</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Heure</th>
+                    <th>Panneaux</th>
+                    <th>Maison</th>
+                    <th>Surplus</th>
+                    <th>ARSUN &rarr; ballon</th>
+                    <th>Reseau</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>8h45</td>
+                    <td class="num">800 W</td>
+                    <td class="num">500 W</td>
+                    <td class="num">300 W</td>
+                    <td class="num">300 W</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>10h</td>
+                    <td class="num">3 000 W</td>
+                    <td class="num">600 W</td>
+                    <td class="num">2 400 W</td>
+                    <td class="num">2 400 W</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>12h</td>
+                    <td class="num">4 500 W</td>
+                    <td class="num">800 W</td>
+                    <td class="num">3 700 W</td>
+                    <td class="num">3 000 W (max)</td>
+                    <td>700 W &rarr; injection</td>
+                </tr>
+                <tr>
+                    <td>13h</td>
+                    <td class="num">4 000 W</td>
+                    <td class="num">1 200 W</td>
+                    <td class="num">2 800 W</td>
+                    <td class="num">2 800 W</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>14h</td>
+                    <td class="num">3 500 W</td>
+                    <td class="num">600 W</td>
+                    <td class="num">2 900 W</td>
+                    <td class="num">Ballon chaud &rarr; 0 W</td>
+                    <td>2 900 W &rarr; injection</td>
+                </tr>
+                <tr>
+                    <td>15h30</td>
+                    <td class="num">2 000 W</td>
+                    <td class="num">500 W</td>
+                    <td class="num">1 500 W</td>
+                    <td class="num">0 (ballon deja chaud)</td>
+                    <td>1 500 W &rarr; injection</td>
+                </tr>
+                <tr style="background: var(--gray-100);">
+                    <td>22h</td>
+                    <td class="num">0 W</td>
+                    <td class="num">300 W</td>
+                    <td class="num">0</td>
+                    <td class="num">0</td>
+                    <td>&larr; achat HC nuit</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>La nuit</h3>
+        <p>Le contacteur heures creuses fonctionne normalement. Mais si le ballon a deja ete chauffe par le soleil en journee, la chauffe de nuit sera <strong>plus courte</strong> &mdash; voire inutile en ete.</p>
+        <div class="alert alert-success">
+            C'est la que se fait l'economie : on remplace de l'electricite achetee la nuit (<strong>13,6 cts</strong>) par du surplus solaire <strong>gratuit</strong>.
+        </div>
+    </section>
+
+    <!-- La maison est toujours prioritaire -->
+    <section>
+        <h2>La maison est toujours prioritaire</h2>
+        <p>C'est le point le plus important : <strong>l'ARSUN ne prive jamais la maison</strong>.</p>
+        <p>Le courant des panneaux alimente d'abord tous les appareils allumes (frigo, PAC, lumieres, PC...). L'ARSUN ne voit que ce qui reste &mdash; le surplus qui partirait sur le reseau.</p>
+
+        <pre><code>Panneaux : 4 000 W
+                          La maison se sert en premier
+  Frigo    &rarr;  150 W  &boxdr;
+  PAC      &rarr; 1 200 W  &boxvr; Total maison : 1 450 W
+  Divers   &rarr;  100 W  &boxur;
+
+  Surplus = 4 000 - 1 450 = 2 550 W
+
+  ARSUN &rarr; envoie 2 550 W au ballon
+  Reseau &rarr; 0 W (rien ne sort, rien ne rentre)</code></pre>
+
+        <p>Si quelqu'un allume le four (2 500 W) :</p>
+
+        <pre><code>  Maison : 1 450 + 2 500 = 3 950 W
+  Surplus : 4 000 - 3 950 = 50 W
+  ARSUN &rarr; 50 W (quasi rien)
+  Reseau &rarr; 0 W</code></pre>
+
+        <div class="alert alert-info">
+            <strong>Pas de risque :</strong> la hierarchie est physique, pas a configurer.
+        </div>
+    </section>
+
+    <!-- Pourquoi c'est economiquement logique -->
+    <section>
+        <h2>Pourquoi c'est economiquement logique</h2>
+
+        <div class="priority-flow">
+            <div class="priority-card priority-1">
+                <div class="rank">1er</div>
+                <div class="desc">La maison consomme le solaire</div>
+                <div class="price">17,6 cts/kWh</div>
+                <div class="label" style="font-size:0.85em; color:var(--gray-500); margin-top:4px;">Ce kWh remplace un achat en HP &rarr; on economise le prix plein</div>
+            </div>
+            <div class="priority-card priority-2">
+                <div class="rank">2e</div>
+                <div class="desc">L'ARSUN chauffe le ballon avec le surplus</div>
+                <div class="price">9,6 cts/kWh</div>
+                <div class="label" style="font-size:0.85em; color:var(--gray-500); margin-top:4px;">Ce kWh evite un achat HC nuit (13,6 cts) mais on perd la revente (4 cts) &rarr; gain net 9,6 cts</div>
+            </div>
+            <div class="priority-card priority-3">
+                <div class="rank">3e</div>
+                <div class="desc">Le reste part sur le reseau</div>
+                <div class="price">4 cts/kWh</div>
+                <div class="label" style="font-size:0.85em; color:var(--gray-500); margin-top:4px;">EDF rachete le surplus</div>
+            </div>
+        </div>
+
+        <div class="alert alert-info">
+            <strong>Pourquoi 9,6 cts et pas 13,6 cts ?</strong> Parce que ce kWh aurait pu etre vendu a EDF (4 cts). En le redirigeant vers le ballon, on gagne 13,6 cts (HC evitee) mais on perd 4 cts (revente perdue). Gain net : 13,6 &minus; 4 = <strong>9,6 cts</strong>. Pour la maison, pas de soustraction : le kWh aurait ete achete de toute facon, il n'y a rien a &laquo;&nbsp;perdre&nbsp;&raquo;.
+        </div>
+    </section>
+
+    <!-- Et quand le ballon est chaud ? -->
+    <section>
+        <h2>Et quand le ballon est chaud ?</h2>
+        <p>Quand le thermostat du ballon est atteint (typiquement vers 13h-14h en ete), l'ARSUN n'a plus rien a alimenter. Le surplus repart en injection reseau (revente EDF a 4 cts).</p>
+        <p>C'est le seul moment ou l'on &laquo;&nbsp;perd&nbsp;&raquo; du surplus. C'est pour ca qu'a terme, Home Assistant prendra le relais avec d'autres charges :</p>
+
+        <pre><code>Surplus disponible, ballon chaud :
+
+  1. ARSUN  &rarr; ballon        &cross; (deja chaud, thermostat atteint)
+  2. HA     &rarr; piscine       &check; (pompe filtration, 1-2 kW)
+  3. HA     &rarr; voiture       &check; (prise standard, 2,3 kW)
+  4. Reseau &larr; injection      (ce qui reste, 4 cts)</code></pre>
+
+        <p>L'ARSUN fait le plus gros du travail des le jour 1 (<strong>134 &euro;/an</strong>). Home Assistant complete ensuite pour capter le surplus restant (piscine <strong>+14 &euro;/an</strong>, voiture <strong>+85 &euro;/an</strong>).</p>
+    </section>
+
+    <!-- Gain estime -->
+    <section>
+        <h2>Gain estime</h2>
+
+        <div class="kpi-grid">
+            <div class="kpi-card good">
+                <div class="value">134 &euro;/an</div>
+                <div class="label">Economie supplementaire</div>
+            </div>
+            <div class="kpi-card highlight">
+                <div class="value">9,6 cts/kWh</div>
+                <div class="label">Gain par kWh route</div>
+            </div>
+            <div class="kpi-card">
+                <div class="value">1 394 kWh</div>
+                <div class="label">Surplus route vers le ballon</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Sans ARSUN</th>
+                    <th>Avec ARSUN</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Surplus annuel</td>
+                    <td class="num">~2 664 kWh</td>
+                    <td class="num">~1 270 kWh</td>
+                </tr>
+                <tr>
+                    <td>Surplus vers ballon</td>
+                    <td class="num">0 kWh</td>
+                    <td class="num positive">~1 394 kWh</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td>Economie supplementaire</td>
+                    <td class="num">0</td>
+                    <td class="num positive">~134 &euro;/an</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p>Le ballon de 300 litres (resistance 3 kW) peut absorber environ 2-3 heures de surplus par jour ensoleille, soit ~8-9 kWh &mdash; largement de quoi le chauffer entierement avec le soleil.</p>
+    </section>
+
+    <!-- Caracteristiques techniques -->
+    <section>
+        <h2>Caracteristiques techniques</h2>
+
+        <table>
+            <tbody>
+                <tr>
+                    <td><strong>Marque</strong></td>
+                    <td>ARSUN Concept (francais)</td>
+                </tr>
+                <tr>
+                    <td><strong>Principe</strong></td>
+                    <td>Routage proportionnel par decoupage de phase</td>
+                </tr>
+                <tr>
+                    <td><strong>Precision</strong></td>
+                    <td>5-30 W</td>
+                </tr>
+                <tr>
+                    <td><strong>Puissance max PV</strong></td>
+                    <td>23 kW</td>
+                </tr>
+                <tr>
+                    <td><strong>Sortie max</strong></td>
+                    <td>3 kW par voie</td>
+                </tr>
+                <tr>
+                    <td><strong>Dimensions</strong></td>
+                    <td>160 x 120 x 35 mm</td>
+                </tr>
+                <tr>
+                    <td><strong>Consommation veille</strong></td>
+                    <td>&lt; 50 mW (negligeable)</td>
+                </tr>
+                <tr>
+                    <td><strong>Installation</strong></td>
+                    <td>Au tableau electrique, entre disjoncteur et ballon</td>
+                </tr>
+                <tr>
+                    <td><strong>Fonctionnement</strong></td>
+                    <td>100% autonome, pas de WiFi, pas de configuration</td>
+                </tr>
+                <tr>
+                    <td><strong>Prix catalogue</strong></td>
+                    <td>~179 &euro; (modele 1 voie)</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>Dans notre devis</strong></td>
+                    <td><strong>Offert</strong> (devis Azelec)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Et apres 2028 ? -->
+    <section>
+        <h2>Et apres 2028 ? (heures creuses en journee)</h2>
+        <p>Enedis prevoit d'ajouter 2h d'heures creuses en journee (~13h-15h) vers 2028. L'ARSUN restera utile :</p>
+        <ul>
+            <li><strong>Jours ensoleilles :</strong> l'ARSUN aura deja chauffe le ballon le matin &rarr; les HC journee sont inutiles (ballon deja chaud)</li>
+            <li><strong>Jours couverts :</strong> pas de surplus &rarr; le ballon chauffe en HC journee a tarif reduit (15,8 cts)</li>
+            <li><strong>Nuit :</strong> complete si besoin, ce qui sera rare</li>
+        </ul>
+        <div class="alert alert-info">
+            Les deux systemes sont <strong>complementaires</strong>, pas concurrents. L'ARSUN ne sera jamais rendu obsolete.
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    Document genere en mars 2026 &middot; Installation prevue : 6 kWc, maison de Vayres (Gironde)
+</footer>
+
+</body>
+</html>
