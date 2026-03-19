@@ -317,7 +317,7 @@
         <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">L'economie augmente chaque annee avec l'inflation electrique (+3%/an). Sur 12 ans avec decalage manuel, l'installation rapporte 3 &euro;/mois des le depart.</p>
 
         <div class="alert alert-warning" style="margin-top: 15px;">
-            <strong>Tarif fixe Gaz de Bordeaux (17,6 cts HP) jusqu'au 28/02/2028.</strong> Apres cette date, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore la rentabilite de 11 a ~10 ans.
+            <strong>Tarif fixe Gaz de Bordeaux (17,6 cts HP) jusqu'au 28/02/2028.</strong> Apres cette date, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore la rentabilite de ~11 a <strong>~9 ans</strong>.
         </div>
 
         <div class="alert alert-info">
@@ -409,7 +409,7 @@
         </div>
 
         <div class="alert alert-warning">
-            <strong>Contrat Gaz de Bordeaux :</strong> tarif fixe jusqu'au 28/02/2028 (HP 17,60 cts, HC 13,61 cts). Apres cette date, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts), ce qui ameliore la rentabilite du solaire (retour de 11 a ~10 ans).
+            <strong>Contrat Gaz de Bordeaux :</strong> tarif fixe jusqu'au 28/02/2028 (HP 17,60 cts, HC 13,61 cts). Apres cette date, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts), ce qui ameliore la rentabilite du solaire (retour de ~11 a <strong>~9 ans</strong>).
         </div>
     </section>
 
@@ -598,39 +598,45 @@
         </div>
 
         <div class="alert alert-warning">
-            <strong>Attention :</strong> ce scenario utilise le tarif reglemente BASE (25,2 cts plat). En option HP/HC reglementee (HP 20,65 / HC 15,79 cts), les gains sont plus modestes. Voir <a href="#s9">section 9</a> pour les chiffres corriges.
+            <strong>Scenario post-2028 :</strong> apres expiration du contrat fixe Gaz de Bordeaux (28/02/2028), passage probable au tarif reglemente HP/HC. L'autoconsommation solaire se fait en journee = heures pleines (20,65 cts).
         </div>
 
-        <h3>Si passage au tarif reglemente (25,2 cts/kWh)</h3>
+        <h3>Si passage au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts)</h3>
         <div class="scenario-grid">
             <div class="scenario-card">
                 <div class="card-header">3 kWc</div>
                 <div class="card-body">
-                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">766 &euro;</span></div>
-                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">8 ans</span></div>
-                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">12 334 &euro;</span></div>
-                    <div class="metric"><span class="label">TRI</span><span class="val">12,4%</span></div>
-                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+18 358 &euro;</span></div>
+                    <div class="metric"><span class="label">Economie autoconso an 1</span><span class="val">620 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu surplus an 1</span><span class="val">12 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">632 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--sun);">~10 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">~7 400 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">~9%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">~12 200 &euro;</span></div>
                 </div>
             </div>
             <div class="scenario-card recommended">
                 <div class="card-header">6 kWc &mdash; Recommande</div>
                 <div class="card-body">
-                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">1 373 &euro;</span></div>
-                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">7 ans</span></div>
-                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">24 893 &euro;</span></div>
-                    <div class="metric"><span class="label">TRI</span><span class="val">15,4%</span></div>
-                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+35 841 &euro;</span></div>
+                    <div class="metric"><span class="label">Economie autoconso an 1</span><span class="val">1 077 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu surplus an 1</span><span class="val">55 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">1 132 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">~9 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">~16 600 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">~12%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">~25 500 &euro;</span></div>
                 </div>
             </div>
             <div class="scenario-card">
                 <div class="card-header">9 kWc</div>
                 <div class="card-body">
-                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">1 738 &euro;</span></div>
-                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--green);">8 ans</span></div>
-                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">29 116 &euro;</span></div>
-                    <div class="metric"><span class="label">TRI</span><span class="val">13,1%</span></div>
-                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">+42 815 &euro;</span></div>
+                    <div class="metric"><span class="label">Economie autoconso an 1</span><span class="val">1 308 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu surplus an 1</span><span class="val">143 &euro;</span></div>
+                    <div class="metric"><span class="label">Revenu total an 1</span><span class="val">1 451 &euro;</span></div>
+                    <div class="metric"><span class="label">Retour invest.</span><span class="val" style="color: var(--sun);">~10 ans</span></div>
+                    <div class="metric"><span class="label">VAN 25 ans</span><span class="val">~18 900 &euro;</span></div>
+                    <div class="metric"><span class="label">TRI</span><span class="val">~10%</span></div>
+                    <div class="metric"><span class="label">Gain 25 ans</span><span class="val positive">~30 000 &euro;</span></div>
                 </div>
             </div>
         </div>
@@ -655,14 +661,13 @@
                 <tr class="highlight-row"><td>HP alt. (16,58 cts)</td><td class="num">924 &euro;</td><td class="num">10 ans</td><td class="num">12 924 &euro;</td></tr>
                 <tr class="highlight-row"><td>HP actuel (17,6 cts)</td><td class="num">977 &euro;</td><td class="num">10 ans</td><td class="num">14 341 &euro;</td></tr>
                 <tr><td>20 cts/kWh</td><td class="num">1 103 &euro;</td><td class="num">9 ans</td><td class="num">17 695 &euro;</td></tr>
-                <tr><td>Reglemente (25,2 cts)</td><td class="num">1 373 &euro;</td><td class="num">7 ans</td><td class="num">24 893 &euro;</td></tr>
-                <tr class="highlight-row"><td>Reglemente HP/HC (20,65/15,79 cts)</td><td class="num">890 &euro;</td><td class="num">~10 ans</td><td class="num">~20 000 &euro;</td></tr>
+                <tr class="highlight-row"><td><strong>Reglemente HP/HC (HP 20,65 cts)</strong></td><td class="num"><strong>1 132 &euro;</strong></td><td class="num"><strong>~9 ans</strong></td><td class="num"><strong>~16 600 &euro;</strong></td></tr>
                 <tr><td>30 cts/kWh</td><td class="num">1 627 &euro;</td><td class="num">6 ans</td><td class="num">31 644 &euro;</td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-warning" style="margin-top: 10px;">
-            <strong>Apres fevrier 2028</strong>, le contrat fixe Gaz de Bordeaux expire. Le passage au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) est le scenario le plus probable. La ligne "Reglemente HP/HC" devient alors la reference pour la rentabilite : retour en <strong>~10 ans</strong>. La ligne "Reglemente (25,2 cts)" correspond au tarif BASE plat, moins probable pour ce foyer en HP/HC.
+            <strong>Apres fevrier 2028</strong>, le contrat fixe Gaz de Bordeaux expire. Le passage au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) est le scenario le plus probable. L'autoconsommation solaire se fait en journee = HP (20,65 cts), soit +17% par rapport au tarif actuel (17,6 cts). Retour en <strong>~9 ans</strong>.
         </div>
 
         <h3>Impact du cout d'installation</h3>
@@ -671,8 +676,9 @@
                 <tr><th>Cout installation</th><th class="num">Cout net</th><th class="num">Retour invest.</th><th class="num">VAN 25 ans</th></tr>
             </thead>
             <tbody>
+                <tr class="highlight-row"><td><strong>Azelec (7 294 &euro;)</strong></td><td class="num"><strong>6 814 &euro;</strong></td><td class="num"><strong>~7 ans</strong></td><td class="num"><strong>~17 550 &euro;</strong></td></tr>
                 <tr><td>Bas (9 000 &euro;)</td><td class="num">8 520 &euro;</td><td class="num">8 ans</td><td class="num">15 841 &euro;</td></tr>
-                <tr class="highlight-row"><td>Median (10 500 &euro;)</td><td class="num">10 020 &euro;</td><td class="num">10 ans</td><td class="num">14 341 &euro;</td></tr>
+                <tr><td>Median (10 500 &euro;)</td><td class="num">10 020 &euro;</td><td class="num">10 ans</td><td class="num">14 341 &euro;</td></tr>
                 <tr><td>Moyen-haut (12 000 &euro;)</td><td class="num">11 520 &euro;</td><td class="num">11 ans</td><td class="num">12 841 &euro;</td></tr>
                 <tr><td>Haut (14 000 &euro;)</td><td class="num">13 520 &euro;</td><td class="num">14 ans</td><td class="num">10 841 &euro;</td></tr>
             </tbody>
@@ -712,7 +718,7 @@
         <h2 id="s7">7. Flux de tresorerie &mdash; 6 kWc, micro-onduleurs, donnees reelles Linky 2025 (59% autoconsommation)</h2>
 
         <p style="color: var(--gray-700); margin-bottom: 15px; line-height: 1.7;">
-            Ce tableau montre l'evolution financiere annee par annee d'une installation 6 kWc avec <strong>micro-onduleurs</strong> (pas de remplacement onduleur). Base sur les <strong>donnees reelles Linky 2025</strong> (59% autoconsommation, production corrigee ombrage). La production baisse de 0,5%/an (degradation panneaux), l'economie augmente avec l'inflation electrique de 3%/an. <strong>Quand le cumul passe en positif, l'investissement est rembourse.</strong>
+            Ce tableau montre l'evolution financiere annee par annee d'une installation 6 kWc avec <strong>micro-onduleurs</strong> (pas de remplacement onduleur). Base sur les <strong>donnees reelles Linky 2025</strong> (59% autoconsommation, production corrigee ombrage). Cout : <strong>8 097 &euro; TTC</strong> (moyenne devis Azelec 7 294 + Concept'Energy 8 900), net apres prime : <strong>7 617 &euro;</strong>. La production baisse de 0,5%/an (degradation panneaux), l'economie augmente avec l'inflation electrique de 3%/an. <strong>Quand le cumul passe en positif, l'investissement est rembourse.</strong>
         </p>
 
         <table>
@@ -729,35 +735,35 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td class="num">1</td><td class="num">6 408</td><td class="num">3 755</td><td class="num">2 653</td><td class="num">681</td><td class="num">106</td><td class="num">787</td><td class="num negative">-9 233</td></tr>
-                <tr><td class="num">2</td><td class="num">6 376</td><td class="num">3 736</td><td class="num">2 640</td><td class="num">697</td><td class="num">106</td><td class="num">803</td><td class="num negative">-8 430</td></tr>
-                <tr><td class="num">3</td><td class="num">6 344</td><td class="num">3 718</td><td class="num">2 626</td><td class="num">715</td><td class="num">105</td><td class="num">820</td><td class="num negative">-7 610</td></tr>
-                <tr><td class="num">4</td><td class="num">6 312</td><td class="num">3 699</td><td class="num">2 613</td><td class="num">733</td><td class="num">105</td><td class="num">837</td><td class="num negative">-6 773</td></tr>
-                <tr><td class="num">5</td><td class="num">6 281</td><td class="num">3 680</td><td class="num">2 600</td><td class="num">751</td><td class="num">104</td><td class="num">855</td><td class="num negative">-5 919</td></tr>
-                <tr><td class="num">6</td><td class="num">6 249</td><td class="num">3 662</td><td class="num">2 587</td><td class="num">769</td><td class="num">103</td><td class="num">873</td><td class="num negative">-5 046</td></tr>
-                <tr><td class="num">7</td><td class="num">6 218</td><td class="num">3 644</td><td class="num">2 574</td><td class="num">789</td><td class="num">103</td><td class="num">892</td><td class="num negative">-4 154</td></tr>
-                <tr><td class="num">8</td><td class="num">6 187</td><td class="num">3 626</td><td class="num">2 561</td><td class="num">808</td><td class="num">102</td><td class="num">911</td><td class="num negative">-3 244</td></tr>
-                <tr><td class="num">9</td><td class="num">6 156</td><td class="num">3 607</td><td class="num">2 549</td><td class="num">828</td><td class="num">102</td><td class="num">930</td><td class="num negative">-2 313</td></tr>
-                <tr><td class="num">10</td><td class="num">6 125</td><td class="num">3 589</td><td class="num">2 536</td><td class="num">849</td><td class="num">101</td><td class="num">950</td><td class="num negative">-1 363</td></tr>
-                <tr><td class="num">11</td><td class="num">6 095</td><td class="num">3 571</td><td class="num">2 523</td><td class="num">870</td><td class="num">101</td><td class="num">971</td><td class="num negative">-392</td></tr>
-                <tr class="breakeven"><td class="num">12</td><td class="num">6 064</td><td class="num">3 554</td><td class="num">2 511</td><td class="num">891</td><td class="num">100</td><td class="num">992</td><td class="num positive">+599</td></tr>
-                <tr><td class="num">13</td><td class="num">6 034</td><td class="num">3 536</td><td class="num">2 498</td><td class="num">914</td><td class="num">100</td><td class="num">1 014</td><td class="num positive">+1 613</td></tr>
-                <tr><td class="num">14</td><td class="num">6 004</td><td class="num">3 518</td><td class="num">2 485</td><td class="num">936</td><td class="num">99</td><td class="num">1 036</td><td class="num positive">+2 649</td></tr>
-                <tr><td class="num">15</td><td class="num">5 974</td><td class="num">3 500</td><td class="num">2 473</td><td class="num">960</td><td class="num">99</td><td class="num">1 059</td><td class="num positive">+3 707</td></tr>
-                <tr><td class="num">16</td><td class="num">5 944</td><td class="num">3 483</td><td class="num">2 461</td><td class="num">983</td><td class="num">98</td><td class="num">1 082</td><td class="num positive">+4 789</td></tr>
-                <tr><td class="num">17</td><td class="num">5 914</td><td class="num">3 466</td><td class="num">2 448</td><td class="num">1 008</td><td class="num">98</td><td class="num">1 106</td><td class="num positive">+5 895</td></tr>
-                <tr><td class="num">18</td><td class="num">5 884</td><td class="num">3 448</td><td class="num">2 436</td><td class="num">1 033</td><td class="num">97</td><td class="num">1 130</td><td class="num positive">+7 026</td></tr>
-                <tr><td class="num">19</td><td class="num">5 855</td><td class="num">3 431</td><td class="num">2 424</td><td class="num">1 059</td><td class="num">97</td><td class="num">1 156</td><td class="num positive">+8 181</td></tr>
-                <tr><td class="num">20</td><td class="num">5 826</td><td class="num">3 414</td><td class="num">2 412</td><td class="num">1 085</td><td class="num">96</td><td class="num">1 181</td><td class="num positive">+9 363</td></tr>
-                <tr><td class="num">21</td><td class="num">5 797</td><td class="num">3 397</td><td class="num">2 400</td><td class="num">1 112</td><td class="num">96</td><td class="num">1 208</td><td class="num positive">+10 570</td></tr>
-                <tr><td class="num">22</td><td class="num">5 768</td><td class="num">3 380</td><td class="num">2 388</td><td class="num">1 140</td><td class="num">96</td><td class="num">1 235</td><td class="num positive">+11 805</td></tr>
-                <tr><td class="num">23</td><td class="num">5 739</td><td class="num">3 363</td><td class="num">2 376</td><td class="num">1 168</td><td class="num">95</td><td class="num">1 263</td><td class="num positive">+13 068</td></tr>
-                <tr><td class="num">24</td><td class="num">5 710</td><td class="num">3 346</td><td class="num">2 364</td><td class="num">1 197</td><td class="num">95</td><td class="num">1 291</td><td class="num positive">+14 360</td></tr>
-                <tr class="highlight-row"><td class="num">25</td><td class="num">5 681</td><td class="num">3 329</td><td class="num">2 352</td><td class="num">1 227</td><td class="num">94</td><td class="num">1 321</td><td class="num positive">+15 680</td></tr>
+                <tr><td class="num">1</td><td class="num">6 408</td><td class="num">3 755</td><td class="num">2 653</td><td class="num">681</td><td class="num">106</td><td class="num">787</td><td class="num negative">-6 830</td></tr>
+                <tr><td class="num">2</td><td class="num">6 376</td><td class="num">3 736</td><td class="num">2 640</td><td class="num">697</td><td class="num">106</td><td class="num">803</td><td class="num negative">-6 027</td></tr>
+                <tr><td class="num">3</td><td class="num">6 344</td><td class="num">3 718</td><td class="num">2 626</td><td class="num">715</td><td class="num">105</td><td class="num">820</td><td class="num negative">-5 207</td></tr>
+                <tr><td class="num">4</td><td class="num">6 312</td><td class="num">3 699</td><td class="num">2 613</td><td class="num">733</td><td class="num">105</td><td class="num">837</td><td class="num negative">-4 370</td></tr>
+                <tr><td class="num">5</td><td class="num">6 281</td><td class="num">3 680</td><td class="num">2 600</td><td class="num">751</td><td class="num">104</td><td class="num">855</td><td class="num negative">-3 515</td></tr>
+                <tr><td class="num">6</td><td class="num">6 249</td><td class="num">3 662</td><td class="num">2 587</td><td class="num">769</td><td class="num">103</td><td class="num">873</td><td class="num negative">-2 642</td></tr>
+                <tr><td class="num">7</td><td class="num">6 218</td><td class="num">3 644</td><td class="num">2 574</td><td class="num">789</td><td class="num">103</td><td class="num">892</td><td class="num negative">-1 750</td></tr>
+                <tr><td class="num">8</td><td class="num">6 187</td><td class="num">3 626</td><td class="num">2 561</td><td class="num">808</td><td class="num">102</td><td class="num">911</td><td class="num negative">-839</td></tr>
+                <tr class="breakeven"><td class="num"><strong>9</strong></td><td class="num">6 156</td><td class="num">3 607</td><td class="num">2 549</td><td class="num">828</td><td class="num">102</td><td class="num">930</td><td class="num positive"><strong>+91</strong></td></tr>
+                <tr><td class="num">10</td><td class="num">6 125</td><td class="num">3 589</td><td class="num">2 536</td><td class="num">849</td><td class="num">101</td><td class="num">950</td><td class="num positive">+1 041</td></tr>
+                <tr><td class="num">11</td><td class="num">6 095</td><td class="num">3 571</td><td class="num">2 523</td><td class="num">870</td><td class="num">101</td><td class="num">971</td><td class="num positive">+2 012</td></tr>
+                <tr><td class="num">12</td><td class="num">6 064</td><td class="num">3 554</td><td class="num">2 511</td><td class="num">891</td><td class="num">100</td><td class="num">992</td><td class="num positive">+3 004</td></tr>
+                <tr><td class="num">13</td><td class="num">6 034</td><td class="num">3 536</td><td class="num">2 498</td><td class="num">914</td><td class="num">100</td><td class="num">1 014</td><td class="num positive">+4 018</td></tr>
+                <tr><td class="num">14</td><td class="num">6 004</td><td class="num">3 518</td><td class="num">2 485</td><td class="num">936</td><td class="num">99</td><td class="num">1 036</td><td class="num positive">+5 054</td></tr>
+                <tr><td class="num">15</td><td class="num">5 974</td><td class="num">3 500</td><td class="num">2 473</td><td class="num">960</td><td class="num">99</td><td class="num">1 059</td><td class="num positive">+6 112</td></tr>
+                <tr><td class="num">16</td><td class="num">5 944</td><td class="num">3 483</td><td class="num">2 461</td><td class="num">983</td><td class="num">98</td><td class="num">1 082</td><td class="num positive">+7 194</td></tr>
+                <tr><td class="num">17</td><td class="num">5 914</td><td class="num">3 466</td><td class="num">2 448</td><td class="num">1 008</td><td class="num">98</td><td class="num">1 106</td><td class="num positive">+8 300</td></tr>
+                <tr><td class="num">18</td><td class="num">5 884</td><td class="num">3 448</td><td class="num">2 436</td><td class="num">1 033</td><td class="num">97</td><td class="num">1 130</td><td class="num positive">+9 430</td></tr>
+                <tr><td class="num">19</td><td class="num">5 855</td><td class="num">3 431</td><td class="num">2 424</td><td class="num">1 059</td><td class="num">97</td><td class="num">1 156</td><td class="num positive">+10 586</td></tr>
+                <tr><td class="num">20</td><td class="num">5 826</td><td class="num">3 414</td><td class="num">2 412</td><td class="num">1 085</td><td class="num">96</td><td class="num">1 181</td><td class="num positive">+11 767</td></tr>
+                <tr><td class="num">21</td><td class="num">5 797</td><td class="num">3 397</td><td class="num">2 400</td><td class="num">1 112</td><td class="num">96</td><td class="num">1 208</td><td class="num positive">+12 975</td></tr>
+                <tr><td class="num">22</td><td class="num">5 768</td><td class="num">3 380</td><td class="num">2 388</td><td class="num">1 140</td><td class="num">96</td><td class="num">1 235</td><td class="num positive">+14 210</td></tr>
+                <tr><td class="num">23</td><td class="num">5 739</td><td class="num">3 363</td><td class="num">2 376</td><td class="num">1 168</td><td class="num">95</td><td class="num">1 263</td><td class="num positive">+15 473</td></tr>
+                <tr><td class="num">24</td><td class="num">5 710</td><td class="num">3 346</td><td class="num">2 364</td><td class="num">1 197</td><td class="num">95</td><td class="num">1 291</td><td class="num positive">+16 764</td></tr>
+                <tr class="highlight-row"><td class="num">25</td><td class="num">5 681</td><td class="num">3 329</td><td class="num">2 352</td><td class="num">1 227</td><td class="num">94</td><td class="num">1 321</td><td class="num positive">+18 085</td></tr>
             </tbody>
         </table>
         <div class="alert alert-success" style="margin-top: 15px;">
-            Le seuil de rentabilite est atteint a l'<strong>annee 12</strong> (cumul positif a +599 &euro;). Pas de remplacement onduleur (micro-onduleurs garantis 20-25 ans). Gain net sur 25 ans : +15 680 &euro;.
+            Le seuil de rentabilite est atteint a l'<strong>annee 9</strong> (cumul positif a +91 &euro;). C'est le scenario <strong>sans aucune optimisation</strong> &mdash; avec decalage de charge le retour est plus rapide (~7-8 ans). Pas de remplacement onduleur (micro-onduleurs garantis 20-25 ans). Gain net sur 25 ans : <strong>+18 085 &euro;</strong>. Cout base : moyenne des devis Azelec (7 294 &euro;) et Concept'Energy (8 900 &euro;).
         </div>
     </section>
 
@@ -963,7 +969,7 @@
                 <tr class="highlight-row"><td><strong>Decalage manuel sans domotique</strong></td><td class="num"><strong>~878 &euro;</strong></td><td class="num"><strong>~10 ans</strong></td></tr>
                 <tr><td>Decalage manuel + domotique ECS</td><td class="num">~1 012 &euro;</td><td class="num">~9 ans</td></tr>
                 <tr class="breakeven"><td><strong>Complet (domotique + ECS + EV)</strong></td><td class="num"><strong>~1 077 &euro;</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
-                <tr><td>Brut, tarif reglemente HP/HC (apres 2028)</td><td class="num">890 &euro;</td><td class="num">~10 ans</td></tr>
+                <tr><td>Brut, tarif reglemente HP/HC (apres 2028)</td><td class="num">~887 &euro;</td><td class="num">~10 ans</td></tr>
             </tbody>
         </table>
 
@@ -1012,7 +1018,7 @@
                 <tr style="background: var(--red-light);"><td><strong>Donnees reelles brutes, tarif actuel</strong></td><td class="num"><strong>~11 ans</strong></td><td class="num"><strong>~9 ans</strong></td></tr>
                 <tr><td>Decalage manuel, tarif actuel</td><td class="num">~10 ans</td><td class="num">~9 ans</td></tr>
                 <tr class="breakeven"><td><strong>Domotique + ECS + EV, tarif actuel</strong></td><td class="num"><strong>~9 ans</strong></td><td class="num"><strong>~7 ans</strong></td></tr>
-                <tr class="highlight-row"><td><strong>Brut, tarif reglemente HP/HC (apres 2028)</strong></td><td class="num"><strong>~10 ans</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
+                <tr class="highlight-row"><td><strong>Brut, tarif reglemente HP/HC (HP 20,65 cts, apres 2028)</strong></td><td class="num"><strong>~10 ans</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
                 <tr><td>Pire cas (tarif bas alt. + cout haut 14 000 &euro;)</td><td class="num">~14 ans</td><td class="num">&mdash;</td></tr>
             </tbody>
         </table>
@@ -1020,7 +1026,7 @@
         <h3>Points cles</h3>
         <ol style="margin: 10px 0 10px 20px; line-height: 2;">
             <li><strong>Donnees reelles Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Production corrigee ombrage hiver : 6 440 kWh/an. Sans optimisation : autoconso 59%, gain 771 &euro;/an, retour ~11 ans (cout median) ou ~9 ans (bon devis). Avec decalage manuel : 878 &euro;/an, retour ~10 ans. Avec domotique ECS 300L + EV : ~1 077 &euro;/an, retour ~8 ans.</li>
-            <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore le retour de 11 a ~10 ans.</li>
+            <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore le retour de ~11 a <strong>~9 ans</strong> (autoconso en journee = HP 20,65 cts).</li>
             <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 6 600 kWh/an, reduction de 31 a 43% de la facture selon optimisation.</li>
             <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, pas de remplacement onduleur a 1 500 &euro; en annee 12. Garantie 20-25 ans, monitoring par panneau.</li>
             <li><strong>HC en journee (~2028)</strong> : quand Enedis deploiera 2h HC en journee, le ballon ECS se declenchera automatiquement sur le pic solaire. Timing favorable : arrive en meme temps que la fin du contrat fixe. Retour ~9 ans sans domotique, potentiellement mieux avec le tarif reglemente.</li>
@@ -1047,61 +1053,49 @@
     <section>
         <h2 id="s12">12. Financement</h2>
 
-        <p style="color: var(--gray-500); margin-bottom: 15px;">Financement confirme : pret familial a taux 0%, sans frais. Pas de surcout credit. La mensualite est simplement le montant divise par la duree.</p>
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Financement personnel, sans credit installateur. La mensualite est le montant divise par la duree choisie.</p>
 
         <h3>Hypotheses</h3>
         <table>
-            <tr><td>Montant</td><td class="num">10 020 &euro; (cout median 10 500 - prime 480)</td></tr>
-            <tr><td>Taux</td><td class="num"><strong>0%</strong> (pret familial)</td></tr>
-            <tr><td>Surcout credit</td><td class="num"><strong>0 &euro;</strong></td></tr>
-            <tr><td>Gain solaire an 1</td><td class="num">771 &euro;/an sans optimisation &mdash; 878 &euro;/an avec decalage manuel &mdash; 1 012 &euro;/an avec domotique ECS</td></tr>
+            <thead><tr><th>Parametre</th><th>Valeur</th></tr></thead>
+            <tbody>
+            <tr><td>Montant net</td><td class="num">7 617 &euro; (moyenne devis 8 097 - prime 480)</td></tr>
+            <tr><td>Gain solaire an 1</td><td class="num">787 &euro;/an sans optimisation &mdash; 878 &euro;/an avec decalage manuel &mdash; 1 012 &euro;/an avec domotique ECS</td></tr>
             <tr><td>Inflation electricite</td><td class="num">3%/an (le gain solaire augmente chaque annee)</td></tr>
+            </tbody>
         </table>
 
         <h3>Reste a charge mensuel par duree et scenario</h3>
 
         <table>
             <thead>
-                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optim (64 &euro;)</th><th class="num">Decalage manuel (73 &euro;)</th><th class="num">Domotique ECS (81 &euro;)</th></tr>
+                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optim (66 &euro;)</th><th class="num">Decalage manuel (73 &euro;)</th><th class="num">Domotique ECS (84 &euro;)</th></tr>
             </thead>
             <tbody>
-                <tr><td>5 ans</td><td class="num">167 &euro;</td><td class="num negative">103 &euro;</td><td class="num negative">94 &euro;</td><td class="num negative">86 &euro;</td></tr>
-                <tr><td>7 ans</td><td class="num">119 &euro;</td><td class="num">55 &euro;</td><td class="num">46 &euro;</td><td class="num">38 &euro;</td></tr>
-                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">20 &euro;</td><td class="num">11 &euro;</td><td class="num positive">3 &euro;</td></tr>
-                <tr class="breakeven"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>6 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain)</strong></td><td class="num positive"><strong>-11 &euro; (gain)</strong></td></tr>
-                <tr style="background: var(--green-light);"><td><strong>15 ans</strong></td><td class="num"><strong>56 &euro;</strong></td><td class="num positive"><strong>-8 &euro; (gain)</strong></td><td class="num positive"><strong>-17 &euro; (gain)</strong></td><td class="num positive"><strong>-25 &euro; (gain)</strong></td></tr>
+                <tr><td>5 ans</td><td class="num">127 &euro;</td><td class="num negative">61 &euro;</td><td class="num negative">54 &euro;</td><td class="num negative">43 &euro;</td></tr>
+                <tr><td>7 ans</td><td class="num">91 &euro;</td><td class="num">25 &euro;</td><td class="num">18 &euro;</td><td class="num">7 &euro;</td></tr>
+                <tr class="breakeven"><td><strong>10 ans</strong></td><td class="num"><strong>63 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain)</strong></td><td class="num positive"><strong>-10 &euro; (gain)</strong></td><td class="num positive"><strong>-21 &euro; (gain)</strong></td></tr>
+                <tr style="background: var(--green-light);"><td><strong>12 ans</strong></td><td class="num"><strong>53 &euro;</strong></td><td class="num positive"><strong>-13 &euro; (gain)</strong></td><td class="num positive"><strong>-20 &euro; (gain)</strong></td><td class="num positive"><strong>-31 &euro; (gain)</strong></td></tr>
             </tbody>
         </table>
 
         <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">Valeurs negatives = l'economie solaire depasse la mensualite, l'installation rapporte de l'argent chaque mois. L'economie augmente chaque annee avec l'inflation electrique (+3%/an).</p>
 
-        <div class="alert alert-warning" style="margin-top: 10px;">
-            <strong>Pire cas :</strong> pret familial 0% sur 10 ans + aucune optimisation = reste a charge de <strong>20 &euro;/mois</strong> en annee 1, auto-finance en annee 3-4 grace a l'inflation electrique.
-        </div>
-
         <h3>Synthese financement</h3>
 
         <div class="kpi-grid" style="margin-top: 20px;">
             <div class="kpi-card good">
-                <div class="value">-3 &euro;/mois</div>
-                <div class="label">Pret 12 ans + decalage manuel (gain net !)</div>
+                <div class="value">-10 &euro;/mois</div>
+                <div class="label">10 ans + decalage manuel (gain net !)</div>
             </div>
             <div class="kpi-card good">
-                <div class="value">6 &euro;/mois</div>
-                <div class="label">Pret 12 ans sans rien faire</div>
-            </div>
-            <div class="kpi-card highlight">
-                <div class="value">0 &euro;</div>
-                <div class="label">Surcout credit (interets inclus)</div>
+                <div class="value">-3 &euro;/mois</div>
+                <div class="label">10 ans sans rien faire (gain net !)</div>
             </div>
         </div>
 
         <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Duree conseillee : 10-12 ans.</strong> Sur 12 ans avec decalage manuel, l'installation rapporte 3 &euro;/mois des le premier mois. Sur 10 ans, le reste a charge est de 11 &euro;/mois. <strong>Apres le remboursement</strong> : l'economie solaire continue pendant 13-15 ans supplementaires (duree de vie panneaux 25 ans), soit ~15 000-20 000 &euro; de gain net apres remboursement.
-        </div>
-
-        <div class="alert alert-warning" style="margin-top: 10px;">
-            <strong>Obligation legale :</strong> un pret familial &gt; 5 000 &euro; doit etre declare aux impots (formulaire 2062). Un contrat ecrit est recommande. Cela n'a aucun impact sur les aides solaires (prime autoconsommation, tarif EDF OA, TVA 5,5%).
+            <strong>Duree conseillee : 7-10 ans.</strong> Sur 10 ans sans optimisation, l'installation rapporte deja 3 &euro;/mois. Avec decalage manuel, le gain est de 10 &euro;/mois des le depart. <strong>Apres le remboursement</strong> : l'economie solaire continue pendant 15-18 ans supplementaires (duree de vie panneaux 25 ans), soit ~18 000+ &euro; de gain net.
         </div>
 
     </section>
