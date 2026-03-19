@@ -974,7 +974,12 @@
         </table>
 
         <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Conclusion cle :</strong> les donnees reelles montrent que le solaire sans optimisation rapporte ~771 &euro;/an (retour ~11 ans). En decalant manuellement l'electromenager en journee <strong>(sans aucune domotique)</strong>, le gain monte a ~878 &euro;/an (retour ~10 ans). L'ajout d'un relais ECS (~15 &euro;) avec Home Assistant apporte ~134 &euro;/an supplementaires (retour ~9 ans). Avec EV en plus : ~1 077 &euro;/an (retour ~8 ans). Apres 2028, le passage au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) ameliore encore la rentabilite (~10 ans sans optimisation). <strong>L'essentiel du gain est accessible par de simples changements d'habitudes + un relais a 15 &euro;.</strong>
+            <strong>Conclusion cle :</strong> les donnees reelles montrent que le solaire sans optimisation rapporte 787 &euro;/an (retour ~9 ans au cout moyen devis). L'optimisation se fait en deux etapes :
+            <ol style="margin: 10px 0 5px 20px; line-height: 1.8;">
+                <li><strong>ARSUN (offert devis Azelec)</strong> : routeur de surplus hardware autonome qui redirige le surplus vers le ballon ECS. Gain : <strong>+134 &euro;/an, 0 &euro; d'investissement</strong>, actif des le jour 1. Pas besoin de HA.</li>
+                <li><strong>Home Assistant</strong> (270 &euro; minimal ou 824 &euro; complet) : pilotage charge voiture sur surplus (+85 &euro;/an), TIC Linky (+~150 &euro;/an comportemental), piscine et boost chauffage (+44 &euro;/an). ROI HA minimal : <strong>~14 mois</strong>.</li>
+            </ol>
+            Total avec ARSUN + HA : <strong>~1 077 &euro;/an</strong>. Detail des scenarios de routage : <code>docs/domotique/scenarios/solaire.md</code>.
         </div>
     </section>
 
