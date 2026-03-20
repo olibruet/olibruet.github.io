@@ -124,6 +124,7 @@
         .num { text-align: right; font-variant-numeric: tabular-nums; }
         .highlight-row td { background: var(--sun-light); font-weight: 600; }
         .total-row td { background: var(--gray-100); font-weight: 700; }
+        .good-row td { background: var(--green-light); font-weight: 600; }
         .positive { color: var(--green); font-weight: 600; }
 
         .alert {
@@ -228,8 +229,8 @@
 <header>
     <div class="container">
         <h1>Autoconsommation solaire</h1>
-        <div class="subtitle">Methodologie et resultats — 6 kWc, Vayres (Gironde)</div>
-        <div class="date">Mars 2026 — Donnees PVGIS horaires (satellite) x Linky demi-horaire 2025</div>
+        <div class="subtitle">Methodologie et resultats &mdash; 6 kWc, Vayres (Gironde)</div>
+        <div class="date">Mars 2026 &mdash; Donnees PVGIS horaires (satellite) x Linky demi-horaire 2025</div>
     </div>
 </header>
 
@@ -313,6 +314,8 @@
         </tbody>
     </table>
 
+    <p style="margin-top:10px">Production : <strong>7 075 kWh/an</strong> (moyenne PVGIS 2020-2023, corrigee ombrage -1.5%).</p>
+
     <h3>Convergence avec l'installateur (Le Solarman)</h3>
     <table>
         <thead>
@@ -368,7 +371,7 @@
             <tr><td>Puissance crete</td><td>6 kWc</td></tr>
             <tr><td>Orientation</td><td>-45&deg; (Sud-Est)</td></tr>
             <tr><td>Inclinaison</td><td>30&deg;</td></tr>
-            <tr><td>Pertes systeme</td><td>14%</td></tr>
+            <tr><td>Pertes systeme</td><td>14% (cablage, onduleur, salissure, mismatch)</td></tr>
             <tr><td>Correction ombrage</td><td>-1.5% (cedres voisin, calepinage est)</td></tr>
         </tbody>
     </table>
@@ -381,8 +384,10 @@
         &nbsp;&nbsp;gain = autoconsommation &times; tarif_HP + surplus &times; tarif_rachat_OA
     </div>
 
+    <p>Les donnees PVGIS horaires sont interpolees en demi-horaire (chaque heure divisee en 2 creneaux egaux). L'alignement se fait par <strong>(mois, jour, heure, minute)</strong> : le 15 juillet 2025 du Linky est croise avec le 15 juillet de chaque annee PVGIS. Les 4 annees sont traitees separement puis moyennees.</p>
+
     <div class="alert alert-info">
-        <strong>Pourquoi c'est fiable :</strong> consommation reelle au compteur (pas un profil generique) + meteo reelle par satellite (nuages, pluie, soleil) + 4 annees croisees + resolution demi-horaire.
+        <strong>Pourquoi c'est fiable :</strong> consommation reelle au compteur (pas un profil generique) + meteo reelle par satellite (nuages, pluie, soleil &mdash; pas une courbe lissee) + 4 annees de production croisees (variabilite inter-annuelle mesuree) + resolution demi-horaire (capture fine de l'overlap production/consommation).
     </div>
 </section>
 
@@ -393,7 +398,7 @@
     <h2>2. Production annuelle</h2>
     <table>
         <thead>
-            <tr><th>Annee PVGIS</th><th class="num">Production brute</th><th class="num">Apres ombrage</th><th class="num">kWh/kWc</th></tr>
+            <tr><th>Annee PVGIS</th><th class="num">Production brute</th><th class="num">Apres ombrage (-1.5%)</th><th class="num">kWh/kWc</th></tr>
         </thead>
         <tbody>
             <tr><td>2020</td><td class="num">7 224 kWh</td><td class="num">7 062 kWh</td><td class="num">1 177</td></tr>
@@ -403,6 +408,9 @@
             <tr class="total-row"><td>Moyenne</td><td class="num">7 231 kWh</td><td class="num">7 075 kWh</td><td class="num">1 179</td></tr>
         </tbody>
     </table>
+    <div class="alert alert-info">
+        Le Solarman estime 7 410 kWh, soit +4.7% vs notre moyenne PVGIS. Ecart normal lie aux parametres de pertes et au modele de panneaux.
+    </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
@@ -451,6 +459,12 @@
         </tbody>
     </table>
 
+    <div class="alert alert-info">
+        <strong>Hiver</strong> (nov-fev) : production faible mais presque tout est autoconsomme (51-72%). Le talon de consommation absorbe l'essentiel.<br>
+        <strong>Ete</strong> (avr-aout) : production forte, autoconsommation 37-54%. Beaucoup de surplus &mdash; c'est la que l'ARSUN intervient.<br>
+        <strong>L'essentiel du gain</strong> vient du printemps et de l'ete (mai-aout = 1 603 kWh autoconsommes, 46% du total).
+    </div>
+
     <h3>Repartition visuelle (sans optimisation)</h3>
     <div class="legend">
         <span class="l-ac">Autoconsomme</span>
@@ -491,16 +505,19 @@
 <section>
     <h2>4. Avec bascule ECS (routeur ARSUN)</h2>
 
-    <p>Le routeur ARSUN redirige le surplus solaire vers le ballon d'eau chaude, watt par watt, en temps reel. Il est <strong>offert dans le devis Azelec</strong>.</p>
+    <p>Le routeur ARSUN est un boitier au tableau electrique qui redirige le surplus solaire vers le ballon d'eau chaude, watt par watt, en temps reel. Il est <strong>offert dans le devis Azelec</strong>. Detail de fonctionnement : <code>routeur-arsun.md</code>.</p>
 
+    <h3>Modele ARSUN</h3>
     <table style="margin-top:15px">
         <tbody>
             <tr><td>Puissance max</td><td>3 kW (resistance du ballon 300L)</td></tr>
-            <tr><td>Capacite journaliere</td><td>8,3 kWh/jour (mesuree Linky)</td></tr>
-            <tr><td>Fonctionnement</td><td>100% autonome, proportionnel, pas de WiFi</td></tr>
+            <tr><td>Capacite journaliere</td><td>8,3 kWh/jour (mesuree Linky, chauffe HC nuit complete)</td></tr>
+            <tr><td>Precision</td><td>5-30 W (routage proportionnel)</td></tr>
             <tr><td>Priorite</td><td>Maison d'abord &rarr; ARSUN &rarr; injection reseau</td></tr>
         </tbody>
     </table>
+
+    <p style="margin-top:12px">A chaque creneau de 30 min, l'ARSUN capte le surplus disponible, plafonne a 1,5 kWh par creneau (3 kW &times; 0,5h) et a 8,3 kWh par jour (capacite du ballon).</p>
 
     <h3>Annuel (4 annees PVGIS)</h3>
     <table>
@@ -538,6 +555,13 @@
         </tbody>
     </table>
 
+    <div class="alert alert-info">
+        L'ARSUN capte <strong>2 116 kWh/an</strong> de surplus pour le ballon &mdash; bien plus que l'estimation initiale (1 394 kWh), car la production PVGIS reelle est plus haute et genere plus de surplus.<br>
+        En <strong>decembre</strong>, l'ARSUN absorbe quasi tout le surplus (68 kWh) &mdash; il ne reste que 2 kWh d'injection. <strong>99% d'autoconsommation</strong>.<br>
+        En <strong>juillet</strong>, malgre la forte production, l'ARSUN capte 235 kWh et le surplus residuel tombe a 253 kWh (vs 488 sans ARSUN).<br>
+        Le taux de couverture atteint <strong>60% en juillet</strong> : les panneaux + ARSUN couvrent plus de la moitie de la facture d'ete.
+    </div>
+
     <h3>Repartition visuelle (avec ARSUN)</h3>
     <div class="legend">
         <span class="l-ac">Autoconsomme</span>
@@ -565,7 +589,7 @@
     <table>
         <tbody>
             <tr><td>Economie autoconsommation directe (HP 17,6 cts)</td><td class="num"><strong>613 &euro;/an</strong></td></tr>
-            <tr><td>Economie ARSUN (HC nuit evitee : 9,6 cts/kWh)</td><td class="num"><strong>203 &euro;/an</strong></td></tr>
+            <tr><td>Economie ARSUN (HC nuit evitee : 13,6 - 4 = 9,6 cts/kWh)</td><td class="num"><strong>203 &euro;/an</strong></td></tr>
             <tr><td>Revenu surplus residuel (OA 4 cts)</td><td class="num">59 &euro;/an</td></tr>
             <tr class="total-row"><td>Gain total</td><td class="num">875 &euro;/an</td></tr>
             <tr class="highlight-row"><td>ROI Azelec (6 814 &euro; net)</td><td class="num">~8 ans</td></tr>
@@ -575,24 +599,58 @@
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- COMPARAISON -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section>
+    <h2>5. Comparaison des approches</h2>
+
+    <table>
+        <thead>
+            <tr><th></th><th class="num">PVGIS horaire (notre modele)</th><th class="num">Le Solarman</th><th class="num">Ancien Gaussien</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Donnees production</td><td class="num">Satellite horaire (4 ans)</td><td class="num">Outil standard (~PVsyst)</td><td class="num">Gaussienne lissee</td></tr>
+            <tr><td>Donnees consommation</td><td class="num"><strong>Linky demi-horaire 2025</strong></td><td class="num">Conso annuelle Linky (pas horaire)</td><td class="num">Linky demi-horaire 2025</td></tr>
+            <tr><td>Variabilite meteo</td><td class="num">Oui (reelle)</td><td class="num">Oui</td><td class="num">Non (chaque jour identique)</td></tr>
+            <tr><td>Bascule ECS</td><td class="num">ARSUN (modelise creneau par creneau)</td><td class="num">Incluse</td><td class="num">Non</td></tr>
+            <tr><td>Production</td><td class="num">7 075 kWh</td><td class="num">7 410 kWh</td><td class="num">6 502 kWh</td></tr>
+            <tr><td>Tx autoconso avec ECS</td><td class="num"><strong>79%</strong></td><td class="num"><strong>70%</strong></td><td class="num">&mdash;</td></tr>
+            <tr><td>Tx couverture avec ECS</td><td class="num"><strong>35%</strong></td><td class="num"><strong>33%</strong></td><td class="num">&mdash;</td></tr>
+            <tr><td>Gain an 1 avec ECS</td><td class="num">875 &euro;</td><td class="num">~1 000 &euro;</td><td class="num">&mdash;</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Pourquoi le Solarman donne un gain plus eleve (~1 000 &euro;)</h3>
+    <p>Son outil utilise un profil de consommation generique (~35% diurne) au lieu de notre Linky reel (26% diurne). Ce profil standard place plus de consommation en journee &rarr; plus d'autoconsommation directe valorisee au tarif HP (17,6 cts) et moins de routage ECS valorise au tarif differentiel (9,6 cts). Le gain unitaire par kWh autoconsomme directement est plus eleve que par kWh route vers le ballon, d'ou un gain total superieur.</p>
+
+    <h3>Pourquoi notre modele est le plus fiable</h3>
+    <p>Il utilise les <strong>deux sources de donnees les plus precises disponibles</strong> :</p>
+    <ul style="margin: 10px 0 10px 20px">
+        <li>Production heure par heure par satellite (meteo reelle, pas lissee)</li>
+        <li>Consommation reelle mesuree au compteur (pas un profil type)</li>
+    </ul>
+    <p>Le seul moyen de faire mieux serait d'avoir les panneaux sur le toit et de mesurer la production reelle.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
 <!-- PROFIL CONSO -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <section>
-    <h2>5. Pourquoi 49% d'autoconsommation brute</h2>
-    <p>La consommation reelle (Linky 2025) est <strong>tres nocturne</strong> :</p>
+    <h2>6. Pourquoi notre profil de consommation est tres nocturne (26% diurne)</h2>
+
     <table style="margin-top:15px">
         <thead>
-            <tr><th>Plage horaire</th><th class="num">Conso (kWh/an)</th><th class="num">Part</th><th>Cause principale</th></tr>
+            <tr><th>Plage horaire</th><th class="num">Conso (kWh/an)</th><th class="num">Part</th></tr>
         </thead>
         <tbody>
-            <tr><td>9h-17h (heures solaires)</td><td class="num">4 113</td><td class="num"><strong>26%</strong></td><td>Talon, piscine, PAC journee</td></tr>
-            <tr><td>17h-22h30 (soir, HP)</td><td class="num">~5 200</td><td class="num">33%</td><td>Cuisine, electromenager, eclairage</td></tr>
-            <tr><td>22h30-9h (nuit, HC)</td><td class="num">~6 591</td><td class="num"><strong>41%</strong></td><td>Ballons ECS (8,3 kWh/nuit), PAC nuit</td></tr>
+            <tr><td>9h-17h (heures solaires)</td><td class="num">4 113</td><td class="num"><strong>26%</strong></td></tr>
+            <tr><td>17h-22h30 (soir, HP)</td><td class="num">~5 200</td><td class="num">33%</td></tr>
+            <tr><td>22h30-9h (nuit, HC)</td><td class="num">~6 591</td><td class="num"><strong>41%</strong></td></tr>
         </tbody>
     </table>
 
     <div class="alert alert-warning">
-        Le ballon ECS 300L consomme <strong>~3 030 kWh/an</strong> (19% de la conso totale), concentres entre 21h45 et 2h du matin. C'est pour ca que l'ARSUN est le <strong>levier n&deg;1</strong> : il decale ~2 100 kWh de la nuit vers le jour.
+        Le ballon ECS 300L consomme <strong>~3 030 kWh/an</strong> (19% de la conso totale), concentres entre 21h45 et 2h du matin. La PAC chauffe surtout la nuit en hiver. L'electromenager tourne le soir. C'est pour ca que le taux d'autoconsommation brut est "seulement" de 49% et que l'ARSUN est le <strong>levier n&deg;1</strong> : il decale ~2 100 kWh du ballon de la nuit vers le jour.
     </div>
 </section>
 
@@ -600,23 +658,64 @@
 <!-- REFERENCE -->
 <!-- ═══════════════════════════════════════════════════════════════════ -->
 <section>
-    <h2>6. Chiffres de reference</h2>
+    <h2>7. Chiffres de reference</h2>
     <p>Valeurs a utiliser dans les autres documents du projet :</p>
+
     <table style="margin-top:15px">
         <thead>
-            <tr><th>Parametre</th><th class="num">Sans ECS</th><th class="num">Avec ARSUN</th></tr>
+            <tr><th>Parametre</th><th class="num">Sans optimisation</th><th class="num">Avec ARSUN</th><th class="num">ARSUN + EV + decalage</th></tr>
         </thead>
         <tbody>
-            <tr><td>Production 6 kWc</td><td class="num">7 075 kWh/an</td><td class="num">7 075 kWh/an</td></tr>
-            <tr><td>Autoconsommation</td><td class="num">3 493 kWh (49%)</td><td class="num">5 610 kWh (79%)</td></tr>
-            <tr><td>Surplus</td><td class="num">3 582 kWh</td><td class="num">1 465 kWh</td></tr>
-            <tr><td>Taux de couverture</td><td class="num">22%</td><td class="num">35%</td></tr>
-            <tr class="highlight-row"><td>Gain an 1 (HP 17,6 cts)</td><td class="num">756 &euro;</td><td class="num">875 &euro;</td></tr>
-            <tr><td>ROI Azelec (6 814 &euro; net)</td><td class="num">~9 ans</td><td class="num">~8 ans</td></tr>
-            <tr><td>ROI moyen devis (7 617 &euro; net)</td><td class="num">~10 ans</td><td class="num">~9 ans</td></tr>
-            <tr><td>Variabilite inter-annuelle</td><td class="num">&plusmn;0.7 pts / &plusmn;14 &euro;</td><td class="num">&plusmn;0.7 pts / &plusmn;12 &euro;</td></tr>
+            <tr><td>Production 6 kWc</td><td class="num">7 075 kWh/an</td><td class="num">7 075 kWh/an</td><td class="num">7 075 kWh/an</td></tr>
+            <tr><td>Autoconso directe</td><td class="num">3 493 kWh</td><td class="num">3 493 kWh</td><td class="num">3 493 kWh</td></tr>
+            <tr><td>ARSUN (ballon ECS)</td><td class="num">&mdash;</td><td class="num">2 116 kWh</td><td class="num">2 116 kWh</td></tr>
+            <tr><td>EV solaire (874 kWh, 38% presence)</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">874 kWh</td></tr>
+            <tr><td>Decalage manuel (machines, piscine)</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">~500 kWh</td></tr>
+            <tr class="highlight-row"><td><strong>Total autoconsomme</strong></td><td class="num"><strong>3 493 kWh (49%)</strong></td><td class="num"><strong>5 610 kWh (79%)</strong></td><td class="num"><strong>~6 983 kWh (99%)</strong></td></tr>
+            <tr><td>Surplus</td><td class="num">3 582 kWh</td><td class="num">1 465 kWh</td><td class="num"><strong>~92 kWh</strong></td></tr>
+            <tr><td>Taux de couverture</td><td class="num">22%</td><td class="num">35%</td><td class="num"><strong>44%</strong></td></tr>
+            <tr><td colspan="4" style="height:8px; border:none"></td></tr>
+            <tr><td>Eco autoconso (HP 17,6 cts)</td><td class="num">613 &euro;</td><td class="num">613 &euro;</td><td class="num">613 &euro;</td></tr>
+            <tr><td>Eco ARSUN (HC evitee 9,6 cts)</td><td class="num">&mdash;</td><td class="num">203 &euro;</td><td class="num">203 &euro;</td></tr>
+            <tr><td>Eco EV (HC evitee 9,6 cts)</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">84 &euro;</td></tr>
+            <tr><td>Eco decalage (HP evitee 13,6 cts)</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">~68 &euro;</td></tr>
+            <tr><td>Revenu surplus (OA 4 cts)</td><td class="num">143 &euro;</td><td class="num">59 &euro;</td><td class="num">~4 &euro;</td></tr>
+            <tr class="total-row"><td>Gain total an 1</td><td class="num">756 &euro;</td><td class="num">875 &euro;</td><td class="num">~972 &euro;</td></tr>
+            <tr class="good-row"><td>ROI Azelec (6 814 &euro; net)</td><td class="num">~9 ans</td><td class="num">~8 ans</td><td class="num">~7 ans</td></tr>
+            <tr><td>ROI moyen devis (7 617 &euro; net)</td><td class="num">~10 ans</td><td class="num">~9 ans</td><td class="num">~8 ans</td></tr>
+            <tr><td>Variabilite inter-annuelle</td><td class="num">&plusmn;0.7 pts / &plusmn;14 &euro;</td><td class="num">&plusmn;0.7 pts / &plusmn;12 &euro;</td><td class="num">&mdash;</td></tr>
         </tbody>
     </table>
+
+    <div class="alert alert-success">
+        Le scenario <strong>ARSUN + EV + decalage</strong> est le maximum physiquement atteignable avec 6 kWc : <strong>99% de la production autoconsommee</strong>, il ne reste que ~92 kWh/an de surplus (~1%). Ajouter des panneaux au-dela de 6 kWc ne fait qu'augmenter le surplus, pas l'autoconsommation &mdash; la maison est saturee.
+    </div>
+
+    <h3>Plafond d'autoconsommation de ce foyer</h3>
+
+    <table style="margin-top:15px">
+        <thead>
+            <tr><th>Charge diurne</th><th class="num">kWh/an</th><th>Decalable ?</th><th>Effort</th></tr>
+        </thead>
+        <tbody>
+            <tr><td>Talon (frigo, congelateur, caves, aquarium, standby)</td><td class="num">~1 640</td><td>Non (permanent)</td><td>Aucun</td></tr>
+            <tr><td>Piscine (mai-sept)</td><td class="num">~1 060</td><td>Deja en journee, resserrer 10h-16h</td><td>Faible</td></tr>
+            <tr><td>PAC clim (ete)</td><td class="num">~600</td><td>Deja en journee</td><td>Aucun</td></tr>
+            <tr><td>PAC chauffage (mi-saison journee)</td><td class="num">~240</td><td>Partiel</td><td>Aucun</td></tr>
+            <tr class="highlight-row"><td>Sous-total (sans optimisation)</td><td class="num">~3 540</td><td></td><td></td></tr>
+            <tr><td>Ballon ECS via ARSUN</td><td class="num">~2 116</td><td><strong>Oui (automatique)</strong></td><td>Aucun</td></tr>
+            <tr><td>EV solaire (jours de presence)</td><td class="num">~874</td><td>Oui (brancher en journee)</td><td>Faible</td></tr>
+            <tr><td>Lave-linge/seche-linge (depart differe)</td><td class="num">~350</td><td>Oui</td><td>Moyen</td></tr>
+            <tr><td>Lave-vaisselle (1 sur 2 apres dejeuner)</td><td class="num">~140</td><td>Partiel</td><td>Moyen</td></tr>
+            <tr><td>Piscine resserree 10h-16h</td><td class="num">~100</td><td>Oui</td><td>Faible</td></tr>
+            <tr class="total-row"><td>Total maximum</td><td class="num">~7 160</td><td></td><td></td></tr>
+            <tr class="good-row"><td>Production 6 kWc</td><td class="num">7 075</td><td></td><td></td></tr>
+        </tbody>
+    </table>
+
+    <div class="alert alert-success">
+        La capacite d'absorption de la maison (~7 160 kWh/an) correspond quasi exactement a la production du 6 kWc (7 075 kWh/an). C'est le <strong>dimensionnement optimal</strong> : toute la production peut etre consommee sur place avec les bons leviers, et tout kWc supplementaire serait du surplus faiblement valorise.
+    </div>
 </section>
 
 </div>

@@ -1053,11 +1053,68 @@
         <ol style="margin: 10px 0 10px 20px; line-height: 2;">
             <li><strong>Donnees PVGIS horaires x Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Production PVGIS : 7 075 kWh/an (moyenne 4 ans, corrigee ombrage). Sans optimisation : autoconso 49%, gain 756 &euro;/an, retour ~9 ans (Azelec). Avec ARSUN : autoconso 79%, gain 875 &euro;/an, retour ~8 ans. Avec ARSUN + decalage + EV : ~1 084 &euro;/an, retour ~6 ans.</li>
             <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore le retour d'environ 1 an.</li>
-            <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 7 075 kWh/an, reduction de 22 a 35% de la facture selon optimisation.</li>
-            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, mais pas de remplacement onduleur a 1 500 &euro; en annee 12. VAN superieure de 683 &euro;, garantie 20-25 ans, monitoring par panneau.</li>
+            <li><strong>6 kWc = le bon dimensionnement pour ce foyer.</strong> Voir justification detaillee ci-dessous.</li>
+            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, mais pas de remplacement onduleur a 1 500 &euro; en annee 12. VAN superieure de 683 &euro;, garantie 20-25 ans, monitoring par panneau. <strong>Extensibilite</strong> : avec des micro-onduleurs, on peut ajouter 2-4 panneaux plus tard (2e voiture, extension) sans toucher a l'installation existante &mdash; juste poser sur les rails et brancher. Avec un string, l'ajout de panneaux change la tension de la chaine et necessite souvent un nouvel onduleur central (~1 500 &euro;).</li>
             <li><strong>HC en journee (~2028)</strong> : quand Enedis deploiera 2h HC en journee, le ballon ECS se declenchera automatiquement sur le pic solaire. Timing favorable : arrive en meme temps que la fin du contrat fixe. Retour ~9 ans sans domotique, potentiellement mieux avec le tarif reglemente.</li>
             <li><strong>Facteurs favorables</strong> : forte consommation (15 904 kWh/an mesures), piscine + PAC en journee, orientation SE correcte, pas d'ombrage sur maison + pool house.</li>
         </ol>
+
+        <h3>Pourquoi 6 kWc et pas 9 kWc</h3>
+
+        <p style="color: var(--gray-700); margin-bottom: 15px; line-height: 1.7;">
+            Le dimensionnement repose sur la <strong>valeur marginale</strong> de chaque kWc supplementaire. Les premiers 6 kWc couvrent le talon de consommation + piscine + ballon ECS (via ARSUN). Les 3 kWc supplementaires d'un 9 kWc produisent quand la maison est deja alimentee &rarr; c'est quasi 100% du surplus, valorise a seulement 4 cts/kWh.
+        </p>
+
+        <table>
+            <thead>
+                <tr><th></th><th class="num">6 kWc + ARSUN</th><th class="num">9 kWc + ARSUN</th><th class="num"><strong>Delta (3 kWc en plus)</strong></th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Production</td><td class="num">7 075 kWh</td><td class="num">~10 600 kWh</td><td class="num">+3 525 kWh</td></tr>
+                <tr><td>Autoconso + ARSUN</td><td class="num">5 610 kWh</td><td class="num">~6 200 kWh</td><td class="num">+590 kWh (marginal)</td></tr>
+                <tr><td>Surplus</td><td class="num">1 465 kWh</td><td class="num">~4 400 kWh</td><td class="num negative"><strong>+2 935 kWh</strong></td></tr>
+                <tr><td>Gain surplus (OA 4 cts)</td><td class="num">59 &euro;</td><td class="num">176 &euro;</td><td class="num">+117 &euro;/an</td></tr>
+                <tr><td>Surcout installation</td><td class="num">&mdash;</td><td class="num">~+2 600 &euro;</td><td class="num"></td></tr>
+                <tr class="highlight-row"><td><strong>ROI des 3 kWc supplementaires</strong></td><td class="num"></td><td class="num"></td><td class="num negative"><strong>~22 ans</strong></td></tr>
+            </tbody>
+        </table>
+
+        <p style="color: var(--gray-700); margin: 15px 0; line-height: 1.7;">
+            Les 3 kWc en plus rapportent <strong>117 &euro;/an</strong> pour un surcout de ~2 600 &euro;. ROI : <strong>~22 ans</strong> sur le marginal. Et a 9.1 kWc la <strong>TVA passe a 20%</strong> (au lieu de 5,5% pour du bas carbone &le; 9 kWc), soit ~1 500 &euro; de surcout TVA sur toute l'installation &mdash; ce qui allonge encore le retour.
+        </p>
+
+        <p style="color: var(--gray-700); margin-bottom: 15px; line-height: 1.7;">
+            Meme avec autoconsommation collective (LeBonWatt, surplus a ~10 cts net) : 2 935 &times; 0,09 = <strong>264 &euro;/an</strong> &rarr; ROI ~10 ans. Mieux, mais le 6 kWc + ARSUN a deja 79% d'autoconsommation et un ROI de 8 ans. L'argent supplementaire est mieux place ailleurs.
+        </p>
+
+        <div class="alert alert-success">
+            <strong>Le 6 kWc est le bon dimensionnement parce que :</strong>
+            <ul style="margin: 10px 0 5px 20px; line-height: 1.8;">
+                <li>Avec ARSUN, <strong>79% de la production est autoconsommee</strong> &rarr; il ne reste que 1 465 kWh de surplus (~20%)</li>
+                <li>Chaque kWc en plus produit principalement du surplus a 4 cts (valeur 10x inferieure a l'autoconsommation)</li>
+                <li>La consommation diurne reelle (26%, mesuree Linky) est le facteur limitant, pas la surface de toit</li>
+                <li>Pas de wallbox prevue (prise standard 2,3 kW suffit pour le besoin EV)</li>
+                <li>Le surcout 9 kWc + TVA 20% coute ~4 100 &euro; de plus pour ~117-264 &euro;/an de gain marginal</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-warning">
+            Un installateur qui pousse le 9 kWc sur ce profil optimise sa marge (+2 600 &euro;), pas la rentabilite du client.
+        </div>
+
+        <h3>Strategie d'extension : 6 kWc maintenant, +2 kWc plus tard si besoin</h3>
+
+        <p style="color: var(--gray-700); margin-bottom: 15px; line-height: 1.7;">
+            Avec des <strong>micro-onduleurs</strong>, l'installation est extensible : on peut ajouter 2-4 panneaux sur les rails existants sans toucher au reste. Cout marginal ~750 &euro;/kWc (panneaux + micro-onduleurs + pose), plus ~500 &euro; de frais de retour chantier et mise a jour declaration Enedis.
+        </p>
+
+        <p style="color: var(--gray-700); margin-bottom: 15px; line-height: 1.7;">
+            <strong>Declencheurs d'extension</strong> : arrivee d'une 2e voiture electrique, augmentation de la consommation (extension maison, PAC supplementaire), ou baisse du prix des panneaux. Tant que le besoin n'est pas la, l'argent travaille mieux ailleurs que dans du surplus a 4 cts.
+        </p>
+
+        <div class="alert alert-info">
+            Avec un onduleur string (Huawei), cette extension est compliquee (la tension de la chaine change &rarr; remplacement onduleur probable). C'est un argument concret en faveur des micro-onduleurs au-dela du pur calcul financier.
+        </div>
 
         <h3>Pour ameliorer la rentabilite</h3>
         <ul style="margin: 10px 0 10px 20px; line-height: 2;">
