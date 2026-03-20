@@ -349,18 +349,46 @@
     <section>
         <h2>Une journee type</h2>
 
-        <div class="diagram-block"><code>    Production solaire (kW)
-  5 |
-    |         /&macr;&macr;&macr;&macr;&macr;&macr;&macr;&macr;&macr;\
-  4 |       /              \
-    |     /     SURPLUS      \
-  3 |   /   &rarr; vers ballon      \
-    |  /                         \
-  2 | /                            \
-    |/   AUTOCONSOMMATION            \
-  1 |    (maison se sert en 1er)       \
-    |______________________________________
-    6h    9h    12h    15h    17h    20h</code></div>
+        <svg viewBox="0 0 800 300" style="width:100%;max-width:800px;margin:20px auto;display:block;background:#1e293b;border-radius:12px;padding:10px;" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grille -->
+          <line x1="80" y1="30" x2="80" y2="250" stroke="#475569" stroke-width="1"/>
+          <line x1="80" y1="250" x2="760" y2="250" stroke="#475569" stroke-width="1"/>
+          <!-- Labels Y -->
+          <text x="70" y="250" text-anchor="end" fill="#94a3b8" font-size="12">0</text>
+          <text x="70" y="206" text-anchor="end" fill="#94a3b8" font-size="12">1 kW</text>
+          <text x="70" y="162" text-anchor="end" fill="#94a3b8" font-size="12">2 kW</text>
+          <text x="70" y="118" text-anchor="end" fill="#94a3b8" font-size="12">3 kW</text>
+          <text x="70" y="74" text-anchor="end" fill="#94a3b8" font-size="12">4 kW</text>
+          <text x="70" y="35" text-anchor="end" fill="#94a3b8" font-size="12">5 kW</text>
+          <!-- Labels X -->
+          <text x="100" y="270" text-anchor="middle" fill="#94a3b8" font-size="11">6h</text>
+          <text x="220" y="270" text-anchor="middle" fill="#94a3b8" font-size="11">9h</text>
+          <text x="380" y="270" text-anchor="middle" fill="#94a3b8" font-size="11">12h</text>
+          <text x="540" y="270" text-anchor="middle" fill="#94a3b8" font-size="11">15h</text>
+          <text x="640" y="270" text-anchor="middle" fill="#94a3b8" font-size="11">17h</text>
+          <text x="740" y="270" text-anchor="middle" fill="#94a3b8" font-size="11">20h</text>
+          <!-- Zone autoconsommation (vert) -->
+          <polygon points="100,250 180,230 260,210 340,210 420,210 500,210 560,220 620,230 680,240 740,250"
+            fill="#10b981" opacity="0.25"/>
+          <!-- Zone surplus (jaune) -->
+          <polygon points="180,230 260,210 260,140 340,70 380,45 420,40 460,45 500,70 540,110 560,140 560,220 500,210 420,210 340,210 260,210"
+            fill="#f59e0b" opacity="0.3"/>
+          <!-- Courbe production -->
+          <polyline points="100,250 180,230 260,140 340,70 380,45 420,40 460,45 500,70 540,110 580,160 640,210 740,250"
+            fill="none" stroke="#f59e0b" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Ligne consommation maison -->
+          <polyline points="100,250 180,230 260,210 340,210 420,210 500,210 560,220 620,230 680,240 740,250"
+            fill="none" stroke="#10b981" stroke-width="2" stroke-dasharray="6,3" stroke-linecap="round"/>
+          <!-- Labels zones -->
+          <text x="420" y="95" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="bold">SURPLUS</text>
+          <text x="420" y="112" text-anchor="middle" fill="#f59e0b" font-size="11">→ vers ballon ECS</text>
+          <text x="420" y="235" text-anchor="middle" fill="#10b981" font-size="11">AUTOCONSOMMATION maison</text>
+          <!-- Legende -->
+          <line x1="200" y1="290" x2="230" y2="290" stroke="#f59e0b" stroke-width="3"/>
+          <text x="235" y="294" fill="#94a3b8" font-size="11">Production solaire</text>
+          <line x1="430" y1="290" x2="460" y2="290" stroke="#10b981" stroke-width="2" stroke-dasharray="6,3"/>
+          <text x="465" y="294" fill="#94a3b8" font-size="11">Consommation maison</text>
+        </svg>
 
         <h3>Deroulement heure par heure</h3>
 
@@ -511,22 +539,60 @@
 
         <h3>Evolution de la temperature du ballon</h3>
 
-        <div class="diagram-block"><code>Temperature ballon (&deg;C)
-
-65&deg; |    \                    /&macr;&macr;&macr;&macr;&macr;\
-    |     \    ARSUN remonte /       \ douches
-60&deg; |      \   le ballon    /         \ soir
-    |       \              /            \
-55&deg; |        \  douchettes/              \
-    |    HC   \  matin   /                \
-50&deg; |  nuit    \       /                   \   HC nuit
-    |    &uarr;      \    /                      \  (courte)
-45&deg; |    &uarr;       \ /                         \___/
-    |____|________|_______________|___________|_____
-    22h  6h      8h    10h      15h     20h   22h
-
-     SANS ARSUN : la courbe descend de 6h a 20h sans remonter
-     AVEC ARSUN : le soleil remonte la courbe en journee</code></div>
+        <svg viewBox="0 0 800 350" style="width:100%;max-width:800px;margin:20px auto;display:block;background:#1e293b;border-radius:12px;padding:10px;" xmlns="http://www.w3.org/2000/svg">
+          <!-- Grille -->
+          <line x1="80" y1="40" x2="80" y2="280" stroke="#475569" stroke-width="1"/>
+          <line x1="80" y1="280" x2="760" y2="280" stroke="#475569" stroke-width="1"/>
+          <!-- Lignes horizontales temperature -->
+          <line x1="80" y1="40" x2="760" y2="40" stroke="#334155" stroke-width="0.5" stroke-dasharray="4"/>
+          <line x1="80" y1="100" x2="760" y2="100" stroke="#334155" stroke-width="0.5" stroke-dasharray="4"/>
+          <line x1="80" y1="160" x2="760" y2="160" stroke="#334155" stroke-width="0.5" stroke-dasharray="4"/>
+          <line x1="80" y1="220" x2="760" y2="220" stroke="#334155" stroke-width="0.5" stroke-dasharray="4"/>
+          <!-- Labels Y (temperature) -->
+          <text x="70" y="45" text-anchor="end" fill="#94a3b8" font-size="12">65°C</text>
+          <text x="70" y="105" text-anchor="end" fill="#94a3b8" font-size="12">60°C</text>
+          <text x="70" y="165" text-anchor="end" fill="#94a3b8" font-size="12">55°C</text>
+          <text x="70" y="225" text-anchor="end" fill="#94a3b8" font-size="12">50°C</text>
+          <text x="70" y="285" text-anchor="end" fill="#94a3b8" font-size="12">45°C</text>
+          <!-- Labels X (heures) -->
+          <text x="80" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">22h</text>
+          <text x="170" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">2h</text>
+          <text x="260" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">6h</text>
+          <text x="330" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">8h</text>
+          <text x="420" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">10h</text>
+          <text x="510" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">14h</text>
+          <text x="580" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">17h</text>
+          <text x="650" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">20h</text>
+          <text x="730" y="300" text-anchor="middle" fill="#94a3b8" font-size="11">22h</text>
+          <!-- Zone solaire (fond jaune transparent) -->
+          <rect x="420" y="30" width="90" height="260" fill="#f59e0b" opacity="0.08" rx="4"/>
+          <text x="465" y="25" text-anchor="middle" fill="#f59e0b" font-size="10" opacity="0.6">☀ ARSUN</text>
+          <!-- Zone HC nuit (fond bleu transparent) -->
+          <rect x="80" y="30" width="90" height="260" fill="#3b82f6" opacity="0.08" rx="4"/>
+          <text x="125" y="25" text-anchor="middle" fill="#3b82f6" font-size="10" opacity="0.6">HC nuit</text>
+          <!-- Zone douches soir (fond rouge transparent) -->
+          <rect x="620" y="30" width="60" height="260" fill="#ef4444" opacity="0.08" rx="4"/>
+          <text x="650" y="25" text-anchor="middle" fill="#ef4444" font-size="10" opacity="0.6">Douches</text>
+          <!-- Courbe AVEC ARSUN (verte) -->
+          <polyline points="80,220 170,40 260,40 300,55 330,100 370,130 420,100 465,55 510,40 560,50 580,55 620,60 650,160 680,200 730,220"
+            fill="none" stroke="#10b981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Courbe SANS ARSUN (rouge pointille) -->
+          <polyline points="80,220 170,40 260,40 300,55 330,100 420,140 510,175 580,200 620,210 650,250 680,260 730,260"
+            fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="8,4" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+          <!-- Labels evenements -->
+          <text x="300" y="120" fill="#94a3b8" font-size="10">douchettes</text>
+          <text x="300" y="132" fill="#94a3b8" font-size="10">matin</text>
+          <text x="465" y="80" fill="#f59e0b" font-size="11" font-weight="bold">↑ solaire</text>
+          <text x="650" y="145" fill="#ef4444" font-size="10">douches</text>
+          <text x="650" y="157" fill="#ef4444" font-size="10">soir</text>
+          <text x="730" y="205" fill="#3b82f6" font-size="10">HC</text>
+          <text x="730" y="217" fill="#3b82f6" font-size="10">(courte)</text>
+          <!-- Legende -->
+          <line x1="200" y1="325" x2="230" y2="325" stroke="#10b981" stroke-width="3"/>
+          <text x="235" y="329" fill="#94a3b8" font-size="11">Avec ARSUN</text>
+          <line x1="380" y1="325" x2="410" y2="325" stroke="#ef4444" stroke-width="2" stroke-dasharray="8,4"/>
+          <text x="415" y="329" fill="#94a3b8" font-size="11">Sans ARSUN</text>
+        </svg>
 
         <p>Le ballon fait le pont entre la production solaire (10h-14h) et les douches (18h-20h). Peu importe que les douches soient le matin ou le soir &mdash; le soleil chauffe <strong>avant</strong>, le ballon <strong>stocke</strong>.</p>
     </section>
