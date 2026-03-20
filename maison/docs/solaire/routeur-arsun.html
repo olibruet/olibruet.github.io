@@ -435,11 +435,100 @@
             </tbody>
         </table>
 
-        <h3>La nuit</h3>
-        <p>Le contacteur heures creuses fonctionne normalement. Mais si le ballon a deja ete chauffe par le soleil en journee, la chauffe de nuit sera <strong>plus courte</strong> &mdash; voire inutile en ete.</p>
-        <div class="alert alert-success">
-            C'est la que se fait l'economie : on remplace de l'electricite achetee la nuit (<strong>13,6 cts</strong>) par du surplus solaire <strong>gratuit</strong>.
+        <h3>Le cycle complet sur 24h (famille de 6)</h3>
+        <p>Le ballon de 300L est une <strong>batterie thermique</strong> : le soleil le chauffe en journee, et il restitue la chaleur aux douches du soir. Le gain vient de la chauffe HC nuit raccourcie.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Heure</th>
+                    <th>Evenement</th>
+                    <th>Temperature ballon</th>
+                    <th>Source d'energie</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>22h-2h</td>
+                    <td>Chauffe HC nuit (raccourcie)</td>
+                    <td>50&deg;C &rarr; 65&deg;C</td>
+                    <td>HC nuit (13,6 cts)</td>
+                </tr>
+                <tr>
+                    <td>2h-6h</td>
+                    <td>Ballon chaud, en attente</td>
+                    <td>65&deg;C &rarr; 63&deg;C (deperditions)</td>
+                    <td>&mdash;</td>
+                </tr>
+                <tr>
+                    <td>6h-7h</td>
+                    <td>Douchettes matin (Olivier + Aurelie)</td>
+                    <td>63&deg;C &rarr; 58&deg;C</td>
+                    <td>&mdash;</td>
+                </tr>
+                <tr style="background: var(--sun-light);">
+                    <td>8h45-10h</td>
+                    <td>Surplus solaire faible, ARSUN commence</td>
+                    <td>58&deg;C &rarr; 60&deg;C</td>
+                    <td><strong>&#9728; Solaire (gratuit)</strong></td>
+                </tr>
+                <tr style="background: var(--sun-light);">
+                    <td>10h-14h</td>
+                    <td>Surplus solaire fort, ARSUN a fond</td>
+                    <td>60&deg;C &rarr; 65&deg;C</td>
+                    <td><strong>&#9728; Solaire (gratuit)</strong></td>
+                </tr>
+                <tr>
+                    <td>14h-18h</td>
+                    <td>Ballon chaud, en attente</td>
+                    <td>65&deg;C &rarr; 63&deg;C (deperditions)</td>
+                    <td>&mdash;</td>
+                </tr>
+                <tr>
+                    <td>18h-20h</td>
+                    <td>Douches du soir (4 enfants + Aurelie)</td>
+                    <td>63&deg;C &rarr; 50&deg;C</td>
+                    <td>&mdash;</td>
+                </tr>
+                <tr>
+                    <td>20h-22h</td>
+                    <td>Ballon tiede, HP, pas de chauffe</td>
+                    <td>50&deg;C &rarr; 49&deg;C</td>
+                    <td>&mdash;</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-warning">
+            <strong>Sans ARSUN :</strong> le ballon arrive a 18h a ~55&deg;C (deperditions toute la journee sans recharge). La HC nuit doit remonter de 45&deg;C a 65&deg;C = <strong>chauffe longue (~4h, 8,3 kWh)</strong>.
         </div>
+        <div class="alert alert-success">
+            <strong>Avec ARSUN :</strong> le ballon arrive a 18h a ~63&deg;C (recharge solaire en journee). Apres les douches du soir il est a ~50&deg;C. La HC nuit ne remonte que de 50&deg;C a 65&deg;C = <strong>chauffe courte (~1-2h, 2-3 kWh)</strong>.
+        </div>
+        <div class="alert alert-info">
+            <strong>Economie : ~6 kWh/jour ensoleille evites en HC nuit</strong>
+        </div>
+
+        <h3>Evolution de la temperature du ballon</h3>
+
+        <div class="diagram-block"><code>Temperature ballon (&deg;C)
+
+65&deg; |    \                    /&macr;&macr;&macr;&macr;&macr;\
+    |     \    ARSUN remonte /       \ douches
+60&deg; |      \   le ballon    /         \ soir
+    |       \              /            \
+55&deg; |        \  douchettes/              \
+    |    HC   \  matin   /                \
+50&deg; |  nuit    \       /                   \   HC nuit
+    |    &uarr;      \    /                      \  (courte)
+45&deg; |    &uarr;       \ /                         \___/
+    |____|________|_______________|___________|_____
+    22h  6h      8h    10h      15h     20h   22h
+
+     SANS ARSUN : la courbe descend de 6h a 20h sans remonter
+     AVEC ARSUN : le soleil remonte la courbe en journee</code></div>
+
+        <p>Le ballon fait le pont entre la production solaire (10h-14h) et les douches (18h-20h). Peu importe que les douches soient le matin ou le soir &mdash; le soleil chauffe <strong>avant</strong>, le ballon <strong>stocke</strong>.</p>
     </section>
 
     <!-- La maison est toujours prioritaire -->
