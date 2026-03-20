@@ -281,37 +281,37 @@
         <h2 id="synthese">Synthese</h2>
 
         <p style="font-size: 1.1em; color: var(--gray-700); margin-bottom: 20px; line-height: 1.7;">
-            Un 6 kWc sur le toit de la maison produit 6 440 kWh/an et reduit la facture de 30 a 40%. Avec un financement adapte, l'installation se paie quasiment toute seule.
+            Un 6 kWc sur le toit de la maison produit ~7 075 kWh/an et reduit la facture de 22 a 35%. Avec un financement adapte, l'installation se paie quasiment toute seule.
         </p>
 
         <div class="kpi-grid">
             <div class="kpi-card highlight">
                 <div class="value">10 020 &euro;</div>
-                <div class="label">Investissement net (apres prime)</div>
+                <div class="label">Investissement net median (apres prime)</div>
             </div>
             <div class="kpi-card highlight">
-                <div class="value">771 - 1 077 &euro;/an</div>
-                <div class="label">Economie sur la facture (donnees reelles)</div>
+                <div class="value">756 - 875 &euro;/an</div>
+                <div class="label">Economie sur la facture (donnees PVGIS horaires)</div>
             </div>
             <div class="kpi-card">
-                <div class="value">70-84 &euro;/mois</div>
+                <div class="value">63-70 &euro;/mois</div>
                 <div class="label">Mensualite financement (10-12 ans)</div>
             </div>
             <div class="kpi-card good">
-                <div class="value">~7-11 ans</div>
+                <div class="value">~8-10 ans</div>
                 <div class="label">Retour sur investissement</div>
             </div>
         </div>
 
-        <h3 style="margin-top: 20px;">Financement &mdash; cout median 10 020 &euro;</h3>
+        <h3 style="margin-top: 20px;">Financement &mdash; cout moyen devis 7 617 &euro; net</h3>
         <table>
             <thead>
-                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Economie solaire</th><th class="num">Reste a charge</th><th>Commentaire</th></tr>
+                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Economie solaire (brut/ARSUN)</th><th class="num">Reste a charge</th><th>Commentaire</th></tr>
             </thead>
             <tbody>
-                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">64-73 &euro;</td><td class="num">11-20 &euro;</td><td>Auto-finance en annee 3-5</td></tr>
-                <tr style="background: var(--green-light);"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>64-73 &euro;</strong></td><td class="num"><strong>-3 a 6 &euro;</strong></td><td><strong>Quasi auto-finance des le 1er mois</strong></td></tr>
-                <tr><td>15 ans</td><td class="num">56 &euro;</td><td class="num">64-73 &euro;</td><td class="num positive">-8 a -17 &euro; (gain net)</td><td>Rapporte des le 1er mois</td></tr>
+                <tr><td>10 ans</td><td class="num">84 &euro;</td><td class="num">63-73 &euro;</td><td class="num">11-21 &euro;</td><td>Auto-finance en annee 3-5</td></tr>
+                <tr style="background: var(--green-light);"><td><strong>12 ans</strong></td><td class="num"><strong>70 &euro;</strong></td><td class="num"><strong>63-73 &euro;</strong></td><td class="num"><strong>-3 a 7 &euro;</strong></td><td><strong>Quasi auto-finance des le 1er mois</strong></td></tr>
+                <tr><td>15 ans</td><td class="num">56 &euro;</td><td class="num">63-73 &euro;</td><td class="num positive">-7 a -17 &euro; (gain net)</td><td>Rapporte des le 1er mois</td></tr>
             </tbody>
         </table>
         <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">L'economie augmente chaque annee avec l'inflation electrique (+3%/an). Sur 12 ans avec decalage manuel, l'installation rapporte 3 &euro;/mois des le depart.</p>
@@ -333,11 +333,11 @@
             <li><a href="#s2" style="color: var(--blue); text-decoration: none;">Cadre reglementaire solaire &mdash; T1 2026</a></li>
             <li><a href="#s3" style="color: var(--blue); text-decoration: none;">Hypotheses de calcul</a></li>
             <li><a href="#s4" style="color: var(--blue); text-decoration: none;">Production mensuelle estimee (6 kWc)</a></li>
-            <li><a href="#s5" style="color: var(--blue); text-decoration: none;">Resultats par scenario</a></li>
+            <li><a href="#s5" style="color: var(--blue); text-decoration: none;">Resultats par scenario (modele theorique)</a></li>
             <li><a href="#s6" style="color: var(--blue); text-decoration: none;">Analyse de sensibilite (6 kWc)</a></li>
-            <li><a href="#s7" style="color: var(--blue); text-decoration: none;">Flux de tresorerie</a></li>
+            <li><a href="#s7" style="color: var(--blue); text-decoration: none;">Flux de tresorerie (PVGIS horaire + ARSUN)</a></li>
             <li><a href="#s8" style="color: var(--blue); text-decoration: none;">Impact vehicule electrique</a></li>
-            <li><a href="#s9" style="color: var(--blue); text-decoration: none;">Confrontation aux donnees reelles (Linky 2025)</a></li>
+            <li><a href="#s9" style="color: var(--blue); text-decoration: none;">Confrontation aux donnees reelles (PVGIS horaire x Linky 2025)</a></li>
             <li><a href="#s10" style="color: var(--blue); text-decoration: none;">Batterie virtuelle</a></li>
             <li><a href="#s11" style="color: var(--blue); text-decoration: none;">Conclusion et recommandations</a></li>
             <li><a href="#s12" style="color: var(--blue); text-decoration: none;">Financement</a></li>
@@ -374,6 +374,13 @@
         <div class="alert alert-info" style="margin-top: 10px;">
             Le <strong>6 kWc recommande</strong> (~30 m&sup2;) tient largement sur la maison seule. <s>9 kWc ecarte</s> : surplus supplementaire revendu a 4 cts (mauvais ROI), pas de wallbox prevue, surcout non justifie. <strong>Calepinage cote est du toit</strong> pour minimiser l'ombrage cedres.
         </div>
+
+        <h4>Non retenu</h4>
+        <ul style="margin: 10px 0 10px 20px; line-height: 1.8;">
+            <li><strong>Extension</strong> : ~55 m&sup2; au sol, versant SE ~20-22 m&sup2;. <strong>Ecartee</strong> : ombrage coniferes du voisin confirme par photos. Perte estimee ~40-50% sur l'annee.</li>
+            <li><strong>Auvent BBQ</strong> : ~4,5 m&sup2;. Trop petit, structure legere, orientation perpendiculaire.</li>
+            <li><strong>Porche jardin</strong> : 8m x 2m &mdash; non pertinent.</li>
+        </ul>
 
         <h3>Consommation electrique (15 900 kWh/an &mdash; 2 576 &euro;/an)</h3>
         <table>
@@ -452,7 +459,7 @@
                 <tr><th>Parametre</th><th>Valeur</th><th>Source</th></tr>
             </thead>
             <tbody>
-                <tr><td>Production specifique</td><td>1 100 kWh/kWc/an</td><td>PVGIS Bordeaux, corrige SE 30&deg;</td></tr>
+                <tr><td>Production specifique</td><td>1 179 kWh/kWc/an</td><td>PVGIS horaire 2020-2023, corrige SE 30&deg;</td></tr>
                 <tr><td>Degradation panneaux</td><td>0,5%/an</td><td>Standard industrie</td></tr>
                 <tr><td>Inflation electricite</td><td>3%/an</td><td>Tendance historique (conservateur)</td></tr>
                 <tr><td>Remplacement onduleur string</td><td>1 500 &euro; a l'annee 12</td><td>Cout moyen marche</td></tr>
@@ -460,7 +467,7 @@
                 <tr><td>Taux d'actualisation (VAN)</td><td>2%/an</td><td>Taux sans risque</td></tr>
                 <tr><td>Duree d'etude</td><td>25 ans</td><td>Garantie constructeur</td></tr>
                 <tr><td>Surface par kWc</td><td>5 m&sup2;</td><td>Panneaux modernes ~200 W/m&sup2;</td></tr>
-                <tr><td>Fraction conso diurne</td><td>45%</td><td>Estime (PAC + piscine en journee)</td></tr>
+                <tr><td>Fraction conso diurne</td><td>26%</td><td>Mesure Linky 2025 (9h-17h)</td></tr>
             </tbody>
         </table>
 
@@ -483,7 +490,7 @@
     <!-- =============== PRODUCTION =============== -->
     <section>
         <h2 id="s4">4. Production mensuelle estimee (6 kWc)</h2>
-        <p style="color: var(--gray-500); margin-bottom: 15px;">Source : PVGIS Bordeaux, corrige pour orientation SE a 30&deg; &mdash; Production specifique : 1 100 kWh/kWc/an</p>
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Source : PVGIS seriescalc horaire 2020-2023 (satellite SARAH3), Vayres SE -45&deg;, 30&deg;, 14% pertes &mdash; Production specifique : 1 179 kWh/kWc/an</p>
 
         <div class="chart-bars">
             <div class="chart-row"><span class="chart-label">Janvier</span><div class="bar" style="width: 62px;"></div><span class="chart-value">239</span></div>
@@ -502,7 +509,7 @@
         <p style="text-align: right; font-weight: 700; color: var(--gray-700);">Total : 6 600 kWh/an</p>
 
         <div class="alert alert-warning" style="margin-top: 15px;">
-            <strong>Correction ombrage :</strong> les cedres du voisin (cote ouest) projettent une ombre progressive l'apres-midi (debut 15h30 a l'equinoxe, confirme par releve terrain 18/03/2026). Matin inchange (plein soleil des ~8h45). Avec <strong>calepinage est</strong> (panneaux groupes cote est), production corrigee : <strong>~6 500 kWh/an</strong> (-1,5%). Ancienne estimation : 6 440 kWh/an (-2,4%) &mdash; legerement pessimiste, confirme par le releve terrain. Detail : <code>ombrage-parcelle.md</code>.
+            <strong>Correction ombrage :</strong> les cedres du voisin (cote ouest) projettent une ombre progressive l'apres-midi (debut 15h30 a l'equinoxe, confirme par releve terrain 18/03/2026). Matin inchange (plein soleil des ~8h45). Avec <strong>calepinage est</strong> (panneaux groupes cote est), production corrigee : <strong>~7 075 kWh/an</strong> (-1,5% de la production PVGIS brute de 7 231 kWh/an). Detail : <code>ombrage-parcelle.md</code>.
         </div>
     </section>
 
@@ -510,7 +517,7 @@
     <section>
         <h2 id="s5">5. Resultats par scenario</h2>
         <div class="alert alert-info" style="margin-bottom: 15px;">
-            <strong>Note :</strong> ces resultats utilisent un modele theorique (45% de conso diurne, taux autoconsommation 79%). Les resultats bases sur les donnees reelles Linky 2025 sont presentes en <a href="#s9">section 9</a>.
+            <strong>Note (mars 2026) :</strong> ces resultats utilisent un modele theorique (45% de conso diurne) qui a ete depasse par l'analyse PVGIS horaire x Linky reel (<a href="#s9">section 9</a>). <strong>Les chiffres de reference sont desormais ceux de la section 9</strong> : production 7 075 kWh/an, autoconso brute 49%, gain brut 756 &euro;/an, avec ARSUN 875 &euro;/an. Les tableaux ci-dessous sont conserves a titre historique.
         </div>
         <p style="color: var(--gray-500); margin-bottom: 15px;">Tous les scenarios sont en autoconsommation avec revente du surplus (seul modele disponible &le; 9 kWc depuis 2026). Le cout utilise est le cout median du marche.</p>
 
@@ -647,7 +654,7 @@
         <h2 id="s6">6. Analyse de sensibilite (6 kWc, cout median)</h2>
 
         <div class="alert alert-info" style="margin-bottom: 15px;">
-            <strong>Note :</strong> ces resultats utilisent un modele theorique. Les resultats bases sur les donnees reelles Linky 2025 sont presentes en <a href="#s9">section 9</a>.
+            <strong>Note :</strong> cette analyse de sensibilite utilise l'ancien modele theorique. Les chiffres de reference sont en <a href="#s9">section 9</a>.
         </div>
 
         <h3>Impact du tarif electrique</h3>
@@ -715,10 +722,10 @@
 
     <!-- =============== FLUX DE TRESORERIE =============== -->
     <section>
-        <h2 id="s7">7. Flux de tresorerie &mdash; 6 kWc, micro-onduleurs, donnees reelles Linky 2025 (59% autoconsommation)</h2>
+        <h2 id="s7">7. Flux de tresorerie &mdash; 6 kWc, micro-onduleurs, ARSUN, donnees PVGIS horaires</h2>
 
         <p style="color: var(--gray-700); margin-bottom: 15px; line-height: 1.7;">
-            Ce tableau montre l'evolution financiere annee par annee d'une installation 6 kWc avec <strong>micro-onduleurs</strong> (pas de remplacement onduleur). Base sur les <strong>donnees reelles Linky 2025</strong> (59% autoconsommation, production corrigee ombrage). Cout : <strong>8 097 &euro; TTC</strong> (moyenne devis Azelec 7 294 + Concept'Energy 8 900), net apres prime : <strong>7 617 &euro;</strong>. La production baisse de 0,5%/an (degradation panneaux), l'economie augmente avec l'inflation electrique de 3%/an. <strong>Quand le cumul passe en positif, l'investissement est rembourse.</strong>
+            Ce tableau montre l'evolution financiere annee par annee d'une installation 6 kWc avec <strong>micro-onduleurs</strong> (pas de remplacement onduleur) et <strong>routeur ARSUN</strong> (bascule ECS, offert devis Azelec). Base sur les <strong>donnees PVGIS horaires 2020-2023</strong> croisees avec la <strong>consommation Linky demi-horaire 2025</strong> (49% autoconsommation brute, 79% avec ARSUN). Detail methodologique : <code>autoconsommation-methodologie.md</code>. Cout : <strong>8 097 &euro; TTC</strong> (moyenne devis Azelec 7 294 + Concept'Energy 8 900), net apres prime : <strong>7 617 &euro;</strong>. La production baisse de 0,5%/an, l'economie augmente avec l'inflation electrique de 3%/an. <strong>Quand le cumul passe en positif, l'investissement est rembourse.</strong>
         </p>
 
         <table>
@@ -726,44 +733,34 @@
                 <tr>
                     <th class="num">Annee</th>
                     <th class="num">Production</th>
-                    <th class="num">Autoconso</th>
+                    <th class="num">AC brut</th>
+                    <th class="num">ARSUN</th>
                     <th class="num">Surplus</th>
                     <th class="num">Eco. &euro;</th>
+                    <th class="num">ARSUN &euro;</th>
                     <th class="num">Surp. &euro;</th>
                     <th class="num">Net &euro;</th>
                     <th class="num">Cumul &euro;</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td class="num">1</td><td class="num">6 408</td><td class="num">3 755</td><td class="num">2 653</td><td class="num">681</td><td class="num">106</td><td class="num">787</td><td class="num negative">-6 830</td></tr>
-                <tr><td class="num">2</td><td class="num">6 376</td><td class="num">3 736</td><td class="num">2 640</td><td class="num">697</td><td class="num">106</td><td class="num">803</td><td class="num negative">-6 027</td></tr>
-                <tr><td class="num">3</td><td class="num">6 344</td><td class="num">3 718</td><td class="num">2 626</td><td class="num">715</td><td class="num">105</td><td class="num">820</td><td class="num negative">-5 207</td></tr>
-                <tr><td class="num">4</td><td class="num">6 312</td><td class="num">3 699</td><td class="num">2 613</td><td class="num">733</td><td class="num">105</td><td class="num">837</td><td class="num negative">-4 370</td></tr>
-                <tr><td class="num">5</td><td class="num">6 281</td><td class="num">3 680</td><td class="num">2 600</td><td class="num">751</td><td class="num">104</td><td class="num">855</td><td class="num negative">-3 515</td></tr>
-                <tr><td class="num">6</td><td class="num">6 249</td><td class="num">3 662</td><td class="num">2 587</td><td class="num">769</td><td class="num">103</td><td class="num">873</td><td class="num negative">-2 642</td></tr>
-                <tr><td class="num">7</td><td class="num">6 218</td><td class="num">3 644</td><td class="num">2 574</td><td class="num">789</td><td class="num">103</td><td class="num">892</td><td class="num negative">-1 750</td></tr>
-                <tr><td class="num">8</td><td class="num">6 187</td><td class="num">3 626</td><td class="num">2 561</td><td class="num">808</td><td class="num">102</td><td class="num">911</td><td class="num negative">-839</td></tr>
-                <tr class="breakeven"><td class="num"><strong>9</strong></td><td class="num">6 156</td><td class="num">3 607</td><td class="num">2 549</td><td class="num">828</td><td class="num">102</td><td class="num">930</td><td class="num positive"><strong>+91</strong></td></tr>
-                <tr><td class="num">10</td><td class="num">6 125</td><td class="num">3 589</td><td class="num">2 536</td><td class="num">849</td><td class="num">101</td><td class="num">950</td><td class="num positive">+1 041</td></tr>
-                <tr><td class="num">11</td><td class="num">6 095</td><td class="num">3 571</td><td class="num">2 523</td><td class="num">870</td><td class="num">101</td><td class="num">971</td><td class="num positive">+2 012</td></tr>
-                <tr><td class="num">12</td><td class="num">6 064</td><td class="num">3 554</td><td class="num">2 511</td><td class="num">891</td><td class="num">100</td><td class="num">992</td><td class="num positive">+3 004</td></tr>
-                <tr><td class="num">13</td><td class="num">6 034</td><td class="num">3 536</td><td class="num">2 498</td><td class="num">914</td><td class="num">100</td><td class="num">1 014</td><td class="num positive">+4 018</td></tr>
-                <tr><td class="num">14</td><td class="num">6 004</td><td class="num">3 518</td><td class="num">2 485</td><td class="num">936</td><td class="num">99</td><td class="num">1 036</td><td class="num positive">+5 054</td></tr>
-                <tr><td class="num">15</td><td class="num">5 974</td><td class="num">3 500</td><td class="num">2 473</td><td class="num">960</td><td class="num">99</td><td class="num">1 059</td><td class="num positive">+6 112</td></tr>
-                <tr><td class="num">16</td><td class="num">5 944</td><td class="num">3 483</td><td class="num">2 461</td><td class="num">983</td><td class="num">98</td><td class="num">1 082</td><td class="num positive">+7 194</td></tr>
-                <tr><td class="num">17</td><td class="num">5 914</td><td class="num">3 466</td><td class="num">2 448</td><td class="num">1 008</td><td class="num">98</td><td class="num">1 106</td><td class="num positive">+8 300</td></tr>
-                <tr><td class="num">18</td><td class="num">5 884</td><td class="num">3 448</td><td class="num">2 436</td><td class="num">1 033</td><td class="num">97</td><td class="num">1 130</td><td class="num positive">+9 430</td></tr>
-                <tr><td class="num">19</td><td class="num">5 855</td><td class="num">3 431</td><td class="num">2 424</td><td class="num">1 059</td><td class="num">97</td><td class="num">1 156</td><td class="num positive">+10 586</td></tr>
-                <tr><td class="num">20</td><td class="num">5 826</td><td class="num">3 414</td><td class="num">2 412</td><td class="num">1 085</td><td class="num">96</td><td class="num">1 181</td><td class="num positive">+11 767</td></tr>
-                <tr><td class="num">21</td><td class="num">5 797</td><td class="num">3 397</td><td class="num">2 400</td><td class="num">1 112</td><td class="num">96</td><td class="num">1 208</td><td class="num positive">+12 975</td></tr>
-                <tr><td class="num">22</td><td class="num">5 768</td><td class="num">3 380</td><td class="num">2 388</td><td class="num">1 140</td><td class="num">96</td><td class="num">1 235</td><td class="num positive">+14 210</td></tr>
-                <tr><td class="num">23</td><td class="num">5 739</td><td class="num">3 363</td><td class="num">2 376</td><td class="num">1 168</td><td class="num">95</td><td class="num">1 263</td><td class="num positive">+15 473</td></tr>
-                <tr><td class="num">24</td><td class="num">5 710</td><td class="num">3 346</td><td class="num">2 364</td><td class="num">1 197</td><td class="num">95</td><td class="num">1 291</td><td class="num positive">+16 764</td></tr>
-                <tr class="highlight-row"><td class="num">25</td><td class="num">5 681</td><td class="num">3 329</td><td class="num">2 352</td><td class="num">1 227</td><td class="num">94</td><td class="num">1 321</td><td class="num positive">+18 085</td></tr>
+                <tr><td class="num">1</td><td class="num">7 040</td><td class="num">3 476</td><td class="num">2 105</td><td class="num">1 459</td><td class="num">612</td><td class="num">202</td><td class="num">58</td><td class="num">872</td><td class="num negative">-6 745</td></tr>
+                <tr><td class="num">2</td><td class="num">7 005</td><td class="num">3 458</td><td class="num">2 094</td><td class="num">1 452</td><td class="num">630</td><td class="num">207</td><td class="num">58</td><td class="num">896</td><td class="num negative">-5 849</td></tr>
+                <tr><td class="num">3</td><td class="num">6 970</td><td class="num">3 441</td><td class="num">2 084</td><td class="num">1 445</td><td class="num">649</td><td class="num">213</td><td class="num">58</td><td class="num">920</td><td class="num negative">-4 930</td></tr>
+                <tr><td class="num">4</td><td class="num">6 935</td><td class="num">3 424</td><td class="num">2 073</td><td class="num">1 438</td><td class="num">668</td><td class="num">220</td><td class="num">58</td><td class="num">945</td><td class="num negative">-3 984</td></tr>
+                <tr><td class="num">5</td><td class="num">6 900</td><td class="num">3 406</td><td class="num">2 063</td><td class="num">1 431</td><td class="num">688</td><td class="num">226</td><td class="num">57</td><td class="num">971</td><td class="num negative">-3 013</td></tr>
+                <tr><td class="num">6</td><td class="num">6 866</td><td class="num">3 389</td><td class="num">2 053</td><td class="num">1 424</td><td class="num">709</td><td class="num">233</td><td class="num">57</td><td class="num">998</td><td class="num negative">-2 015</td></tr>
+                <tr><td class="num">7</td><td class="num">6 832</td><td class="num">3 372</td><td class="num">2 042</td><td class="num">1 417</td><td class="num">730</td><td class="num">240</td><td class="num">57</td><td class="num">1 026</td><td class="num negative">-989</td></tr>
+                <tr class="breakeven"><td class="num"><strong>8</strong></td><td class="num"><strong>6 798</strong></td><td class="num"><strong>3 355</strong></td><td class="num"><strong>2 032</strong></td><td class="num"><strong>1 410</strong></td><td class="num"><strong>751</strong></td><td class="num"><strong>247</strong></td><td class="num"><strong>56</strong></td><td class="num"><strong>1 055</strong></td><td class="num positive"><strong>+65</strong></td></tr>
+                <tr><td class="num">9</td><td class="num">6 764</td><td class="num">3 339</td><td class="num">2 022</td><td class="num">1 404</td><td class="num">774</td><td class="num">254</td><td class="num">56</td><td class="num">1 084</td><td class="num positive">+1 149</td></tr>
+                <tr><td class="num">10</td><td class="num">6 730</td><td class="num">3 322</td><td class="num">2 012</td><td class="num">1 397</td><td class="num">797</td><td class="num">262</td><td class="num">56</td><td class="num">1 115</td><td class="num positive">+2 264</td></tr>
+                <tr><td class="num">15</td><td class="num">6 565</td><td class="num">3 240</td><td class="num">1 963</td><td class="num">1 362</td><td class="num">924</td><td class="num">304</td><td class="num">54</td><td class="num">1 282</td><td class="num positive">+8 212</td></tr>
+                <tr><td class="num">20</td><td class="num">6 404</td><td class="num">3 161</td><td class="num">1 915</td><td class="num">1 328</td><td class="num">1 071</td><td class="num">352</td><td class="num">53</td><td class="num">1 477</td><td class="num positive">+15 085</td></tr>
+                <tr class="highlight-row"><td class="num">25</td><td class="num">6 247</td><td class="num">3 083</td><td class="num">1 868</td><td class="num">1 296</td><td class="num">1 241</td><td class="num">408</td><td class="num">52</td><td class="num">1 702</td><td class="num positive">+22 984</td></tr>
             </tbody>
         </table>
         <div class="alert alert-success" style="margin-top: 15px;">
-            Le seuil de rentabilite est atteint a l'<strong>annee 9</strong> (cumul positif a +91 &euro;). C'est le scenario <strong>sans aucune optimisation</strong> &mdash; avec decalage de charge le retour est plus rapide (~7-8 ans). Pas de remplacement onduleur (micro-onduleurs garantis 20-25 ans). Gain net sur 25 ans : <strong>+18 085 &euro;</strong>. Cout base : moyenne des devis Azelec (7 294 &euro;) et Concept'Energy (8 900 &euro;).
+            Le seuil de rentabilite est atteint a l'<strong>annee 8</strong> (cumul positif a +65 &euro;). Gain net sur 25 ans : <strong>+22 984 &euro;</strong>. C'est le scenario avec ARSUN (offert) sans autre optimisation. Pas de remplacement onduleur (micro-onduleurs garantis 20-25 ans). Cout base : moyenne des devis Azelec (7 294 &euro;) et Concept'Energy (8 900 &euro;).
         </div>
     </section>
 
@@ -776,7 +773,7 @@
         <h3>Donnees vehicule</h3>
         <table>
             <tr><td>Kilometrage reel mesure (Aurelie)</td><td class="num">12 840 km/an</td></tr>
-            <tr><td>Usage WE Olivier (remplacement diesel 5008)</td><td class="num">~2 500 km/an</td></tr>
+            <tr><td>Usage WE Olivier (remplacement diesel)</td><td class="num">~2 500 km/an</td></tr>
             <tr><td>Consommation EV</td><td class="num">15 kWh/100 km</td></tr>
             <tr class="highlight-row"><td><strong>Consommation totale EV</strong></td><td class="num"><strong>~2 300 kWh/an</strong></td></tr>
             <tr><td>Fraction recharge solaire (conservateur)</td><td class="num">38%</td></tr>
@@ -791,8 +788,8 @@
             </thead>
             <tbody>
                 <tr><td>Lundi</td><td>Non (travail)</td><td>Non</td></tr>
-                <tr><td>Mardi matin</td><td>Non (travail)</td><td><strong>Apres-midi ~50%</strong></td></tr>
-                <tr><td>Mercredi OU vendredi</td><td><strong>~50%</strong> (activites enfants)</td><td>Oui quand presente</td></tr>
+                <tr><td>Mardi matin</td><td>Non (travail)</td><td><strong>Apres-midi ~50%</strong> (courses, activites)</td></tr>
+                <tr><td>Mercredi OU vendredi</td><td><strong>~50%</strong> (activites enfants, courses)</td><td>Oui quand presente</td></tr>
                 <tr><td>Jeudi</td><td><strong>~60%</strong></td><td>Oui quand presente</td></tr>
                 <tr><td>Week-end</td><td><strong>~30%</strong> (Olivier l'utilise)</td><td>Peu</td></tr>
             </tbody>
@@ -840,11 +837,11 @@
 
     <!-- =============== DONNEES REELLES =============== -->
     <section>
-        <h2 id="s9">9. Confrontation aux donnees reelles (Linky 2025)</h2>
+        <h2 id="s9">9. Confrontation aux donnees reelles (PVGIS horaire x Linky 2025)</h2>
 
-        <p style="color: var(--gray-500); margin-bottom: 15px;">Analyse croisee des donnees de consommation Linky demi-horaires (annee complete 2025, 17 421 creneaux) avec la production solaire simulee 6 kWc.</p>
+        <p style="color: var(--gray-500); margin-bottom: 15px;">Analyse croisee des donnees de consommation Linky (demi-horaires, annee complete 2025) avec les donnees de production PVGIS horaires (satellite, 4 annees 2020-2023). Scripts : <code>scripts/solaire/analyse_autoconso_pvgis.py</code> et <code>analyse_autoconso_arsun.py</code>. Detail methodologique : <code>autoconsommation-methodologie.md</code>.</p>
 
-        <h3>Consommation reelle vs hypothese</h3>
+        <h3>Consommation reelle mesuree</h3>
 
         <div class="kpi-grid">
             <div class="kpi-card">
@@ -855,60 +852,79 @@
                 <div class="value" style="color: #991b1b;">25,9%</div>
                 <div class="label">Fraction diurne reelle (vs 45% suppose)</div>
             </div>
-            <div class="kpi-card" style="background: var(--red-light); border-color: var(--red);">
-                <div class="value" style="color: #991b1b;">59,1%</div>
-                <div class="label">Autoconsommation reelle (vs 79% theorique)</div>
+            <div class="kpi-card">
+                <div class="value">4 113 kWh</div>
+                <div class="label">Conso diurne annuelle</div>
             </div>
         </div>
 
-        <div class="alert alert-warning">
-            <strong>Ecart significatif :</strong> la consommation totale est correcte, mais seulement 26% a lieu pendant les heures solaires (9h-17h) au lieu de 45%. Cause principale : les ballons ECS (4-5 kW entre 21h30 et minuit en HC) et la PAC chauffage la nuit en hiver.
-        </div>
-
-        <h3>Autoconsommation reelle simulee (6 kWc)</h3>
         <table>
             <thead>
-                <tr><th></th><th class="num">Modele theorique</th><th class="num">Donnees reelles</th><th class="num">Ecart</th></tr>
+                <tr><th>Parametre</th><th class="num">Hypothese initiale</th><th class="num">Donnees reelles</th></tr>
             </thead>
             <tbody>
-                <tr><td>Taux autoconsommation</td><td class="num">79%</td><td class="num"><strong>59,1%</strong></td><td class="num negative">-20 pts</td></tr>
-                <tr><td>Autoconsommation</td><td class="num">5 214 kWh</td><td class="num"><strong>3 776 kWh</strong></td><td class="num negative">-1 438 kWh</td></tr>
-                <tr><td>Surplus</td><td class="num">1 386 kWh</td><td class="num"><strong>2 664 kWh</strong></td><td class="num negative">+1 278 kWh</td></tr>
-                <tr><td>Economie autoconso an 1</td><td class="num">923 &euro;</td><td class="num"><strong>665 &euro;</strong></td><td class="num negative">-258 &euro;</td></tr>
-                <tr><td>Revenu surplus</td><td class="num">54 &euro;</td><td class="num"><strong>106 &euro;</strong></td><td class="num positive">+52 &euro;</td></tr>
-                <tr class="highlight-row"><td><strong>Gain total an 1</strong></td><td class="num"><strong>977 &euro;</strong></td><td class="num"><strong>771 &euro;</strong></td><td class="num negative"><strong>-206 &euro;</strong></td></tr>
-                <tr class="highlight-row"><td><strong>Retour sur investissement</strong></td><td class="num"><strong>10 ans</strong></td><td class="num"><strong>~11 ans</strong></td><td class="num negative"><strong>+1 an</strong></td></tr>
+                <tr><td>Consommation annuelle</td><td class="num">15 900 kWh</td><td class="num"><strong>15 904 kWh</strong></td></tr>
+                <tr><td>Fraction diurne (9h-17h)</td><td class="num">45%</td><td class="num negative"><strong>25,9%</strong></td></tr>
+                <tr><td>Conso diurne annuelle</td><td class="num">~7 155 kWh</td><td class="num negative"><strong>4 113 kWh</strong></td></tr>
             </tbody>
         </table>
 
-        <h3>Detail mensuel</h3>
+        <div class="alert alert-warning">
+            <strong>Ecart significatif :</strong> la consommation totale est quasi identique a l'estimation, mais la repartition horaire est tres differente : seulement 26% de la consommation a lieu pendant les heures de production solaire, contre 45% suppose. <strong>Cause principale</strong> : les ballons ECS consomment ~4-5 kW entre 21h30 et minuit (heures creuses), et la PAC chauffage fonctionne surtout la nuit en hiver. L'electromenager (lave-vaisselle, lave-linge) tourne le soir.
+        </div>
+
+        <h3>Autoconsommation (PVGIS horaire x Linky demi-horaire)</h3>
+
         <table>
             <thead>
-                <tr><th>Mois</th><th class="num">Conso</th><th class="num">Production</th><th class="num">Autoconso</th><th class="num">Surplus</th><th class="num">Tx auto</th><th class="num">Tx couv.</th></tr>
+                <tr><th></th><th class="num">Sans ARSUN</th><th class="num"><strong>Avec ARSUN</strong></th></tr>
             </thead>
             <tbody>
-                <tr><td>Janvier</td><td class="num">1 516</td><td class="num">191</td><td class="num">122</td><td class="num">70</td><td class="num">64%</td><td class="num">8%</td></tr>
-                <tr><td>Fevrier</td><td class="num">1 470</td><td class="num">284</td><td class="num">201</td><td class="num">84</td><td class="num">71%</td><td class="num">14%</td></tr>
-                <tr><td>Mars</td><td class="num">1 373</td><td class="num">534</td><td class="num">303</td><td class="num">231</td><td class="num">57%</td><td class="num">22%</td></tr>
-                <tr><td>Avril</td><td class="num">1 119</td><td class="num">660</td><td class="num">315</td><td class="num">345</td><td class="num">48%</td><td class="num">28%</td></tr>
-                <tr><td>Mai</td><td class="num">1 318</td><td class="num">786</td><td class="num">472</td><td class="num">314</td><td class="num">60%</td><td class="num">36%</td></tr>
-                <tr><td>Juin</td><td class="num">1 205</td><td class="num">849</td><td class="num">441</td><td class="num">408</td><td class="num">52%</td><td class="num">37%</td></tr>
-                <tr style="background: var(--sun-light);"><td><strong>Juillet</strong></td><td class="num">1 014</td><td class="num">911</td><td class="num">438</td><td class="num">473</td><td class="num">48%</td><td class="num"><strong>43%</strong></td></tr>
-                <tr><td>Aout</td><td class="num">1 469</td><td class="num">817</td><td class="num">511</td><td class="num">306</td><td class="num">63%</td><td class="num">35%</td></tr>
-                <tr><td>Septembre</td><td class="num">1 191</td><td class="num">629</td><td class="num">385</td><td class="num">244</td><td class="num">61%</td><td class="num">32%</td></tr>
-                <tr><td>Octobre</td><td class="num">1 061</td><td class="num">409</td><td class="num">278</td><td class="num">131</td><td class="num">68%</td><td class="num">26%</td></tr>
-                <tr><td>Novembre</td><td class="num">1 457</td><td class="num">218</td><td class="num">177</td><td class="num">42</td><td class="num">81%</td><td class="num">12%</td></tr>
-                <tr><td>Decembre</td><td class="num">1 712</td><td class="num">151</td><td class="num">135</td><td class="num">17</td><td class="num">89%</td><td class="num">8%</td></tr>
+                <tr><td>Production (moy. PVGIS 2020-2023)</td><td class="num">7 075 kWh</td><td class="num">7 075 kWh</td></tr>
+                <tr><td>Autoconsommation</td><td class="num">3 493 kWh</td><td class="num"><strong>5 610 kWh</strong></td></tr>
+                <tr><td>Surplus</td><td class="num">3 582 kWh</td><td class="num"><strong>1 465 kWh</strong></td></tr>
+                <tr><td><strong>Taux autoconsommation</strong></td><td class="num"><strong>49%</strong></td><td class="num positive"><strong>79%</strong></td></tr>
+                <tr><td><strong>Taux de couverture</strong></td><td class="num"><strong>22%</strong></td><td class="num positive"><strong>35%</strong></td></tr>
+                <tr><td>Economie autoconso an 1</td><td class="num">613 &euro;</td><td class="num">613 &euro;</td></tr>
+                <tr><td>Economie ARSUN an 1</td><td class="num">&mdash;</td><td class="num positive"><strong>203 &euro;</strong></td></tr>
+                <tr><td>Revenu surplus</td><td class="num">143 &euro;</td><td class="num">59 &euro;</td></tr>
+                <tr class="highlight-row"><td><strong>Gain total an 1</strong></td><td class="num"><strong>756 &euro;</strong></td><td class="num"><strong>875 &euro;</strong></td></tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-info">
+            Variabilite inter-annuelle negligeable : 49.0%-49.7% (0.7 pts), 747-761 &euro;/an sur 4 annees PVGIS.
+        </div>
+
+        <h3>Detail mensuel (moyenne 4 ans PVGIS, avec ARSUN)</h3>
+        <table>
+            <thead>
+                <tr><th>Mois</th><th class="num">Conso</th><th class="num">Production</th><th class="num">AC brut</th><th class="num">ARSUN</th><th class="num">AC+ECS</th><th class="num">Surplus</th><th class="num">Tx autoconso</th><th class="num">Tx couverture</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Janvier</td><td class="num">1 514</td><td class="num">311</td><td class="num">159</td><td class="num">127</td><td class="num">286</td><td class="num">25</td><td class="num">92%</td><td class="num">19%</td></tr>
+                <tr><td>Fevrier</td><td class="num">1 469</td><td class="num">417</td><td class="num">228</td><td class="num">138</td><td class="num">366</td><td class="num">51</td><td class="num">88%</td><td class="num">25%</td></tr>
+                <tr><td>Mars</td><td class="num">1 374</td><td class="num">611</td><td class="num">283</td><td class="num">190</td><td class="num">473</td><td class="num">138</td><td class="num">77%</td><td class="num">34%</td></tr>
+                <tr><td>Avril</td><td class="num">1 119</td><td class="num">729</td><td class="num">271</td><td class="num">211</td><td class="num">482</td><td class="num">247</td><td class="num">66%</td><td class="num">43%</td></tr>
+                <tr><td>Mai</td><td class="num">1 317</td><td class="num">861</td><td class="num">429</td><td class="num">221</td><td class="num">650</td><td class="num">211</td><td class="num">75%</td><td class="num">49%</td></tr>
+                <tr><td>Juin</td><td class="num">1 208</td><td class="num">759</td><td class="num">372</td><td class="num">207</td><td class="num">579</td><td class="num">180</td><td class="num">76%</td><td class="num">48%</td></tr>
+                <tr style="background: var(--sun-light);"><td><strong>Juillet</strong></td><td class="num">1 013</td><td class="num">862</td><td class="num">375</td><td class="num">235</td><td class="num">610</td><td class="num">253</td><td class="num">71%</td><td class="num"><strong>60%</strong></td></tr>
+                <tr><td>Aout</td><td class="num">1 469</td><td class="num">791</td><td class="num">427</td><td class="num">222</td><td class="num">649</td><td class="num">142</td><td class="num">82%</td><td class="num">44%</td></tr>
+                <tr><td>Septembre</td><td class="num">1 190</td><td class="num">645</td><td class="num">314</td><td class="num">204</td><td class="num">518</td><td class="num">127</td><td class="num">80%</td><td class="num">44%</td></tr>
+                <tr><td>Octobre</td><td class="num">1 062</td><td class="num">480</td><td class="num">234</td><td class="num">174</td><td class="num">408</td><td class="num">72</td><td class="num">85%</td><td class="num">38%</td></tr>
+                <tr><td>Novembre</td><td class="num">1 456</td><td class="num">353</td><td class="num">217</td><td class="num">119</td><td class="num">336</td><td class="num">17</td><td class="num">95%</td><td class="num">23%</td></tr>
+                <tr><td>Decembre</td><td class="num">1 714</td><td class="num">255</td><td class="num">185</td><td class="num">68</td><td class="num">253</td><td class="num">2</td><td class="num">99%</td><td class="num">15%</td></tr>
+                <tr class="highlight-row"><td><strong>Total</strong></td><td class="num"><strong>15 904</strong></td><td class="num"><strong>7 075</strong></td><td class="num"><strong>3 493</strong></td><td class="num"><strong>2 116</strong></td><td class="num"><strong>5 610</strong></td><td class="num"><strong>1 465</strong></td><td class="num"><strong>79%</strong></td><td class="num"><strong>35%</strong></td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-info" style="margin-top: 15px;">
-            En hiver, l'autoconsommation est elevee (80-89%) mais la production est faible (corrigee ombrage apres-midi) : presque tout est consomme mais ca ne represente que 8-14% de la facture. En ete, la production est forte mais l'autoconsommation est basse (48-63%) car la conso diurne est limitee a la piscine + talon. <strong>L'essentiel du gain (55%) vient du printemps et de l'ete ou il n'y a aucun ombrage.</strong>
+            En hiver, l'ARSUN absorbe quasi tout le surplus (99% d'autoconsommation en decembre). En ete, malgre la forte production, l'ARSUN capte 220+ kWh/mois et le taux de couverture atteint 60% en juillet. <strong>L'essentiel du gain vient du printemps et de l'ete.</strong>
         </div>
 
-        <h3>Potentiel d'optimisation (decalage de charge)</h3>
+        <h3>Potentiel d'optimisation supplementaire (au-dela de l'ARSUN)</h3>
 
-        <p style="margin-bottom: 10px;">Le surplus annuel de 2 664 kWh represente 362 &euro; de gain potentiel. Les creneaux 10h30-14h30 concentrent l'essentiel du surplus. <strong>La plupart des leviers sont realisables manuellement</strong>, sans domotique.</p>
+        <p style="margin-bottom: 10px;">Le surplus residuel avec ARSUN est de 1 465 kWh/an. Les creneaux 10h30-14h30 concentrent l'essentiel.</p>
 
         <h4>Leviers manuels (sans domotique)</h4>
         <table>
@@ -916,70 +932,76 @@
                 <tr><th>Levier</th><th>Comment</th><th class="num">kWh/an</th><th class="num">Gain supp.</th></tr>
             </thead>
             <tbody>
-                <tr><td>Lave-linge en journee</td><td>Depart differe ou lancer avant de partir</td><td class="num">~350</td><td class="num">~50 &euro;</td></tr>
+                <tr><td>Lave-linge en journee (1 cycle/j)</td><td>Depart differe ou lancer avant de partir</td><td class="num">~350</td><td class="num">~50 &euro;</td></tr>
                 <tr><td>Seche-linge en journee</td><td>Idem</td><td class="num">~200</td><td class="num">~25 &euro;</td></tr>
                 <tr><td>1 lave-vaisselle sur 2 en journee</td><td>Lancer apres le dejeuner</td><td class="num">~275</td><td class="num">~35 &euro;</td></tr>
                 <tr><td>Piscine resserree 10h-16h</td><td>Reprogrammer l'horloge du coffret</td><td class="num">~100</td><td class="num">~14 &euro;</td></tr>
-                <tr><td>Vehicule electrique (prise standard)</td><td>Brancher en journee, HA pilote via relais surplus/HC</td><td class="num">~874</td><td class="num">~85 &euro;</td></tr>
-                <tr class="highlight-row"><td><strong>Total manuel</strong></td><td></td><td class="num"><strong>~1 800</strong></td><td class="num"><strong>~209 &euro;</strong></td></tr>
+                <tr class="highlight-row"><td><strong>Total manuel</strong></td><td></td><td class="num"><strong>~925</strong></td><td class="num"><strong>~124 &euro;</strong></td></tr>
             </tbody>
         </table>
 
-        <h4>Levier necessitant la domotique</h4>
+        <h4>Leviers necessitant Home Assistant</h4>
         <table>
             <thead>
                 <tr><th>Levier</th><th>Comment</th><th class="num">kWh/an</th><th class="num">Gain supp.</th></tr>
             </thead>
             <tbody>
-                <tr class="highlight-row"><td><strong>Ballon ECS 300L : boost solaire 12h-15h30</strong></td><td>Relais Shelly (~15 &euro;) sur contacteur HC, pilote par HA</td><td class="num"><strong>~1 394</strong></td><td class="num"><strong>~134 &euro;</strong></td></tr>
+                <tr class="highlight-row"><td><strong>Vehicule electrique (prise standard)</strong></td><td>Brancher en journee, HA pilote via relais surplus/HC</td><td class="num"><strong>~874</strong></td><td class="num"><strong>~85 &euro;</strong></td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-info" style="margin-top: 10px;">
-            Le ballon ECS est asservi au signal HC du compteur Linky (declenchement automatique ~21h45). Il n'est pas possible de le forcer en journee sans un relais connecte qui court-circuite le contacteur HC. C'est le seul levier qui necessite la domotique, et c'est le <strong>plus gros levier unitaire</strong> du projet.
+            <strong>Ballon ECS :</strong> le routeur ARSUN (offert devis Azelec) couvre ce levier de facon autonome des le jour 1 (203 &euro;/an, 2 116 kWh). Il n'est plus necessaire d'attendre Home Assistant pour le ballon &mdash; c'est le changement majeur par rapport a l'estimation initiale.
+        </div>
+
+        <div class="alert alert-info" style="margin-top: 10px;">
+            <strong>Ballon ECS mesure :</strong> 300L NF, resistance 3 kW, consommation mesuree <strong>8,3 kWh/nuit</strong> (3 030 kWh/an, 19% de la conso totale). En journee, il peut absorber la quasi-totalite du surplus solaire d'ete.
         </div>
 
         <div class="alert alert-success" style="margin-top: 10px;">
-            <strong>Perspective : HC en journee (~2028 pour ce foyer).</strong> Enedis prevoit de deployer 2h d'heures creuses en journee (~13h-15h) pour 9,3 millions de foyers, entre fin 2026 et fin 2027. Pour ce foyer, le changement sera effectif vers ~2028 (apres expiration du contrat fixe Gaz de Bordeaux le 28/02/2028). <strong>Timing favorable</strong> : la hausse du tarif (passage au reglemente HP/HC) et les HC en journee arrivent en meme temps, ameliorant la rentabilite sur les deux tableaux. Le ballon ECS se declenchera alors automatiquement sur le pic solaire sans aucun equipement &mdash; le retour sur investissement passera a <strong>~9 ans sans domotique</strong>, et potentiellement mieux avec le tarif reglemente.
+            <strong>Perspective : HC en journee (~2028 pour ce foyer).</strong> Enedis prevoit de deployer 2h d'heures creuses en journee (~13h-15h). Pour ce foyer, le changement sera effectif vers ~2028 (apres expiration du contrat fixe Gaz de Bordeaux le 28/02/2028). L'ARSUN restera utile : il chauffe le ballon le matin avant les HC journee.
         </div>
 
         <h3>Synthese : scenarios avec et sans optimisation</h3>
 
+        <div class="alert alert-info" style="margin-bottom: 10px;">
+            <strong>Methodologie ROI :</strong> retour sur investissement dynamique (inflation elec +3%/an, degradation panneaux -0,5%/an), coherent avec le modele de la section 7. Production PVGIS horaire : 7 075 kWh/an (moyenne 2020-2023, corrigee ombrage -1.5%).
+        </div>
+
         <div class="kpi-grid">
             <div class="kpi-card">
-                <div class="value">771 &euro;</div>
-                <div class="label">Gain/an sans optimisation (~11 ans)</div>
+                <div class="value">756 &euro;</div>
+                <div class="label">Gain/an brut sans optimisation (~10 ans)</div>
             </div>
             <div class="kpi-card highlight">
-                <div class="value">~878 &euro;</div>
-                <div class="label">Gain/an decalage manuel (~10 ans)</div>
+                <div class="value">875 &euro;</div>
+                <div class="label">Gain/an avec ARSUN (~9 ans)</div>
             </div>
             <div class="kpi-card good">
-                <div class="value">~1 012 &euro;</div>
-                <div class="label">Gain/an manuel + domotique ECS (~9 ans)</div>
+                <div class="value">~1 084 &euro;</div>
+                <div class="label">Gain/an ARSUN + decalage + EV (~7 ans)</div>
             </div>
         </div>
 
         <table>
             <thead>
-                <tr><th>Scenario</th><th class="num">Gain an 1</th><th class="num">Retour invest.</th></tr>
+                <tr><th>Scenario</th><th class="num">Gain an 1</th><th class="num">ROI (cout moyen devis)</th><th class="num">ROI (Azelec 6 814 &euro; net)</th></tr>
             </thead>
             <tbody>
-                <tr><td>Donnees brutes (aucune optimisation)</td><td class="num">771 &euro;</td><td class="num">~11 ans</td></tr>
-                <tr class="highlight-row"><td><strong>Decalage manuel sans domotique</strong></td><td class="num"><strong>~878 &euro;</strong></td><td class="num"><strong>~10 ans</strong></td></tr>
-                <tr><td>Decalage manuel + domotique ECS</td><td class="num">~1 012 &euro;</td><td class="num">~9 ans</td></tr>
-                <tr class="breakeven"><td><strong>Complet (domotique + ECS + EV)</strong></td><td class="num"><strong>~1 077 &euro;</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
-                <tr><td>Brut, tarif reglemente HP/HC (apres 2028)</td><td class="num">~887 &euro;</td><td class="num">~10 ans</td></tr>
+                <tr><td>Brut sans optimisation</td><td class="num">756 &euro;</td><td class="num">~10 ans</td><td class="num">~9 ans</td></tr>
+                <tr class="highlight-row"><td><strong>Avec ARSUN (offert Azelec)</strong></td><td class="num"><strong>875 &euro;</strong></td><td class="num"><strong>~9 ans</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
+                <tr><td>ARSUN + decalage manuel</td><td class="num">~999 &euro;</td><td class="num">~8 ans</td><td class="num">~7 ans</td></tr>
+                <tr class="breakeven"><td><strong>ARSUN + decalage + EV</strong></td><td class="num"><strong>~1 084 &euro;</strong></td><td class="num"><strong>~7 ans</strong></td><td class="num"><strong>~6 ans</strong></td></tr>
             </tbody>
         </table>
 
         <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Conclusion cle :</strong> les donnees reelles montrent que le solaire sans optimisation rapporte 787 &euro;/an (retour ~9 ans au cout moyen devis). L'optimisation se fait en deux etapes :
+            <strong>Conclusion cle :</strong> les donnees PVGIS horaires croisees avec le Linky reel montrent que le solaire avec ARSUN rapporte <strong>875 &euro;/an</strong> (retour ~8 ans au devis Azelec). L'optimisation se fait en deux etapes :
             <ol style="margin: 10px 0 5px 20px; line-height: 1.8;">
-                <li><strong>ARSUN (offert devis Azelec)</strong> : routeur de surplus hardware autonome qui redirige le surplus vers le ballon ECS. Gain : <strong>+134 &euro;/an, 0 &euro; d'investissement</strong>, actif des le jour 1. Pas besoin de HA.</li>
-                <li><strong>Home Assistant</strong> (270 &euro; minimal ou 824 &euro; complet) : pilotage charge voiture sur surplus (+85 &euro;/an), TIC Linky (+~150 &euro;/an comportemental), piscine et boost chauffage (+44 &euro;/an). ROI HA minimal : <strong>~14 mois</strong>.</li>
+                <li><strong>ARSUN (offert devis Azelec)</strong> : routeur de surplus hardware autonome qui redirige le surplus vers le ballon ECS. Gain : <strong>+203 &euro;/an, 0 &euro; d'investissement</strong>, actif des le jour 1.</li>
+                <li><strong>Home Assistant</strong> (270 &euro; minimal) : pilotage charge voiture sur surplus (+85 &euro;/an), TIC Linky (+~150 &euro;/an comportemental), piscine (+14 &euro;/an). ROI HA minimal : <strong>~14 mois</strong>.</li>
             </ol>
-            Total avec ARSUN + HA : <strong>~1 077 &euro;/an</strong>. Detail des scenarios de routage : <code>docs/domotique/scenarios/solaire.md</code>.
+            Total avec ARSUN + HA + decalage + EV : ~1 084 &euro;/an. Detail des scenarios de routage : <code>docs/domotique/scenarios/solaire.md</code>.
         </div>
     </section>
 
@@ -1011,29 +1033,28 @@
         <h2 id="s11">11. Conclusion et recommandations</h2>
 
         <div class="alert alert-success">
-            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios. Les donnees reelles Linky 2025 (<a href="#s9">section 9</a>), corrigees pour l'ombrage hivernal, donnent un retour de ~11 ans sans optimisation (cout median) ou ~9 ans avec un bon devis. Avec decalage de charge + domotique + EV, le retour descend a ~7-9 ans. Apres 2028, le passage au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) ameliore encore d'environ 1 an.
+            <strong>Verdict :</strong> l'installation est rentable dans tous les scenarios. Les donnees PVGIS horaires croisees avec le Linky 2025 (<a href="#s9">section 9</a>) donnent un retour de ~9-10 ans sans optimisation ou ~8 ans avec ARSUN (offert devis Azelec). Avec decalage de charge + EV, le retour descend a ~6-7 ans. Apres 2028, le passage au tarif reglemente HP/HC ameliore encore d'environ 1 an.
         </div>
 
         <h3>Resume des retours sur investissement</h3>
         <table>
             <thead>
-                <tr><th>Scenario</th><th class="num">ROI (cout median)</th><th class="num">ROI (bon devis)</th></tr>
+                <tr><th>Scenario</th><th class="num">ROI (cout moyen devis)</th><th class="num">ROI (Azelec 6 814 &euro; net)</th></tr>
             </thead>
             <tbody>
-                <tr style="background: var(--red-light);"><td><strong>Donnees reelles brutes, tarif actuel</strong></td><td class="num"><strong>~11 ans</strong></td><td class="num"><strong>~9 ans</strong></td></tr>
-                <tr><td>Decalage manuel, tarif actuel</td><td class="num">~10 ans</td><td class="num">~9 ans</td></tr>
-                <tr class="breakeven"><td><strong>Domotique + ECS + EV, tarif actuel</strong></td><td class="num"><strong>~9 ans</strong></td><td class="num"><strong>~7 ans</strong></td></tr>
-                <tr class="highlight-row"><td><strong>Brut, tarif reglemente HP/HC (HP 20,65 cts, apres 2028)</strong></td><td class="num"><strong>~10 ans</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
-                <tr><td>Pire cas (tarif bas alt. + cout haut 14 000 &euro;)</td><td class="num">~14 ans</td><td class="num">&mdash;</td></tr>
+                <tr><td><strong>Brut sans optimisation</strong></td><td class="num"><strong>~10 ans</strong></td><td class="num"><strong>~9 ans</strong></td></tr>
+                <tr class="highlight-row"><td><strong>Avec ARSUN (offert Azelec)</strong></td><td class="num"><strong>~9 ans</strong></td><td class="num"><strong>~8 ans</strong></td></tr>
+                <tr><td>ARSUN + decalage manuel</td><td class="num">~8 ans</td><td class="num">~7 ans</td></tr>
+                <tr class="breakeven"><td><strong>ARSUN + decalage + EV</strong></td><td class="num"><strong>~7 ans</strong></td><td class="num"><strong>~6 ans</strong></td></tr>
             </tbody>
         </table>
 
         <h3>Points cles</h3>
         <ol style="margin: 10px 0 10px 20px; line-height: 2;">
-            <li><strong>Donnees reelles Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Production corrigee ombrage hiver : 6 440 kWh/an. Sans optimisation : autoconso 59%, gain 771 &euro;/an, retour ~11 ans (cout median) ou ~9 ans (bon devis). Avec decalage manuel : 878 &euro;/an, retour ~10 ans. Avec domotique ECS 300L + EV : ~1 077 &euro;/an, retour ~8 ans.</li>
-            <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore le retour de ~11 a <strong>~9 ans</strong> (autoconso en journee = HP 20,65 cts).</li>
-            <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 6 600 kWh/an, reduction de 31 a 43% de la facture selon optimisation.</li>
-            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, pas de remplacement onduleur a 1 500 &euro; en annee 12. Garantie 20-25 ans, monitoring par panneau.</li>
+            <li><strong>Donnees PVGIS horaires x Linky 2025</strong> (<a href="#s9">section 9</a>) : 15 904 kWh/an mesures, seulement 26% de conso diurne. Production PVGIS : 7 075 kWh/an (moyenne 4 ans, corrigee ombrage). Sans optimisation : autoconso 49%, gain 756 &euro;/an, retour ~9 ans (Azelec). Avec ARSUN : autoconso 79%, gain 875 &euro;/an, retour ~8 ans. Avec ARSUN + decalage + EV : ~1 084 &euro;/an, retour ~6 ans.</li>
+            <li><strong>Tarif fixe jusqu'au 28/02/2028</strong> : le contrat Gaz de Bordeaux (17,6 cts HP) limite les economies solaires. Apres 2028, passage probable au tarif reglemente HP/HC (HP 20,65 / HC 15,79 cts) qui ameliore le retour d'environ 1 an.</li>
+            <li><strong>6 kWc = meilleur compromis</strong> : ~30 m&sup2; de toit (sur 75 m&sup2; disponibles), production 7 075 kWh/an, reduction de 22 a 35% de la facture selon optimisation.</li>
+            <li><strong>Micro-onduleurs recommandes</strong> : +500 &euro; a l'achat, mais pas de remplacement onduleur a 1 500 &euro; en annee 12. VAN superieure de 683 &euro;, garantie 20-25 ans, monitoring par panneau.</li>
             <li><strong>HC en journee (~2028)</strong> : quand Enedis deploiera 2h HC en journee, le ballon ECS se declenchera automatiquement sur le pic solaire. Timing favorable : arrive en meme temps que la fin du contrat fixe. Retour ~9 ans sans domotique, potentiellement mieux avec le tarif reglemente.</li>
             <li><strong>Facteurs favorables</strong> : forte consommation (15 904 kWh/an mesures), piscine + PAC en journee, orientation SE correcte, pas d'ombrage sur maison + pool house.</li>
         </ol>
@@ -1047,11 +1068,6 @@
             <li><strong>Batterie physique</strong> : NON rentable aux prix actuels (4 000-9 000 &euro; pour 5-10 kWh, duree de vie ~10 ans).</li>
             <li><strong>Batterie virtuelle</strong> : sans interet avec un EV (surplus residuel trop faible). Sans EV, gain marginal (~30-90 &euro;/an net).</li>
         </ul>
-
-        <h3>Synergie avec le projet maison connectee</h3>
-        <div class="alert alert-info">
-            L'installation solaire et la domotique sont complementaires : Home Assistant pourra piloter les appareils pour maximiser l'autoconsommation, monitorer la production vs consommation en temps reel, et programmer la filtration piscine et les ballons d'eau chaude sur les heures de production solaire.
-        </div>
     </section>
 
     <!-- =============== FINANCEMENT =============== -->
@@ -1065,42 +1081,42 @@
             <thead><tr><th>Parametre</th><th>Valeur</th></tr></thead>
             <tbody>
             <tr><td>Montant net</td><td class="num">7 617 &euro; (moyenne devis 8 097 - prime 480)</td></tr>
-            <tr><td>Gain solaire an 1</td><td class="num">787 &euro;/an sans optimisation &mdash; 878 &euro;/an avec decalage manuel &mdash; 1 012 &euro;/an avec domotique ECS</td></tr>
+            <tr><td>Gain solaire an 1</td><td class="num">756 &euro;/an brut &mdash; 875 &euro;/an avec ARSUN &mdash; ~999 &euro;/an avec ARSUN + decalage</td></tr>
             <tr><td>Inflation electricite</td><td class="num">3%/an (le gain solaire augmente chaque annee)</td></tr>
             </tbody>
         </table>
 
-        <h3>Reste a charge mensuel par duree et scenario</h3>
+        <h3>Mensualite et reste a charge</h3>
 
         <table>
             <thead>
-                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Sans optim (66 &euro;)</th><th class="num">Decalage manuel (73 &euro;)</th><th class="num">Domotique ECS (84 &euro;)</th></tr>
+                <tr><th>Duree</th><th class="num">Mensualite</th><th class="num">Brut (63 &euro;/mois)</th><th class="num"><strong>Avec ARSUN (73 &euro;/mois)</strong></th><th class="num">ARSUN + decalage (83 &euro;/mois)</th></tr>
             </thead>
             <tbody>
-                <tr><td>5 ans</td><td class="num">127 &euro;</td><td class="num negative">61 &euro;</td><td class="num negative">54 &euro;</td><td class="num negative">43 &euro;</td></tr>
-                <tr><td>7 ans</td><td class="num">91 &euro;</td><td class="num">25 &euro;</td><td class="num">18 &euro;</td><td class="num">7 &euro;</td></tr>
-                <tr class="breakeven"><td><strong>10 ans</strong></td><td class="num"><strong>63 &euro;</strong></td><td class="num positive"><strong>-3 &euro; (gain)</strong></td><td class="num positive"><strong>-10 &euro; (gain)</strong></td><td class="num positive"><strong>-21 &euro; (gain)</strong></td></tr>
-                <tr style="background: var(--green-light);"><td><strong>12 ans</strong></td><td class="num"><strong>53 &euro;</strong></td><td class="num positive"><strong>-13 &euro; (gain)</strong></td><td class="num positive"><strong>-20 &euro; (gain)</strong></td><td class="num positive"><strong>-31 &euro; (gain)</strong></td></tr>
+                <tr><td>5 ans</td><td class="num">127 &euro;</td><td class="num">64 &euro;</td><td class="num">54 &euro;</td><td class="num">44 &euro;</td></tr>
+                <tr><td>7 ans</td><td class="num">91 &euro;</td><td class="num">28 &euro;</td><td class="num">18 &euro;</td><td class="num">8 &euro;</td></tr>
+                <tr class="breakeven"><td><strong>10 ans</strong></td><td class="num"><strong>63 &euro;</strong></td><td class="num"><strong>0 &euro;</strong></td><td class="num positive"><strong>-10 &euro; (gain)</strong></td><td class="num positive"><strong>-20 &euro; (gain)</strong></td></tr>
+                <tr style="background: var(--green-light);"><td><strong>12 ans</strong></td><td class="num"><strong>53 &euro;</strong></td><td class="num positive"><strong>-10 &euro; (gain)</strong></td><td class="num positive"><strong>-20 &euro; (gain)</strong></td><td class="num positive"><strong>-30 &euro; (gain)</strong></td></tr>
             </tbody>
         </table>
 
-        <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">Valeurs negatives = l'economie solaire depasse la mensualite, l'installation rapporte de l'argent chaque mois. L'economie augmente chaque annee avec l'inflation electrique (+3%/an).</p>
+        <p style="color: var(--gray-500); font-size: 0.9em; margin-top: 8px;">Valeurs negatives = l'economie solaire depasse la mensualite &rarr; l'installation rapporte de l'argent chaque mois.</p>
 
-        <h3>Synthese financement</h3>
+        <h3>Recommandation</h3>
 
         <div class="kpi-grid" style="margin-top: 20px;">
             <div class="kpi-card good">
                 <div class="value">-10 &euro;/mois</div>
-                <div class="label">10 ans + decalage manuel (gain net !)</div>
+                <div class="label">10 ans + ARSUN (gain net !)</div>
             </div>
             <div class="kpi-card good">
-                <div class="value">-3 &euro;/mois</div>
-                <div class="label">10 ans sans rien faire (gain net !)</div>
+                <div class="value">0 &euro;/mois</div>
+                <div class="label">10 ans brut (auto-finance !)</div>
             </div>
         </div>
 
         <div class="alert alert-success" style="margin-top: 15px;">
-            <strong>Duree conseillee : 7-10 ans.</strong> Sur 10 ans sans optimisation, l'installation rapporte deja 3 &euro;/mois. Avec decalage manuel, le gain est de 10 &euro;/mois des le depart. <strong>Apres le remboursement</strong> : l'economie solaire continue pendant 15-18 ans supplementaires (duree de vie panneaux 25 ans), soit ~18 000+ &euro; de gain net.
+            <strong>Duree conseillee : 7-10 ans.</strong> Sur 10 ans avec ARSUN, l'installation rapporte 10 &euro;/mois des le depart. <strong>Apres le remboursement</strong> : l'economie solaire continue pendant 15-18 ans supplementaires (duree de vie panneaux 25 ans), soit ~23 000+ &euro; de gain net apres remboursement.
         </div>
 
     </section>
@@ -1111,7 +1127,7 @@
 
         <table>
             <thead>
-                <tr><th>Parametre</th><th class="num">v1 (mars 2026)</th><th class="num">v2 (actualise)</th><th class="num">Impact</th></tr>
+                <tr><th>Parametre</th><th class="num">v1 (mars 2026)</th><th class="num">v2 (mars 2026 actualise)</th><th class="num">Impact</th></tr>
             </thead>
             <tbody>
                 <tr><td>Cout median 6 kWc</td><td class="num">13 000 &euro;</td><td class="num">10 500 &euro;</td><td class="num positive">-2 500 &euro;</td></tr>
