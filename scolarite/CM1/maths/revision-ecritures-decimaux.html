@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>R&eacute;vision &ndash; &Eacute;critures des nombres d&eacute;cimaux</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --indigo: #283593;
+            --indigo-bg: #e8eaf6;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #bbdefb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #e65100 0%, #e67e22 40%, #f39c12 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--orange); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--orange);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--orange);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.red { border-left-color: var(--red); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.indigo { border-left-color: var(--indigo); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.indigo { background: var(--indigo-bg); color: var(--indigo); }
+
+        /* ===== EXAMPLE ===== */
+        .example {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+        }
+        .example strong { color: var(--orange); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== PLACE VALUE TABLE ===== */
+        .pv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0.8rem 0;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+        .pv-table th {
+            padding: 0.5rem;
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+        .pv-table td {
+            padding: 0.6rem;
+            font-size: 1.3rem;
+            font-weight: 800;
+            border: 2px solid var(--light);
+        }
+        .pv-table .sep { border-left: 3px solid var(--red); border-right: none; width: 5px; padding: 0; font-size: 1.5rem; color: var(--red); }
+        .pv-table .h-centaines { color: var(--purple); background: var(--purple-bg); }
+        .pv-table .h-dizaines { color: var(--blue); background: var(--blue-bg); }
+        .pv-table .h-unites { color: var(--green); background: var(--green-bg); }
+        .pv-table .h-dixiemes { color: var(--orange); background: var(--orange-bg); }
+        .pv-table .h-centiemes { color: var(--red); background: var(--red-bg); }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#128290;</div>
+    <h1>R&eacute;vision &ndash; &Eacute;critures des nombres d&eacute;cimaux</h1>
+    <p class="subtitle">Dixi&egrave;mes, centi&egrave;mes, unit&eacute;s, dizaines, centaines</p>
+    <p class="collection">CM1 &bull; Maths</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#ex1">Lettres &rarr; chiffres</a>
+    <a href="#ex2">Chiffres &rarr; lettres</a>
+    <a href="#ex3">Pi&egrave;ges</a>
+    <a href="#retenir">&Agrave; retenir</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on &ndash; Comment &ccedil;a marche&nbsp;?</h2>
+        </div>
+        <div class="card">
+            <p>Chaque position dans un nombre a une <strong>valeur</strong>. Voici le tableau de num&eacute;ration&nbsp;:</p>
+            <table class="pv-table">
+                <tr>
+                    <th class="h-centaines">Centaines</th>
+                    <th class="h-dizaines">Dizaines</th>
+                    <th class="h-unites">Unit&eacute;s</th>
+                    <th style="width:5px;color:var(--red);font-weight:900;">,</th>
+                    <th class="h-dixiemes">Dixi&egrave;mes</th>
+                    <th class="h-centiemes">Centi&egrave;mes</th>
+                </tr>
+                <tr>
+                    <td class="h-centaines">100</td>
+                    <td class="h-dizaines">10</td>
+                    <td class="h-unites">1</td>
+                    <td style="color:var(--red);font-weight:900;font-size:1.5rem;">,</td>
+                    <td class="h-dixiemes">0,1</td>
+                    <td class="h-centiemes">0,01</td>
+                </tr>
+            </table>
+        </div>
+        <div class="card red">
+            <div class="key red">L'astuce cl&eacute;</div>
+            <p>&laquo;&nbsp;<strong>52 centi&egrave;mes</strong>&nbsp;&raquo; veut dire <strong>52 &times; 0,01</strong> = 52 &divide; 100 = <strong>0,52</strong></p>
+            <p>Ce n'est <strong>PAS</strong> 0,052&nbsp;! (0,052 = 52 <em>milli&egrave;mes</em>)</p>
+            <div class="tip">
+                <strong>La r&egrave;gle :</strong> Pour &eacute;crire en chiffres, divise le nombre par la valeur indiqu&eacute;e&nbsp;:<br/>
+                &bull; <strong>dixi&egrave;mes</strong> &rarr; divise par <strong>10</strong><br/>
+                &bull; <strong>centi&egrave;mes</strong> &rarr; divise par <strong>100</strong>
+            </div>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Exemples avec les dixi&egrave;mes</div>
+            <div class="example">
+                <strong>3 dixi&egrave;mes</strong> = 3 &divide; 10 = <strong>0,3</strong>
+            </div>
+            <div class="example">
+                <strong>89 dixi&egrave;mes</strong> = 89 &divide; 10 = <strong>8,9</strong> (pas 0,89&nbsp;!)
+            </div>
+            <div class="example">
+                <strong>145 dixi&egrave;mes</strong> = 145 &divide; 10 = <strong>14,5</strong>
+            </div>
+        </div>
+        <div class="card blue">
+            <div class="key blue">Exemples avec les centi&egrave;mes</div>
+            <div class="example">
+                <strong style="color:var(--blue);">2 centi&egrave;mes</strong> = 2 &divide; 100 = <strong style="color:var(--blue);">0,02</strong>
+            </div>
+            <div class="example">
+                <strong style="color:var(--blue);">52 centi&egrave;mes</strong> = 52 &divide; 100 = <strong style="color:var(--blue);">0,52</strong>
+            </div>
+            <div class="example">
+                <strong style="color:var(--blue);">307 centi&egrave;mes</strong> = 307 &divide; 100 = <strong style="color:var(--blue);">3,07</strong>
+            </div>
+        </div>
+        <div class="card green">
+            <div class="key green">Exemples avec unit&eacute;s, dizaines, centaines</div>
+            <div class="example">
+                <strong style="color:var(--green);">7 unit&eacute;s</strong> = <strong style="color:var(--green);">7</strong>
+            </div>
+            <div class="example">
+                <strong style="color:var(--green);">35 dizaines</strong> = 35 &times; 10 = <strong style="color:var(--green);">350</strong>
+            </div>
+            <div class="example">
+                <strong style="color:var(--green);">4 centaines</strong> = 4 &times; 100 = <strong style="color:var(--green);">400</strong>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICE 1 : LETTRES → CHIFFRES ===== -->
+    <section id="ex1">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Lettres &rarr; chiffres</h2>
+        </div>
+        <div class="card exercise">
+            <p>&Eacute;cris le nombre en chiffres.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>7 dixi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>4 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>52 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>89 dixi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>6 unit&eacute;s = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>15 dizaines = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>3 centaines = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">8</span>
+                <span>145 dixi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">9</span>
+                <span>9 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">10</span>
+                <span>307 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">11</span>
+                <span>24 dixi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">12</span>
+                <span>8 dizaines = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">13</span>
+                <span>60 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">14</span>
+                <span>5 dixi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">15</span>
+                <span>230 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> 7 dixi&egrave;mes = 7 &divide; 10 = <span class="answer">0,7</span></div>
+                <div class="correction-item"><strong>2)</strong> 4 centi&egrave;mes = 4 &divide; 100 = <span class="answer">0,04</span></div>
+                <div class="correction-item"><strong>3)</strong> 52 centi&egrave;mes = 52 &divide; 100 = <span class="answer">0,52</span></div>
+                <div class="correction-item"><strong>4)</strong> 89 dixi&egrave;mes = 89 &divide; 10 = <span class="answer">8,9</span></div>
+                <div class="correction-item"><strong>5)</strong> 6 unit&eacute;s = <span class="answer">6</span></div>
+                <div class="correction-item"><strong>6)</strong> 15 dizaines = 15 &times; 10 = <span class="answer">150</span></div>
+                <div class="correction-item"><strong>7)</strong> 3 centaines = 3 &times; 100 = <span class="answer">300</span></div>
+                <div class="correction-item"><strong>8)</strong> 145 dixi&egrave;mes = 145 &divide; 10 = <span class="answer">14,5</span></div>
+                <div class="correction-item"><strong>9)</strong> 9 centi&egrave;mes = 9 &divide; 100 = <span class="answer">0,09</span></div>
+                <div class="correction-item"><strong>10)</strong> 307 centi&egrave;mes = 307 &divide; 100 = <span class="answer">3,07</span></div>
+                <div class="correction-item"><strong>11)</strong> 24 dixi&egrave;mes = 24 &divide; 10 = <span class="answer">2,4</span></div>
+                <div class="correction-item"><strong>12)</strong> 8 dizaines = 8 &times; 10 = <span class="answer">80</span></div>
+                <div class="correction-item"><strong>13)</strong> 60 centi&egrave;mes = 60 &divide; 100 = <span class="answer">0,60</span> = 0,6</div>
+                <div class="correction-item"><strong>14)</strong> 5 dixi&egrave;mes = 5 &divide; 10 = <span class="answer">0,5</span></div>
+                <div class="correction-item"><strong>15)</strong> 230 centi&egrave;mes = 230 &divide; 100 = <span class="answer">2,30</span> = 2,3</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- ===== EXERCICE 2 : CHIFFRES → LETTRES ===== -->
+    <section id="ex2">
+        <div class="section-header">
+            <span class="section-icon">&#128214;</span>
+            <h2>Exercice 2 &ndash; Chiffres &rarr; lettres</h2>
+        </div>
+        <div class="card exercise">
+            <p>Compl&egrave;te en &eacute;crivant combien de dixi&egrave;mes, centi&egrave;mes, unit&eacute;s, dizaines ou centaines.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>0,3 = ___ dixi&egrave;mes</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>0,07 = ___ centi&egrave;mes</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>0,85 = ___ centi&egrave;mes</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>4,7 = ___ dixi&egrave;mes</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>200 = ___ centaines</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>1,56 = ___ centi&egrave;mes</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>60 = ___ dizaines</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">8</span>
+                <span>12,3 = ___ dixi&egrave;mes</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">9</span>
+                <span>0,01 = ___ centi&egrave;me</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">10</span>
+                <span>5,04 = ___ centi&egrave;mes</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> 0,3 = 0,3 &times; 10 = <span class="answer">3</span> dixi&egrave;mes</div>
+                <div class="correction-item"><strong>2)</strong> 0,07 = 0,07 &times; 100 = <span class="answer">7</span> centi&egrave;mes</div>
+                <div class="correction-item"><strong>3)</strong> 0,85 = 0,85 &times; 100 = <span class="answer">85</span> centi&egrave;mes</div>
+                <div class="correction-item"><strong>4)</strong> 4,7 = 4,7 &times; 10 = <span class="answer">47</span> dixi&egrave;mes</div>
+                <div class="correction-item"><strong>5)</strong> 200 = 200 &divide; 100 = <span class="answer">2</span> centaines</div>
+                <div class="correction-item"><strong>6)</strong> 1,56 = 1,56 &times; 100 = <span class="answer">156</span> centi&egrave;mes</div>
+                <div class="correction-item"><strong>7)</strong> 60 = 60 &divide; 10 = <span class="answer">6</span> dizaines</div>
+                <div class="correction-item"><strong>8)</strong> 12,3 = 12,3 &times; 10 = <span class="answer">123</span> dixi&egrave;mes</div>
+                <div class="correction-item"><strong>9)</strong> 0,01 = 0,01 &times; 100 = <span class="answer">1</span> centi&egrave;me</div>
+                <div class="correction-item"><strong>10)</strong> 5,04 = 5,04 &times; 100 = <span class="answer">504</span> centi&egrave;mes</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- ===== EXERCICE 3 : PIÈGES ===== -->
+    <section id="ex3">
+        <div class="section-header">
+            <span class="section-icon">&#9888;&#65039;</span>
+            <h2>Exercice 3 &ndash; Attention aux pi&egrave;ges&nbsp;!</h2>
+        </div>
+        <div class="card exercise">
+            <p>&Eacute;cris le nombre en chiffres. Attention, c'est m&eacute;lang&eacute;&nbsp;!</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>36 dixi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>36 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>36 unit&eacute;s = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>36 dizaines = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>36 centaines = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>405 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>70 dixi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">8</span>
+                <span>8 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">9</span>
+                <span>100 dixi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">10</span>
+                <span>1 000 centi&egrave;mes = ___</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> 36 dixi&egrave;mes = 36 &divide; 10 = <span class="answer">3,6</span></div>
+                <div class="correction-item"><strong>2)</strong> 36 centi&egrave;mes = 36 &divide; 100 = <span class="answer">0,36</span></div>
+                <div class="correction-item"><strong>3)</strong> 36 unit&eacute;s = <span class="answer">36</span></div>
+                <div class="correction-item"><strong>4)</strong> 36 dizaines = 36 &times; 10 = <span class="answer">360</span></div>
+                <div class="correction-item"><strong>5)</strong> 36 centaines = 36 &times; 100 = <span class="answer">3 600</span></div>
+                <div class="correction-item"><strong>6)</strong> 405 centi&egrave;mes = 405 &divide; 100 = <span class="answer">4,05</span></div>
+                <div class="correction-item"><strong>7)</strong> 70 dixi&egrave;mes = 70 &divide; 10 = <span class="answer">7</span></div>
+                <div class="correction-item"><strong>8)</strong> 8 centi&egrave;mes = 8 &divide; 100 = <span class="answer">0,08</span></div>
+                <div class="correction-item"><strong>9)</strong> 100 dixi&egrave;mes = 100 &divide; 10 = <span class="answer">10</span></div>
+                <div class="correction-item"><strong>10)</strong> 1 000 centi&egrave;mes = 1 000 &divide; 100 = <span class="answer">10</span></div>
+            </div>
+        </details>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card green">
+            <p><strong>Pour convertir en chiffres&nbsp;:</strong></p>
+            <p>&#128073; <strong>dixi&egrave;mes</strong> &rarr; divise par <strong>10</strong> (d&eacute;cale la virgule de 1 rang &agrave; gauche)</p>
+            <p>&#128073; <strong>centi&egrave;mes</strong> &rarr; divise par <strong>100</strong> (d&eacute;cale la virgule de 2 rangs &agrave; gauche)</p>
+            <p>&#128073; <strong>unit&eacute;s</strong> &rarr; le nombre ne change pas</p>
+            <p>&#128073; <strong>dizaines</strong> &rarr; multiplie par <strong>10</strong></p>
+            <p>&#128073; <strong>centaines</strong> &rarr; multiplie par <strong>100</strong></p>
+        </div>
+        <div class="card red">
+            <div class="key red">Attention au pi&egrave;ge classique&nbsp;!</div>
+            <p><strong>52 centi&egrave;mes = 0,52</strong> (et pas 0,052&nbsp;!)</p>
+            <p><strong>89 dixi&egrave;mes = 8,9</strong> (et pas 0,89&nbsp;!)</p>
+            <p>Quand le nombre est plus grand que la position, la virgule se d&eacute;place et on obtient un nombre <strong>plus grand que 1</strong>.</p>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>R&eacute;vision &bull; &Eacute;critures des nombres d&eacute;cimaux</p>
+    <p>CM1 &bull; Maths</p>
+</footer>
+
+</body>
+</html>

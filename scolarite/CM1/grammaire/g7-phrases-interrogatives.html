@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G7 &ndash; Les phrases interrogatives</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --indigo: #283593;
+            --indigo-bg: #e8eaf6;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f8ff 0%, #bbdefb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 40%, #42a5f5 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--blue); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--blue);
+        }
+        .card.orange { border-left-color: var(--orange); }
+        .card.green { border-left-color: var(--green); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.red { border-left-color: var(--red); }
+        .card.indigo { border-left-color: var(--indigo); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.indigo { background: var(--indigo-bg); color: var(--indigo); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+
+        /* ===== EXAMPLE ===== */
+        .example {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+        }
+        .example strong { color: var(--blue); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== INTERRO TABLE ===== */
+        .interro-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+        }
+        .interro-table th {
+            background: var(--indigo);
+            color: var(--white);
+            padding: 0.6rem 0.8rem;
+            text-align: left;
+            font-weight: 700;
+        }
+        .interro-table td {
+            padding: 0.5rem 0.8rem;
+            border-bottom: 1px solid var(--light);
+        }
+        .interro-table tr:last-child td { border-bottom: none; }
+        .interro-table td:first-child { font-weight: 700; color: var(--indigo); }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#10067;</div>
+    <h1>G7 &ndash; Les phrases interrogatives</h1>
+    <p class="subtitle">Poser des questions &agrave; l'&eacute;crit</p>
+    <p class="collection">CM1 &bull; Grammaire</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#ouinon">R&eacute;ponse oui/non</a>
+    <a href="#autres">Autres r&eacute;ponses</a>
+    <a href="#exercices">Exercices</a>
+    <a href="#retenir">&Agrave; retenir</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+        <div class="card">
+            <p>Les phrases interrogatives servent &agrave; <strong>poser des questions</strong>.</p>
+            <p>Elles se terminent toujours par un <strong>point d'interrogation</strong> (<strong>?</strong>).</p>
+            <p>On remarque qu'il faut souvent <strong>inverser le sujet et le verbe</strong> lorsqu'on &eacute;crit une phrase interrogative.</p>
+        </div>
+    </section>
+
+    <!-- RÉPONSE OUI/NON -->
+    <section id="ouinon">
+        <div class="section-header">
+            <span class="section-icon">&#128077;</span>
+            <h2>Les phrases dont la r&eacute;ponse est OUI / NON</h2>
+        </div>
+        <div class="card">
+            <p>On distingue les phrases interrogatives dont la r&eacute;ponse est <strong>OUI/NON</strong>&nbsp;: elles se forment de <strong>3 mani&egrave;res diff&eacute;rentes</strong>&nbsp;:</p>
+        </div>
+        <div class="card orange">
+            <div class="key orange">1. La phrase d&eacute;clarative + ?</div>
+            <p>On prend une phrase normale et on ajoute simplement un point d'interrogation. &Agrave; l'oral, on monte la voix (<strong>intonation montante</strong>).</p>
+            <div class="example">
+                &#128264; <strong>Il fait beau ?</strong>
+            </div>
+        </div>
+        <div class="card purple">
+            <div class="key purple">2. &laquo;&nbsp;Est-ce que&nbsp;&raquo; + phrase</div>
+            <p>On ajoute <strong>&laquo;&nbsp;est-ce que&nbsp;&raquo;</strong> au d&eacute;but de la phrase.</p>
+            <div class="example">
+                &#128264; <strong>Est-ce qu'il fait beau ?</strong>
+            </div>
+        </div>
+        <div class="card indigo">
+            <div class="key indigo">3. Inversion VERBE / SUJET</div>
+            <p>On <strong>inverse le verbe et le sujet</strong> et on les relie par un trait d'union.</p>
+            <div class="example">
+                &#128264; <strong>Fait-il beau ?</strong>
+            </div>
+        </div>
+        <div class="tip">
+            <strong>Astuce :</strong> Les 3 phrases veulent dire la m&ecirc;me chose, mais l'inversion verbe/sujet est la forme la plus &eacute;l&eacute;gante &agrave; l'&eacute;crit.
+        </div>
+    </section>
+
+    <!-- AUTRES RÉPONSES -->
+    <section id="autres">
+        <div class="section-header">
+            <span class="section-icon">&#128269;</span>
+            <h2>Les phrases qui attendent une r&eacute;ponse pr&eacute;cise</h2>
+        </div>
+        <div class="card teal">
+            <p>Les autres questions sont construites avec une <strong>inversion VERBE/SUJET</strong> et sont introduites par des <strong>mots interrogatifs</strong>.</p>
+            <p>Elles apportent une <strong>information / r&eacute;ponse pr&eacute;cise</strong>.</p>
+            <div class="example">
+                &#128264; <strong>Quand</strong> viens-tu ? &mdash; <strong>O&ugrave;</strong> allez-vous ?
+            </div>
+        </div>
+        <div class="card indigo">
+            <div class="key indigo">Les mots interrogatifs</div>
+            <table class="interro-table">
+                <tr><th>Mot interrogatif</th><th>Type de r&eacute;ponse</th></tr>
+                <tr><td>Qui</td><td>&#128100; Personne</td></tr>
+                <tr><td>Quoi / Que</td><td>&#127919; Action / chose</td></tr>
+                <tr><td>Quand</td><td>&#128339; Temps</td></tr>
+                <tr><td>O&ugrave;</td><td>&#128205; Lieu</td></tr>
+                <tr><td>Comment</td><td>&#128736; Mani&egrave;re</td></tr>
+                <tr><td>Pourquoi</td><td>&#128161; Cause</td></tr>
+                <tr><td>Combien</td><td>&#128290; Quantit&eacute;</td></tr>
+                <tr><td>Quel, quelle, quels, quelles</td><td>&#127380; Choix / pr&eacute;cision</td></tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Oui/non ou r&eacute;ponse pr&eacute;cise&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Indique si la question attend une r&eacute;ponse <strong>oui/non</strong> ou une <strong>r&eacute;ponse pr&eacute;cise</strong>.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Est-ce que tu aimes le chocolat&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>O&ugrave; habites-tu&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Fait-il froid dehors&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Combien co&ucirc;te ce livre&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Tu viens demain&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>Pourquoi pleures-tu&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">Oui/non</span> &ndash; &laquo;&nbsp;Est-ce que&nbsp;&raquo; + pas de mot interrogatif.</div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">R&eacute;ponse pr&eacute;cise</span> &ndash; <strong>O&ugrave;</strong> &rarr; lieu.</div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">Oui/non</span> &ndash; Inversion verbe/sujet sans mot interrogatif.</div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">R&eacute;ponse pr&eacute;cise</span> &ndash; <strong>Combien</strong> &rarr; quantit&eacute;.</div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">Oui/non</span> &ndash; Phrase d&eacute;clarative + ?</div>
+                <div class="correction-item"><strong>6)</strong> <span class="answer">R&eacute;ponse pr&eacute;cise</span> &ndash; <strong>Pourquoi</strong> &rarr; cause.</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128214;</span>
+            <h2>Exercice 2 &ndash; Trouve le mot interrogatif</h2>
+        </div>
+        <div class="card exercise">
+            <p>Compl&egrave;te avec le bon mot interrogatif&nbsp;: <strong>qui</strong>, <strong>quand</strong>, <strong>o&ugrave;</strong>, <strong>comment</strong>, <strong>pourquoi</strong>, <strong>combien</strong>, <strong>quel(le)</strong>.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>___ est ton meilleur ami&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>___ pars-tu en vacances&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>___ se trouve la biblioth&egrave;que&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>___ t'appelles-tu&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>___ es-tu en retard&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>___ d'&eacute;l&egrave;ves y a-t-il dans ta classe&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>___ heure est-il&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">Qui</span> &rarr; personne</div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">Quand</span> &rarr; temps</div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">O&ugrave;</span> &rarr; lieu</div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">Comment</span> &rarr; mani&egrave;re</div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">Pourquoi</span> &rarr; cause</div>
+                <div class="correction-item"><strong>6)</strong> <span class="answer">Combien</span> &rarr; quantit&eacute;</div>
+                <div class="correction-item"><strong>7)</strong> <span class="answer">Quelle</span> &rarr; pr&eacute;cision</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 3 &ndash; Transforme la question</h2>
+        </div>
+        <div class="card exercise">
+            <p>&Eacute;cris chaque question de <strong>3 mani&egrave;res diff&eacute;rentes</strong> (phrase d&eacute;clarative + ?, est-ce que, inversion verbe/sujet).</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Demande si ton ami aime le sport.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Demande si Marie a fini ses devoirs.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Demande si les enfants jouent dans le jardin.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>1)</strong><br/>
+                    <span class="answer">Tu aimes le sport ?</span><br/>
+                    <span class="answer">Est-ce que tu aimes le sport ?</span><br/>
+                    <span class="answer">Aimes-tu le sport ?</span>
+                </div>
+                <div class="correction-item">
+                    <strong>2)</strong><br/>
+                    <span class="answer">Marie a fini ses devoirs ?</span><br/>
+                    <span class="answer">Est-ce que Marie a fini ses devoirs ?</span><br/>
+                    <span class="answer">Marie a-t-elle fini ses devoirs ?</span>
+                </div>
+                <div class="correction-item">
+                    <strong>3)</strong><br/>
+                    <span class="answer">Les enfants jouent dans le jardin ?</span><br/>
+                    <span class="answer">Est-ce que les enfants jouent dans le jardin ?</span><br/>
+                    <span class="answer">Les enfants jouent-ils dans le jardin ?</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 4 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128173;</span>
+            <h2>Exercice 4 &ndash; Quelle construction&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Indique la construction utilis&eacute;e&nbsp;: <strong>phrase d&eacute;clarative + ?</strong>, <strong>est-ce que</strong>, ou <strong>inversion verbe/sujet</strong>.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Viendras-tu samedi&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Il a mang&eacute;&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Est-ce que tu as compris&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>O&ugrave; sont-ils partis&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Vous avez fini&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">Inversion verbe/sujet</span> (viendras-<strong>tu</strong>)</div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">Phrase d&eacute;clarative + ?</span></div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">Est-ce que</span></div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">Inversion verbe/sujet</span> avec mot interrogatif <strong>o&ugrave;</strong> (sont-<strong>ils</strong>)</div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">Phrase d&eacute;clarative + ?</span></div>
+            </div>
+        </details>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card green">
+            <p>Les phrases interrogatives servent &agrave; <strong>poser des questions</strong> et se terminent par un <strong>?</strong></p>
+            <p><strong>R&eacute;ponse oui/non</strong> &rarr; 3 constructions&nbsp;: phrase d&eacute;clarative + ?, &laquo;&nbsp;est-ce que&nbsp;&raquo;, inversion verbe/sujet.</p>
+            <p><strong>R&eacute;ponse pr&eacute;cise</strong> &rarr; inversion verbe/sujet + mot interrogatif (<strong>qui, quoi, quand, o&ugrave;, comment, pourquoi, combien, quel(le)(s)</strong>).</p>
+        </div>
+        <div class="card">
+            <div class="key blue">Mots cl&eacute;s</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.6rem;">
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--blue-bg);color:var(--blue);">Point d'interrogation</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--orange-bg);color:var(--orange);">Intonation montante</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--purple-bg);color:var(--purple);">Est-ce que</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--indigo-bg);color:var(--indigo);">Inversion verbe/sujet</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--teal-bg);color:var(--teal);">Mots interrogatifs</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--red-bg);color:var(--red);">R&eacute;ponse oui/non</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>G7 &bull; Les phrases interrogatives</p>
+    <p>CM1 &bull; Grammaire</p>
+</footer>
+
+</body>
+</html>
