@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparatif 6 kWc vs 9 kWc — Faut-il voir plus grand ?</title>
+    <style>
+        :root {
+            --sun: #f59e0b;
+            --sun-light: #fef3c7;
+            --green: #10b981;
+            --green-light: #d1fae5;
+            --red: #ef4444;
+            --red-light: #fee2e2;
+            --blue: #3b82f6;
+            --blue-light: #dbeafe;
+            --purple: #8b5cf6;
+            --purple-light: #ede9fe;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-500: #6b7280;
+            --gray-700: #374151;
+            --gray-900: #111827;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--gray-900);
+            background: var(--gray-50);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+            color: white;
+            padding: 40px 0;
+            margin-bottom: 30px;
+        }
+        header h1 { font-size: 2em; margin-bottom: 5px; }
+        header .subtitle { opacity: 0.85; font-size: 1.1em; }
+        header .date { opacity: 0.6; font-size: 0.9em; margin-top: 10px; }
+
+        section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        section h2 {
+            font-size: 1.4em;
+            color: var(--gray-900);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--sun);
+        }
+        section h3 {
+            font-size: 1.1em;
+            color: var(--gray-700);
+            margin: 25px 0 12px;
+        }
+
+        /* KPI grid in header */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .kpi-card {
+            background: rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .kpi-card .value {
+            font-size: 2em;
+            font-weight: 700;
+            color: white;
+        }
+        .kpi-card .label {
+            font-size: 0.85em;
+            opacity: 0.8;
+            margin-top: 4px;
+        }
+        .kpi-card.col-6 {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+        .kpi-card.col-9 {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        /* Section KPI cards (white bg) */
+        .kpi-grid-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .kpi-section {
+            background: var(--gray-50);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+        }
+        .kpi-section .value {
+            font-size: 2em;
+            font-weight: 700;
+        }
+        .kpi-section .label {
+            font-size: 0.85em;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+        .kpi-section.blue { background: var(--blue-light); border-color: var(--blue); }
+        .kpi-section.blue .value { color: #1e40af; }
+        .kpi-section.purple { background: var(--purple-light); border-color: var(--purple); }
+        .kpi-section.purple .value { color: #5b21b6; }
+        .kpi-section.green { background: var(--green-light); border-color: var(--green); }
+        .kpi-section.green .value { color: #065f46; }
+        .kpi-section.sun { background: var(--sun-light); border-color: var(--sun); }
+        .kpi-section.sun .value { color: #92400e; }
+
+        /* VS divider */
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        .vs-divider .line { flex: 1; height: 2px; background: var(--gray-200); }
+        .vs-divider .vs {
+            font-size: 1.4em;
+            font-weight: 800;
+            color: var(--gray-500);
+            background: var(--gray-100);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 0.92em;
+        }
+        th {
+            background: var(--gray-100);
+            padding: 10px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--gray-700);
+            border-bottom: 2px solid var(--gray-300);
+        }
+        td {
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        tr:hover td { background: var(--gray-50); }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+
+        th.col-6-header { background: var(--blue-light); color: #1e40af; }
+        th.col-9-header { background: var(--purple-light); color: #5b21b6; }
+        td.col-6 { background: rgba(219, 234, 254, 0.3); }
+        td.col-9 { background: rgba(237, 233, 254, 0.3); }
+        tr:hover td.col-6 { background: rgba(219, 234, 254, 0.5); }
+        tr:hover td.col-9 { background: rgba(237, 233, 254, 0.5); }
+
+        .highlight-row td { background: var(--sun-light) !important; font-weight: 600; }
+        .total-row td { background: var(--gray-100) !important; font-weight: 700; }
+        .good-row td { background: var(--green-light) !important; font-weight: 600; }
+
+        .cost-positive { color: var(--red); font-weight: 700; }
+        .cost-negative { color: var(--green); font-weight: 700; }
+        .cost-zero { color: var(--green); font-weight: 700; }
+
+        .cumul-col { font-weight: 600; }
+        .cumul-6 { color: #1e40af; font-weight: 700; }
+        .cumul-9 { color: #5b21b6; font-weight: 700; }
+
+        /* Alerts */
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+        .alert-info {
+            background: var(--blue-light);
+            border-left: 4px solid var(--blue);
+            color: #1e40af;
+        }
+        .alert-success {
+            background: var(--green-light);
+            border-left: 4px solid var(--green);
+            color: #065f46;
+        }
+        .alert-warning {
+            background: var(--sun-light);
+            border-left: 4px solid var(--sun);
+            color: #92400e;
+        }
+        .alert-reco {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 2px solid var(--green);
+            border-left: 6px solid var(--green);
+            color: #065f46;
+            padding: 24px 28px;
+            font-size: 1.05em;
+        }
+        .alert-reco strong { display: block; font-size: 1.2em; margin-bottom: 8px; }
+
+        /* Comparison grid */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 0;
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--gray-200);
+        }
+        .compare-grid .cg-header {
+            padding: 14px 16px;
+            font-weight: 700;
+            font-size: 0.95em;
+            border-bottom: 2px solid var(--gray-200);
+        }
+        .compare-grid .cg-header:first-child { background: var(--gray-100); color: var(--gray-700); }
+        .compare-grid .cg-header:nth-child(2) { background: var(--blue-light); color: #1e40af; text-align: center; }
+        .compare-grid .cg-header:nth-child(3) { background: var(--purple-light); color: #5b21b6; text-align: center; }
+
+        .compare-grid .cg-question {
+            padding: 12px 16px;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+        }
+        .compare-grid .cg-answer {
+            padding: 12px 16px;
+            font-size: 0.9em;
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .compare-grid .cg-answer.winner {
+            background: #d1fae5;
+            font-weight: 700;
+            color: #065f46;
+        }
+        .compare-grid .cg-answer.neutral {
+            background: var(--gray-50);
+        }
+
+        .badge-winner {
+            display: inline-block;
+            background: var(--green);
+            color: white;
+            font-size: 0.7em;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+
+        /* Visual bars */
+        .bar-compare {
+            display: flex;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .bar-item {
+            flex: 1;
+            text-align: center;
+        }
+        .bar-item .bar-label { font-weight: 700; margin-bottom: 8px; }
+        .bar-visual {
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .bar-visual .autoconso { background: var(--green); }
+        .bar-visual .surplus { background: var(--gray-300); }
+        .bar-pct {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8em;
+            color: var(--gray-500);
+        }
+
+        p { margin: 10px 0; }
+        ul { margin: 10px 0 10px 20px; }
+        li { margin: 4px 0; }
+
+        .scenario-box {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 16px 20px;
+            margin: 15px 0;
+            font-size: 0.95em;
+        }
+
+        .text-muted { color: var(--gray-500); font-size: 0.9em; }
+        .text-bold { font-weight: 700; }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: var(--gray-500);
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 15px; }
+            header { padding: 30px 0; }
+            header h1 { font-size: 1.5em; }
+            section { padding: 20px; }
+            .kpi-grid { grid-template-columns: 1fr 1fr; }
+            .compare-grid { font-size: 0.85em; }
+            table { font-size: 0.82em; }
+            th, td { padding: 6px 8px; }
+            .bar-compare { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>6 kWc vs 9 kWc</h1>
+        <div class="subtitle">Faut-il voir plus grand ?</div>
+        <div class="date">Maison type : 15 900 kWh/an, Sud-Est 30deg, Gironde — Mars 2026</div>
+
+        <div class="kpi-grid" style="margin-top: 30px;">
+            <div class="kpi-card col-6">
+                <div class="value">10 000 &euro;</div>
+                <div class="label">Investissement 6 kWc</div>
+            </div>
+            <div class="kpi-card col-9">
+                <div class="value">12 000 &euro;</div>
+                <div class="label">Investissement 9 kWc</div>
+            </div>
+            <div class="kpi-card col-6">
+                <div class="value">930 &euro;/an</div>
+                <div class="label">Gain annuel 6 kWc</div>
+            </div>
+            <div class="kpi-card col-9">
+                <div class="value">1 150 &euro;/an</div>
+                <div class="label">Gain annuel 9 kWc</div>
+            </div>
+            <div class="kpi-card col-6">
+                <div class="value">92%</div>
+                <div class="label">Autoconsomme (6 kWc)</div>
+            </div>
+            <div class="kpi-card col-9">
+                <div class="value">70%</div>
+                <div class="label">Autoconsomme (9 kWc)</div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- HYPOTHESES -->
+    <section>
+        <h2>Hypotheses de depart</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Parametre</th>
+                    <th class="col-6-header num">6 kWc</th>
+                    <th class="col-9-header num">9 kWc</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Investissement</strong></td>
+                    <td class="col-6 num"><strong>10 000 &euro;</strong></td>
+                    <td class="col-9 num"><strong>12 000 &euro;</strong></td>
+                </tr>
+                <tr>
+                    <td>Mensualite (pret taux 0)</td>
+                    <td class="col-6 num">100 &euro;/mois</td>
+                    <td class="col-9 num">100 &euro;/mois</td>
+                </tr>
+                <tr>
+                    <td>Duree de remboursement</td>
+                    <td class="col-6 num">8 ans 4 mois</td>
+                    <td class="col-9 num">10 ans</td>
+                </tr>
+                <tr>
+                    <td>Production an 1</td>
+                    <td class="col-6 num">7 075 kWh</td>
+                    <td class="col-9 num">10 600 kWh</td>
+                </tr>
+                <tr>
+                    <td>Degradation panneaux</td>
+                    <td class="col-6 num">-0,5%/an</td>
+                    <td class="col-9 num">-0,5%/an</td>
+                </tr>
+                <tr>
+                    <td>Inflation electricite</td>
+                    <td class="col-6 num">+3%/an</td>
+                    <td class="col-9 num">+3%/an</td>
+                </tr>
+                <tr>
+                    <td>Onduleur</td>
+                    <td class="col-6 num" colspan="2" style="text-align:center; background: rgba(219,234,254,0.15);">Micro-onduleurs (25 ans, pas de remplacement)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="scenario-box">
+            <strong>Scenario retenu :</strong> pilotage automatique du ballon d'eau chaude (routeur surplus) + recharge vehicule electrique en journee. Pas de changement d'habitudes au quotidien.
+        </div>
+
+        <h3>Repartition de la production</h3>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="col-6-header num">6 kWc</th>
+                    <th class="col-9-header num">9 kWc</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Autoconsommation directe</td>
+                    <td class="col-6 num">3 493 kWh</td>
+                    <td class="col-9 num">~4 240 kWh</td>
+                </tr>
+                <tr>
+                    <td>Routeur ECS (ballon 300L)</td>
+                    <td class="col-6 num">2 116 kWh</td>
+                    <td class="col-9 num">~2 300 kWh</td>
+                </tr>
+                <tr>
+                    <td>Recharge EV (jours de presence)</td>
+                    <td class="col-6 num">874 kWh</td>
+                    <td class="col-9 num">874 kWh</td>
+                </tr>
+                <tr class="good-row">
+                    <td><strong>Total autoconsomme</strong></td>
+                    <td class="num"><strong>6 483 kWh (92%)</strong></td>
+                    <td class="num"><strong>~7 414 kWh (70%)</strong></td>
+                </tr>
+                <tr>
+                    <td>Surplus vendu (EDF OA 4 cts)</td>
+                    <td class="col-6 num">592 kWh</td>
+                    <td class="col-9 num">3 186 kWh</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>Gain an 1</strong></td>
+                    <td class="num"><strong>930 &euro;</strong></td>
+                    <td class="num"><strong>1 150 &euro;</strong></td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>Gain mensuel an 1</strong></td>
+                    <td class="num"><strong>78 &euro;</strong></td>
+                    <td class="num"><strong>96 &euro;</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Autoconso visual bars -->
+        <div class="bar-compare">
+            <div class="bar-item">
+                <div class="bar-label" style="color: #1e40af;">6 kWc</div>
+                <div class="bar-visual">
+                    <div class="autoconso" style="width: 92%;"></div>
+                    <div class="surplus" style="width: 8%;"></div>
+                </div>
+                <div class="bar-pct">
+                    <span>92% autoconsomme</span>
+                    <span>8% surplus</span>
+                </div>
+            </div>
+            <div class="bar-item">
+                <div class="bar-label" style="color: #5b21b6;">9 kWc</div>
+                <div class="bar-visual">
+                    <div class="autoconso" style="width: 70%;"></div>
+                    <div class="surplus" style="width: 30%;"></div>
+                </div>
+                <div class="bar-pct">
+                    <span>70% autoconsomme</span>
+                    <span>30% surplus</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-warning">
+            Le 9 kWc produit <strong>50% de plus</strong> mais ne gagne que <strong>24% de plus</strong>. La maison est deja "pleine" avec 6 kWc : le surplus supplementaire part sur le reseau a 4 centimes au lieu d'etre autoconsomme a 17,6 centimes.
+        </div>
+    </section>
+
+    <!-- PENDANT LE REMBOURSEMENT -->
+    <section>
+        <h2>1. Pendant le remboursement : que reste-t-il a payer chaque mois ?</h2>
+
+        <p>Mensualite fixe de <strong>100 &euro;/mois</strong>. Le gain solaire couvre une partie de la mensualite. La difference est le "reste a charge" reel.</p>
+
+        <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Annee</th>
+                    <th class="col-6-header num">Gain 6 kWc</th>
+                    <th class="col-9-header num">Gain 9 kWc</th>
+                    <th class="num">Mensualite</th>
+                    <th class="col-6-header num">Reste a charge 6 kWc</th>
+                    <th class="col-9-header num">Reste a charge 9 kWc</th>
+                    <th class="col-6-header num">Restant du 6</th>
+                    <th class="col-9-header num">Restant du 9</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td class="col-6 num">78 &euro;/mois</td>
+                    <td class="col-9 num">96 &euro;/mois</td>
+                    <td class="num">100 &euro;</td>
+                    <td class="num cost-positive">22 &euro;/mois</td>
+                    <td class="num cost-positive">4 &euro;/mois</td>
+                    <td class="col-6 num">8 800 &euro;</td>
+                    <td class="col-9 num">10 800 &euro;</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td class="col-6 num">80 &euro;/mois</td>
+                    <td class="col-9 num">98 &euro;/mois</td>
+                    <td class="num">100 &euro;</td>
+                    <td class="num cost-positive">20 &euro;/mois</td>
+                    <td class="num cost-positive">2 &euro;/mois</td>
+                    <td class="col-6 num">7 600 &euro;</td>
+                    <td class="col-9 num">9 600 &euro;</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td class="col-6 num">82 &euro;/mois</td>
+                    <td class="col-9 num">101 &euro;/mois</td>
+                    <td class="num">100 &euro;</td>
+                    <td class="num cost-positive">18 &euro;/mois</td>
+                    <td class="num cost-negative">+1 &euro;/mois</td>
+                    <td class="col-6 num">6 400 &euro;</td>
+                    <td class="col-9 num">8 400 &euro;</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td class="col-6 num">84 &euro;/mois</td>
+                    <td class="col-9 num">103 &euro;/mois</td>
+                    <td class="num">100 &euro;</td>
+                    <td class="num cost-positive">16 &euro;/mois</td>
+                    <td class="num cost-negative">+3 &euro;/mois</td>
+                    <td class="col-6 num">5 200 &euro;</td>
+                    <td class="col-9 num">7 200 &euro;</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td class="col-6 num">86 &euro;/mois</td>
+                    <td class="col-9 num">106 &euro;/mois</td>
+                    <td class="num">100 &euro;</td>
+                    <td class="num cost-positive">14 &euro;/mois</td>
+                    <td class="num cost-negative">+6 &euro;/mois</td>
+                    <td class="col-6 num">4 000 &euro;</td>
+                    <td class="col-9 num">6 000 &euro;</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td class="col-6 num">88 &euro;/mois</td>
+                    <td class="col-9 num">109 &euro;/mois</td>
+                    <td class="num">100 &euro;</td>
+                    <td class="num cost-positive">12 &euro;/mois</td>
+                    <td class="num cost-negative">+9 &euro;/mois</td>
+                    <td class="col-6 num">2 800 &euro;</td>
+                    <td class="col-9 num">4 800 &euro;</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td class="col-6 num">90 &euro;/mois</td>
+                    <td class="col-9 num">111 &euro;/mois</td>
+                    <td class="num">100 &euro;</td>
+                    <td class="num cost-positive">10 &euro;/mois</td>
+                    <td class="num cost-negative">+11 &euro;/mois</td>
+                    <td class="col-6 num">1 600 &euro;</td>
+                    <td class="col-9 num">3 600 &euro;</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td class="col-6 num">92 &euro;/mois</td>
+                    <td class="col-9 num">114 &euro;/mois</td>
+                    <td class="num">100 &euro;</td>
+                    <td class="num cost-positive">8 &euro;/mois</td>
+                    <td class="num cost-negative">+14 &euro;/mois</td>
+                    <td class="col-6 num">400 &euro;</td>
+                    <td class="col-9 num">2 400 &euro;</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>9</strong></td>
+                    <td class="num"><strong>95 &euro;/mois</strong></td>
+                    <td class="num">117 &euro;/mois</td>
+                    <td class="num">100 / <strong>0</strong></td>
+                    <td class="num cost-zero"><strong>6 kWc rembourse !</strong></td>
+                    <td class="num cost-negative">+17 &euro;/mois</td>
+                    <td class="num"><strong>0 &euro;</strong></td>
+                    <td class="num">1 200 &euro;</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>10</strong></td>
+                    <td class="num">97 &euro;/mois</td>
+                    <td class="num"><strong>120 &euro;/mois</strong></td>
+                    <td class="num">0 / 100</td>
+                    <td class="num cost-negative"><strong>+97 &euro;/mois</strong></td>
+                    <td class="num cost-negative">+20 &euro;/mois</td>
+                    <td class="num">0 &euro;</td>
+                    <td class="num"><strong>0 &euro;</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <div class="alert alert-info" style="margin-top: 20px;">
+            <strong>Comment lire ce tableau :</strong>
+            <ul style="margin-top: 8px;">
+                <li>Le <strong style="color:#1e40af;">6 kWc coute ~22 &euro;/mois la 1ere annee</strong> (100 de mensualite - 78 de gain solaire), puis de moins en moins</li>
+                <li>Le <strong style="color:#5b21b6;">9 kWc est quasi auto-finance des l'annee 1</strong> (100 - 96 = 4 &euro;/mois), et <strong>rapporte de l'argent des l'annee 3</strong></li>
+                <li>Mais le <strong style="color:#1e40af;">6 kWc est rembourse 20 mois plus tot</strong> (annee 9 vs annee 10)</li>
+                <li>A partir de l'annee 9, le 6 kWc rapporte ~95 &euro;/mois sans rien payer, tandis que le 9 kWc paie encore 100 &euro;</li>
+            </ul>
+        </div>
+
+        <h3>Cout total du remboursement</h3>
+
+        <div class="kpi-grid-section">
+            <div class="kpi-section blue">
+                <div class="value">1 470 &euro;</div>
+                <div class="label">Effort reel du 6 kWc<br><span class="text-muted">Le solaire paie 85% de la mensualite</span></div>
+            </div>
+            <div class="kpi-section purple">
+                <div class="value">-880 &euro;</div>
+                <div class="label">Effort reel du 9 kWc<br><span class="text-muted">Il se paie tout seul et rapporte 880 &euro;</span></div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="col-6-header num">6 kWc</th>
+                    <th class="col-9-header num">9 kWc</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Total rembourse</td>
+                    <td class="col-6 num">10 000 &euro;</td>
+                    <td class="col-9 num">12 000 &euro;</td>
+                </tr>
+                <tr>
+                    <td>Total des gains pendant le remboursement</td>
+                    <td class="col-6 num">8 530 &euro;</td>
+                    <td class="col-9 num">12 880 &euro;</td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>Effort reel</strong> (rembourse - gains)</td>
+                    <td class="num"><strong>1 470 &euro;</strong></td>
+                    <td class="num"><strong>-880 &euro;</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-warning">
+            Le 6 kWc coute reellement <strong>1 470 &euro;</strong> sur 8 ans (le solaire paie 85% de la mensualite). Le 9 kWc se paie tout seul et rapporte meme <strong>880 &euro;</strong> pendant le remboursement — mais il faut 20 mois de plus.
+        </div>
+    </section>
+
+    <!-- APRES LE REMBOURSEMENT -->
+    <section>
+        <h2>2. Apres le remboursement : les gains purs</h2>
+
+        <p>Une fois l'installation remboursee, c'est du <strong>gain pur</strong>. Plus aucune mensualite. Voici ce que chaque installation rapporte, annee apres annee :</p>
+
+        <div style="overflow-x: auto;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Annee</th>
+                    <th class="col-6-header num">Gain 6 kWc</th>
+                    <th class="col-9-header num">Gain 9 kWc</th>
+                    <th class="num">Ecart 9 vs 6</th>
+                    <th class="col-6-header num">Cumul profit 6 kWc</th>
+                    <th class="col-9-header num">Cumul profit 9 kWc</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>10</td>
+                    <td class="col-6 num">1 162 &euro;</td>
+                    <td class="col-9 num text-muted">— (finit de payer)</td>
+                    <td class="num">—</td>
+                    <td class="num cumul-6">+423 &euro;</td>
+                    <td class="num text-muted">—</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>11</strong></td>
+                    <td class="num"><strong>1 191 &euro;</strong></td>
+                    <td class="num"><strong>1 472 &euro;</strong></td>
+                    <td class="num"><strong>+281 &euro;</strong></td>
+                    <td class="num cumul-6"><strong>+1 614 &euro;</strong></td>
+                    <td class="num cumul-9"><strong>+883 &euro;</strong></td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td class="col-6 num">1 221 &euro;</td>
+                    <td class="col-9 num">1 509 &euro;</td>
+                    <td class="num">+288 &euro;</td>
+                    <td class="num cumul-6">+2 835 &euro;</td>
+                    <td class="num cumul-9">+2 392 &euro;</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td class="col-6 num">1 252 &euro;</td>
+                    <td class="col-9 num">1 547 &euro;</td>
+                    <td class="num">+295 &euro;</td>
+                    <td class="num cumul-6">+4 087 &euro;</td>
+                    <td class="num cumul-9">+3 939 &euro;</td>
+                </tr>
+                <tr style="border-top: 2px solid var(--gray-300);">
+                    <td><strong>14</strong></td>
+                    <td class="col-6 num">1 283 &euro;</td>
+                    <td class="col-9 num">1 586 &euro;</td>
+                    <td class="num">+303 &euro;</td>
+                    <td class="num cumul-6">+5 370 &euro;</td>
+                    <td class="num cumul-9"><strong>+5 525 &euro;</strong></td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>15</strong></td>
+                    <td class="num"><strong>1 315 &euro;</strong></td>
+                    <td class="num"><strong>1 626 &euro;</strong></td>
+                    <td class="num"><strong>+311 &euro;</strong></td>
+                    <td class="num cumul-6"><strong>+6 685 &euro;</strong></td>
+                    <td class="num cumul-9"><strong>+7 151 &euro;</strong></td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td class="col-6 num">1 348 &euro;</td>
+                    <td class="col-9 num">1 667 &euro;</td>
+                    <td class="num">+319 &euro;</td>
+                    <td class="num cumul-6">+8 033 &euro;</td>
+                    <td class="num cumul-9">+8 818 &euro;</td>
+                </tr>
+                <tr>
+                    <td>17</td>
+                    <td class="col-6 num">1 382 &euro;</td>
+                    <td class="col-9 num">1 708 &euro;</td>
+                    <td class="num">+326 &euro;</td>
+                    <td class="num cumul-6">+9 415 &euro;</td>
+                    <td class="num cumul-9">+10 526 &euro;</td>
+                </tr>
+                <tr>
+                    <td>18</td>
+                    <td class="col-6 num">1 417 &euro;</td>
+                    <td class="col-9 num">1 751 &euro;</td>
+                    <td class="num">+334 &euro;</td>
+                    <td class="num cumul-6">+10 832 &euro;</td>
+                    <td class="num cumul-9">+12 277 &euro;</td>
+                </tr>
+                <tr>
+                    <td>19</td>
+                    <td class="col-6 num">1 452 &euro;</td>
+                    <td class="col-9 num">1 795 &euro;</td>
+                    <td class="num">+343 &euro;</td>
+                    <td class="num cumul-6">+12 284 &euro;</td>
+                    <td class="num cumul-9">+14 072 &euro;</td>
+                </tr>
+                <tr class="highlight-row">
+                    <td><strong>20</strong></td>
+                    <td class="num"><strong>1 489 &euro;</strong></td>
+                    <td class="num"><strong>1 840 &euro;</strong></td>
+                    <td class="num"><strong>+351 &euro;</strong></td>
+                    <td class="num cumul-6"><strong>+13 773 &euro;</strong></td>
+                    <td class="num cumul-9"><strong>+15 912 &euro;</strong></td>
+                </tr>
+                <tr>
+                    <td>21</td>
+                    <td class="col-6 num">1 526 &euro;</td>
+                    <td class="col-9 num">1 886 &euro;</td>
+                    <td class="num">+360 &euro;</td>
+                    <td class="num cumul-6">+15 299 &euro;</td>
+                    <td class="num cumul-9">+17 798 &euro;</td>
+                </tr>
+                <tr>
+                    <td>22</td>
+                    <td class="col-6 num">1 564 &euro;</td>
+                    <td class="col-9 num">1 933 &euro;</td>
+                    <td class="num">+369 &euro;</td>
+                    <td class="num cumul-6">+16 863 &euro;</td>
+                    <td class="num cumul-9">+19 731 &euro;</td>
+                </tr>
+                <tr>
+                    <td>23</td>
+                    <td class="col-6 num">1 604 &euro;</td>
+                    <td class="col-9 num">1 982 &euro;</td>
+                    <td class="num">+378 &euro;</td>
+                    <td class="num cumul-6">+18 467 &euro;</td>
+                    <td class="num cumul-9">+21 713 &euro;</td>
+                </tr>
+                <tr>
+                    <td>24</td>
+                    <td class="col-6 num">1 644 &euro;</td>
+                    <td class="col-9 num">2 031 &euro;</td>
+                    <td class="num">+387 &euro;</td>
+                    <td class="num cumul-6">+20 111 &euro;</td>
+                    <td class="num cumul-9">+23 744 &euro;</td>
+                </tr>
+                <tr class="good-row">
+                    <td><strong>25</strong></td>
+                    <td class="num"><strong>1 685 &euro;</strong></td>
+                    <td class="num"><strong>2 082 &euro;</strong></td>
+                    <td class="num"><strong>+397 &euro;</strong></td>
+                    <td class="num cumul-6"><strong>+21 796 &euro;</strong></td>
+                    <td class="num cumul-9"><strong>+25 826 &euro;</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+
+        <h3>Synthese sur 25 ans</h3>
+
+        <div class="kpi-grid-section">
+            <div class="kpi-section blue">
+                <div class="value">+21 796 &euro;</div>
+                <div class="label">Profit net 25 ans (6 kWc)</div>
+            </div>
+            <div class="kpi-section purple">
+                <div class="value">+25 826 &euro;</div>
+                <div class="label">Profit net 25 ans (9 kWc)</div>
+            </div>
+            <div class="kpi-section sun">
+                <div class="value">+4 030 &euro;</div>
+                <div class="label">Le 9 kWc rapporte 4 030 &euro; de plus<br>pour 2 000 &euro; investis en plus</div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th class="col-6-header num">6 kWc</th>
+                    <th class="col-9-header num">9 kWc</th>
+                    <th class="num">Ecart</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Investissement</td>
+                    <td class="col-6 num">10 000 &euro;</td>
+                    <td class="col-9 num">12 000 &euro;</td>
+                    <td class="num">+2 000 &euro;</td>
+                </tr>
+                <tr>
+                    <td>Gains cumules 25 ans</td>
+                    <td class="col-6 num">31 796 &euro;</td>
+                    <td class="col-9 num">37 826 &euro;</td>
+                    <td class="num">+6 030 &euro;</td>
+                </tr>
+                <tr class="good-row">
+                    <td><strong>Profit net 25 ans</strong></td>
+                    <td class="num"><strong>+21 796 &euro;</strong></td>
+                    <td class="num"><strong>+25 826 &euro;</strong></td>
+                    <td class="num"><strong>+4 030 &euro;</strong></td>
+                </tr>
+                <tr>
+                    <td>Rendement annuel moyen</td>
+                    <td class="col-6 num"><strong>~8,7%</strong></td>
+                    <td class="col-9 num">~7,8%</td>
+                    <td class="num"></td>
+                </tr>
+                <tr>
+                    <td>Gain moyen annuel (derniere decennie)</td>
+                    <td class="col-6 num">~1 470 &euro;/an</td>
+                    <td class="col-9 num">~1 820 &euro;/an</td>
+                    <td class="num">+350 &euro;/an</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="alert alert-info">
+            Le 9 kWc rapporte <strong>4 030 &euro; de plus</strong> sur 25 ans pour 2 000 &euro; de plus investis. C'est un retour de 200% sur l'investissement supplementaire. En revanche, le <strong>rendement annuel du 6 kWc est superieur</strong> (8,7% vs 7,8%) car une plus grande part de la production est autoconsommee a plein tarif.
+        </div>
+    </section>
+
+    <!-- LE VRAI CHOIX -->
+    <section>
+        <h2>Le vrai choix</h2>
+
+        <div class="compare-grid">
+            <div class="cg-header">Question</div>
+            <div class="cg-header">6 kWc</div>
+            <div class="cg-header">9 kWc</div>
+
+            <div class="cg-question">Je veux le meilleur rendement</div>
+            <div class="cg-answer winner">92% autoconsomme, quasi rien de perdu <span class="badge-winner">Gagnant</span></div>
+            <div class="cg-answer neutral">30% part en surplus a 4 cts</div>
+
+            <div class="cg-question">Je veux le profit maximum a 25 ans</div>
+            <div class="cg-answer neutral">+21 796 &euro;</div>
+            <div class="cg-answer winner">+25 826 &euro; (+4 030) <span class="badge-winner">Gagnant</span></div>
+
+            <div class="cg-question">Je veux rembourser vite</div>
+            <div class="cg-answer winner">8 ans 4 mois <span class="badge-winner">Gagnant</span></div>
+            <div class="cg-answer neutral">10 ans</div>
+
+            <div class="cg-question">Je veux le moins d'effort mensuel</div>
+            <div class="cg-answer neutral">22 &euro;/mois en debut</div>
+            <div class="cg-answer winner">4 &euro;/mois (quasi gratuit) <span class="badge-winner">Gagnant</span></div>
+
+            <div class="cg-question">Je veux pouvoir agrandir plus tard</div>
+            <div class="cg-answer winner">Oui (micro-onduleurs, +2 panneaux = ~1 500 &euro;) <span class="badge-winner">Gagnant</span></div>
+            <div class="cg-answer neutral">Deja grand, peu d'interet</div>
+
+            <div class="cg-question">J'ai peut-etre un 2e vehicule electrique un jour</div>
+            <div class="cg-answer neutral">A ce moment-la, +2 panneaux</div>
+            <div class="cg-answer winner">Deja couvert <span class="badge-winner">Gagnant</span></div>
+
+            <div class="cg-question">TVA</div>
+            <div class="cg-answer winner">5,5% (si panneaux bas carbone, &le; 9 kWc) <span class="badge-winner">Gagnant</span></div>
+            <div class="cg-answer neutral" style="background: #fee2e2; color: #991b1b; font-weight: 600;">20% si > 9 kWc — surcout ~1 500 &euro; cache</div>
+        </div>
+
+        <div class="vs-divider">
+            <div class="line"></div>
+            <div class="vs">VS</div>
+            <div class="line"></div>
+        </div>
+
+        <h3>En un mot</h3>
+        <p>Le 6 kWc est <strong>le meilleur investissement par euro depense</strong>. Le 9 kWc rapporte plus en valeur absolue mais avec un rendement inferieur et un remboursement plus long.</p>
+        <p>Pour un foyer qui consomme surtout le soir et la nuit (cas typique d'une famille), le surplus du 9 kWc n'a pas ou aller en journee — il part sur le reseau pour quasi rien.</p>
+
+        <div class="alert alert-reco" style="margin-top: 25px;">
+            <strong>Recommandation : commencer par 6 kWc</strong>
+            Si dans 3-5 ans un 2e vehicule electrique arrive ou que les besoins changent, ajouter 2-3 panneaux sur les rails existants pour ~1 500 &euro;. C'est la strategie la plus rentable et la plus flexible.
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <p>Comparaison indicative, mars 2026. Hypotheses : production PVGIS Bordeaux SE 30deg, conso 15 900 kWh/an (Linky), inflation elec +3%/an, degradation panneaux -0,5%/an, pret taux 0. Prix arrondis pour simplifier la lecture.</p>
+</footer>
+
+</body>
+</html>
