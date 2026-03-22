@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L'Enfant Oc&eacute;an - Jean-Claude Mourlevat</title>
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --ocean: #0277bd;
+            --ocean-light: #03a9f4;
+            --ocean-bg: #e1f5fe;
+            --green: #27ae60;
+            --green-bg: #eafaf1;
+            --blue: #2980b9;
+            --blue-bg: #ebf5fb;
+            --purple: #8e44ad;
+            --purple-bg: #f4ecf7;
+            --red: #c0392b;
+            --red-bg: #fdedec;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --teal: #00897b;
+            --teal-bg: #e0f2f1;
+            --dark: #2c3e50;
+            --gray: #7f8c8d;
+            --light: #ecf0f1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #b3e5fc 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HEADER ===== */
+        .hero {
+            background: linear-gradient(135deg, #01579b 0%, #0277bd 40%, #03a9f4 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .author { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--ocean); color: var(--white); }
+
+        /* ===== MAIN CONTENT ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--ocean);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.4rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--ocean);
+        }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== CHAPTER ACCORDION ===== */
+        .chapter {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 0.8rem;
+            overflow: hidden;
+            border-left: 4px solid var(--blue);
+        }
+        .chapter summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(41, 128, 185, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+        }
+        .chapter summary::-webkit-details-marker { display: none; }
+        .chapter summary::marker { display: none; content: ''; }
+        .chapter summary:hover, .chapter summary:active { background: var(--blue-bg); }
+        .chapter-number {
+            background: var(--blue);
+            color: var(--white);
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .chapter-title-block { flex: 1; }
+        .chapter-title { font-weight: 700; font-size: 1rem; color: var(--dark); }
+        .chapter-subtitle { font-size: 0.8rem; color: var(--gray); font-style: italic; }
+        .chapter-arrow { font-size: 1.2rem; transition: transform 0.3s; color: var(--gray); flex-shrink: 0; }
+        .chapter[open] .chapter-arrow { transform: rotate(180deg); }
+        .chapter-content-inner {
+            padding: 0 1.2rem 1.2rem;
+            color: #444;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+        .chapter-content-inner p { margin-bottom: 0.6rem; }
+        .chapter-content-inner p:last-child { margin-bottom: 0; }
+
+        /* ===== CHARACTER CARDS ===== */
+        .character-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+        .character-avatar {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        .character-avatar.main { background: var(--ocean-bg); }
+        .character-avatar.secondary { background: var(--blue-bg); }
+        .character-avatar.minor { background: var(--light); }
+        .character-avatar.danger { background: var(--red-bg); }
+        .character-info { flex: 1; }
+        .character-name { font-weight: 700; font-size: 1.05rem; color: var(--dark); }
+        .character-role { font-size: 0.8rem; color: var(--gray); margin-bottom: 0.4rem; }
+        .character-desc { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+        /* ===== THEME TAGS ===== */
+        .theme-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        .theme-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+        .theme-title .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .theme-desc { font-size: 0.9rem; color: #555; line-height: 1.7; }
+
+        /* ===== CONTEXT BOX ===== */
+        .context-box {
+            background: var(--purple-bg);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+            border-left: 4px solid var(--purple);
+            margin-bottom: 1rem;
+        }
+        .context-box h3 { font-size: 1rem; color: var(--purple); margin-bottom: 0.4rem; }
+        .context-box p { font-size: 0.9rem; color: #555; }
+
+        /* ===== NARRATION BOX ===== */
+        .narration-box {
+            background: var(--ocean-bg);
+            border-radius: var(--radius);
+            padding: 1.2rem;
+            border-left: 4px solid var(--ocean);
+            margin-bottom: 1rem;
+        }
+        .narration-box h3 { font-size: 1rem; color: var(--ocean); margin-bottom: 0.4rem; }
+        .narration-box p { font-size: 0.9rem; color: #555; }
+
+        /* ===== FOOTER ===== */
+        footer { text-align: center; padding: 2rem 1rem; color: var(--gray); font-size: 0.8rem; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.6rem; }
+            .hero .author { font-size: 1.3rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.6rem; }
+            .card { padding: 2rem; }
+
+            .characters-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .characters-grid .character-card { margin-bottom: 0; }
+            .character-card.full-width { grid-column: 1 / -1; }
+
+            .themes-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            .themes-grid .theme-card { margin-bottom: 0; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .chapter[open] { break-inside: avoid; }
+            .chapter { border: 1px solid #ccc; }
+            body { background: white; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127754;</div>
+    <h1>L'Enfant Oc&eacute;an</h1>
+    <p class="author">Jean-Claude Mourlevat</p>
+    <p class="collection">Pocket Jeunesse &bull; 1999</p>
+</header>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="nav" role="navigation">
+    <a href="#resume">En bref</a>
+    <a href="#narration">Narration</a>
+    <a href="#chapitres">Chapitres</a>
+    <a href="#personnages">Personnages</a>
+    <a href="#themes">Th&egrave;mes</a>
+    <a href="#savais-tu">Le savais-tu ?</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- RÉSUMÉ GÉNÉRAL -->
+    <section id="resume">
+        <div class="section-header">
+            <span class="section-icon">&#128214;</span>
+            <h2>R&eacute;sum&eacute; g&eacute;n&eacute;ral</h2>
+        </div>
+        <div class="card">
+            <p>L'histoire se passe <strong>de nos jours</strong>, quelque part dans la campagne fran&ccedil;aise. La <strong>famille Doutreleau</strong> vit dans une ferme isol&eacute;e et mis&eacute;rable. Les parents sont pauvres, le p&egrave;re est <strong>violent et alcoolique</strong>. Ils ont <strong>sept fils</strong>&nbsp;: trois paires de jumeaux et un dernier, le plus petit, <strong>Yann</strong>.</p>
+
+            <p>Yann est <strong>minuscule</strong>, il ne parle pas (il est <strong>muet</strong>), mais il est extraordinairement <strong>intelligent</strong>. Il comprend tout, voit tout, et communique par le regard et par de petits gestes.</p>
+
+            <p>Une nuit, Yann r&eacute;veille ses six fr&egrave;res et leur fait signe de le suivre. Pourquoi&nbsp;? Les fr&egrave;res croient avoir entendu leur p&egrave;re dire qu'il allait <strong>les tuer</strong>. Alors, en pleine nuit, les sept enfants s'enfuient &agrave; pied &agrave; travers la France.</p>
+
+            <p>Yann, le plus petit, marche <strong>devant</strong>. C'est lui le guide. Ses fr&egrave;res le suivent sans vraiment comprendre o&ugrave; il les emm&egrave;ne. Mais Yann a un but&nbsp;: il veut atteindre l'<strong>oc&eacute;an</strong>.</p>
+
+            <p>En chemin, les sept fr&egrave;res rencontrent des gens tr&egrave;s diff&eacute;rents&nbsp;: certains les aident, d'autres les trahissent. Ils dorment dans des granges, volent de la nourriture, &eacute;chappent &agrave; un <strong>camionneur dangereux</strong> (le &laquo;&nbsp;Petit Poucet invers&eacute;&nbsp;&raquo; de l'ogre) et sont recueillis par <strong>Nathalie Josse</strong>, une assistante sociale.</p>
+
+            <p>Finalement, Yann arrive seul au bord de l'oc&eacute;an. Il entre dans l'eau et <strong>dispara&icirc;t</strong>. Les fr&egrave;res et les t&eacute;moins racontent chacun leur version de l'histoire. On ne sait jamais vraiment ce qui s'est pass&eacute;&nbsp;: Yann a-t-il trouv&eacute; ce qu'il cherchait&nbsp;? Est-il mort&nbsp;? La fin reste <strong>ouverte et po&eacute;tique</strong>.</p>
+        </div>
+    </section>
+
+    <!-- NARRATION -->
+    <section id="narration">
+        <div class="section-header">
+            <span class="section-icon">&#128483;&#65039;</span>
+            <h2>Une narration originale</h2>
+        </div>
+        <div class="narration-box">
+            <h3>Des voix multiples</h3>
+            <p>Le livre n'est <strong>pas racont&eacute; par un seul narrateur</strong>. Chaque chapitre donne la parole &agrave; un <strong>t&eacute;moin diff&eacute;rent</strong>&nbsp;: un fr&egrave;re, un voisin, un gendarme, l'assistante sociale, le camionneur... C'est comme une <strong>enqu&ecirc;te</strong> o&ugrave; chacun donne sa version des faits. Le lecteur doit reconstituer l'histoire lui-m&ecirc;me.</p>
+        </div>
+        <div class="narration-box">
+            <h3>Yann ne parle jamais</h3>
+            <p>Le personnage principal &ndash; Yann &ndash; est <strong>muet</strong>. On n'entend donc <strong>jamais sa voix directement</strong>. On ne conna&icirc;t ses pens&eacute;es qu'&agrave; travers ce que les autres disent de lui. C'est un choix tr&egrave;s fort de l'auteur&nbsp;: le h&eacute;ros reste un <strong>myst&egrave;re</strong>.</p>
+        </div>
+        <div class="narration-box">
+            <h3>Des points de vue qui se contredisent</h3>
+            <p>Les t&eacute;moins ne racontent pas tous la m&ecirc;me chose. Certains se contredisent, certains mentent, certains ne comprennent pas ce qu'ils ont vu. Le lecteur doit <strong>faire le tri</strong> et d&eacute;cider ce qu'il croit. C'est ce qui rend le livre si captivant.</p>
+        </div>
+    </section>
+
+    <!-- CHAPITRES -->
+    <section id="chapitres">
+        <div class="section-header">
+            <span class="section-icon">&#128220;</span>
+            <h2>R&eacute;sum&eacute; par &eacute;tapes</h2>
+        </div>
+
+        <!-- Étape 1 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">1</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La ferme des Doutreleau</div>
+                    <div class="chapter-subtitle">Situation initiale</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>On d&eacute;couvre la famille Doutreleau &agrave; travers les t&eacute;moignages de voisins et de connaissances. La ferme est <strong>isol&eacute;e</strong>, pauvre, en mauvais &eacute;tat. Le p&egrave;re est un homme <strong>brutal et alcoolique</strong>, la m&egrave;re est <strong>soumise et d&eacute;pass&eacute;e</strong>.</p>
+                <p>Les sept fr&egrave;res vivent dans cette mis&egrave;re&nbsp;: les a&icirc;n&eacute;s (<strong>Fabien et R&eacute;my</strong>) sont de grands costauds pas tr&egrave;s malins, les moyens (<strong>Victor et Pierre</strong>) et les petits (<strong>Paul et Max</strong>) se ressemblent comme des gouttes d'eau. Et puis il y a <strong>Yann</strong>, le septi&egrave;me, tout petit, muet, diff&eacute;rent des autres.</p>
+                <p>Un t&eacute;moin raconte que Yann est arriv&eacute; dans la famille comme un <strong>miracle</strong>&nbsp;: la m&egrave;re, qui pensait ne plus pouvoir avoir d'enfant, l'a mis au monde bien apr&egrave;s les jumeaux. Il est n&eacute; <strong>minuscule</strong> mais avec des yeux incroyablement vifs.</p>
+            </div>
+        </details>
+
+        <!-- Étape 2 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">2</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La nuit de la fuite</div>
+                    <div class="chapter-subtitle">&Eacute;l&eacute;ment d&eacute;clencheur</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Une nuit, Yann se l&egrave;ve et r&eacute;veille ses fr&egrave;res un par un. Sans un mot, il leur fait comprendre qu'il faut <strong>partir imm&eacute;diatement</strong>.</p>
+                <p>Les fr&egrave;res a&icirc;n&eacute;s racontent qu'ils ont entendu le p&egrave;re dire &agrave; la m&egrave;re&nbsp;: &laquo;&nbsp;<strong>Demain, je les tue.</strong>&nbsp;&raquo; Mais l'a-t-il vraiment dit&nbsp;? Parlait-il des enfants ou d'autre chose (des animaux de la ferme)&nbsp;? Chaque fr&egrave;re a une version diff&eacute;rente. <strong>Le doute reste entier.</strong></p>
+                <p>Ce qui est s&ucirc;r, c'est que Yann, lui, a <strong>d&eacute;cid&eacute; de fuir</strong>. Et quand Yann d&eacute;cide quelque chose, les autres le suivent. Les sept fr&egrave;res quittent la ferme en pleine nuit, pieds nus dans la boue.</p>
+            </div>
+        </details>
+
+        <!-- Étape 3 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">3</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">La travers&eacute;e de la France</div>
+                    <div class="chapter-subtitle">Le voyage</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Les sept fr&egrave;res marchent vers l'ouest, guid&eacute;s par Yann qui marche toujours <strong>devant</strong>, malgr&eacute; sa petite taille. Ils ne savent pas o&ugrave; il les emm&egrave;ne, mais ils lui font <strong>confiance</strong>.</p>
+                <p>Ils traversent des champs, des for&ecirc;ts, des villages. Ils dorment dans des <strong>granges</strong>, mangent ce qu'ils trouvent. Les fr&egrave;res a&icirc;n&eacute;s volent parfois de la nourriture.</p>
+                <p>En chemin, ils croisent diff&eacute;rentes personnes&nbsp;: un <strong>couple de boulangers</strong> qui les nourrit, une <strong>vieille dame</strong> qui les h&eacute;berge une nuit... Mais aussi des gens qui les d&eacute;noncent ou qui ne veulent pas les aider.</p>
+                <p>Les gendarmes sont &agrave; leurs trousses&nbsp;: la police a &eacute;t&eacute; pr&eacute;venue de la <strong>disparition des sept enfants</strong>.</p>
+            </div>
+        </details>
+
+        <!-- Étape 4 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">4</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">Le camionneur</div>
+                    <div class="chapter-subtitle">L'ogre moderne</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Sur la route, un <strong>camionneur</strong> propose de les emmener. Il semble gentil au d&eacute;but, mais les enfants comprennent vite qu'il est <strong>dangereux</strong>. C'est le personnage de l'<strong>ogre</strong> dans la version moderne du Petit Poucet.</p>
+                <p>Le camionneur les emm&egrave;ne chez lui. Sa maison est inqui&eacute;tante. Yann, qui comprend le danger avant les autres, organise la <strong>fuite</strong> pendant la nuit &ndash; exactement comme le Petit Poucet qui s'&eacute;chappe de la maison de l'ogre.</p>
+                <p>C'est l'un des moments les plus <strong>tendus</strong> du livre. Les diff&eacute;rents t&eacute;moins donnent des versions l&eacute;g&egrave;rement diff&eacute;rentes de cet &eacute;pisode, ce qui renforce l'angoisse.</p>
+            </div>
+        </details>
+
+        <!-- Étape 5 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">5</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">Nathalie Josse</div>
+                    <div class="chapter-subtitle">L'aide sociale</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Les enfants sont finalement recueillis par <strong>Nathalie Josse</strong>, une assistante sociale. C'est une femme <strong>bienveillante</strong> qui veut les prot&eacute;ger et comprendre leur histoire.</p>
+                <p>Elle est tr&egrave;s touch&eacute;e par Yann, qu'elle d&eacute;crit comme un enfant <strong>extraordinaire</strong>&nbsp;: ses yeux, son intelligence, la fa&ccedil;on dont ses fr&egrave;res le respectent malgr&eacute; sa taille et son mutisme.</p>
+                <p>Mais Yann ne veut pas rester. Il veut continuer vers l'<strong>oc&eacute;an</strong>. Les fr&egrave;res sont s&eacute;par&eacute;s&nbsp;: certains restent avec Nathalie, d'autres repartent. Yann continue seul ou presque.</p>
+            </div>
+        </details>
+
+        <!-- Étape 6 -->
+        <details class="chapter">
+            <summary>
+                <div class="chapter-number">6</div>
+                <div class="chapter-title-block">
+                    <div class="chapter-title">L'oc&eacute;an</div>
+                    <div class="chapter-subtitle">D&eacute;nouement</div>
+                </div>
+                <span class="chapter-arrow">&#9660;</span>
+            </summary>
+            <div class="chapter-content-inner">
+                <p>Yann arrive enfin au bord de l'<strong>oc&eacute;an Atlantique</strong>. C'est ce vers quoi il marchait depuis le d&eacute;but. Les derni&egrave;res pages sont racont&eacute;es par plusieurs t&eacute;moins qui l'ont vu sur la plage.</p>
+                <p>Yann entre dans l'eau et <strong>dispara&icirc;t</strong>. Certains t&eacute;moins disent qu'il s'est noy&eacute;. D'autres disent qu'il a &eacute;t&eacute; &laquo;&nbsp;emport&eacute;&nbsp;&raquo; par l'oc&eacute;an. D'autres encore ne croient pas qu'il soit mort.</p>
+                <p>La fin est <strong>ouverte et po&eacute;tique</strong>. Le lecteur peut choisir sa propre interpr&eacute;tation&nbsp;: Yann a-t-il trouv&eacute; la <strong>libert&eacute;</strong> qu'il cherchait&nbsp;? L'oc&eacute;an est-il un lieu de mort ou de <strong>renaissance</strong>&nbsp;? C'est la grande question du livre.</p>
+            </div>
+        </details>
+    </section>
+
+    <!-- PERSONNAGES -->
+    <section id="personnages">
+        <div class="section-header">
+            <span class="section-icon">&#128101;</span>
+            <h2>Les personnages</h2>
+        </div>
+
+        <!-- Personnage principal -->
+        <div class="character-card full-width">
+            <div class="character-avatar main">&#127754;</div>
+            <div class="character-info">
+                <div class="character-name">Yann Doutreleau</div>
+                <div class="character-role">Personnage principal &bull; Le septi&egrave;me fils</div>
+                <div class="character-desc">
+                    Le plus petit des sept fr&egrave;res, <strong>muet</strong> et <strong>minuscule</strong>, mais dot&eacute; d'une intelligence hors du commun. Il ne parle pas mais communique par le regard. Ses fr&egrave;res le suivent sans h&eacute;siter, comme s'il &eacute;tait leur chef naturel. C'est le <strong>Petit Poucet</strong> de l'histoire&nbsp;: le plus faible qui guide les autres. Il est attir&eacute; par l'oc&eacute;an, comme par une force myst&eacute;rieuse.
+                </div>
+            </div>
+        </div>
+
+        <div class="characters-grid">
+            <div class="character-card">
+                <div class="character-avatar secondary">&#128170;</div>
+                <div class="character-info">
+                    <div class="character-name">Fabien et R&eacute;my</div>
+                    <div class="character-role">Les a&icirc;n&eacute;s &bull; Jumeaux</div>
+                    <div class="character-desc">
+                        Les <strong>&laquo;&nbsp;grands&nbsp;&raquo;</strong>. Costauds mais pas tr&egrave;s malins, ils prot&egrave;gent les plus petits avec leurs muscles. Ce sont les <strong>narrateurs</strong> les plus fr&eacute;quents du livre. Ils racontent l'histoire avec leur langage simple et touchant.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar secondary">&#128066;</div>
+                <div class="character-info">
+                    <div class="character-name">Victor et Pierre</div>
+                    <div class="character-role">Les moyens &bull; Jumeaux</div>
+                    <div class="character-desc">
+                        Les <strong>&laquo;&nbsp;moyens&nbsp;&raquo;</strong>. Plus discrets que les a&icirc;n&eacute;s, ils suivent le mouvement. Ils sont attach&eacute;s &agrave; Yann et ont une confiance aveugle en lui.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar secondary">&#128118;</div>
+                <div class="character-info">
+                    <div class="character-name">Paul et Max</div>
+                    <div class="character-role">Les petits &bull; Jumeaux</div>
+                    <div class="character-desc">
+                        Les <strong>&laquo;&nbsp;petits&nbsp;&raquo;</strong> (juste avant Yann). Encore jeunes, ils sont les plus vuln&eacute;rables pendant le voyage. Leur t&eacute;moignage est na&iuml;f et &eacute;mouvant.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar danger">&#128544;</div>
+                <div class="character-info">
+                    <div class="character-name">Le p&egrave;re Doutreleau</div>
+                    <div class="character-role">Le p&egrave;re &bull; Violent</div>
+                    <div class="character-desc">
+                        Homme <strong>brutal et alcoolique</strong>. A-t-il vraiment menac&eacute; de tuer ses enfants&nbsp;? Le doute plane. Il repr&eacute;sente la <strong>violence domestique</strong> et la mis&egrave;re sociale.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar minor">&#128557;</div>
+                <div class="character-info">
+                    <div class="character-name">La m&egrave;re Doutreleau</div>
+                    <div class="character-role">La m&egrave;re &bull; Soumise</div>
+                    <div class="character-desc">
+                        Femme <strong>d&eacute;pass&eacute;e</strong> par sa vie, soumise &agrave; son mari violent. Elle aime ses enfants mais n'a pas la force de les prot&eacute;ger. Elle n'a pas emp&ecirc;ch&eacute; leur fuite.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar secondary">&#128156;</div>
+                <div class="character-info">
+                    <div class="character-name">Nathalie Josse</div>
+                    <div class="character-role">Assistante sociale</div>
+                    <div class="character-desc">
+                        Femme <strong>bienveillante et sensible</strong>. Elle recueille les enfants et est profond&eacute;ment touch&eacute;e par Yann. Son t&eacute;moignage est l'un des plus &eacute;mouvants du livre.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar danger">&#128666;</div>
+                <div class="character-info">
+                    <div class="character-name">Le camionneur</div>
+                    <div class="character-role">L'ogre moderne</div>
+                    <div class="character-desc">
+                        Personnage <strong>inqui&eacute;tant</strong> qui repr&eacute;sente l'<strong>ogre du conte</strong>. Il semble gentil mais s'av&egrave;re dangereux. Les enfants doivent s'enfuir de chez lui en pleine nuit.
+                    </div>
+                </div>
+            </div>
+
+            <div class="character-card">
+                <div class="character-avatar minor">&#128110;</div>
+                <div class="character-info">
+                    <div class="character-name">Les gendarmes</div>
+                    <div class="character-role">La recherche</div>
+                    <div class="character-desc">
+                        Ils enqu&ecirc;tent sur la disparition des enfants. Leur t&eacute;moignage apporte un point de vue <strong>officiel et factuel</strong> qui contraste avec les r&eacute;cits plus &eacute;motionnels des autres t&eacute;moins.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- THÈMES -->
+    <section id="themes">
+        <div class="section-header">
+            <span class="section-icon">&#128161;</span>
+            <h2>Les th&egrave;mes du livre</h2>
+        </div>
+
+        <div class="themes-grid">
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--ocean);"></span>
+                    L'oc&eacute;an comme symbole de libert&eacute;
+                </div>
+                <div class="theme-desc">
+                    Yann marche vers l'oc&eacute;an comme vers une <strong>promesse</strong>. L'oc&eacute;an repr&eacute;sente tout ce que sa vie &agrave; la ferme n'&eacute;tait pas&nbsp;: l'<strong>immensit&eacute;</strong>, la <strong>libert&eacute;</strong>, un ailleurs infini. C'est &agrave; la fois un r&ecirc;ve et un myst&egrave;re.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--red);"></span>
+                    La violence et la mis&egrave;re sociale
+                </div>
+                <div class="theme-desc">
+                    Le livre ne cache rien&nbsp;: le p&egrave;re violent, l'alcool, la pauvret&eacute;, les enfants qui vivent dans des conditions indignes. Mourlevat montre que <strong>la mis&egrave;re engendre la violence</strong> et que ce sont les enfants qui en souffrent le plus.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--green);"></span>
+                    La fraternit&eacute;
+                </div>
+                <div class="theme-desc">
+                    Les sept fr&egrave;res restent <strong>soud&eacute;s</strong> malgr&eacute; tout. Les grands prot&egrave;gent les petits, tous suivent Yann sans discuter. Ce lien fraternel est la <strong>force</strong> qui leur permet de tenir pendant le voyage. C'est aussi la plus belle chose de leur vie.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--purple);"></span>
+                    La r&eacute;&eacute;criture du conte
+                </div>
+                <div class="theme-desc">
+                    L'Enfant Oc&eacute;an est une <strong>r&eacute;&eacute;criture moderne</strong> du <em>Petit Poucet</em> de Perrault&nbsp;: 7 fr&egrave;res, des parents pauvres, une fuite dans la nuit, un ogre... Mais transpos&eacute; dans le monde r&eacute;el, avec ses probl&egrave;mes sociaux et sa complexit&eacute;.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--orange);"></span>
+                    La force du silence
+                </div>
+                <div class="theme-desc">
+                    Yann ne parle pas, mais il est le personnage le plus <strong>puissant</strong> du livre. Son silence n'est pas une faiblesse&nbsp;: c'est une <strong>force myst&eacute;rieuse</strong>. Il voit, il comprend, il d&eacute;cide &ndash; sans avoir besoin de mots. Le livre montre que <strong>parler n'est pas la seule fa&ccedil;on de communiquer</strong>.
+                </div>
+            </div>
+
+            <div class="theme-card">
+                <div class="theme-title">
+                    <span class="dot" style="background: var(--teal);"></span>
+                    La v&eacute;rit&eacute; et le point de vue
+                </div>
+                <div class="theme-desc">
+                    Chaque t&eacute;moin raconte &laquo;&nbsp;sa&nbsp;&raquo; v&eacute;rit&eacute;. Mais aucun ne d&eacute;tient la v&eacute;rit&eacute; compl&egrave;te. Le livre nous apprend que <strong>la r&eacute;alit&eacute; d&eacute;pend du regard qu'on porte sur elle</strong>, et qu'il faut &eacute;couter plusieurs voix pour s'approcher de la v&eacute;rit&eacute;.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LE SAVAIS-TU ? -->
+    <section id="savais-tu">
+        <div class="section-header">
+            <span class="section-icon">&#128300;</span>
+            <h2>Le savais-tu ?</h2>
+        </div>
+
+        <div class="context-box">
+            <h3>Un Petit Poucet moderne</h3>
+            <p>Jean-Claude Mourlevat s'est directement inspir&eacute; du conte <strong><em>Le Petit Poucet</em></strong> de <strong>Charles Perrault</strong> (1697). On retrouve tous les &eacute;l&eacute;ments&nbsp;: 7 fr&egrave;res, des parents tr&egrave;s pauvres, un p&egrave;re qui veut &laquo;&nbsp;abandonner&nbsp;&raquo; ses enfants, une fuite dans la nuit, et un ogre (ici le camionneur). Mais le conte est transpos&eacute; dans le monde r&eacute;el et ses probl&egrave;mes&nbsp;: violence domestique, pauvret&eacute;, services sociaux.</p>
+        </div>
+
+        <div class="context-box">
+            <h3>Le choix des voix multiples</h3>
+            <p>Mourlevat a choisi de raconter l'histoire &agrave; travers <strong>21 t&eacute;moignages</strong> de personnes diff&eacute;rentes. Ce proc&eacute;d&eacute; s'appelle la <strong>polyphonie narrative</strong> (plusieurs voix). C'est une technique litt&eacute;raire utilis&eacute;e aussi par des auteurs comme <strong>William Faulkner</strong> (<em>Tandis que j'agonise</em>). &Ccedil;a donne au lecteur l'impression de mener l'enqu&ecirc;te.</p>
+        </div>
+
+        <div class="context-box">
+            <h3>Un auteur venu du th&eacute;&acirc;tre</h3>
+            <p><strong>Jean-Claude Mourlevat</strong> (n&eacute; en 1952) &eacute;tait d'abord <strong>com&eacute;dien et metteur en sc&egrave;ne</strong> de th&eacute;&acirc;tre. On sent cette influence dans <em>L'Enfant Oc&eacute;an</em>&nbsp;: chaque chapitre ressemble &agrave; un <strong>monologue</strong>, comme si les personnages &eacute;taient sur sc&egrave;ne. Il a re&ccedil;u de nombreux prix litt&eacute;raires et est l'un des plus grands auteurs de litt&eacute;rature jeunesse fran&ccedil;aise.</p>
+        </div>
+
+        <div class="context-box">
+            <h3>La fin ouverte&nbsp;: &agrave; toi de choisir</h3>
+            <p>La disparition de Yann dans l'oc&eacute;an peut &ecirc;tre interpr&eacute;t&eacute;e de plusieurs fa&ccedil;ons&nbsp;: une <strong>noyade tragique</strong>, une <strong>lib&eacute;ration symbolique</strong>, ou m&ecirc;me un <strong>passage vers un autre monde</strong> (comme dans les contes). Mourlevat a d&eacute;clar&eacute; qu'il ne voulait pas donner de r&eacute;ponse d&eacute;finitive&nbsp;: &laquo;&nbsp;C'est au lecteur de d&eacute;cider.&nbsp;&raquo;</p>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>Fiche de lecture &bull; <em>L'Enfant Oc&eacute;an</em> &ndash; Jean-Claude Mourlevat</p>
+    <p>Niveau 5&egrave;me &bull; Fran&ccedil;ais</p>
+</footer>
+
+</body>
+</html>
