@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RDV Médecin du sport — 26/03/2026</title>
+<style>
+  :root {
+    --blue: #0077b6;
+    --blue-light: #e8f4f8;
+    --red: #c62828;
+    --red-bg: #ffebee;
+    --orange: #e65100;
+    --orange-bg: #fff3e0;
+    --green: #2e7d32;
+    --green-bg: #e8f5e9;
+    --purple: #6a1b9a;
+    --purple-bg: #f3e5f5;
+    --bg: #f8f9fa;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --muted: #6c757d;
+    --border: #dee2e6;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  header {
+    background: linear-gradient(135deg, #c62828, #e65100);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  header h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+  header .subtitle { font-size: 0.95rem; opacity: 0.9; }
+  header .meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+  }
+  header .meta span {
+    background: rgba(255,255,255,0.2);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .section {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .section-title .icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  /* Couleurs sections */
+  .icon-red { background: var(--red-bg); color: var(--red); }
+  .icon-orange { background: var(--orange-bg); color: var(--orange); }
+  .icon-green { background: var(--green-bg); color: var(--green); }
+  .icon-purple { background: var(--purple-bg); color: var(--purple); }
+  .icon-blue { background: var(--blue-light); color: var(--blue); }
+
+  /* Résumé situation */
+  .situation {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  .situation strong { color: var(--blue); }
+
+  /* Timeline blessures */
+  .timeline {
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 4px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--red);
+    opacity: 0.3;
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.5rem;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+  }
+  .timeline-date {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--red);
+  }
+  .timeline-desc {
+    font-size: 0.88rem;
+    color: var(--text);
+  }
+  .timeline-cause {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* Pattern box */
+  .pattern-box {
+    background: var(--red-bg);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.88rem;
+    border: 1px solid #ffcdd2;
+  }
+  .pattern-box strong { color: var(--red); }
+
+  /* Enseignement 2025 */
+  .good-box {
+    background: var(--green-bg);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    font-size: 0.88rem;
+    border: 1px solid #c8e6c9;
+  }
+  .good-box strong { color: var(--green); }
+
+  /* Episode actuel */
+  .episode {
+    font-size: 0.9rem;
+  }
+  .episode ul {
+    margin: 0.5rem 0 0.5rem 1.2rem;
+  }
+  .episode li {
+    margin-bottom: 0.3rem;
+  }
+
+  /* Questions */
+  .questions {
+    list-style: none;
+    counter-reset: q;
+  }
+  .questions li {
+    counter-increment: q;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+  .questions li:last-child { border-bottom: none; }
+  .questions li::before {
+    content: counter(q);
+    background: var(--purple-bg);
+    color: var(--purple);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .questions .sub {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+
+  /* Profil rapide */
+  .profil-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+  .profil-item {
+    background: var(--bg);
+    padding: 0.4rem 0.7rem;
+    border-radius: 8px;
+  }
+  .profil-item .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .profil-item .value {
+    font-weight: 600;
+  }
+
+  /* Records */
+  .records {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+  }
+  .record {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 0.4rem;
+  }
+  .record .dist { font-size: 0.7rem; color: var(--muted); }
+  .record .time { font-weight: 700; }
+
+  /* Message clé */
+  .key-message {
+    background: linear-gradient(135deg, #e8f4f8, #e3f2fd);
+    border: 2px solid var(--blue);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--blue);
+    margin-top: 1rem;
+  }
+
+  @media (max-width: 500px) {
+    .profil-grid { grid-template-columns: 1fr; }
+    .records { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>RDV Médecin du sport</h1>
+  <div class="subtitle">Mémo de consultation — Olivier Bruet</div>
+  <div class="meta">
+    <span>26/03/2026 — 13h</span>
+    <span>45 ans — 70 kg — 1m73</span>
+  </div>
+</header>
+
+<div class="situation">
+  <strong>Motif :</strong> contracture/blessure récurrente du mollet gauche (4e épisode en 17 ans). Épisode actuel depuis le 05/01/2026. Échographie le 17/02 = RAS. Pas de douleur aujourd'hui — la consultation vise à <strong>comprendre la récurrence</strong> et <strong>cadrer la reprise</strong>.
+</div>
+
+<!-- PROFIL RAPIDE -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon icon-blue">ID</span>
+    Profil rapide
+  </div>
+  <div class="profil-grid">
+    <div class="profil-item">
+      <div class="label">FC max</div>
+      <div class="value">206 bpm (test effort 01/2021)</div>
+    </div>
+    <div class="profil-item">
+      <div class="label">VMA</div>
+      <div class="value">14.5 km/h (01/2021)</div>
+    </div>
+    <div class="profil-item">
+      <div class="label">Passé sportif</div>
+      <div class="value">Natation compétition 14 ans</div>
+    </div>
+    <div class="profil-item">
+      <div class="label">Course à pied</div>
+      <div class="value">2008-10, épisodique 2014-20, reprise 2021</div>
+    </div>
+  </div>
+  <div class="records">
+    <div class="record"><div class="dist">10 km</div><div class="time">43'21"</div></div>
+    <div class="record"><div class="dist">Semi</div><div class="time">1h37'50"</div></div>
+    <div class="record"><div class="dist">20 km</div><div class="time">1h28'40"</div></div>
+    <div class="record"><div class="dist">Marathon</div><div class="time">3h41'25"</div></div>
+  </div>
+</div>
+
+<!-- HISTORIQUE BLESSURES -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon icon-red">!</span>
+    Historique blessures — Mollet gauche (4 épisodes)
+  </div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">2009</div>
+      <div class="timeline-desc">Prépa 20 km de Paris — mollet gauche</div>
+      <div class="timeline-cause">Plan cardiologue, probable absence d'EF</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Décembre 2023</div>
+      <div class="timeline-desc">Prépa 10 km Arcachon — mollet gauche + droit</div>
+      <div class="timeline-cause">Plan cardiologue : zéro séance facile, EF prescrite à 192 bpm. Couru blessé, droit lâche au km 9</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Décembre 2024</div>
+      <div class="timeline-desc">Prépa Semi de Bordeaux — mollet gauche</div>
+      <div class="timeline-cause">Plan cardiologue : EF à 192 bpm. Douleur pendant la prépa</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">Janvier 2026</div>
+      <div class="timeline-desc">Reprise post-marathon — mollet gauche</div>
+      <div class="timeline-cause">Séance de côtes trop tôt (2×6×30"), pète à la 2e montée, a continué. Dernière sortie le 16/02 (contracture à 23 min d'EF)</div>
+    </div>
+  </div>
+
+  <div class="pattern-box">
+    <strong>Pattern :</strong> 2023-2024 avec EF trop rapide → blessé à chaque prépa. 2025 avec EF cool → zéro blessure. 2026 → séance intense sans progression suffisante.
+  </div>
+  <div class="good-box">
+    <strong>2025 = année sans blessure</strong> — plans Decathlon Coach avec EF vraiment douce. 3 courses (10 km, Semi, Marathon), aucune blessure mollet.
+  </div>
+</div>
+
+<!-- ÉPISODE ACTUEL -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon icon-orange">~</span>
+    Épisode actuel (depuis 05/01/2026)
+  </div>
+  <div class="episode">
+    <ul>
+      <li><strong>05/01 :</strong> séance de côtes (2×6×30"), douleur mollet G à la 2e montée, a continué malgré la douleur</li>
+      <li><strong>26/01 – 07/02 :</strong> reprise tentée (6 sorties dont VMA et allure spé) → douleur le 07/02, arrêt 9 jours</li>
+      <li><strong>16/02 :</strong> dernière sortie, EF tranquille, contracture au bout de 23 min → arrêt définitif</li>
+      <li><strong>17/02 :</strong> médecin du sport — échographie mollet = RAS. Prescription kiné 2×/sem + podologue</li>
+      <li><strong>Depuis 17/02 :</strong> arrêt course complet, kiné 2×/semaine + piscine pullbuoy</li>
+      <li><strong>Kiné (8 séances) :</strong> excentrique progressif → pliométrie tentée le 19/03 → douleur 48h après (volume excessif) → retour au travail sans charge → 28/03 : retour excentrique + tapis incliné, plus de douleur</li>
+      <li><strong>Aujourd'hui :</strong> quasi plus de douleur au quotidien, mais la tentative de plio montre que le mollet est encore fragile</li>
+    </ul>
+  </div>
+</div>
+
+<!-- QUESTIONS À POSER -->
+<div class="section">
+  <div class="section-title">
+    <span class="icon icon-purple">?</span>
+    Questions à poser
+  </div>
+  <ol class="questions">
+    <li>
+      <div>
+        <strong>Nouvelle échographie utile ?</strong>
+        <div class="sub">Écho du 17/02 = RAS. Mais la douleur a persisté 2 mois. Faut-il refaire une imagerie (écho, IRM) maintenant ?</div>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Pourquoi toujours le mollet gauche ?</strong>
+        <div class="sub">4 épisodes en 17 ans, même côté. Y a-t-il un déficit structurel, une asymétrie, un raccourcissement à investiguer ?</div>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Un bilan biomécanique est-il pertinent ?</strong>
+        <div class="sub">Analyse de foulée, podologue du sport, semelles orthopédiques ?</div>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Quels critères objectifs pour reprendre la course ?</strong>
+        <div class="sub">Tests fonctionnels ? Montées de talons unipodal ×30 sans douleur ? Marche rapide en pente 15 min ? Autre ?</div>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Faut-il refaire un test d'effort ?</strong>
+        <div class="sub">Le dernier date de janvier 2021 (5 ans). 45 ans, FC max 206 bpm. Recalibrer VMA et vérifier le cardio ?</div>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Le cross-training piscine est-il suffisant pour maintenir la base aérobie ?</strong>
+        <div class="sub">2 séances piscine/semaine (pullbuoy, plaquettes, élastique) depuis 2 mois. Ancien nageur de compétition (14 ans).</div>
+      </div>
+    </li>
+    <li>
+      <div>
+        <strong>Podologue nécessaire ?</strong>
+        <div class="sub">Prescrit par le médecin du sport le 17/02. Pas encore fait. Est-ce toujours pertinent ? Lien avec la récurrence mollet gauche ?</div>
+      </div>
+    </li>
+  </ol>
+</div>
+
+<div class="key-message">
+  Je ne viens pas parce que j'ai mal.<br>
+  Je viens parce que ça revient tous les 2 ans et je veux comprendre pourquoi.
+</div>
+
+</body>
+</html>
