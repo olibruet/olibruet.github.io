@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H15 &ndash; Louis IX, pourquoi un Saint&nbsp;?</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --brown: #5d4037;
+            --brown-light: #8d6e63;
+            --brown-bg: #efebe9;
+            --blue: #1565c0;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --gold: #f57f17;
+            --gold-bg: #fff8e1;
+            --indigo: #283593;
+            --indigo-bg: #e8eaf6;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafaf5 0%, #d7ccc8 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #e65100 0%, #f57f17 40%, #ffc107 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; text-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--gold); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--gold);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--gold);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.red { border-left-color: var(--red); }
+        .card.gold { border-left-color: var(--gold); }
+        .card.brown { border-left-color: var(--brown); }
+        .card.indigo { border-left-color: var(--indigo); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.gold { background: var(--gold-bg); color: var(--gold); }
+        .key.brown { background: var(--brown-bg); color: var(--brown); }
+        .key.indigo { background: var(--indigo-bg); color: var(--indigo); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== VOCAB ===== */
+        .vocab {
+            background: var(--brown-bg);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .vocab strong { color: var(--brown); }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#128081;</div>
+    <h1>H15 &ndash; Louis IX, pourquoi un Saint&nbsp;?</h1>
+    <p class="subtitle">Saint Louis, roi de France (1226&ndash;1270)</p>
+    <p class="collection">CM1 &bull; Histoire</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#exercices">Exercices</a>
+    <a href="#retenir">&Agrave; retenir</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- ===== LEÇON ===== -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+
+        <div class="card gold">
+            <div class="key gold">Un roi tr&egrave;s chr&eacute;tien</div>
+            <p>Louis IX est un roi <strong>tr&egrave;s chr&eacute;tien</strong>. Il d&eacute;fend particuli&egrave;rement bien toutes les <strong>valeurs de l'&Eacute;glise</strong> de l'&eacute;poque.</p>
+            <p>&Agrave; sa mort, le <strong>pape</strong> l'a reconnu comme un <strong>saint</strong>. C'est pourquoi on l'appelle aussi <strong>Saint Louis</strong>.</p>
+            <div class="vocab">
+                <strong>Canonisation&nbsp;:</strong> c'est quand le pape d&eacute;clare qu'une personne est un saint. Louis IX a &eacute;t&eacute; canonis&eacute; en 1297, soit 27 ans apr&egrave;s sa mort.
+            </div>
+        </div>
+
+        <div class="card red">
+            <div class="key red">Les croisades</div>
+            <p>Louis IX a fait la <strong>croisade</strong>&nbsp;: il a combattu ceux que l'on appelait les &laquo;&nbsp;<strong>infid&egrave;les</strong>&nbsp;&raquo;, c'est-&agrave;-dire ceux qui <strong>n'&eacute;taient pas chr&eacute;tiens</strong>.</p>
+            <p>Il a particip&eacute; &agrave; <strong>deux croisades</strong>&nbsp;: la <strong>7<sup>e</sup> croisade</strong> (1248) en &Eacute;gypte et la <strong>8<sup>e</sup> croisade</strong> (1270) &agrave; Tunis, o&ugrave; il est mort de maladie.</p>
+            <div class="vocab">
+                <strong>Croisade&nbsp;:</strong> exp&eacute;dition militaire men&eacute;e par des chr&eacute;tiens pour reprendre J&eacute;rusalem et la Terre sainte aux musulmans.
+            </div>
+        </div>
+
+        <div class="card blue">
+            <div class="key blue">Un roi juste</div>
+            <p>Louis IX rendait la <strong>justice</strong> lui-m&ecirc;me, souvent assis sous un <strong>ch&ecirc;ne</strong> dans le bois de Vincennes. Tout le monde pouvait venir lui parler, riches comme pauvres.</p>
+            <p>Il a aussi cr&eacute;&eacute; des lois pour que la justice soit plus <strong>&eacute;quitable</strong> dans tout le royaume.</p>
+        </div>
+
+        <div class="card teal">
+            <div class="key teal">Un roi b&acirc;tisseur</div>
+            <p>Louis IX a fait construire la <strong>Sainte-Chapelle</strong> &agrave; Paris pour abriter des <strong>reliques</strong> (objets sacr&eacute;s li&eacute;s &agrave; J&eacute;sus).</p>
+            <p>Il a aussi fond&eacute; des <strong>h&ocirc;pitaux</strong> et aid&eacute; les pauvres et les malades.</p>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice &ndash; Compl&egrave;te les phrases</h2>
+        </div>
+        <div class="card exercise">
+            <p>Compl&egrave;te avec le bon mot&nbsp;: <strong>chr&eacute;tien</strong>, <strong>pape</strong>, <strong>saint</strong>, <strong>&Eacute;glise</strong>, <strong>croisade</strong>, <strong>infid&egrave;les</strong>, <strong>justice</strong>, <strong>ch&ecirc;ne</strong>, <strong>Sainte-Chapelle</strong>, <strong>reliques</strong>.</p>
+
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Louis IX est un roi tr&egrave;s ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Le ___ l'a reconnu comme un ___ apr&egrave;s sa mort.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Il d&eacute;fendait toutes les valeurs de l'___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Louis IX a fait la ___ pour combattre les ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Il rendait la ___ sous un ___ dans le bois de Vincennes.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>Il a fait construire la ___ pour abriter des ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">chr&eacute;tien</span></div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">pape</span> &ndash; <span class="answer">saint</span></div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">&Eacute;glise</span></div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">croisade</span> &ndash; <span class="answer">infid&egrave;les</span></div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">justice</span> &ndash; <span class="answer">ch&ecirc;ne</span></div>
+                <div class="correction-item"><strong>6)</strong> <span class="answer">Sainte-Chapelle</span> &ndash; <span class="answer">reliques</span></div>
+            </div>
+        </details>
+    </section>
+
+    <!-- ===== À RETENIR ===== -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card green">
+            <p><strong>Louis IX</strong> (1226&ndash;1270) est un roi tr&egrave;s <strong>chr&eacute;tien</strong> qui d&eacute;fend les valeurs de l'<strong>&Eacute;glise</strong>.</p>
+            <p>Il fait la <strong>croisade</strong> pour combattre les &laquo;&nbsp;<strong>infid&egrave;les</strong>&nbsp;&raquo; (ceux qui ne sont pas chr&eacute;tiens).</p>
+            <p>Il rend la <strong>justice</strong> lui-m&ecirc;me sous un ch&ecirc;ne, pour tous (riches et pauvres).</p>
+            <p>Il fait construire la <strong>Sainte-Chapelle</strong> et aide les pauvres et les malades.</p>
+            <p>Apr&egrave;s sa mort, le <strong>pape</strong> le reconna&icirc;t comme un <strong>saint</strong> (canonis&eacute; en 1297).</p>
+        </div>
+        <div class="card">
+            <div class="key gold">Mots cl&eacute;s</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.6rem;">
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--gold-bg);color:var(--gold);">Saint Louis</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--red-bg);color:var(--red);">Croisade</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--blue-bg);color:var(--blue);">Justice</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--purple-bg);color:var(--purple);">Canonisation</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--teal-bg);color:var(--teal);">Sainte-Chapelle</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--brown-bg);color:var(--brown);">Infid&egrave;les</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--orange-bg);color:var(--orange);">Reliques</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>H15 &bull; Louis IX, pourquoi un Saint&nbsp;?</p>
+    <p>CM1 &bull; Histoire</p>
+</footer>
+
+</body>
+</html>
