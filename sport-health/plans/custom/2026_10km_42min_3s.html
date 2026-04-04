@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan 10 km — 42'00 — La Boienne Biganos 2026</title>
+<style>
+  :root {
+    --color-vma: #7C3AED;
+    --color-vma-light: #f3e8ff;
+    --color-spe: #D97706;
+    --color-spe-light: #fef3c7;
+    --color-ef: #059669;
+    --color-ef-light: #d1fae5;
+    --color-renfo: #2563EB;
+    --color-renfo-light: #dbeafe;
+    --color-piscine: #0891B2;
+    --color-piscine-light: #cffafe;
+    --color-repos: #6B7280;
+    --color-course: #DC2626;
+    --color-course-light: #fee2e2;
+    --color-info: #e8f0fe;
+    --color-info-border: #93b4f0;
+    --color-warn: #fff8e1;
+    --color-warn-border: #f5c542;
+    --color-green: #d1fae5;
+    --color-green-border: #059669;
+    --color-red: #fee2e2;
+    --color-red-border: #DC2626;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #222; background: #f5f5f5; margin: 0; padding: 0; }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  h1 { text-align: center; font-size: 1.7rem; margin-bottom: 0.2em; color: #111; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 0.5em; font-size: 0.95rem; }
+  .meta { text-align: center; color: #777; font-size: 0.85rem; margin-bottom: 2em; }
+
+  .card { background: #fff; border-radius: 10px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .card-header { padding: 14px 24px; color: #fff; font-weight: 700; font-size: 1.05rem; }
+  .card-body { padding: 20px 24px; }
+  .card-body h3 { font-size: 1rem; margin-top: 1.2em; margin-bottom: 0.4em; }
+  .card-body h3:first-child { margin-top: 0; }
+  .card-body ul, .card-body ol { padding-left: 1.3em; }
+
+  .info-box { background: var(--color-info); border-left: 4px solid var(--color-info-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #1a3a6a; }
+  .warn-box { background: var(--color-warn); border-left: 4px solid var(--color-warn-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #7a5e00; }
+  .green-box { background: var(--color-green); border-left: 4px solid var(--color-green-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #065f46; }
+  .red-box { background: var(--color-red); border-left: 4px solid var(--color-red-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #991b1b; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+  th { background: #f0f0f0; text-align: left; padding: 8px 10px; font-weight: 600; border-bottom: 2px solid #ddd; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .week-header { padding: 12px 24px; color: #fff; font-weight: 700; font-size: 1rem; }
+  .week-reprise { background: #6B7280; }
+  .week-spe { background: var(--color-vma); }
+  .week-recup { background: #0891B2; }
+  .week-affut { background: var(--color-spe); }
+  .week-course { background: var(--color-course); }
+
+  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-right: 4px; }
+  .tag-vma { background: var(--color-vma-light); color: var(--color-vma); }
+  .tag-spe { background: var(--color-spe-light); color: var(--color-spe); }
+  .tag-ef { background: var(--color-ef-light); color: var(--color-ef); }
+  .tag-renfo { background: var(--color-renfo-light); color: var(--color-renfo); }
+  .tag-piscine { background: var(--color-piscine-light); color: var(--color-piscine); }
+  .tag-repos { background: #f3f4f6; color: var(--color-repos); }
+  .tag-course { background: var(--color-course-light); color: var(--color-course); }
+
+  details { margin: 10px 0; }
+  summary { cursor: pointer; font-weight: 600; padding: 8px 0; color: var(--color-vma); font-size: 0.95rem; }
+  summary:hover { text-decoration: underline; }
+
+  .toc { background: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .toc h2 { font-size: 1.1rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 8px; }
+  .toc ol { padding-left: 1.3em; margin: 0; }
+  .toc li { margin: 5px 0; }
+  .toc a { color: var(--color-vma); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.85em; }
+  strong { color: #111; }
+  @media (max-width: 600px) { .container { padding: 16px 10px; } .card-body { padding: 16px; } h1 { font-size: 1.3rem; } table { font-size: 0.78rem; } td, th { padding: 5px 6px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Plan 10 km &mdash; 42'00</h1>
+<p class="subtitle">La Boienne &mdash; Biganos &mdash; 19/07/2026</p>
+<p class="meta">PR actuel : 43'21 (Saucats, 16/02/2025) &bull; Objectif B : 42'30 &bull; 3 seances/sem + piscine + 2 renfos</p>
+
+<!-- TOC -->
+<div class="toc">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#course">La course</a></li>
+    <li><a href="#principes">Principes du plan</a></li>
+    <li><a href="#allures">Allures de reference</a></li>
+    <li><a href="#reprise">Phase de reprise (R1-R2)</a></li>
+    <li><a href="#specifique">Phase specifique (S1-S6)</a></li>
+    <li><a href="#affutage">Phase d'affutage (S7-S8)</a></li>
+    <li><a href="#progression">Progression vue d'ensemble</a></li>
+    <li><a href="#strategie">Strategie de course</a></li>
+    <li><a href="#comparaison">Comparaison Decathlon vs plan custom</a></li>
+    <li><a href="#billat">Rappel seances Billat</a></li>
+    <li><a href="#renfo">Renforcement musculaire</a></li>
+    <li><a href="#adaptations">Adaptations possibles</a></li>
+  </ol>
+</div>
+
+<!-- 1. COURSE -->
+<div class="card" id="course">
+  <div class="card-header" style="background:#0E7490">La Boienne &mdash; Biganos</div>
+  <div class="card-body">
+    <ul>
+      <li><strong>10 km plat sur route</strong>, Biganos (Bassin d'Arcachon)</li>
+      <li>Depart 10h00, Stade Roger Garnung</li>
+      <li>Denivele quasi nul &rarr; parcours rapide</li>
+      <li>~250 participants, ambiance village</li>
+      <li>Inscription sur chrono33.fr (pas d'inscription le jour meme)</li>
+      <li>2025 : 1er en 34'55, 1ere femme en 42'52, 249 finishers</li>
+      <li>Avec 43'21 &rarr; ~38e/249 (top 15%). Avec 42'00 &rarr; ~34e (top 14%)</li>
+    </ul>
+    <div class="warn-box">
+      <strong>Attention chaleur :</strong> juillet, depart 10h &rarr; prevoir hydratation, casquette, depart retenu. Si chaleur extreme &rarr; objectif B (42'30).
+    </div>
+  </div>
+</div>
+
+<!-- 2. PRINCIPES -->
+<div class="card" id="principes">
+  <div class="card-header" style="background:#4A5568">Principes du plan</div>
+  <div class="card-body">
+    <h3>Ce qu'on corrige par rapport a 2025</h3>
+    <table>
+      <tr><th>Erreur 2025</th><th>Correction 2026</th></tr>
+      <tr><td>3-4 semaines de prepa</td><td>6 sem specifique + 2 reprise + 2 affutage</td></tr>
+      <tr><td>VMA en onde carree (200m, 300m)</td><td><strong>30/30 pyramide</strong> (Billat)</td></tr>
+      <tr><td>EF monotones</td><td><strong>EF + accelerations 6-8s</strong> (Billat)</td></tr>
+      <tr><td>Footing "lent" a FC 151 bpm</td><td><strong>EF &lt; 150 bpm strict</strong></td></tr>
+      <tr><td>Pas de renfo</td><td><strong>2 renfos/semaine</strong></td></tr>
+      <tr><td>Pas de piscine</td><td><strong>1 piscine/semaine</strong></td></tr>
+      <tr><td>Derniere sortie J-3 a FC 164</td><td><strong>Affutage propre</strong> sur 2 semaines</td></tr>
+    </table>
+    <h3>Pourquoi certaines seances Billat, et pas d'autres</h3>
+    <table>
+      <tr><th>Seance</th><th>Approche</th><th>Justification</th></tr>
+      <tr><td><span class="tag tag-vma">VMA</span></td><td><strong>Billat (30/30 pyramide)</strong></td><td>12-15 min a VO2max vs ~0 avec des 200m. Moins traumatisant soleaire.</td></tr>
+      <tr><td><span class="tag tag-spe">Allure spe</span></td><td><strong>Classique (allure fixe)</strong></td><td>Le 10 km se court a allure reguliere. Il faut s'entrainer a tenir 4'12.</td></tr>
+      <tr><td><span class="tag tag-ef">EF</span></td><td><strong>Billat (accelerations 6-8s)</strong></td><td>Force musculaire (F=m&times;a) sans traumatisme. Compense l'absence de cotes.</td></tr>
+      <tr><td><span class="tag tag-course">Course</span></td><td><strong>Classique (negative split)</strong></td><td>Positive split sur 6/7 courses &rarr; pas le "U" de Billat.</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 3. ALLURES -->
+<div class="card" id="allures">
+  <div class="card-header" style="background:#1a5276">Allures de reference</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Zone</th><th>Allure</th><th>FC cible</th><th>Sensation</th></tr>
+      <tr><td><span class="tag tag-ef">EF</span></td><td>5'30-6'00/km</td><td><strong>&lt; 150 bpm</strong></td><td>Conversation facile</td></tr>
+      <tr><td>Seuil</td><td>4'40-4'50/km</td><td>160-170 bpm</td><td>Phrases courtes</td></tr>
+      <tr><td><span class="tag tag-spe">AS10</span></td><td>4'10-4'15/km</td><td>175-185 bpm</td><td>Effort soutenu</td></tr>
+      <tr><td><span class="tag tag-vma">VMA</span></td><td>3'45-3'55/km</td><td>185-197 bpm</td><td>Effort maximal</td></tr>
+    </table>
+    <div class="red-box">
+      <strong>REGLE D'OR :</strong> si une seance EF depasse 150 bpm, ralentir immediatement. En 2025 (EF cool) = zero blessure. En 2023-2024 (EF a 192 bpm) = mollet casse a chaque fois.
+    </div>
+  </div>
+</div>
+
+<!-- 4. REPRISE -->
+<div class="card" id="reprise">
+  <div class="week-header week-reprise">Phase de reprise (R1-R2) &mdash; 12/05 &rarr; 25/05</div>
+  <div class="card-body">
+    <div class="info-box">Objectif : reprendre la course en douceur, tester le soleaire. <strong>Uniquement de l'EF.</strong> Si le mollet tire &rarr; stop et retour au kine.</div>
+
+    <h3>R1 (12-18/05)</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-ef">Marche/course</span></td><td>Alternance 2' marche / 2' course, plat. <strong>STOP si le mollet tire.</strong></td><td>30'</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo</span> + <span class="tag tag-piscine">Piscine</span></td><td>Renfo leger (matin) + pullbuoy 1200m souple (midi)</td><td>35'+25'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-ef">EF</span></td><td>Footing tres facile, plat, 5'40-6'00/km</td><td>25-30'</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF</span></td><td>Footing facile, plat, 5'30-6'00/km</td><td>30-35'</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo</span></td><td>Ischios + mollets + PPG</td><td>40'</td></tr>
+    </table>
+    <p><strong>Volume running : ~12-15 km.</strong></p>
+
+    <h3>R2 (19-25/05)</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-ef">EF</span></td><td>Footing 5'30-5'50/km, plat</td><td>35-40'</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo</span> + <span class="tag tag-piscine">Piscine</span></td><td>Renfo (matin) + pullbuoy 1400m cardio modere (midi)</td><td>40'+30'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-ef">EF</span></td><td>Footing 5'30-5'50/km + <strong>3 accelerations progressives 80m</strong></td><td>35-40'</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF</span></td><td>Sortie facile, 1re sortie &gt; 40'. Plat.</td><td>45-50'</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo</span></td><td>Ischios + mollets + PPG</td><td>40'</td></tr>
+    </table>
+    <p><strong>Volume running : ~20-22 km.</strong> Si tout va bien &rarr; on attaque la prepa specifique.</p>
+  </div>
+</div>
+
+<!-- 5. SPECIFIQUE -->
+<div class="card" id="specifique">
+  <div class="week-header week-spe">Phase specifique (S1-S6) &mdash; 26/05 &rarr; 05/07</div>
+  <div class="card-body">
+
+    <h3>S1 (26/05-01/06) &mdash; Redecouverte des allures</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-vma">VMA 30/30</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>2&times;6&times; (30s accel 5'00&rarr;3'50 / 30s decel 3'50&rarr;5'30)</strong>, r=3' &rarr; 10' EF</td><td>~55'</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo</span> + <span class="tag tag-piscine">Piscine</span></td><td>Ischios+mollets+PPG (matin), pullbuoy 1400m soutenu (midi)</td><td>40'+30'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-spe">AS10</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>3&times;1 km a 4'12-4'15</strong> (r=2'30) &rarr; 10' EF</td><td>~55'</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF</span></td><td>55' footing 5'30-5'50/km + <strong>4 accelerations de 6-8s</strong> toutes les 5'</td><td>55'</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo</span></td><td>Ischios + mollets + PPG</td><td>40'</td></tr>
+    </table>
+    <p><strong>Volume running : ~25 km.</strong> 1re seance 30/30 (6 reps = prudence soleaire). 1er contact allure 10 km.</p>
+
+    <h3>S2 (02-08/06) &mdash; Montee en charge</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-vma">VMA 30/30</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>2&times;8&times; (30s accel / 30s decel)</strong>, r=3' &rarr; 10' EF</td><td>~1h05</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo</span> + <span class="tag tag-piscine">Piscine</span></td><td>Ischios+mollets+PPG (matin), pullbuoy 1500m intervalles courts (midi)</td><td>40'+35'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-spe">AS10</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>3&times;1.5 km a 4'12-4'15</strong> (r=2'30) &rarr; 10' EF</td><td>~1h05</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF</span></td><td>1h05 footing 5'30-5'50/km + <strong>6-8 accelerations de 6-8s</strong></td><td>1h05</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo</span></td><td>Ischios + mollets + PPG</td><td>40'</td></tr>
+    </table>
+    <p><strong>Volume running : ~30 km.</strong> 30/30 monte a 8 reps. Volume AS10 : 4.5 km.</p>
+
+    <h3>S3 (09-15/06) &mdash; Charge max cycle 1</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-vma">VMA 30/30</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>2&times;10&times; (30s accel / 30s decel)</strong>, r=3' &rarr; 10' EF</td><td>~1h10</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo</span> + <span class="tag tag-piscine">Piscine recup</span></td><td>Ischios+mollets+PPG (matin), pullbuoy 1000m ultra souple (midi)</td><td>40'+25'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-spe">AS10</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>3&times;2 km a 4'12-4'15</strong> (r=2'30) &rarr; 10' EF</td><td>~1h15</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF longue</span></td><td>1h15 footing 5'30-5'50/km + <strong>8-10 accelerations de 6-8s</strong></td><td>1h15</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo</span></td><td>Ischios + mollets + PPG</td><td>40'</td></tr>
+    </table>
+    <p><strong>Volume running : ~35 km.</strong> Charge max cycle 1. 30/30 a 10 reps = ~15 min a VO2max. 6 km a AS10.</p>
+
+    <h3>S4 (16-22/06) &mdash; Recuperation</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-vma">VMA legere</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>1&times;8&times; (30s accel / 30s decel)</strong> &rarr; 10' EF</td><td>~45'</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo leger</span> + <span class="tag tag-piscine">Piscine cardio</span></td><td>PPG (matin), pullbuoy 1500m soutenu (midi)</td><td>30'+35'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-spe">AS10</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>2&times;1.5 km a 4'12-4'15</strong> (r=2') &rarr; 10' EF</td><td>~55'</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF</span></td><td>50' footing facile 5'30-6'00/km + <strong>4 accelerations</strong></td><td>50'</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo</span></td><td>Ischios + mollets + PPG</td><td>40'</td></tr>
+    </table>
+    <p><strong>Volume running : ~22 km.</strong> Semaine allegee. Piscine cardio (semaine legere = on peut pousser en piscine).</p>
+
+    <h3>S5 (23-29/06) &mdash; Charge max cycle 2</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-vma">VMA 30/30</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>2&times;10&times; (30s accel / 30s decel)</strong>, r=3' &rarr; 10' EF</td><td>~1h10</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo</span> + <span class="tag tag-piscine">Piscine recup</span></td><td>Ischios+mollets+PPG (matin), pullbuoy 1000m ultra souple (midi)</td><td>40'+25'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-spe">AS10 &mdash; seance cle</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>2&times;3 km a 4'12-4'15</strong> (r=2'30) &rarr; 10' EF</td><td>~1h15</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF longue</span></td><td>1h15 footing 5'30-5'50/km + <strong>8-10 accelerations de 6-8s</strong></td><td>1h15</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo</span></td><td>Ischios + mollets + PPG</td><td>40'</td></tr>
+    </table>
+    <p><strong>Volume running : ~37 km.</strong> Seance cle : 2&times;3 km a AS10. NE PAS sauter cette semaine.</p>
+
+    <h3>S6 (30/06-06/07) &mdash; Specifique final</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-vma">VMA 30/30</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>2&times;8&times; (30s accel / 30s decel)</strong>, r=3' &rarr; 10' EF</td><td>~1h05</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo</span> + <span class="tag tag-piscine">Piscine recup</span></td><td>Ischios+mollets+PPG (matin), pullbuoy 1000m souple (midi)</td><td>40'+25'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-spe">AS10 &mdash; test</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>3 km + 2 km + 1 km a 4'10-4'15</strong> (r=2'30 puis 2') &rarr; 10' EF</td><td>~1h10</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF</span></td><td>1h footing 5'30-5'50/km + <strong>6-8 accelerations</strong></td><td>1h</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo</span></td><td>Ischios + mollets + PPG</td><td>40'</td></tr>
+    </table>
+    <p><strong>Volume running : ~33 km.</strong> Test grandeur nature : 3+2+1 km a allure course. Si ca passe &rarr; 42' est a portee.</p>
+
+  </div>
+</div>
+
+<!-- 6. AFFUTAGE -->
+<div class="card" id="affutage">
+  <div class="week-header week-affut">Phase d'affutage (S7-S8) &mdash; 07/07 &rarr; 19/07</div>
+  <div class="card-body">
+
+    <h3>S7 (07-13/07) &mdash; Pre-competition</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-vma">VMA legere</span></td><td>20' EF + PPG &rarr; <strong>1&times;6&times; (30s accel / 30s decel)</strong> &rarr; 10' EF</td><td>~40'</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo leger</span></td><td>PPG + etirements</td><td>30'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-spe">Rappel AS10</span></td><td>20' EF + PPG + 3 accel &rarr; <strong>3&times;1 km a 4'10-4'12</strong> (r=2') &rarr; 10' EF</td><td>~55'</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-piscine">Piscine recup</span></td><td>Pullbuoy 1000m ultra souple</td><td>25'</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-ef">EF</span></td><td>50' footing facile. Pas d'accelerations. Jambes fraiches.</td><td>50'</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-renfo">Renfo leger</span></td><td>PPG uniquement</td><td>25'</td></tr>
+    </table>
+    <p><strong>Volume running : ~22 km.</strong> Reduction nette. 1 rappel VMA + 1 rappel allure.</p>
+
+    <h3>S8 (14-19/07) &mdash; Affutage et COURSE</h3>
+    <table>
+      <tr><th>Jour</th><th>Seance</th><th>Detail</th><th>Duree</th></tr>
+      <tr><td>Lun</td><td><span class="tag tag-spe">EF + rappel</span></td><td>25' EF + <strong>1 km a 4'12</strong> + 5' EF</td><td>~35'</td></tr>
+      <tr><td>Mar</td><td><span class="tag tag-renfo">Renfo tres leger</span></td><td>PPG uniquement, 15 min</td><td>15'</td></tr>
+      <tr><td>Mer</td><td><span class="tag tag-ef">EF courte</span></td><td>20' footing + 5 accelerations progressives 80m</td><td>~25'</td></tr>
+      <tr><td>Jeu</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Ven</td><td><span class="tag tag-repos">Repos</span></td><td>&mdash;</td><td>&mdash;</td></tr>
+      <tr><td>Sam</td><td><span class="tag tag-repos">Repos</span></td><td>Preparation materiel, hydratation, alimentation</td><td>&mdash;</td></tr>
+      <tr><td><strong>Dim</strong></td><td><span class="tag tag-course">COURSE</span></td><td><strong>LA BOIENNE &mdash; 10 KM &mdash; Objectif : 42'00</strong></td><td><strong>42'</strong></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 7. PROGRESSION -->
+<div class="card" id="progression">
+  <div class="card-header" style="background:#4A5568">Progression vue d'ensemble</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Sem</th><th>VMA (30/30)</th><th>Volume AS10</th><th>EF + accel</th><th>Vol. total</th></tr>
+      <tr><td>R1</td><td>&mdash;</td><td>&mdash;</td><td>EF pure</td><td>~12-15 km</td></tr>
+      <tr><td>R2</td><td>&mdash;</td><td>&mdash;</td><td>3 accel</td><td>~20-22 km</td></tr>
+      <tr><td>S1</td><td>2&times;6 reps</td><td>3&times;1 km = 3 km</td><td>4 accel</td><td>~25 km</td></tr>
+      <tr><td>S2</td><td>2&times;8 reps</td><td>3&times;1.5 km = 4.5 km</td><td>6-8 accel</td><td>~30 km</td></tr>
+      <tr><td><strong>S3</strong></td><td><strong>2&times;10 reps</strong></td><td><strong>3&times;2 km = 6 km</strong></td><td>8-10 accel</td><td><strong>~35 km</strong></td></tr>
+      <tr><td>S4 <em>(recup)</em></td><td>1&times;8 reps</td><td>2&times;1.5 km = 3 km</td><td>4 accel</td><td>~22 km</td></tr>
+      <tr><td><strong>S5</strong></td><td><strong>2&times;10 reps</strong></td><td><strong>2&times;3 km = 6 km</strong></td><td>8-10 accel</td><td><strong>~37 km</strong></td></tr>
+      <tr><td>S6</td><td>2&times;8 reps</td><td>3+2+1 km = 6 km</td><td>6-8 accel</td><td>~33 km</td></tr>
+      <tr><td>S7</td><td>1&times;6 reps</td><td>3&times;1 km = 3 km</td><td>&mdash;</td><td>~22 km</td></tr>
+      <tr><td>S8</td><td>&mdash;</td><td>1 km rappel</td><td>&mdash;</td><td>~10 km</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 8. STRATEGIE -->
+<div class="card" id="strategie">
+  <div class="card-header" style="background:#DC2626">Strategie de course &mdash; Jour J</div>
+  <div class="card-body">
+    <h3>Plan d'allure</h3>
+    <table>
+      <tr><th>Phase</th><th>km</th><th>Allure</th><th>FC</th><th>Consigne</th></tr>
+      <tr><td><strong>Depart</strong></td><td>1-2</td><td>4'15-4'18</td><td>&lt; 175</td><td><strong>Retenir.</strong> Chaleur = partir encore plus sage.</td></tr>
+      <tr><td>Croisiere</td><td>3-7</td><td>4'10-4'12</td><td>175-183</td><td>Rythme regulier</td></tr>
+      <tr><td>Specifique</td><td>8-9</td><td>4'10-4'12</td><td>180-185</td><td>Tenir l'allure</td></tr>
+      <tr><td><strong>Finish</strong></td><td>9.5-10</td><td>4'05-4'10</td><td>&gt;185 OK</td><td>Lacher les chevaux si les jambes repondent</td></tr>
+    </table>
+
+    <h3>Temps de passage</h3>
+    <table>
+      <tr><th>Point</th><th>Temps</th><th>Allure cum.</th></tr>
+      <tr><td>km 2</td><td>8'32</td><td>~4'16</td></tr>
+      <tr><td>km 5</td><td>21'00</td><td>~4'12</td></tr>
+      <tr><td>km 8</td><td>33'30</td><td>~4'11</td></tr>
+      <tr><td><strong>km 10</strong></td><td><strong>41'50-42'00</strong></td><td><strong>~4'11-4'12</strong></td></tr>
+    </table>
+
+    <div class="red-box">
+      <strong>A eviter :</strong>
+      <ul style="margin-bottom:0">
+        <li>Partir a 3'55-4'05 &rarr; craquage km 7-8</li>
+        <li>Suivre un groupe trop rapide</li>
+        <li>Negliger la chaleur : si surchauffe &rarr; 4'18-4'20 et viser 42'30</li>
+      </ul>
+    </div>
+
+    <div class="green-box">
+      <strong>Ce qui doit rassurer :</strong>
+      <ul style="margin-bottom:0">
+        <li>43'21 avec 3-4 semaines de prepa en 2025</li>
+        <li>Cette fois : 6 sem specifique, VMA 30/30, accelerations EF, 2 renfos/sem, piscine</li>
+        <li>Parcours plat = conditions ideales</li>
+        <li>Objectif = 8 sec/km plus vite que le PR, pas 30 sec</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 9. COMPARAISON DECATHLON -->
+<div class="card" id="comparaison">
+  <div class="card-header" style="background:#1a5276">Comparaison Decathlon vs plan custom &mdash; seance par seance</div>
+  <div class="card-body">
+
+    <p>Le plan Decathlon 8 semaines vise 40' (3'55/km). Notre plan vise 42' (4'12/km) avec adaptations profil + Billat.</p>
+
+    <details>
+      <summary>Phase de reprise (absente du Decathlon)</summary>
+      <table>
+        <tr><th>Sem</th><th>Decathlon</th><th>Plan custom</th><th>Justification</th></tr>
+        <tr><td>R1-R2</td><td>Pas de reprise</td><td>2 sem EF + marche/course</td><td>Indispensable apres 3 mois d'arret (soleaire). Protocole Dr Nado.</td></tr>
+      </table>
+    </details>
+
+    <details open>
+      <summary>Phase specifique &mdash; seances VMA</summary>
+      <table>
+        <tr><th>Sem</th><th>Decathlon</th><th>Plan custom</th><th>Justification</th></tr>
+        <tr><td>S1</td><td>12&times;200m a 105% VMA</td><td><strong>2&times;6&times; 30/30 pyramide</strong></td><td>Le 30/30 accumule ~12 min a VO2max vs quasi 0 avec des 200m. Moins traumatisant soleaire. 6 reps = prudence.</td></tr>
+        <tr><td>S2</td><td>12&times;300m a 100-105% VMA</td><td><strong>2&times;8&times; 30/30 pyramide</strong></td><td>Meme logique. Le 300m en onde carree n'apporte pas plus de temps a VO2max qu'un 200m.</td></tr>
+        <tr><td>S3</td><td>10&times;400m a 95-100% VMA</td><td><strong>2&times;10&times; 30/30 pyramide</strong></td><td>Le 400m sollicite plus le soleaire que le 30/30 (effort continu plus long a haute vitesse).</td></tr>
+        <tr><td>S4</td><td><em>Pas de VMA (recup)</em></td><td><strong>1&times;8&times; 30/30 (allege)</strong></td><td>Rappel leger pour maintenir les acquis sans fatiguer.</td></tr>
+        <tr><td>S5</td><td>2&times;(8&times;200m) a 105% VMA</td><td><strong>2&times;10&times; 30/30 pyramide</strong></td><td>Meme argument : le 30/30 est superieur pour le temps a VO2max.</td></tr>
+        <tr><td>S6</td><td>8&times;500m a 95% VMA</td><td><strong>2&times;8&times; 30/30 pyramide</strong></td><td>Le 500m (~2 min a haute vitesse) est plus traumatisant que le 30/30 (30s).</td></tr>
+        <tr><td>S7</td><td><em>Pas de VMA</em></td><td><strong>1&times;6&times; 30/30 (rappel)</strong></td><td>Petit rappel vivacite sans fatigue.</td></tr>
+        <tr><td>S8</td><td>8&times;200m a 105% VMA</td><td>&mdash;</td><td>VMA a J-5 : inutile et risque. Remplace par rappel allure.</td></tr>
+      </table>
+    </details>
+
+    <details open>
+      <summary>Phase specifique &mdash; seances allure specifique</summary>
+      <table>
+        <tr><th>Sem</th><th>Decathlon (3'55/km)</th><th>Plan custom (4'12-4'15/km)</th><th>Justification</th></tr>
+        <tr><td>S1</td><td>5&times;1 km</td><td><strong>3&times;1 km</strong></td><td>Allure realiste (PR 43'21 = 4'20, pas 3'55). 3 reps car reprise.</td></tr>
+        <tr><td>S2</td><td>3&times;1.5 km</td><td><strong>3&times;1.5 km</strong></td><td>Meme progression, allure adaptee.</td></tr>
+        <tr><td>S3</td><td>3&times;2 km</td><td><strong>3&times;2 km</strong></td><td>Identique, meme volume (6 km).</td></tr>
+        <tr><td>S4</td><td>2&times;3 km</td><td><strong>2&times;1.5 km</strong></td><td>Decathlon met la seance la plus longue en semaine de recup &mdash; incoherent. Volume reduit.</td></tr>
+        <tr><td>S5</td><td>6&times;1 km, r=1'30</td><td><strong>2&times;3 km, r=2'30</strong></td><td>2&times;3km apprend a tenir l'allure plus longtemps d'affilee. Plus specifique au 10 km.</td></tr>
+        <tr><td>S6</td><td>2&times;3 km</td><td><strong>3+2+1 km</strong></td><td>Test grandeur nature : 6 km avec recups decroissantes.</td></tr>
+        <tr><td>S7</td><td>4&times;1km + 3+2+1km <em>(2 seances spe !)</em></td><td><strong>3&times;1 km</strong></td><td>Decathlon met 2 seances spe en avant-derniere sem &mdash; trop de charge. 1 seule suffit.</td></tr>
+        <tr><td>S8</td><td>20' + accel</td><td><strong>1 km a 4'12 + EF courte</strong></td><td>Quasi identique. Rappel allure J-5, footing J-3, repos J-2/J-1.</td></tr>
+      </table>
+    </details>
+
+    <details open>
+      <summary>Phase specifique &mdash; seances EF</summary>
+      <table>
+        <tr><th>Sem</th><th>Decathlon</th><th>Plan custom</th><th>Justification</th></tr>
+        <tr><td>S1</td><td>1h footing plat</td><td><strong>55' EF + 4 accel 6-8s</strong></td><td>Accelerations = force musculaire (F=m&times;a) sans traumatisme.</td></tr>
+        <tr><td>S2</td><td>1h15 footing plat</td><td><strong>1h05 EF + 6-8 accel</strong></td><td>Volume legerement reduit (reprise blessure), accel integrees.</td></tr>
+        <tr><td>S3</td><td>1h15 footing plat</td><td><strong>1h15 EF + 8-10 accel</strong></td><td>Meme duree, accelerations ajoutees.</td></tr>
+        <tr><td>S4</td><td>45' vallonne + 1h plat</td><td><strong>50' EF + 4 accel</strong></td><td>Vallonne = risque soleaire. EF plat uniquement.</td></tr>
+        <tr><td>S5</td><td>1h30 footing plat</td><td><strong>1h15 EF + 8-10 accel</strong></td><td>Volume reduit (reprise blessure). Accelerations pour la force.</td></tr>
+        <tr><td>S6</td><td>1h15 footing plat</td><td><strong>1h EF + 6-8 accel</strong></td><td>Debut phase descendante.</td></tr>
+        <tr><td>S7</td><td>1h footing plat</td><td><strong>50' EF, pas d'accel</strong></td><td>Jambes fraiches. On recupere.</td></tr>
+      </table>
+    </details>
+
+    <details>
+      <summary>Recapitulatif des changements cles</summary>
+      <table>
+        <tr><th>Changement</th><th>Nb seances</th><th>Justification</th></tr>
+        <tr><td>VMA : 200-500m &rarr; 30/30 pyramide</td><td>8</td><td>Temps a VO2max (12-15 min vs ~0), moins de stress soleaire</td></tr>
+        <tr><td>Allure spe : 3'55 &rarr; 4'12-4'15</td><td>8</td><td>Allure realiste (PR 43'21 = 4'20, pas 3'55)</td></tr>
+        <tr><td>EF : monotone &rarr; + accelerations 6-8s</td><td>7</td><td>Force musculaire (F=m&times;a) sans traumatisme</td></tr>
+        <tr><td>Ajout phase reprise (2 sem)</td><td>+6</td><td>Post-blessure soleaire, protocole Dr Nado</td></tr>
+        <tr><td>Affutage : 1 sem &rarr; 2 sem</td><td>+3</td><td>Prepa 2025 : derniere sortie a FC 164 = trop intense</td></tr>
+        <tr><td>Ajout piscine 1x/sem</td><td>+10</td><td>Cross-training, maintien cardio sans charge mollet</td></tr>
+        <tr><td>Ajout renfo 2x/sem</td><td>+20</td><td>Facteur limitant musculaire</td></tr>
+        <tr><td>EF vallonne &rarr; EF plat</td><td>2</td><td>Protection soleaire</td></tr>
+      </table>
+    </details>
+  </div>
+</div>
+
+<!-- 10. BILLAT -->
+<div class="card" id="billat">
+  <div class="card-header" style="background:#7C3AED">Rappel seances Billat</div>
+  <div class="card-body">
+    <h3>Le 30/30 en pyramide (seance VMA)</h3>
+    <div class="green-box">
+      <strong>30s :</strong> acceleration progressive de ~5'00 &rarr; 3'50/km<br>
+      (on ne demarre pas a VMA, on y arrive en fin de fraction)<br><br>
+      <strong>30s :</strong> deceleration progressive de 3'50 &rarr; 5'30/km<br>
+      (pas de stop, on decelere)<br><br>
+      Apres 4-5 reps, la VO2 est au max. Elle y reste pendant les phases de deceleration. <strong>~12-15 min a VO2max</strong> au lieu de ~5 min avec des 200m.
+    </div>
+
+    <h3>Les accelerations en EF</h3>
+    <div class="green-box">
+      Toutes les 4-5 min : <strong>1 acceleration progressive de 6-8s</strong><br>
+      &rarr; de 5'30 a ~4'00/km en 6 secondes<br>
+      &rarr; deceleration naturelle sur 10-15s<br>
+      &rarr; retour en EF<br><br>
+      Developpe la force musculaire (F = m &times; a) sans fatigue. FC reste &lt; 150 bpm.
+    </div>
+  </div>
+</div>
+
+<!-- 11. RENFO -->
+<div class="card" id="renfo">
+  <div class="card-header" style="background:#2563EB">Renforcement musculaire &mdash; 2x/semaine</div>
+  <div class="card-body">
+    <h3>Ischios-jambiers (priorite n&deg;1)</h3>
+    <ul>
+      <li>Nordic hamstring curls : 3&times;6</li>
+      <li>Pont fessier unipodal : 3&times;10 chaque jambe</li>
+      <li>Souleve de terre roumain : 3&times;10</li>
+    </ul>
+    <h3>Mollets (priorite n&deg;2)</h3>
+    <ul>
+      <li>Montees sur pointes bilaterales lentes : 3&times;15</li>
+      <li>Montees sur pointes unipodales : 3&times;8 chaque jambe (excentrique lent)</li>
+      <li>Montees sur tabouret (talons dans le vide), descente unipodal : 2&times;10</li>
+      <li>Etirements mollets post-seance (30" par cote)</li>
+    </ul>
+    <h3>PPG / Gainage</h3>
+    <ul>
+      <li>Planche : 3&times;30-45"</li>
+      <li>Planche laterale : 3&times;20" chaque cote</li>
+      <li>Fentes marchees : 2&times;10</li>
+    </ul>
+    <div class="warn-box">
+      <strong>Ne pas cumuler excentrique lourd + course intense le meme jour</strong> (conseil Dr Nado).
+    </div>
+  </div>
+</div>
+
+<!-- 12. ADAPTATIONS -->
+<div class="card" id="adaptations">
+  <div class="card-header" style="background:#6B7280">Adaptations possibles</div>
+  <div class="card-body">
+    <ul>
+      <li><strong>Si reprise retardee au 17/05 :</strong> decaler R1 d'une semaine. Le plan specifique reste identique.</li>
+      <li><strong>Si le soleaire tire en R1-R2 :</strong> prolonger la reprise, raccourcir a 5 semaines specifiques (supprimer S4 recup).</li>
+      <li><strong>Si fatigue ou Body Battery bas :</strong> remplacer la VMA par de l'EF. Jamais forcer.</li>
+      <li><strong>Si chaleur extreme le jour J :</strong> objectif B (42'30, allure 4'15/km). La sante prime.</li>
+    </ul>
+  </div>
+</div>
+
+<p style="text-align:center; color:#999; font-size:0.8rem; margin-top:32px;">
+  Plan custom &mdash; Avril 2026 &mdash; Trame Decathlon Coach + adaptations profil + seances Billat
+</p>
+
+</div>
+</body>
+</html>
