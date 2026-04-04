@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Méthode Billat — Synthèse & Application</title>
+<style>
+  :root {
+    --color-primary: #1a5276;
+    --color-primary-light: #e8f0fe;
+    --color-primary-border: #93b4f0;
+    --color-green: #1B7A3D;
+    --color-green-light: #e6f4ec;
+    --color-green-border: #28a745;
+    --color-orange: #D2691E;
+    --color-orange-light: #fdf0e6;
+    --color-orange-border: #e0a800;
+    --color-red: #8B1A1A;
+    --color-red-light: #f5e6e6;
+    --color-warn: #fff8e1;
+    --color-warn-border: #f5c542;
+    --color-purple: #6B21A8;
+    --color-purple-light: #f3e8ff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #222;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 24px 16px;
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 0.2em;
+    color: #111;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: #555;
+    margin-bottom: 2em;
+    font-size: 0.95rem;
+  }
+
+  /* --- Cards --- */
+  .card {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .card-header {
+    padding: 14px 24px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .card-body { padding: 20px 24px; }
+  .card-body h3 { font-size: 1rem; margin-top: 1.2em; margin-bottom: 0.4em; }
+  .card-body h3:first-child { margin-top: 0; }
+  .card-body ol, .card-body ul { padding-left: 1.3em; }
+
+  .header-bio { background: var(--color-primary); }
+  .header-concepts { background: #2563EB; }
+  .header-newton { background: var(--color-purple); }
+  .header-methods { background: var(--color-green); }
+  .header-marathon { background: var(--color-orange); }
+  .header-controverses { background: var(--color-red); }
+  .header-compare { background: #4A5568; }
+  .header-profil { background: #0E7490; }
+  .header-plan { background: #7C3AED; }
+
+  /* --- Info & Warn boxes --- */
+  .info-box {
+    background: var(--color-primary-light);
+    border-left: 4px solid var(--color-primary-border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+    color: #1a3a6a;
+  }
+
+  .warn-box {
+    background: var(--color-warn);
+    border-left: 4px solid var(--color-warn-border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+    color: #7a5e00;
+  }
+
+  .green-box {
+    background: var(--color-green-light);
+    border-left: 4px solid var(--color-green-border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+    color: #155724;
+  }
+
+  .red-box {
+    background: var(--color-red-light);
+    border-left: 4px solid var(--color-red);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+    color: #5a1010;
+  }
+
+  .purple-box {
+    background: var(--color-purple-light);
+    border-left: 4px solid var(--color-purple);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 10px 0 14px;
+    font-size: 0.92rem;
+    color: #4a1a7a;
+  }
+
+  /* --- Tables --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    background: #f0f0f0;
+    text-align: left;
+    padding: 8px 12px;
+    font-weight: 600;
+    border-bottom: 2px solid #ddd;
+  }
+
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  /* --- Collapsible sections --- */
+  details {
+    margin: 10px 0;
+  }
+
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    padding: 8px 0;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+  }
+
+  summary:hover { text-decoration: underline; }
+
+  /* --- TOC --- */
+  .toc {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+
+  .toc h2 { font-size: 1.1rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 8px; }
+  .toc ol { padding-left: 1.3em; margin: 0; }
+  .toc li { margin: 6px 0; }
+  .toc a { color: var(--color-primary); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  strong { color: #111; }
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.88em; }
+
+  @media (max-width: 600px) {
+    .container { padding: 16px 10px; }
+    .card-body { padding: 16px; }
+    h1 { font-size: 1.4rem; }
+    table { font-size: 0.82rem; }
+    td, th { padding: 6px 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Methode Veronique Billat</h1>
+<p class="subtitle">Synthese complete &amp; application a mon profil</p>
+
+<!-- TOC -->
+<div class="toc">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#bio">Qui est Veronique Billat ?</a></li>
+    <li><a href="#concepts">Concepts fondamentaux</a></li>
+    <li><a href="#newton">La 2e loi de Newton (F = m x a)</a></li>
+    <li><a href="#methods">Les methodes d'entrainement</a></li>
+    <li><a href="#marathon">Strategie de course &mdash; Revolution Marathon</a></li>
+    <li><a href="#controverses">Les controverses</a></li>
+    <li><a href="#compare">Billat vs Daniels vs Lydiard</a></li>
+    <li><a href="#profil">Application a mon profil</a></li>
+    <li><a href="#plan">Adaptations Billat au plan Semi 1h35</a></li>
+  </ol>
+</div>
+
+<!-- 1. BIO -->
+<div class="card" id="bio">
+  <div class="card-header header-bio">1. Qui est Veronique Billat ?</div>
+  <div class="card-body">
+    <p>Veronique Billat (nee en 1961 a Grenoble) est une <strong>physiologiste francaise, professeure des universites et chercheuse INSERM</strong>, consideree comme l'une des references mondiales sur la VO2max et la VMA.</p>
+    <ul>
+      <li><strong>These</strong> : Universite Joseph-Fourier (1988), sur la stabilite lactique</li>
+      <li><strong>Postes</strong> : Professeure a Paris XII, Lille II, puis Evry-Val-d'Essonne</li>
+      <li><strong>Laboratoire</strong> : Fondatrice du Labo de Biologie Integrative des Adaptations a l'Exercice (INSERM U902)</li>
+      <li><strong>Collaboration</strong> : 10 ans avec <strong>Yves Meyer</strong> (medaille Fields, prix Abel) sur l'analyse fractale de la FC</li>
+      <li><strong>Athletes</strong> : Isabella Ochichi (Kenya), Robert Marchand (cycliste centenaire)</li>
+      <li><strong>Societe</strong> : Fondatrice de BillaTraining (2014)</li>
+    </ul>
+
+    <details>
+      <summary>Publications cles</summary>
+      <ul>
+        <li><em>Physiologie et methodologie de l'entrainement</em> (6e ed., De Boeck) &mdash; ouvrage de reference</li>
+        <li><em>VO2max a l'epreuve du temps</em> (2013, De Boeck)</li>
+        <li><em>Revolution Marathon</em> (2019, De Boeck)</li>
+        <li><em>Course a pied : s'entrainer a la sensation</em> (De Boeck)</li>
+        <li>Articles dans <em>Medicine &amp; Science in Sports &amp; Exercise</em>, <em>European J. Applied Physiology</em>, <em>Sports Medicine</em></li>
+      </ul>
+    </details>
+  </div>
+</div>
+
+<!-- 2. CONCEPTS -->
+<div class="card" id="concepts">
+  <div class="card-header header-concepts">2. Concepts fondamentaux</div>
+  <div class="card-body">
+
+    <h3>VMA vs vVO2max</h3>
+    <p>Billat distingue la <strong>VMA</strong> (mesuree en test de terrain) de la <strong>vVO2max</strong> (vitesse minimale a laquelle on atteint reellement sa VO2max). C'est la vVO2max qui doit calibrer l'entrainement, pas la VMA brute.</p>
+
+    <h3>Temps limite a VMA (tlimVMA)</h3>
+    <p>Concept central : <strong>combien de temps peut-on tenir a 100% de sa VMA en continu ?</strong></p>
+    <table>
+      <tr><td>Sportif standard</td><td><strong>4 a 11 minutes</strong></td></tr>
+      <tr><td>Elites</td><td><strong>15 a 25+ minutes</strong></td></tr>
+    </table>
+    <p>Ce temps est individuel et sert a calibrer toutes les seances de fractionne (duree des fractions &asymp; 50% du tlim).</p>
+
+    <h3>La composante lente de VO2</h3>
+    <p>Lors d'un effort intense, la VO2 monte en 2 phases :</p>
+    <ol>
+      <li><strong>Montee rapide</strong> vers un plateau</li>
+      <li><strong>Derive lente</strong> vers VO2max (recrutement progressif des fibres rapides type II)</li>
+    </ol>
+    <p>Chez les coureurs peu entraines, cette derive fait atteindre VO2max meme a des intensites sous-maximales. L'entrainement la reduit.</p>
+
+    <h3>On peut depasser sa VO2max mesuree</h3>
+    <div class="info-box">
+      En utilisant des <strong>accelerations/decelerations</strong>, on peut depasser la VO2max du test classique. Le plafond n'est pas fixe &mdash; c'est une idee revolutionnaire.
+    </div>
+
+    <h3>Le seuil lactique est individuel</h3>
+    <p>Le seuil a 4 mmol/L est une moyenne statistique. Chaque coureur a <strong>son propre seuil</strong> de stabilite lactique.</p>
+  </div>
+</div>
+
+<!-- 3. NEWTON -->
+<div class="card" id="newton">
+  <div class="card-header header-newton">3. La 2e loi de Newton (F = m &times; a)</div>
+  <div class="card-body">
+    <p>Cadre conceptuel de Billat pour le travail de force en course :</p>
+    <ol>
+      <li><strong>F = m &times; a</strong> &rarr; a masse constante, produire une acceleration necessite de la force</li>
+      <li>Le facteur limitant en longue distance est <strong>musculaire</strong>, pas cardiovasculaire</li>
+      <li>Le "mur" (km 30-37) vient du fait que les muscles ne produisent plus assez de force pour maintenir l'allure</li>
+      <li>Pour augmenter sa <strong>reserve de vitesse</strong> (ecart entre vitesse max et allure de course), il faut developper la puissance sur 10-30 secondes</li>
+    </ol>
+    <div class="purple-box">
+      <strong>Conclusion pratique :</strong> remplacer les longues series de piste a allure constante par des <strong>accelerations courtes et vigoureuses</strong> (4-10 secondes) &rarr; developpe la force musculaire specifique au contact sol.
+    </div>
+  </div>
+</div>
+
+<!-- 4. METHODES -->
+<div class="card" id="methods">
+  <div class="card-header header-methods">4. Les methodes d'entrainement</div>
+  <div class="card-body">
+
+    <h3>Phase 1 &mdash; Le 30/30 (methode historique)</h3>
+    <ul>
+      <li>30s a 100% vVO2max / 30s recup active (~50-60% VMA)</li>
+      <li>Repete jusqu'a epuisement</li>
+    </ul>
+    <div class="info-box">
+      <strong>Pourquoi ca marche :</strong> apres 30s d'effort intense, la VO2 reste proche du max pendant 15-20s (inertie cinetique). La recup de 30s est trop courte pour que VO2 redescende &rarr; <strong>~83% du temps a VO2max</strong>, accumulant 8-10 min a ce niveau (impossible en continu).
+    </div>
+
+    <h3>Phase 2 &mdash; Fractionne calibre sur le tlim</h3>
+    <ul>
+      <li>Fractions = <strong>50% du tlim individuel</strong></li>
+      <li>3 a 5 repetitions</li>
+      <li>Recup = duree de travail, a 60% VMA</li>
+    </ul>
+    <p><strong>Exemple :</strong> tlim 12 min &rarr; 5&times;6 min a vVO2max, recup 6 min active.</p>
+
+    <h3>Phase 3 &mdash; Les accelerations (methode actuelle)</h3>
+    <p>C'est la grande evolution. Trois types integres dans des seances de 30-40 min :</p>
+    <table>
+      <tr><th>Type</th><th>Description</th></tr>
+      <tr><td>Douce</td><td>Augmentation progressive et moderee</td></tr>
+      <tr><td>Moyenne</td><td>Acceleration franche</td></tr>
+      <tr><td>Forte</td><td>Sprint court (4-10 secondes)</td></tr>
+    </table>
+    <p>Moins de fatigue generale, plus de stimulus musculaire.</p>
+
+    <h3>Le protocole Yoyo</h3>
+    <p>Alternance : 2 min a vVO2max / 2 min a 90% vVO2max. Les elites tiennent 25-30 min, les recreatifs 15 min.</p>
+
+    <h3>Seances types concretes</h3>
+    <table>
+      <tr><th>Seance</th><th>Structure</th></tr>
+      <tr><td>Perception</td><td>3&times; (4' EF / 2' allure marathon / 1' VMA)</td></tr>
+      <tr><td>Force/vitesse</td><td>4-6s d'acceleration toutes les 3' pendant 30' a allure marathon</td></tr>
+      <tr><td>Efficacite cardio</td><td>5&times; (3' en acceleration progressive jusqu'a VMA / 1' allure marathon)</td></tr>
+      <tr><td>Tolerance acidose</td><td>6&times; (4' EF / 1' sprint en acceleration)</td></tr>
+      <tr><td>Minimaliste marathon</td><td>10 accelerations de 10s toutes les 3 min</td></tr>
+    </table>
+
+    <h3>La "Signature de Vitesse"</h3>
+    <p>Chaque coureur a une maniere naturelle optimale de varier son rythme. Le test RABIT (Running Advisor BillaTraining) sert a la determiner. L'objectif : <strong>piloter sa vitesse selon ses sensations</strong>, pas courir a allure constante.</p>
+  </div>
+</div>
+
+<!-- 5. REVOLUTION MARATHON -->
+<div class="card" id="marathon">
+  <div class="card-header header-marathon">5. Strategie de course &mdash; Revolution Marathon</div>
+  <div class="card-body">
+    <p>Billat preconise un profil en <strong>"U"</strong> :</p>
+    <table>
+      <tr><th>Phase</th><th>Consigne</th></tr>
+      <tr><td>30 premieres min</td><td>Depart <strong>au-dessus</strong> de la vitesse moyenne</td></tr>
+      <tr><td>Phase mediane</td><td><strong>En dessous</strong> de l'objectif</td></tr>
+      <tr><td>10 dernieres min</td><td><strong>Acceleration</strong> finale</td></tr>
+    </table>
+    <p>Perception d'effort : 13-14/20 sur les 2/3, puis 15-16/20 en fin.</p>
+    <div class="warn-box">
+      <strong>Attention :</strong> cette strategie est calibree pour des elites. Pour un coureur avec un pattern de positive split (6/7 courses), le negative split reste plus sur.
+    </div>
+  </div>
+</div>
+
+<!-- 6. CONTROVERSES -->
+<div class="card" id="controverses">
+  <div class="card-header header-controverses">6. Les controverses</div>
+  <div class="card-body">
+
+    <h3>L'abandon du 30/30</h3>
+    <p>Elle a promu le 30/30 pendant des annees, puis recommande des fractions <strong>6 fois plus longues</strong> (3-6 min). Si les premieres mesures etaient justes, pourquoi ce virage ?</p>
+
+    <h3>Peu de resultats chez les elites</h3>
+    <p>Son athlete le plus mediatise est Robert Marchand (cycliste centenaire). Pas de resultats majeurs en athletisme de haut niveau. Le cas Paul Lalire : 2h17 avant la methode, 2h25 apres.</p>
+
+    <h3>"Elle reformule ce qui existe deja"</h3>
+    <p>Critique recurrente : ses methodes reformulent scientifiquement ce que les entraineurs pratiquent depuis Zatopek, Astrand et Lydiard (annees 50-60).</p>
+
+    <h3>Commercialisation</h3>
+    <p>Plans de 150 a 800 EUR, marque deposee, societe commerciale &rarr; critiques sur la mercantilisation.</p>
+
+    <h3>Rigueur scientifique questionnee</h3>
+    <ul>
+      <li>Label INSERM retire en 2013</li>
+      <li>Laboratoire ferme par l'universite d'Evry en 2018</li>
+      <li>Utilisation de donnees Strava comme base d'etudes</li>
+      <li>Correlation &ne; causalite : les coureurs rapides varient leur allure, mais varier l'allure rend-il plus rapide ?</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 7. COMPARAISON -->
+<div class="card" id="compare">
+  <div class="card-header header-compare">7. Billat vs Daniels vs Lydiard</div>
+  <div class="card-body">
+    <table>
+      <tr><th></th><th>Billat</th><th>Jack Daniels</th><th>Lydiard</th></tr>
+      <tr><td><strong>Calibration</strong></td><td>vVO2max + tlim individuel</td><td>VDOT (tables sur chronos)</td><td>Periodisation par phases</td></tr>
+      <tr><td><strong>Seance phare</strong></td><td>30/30, accelerations</td><td>Intervalles allure I, Tempo</td><td>Sorties longues aerobie</td></tr>
+      <tr><td><strong>Endurance fondamentale</strong></td><td>Relativement secondaire</td><td>80% du volume</td><td>Massive</td></tr>
+      <tr><td><strong>Individualisation</strong></td><td>Tres poussee (tlim, RABIT)</td><td>Via VDOT</td><td>Moins individualisee</td></tr>
+      <tr><td><strong>Strategie course</strong></td><td>Profil en "U"</td><td>Even/negative split</td><td>Even split</td></tr>
+      <tr><td><strong>Force</strong></td><td>Centrale (F=ma)</td><td>Secondaire</td><td>Hill training</td></tr>
+      <tr><td><strong>Volume</strong></td><td>Minimaliste (30-40 min)</td><td>Modere a eleve</td><td>Tres eleve</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 8. APPLICATION PROFIL -->
+<div class="card" id="profil">
+  <div class="card-header header-profil">8. Application a mon profil</div>
+  <div class="card-body">
+
+    <h3>Ce qui resonne avec mon cas</h3>
+
+    <div class="green-box">
+      <strong>1. "Le facteur limitant est musculaire, pas cardiovasculaire"</strong><br>
+      Exactement mon diagnostic. Test d'effort 2021 : cardio >20% au-dessus de la moyenne, FC max 206 bpm, test normal. Mais les ischios lachent au km 37 du marathon, les mollets cassent en prepa. Billat dirait : pas un probleme de VO2max, mais de <strong>force specifique au contact sol</strong>.
+    </div>
+
+    <div class="green-box">
+      <strong>2. Les accelerations courtes pour developper la force</strong><br>
+      Mes blessures (soleaire gauche) viennent de seances trop intenses trop vite (cotes 2&times;6&times;30s en janvier 2026). Les accelerations Billat (4-6s, 10s max) sont beaucoup <strong>moins traumatisantes</strong>. C'est le type de stimulus qui me manque.
+    </div>
+
+    <div class="green-box">
+      <strong>3. La VMA est sous-estimee par mon test</strong><br>
+      Test d'effort : VMA = 14.5 km/h mais avec <strong>2% de pente</strong>. Sur plat, VMA reelle superieure. Seance 10&times;200m a 3'30/km (17.1 km/h) en fevrier 2026 &rarr; VMA estimee entre 15 et 16 km/h.
+    </div>
+
+    <div class="info-box">
+      <strong>4. Montee en FC lineaire et rapide</strong><br>
+      De 114 bpm (pre-test) a 206 bpm (palier 13) &mdash; quasi lineaire de ~7-8 bpm par palier. Bonne reactivite cardiovasculaire mais systeme sollicite tres vite. La composante lente de VO2 pourrait amener a VO2max meme a des intensites sous-maximales &rarr; d'ou l'interet de garder l'EF < 150 bpm.
+    </div>
+
+    <h3>Ce que je peux appliquer</h3>
+
+    <p><strong>Applicable maintenant (phase reeducation) :</strong></p>
+    <ul>
+      <li>Le concept de reserve de vitesse valide le travail de renfo chez le kine (excentrique, charges progressives)</li>
+    </ul>
+
+    <p><strong>Applicable a la reprise (post 11 mai) :</strong></p>
+    <table>
+      <tr><th>Principe Billat</th><th>Application</th><th>Precaution</th></tr>
+      <tr><td>Accelerations courtes (4-6s) dans les sorties EF</td><td>1 acceleration toutes les 3-4 min pendant les sorties marche/course</td><td>Pas avant d'avoir valide la marche/course sans douleur</td></tr>
+      <tr><td>EF a sensation</td><td>Coherent avec mon enseignement : EF &lt; 150 bpm strict</td><td>Aucune</td></tr>
+      <tr><td>Fractionne calibre sur le tlim</td><td>Faire un test de tlim une fois la course reprise</td><td>Pas avant plusieurs semaines de reprise</td></tr>
+      <tr><td>30/30 pour accumuler du temps a VO2max</td><td>Seances de 30/30 une fois le soleaire valide</td><td>Le 30/30 reste de l'intensite</td></tr>
+      <tr><td>Seances courtes et qualitatives (30-40 min)</td><td><strong>Parfait pour moi</strong> &mdash; besoin de qualite, pas de volume</td><td>Compatible avec 3 seances/semaine</td></tr>
+    </table>
+
+    <div class="red-box">
+      <strong>Ce qu'il ne faut PAS appliquer :</strong>
+      <ul style="margin-bottom:0">
+        <li>Le profil en "U" en course &mdash; garder le negative split, mon historique parle (positive split sur 6/7 courses)</li>
+        <li>Reduire l'endurance fondamentale &mdash; c'est la condition pour proteger le soleaire</li>
+        <li>Le test RABIT &mdash; produit commercial payant, un demi-Cooper ou Vameval suffit</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- 9. ADAPTATIONS PLAN SEMI -->
+<div class="card" id="plan">
+  <div class="card-header header-plan">9. Adaptations Billat au plan Semi 1h35</div>
+  <div class="card-body">
+
+    <p>Ce que je changerais sur mon plan semi-marathon 2026 a 3 seances/semaine <strong>a pleine possession de mes moyens</strong> (pas en reprise de blessure).</p>
+
+    <h3>1. Remplacer la VMA "classique" par du 30/30</h3>
+
+    <p><strong>Plan actuel :</strong> 10&times;200m, 8&times;300m, 10&times;400m a allure VMA fixe (3'50-3'55/km).</p>
+
+    <p><strong>Version Billat :</strong></p>
+    <ul>
+      <li><strong>Seance 30/30 :</strong> 30s a 100% vVO2max / 30s trot, 2 series de 8-10 repetitions (r=3' entre series). Objectif : accumuler 8-10 min a VO2max au total.</li>
+      <li><strong>Seance tlim :</strong> (une fois le tlim connu) ex. si tlim = 10 min &rarr; 3&times;5 min a vVO2max, recup 5 min active. Plus long, plus specifique.</li>
+    </ul>
+    <div class="info-box">
+      <strong>Pourquoi c'est mieux :</strong> le 30/30 maintient la VO2 haute en continu (83% du temps a VO2max) au lieu de la faire monter/redescendre a chaque 200m. Plus de temps passe a VO2max = plus de progression aerobie.
+    </div>
+
+    <h3>2. Integrer des accelerations courtes dans les sorties EF</h3>
+
+    <p><strong>Plan actuel :</strong> les sorties EF sont monotones (5'30-6'00/km pendant 50'-1h15).</p>
+
+    <p><strong>Version Billat :</strong> ajouter <strong>1 acceleration de 6-8 secondes toutes les 4-5 minutes</strong> pendant les sorties EF (sauf la semaine d'affutage). Pas un sprint a fond, une acceleration progressive jusqu'a ~90% du max, puis retour en EF.</p>
+
+    <div class="green-box">
+      <strong>Pourquoi c'est mieux :</strong>
+      <ul style="margin-bottom:0">
+        <li>Developpe la force musculaire specifique (F = m &times; a) sans fatigue generale</li>
+        <li>Casse la monotonie</li>
+        <li>Ameliore la reserve de vitesse : l'ecart entre vitesse max et allure semi</li>
+        <li>Protege le soleaire mieux que des cotes (effort trop bref pour creer du traumatisme musculaire)</li>
+      </ul>
+    </div>
+
+    <h3>3. Transformer les sorties longues avec blocs AS21</h3>
+
+    <p><strong>Plan actuel (S5-S6) :</strong> SL avec 3&times;8' ou 3&times;12' a AS21, reguliers.</p>
+
+    <p><strong>Version Billat :</strong> remplacer les blocs a allure constante par des <strong>blocs en variation</strong> :</p>
+    <ul>
+      <li>3&times; (6' AS21 + 2' a 4'40-4'45 + 1' acceleration a allure 10 km) au lieu de 3&times;12'</li>
+      <li>Ou : 3&times;12' avec <strong>une acceleration de 8s a allure 10 km toutes les 3 minutes</strong> au sein de chaque bloc</li>
+    </ul>
+    <div class="info-box">
+      <strong>Pourquoi c'est mieux :</strong> la variation de vitesse sollicite plus de fibres musculaires (type I et type II) et habitue le corps a relancer &mdash; exactement ce qu'il faut au km 16-19 du semi quand les jambes pesent.
+    </div>
+
+    <h3>4. Ajouter une seance "perception"</h3>
+
+    <p><strong>Plan actuel (S4 recup) :</strong> fartlek Thibault + 2 EF.</p>
+
+    <p><strong>Version Billat :</strong> remplacer le fartlek par une <strong>seance perception</strong> :</p>
+    <ul>
+      <li>3&times; (4' EF / 2' allure marathon ~4'50 / 1' allure VMA) &mdash; duree totale 21 min de travail</li>
+      <li>Ou : 6&times; (4' EF / 1' sprint en acceleration progressive)</li>
+    </ul>
+    <div class="info-box">
+      Moins codifie, apprend a piloter ses allures aux sensations plutot qu'au GPS. Developpe l'ecoute corporelle, utile en course quand le GPS est peu fiable.
+    </div>
+
+    <h3>5. Plan d'allure course : garder le negative split</h3>
+    <div class="warn-box">
+      <strong>Le seul point ou je NE SUIS PAS Billat.</strong> Elle preconise un profil en "U" (depart rapide, creux, relance). Mon historique est clair : 6 courses sur 7 en positive split, je craque systematiquement quand je pars vite. Le negative split reste ma strategie.
+    </div>
+
+    <h3>Resume des changements</h3>
+    <table>
+      <tr><th>Seance</th><th>Plan actuel</th><th>Version Billat</th></tr>
+      <tr><td><strong>VMA (lundi)</strong></td><td>10&times;200m / 8&times;300m / 10&times;400m fixes</td><td>30/30 (2&times;8-10 rep) ou fractions longues calibrees tlim</td></tr>
+      <tr><td><strong>EF (ven/sam)</strong></td><td>Footing monotone</td><td>Footing + 1 acceleration 6-8s toutes les 4-5 min</td></tr>
+      <tr><td><strong>SL avec blocs (S5-S6)</strong></td><td>3&times;8' ou 3&times;12' a allure constante</td><td>Blocs en variation (AS21 + accelerations 8s toutes les 3 min)</td></tr>
+      <tr><td><strong>Seuil (S3, S6)</strong></td><td>3&times;8' ou 2&times;12' a 4'45</td><td>Inchange (Billat ne remet pas en cause le seuil)</td></tr>
+      <tr><td><strong>Recup S4</strong></td><td>Fartlek Thibault</td><td>Seance perception (EF/marathon/VMA en blocs)</td></tr>
+      <tr><td><strong>Strategie course</strong></td><td>Negative split (depart 4'32-4'35)</td><td><strong>Negative split</strong> (pas le "U" de Billat)</td></tr>
+    </table>
+
+    <h3>Impact attendu</h3>
+    <div class="green-box">
+      <ul style="margin-bottom:0">
+        <li><strong>Plus de temps passe a VO2max</strong> grace au 30/30 (vs les 200m classiques)</li>
+        <li><strong>Meilleure force musculaire</strong> grace aux accelerations courtes dans les EF</li>
+        <li><strong>Meilleure capacite de relance</strong> grace aux variations dans les SL</li>
+        <li><strong>Moins de risque de blessure</strong> : les accelerations de 6-8s sont beaucoup moins traumatisantes que les cotes ou le fractionne long</li>
+        <li><strong>Meme volume, meme structure 3 seances</strong> &mdash; on change le contenu, pas le cadre</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<p style="text-align:center; color:#999; font-size:0.8rem; margin-top:32px;">
+  Synthese realisee en avril 2026 &mdash; Sources : publications scientifiques, Wikipedia, U-Run, Running Addict, PubMed
+</p>
+
+</div>
+</body>
+</html>
