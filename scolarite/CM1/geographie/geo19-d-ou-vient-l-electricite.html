@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G&Eacute;O 19 &ndash; D'o&ugrave; vient l'&eacute;lectricit&eacute;&nbsp;?</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --yellow: #f9a825;
+            --yellow-bg: #fffde7;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #e65100 0%, #f57f17 40%, #fdd835 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--yellow); color: var(--dark); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--yellow);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--yellow);
+        }
+        .card.blue { border-left-color: var(--blue); }
+        .card.orange { border-left-color: var(--orange); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.green { border-left-color: var(--green); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.red { border-left-color: var(--red); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY POINT ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.yellow { background: var(--yellow-bg); color: #f57f17; }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== VOCAB ===== */
+        .vocab {
+            background: var(--yellow-bg);
+            border-radius: 8px;
+            padding: 0.6rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .vocab strong { color: #f57f17; }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#9889;</div>
+    <h1>G&Eacute;O 19 &ndash; D'o&ugrave; vient l'&eacute;lectricit&eacute;&nbsp;?</h1>
+    <p class="subtitle">Les centrales, les &eacute;nergies fossiles et renouvelables</p>
+    <p class="collection">CM1 &bull; G&eacute;ographie</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#fossiles">&Eacute;nergies fossiles</a>
+    <a href="#renouvelables">&Eacute;nergies renouvelables</a>
+    <a href="#exercices">Exercices</a>
+    <a href="#retenir">&Agrave; retenir</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+
+        <div class="card">
+            <div class="key yellow">D'o&ugrave; vient l'&eacute;lectricit&eacute;&nbsp;?</div>
+            <p>L'&eacute;lectricit&eacute; que nous consommons au quotidien est produite dans des usines appel&eacute;es <strong>&laquo;&nbsp;centrales&nbsp;&raquo;</strong>.</p>
+            <p>Elle est produite &agrave; partir d'&eacute;nergies <strong>fossiles</strong> ou <strong>renouvelables</strong>.</p>
+        </div>
+
+        <div class="card blue">
+            <div class="key blue">La distribution</div>
+            <p>L'&eacute;lectricit&eacute; produite est ensuite distribu&eacute;e par un important <strong>r&eacute;seau</strong> de <strong>lignes &eacute;lectriques</strong> sur l'ensemble du territoire.</p>
+            <p>Ce r&eacute;seau alimente environ <strong>33&nbsp;millions de consommateurs</strong>.</p>
+            <div class="tip">
+                <strong>Le trajet&nbsp;:</strong> Centrale &eacute;lectrique &rarr; lignes &eacute;lectriques &rarr; transformateurs &rarr; maisons, &eacute;coles, usines
+            </div>
+        </div>
+    </section>
+
+    <!-- ÉNERGIES FOSSILES -->
+    <section id="fossiles">
+        <div class="section-header">
+            <span class="section-icon">&#128293;</span>
+            <h2>Les &eacute;nergies fossiles</h2>
+        </div>
+
+        <div class="card red">
+            <div class="key red">&Eacute;nergie fossile</div>
+            <p>Les &eacute;nergies fossiles proviennent de la <strong>d&eacute;composition tr&egrave;s lente</strong> d'&eacute;l&eacute;ments vivants il y a <strong>plusieurs millions d'ann&eacute;es</strong>.</p>
+            <p>Ces &eacute;nergies sont&nbsp;:</p>
+            <ul style="margin-left:1.2rem;margin-top:0.3rem;">
+                <li>le <strong>p&eacute;trole</strong></li>
+                <li>le <strong>gaz</strong></li>
+                <li>le <strong>charbon</strong></li>
+            </ul>
+            <div class="vocab">
+                <strong>Attention&nbsp;:</strong> Leur quantit&eacute; sur Terre est <strong>limit&eacute;e</strong>. Une fois utilis&eacute;es, elles disparaissent pour toujours.
+            </div>
+        </div>
+    </section>
+
+    <!-- ÉNERGIES RENOUVELABLES -->
+    <section id="renouvelables">
+        <div class="section-header">
+            <span class="section-icon">&#127807;</span>
+            <h2>Les &eacute;nergies renouvelables</h2>
+        </div>
+
+        <div class="card green">
+            <div class="key green">&Eacute;nergie renouvelable</div>
+            <p>Les &eacute;nergies renouvelables sont des &eacute;nergies qui se <strong>reconstituent naturellement</strong> et sont consid&eacute;r&eacute;es comme <strong>in&eacute;puisables</strong>.</p>
+            <p>Ce sont des &eacute;nergies dites <strong>propres</strong>.</p>
+        </div>
+
+        <div class="card teal">
+            <div class="key teal">Les sources d'&eacute;nergies renouvelables</div>
+            <ul style="margin-left:1.2rem;margin-top:0.3rem;line-height:2;">
+                <li>&#9728;&#65039; le <strong>soleil</strong> (&eacute;nergie solaire)</li>
+                <li>&#128168; le <strong>vent</strong> (&eacute;nergie &eacute;olienne)</li>
+                <li>&#128167; l'<strong>eau</strong> (&eacute;nergie hydraulique)</li>
+                <li>&#127793; la <strong>biomasse</strong> (bois, d&eacute;chets v&eacute;g&eacute;taux)</li>
+            </ul>
+            <div class="vocab">
+                <strong>Biomasse&nbsp;:</strong> ensemble des mati&egrave;res organiques (bois, plantes, d&eacute;chets agricoles) qui peuvent &ecirc;tre br&ucirc;l&eacute;es ou transform&eacute;es pour produire de l'&eacute;nergie.
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXERCICES ===== -->
+
+    <!-- EXERCICE 1 -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice 1 &ndash; Compl&egrave;te les phrases</h2>
+        </div>
+        <div class="card exercise">
+            <p>Compl&egrave;te avec le bon mot&nbsp;: <strong>centrales</strong>, <strong>fossiles</strong>, <strong>renouvelables</strong>, <strong>r&eacute;seau</strong>, <strong>lignes &eacute;lectriques</strong>, <strong>33&nbsp;millions</strong>, <strong>d&eacute;composition</strong>, <strong>limit&eacute;e</strong>.</p>
+
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>L'&eacute;lectricit&eacute; est produite dans des usines appel&eacute;es ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Elle est produite &agrave; partir d'&eacute;nergies ___ ou ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>L'&eacute;lectricit&eacute; est distribu&eacute;e par un ___ de ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Ce r&eacute;seau alimente environ ___ de consommateurs.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Les &eacute;nergies fossiles proviennent de la ___ d'&eacute;l&eacute;ments vivants.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>La quantit&eacute; d'&eacute;nergies fossiles sur Terre est ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">centrales</span></div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">fossiles</span> &ndash; <span class="answer">renouvelables</span></div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">r&eacute;seau</span> &ndash; <span class="answer">lignes &eacute;lectriques</span></div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">33&nbsp;millions</span></div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">d&eacute;composition</span></div>
+                <div class="correction-item"><strong>6)</strong> <span class="answer">limit&eacute;e</span></div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 2 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128214;</span>
+            <h2>Exercice 2 &ndash; Fossile ou renouvelable&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>Indique si chaque &eacute;nergie est <strong>fossile</strong> ou <strong>renouvelable</strong>.</p>
+
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Le charbon</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Le vent</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Le p&eacute;trole</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Le soleil</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Le gaz</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>L'eau d'un barrage</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>La biomasse (bois, d&eacute;chets v&eacute;g&eacute;taux)</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">Fossile</span> &ndash; le charbon met des millions d'ann&eacute;es &agrave; se former.</div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">Renouvelable</span> &ndash; le vent se reconstitue naturellement.</div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">Fossile</span> &ndash; le p&eacute;trole est en quantit&eacute; limit&eacute;e.</div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">Renouvelable</span> &ndash; le soleil est in&eacute;puisable.</div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">Fossile</span> &ndash; le gaz est en quantit&eacute; limit&eacute;e.</div>
+                <div class="correction-item"><strong>6)</strong> <span class="answer">Renouvelable</span> &ndash; l'eau se reconstitue gr&acirc;ce au cycle de l'eau.</div>
+                <div class="correction-item"><strong>7)</strong> <span class="answer">Renouvelable</span> &ndash; la biomasse se reconstitue naturellement.</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 3 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#129300;</span>
+            <h2>Exercice 3 &ndash; Vrai ou faux&nbsp;?</h2>
+        </div>
+        <div class="card exercise">
+            <p>R&eacute;ponds par <strong>vrai</strong> ou <strong>faux</strong> et corrige si c'est faux.</p>
+
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>L'&eacute;lectricit&eacute; est produite dans des usines appel&eacute;es &laquo;&nbsp;raffineries&nbsp;&raquo;.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Les &eacute;nergies fossiles sont le p&eacute;trole, le gaz et le charbon.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Les &eacute;nergies renouvelables sont en quantit&eacute; limit&eacute;e.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>L'&eacute;lectricit&eacute; est distribu&eacute;e par des lignes &eacute;lectriques.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Le vent est une &eacute;nergie fossile.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>Les &eacute;nergies renouvelables sont consid&eacute;r&eacute;es comme des &eacute;nergies propres.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">Faux</span> &ndash; L'&eacute;lectricit&eacute; est produite dans des <strong>centrales</strong> (les raffineries transforment le p&eacute;trole en essence).</div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">Vrai</span></div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">Faux</span> &ndash; Ce sont les &eacute;nergies <strong>fossiles</strong> qui sont en quantit&eacute; limit&eacute;e. Les renouvelables sont in&eacute;puisables.</div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">Vrai</span></div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">Faux</span> &ndash; Le vent est une &eacute;nergie <strong>renouvelable</strong>.</div>
+                <div class="correction-item"><strong>6)</strong> <span class="answer">Vrai</span></div>
+            </div>
+        </details>
+    </section>
+
+    <!-- EXERCICE 4 -->
+    <section>
+        <div class="section-header">
+            <span class="section-icon">&#128173;</span>
+            <h2>Exercice 4 &ndash; Relie les bonnes r&eacute;ponses</h2>
+        </div>
+        <div class="card exercise">
+            <p>Pour chaque type de centrale, indique quelle &eacute;nergie elle utilise&nbsp;: <strong>soleil</strong>, <strong>vent</strong>, <strong>eau</strong>, <strong>charbon</strong>, <strong>gaz</strong>, <strong>biomasse</strong>.</p>
+
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Une centrale &eacute;olienne utilise ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Une centrale solaire utilise ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Une centrale hydraulique utilise ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Une centrale thermique &agrave; charbon utilise ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Une centrale thermique &agrave; gaz utilise ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>Une centrale &agrave; biomasse utilise ___.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">le vent</span></div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">le soleil</span></div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">l'eau</span></div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">le charbon</span> (fossile)</div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">le gaz</span> (fossile)</div>
+                <div class="correction-item"><strong>6)</strong> <span class="answer">la biomasse</span> (bois, d&eacute;chets v&eacute;g&eacute;taux)</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card green">
+            <p>L'<strong>&eacute;lectricit&eacute;</strong> est produite dans des <strong>centrales</strong> &agrave; partir d'&eacute;nergies <strong>fossiles</strong> ou <strong>renouvelables</strong>.</p>
+            <p>Elle est distribu&eacute;e par un <strong>r&eacute;seau de lignes &eacute;lectriques</strong> &agrave; <strong>33&nbsp;millions</strong> de consommateurs.</p>
+            <p><strong>&Eacute;nergies fossiles</strong> (limit&eacute;es)&nbsp;: p&eacute;trole, gaz, charbon. Elles viennent de la d&eacute;composition d'&ecirc;tres vivants il y a des millions d'ann&eacute;es.</p>
+            <p><strong>&Eacute;nergies renouvelables</strong> (in&eacute;puisables, propres)&nbsp;: soleil, vent, eau, biomasse.</p>
+        </div>
+        <div class="card">
+            <div class="key yellow">Mots cl&eacute;s</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.6rem;">
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--yellow-bg);color:#f57f17;">Centrale</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--red-bg);color:var(--red);">&Eacute;nergie fossile</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--green-bg);color:var(--green);">&Eacute;nergie renouvelable</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--blue-bg);color:var(--blue);">Lignes &eacute;lectriques</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--teal-bg);color:var(--teal);">Biomasse</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--purple-bg);color:var(--purple);">In&eacute;puisable</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>G&Eacute;O 19 &bull; D'o&ugrave; vient l'&eacute;lectricit&eacute;&nbsp;?</p>
+    <p>CM1 &bull; G&eacute;ographie</p>
+</footer>
+
+</body>
+</html>
