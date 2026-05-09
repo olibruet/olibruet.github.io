@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>G&Eacute;O 22 &ndash; D'o&ugrave; viennent les fruits exotiques&nbsp;?</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f1f8e9 0%, #a5d6a7 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 40%, #66bb6a 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--green); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--green);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--green);
+        }
+        .card.orange { border-left-color: var(--orange); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.blue { border-left-color: var(--blue); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+
+        /* ===== EXAMPLE ===== */
+        .example {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+        }
+        .example strong { color: var(--green); }
+
+        /* ===== LEXIQUE ===== */
+        .lexique-item {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .lexique-item:last-child { border-bottom: none; }
+        .lexique-term {
+            font-weight: 800;
+            color: var(--orange);
+            font-size: 1rem;
+        }
+
+        /* ===== SCHEMA TRAJET ===== */
+        .trajet {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.4rem;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .trajet-step {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--green-bg);
+            color: var(--green);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .trajet-arrow {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 121, 107, 0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127820;</div>
+    <h1>G&Eacute;O 22 &ndash; D'o&ugrave; viennent les fruits exotiques&nbsp;?</h1>
+    <p class="subtitle">Les fruits exotiques que je mange</p>
+    <p class="collection">CM1 &bull; G&eacute;ographie</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#lexique">Lexique</a>
+    <a href="#exercice">Exercice</a>
+    <a href="#retenir">&Agrave; retenir</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on</h2>
+        </div>
+        <div class="card">
+            <p>Les fruits exotiques que nous mangeons &agrave; la cantine sont, par exemple, les <strong>bananes</strong>, les <strong>ananas</strong> ou les <strong>kiwis</strong>.</p>
+            <p>Ces fruits sont <strong>cultiv&eacute;s dans des pays lointains</strong>, situ&eacute;s en <strong>zone tropicale</strong>. Ils sont donc <strong>import&eacute;s</strong>.</p>
+            <p>Ils sont achem&icirc;n&eacute;s en France par <strong>bateau r&eacute;frig&eacute;r&eacute;</strong>, pour une meilleure conservation, puis ils sont transport&eacute;s par <strong>camions</strong> jusqu'aux commer&ccedil;ants.</p>
+        </div>
+        <div class="card teal">
+            <div class="key teal">Le trajet des fruits</div>
+            <div class="trajet">
+                <span class="trajet-step">&#127758; Pays tropical</span>
+                <span class="trajet-arrow">&#8594;</span>
+                <span class="trajet-step">&#9875; Bateau r&eacute;frig&eacute;r&eacute;</span>
+                <span class="trajet-arrow">&#8594;</span>
+                <span class="trajet-step">&#128666; Camion</span>
+                <span class="trajet-arrow">&#8594;</span>
+                <span class="trajet-step">&#127881; Commer&ccedil;ant</span>
+                <span class="trajet-arrow">&#8594;</span>
+                <span class="trajet-step">&#127968; Chez toi&nbsp;!</span>
+            </div>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Quelques pays producteurs</div>
+            <div class="example">
+                &#127820; <strong>Ananas</strong> &rarr; C&ocirc;te d'Ivoire, Costa Rica<br>
+                &#127820; <strong>Banane</strong> &rarr; Martinique, Cameroun, &Eacute;quateur<br>
+                &#127820; <strong>Kiwi</strong> &rarr; Nouvelle-Z&eacute;lande, Chili, Italie
+            </div>
+        </div>
+    </section>
+
+    <!-- LEXIQUE -->
+    <section id="lexique">
+        <div class="section-header">
+            <span class="section-icon">&#128366;</span>
+            <h2>Lexique</h2>
+        </div>
+        <div class="card blue">
+            <div class="lexique-item">
+                <span class="lexique-term">Produit import&eacute;</span>
+                <p>Mati&egrave;re premi&egrave;re ou produit fabriqu&eacute; &agrave; l'&eacute;tranger que l'on fait venir en France. <em>Exemple&nbsp;: le p&eacute;trole achet&eacute; en Arabie Saoudite ou les ananas achet&eacute;s en C&ocirc;te d'Ivoire.</em></p>
+            </div>
+            <div class="lexique-item">
+                <span class="lexique-term">Zone tropicale</span>
+                <p>R&eacute;gion du globe proche de l'&eacute;quateur, o&ugrave; le climat est chaud et humide toute l'ann&eacute;e. C'est l&agrave; que poussent les fruits exotiques.</p>
+            </div>
+            <div class="lexique-item">
+                <span class="lexique-term">Bateau r&eacute;frig&eacute;r&eacute;</span>
+                <p>Bateau dot&eacute; de chambres froides pour transporter les aliments sans qu'ils se g&acirc;tent durant le long voyage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXERCICE -->
+    <section id="exercice">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercice &ndash; Questions sur la le&ccedil;on</h2>
+        </div>
+        <div class="card exercise">
+            <p>R&eacute;ponds aux questions en t'aidant de la le&ccedil;on.</p>
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Cite trois exemples de fruits exotiques que l'on mange &agrave; la cantine.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Dans quel type de zone climatique sont cultiv&eacute;s ces fruits&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Que signifie le mot &laquo;&nbsp;import&eacute;&nbsp;&raquo;&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Quel moyen de transport est utilis&eacute; pour amener les fruits jusqu'en France&nbsp;? Pourquoi ce type sp&eacute;cial de transport&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>Quel moyen de transport prennent ensuite les fruits pour arriver chez les commer&ccedil;ants&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>Remets les &eacute;tapes dans l'ordre&nbsp;: camion &bull; bateau r&eacute;frig&eacute;r&eacute; &bull; pays tropical &bull; commer&ccedil;ant</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>Dans quel pays achète-t-on des ananas selon le lexique&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+            <div class="exercise-item">
+                <span class="exercise-number">8</span>
+                <span>Vrai ou faux&nbsp;: les fruits exotiques sont cultiv&eacute;s en France.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> <span class="answer">Les bananes, les ananas et les kiwis.</span></div>
+                <div class="correction-item"><strong>2)</strong> <span class="answer">En zone tropicale</span> (proche de l'&eacute;quateur, clima chaud et humide).</div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">Un produit import&eacute; est fabriqu&eacute; ou cultiv&eacute; &agrave; l'&eacute;tranger et amen&eacute; en France.</span></div>
+                <div class="correction-item"><strong>4)</strong> <span class="answer">Un bateau r&eacute;frig&eacute;r&eacute;</span>, car il garde les fruits au frais pour qu'ils ne se g&acirc;tent pas durant le long voyage.</div>
+                <div class="correction-item"><strong>5)</strong> <span class="answer">Par camion.</span></div>
+                <div class="correction-item"><strong>6)</strong> <span class="answer">Pays tropical &rarr; bateau r&eacute;frig&eacute;r&eacute; &rarr; camion &rarr; commer&ccedil;ant.</span></div>
+                <div class="correction-item"><strong>7)</strong> <span class="answer">En C&ocirc;te d'Ivoire.</span></div>
+                <div class="correction-item"><strong>8)</strong> <span class="answer">Faux.</span> Ils sont cultiv&eacute;s dans des pays lointains en zone tropicale.</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card green">
+            <p>Les fruits exotiques (bananes, ananas, kiwis&hellip;) sont cultiv&eacute;s dans des <strong>pays lointains en zone tropicale</strong>.</p>
+            <p>Ils sont <strong>import&eacute;s</strong> en France par <strong>bateau r&eacute;frig&eacute;r&eacute;</strong>, puis livr&eacute;s par <strong>camion</strong> aux commer&ccedil;ants.</p>
+        </div>
+        <div class="card">
+            <div class="key green">Mots cl&eacute;s</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.6rem;">
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--green-bg);color:var(--green);">Fruits exotiques</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--teal-bg);color:var(--teal);">Zone tropicale</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--orange-bg);color:var(--orange);">Produit import&eacute;</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--blue-bg);color:var(--blue);">Bateau r&eacute;frig&eacute;r&eacute;</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>G&Eacute;O 22 &bull; D'o&ugrave; viennent les fruits exotiques&nbsp;?</p>
+    <p>CM1 &bull; G&eacute;ographie</p>
+</footer>
+
+</body>
+</html>

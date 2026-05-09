@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RP7 &ndash; Utiliser la division</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-light: #42a5f5;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fafcff 0%, #bbdefb 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #0d47a1 0%, #1565c0 40%, #42a5f5 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--blue); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--blue);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--blue);
+        }
+        .card.orange { border-left-color: var(--orange); }
+        .card.green { border-left-color: var(--green); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+
+        /* ===== TYPE CARDS ===== */
+        .type-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+        .type-box {
+            border-radius: 10px;
+            padding: 1rem 1.1rem;
+            font-size: 0.9rem;
+        }
+        .type-box.groupes {
+            background: var(--blue-bg);
+            border: 2px solid var(--blue);
+        }
+        .type-box.partage {
+            background: var(--orange-bg);
+            border: 2px solid var(--orange);
+        }
+        .type-box h3 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        .type-box.groupes h3 { color: var(--blue); }
+        .type-box.partage h3 { color: var(--orange); }
+        .type-box .question-word {
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: inline-block;
+            padding: 0.1rem 0.5rem;
+            border-radius: 10px;
+            margin-bottom: 0.4rem;
+        }
+        .type-box.groupes .question-word { background: var(--blue); color: var(--white); }
+        .type-box.partage .question-word { background: var(--orange); color: var(--white); }
+
+        /* ===== OPERATION BOX ===== */
+        .op-box {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.7rem;
+            font-size: 1rem;
+        }
+        .op {
+            font-family: monospace;
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--blue);
+            display: block;
+            margin: 0.3rem 0;
+        }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== PROBLEM ===== */
+        .problem-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .problem-item:last-child { border-bottom: none; }
+        .problem-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .problem-tag {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.05rem 0.5rem;
+            border-radius: 10px;
+            margin-right: 0.3rem;
+            vertical-align: middle;
+        }
+        .problem-tag.groupes { background: var(--blue-bg); color: var(--blue); }
+        .problem-tag.partage { background: var(--orange-bg); color: var(--orange); }
+        .problem-text {
+            display: block;
+            margin-top: 0.3rem;
+            font-size: 0.95rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 70px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Op\00e9ration\a0: ___ : ___ = ___\a\aR\00e9ponse\a0: ___';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+            white-space: pre;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0,121,107,0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.6rem 0;
+            font-size: 0.95rem;
+            line-height: 1.9;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+        .op-answer {
+            font-family: monospace;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--blue);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+        @media (max-width: 500px) {
+            .type-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 80px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#8758;</div>
+    <h1>RP7 &ndash; Utiliser la division</h1>
+    <p class="subtitle">Groupes ou partage&nbsp;?</p>
+    <p class="collection">CM1 &bull; Math&eacute;matiques</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#methode">M&eacute;thode</a>
+    <a href="#exercices">Probl&egrave;mes</a>
+    <a href="#retenir">&Agrave; retenir</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>J'utilise la division quand&hellip;</h2>
+        </div>
+        <div class="card">
+            <p>On utilise la division dans <strong>deux situations</strong> de probl&egrave;me&nbsp;:</p>
+            <div class="type-grid">
+                <div class="type-box groupes">
+                    <h3>&#128202; Combien de groupes&nbsp;?</h3>
+                    <span class="question-word">Combien de sacs&nbsp;? de bo&icirc;tes&nbsp;? de rang&eacute;es&nbsp;?</span>
+                    <p>On conna&icirc;t le total et la taille de chaque groupe. On cherche <strong>combien de groupes</strong> on peut faire.</p>
+                    <div class="op-box">
+                        <em>Paul a 15 billes. Combien de sacs de 5 billes peut-il faire&nbsp;?</em>
+                        <span class="op">15 &divide; 5 = 3</span>
+                        Il peut faire <strong>3 sacs</strong>.
+                    </div>
+                </div>
+                <div class="type-box partage">
+                    <h3>&#129309; Combien chacun aura&nbsp;?</h3>
+                    <span class="question-word">Combien par personne&nbsp;? chacun&nbsp;?</span>
+                    <p>On conna&icirc;t le total et le nombre de personnes. On cherche <strong>combien chacun aura</strong>.</p>
+                    <div class="op-box">
+                        <em>Paul partage ses 18 billes entre 3 copains. Combien chacun en aura-t-il&nbsp;?</em>
+                        <span class="op">18 &divide; 3 = 6</span>
+                        Chacun aura <strong>6 billes</strong>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MÉTHODE -->
+    <section id="methode">
+        <div class="section-header">
+            <span class="section-icon">&#128221;</span>
+            <h2>M&eacute;thode pour r&eacute;soudre</h2>
+        </div>
+        <div class="card teal">
+            <div class="key teal">Les 3 &eacute;tapes</div>
+            <p><strong>1. Je lis</strong> et je cherche&nbsp;: est-ce un probl&egrave;me de groupes ou de partage&nbsp;?</p>
+            <p><strong>2. J'&eacute;cris l'op&eacute;ration</strong>&nbsp;: total &divide; nombre = r&eacute;sultat</p>
+            <p><strong>3. Je r&eacute;ponds</strong> par une phrase compl&egrave;te.</p>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Mots cl&eacute;s qui indiquent une division</div>
+            <p>&#128073; <strong>Groupes</strong>&nbsp;: <em>combien de sacs, de rang&eacute;es, de bo&icirc;tes, de lots, de paquets&hellip;</em></p>
+            <p>&#128073; <strong>Partage</strong>&nbsp;: <em>partager entre, distribuer &agrave;, r&eacute;partir entre, combien chacun, par personne&hellip;</em></p>
+            <div class="tip">
+                <strong>Astuce&nbsp;:</strong> Quand tu h&eacute;sites, pose-toi la question&nbsp;: &laquo;&nbsp;Je cherche combien de <u>groupes</u> ou combien par <u>personne</u>&nbsp;?&nbsp;&raquo;
+            </div>
+        </div>
+    </section>
+
+    <!-- EXERCICES -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Probl&egrave;mes</h2>
+        </div>
+        <div class="card exercise">
+            <p>Pour chaque probl&egrave;me&nbsp;: indique le type (groupes ou partage), &eacute;cris l'op&eacute;ration et la r&eacute;ponse.</p>
+
+            <div class="problem-item">
+                <span class="problem-number">1</span>
+                <span class="problem-tag groupes">groupes&nbsp;?</span>
+                <span class="problem-text">L&eacute;a a 20 autocollants. Elle en met 4 par page. Combien de pages utilisera-t-elle&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">2</span>
+                <span class="problem-tag partage">partage&nbsp;?</span>
+                <span class="problem-text">Tom a 24 bonbons. Il les partage &eacute;quitablement entre ses 6 amis. Combien chacun en aura-t-il&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">3</span>
+                <span class="problem-text">Le boulanger a fait 36 croissants. Il les place dans des sacs de 6. Combien de sacs peut-il remplir&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">4</span>
+                <span class="problem-text">48 &eacute;l&egrave;ves sont r&eacute;partis dans 4 classes. Combien d'&eacute;l&egrave;ves y a-t-il par classe&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">5</span>
+                <span class="problem-text">Une biblioth&egrave;que a 56 livres. Elle en place 7 par &eacute;tag&egrave;re. Combien d'&eacute;tag&egrave;res faut-il&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">6</span>
+                <span class="problem-text">Papa ach&egrave;te 45 bonbons pour les distribuer &agrave; 9 enfants. Combien chaque enfant recevra-t-il de bonbons&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">7</span>
+                <span class="problem-text">Une ferme poss&egrave;de 63 poulets. On les met dans des cages de 9. Combien faut-il de cages&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">8</span>
+                <span class="problem-text">72 bouteilles sont rang&eacute;es &agrave; parts &eacute;gales dans 8 casiers. Combien y a-t-il de bouteilles par casier&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">9</span>
+                <span class="problem-text">Un fleuriste veut faire des bouquets de 8 fleurs. Il a 64 fleurs. Combien de bouquets peut-il faire&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">10</span>
+                <span class="problem-text">Un sac de billes contient 81 billes. On les r&eacute;partit entre 9 enfants. Combien chacun en aura-t-il&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">11</span>
+                <span class="problem-text">&#9733; Une &eacute;cole commande 96 cahiers &agrave; distribuer &agrave; raison de 4 par &eacute;l&egrave;ve. Combien d'&eacute;l&egrave;ves peuvent &ecirc;tre servis&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="problem-item">
+                <span class="problem-number">12</span>
+                <span class="problem-text">&#9733; Un march&eacute; vend des oranges par filets de 8. La marchande a 120 oranges. Combien de filets peut-elle pr&eacute;parer&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item">
+                    <strong>1)</strong> Groupes &mdash; <span class="op-answer">20 &divide; 4 = 5</span><br>
+                    <span class="answer">L&eacute;a utilisera 5 pages.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>2)</strong> Partage &mdash; <span class="op-answer">24 &divide; 6 = 4</span><br>
+                    <span class="answer">Chaque ami aura 4 bonbons.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>3)</strong> Groupes &mdash; <span class="op-answer">36 &divide; 6 = 6</span><br>
+                    <span class="answer">Le boulanger peut remplir 6 sacs.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>4)</strong> Partage &mdash; <span class="op-answer">48 &divide; 4 = 12</span><br>
+                    <span class="answer">Il y a 12 &eacute;l&egrave;ves par classe.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>5)</strong> Groupes &mdash; <span class="op-answer">56 &divide; 7 = 8</span><br>
+                    <span class="answer">Il faut 8 &eacute;tag&egrave;res.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>6)</strong> Partage &mdash; <span class="op-answer">45 &divide; 9 = 5</span><br>
+                    <span class="answer">Chaque enfant recevra 5 bonbons.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>7)</strong> Groupes &mdash; <span class="op-answer">63 &divide; 9 = 7</span><br>
+                    <span class="answer">Il faut 7 cages.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>8)</strong> Partage &mdash; <span class="op-answer">72 &divide; 8 = 9</span><br>
+                    <span class="answer">Il y a 9 bouteilles par casier.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>9)</strong> Groupes &mdash; <span class="op-answer">64 &divide; 8 = 8</span><br>
+                    <span class="answer">Le fleuriste peut faire 8 bouquets.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>10)</strong> Partage &mdash; <span class="op-answer">81 &divide; 9 = 9</span><br>
+                    <span class="answer">Chaque enfant aura 9 billes.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>11)</strong> Groupes &mdash; <span class="op-answer">96 &divide; 4 = 24</span><br>
+                    <span class="answer">24 &eacute;l&egrave;ves peuvent &ecirc;tre servis.</span>
+                </div>
+                <div class="correction-item">
+                    <strong>12)</strong> Groupes &mdash; <span class="op-answer">120 &divide; 8 = 15</span><br>
+                    <span class="answer">La marchande peut pr&eacute;parer 15 filets.</span>
+                </div>
+            </div>
+        </details>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card blue">
+            <p>J'utilise la division dans deux cas&nbsp;:</p>
+            <p>&#128202; <strong>Combien de groupes&nbsp;?</strong> &rarr; Je connais la taille de chaque groupe.</p>
+            <p>&#129309; <strong>Combien chacun aura&nbsp;?</strong> &rarr; Je connais le nombre de personnes.</p>
+            <p>Dans les deux cas&nbsp;: <strong>total &divide; nombre = r&eacute;sultat</strong></p>
+        </div>
+        <div class="card">
+            <div class="key blue">Mots cl&eacute;s</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.6rem;">
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--blue-bg);color:var(--blue);">Combien de groupes&nbsp;?</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--orange-bg);color:var(--orange);">Combien chacun aura&nbsp;?</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--green-bg);color:var(--green);">Total &divide; nombre = r&eacute;sultat</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--purple-bg);color:var(--purple);">Phrase de r&eacute;ponse</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>RP7 &bull; Utiliser la division</p>
+    <p>CM1 &bull; Math&eacute;matiques</p>
+</footer>
+
+</body>
+</html>

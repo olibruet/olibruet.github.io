@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S11 &ndash; Les types d'&eacute;ruptions volcaniques</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --blue: #1565c0;
+            --blue-bg: #e3f2fd;
+            --orange: #e67e22;
+            --orange-bg: #fef5e7;
+            --purple: #7b1fa2;
+            --purple-bg: #f3e5f5;
+            --green: #2e7d32;
+            --green-bg: #e8f5e9;
+            --teal: #00796b;
+            --teal-bg: #e0f2f1;
+            --red: #c62828;
+            --red-bg: #ffebee;
+            --gold: #f57f17;
+            --gold-bg: #fff8e1;
+            --dark: #263238;
+            --gray: #78909c;
+            --light: #eceff1;
+            --white: #ffffff;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --radius: 12px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fff3e0 0%, #ff8a65 100%);
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            background: linear-gradient(135deg, #b71c1c 0%, #c62828 40%, #ef5350 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 1.5rem 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        .hero-icon { font-size: 4rem; margin-bottom: 0.5rem; position: relative; }
+        .hero h1 { font-size: 1.8rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.3rem; position: relative; }
+        .hero .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 400; position: relative; }
+        .hero .collection { font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem; position: relative; }
+
+        /* ===== NAV ===== */
+        .nav {
+            background: var(--white);
+            padding: 0.8rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav::-webkit-scrollbar { display: none; }
+        .nav a {
+            flex-shrink: 0;
+            text-decoration: none;
+            color: var(--dark);
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .nav a:hover, .nav a:active { background: var(--red); color: var(--white); }
+
+        /* ===== CONTAINER ===== */
+        .container { max-width: 800px; margin: 0 auto; padding: 1rem; }
+
+        /* ===== SECTIONS ===== */
+        section { margin-bottom: 1.5rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--red);
+        }
+        .section-icon { font-size: 1.6rem; flex-shrink: 0; }
+        .section-header h2 { font-size: 1.3rem; font-weight: 700; color: var(--dark); }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--red);
+        }
+        .card.orange { border-left-color: var(--orange); }
+        .card.green { border-left-color: var(--green); }
+        .card.purple { border-left-color: var(--purple); }
+        .card.teal { border-left-color: var(--teal); }
+        .card.gold { border-left-color: var(--gold); }
+        .card.blue { border-left-color: var(--blue); }
+        .card.exercise { border-left-color: var(--purple); }
+        .card p { margin-bottom: 0.8rem; }
+        .card p:last-child { margin-bottom: 0; }
+
+        /* ===== KEY ===== */
+        .key {
+            display: inline-block;
+            font-weight: 800;
+            font-size: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: 8px;
+            margin-bottom: 0.6rem;
+        }
+        .key.red { background: var(--red-bg); color: var(--red); }
+        .key.orange { background: var(--orange-bg); color: var(--orange); }
+        .key.green { background: var(--green-bg); color: var(--green); }
+        .key.purple { background: var(--purple-bg); color: var(--purple); }
+        .key.teal { background: var(--teal-bg); color: var(--teal); }
+        .key.gold { background: var(--gold-bg); color: var(--gold); }
+        .key.blue { background: var(--blue-bg); color: var(--blue); }
+
+        /* ===== COMPARE GRID ===== */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 0.8rem;
+        }
+        .compare-col {
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        .compare-col.rouge {
+            background: #fff8f0;
+            border: 2px solid var(--orange);
+        }
+        .compare-col.gris {
+            background: #f5f5f5;
+            border: 2px solid #546e7a;
+        }
+        .compare-col h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .compare-col.rouge h3 { color: var(--orange); }
+        .compare-col.gris h3 { color: #546e7a; }
+        .compare-col ul {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+        .compare-col ul li {
+            padding: 0.2rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+        .compare-col ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            font-size: 0.75rem;
+        }
+        .compare-col.rouge ul li::before { color: var(--orange); }
+        .compare-col.gris ul li::before { color: #546e7a; }
+        .compare-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 0.15rem 0.6rem;
+            border-radius: 12px;
+            margin-top: 0.5rem;
+        }
+        .compare-badge.effusif { background: var(--orange-bg); color: var(--orange); }
+        .compare-badge.explosif { background: var(--red-bg); color: var(--red); }
+
+        /* ===== EXAMPLE ===== */
+        .example {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+        }
+        .example strong { color: var(--red); }
+
+        /* ===== TIP ===== */
+        .tip {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            margin-top: 0.8rem;
+            border-left: 3px solid #f39c12;
+            font-size: 0.9rem;
+        }
+
+        /* ===== SCHEMA BOUCHON ===== */
+        .schema {
+            background: #fafafa;
+            border: 2px solid var(--light);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+        }
+        .schema-step {
+            display: flex;
+            gap: 0.7rem;
+            align-items: flex-start;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .schema-step:last-child { border-bottom: none; }
+        .schema-num {
+            width: 1.6rem;
+            height: 1.6rem;
+            border-radius: 50%;
+            background: var(--red);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* ===== EXERCISE ===== */
+        .exercise-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--light);
+        }
+        .exercise-item:last-child { border-bottom: none; }
+        .exercise-number {
+            display: inline-block;
+            background: var(--purple);
+            color: var(--white);
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            margin-right: 0.4rem;
+        }
+        .answer-zone {
+            background: #fafafa;
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            min-height: 50px;
+            border: 2px dashed #b0bec5;
+            color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.8;
+            outline: none;
+            margin-top: 0.5rem;
+            transition: border-color 0.2s, background 0.2s;
+        }
+        .answer-zone:empty::before {
+            content: 'Ta r\00e9ponse\2026';
+            color: var(--gray);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        .answer-zone:focus {
+            border-color: var(--purple);
+            border-style: solid;
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(123, 31, 162, 0.12);
+        }
+
+        /* ===== CORRECTION ===== */
+        .correction {
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-top: 1rem;
+            overflow: hidden;
+            border-left: 4px solid var(--green);
+        }
+        .correction summary {
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0,121,107,0.15);
+            transition: background 0.2s;
+            list-style: none;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--green);
+        }
+        .correction summary::-webkit-details-marker { display: none; }
+        .correction summary::marker { display: none; content: ''; }
+        .correction summary:hover, .correction summary:active { background: var(--green-bg); }
+        .correction-arrow {
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+            color: var(--gray);
+            flex-shrink: 0;
+        }
+        .correction[open] .correction-arrow { transform: rotate(180deg); }
+        .correction-inner { padding: 0 1.2rem 1.2rem; }
+        .correction-item {
+            padding: 0.5rem 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+            border-bottom: 1px solid var(--light);
+        }
+        .correction-item:last-child { border-bottom: none; }
+        .answer { font-weight: 700; color: var(--green); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            color: var(--gray);
+            font-size: 0.8rem;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (min-width: 768px) {
+            .hero { padding: 4rem 2rem 3rem; }
+            .hero h1 { font-size: 2.2rem; }
+            .container { padding: 1.5rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .card { padding: 2rem; }
+        }
+        @media (max-width: 500px) {
+            .compare-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== PRINT ===== */
+        @media print {
+            .nav { display: none; }
+            .hero { padding: 1.5rem; }
+            .correction { display: none; }
+            body { background: white; }
+            .answer-zone { min-height: 60px; border-style: solid; }
+            .answer-zone:empty::before { content: ''; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== HERO ===== -->
+<header class="hero">
+    <div class="hero-icon">&#127755;</div>
+    <h1>S11 &ndash; Les types d'&eacute;ruptions volcaniques</h1>
+    <p class="subtitle">Quelles sont les sortes d'&eacute;ruptions&nbsp;?</p>
+    <p class="collection">CM1 &bull; Sciences</p>
+</header>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" role="navigation">
+    <a href="#lecon">Le&ccedil;on</a>
+    <a href="#bouchon">Le bouchon</a>
+    <a href="#exercices">Exercices</a>
+    <a href="#retenir">&Agrave; retenir</a>
+</nav>
+
+<!-- ===== MAIN ===== -->
+<main class="container">
+
+    <!-- LEÇON -->
+    <section id="lecon">
+        <div class="section-header">
+            <span class="section-icon">&#128218;</span>
+            <h2>La le&ccedil;on &ndash; Deux types de volcans</h2>
+        </div>
+        <div class="card">
+            <p>Il existe <strong>deux types de volcans</strong>, qui ont des &eacute;ruptions tr&egrave;s diff&eacute;rentes&nbsp;:</p>
+            <div class="compare-grid">
+                <div class="compare-col rouge">
+                    <h3>&#128308; Volcan rouge</h3>
+                    <ul>
+                        <li>Coul&eacute;es de lave</li>
+                        <li>Lave fluide</li>
+                        <li>S'&eacute;coule lentement</li>
+                        <li>Moins dangereux</li>
+                    </ul>
+                    <span class="compare-badge effusif">Volcan effusif</span>
+                </div>
+                <div class="compare-col gris">
+                    <h3>&#9899; Volcan gris</h3>
+                    <ul>
+                        <li>Explosions violentes</li>
+                        <li>Panaches de fum&eacute;e</li>
+                        <li>Nu&eacute;es ardentes</li>
+                        <li>Explosions de blocs</li>
+                    </ul>
+                    <span class="compare-badge explosif">Volcan explosif &#9888;</span>
+                </div>
+            </div>
+            <div class="tip">
+                <strong>&#9888; Les volcans gris sont plus dangereux</strong> car leurs &eacute;ruptions sont soudaines et tr&egrave;s violentes.
+            </div>
+        </div>
+        <div class="card orange">
+            <div class="key orange">Exemples de volcans</div>
+            <div class="example">
+                &#128308; <strong>Piton de la Fournaise</strong> (R&eacute;union) &rarr; volcan effusif<br>
+                &#9899; <strong>Mont Saint Helens</strong> (USA), <strong>Pinatubo</strong> (Philippines) &rarr; volcans explosifs
+            </div>
+        </div>
+    </section>
+
+    <!-- LE BOUCHON -->
+    <section id="bouchon">
+        <div class="section-header">
+            <span class="section-icon">&#128293;</span>
+            <h2>Pourquoi les volcans explosifs explosent-ils&nbsp;?</h2>
+        </div>
+        <div class="card teal">
+            <div class="key teal">Un magma visqueux</div>
+            <p>Le magma des volcans explosifs est beaucoup plus <strong>visqueux</strong>, comme le miel. Quand il remonte vers la surface, il se d&eacute;place <strong>difficilement</strong>.</p>
+            <div class="example">
+                &#128197; Magma fluide (volcan rouge) = comme de l'eau<br>
+                &#127855; Magma visqueux (volcan gris) = comme du miel
+            </div>
+        </div>
+        <div class="card red">
+            <div class="key red">La formation du bouchon</div>
+            <p>Le magma visqueux s'accumule vers le sommet et forme un <strong>bouchon</strong>. La pression des gaz augmente sous ce bouchon jusqu'&agrave; ce que tout <strong>explose</strong>.</p>
+            <div class="schema">
+                <div class="schema-step">
+                    <div class="schema-num">1</div>
+                    <div>Le magma <strong>visqueux</strong> remonte lentement depuis les profondeurs.</div>
+                </div>
+                <div class="schema-step">
+                    <div class="schema-num">2</div>
+                    <div>Il s'accumule au sommet et forme un <strong>bouchon</strong> qui bloque la chemin&eacute;e.</div>
+                </div>
+                <div class="schema-step">
+                    <div class="schema-num">3</div>
+                    <div>La <strong>pression des gaz</strong> augmente sous le bouchon.</div>
+                </div>
+                <div class="schema-step">
+                    <div class="schema-num">4</div>
+                    <div>Tout <strong>explose</strong> en projetant de grosses quantit&eacute;s de mati&egrave;res&nbsp;: cendres, blocs, nu&eacute;es ardentes.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXERCICES -->
+    <section id="exercices">
+        <div class="section-header">
+            <span class="section-icon">&#9998;&#65039;</span>
+            <h2>Exercices</h2>
+        </div>
+        <div class="card exercise">
+            <p>R&eacute;ponds aux questions en t'aidant de la le&ccedil;on.</p>
+
+            <div class="exercise-item">
+                <span class="exercise-number">1</span>
+                <span>Combien existe-t-il de types de volcans&nbsp;? Comment les appelle-t-on&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">2</span>
+                <span>Par quoi les volcans rouges sont-ils caract&eacute;ris&eacute;s&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">3</span>
+                <span>Cite trois caract&eacute;ristiques des volcans gris.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">4</span>
+                <span>Lequel est le plus dangereux&nbsp;? Pourquoi&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">5</span>
+                <span>&Agrave; quoi compare-t-on le magma des volcans explosifs&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">6</span>
+                <span>Qu'est-ce qu'un bouchon&nbsp;? Comment se forme-t-il&nbsp;?</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">7</span>
+                <span>Explique avec tes mots pourquoi un volcan explosif explose.</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">8</span>
+                <span>Vrai ou faux&nbsp;? &laquo;&nbsp;Le Piton de la Fournaise est un volcan explosif.&nbsp;&raquo;</span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">9</span>
+                <span>Classe chaque mot dans la bonne colonne&nbsp;: <em>coul&eacute;e de lave &bull; nu&eacute;e ardente &bull; lave fluide &bull; panache de fum&eacute;e &bull; magma visqueux &bull; s'&eacute;coule lentement</em></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+
+            <div class="exercise-item">
+                <span class="exercise-number">10</span>
+                <span>Remets les &eacute;tapes dans l'ordre pour expliquer l'explosion d'un volcan gris&nbsp;:<br>
+                <em>A. Tout explose &mdash; B. Magma visqueux remonte &mdash; C. Pression des gaz augmente &mdash; D. Bouchon se forme</em></span>
+                <div class="answer-zone" contenteditable="true"></div>
+            </div>
+        </div>
+        <details class="correction">
+            <summary>
+                <span>&#9989; Voir la correction</span>
+                <span class="correction-arrow">&#9660;</span>
+            </summary>
+            <div class="correction-inner">
+                <div class="correction-item"><strong>1)</strong> Il existe <span class="answer">deux types de volcans</span>&nbsp;: les volcans <span class="answer">rouges (effusifs)</span> et les volcans <span class="answer">gris (explosifs)</span>.</div>
+                <div class="correction-item"><strong>2)</strong> Par des <span class="answer">coul&eacute;es de lave</span>.</div>
+                <div class="correction-item"><strong>3)</strong> <span class="answer">Explosions violentes, panaches de fum&eacute;e, nu&eacute;es ardentes</span> (et explosions de blocs).</div>
+                <div class="correction-item"><strong>4)</strong> Le <span class="answer">volcan gris (explosif)</span> est plus dangereux car ses &eacute;ruptions sont soudaines et tr&egrave;s violentes.</div>
+                <div class="correction-item"><strong>5)</strong> Au <span class="answer">miel</span> &ndash; le magma est visqueux et se d&eacute;place difficilement.</div>
+                <div class="correction-item"><strong>6)</strong> Un bouchon est une <span class="answer">accumulation de magma visqueux au sommet du volcan</span> qui bloque la chemin&eacute;e.</div>
+                <div class="correction-item"><strong>7)</strong> Le magma visqueux <span class="answer">s'accumule et forme un bouchon</span>. Les gaz compriment sous ce bouchon. Quand la pression est trop forte, <span class="answer">tout explose</span>.</div>
+                <div class="correction-item"><strong>8)</strong> <span class="answer">Faux.</span> Le Piton de la Fournaise est un volcan effusif (rouge).</div>
+                <div class="correction-item"><strong>9)</strong>
+                    Volcan rouge&nbsp;: <span class="answer">coul&eacute;e de lave, lave fluide, s'&eacute;coule lentement</span><br>
+                    Volcan gris&nbsp;: <span class="answer">nu&eacute;e ardente, panache de fum&eacute;e, magma visqueux</span>
+                </div>
+                <div class="correction-item"><strong>10)</strong> <span class="answer">B &rarr; D &rarr; C &rarr; A</span> (magma remonte &rarr; bouchon &rarr; pression augmente &rarr; explosion)</div>
+            </div>
+        </details>
+    </section>
+
+    <!-- À RETENIR -->
+    <section id="retenir">
+        <div class="section-header">
+            <span class="section-icon">&#11088;</span>
+            <h2>&Agrave; retenir</h2>
+        </div>
+        <div class="card red">
+            <p><strong>Volcan rouge (effusif)</strong>&nbsp;: coul&eacute;es de lave fluide. Moins dangereux.</p>
+            <p><strong>Volcan gris (explosif)</strong>&nbsp;: magma visqueux &rarr; bouchon &rarr; pression &rarr; explosion violente. Plus dangereux.</p>
+        </div>
+        <div class="card">
+            <div class="key red">Mots cl&eacute;s</div>
+            <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.6rem;">
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--orange-bg);color:var(--orange);">Volcan effusif</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--red-bg);color:var(--red);">Volcan explosif</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--teal-bg);color:var(--teal);">Magma visqueux</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--purple-bg);color:var(--purple);">Bouchon</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--gold-bg);color:var(--gold);">Nu&eacute;e ardente</span>
+                <span style="display:inline-block;padding:0.3rem 0.8rem;border-radius:20px;font-size:0.85rem;font-weight:600;background:var(--blue-bg);color:var(--blue);">Pression des gaz</span>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>S11 &bull; Les types d'&eacute;ruptions volcaniques</p>
+    <p>CM1 &bull; Sciences</p>
+</footer>
+
+</body>
+</html>
