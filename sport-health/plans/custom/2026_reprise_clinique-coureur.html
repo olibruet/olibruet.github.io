@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan reprise course — Clinique du Coureur — 2026</title>
+<style>
+  :root {
+    --color-marche: #6B7280;
+    --color-marche-light: #f3f4f6;
+    --color-mix: #D97706;
+    --color-mix-light: #fef3c7;
+    --color-continu: #059669;
+    --color-continu-light: #d1fae5;
+    --color-renfo: #2563EB;
+    --color-renfo-light: #dbeafe;
+    --color-piscine: #0891B2;
+    --color-piscine-light: #cffafe;
+    --color-info: #e8f0fe;
+    --color-info-border: #93b4f0;
+    --color-warn: #fff8e1;
+    --color-warn-border: #f5c542;
+    --color-green: #d1fae5;
+    --color-green-border: #059669;
+    --color-red: #fee2e2;
+    --color-red-border: #DC2626;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #222; background: #f5f5f5; margin: 0; padding: 0; }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  h1 { text-align: center; font-size: 1.7rem; margin-bottom: 0.2em; color: #111; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 0.5em; font-size: 0.95rem; }
+  .meta { text-align: center; color: #777; font-size: 0.85rem; margin-bottom: 2em; }
+
+  .card { background: #fff; border-radius: 10px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .card-header { padding: 14px 24px; color: #fff; font-weight: 700; font-size: 1.05rem; }
+  .card-body { padding: 20px 24px; }
+  .card-body h3 { font-size: 1rem; margin-top: 1.2em; margin-bottom: 0.4em; }
+  .card-body h3:first-child { margin-top: 0; }
+  .card-body ul, .card-body ol { padding-left: 1.3em; }
+
+  .info-box { background: var(--color-info); border-left: 4px solid var(--color-info-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #1a3a6a; }
+  .warn-box { background: var(--color-warn); border-left: 4px solid var(--color-warn-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #7a5e00; }
+  .green-box { background: var(--color-green); border-left: 4px solid var(--color-green-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #065f46; }
+  .red-box { background: var(--color-red); border-left: 4px solid var(--color-red-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #991b1b; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+  th { background: #f0f0f0; text-align: left; padding: 8px 10px; font-weight: 600; border-bottom: 2px solid #ddd; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-right: 4px; }
+  .tag-marche { background: var(--color-marche-light); color: var(--color-marche); }
+  .tag-mix { background: var(--color-mix-light); color: var(--color-mix); }
+  .tag-continu { background: var(--color-continu-light); color: var(--color-continu); }
+  .tag-renfo { background: var(--color-renfo-light); color: var(--color-renfo); }
+  .tag-piscine { background: var(--color-piscine-light); color: var(--color-piscine); }
+
+  .toc { background: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .toc h2 { font-size: 1.1rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 8px; }
+  .toc ol { padding-left: 1.3em; margin: 0; }
+  .toc li { margin: 5px 0; }
+  .toc a { color: var(--color-mix); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.85em; }
+  strong { color: #111; }
+  @media (max-width: 600px) { .container { padding: 16px 10px; } .card-body { padding: 16px; } h1 { font-size: 1.3rem; } table { font-size: 0.78rem; } td, th { padding: 5px 6px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Plan reprise course &mdash; Clinique du Coureur</h1>
+<p class="subtitle">Post-blessure soléaire G &mdash; validé Dr Nado 11/05/2026</p>
+<p class="meta">14 séances &bull; 12/05 → 07/06/2026 &bull; 1 sortie tous les 2 jours &bull; Prépa 10 km Biganos 19/07</p>
+
+<!-- TOC -->
+<div class="toc">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#contexte">Contexte</a></li>
+    <li><a href="#principe">Principe du protocole</a></li>
+    <li><a href="#allures">Allures et FC</a></li>
+    <li><a href="#calendrier">Calendrier détaillé</a></li>
+    <li><a href="#regles">Règles non négociables</a></li>
+    <li><a href="#jours-off">Jours OFF course — travail</a></li>
+    <li><a href="#signaux">Signaux progression / régression</a></li>
+    <li><a href="#apres">Après le protocole</a></li>
+  </ol>
+</div>
+
+<!-- 1. CONTEXTE -->
+<div class="card" id="contexte">
+  <div class="card-header" style="background:#0E7490">Contexte</div>
+  <div class="card-body">
+    <ul>
+      <li><strong>Blessure</strong> : séquelle lésion myoaponévrotique 1/3 moyen soléaire G (05/01/2026)</li>
+      <li><strong>Dernière sortie course</strong> : 16/02/2026 (rechute EF)</li>
+      <li><strong>Arrêt course</strong> : 72 jours (16/02 → 28/04 — 1res min tapis kiné)</li>
+      <li><strong>Prépa kiné</strong> : 2×/sem depuis fév 2026, excentrique chargé jusqu'à 60 kg barre (11/05), plio unipodale, fentes sautées, course tapis 15 min @ 7.5 km/h sans douleur (07/05)</li>
+      <li><strong>Échographie 11/05</strong> : cicatrisation complète (lésion non visualisée, pas de collection, pas de cicatrice fibreuse, pas d'hyperhémie au doppler)</li>
+      <li><strong>Semelles orthopédiques</strong> sur mesure (Yann Parinaud 21/04) — à porter dès R1</li>
+    </ul>
+    <div class="green-box">
+      <strong>GO reprise course validé par Dr Nado 11/05/2026.</strong> Protocole reprise simplifié Clinique du Coureur.
+    </div>
+  </div>
+</div>
+
+<!-- 2. PRINCIPE -->
+<div class="card" id="principe">
+  <div class="card-header" style="background:#4A5568">Principe du protocole</div>
+  <div class="card-body">
+    <p>Reprise très progressive en 2 séries de 7 paliers, espacement 48h minimum (jamais 2 jours consécutifs).</p>
+    <table>
+      <tr><th>Série</th><th>Type</th><th>Progression durée</th></tr>
+      <tr>
+        <td><span class="tag tag-mix">Série 1</span> R1 → R7</td>
+        <td>Alternance <strong>1' course / 1' marche</strong></td>
+        <td>5 → 35 min par paliers de 5 min</td>
+      </tr>
+      <tr>
+        <td><span class="tag tag-continu">Série 2</span> R8 → R14</td>
+        <td><strong>Course continue</strong></td>
+        <td>5 → 35 min par paliers de 5 min</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- 3. ALLURES -->
+<div class="card" id="allures">
+  <div class="card-header" style="background:#7C3AED">Allures et FC</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Zone</th><th>Allure cible</th><th>FC cible</th><th>Sensation</th></tr>
+      <tr><td>Course série 1</td><td>6'00-6'30/km</td><td>&lt; 145 bpm</td><td>Trottiner très cool</td></tr>
+      <tr><td>Course série 2</td><td>5'45-6'15/km</td><td><strong>&lt; 150 bpm strict</strong></td><td>EF franche, conversation facile</td></tr>
+      <tr><td>Marche série 1</td><td>~7-8 km/h</td><td>—</td><td>Active, pas balade</td></tr>
+    </table>
+    <div class="red-box">
+      <strong>Règle absolue : FC &lt; 150 bpm.</strong> Pattern 2023-2024 : EF à 192 bpm = mollet blessé. 2025 EF cool = zéro blessure.
+    </div>
+  </div>
+</div>
+
+<!-- 4. CALENDRIER -->
+<div class="card" id="calendrier">
+  <div class="card-header" style="background:var(--color-mix)">Calendrier détaillé</div>
+  <div class="card-body">
+    <h3>Série 1 — alternance 1' course / 1' marche</h3>
+    <table>
+      <tr><th>#</th><th>Date</th><th>Jour</th><th>Durée</th><th>Structure</th></tr>
+      <tr><td>R1</td><td>12/05</td><td>mar</td><td>6 min</td><td>3×(1'C/1'M)</td></tr>
+      <tr><td>R2</td><td>14/05</td><td>jeu</td><td>10 min</td><td>5×(1'C/1'M)</td></tr>
+      <tr><td>R3</td><td>16/05</td><td>sam</td><td>16 min</td><td>8×(1'C/1'M)</td></tr>
+      <tr><td>R4</td><td>18/05</td><td>lun</td><td>20 min</td><td>10×(1'C/1'M)</td></tr>
+      <tr><td>R5</td><td>20/05</td><td>mer</td><td>26 min</td><td>13×(1'C/1'M)</td></tr>
+      <tr><td>R6</td><td>22/05</td><td>ven</td><td>30 min</td><td>15×(1'C/1'M)</td></tr>
+      <tr><td>R7</td><td>24/05</td><td>dim</td><td>36 min</td><td>18×(1'C/1'M)</td></tr>
+    </table>
+    <h3>Série 2 — course continue</h3>
+    <table>
+      <tr><th>#</th><th>Date</th><th>Jour</th><th>Durée</th><th>Type</th></tr>
+      <tr><td>R8</td><td>26/05</td><td>mar</td><td>5 min</td><td>continu — 1re depuis 16/02</td></tr>
+      <tr><td>R9</td><td>28/05</td><td>jeu</td><td>10 min</td><td>continu</td></tr>
+      <tr><td>R10</td><td>30/05</td><td>sam</td><td>15 min</td><td>continu</td></tr>
+      <tr><td>R11</td><td>01/06</td><td>lun</td><td>20 min</td><td>continu</td></tr>
+      <tr><td>R12</td><td>03/06</td><td>mer</td><td>25 min</td><td>continu</td></tr>
+      <tr><td>R13</td><td>05/06</td><td>ven</td><td>30 min</td><td>continu</td></tr>
+      <tr><td>R14</td><td>07/06</td><td>dim</td><td>35 min</td><td>continu — fin protocole</td></tr>
+    </table>
+    <div class="info-box">
+      <strong>Échauffement / retour au calme à chaque sortie :</strong>
+      <ul style="margin:6px 0 0">
+        <li>5 min marche active avant le bloc course</li>
+        <li>3 min marche après le bloc course</li>
+        <li>Étirements doux chaînes postérieures (sole plantaire → mollets → ischios)</li>
+        <li>Rouleau mollets + ischios</li>
+      </ul>
+    </div>
+    <div class="green-box">
+      <strong>14 séances envoyées sur Garmin Connect</strong> et planifiées dans le calendrier (12/05 → 07/06). HR zone Z2 sur les séries continues.
+    </div>
+  </div>
+</div>
+
+<!-- 5. RÈGLES -->
+<div class="card" id="regles">
+  <div class="card-header" style="background:#DC2626">Règles non négociables</div>
+  <div class="card-body">
+    <ol>
+      <li><strong>Stop net si tirage ou douleur</strong> pendant ou après course — pas de "voir si ça passe"</li>
+      <li><strong>FC &lt; 150 bpm</strong> en série 2 (zéro exception)</li>
+      <li><strong>Semelles orthopédiques dès R1</strong></li>
+      <li><strong>Vérif J+1</strong> : si chaud, raideur ou tirage persistant &gt; J+1 → repos suppl, pas de progression palier</li>
+      <li><strong>Espacement 48h min</strong> entre 2 sorties course</li>
+      <li><strong>Pas de cumul Stanish + course</strong> le même jour (Dr Nado 26/03)</li>
+      <li><strong>Pas de piscine intense</strong> le même jour qu'une course</li>
+      <li><strong>Surface plat uniquement</strong> — route ou chemin roulant. Pas de côtes, pas de trail technique</li>
+    </ol>
+  </div>
+</div>
+
+<!-- 6. JOURS OFF -->
+<div class="card" id="jours-off">
+  <div class="card-header" style="background:var(--color-renfo)">Jours OFF course — travail</div>
+  <div class="card-body">
+    <div class="warn-box">
+      Dr Nado n'a pas redonné de nouvelles séances kiné le 11/05 (15 séances ordonnance du 26/03). <strong>Prochains RDV kiné : lun 18/05 + jeu 21/05</strong> — vérifier solde ordonnance et nouvelle prescription si besoin.
+    </div>
+    <h3><span class="tag tag-renfo">Renfo</span>Bloc renfo maison (jours OFF course)</h3>
+    <table>
+      <tr><th>Exercice</th><th>Séries × Reps</th><th>Notes</th></tr>
+      <tr><td>Stanish bilatéral (descente lente)</td><td>2×20</td><td>Échauffement</td></tr>
+      <tr><td>Stanish unipodal G descente lente</td><td>2×15</td><td>Soléaire ciblé</td></tr>
+      <tr><td>Stanish unipodal D descente lente</td><td>2×15</td><td>Équilibre côtés</td></tr>
+      <tr><td>Fente avant + montée talons + équilibre 10s</td><td>2×10 chaque côté</td><td>Proprio + mollet</td></tr>
+      <tr><td>Équilibre unipodal yeux fermés</td><td>2×30s chaque côté</td><td>Proprio cheville</td></tr>
+      <tr><td>Étirements chaînes postérieures (sole → mollet → ischio)</td><td>2×30s chaque chaîne</td><td>Mobilité</td></tr>
+      <tr><td>Rouleau mollet + ischio</td><td>5 min</td><td>Récup tissulaire</td></tr>
+    </table>
+    <div class="red-box">
+      <strong>Stanish jours OFF course uniquement.</strong> Dr Nado : pas cumul Stanish + course le même jour.
+    </div>
+    <h3><span class="tag tag-renfo">Renfo</span>Renfo ischios + fessiers (1-2×/sem)</h3>
+    <ul>
+      <li>Hip thrust ou pont fessier 3×15</li>
+      <li>Soulevé de terre roumain (poids de corps ou léger) 3×12</li>
+      <li>Squat unipodal contrôlé 3×10 chaque côté</li>
+    </ul>
+    <h3><span class="tag tag-piscine">Piscine</span>Cross-training piscine</h3>
+    <ul>
+      <li><strong>1-2 séances/semaine</strong> en pullbuoy (aérobie bras)</li>
+      <li>Jamais de brasse (fouetté → mollet)</li>
+      <li>Voir <a href="2026_piscine_cross-training.html">plan piscine cross-training</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- 7. SIGNAUX -->
+<div class="card" id="signaux">
+  <div class="card-header" style="background:#7C3AED">Signaux progression / régression</div>
+  <div class="card-body">
+    <div class="green-box">
+      <strong>✅ OK pour passer au palier suivant</strong>
+      <ul style="margin:6px 0 0">
+        <li>Aucune douleur ni tirage pendant la course</li>
+        <li>Aucune raideur &gt; J+1</li>
+        <li>FC reste &lt; 150 bpm en série 2</li>
+        <li>Sensations correctes, pas de fatigue excessive</li>
+      </ul>
+    </div>
+    <div class="red-box">
+      <strong>🚨 Stop / régression</strong>
+      <ul style="margin:6px 0 0">
+        <li>Tirage sur le point de contraction soléaire (signal lésionnel comme le 19/03)</li>
+        <li>Douleur J+1 ou J+2 (rappel : rechutes 07/02 et 16/02 sur ce schéma)</li>
+        <li>Raideur persistante au lever</li>
+        <li>Boitement</li>
+      </ul>
+      → Repos 2-3 jours + signal kiné + redescente d'un palier ou retour au 1'/1'.
+    </div>
+  </div>
+</div>
+
+<!-- 8. APRÈS -->
+<div class="card" id="apres">
+  <div class="card-header" style="background:var(--color-continu)">Après le protocole (08/06 → 19/07)</div>
+  <div class="card-body">
+    <ul>
+      <li>6 semaines de spécifique 10 km</li>
+      <li>Plan : <a href="2026_10km_42min_3s.html">Plan 10 km 42'00 — La Boienne Biganos</a></li>
+      <li>Phase 1 : reprise du volume EF + 1re séance qualité légère</li>
+      <li>Phase 2 : VMA + allure spé progressives</li>
+      <li>Phase 3 : affûtage</li>
+    </ul>
+    <div class="info-box">
+      <strong>Adapter le plan 10 km en début juin</strong> selon sensations fin protocole (35 min continu doit être facile).
+    </div>
+  </div>
+</div>
+
+<p style="text-align:center; color:#999; font-size:0.8rem; margin-top:40px;">
+  Plan v1 — validé Dr Sébastien Nado (IMCS Bordeaux) le 11/05/2026 — généré 11/05/2026
+</p>
+
+</div>
+</body>
+</html>
