@@ -86,9 +86,12 @@
     margin-bottom: 1rem;
     color: white;
   }
+  .phase-header.p0 { background: linear-gradient(135deg, #dc2626, #991b1b); }
   .phase-header.p1 { background: linear-gradient(135deg, #00b4d8, #0077b6); }
   .phase-header.p2 { background: linear-gradient(135deg, #ff8f00, #f57c00); }
   .phase-header.p3 { background: linear-gradient(135deg, #9c27b0, #7b1fa2); }
+  .phase-header.active { box-shadow: 0 0 0 3px #fef3c7; }
+  .badge-active { display: inline-block; background: #fbbf24; color: #78350f; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; margin-left: 8px; }
   .phase-header h2 { font-size: 1.1rem; flex: 1; }
   .phase-header .phase-info {
     font-size: 0.8rem;
@@ -262,6 +265,151 @@
   <strong>Matériel :</strong> Pullbuoy, plaquettes, élastique chevilles.
 </div>
 
+<!-- ============ PHASE 0 — REPRISE POST-BLESSURE ============ -->
+<div class="phase">
+  <div class="phase-header p0 active">
+    <h2>Phase 0 — Reprise post-blessure mollet<span class="badge-active">ACTIVE</span></h2>
+    <div class="phase-info">S1 → S4<br>12/05 → 07/06<br>2x/sem</div>
+  </div>
+  <p class="phase-desc">Phase active actuelle. Course remonte progressivement (15-35 min continu) via protocole Clinique du Coureur. Volume running faible → la piscine reste un pilier cardio actif, pas une récup. Volume hebdo : ~3 200-3 500m.</p>
+
+  <table style="margin-bottom: 1rem;">
+    <thead><tr><th>Sem</th><th>Période</th><th>Séance 1 (Mar)</th><th>Séance 2 (Sam)</th><th>Volume</th></tr></thead>
+    <tbody>
+      <tr><td>S1</td><td>12/05 → 18/05</td><td>RC1 (1700m)</td><td>RC4 (1700m)</td><td>3 400m</td></tr>
+      <tr><td>S2</td><td>19/05 → 25/05</td><td>RC2 (1800m)</td><td>RC3 (1600m)</td><td>3 400m</td></tr>
+      <tr><td>S3</td><td>26/05 → 01/06</td><td>RC5 (1500m)</td><td>RC6 (1500m)</td><td>3 000m</td></tr>
+      <tr><td>S4</td><td>02/06 → 07/06</td><td>RC2 (1800m)</td><td>RC1 (1700m)</td><td>3 500m</td></tr>
+    </tbody>
+  </table>
+
+  <div class="session aerobie">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>RC1 — Aérobie progressif</h3>
+      <span class="tag aerobie">Aérobie</span>
+      <span class="distance">1 700m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Base aérobie, monter la FC progressivement sur 4 paliers.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>200m crawl + 100m dos souple</td><td class="dist">300m</td></tr>
+          <tr><td class="bloc">Corps</td><td>4×300m crawl PB progressif (1'50 → 1'45 → 1'40 → 1'35) — R:30" Lap manuel</td><td class="dist">1 200m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos deux bras</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session fartlek">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>RC2 — Fartlek allures</h3>
+      <span class="tag fartlek">Fartlek</span>
+      <span class="distance">1 800m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Changements d'allure, simule fractionné seuil sans à-coup. Idéal cardio.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Fartlek</td><td>10×100m PB alternés : impairs confort (~1'50") / pairs soutenu (~1'35") — R:15" Lap manuel</td><td class="dist">1 000m</td></tr>
+          <tr><td class="bloc">Récup active</td><td>200m dos souple</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Série</td><td>4×50m crawl PB sprint — R:25" Lap manuel</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session cardio">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>RC3 — Seuil 6×150m</h3>
+      <span class="tag cardio">Seuil</span>
+      <span class="distance">1 600m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Travail seuil/soutenu, FC élevée (160+ bpm). Allure ~1'40/100m.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Série 1</td><td>6×150m crawl PB soutenu (~1'40/100m) — R:25" Lap manuel</td><td class="dist">900m</td></tr>
+          <tr><td class="bloc">Récup active</td><td>100m dos</td><td class="dist">100m</td></tr>
+          <tr><td class="bloc">Série 2</td><td>4×50m plaquettes puissance — R:20" Lap manuel</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session puissance">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>RC4 — Puissance bras</h3>
+      <span class="tag puissance">Puissance</span>
+      <span class="distance">1 700m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Force pure, plaquettes + élastique. Compense déficit course pour force musculaire.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>400m mix crawl/dos</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Série 1</td><td>8×50m crawl plaquettes (puissance) — R:20" Lap manuel</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Série 2</td><td>4×100m PB + élastique chevilles (25m dos / 75m crawl) — R:30" Lap manuel</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Série 3</td><td>6×50m plaquettes soutenu — R:20" Lap manuel</td><td class="dist">300m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session cardio">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>RC5 — Pyramide tempo</h3>
+      <span class="tag cardio">Tempo</span>
+      <span class="distance">1 500m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Pyramide montante puis descendante.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Pyramide</td><td>PB tempo : 100m R:15" → 200m R:20" → 300m R:30" → 200m R:20" → 100m R:15" — Lap manuel</td><td class="dist">900m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos souple</td><td class="dist">200m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="session sprint">
+    <div class="session-header" onclick="toggle(this)">
+      <h3>RC6 — Sprints courts</h3>
+      <span class="tag sprint">Sprint</span>
+      <span class="distance">1 500m</span>
+      <span class="chevron">›</span>
+    </div>
+    <div class="session-body">
+      <p class="session-note">Vivacité cardio, sprints courts répétés. FC très élevée.</p>
+      <table>
+        <thead><tr><th>Bloc</th><th>Détail</th><th>Dist.</th></tr></thead>
+        <tbody>
+          <tr><td class="bloc">Échauffement</td><td>300m crawl + 100m dos</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Série 1</td><td>12×50m crawl PB sprint — R:25" Lap manuel (viser 160+ bpm)</td><td class="dist">600m</td></tr>
+          <tr><td class="bloc">Récup active</td><td>200m dos souple</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Série 2</td><td>4×50m plaquettes soutenu — R:20" Lap manuel</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Récup</td><td>100m souple</td><td class="dist">100m</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <!-- ============ PHASE 1 ============ -->
 <div class="phase">
   <div class="phase-header p1">
@@ -327,7 +475,7 @@
           <tr><td class="bloc">Échauffement</td><td>200m crawl / 200m dos</td><td class="dist">400m</td></tr>
           <tr><td class="bloc">Série 1</td><td>8x50m crawl PB + plaquettes (puissance) — R:20"</td><td class="dist">400m</td></tr>
           <tr><td class="bloc">Série 2</td><td>4x100m PB + élastique (25m dos / 75m crawl) — R:20"</td><td class="dist">400m</td></tr>
-          <tr><td class="bloc">Récup</td><td>200m dos + 200m brasse souple</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Récup</td><td>400m NL PB souple</td><td class="dist">400m</td></tr>
         </tbody>
       </table>
     </div>
@@ -356,7 +504,7 @@
         <tbody>
           <tr><td class="bloc">Corps</td><td>400m crawl PB très souple (~2'00"/100m)</td><td class="dist">400m</td></tr>
           <tr><td class="bloc">Alternance</td><td>4x100m (50m dos / 50m crawl) PB souple — R:15"</td><td class="dist">400m</td></tr>
-          <tr><td class="bloc">Récup</td><td>200m dos deux bras + 200m brasse coulée</td><td class="dist">400m</td></tr>
+          <tr><td class="bloc">Récup</td><td>200m dos deux bras + 200m NL PB souple</td><td class="dist">400m</td></tr>
         </tbody>
       </table>
     </div>
@@ -448,7 +596,7 @@
         <tbody>
           <tr><td class="bloc">Dos</td><td>400m dos deux bras, très souple</td><td class="dist">400m</td></tr>
           <tr><td class="bloc">Crawl</td><td>400m crawl PB rattrapé, allonger chaque mouvement</td><td class="dist">400m</td></tr>
-          <tr><td class="bloc">Mix</td><td>200m (50m dos / 50m brasse) × 2</td><td class="dist">200m</td></tr>
+          <tr><td class="bloc">Mix</td><td>200m (50m dos / 50m NL PB) × 2</td><td class="dist">200m</td></tr>
           <tr><td class="bloc">Récup</td><td>200m au choix, très souple</td><td class="dist">200m</td></tr>
         </tbody>
       </table>
