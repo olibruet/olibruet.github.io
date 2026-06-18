@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan v3 10 km — La Boïenne Biganos 2026 (exploratoire)</title>
+<style>
+  :root {
+    --color-ef: #059669;
+    --color-ef-light: #d1fae5;
+    --color-seuil: #D97706;
+    --color-seuil-light: #fef3c7;
+    --color-as: #EA580C;
+    --color-as-light: #ffedd5;
+    --color-renfo: #2563EB;
+    --color-renfo-light: #dbeafe;
+    --color-piscine: #0891B2;
+    --color-piscine-light: #cffafe;
+    --color-repos: #6B7280;
+    --color-course: #DC2626;
+    --color-course-light: #fee2e2;
+    --color-info: #e8f0fe;
+    --color-info-border: #93b4f0;
+    --color-warn: #fff8e1;
+    --color-warn-border: #f5c542;
+    --color-green: #d1fae5;
+    --color-green-border: #059669;
+    --color-red: #fee2e2;
+    --color-red-border: #DC2626;
+    --accent: #0E7490;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #222; background: #f5f5f5; margin: 0; padding: 0; }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  h1 { text-align: center; font-size: 1.7rem; margin-bottom: 0.2em; color: #111; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 0.5em; font-size: 0.95rem; }
+  .meta { text-align: center; color: #777; font-size: 0.85rem; margin-bottom: 2em; }
+  .version-badge { display: inline-block; background: var(--color-ef); color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; vertical-align: middle; margin-left: 8px; }
+
+  .card { background: #fff; border-radius: 10px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .card-header { padding: 14px 24px; color: #fff; font-weight: 700; font-size: 1.05rem; }
+  .card-body { padding: 20px 24px; }
+  .card-body h3 { font-size: 1rem; margin-top: 1.2em; margin-bottom: 0.4em; }
+  .card-body h3:first-child { margin-top: 0; }
+  .card-body ul, .card-body ol { padding-left: 1.3em; }
+
+  .info-box { background: var(--color-info); border-left: 4px solid var(--color-info-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #1a3a6a; }
+  .warn-box { background: var(--color-warn); border-left: 4px solid var(--color-warn-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #7a5e00; }
+  .green-box { background: var(--color-green); border-left: 4px solid var(--color-green-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #065f46; }
+  .red-box { background: var(--color-red); border-left: 4px solid var(--color-red-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #991b1b; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.85rem; }
+  th { background: #f0f0f0; text-align: left; padding: 8px 10px; font-weight: 600; border-bottom: 2px solid #ddd; }
+  td { padding: 7px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  .week-header { padding: 12px 24px; color: #fff; font-weight: 700; font-size: 1rem; }
+  .week-distance { background: var(--color-ef); }
+  .week-vitesse { background: var(--color-as); }
+  .week-affut { background: var(--accent); }
+  .week-course { background: var(--color-course); }
+
+  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; margin-right: 4px; }
+  .tag-ef { background: var(--color-ef-light); color: var(--color-ef); }
+  .tag-seuil { background: var(--color-seuil-light); color: var(--color-seuil); }
+  .tag-as { background: var(--color-as-light); color: var(--color-as); }
+  .tag-renfo { background: var(--color-renfo-light); color: var(--color-renfo); }
+  .tag-piscine { background: var(--color-piscine-light); color: var(--color-piscine); }
+  .tag-repos { background: #f3f4f6; color: var(--color-repos); }
+  .tag-course { background: var(--color-course-light); color: var(--color-course); }
+  .tag-test { background: #fee2e2; color: #DC2626; border: 1px solid #DC2626; }
+  .tag-star { background: #fef3c7; color: #92400e; border: 1px solid #f59e0b; }
+  .tag-kine { background: #ede9fe; color: #7C3AED; }
+
+  .toc { background: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .toc h2 { font-size: 1.1rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 8px; }
+  .toc ol { padding-left: 1.3em; margin: 0; }
+  .toc li { margin: 5px 0; }
+  .toc a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.85em; }
+  strong { color: #111; }
+  @media (max-width: 600px) { .container { padding: 16px 10px; } .card-body { padding: 16px; } h1 { font-size: 1.3rem; } table { font-size: 0.78rem; } td, th { padding: 5px 6px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Plan 10 km <span class="version-badge">v3 — exploratoire</span></h1>
+<p class="subtitle">La Boïenne — Biganos — dim 19/07/2026 — départ 10h</p>
+<p class="meta">Course exploratoire, <strong>zéro cible chrono</strong> &bull; 31 jours &bull; 3 séances/sem + renfo 2× + piscine 1-2× &bull; sans VMA</p>
+
+<div class="info-box" style="margin-top: 0;">
+  <strong>Version v3 (18/06/2026)</strong> — révision après le <strong>feu vert kiné final</strong> (dernière séance de la série, plus aucune contre-indication) + la <strong>règle de progression</strong> (distance OU vitesse, jamais les deux ; pas de VMA d'ici Biganos) + le recadrage <strong>« zéro cible chrono »</strong>. Remplace la v2 (17/05, VMA-centrée) désormais caduque.
+</div>
+
+<div class="green-box">
+  <strong>L'esprit du plan :</strong> on ne vise pas un temps. On fait une structure cohérente, à la sensation. Le moteur aérobie (VO2max 49 = intact) s'exprimera tout seul le jour J si le corps dit oui. Tenir ~5'/km = déjà content. Biganos = test #1 en plaisir, RETEX pour la vraie cible PR = <strong>Izon 27/09</strong>.
+</div>
+
+<div class="toc">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#course">La course</a></li>
+    <li><a href="#change">Ce qui change vs v2</a></li>
+    <li><a href="#diag">Diagnostic de départ (données 18/06)</a></li>
+    <li><a href="#allures">Allures de référence — indicatives</a></li>
+    <li><a href="#securite">Sécurité — règles absolues</a></li>
+    <li><a href="#bloc1">Bloc 1 — Distance</a></li>
+    <li><a href="#bloc2">Bloc 2 — Vitesse</a></li>
+    <li><a href="#bloc3">Bloc 3 — Affûtage + course</a></li>
+    <li><a href="#ensemble">Vue d'ensemble</a></li>
+    <li><a href="#approche">Approche course — 19/07</a></li>
+    <li><a href="#renfo">Renforcement</a></li>
+    <li><a href="#controle">Points de contrôle</a></li>
+  </ol>
+</div>
+
+<!-- LA COURSE -->
+<div class="card" id="course">
+  <div class="card-header" style="background: var(--color-course);">1. La course</div>
+  <div class="card-body">
+    <ul>
+      <li><strong>La Boïenne</strong> — Biganos (Bassin d'Arcachon), <strong>dim 19/07/2026</strong>, départ 10h00, Stade Roger Garnung.</li>
+      <li><strong>10 km plat sur route</strong>, dénivelé quasi nul → parcours rapide. ~250 participants, ambiance village.</li>
+      <li><strong>Chaleur probable</strong> (juillet, départ 10h) → casquette, eau, départ retenu.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CE QUI CHANGE -->
+<div class="card" id="change">
+  <div class="card-header" style="background: var(--accent);">2. Ce qui change vs v2 (et pourquoi)</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Sujet</th><th>v2 (17/05)</th><th>v3 (18/06)</th><th>Raison</th></tr>
+      <tr><td><strong>Cible chrono</strong></td><td>42'30 → 43'30</td><td><strong>AUCUNE</strong></td><td>Course exploratoire ; pression chrono = risque (départ trop vite / EF qui dérive)</td></tr>
+      <tr><td><strong>VMA</strong></td><td>30/30 Billat, pyramides</td><td><strong>SUPPRIMÉE</strong></td><td>Règle kiné : pas de VMA les 1res semaines de reprise</td></tr>
+      <tr><td><strong>Sprints / côtes / strides</strong></td><td>accél 6-8s partout</td><td><strong>SUPPRIMÉS</strong></td><td>Règle kiné : pas de sprint ni côtes ; strides retirés par prudence</td></tr>
+      <tr><td><strong>Séquençage</strong></td><td>volume + intensité mêlés</td><td><strong>distance PUIS vitesse</strong></td><td>Augmenter durée OU vitesse, jamais les deux au même palier</td></tr>
+      <tr><td><strong>Allures</strong></td><td>cibles à tenir</td><td><strong>indicatives</strong></td><td>Si « 3×1km visée 4'15 » sort à 4'45 = aucun souci</td></tr>
+      <tr><td><strong>Plafond EF</strong></td><td>&lt;150 strict</td><td><strong>&lt;160 toléré (canicule)</strong></td><td>Dérive thermique +10 bpm ; cœur monte vite (FC max 206)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- DIAGNOSTIC -->
+<div class="card" id="diag">
+  <div class="card-header" style="background: var(--color-ef);">3. Diagnostic de départ (données 18/06)</div>
+  <div class="card-body">
+    <ul>
+      <li><strong>VO2max 49</strong> (stable, préservé par natation + cardio kiné) = <strong>moteur aérobie intact</strong> (≈ capacité sub-43 sur 10k).</li>
+      <li>Statut Garmin <strong>PRODUCTIVE</strong>, fitness ↑, charge <strong>ACWR 1.3 = OPTIMAL</strong>, balance <strong>AEROBIC_LOW_FOCUS</strong> (= il manque de l'aérobie-haute : seuil/tempo).</li>
+      <li><strong>Prédiction Garmin 10k 52'37 = à ignorer</strong> (algo dégradé par 4 mois sans course rapide).</li>
+      <li><strong>Acquis reprise</strong> : ~9.3 km EF @6'10 (54' le 16/06), vitesse touchée = 2×1km @4'58 (mollet muet). Jamais tenu d'allure course sur distance depuis la blessure.</li>
+    </ul>
+    <div class="info-box">Ce qui manque (seuil + allure course) = <strong>exactement ce que le kiné autorise</strong>. La VMA interdite n'est pas le levier critique sur 4 semaines → la contrainte ne coûte quasi rien sur Biganos.</div>
+  </div>
+</div>
+
+<!-- ALLURES -->
+<div class="card" id="allures">
+  <div class="card-header" style="background: var(--color-seuil);">4. Allures de référence — INDICATIVES (pas des objectifs)</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Zone</th><th>Allure indicative</th><th>Effort / sensation</th><th>FC</th></tr>
+      <tr><td><span class="tag tag-ef">EF</span></td><td>~5'45-6'15/km</td><td>facile, conversation pleine</td><td>&lt;150 (frais) · <strong>&lt;160 toléré canicule</strong></td></tr>
+      <tr><td><span class="tag tag-seuil">Seuil</span></td><td>~4'40-5'00/km</td><td>« phrases courtes »</td><td>~160-170</td></tr>
+      <tr><td><span class="tag tag-as">Allure course</span></td><td>~4'15-4'45/km</td><td>« soutenu, confortablement dur, pas en apnée »</td><td>~170-183</td></tr>
+    </table>
+    <div class="green-box"><strong>Si c'est plus lent que l'allure indicative : aucun souci.</strong> On garde la structure et l'effort, le chrono qui sort est ce qu'il est.</div>
+  </div>
+</div>
+
+<!-- SECURITE -->
+<div class="card" id="securite">
+  <div class="card-header" style="background: var(--color-course);">5. Sécurité — règles absolues</div>
+  <div class="card-body">
+    <ol>
+      <li><strong>Pas de VMA, pas de sprint, pas de côtes</strong> d'ici Biganos (règle kiné 18/06).</li>
+      <li><strong>Distance OU vitesse, jamais les deux au même palier.</strong> Distance en EF d'abord, vitesse ensuite (volume stable).</li>
+      <li><strong>EF gouverné par l'allure facile</strong>, FC &lt;150 (frais) / &lt;160 (canicule) en proxy. FC 160 à allure lente → ralentir / ombre / hydrater / courir tôt.</li>
+      <li><strong>Douleur aiguë = STOP immédiat</strong>, ne jamais finir la série.</li>
+      <li><strong>Lourdeur diffuse = OK</strong> (le mollet « travaille ») ; <strong>point focal douloureux = alerte</strong>.</li>
+      <li><strong>Espacement course 48-72h</strong> post grosse charge (clairance soléaire 2-3j) ; viser J+2.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- BLOC 1 -->
+<div class="card" id="bloc1">
+  <div class="week-header week-distance">BLOC 1 — DISTANCE (acquérir 10-11 km EF, zéro vitesse ajoutée)</div>
+  <div class="card-body">
+    <div class="info-box" style="margin-top:0;">Objectif : couvrir la distance course en EF <strong>avant</strong> d'y mettre de la vitesse. Aucune qualité ce bloc.</div>
+
+    <h3>Semaine en cours (18-21/06)</h3>
+    <table>
+      <tr><th>Jour</th><th>Séance</th></tr>
+      <tr><td>Jeu 18/06</td><td><span class="tag tag-kine">Kiné</span><span class="tag tag-piscine">Piscine</span> ✅ Kiné (charge 150) + nat récup 1400m — fait</td></tr>
+      <tr><td>Ven 19/06</td><td><span class="tag tag-repos">Repos</span> laisse décharger le soléaire</td></tr>
+      <tr><td><strong>Sam 20/06</strong></td><td><span class="tag tag-ef">EF</span> <strong>50-55'</strong> — J+2 post-kiné, <strong>tôt le matin</strong> (chaleur), allure facile, plat, zéro accé</td></tr>
+      <tr><td>Dim 21/06</td><td><span class="tag tag-repos">Repos</span> (ou renfo léger maison)</td></tr>
+    </table>
+
+    <h3>Sem B (22-28/06) — monte la durée</h3>
+    <table>
+      <tr><th>Jour</th><th>Séance</th></tr>
+      <tr><td>Mar 23/06</td><td><span class="tag tag-renfo">Renfo léger</span><span class="tag tag-piscine">Piscine PB</span> (jour travail)</td></tr>
+      <tr><td>Mer 24/06</td><td><span class="tag tag-ef">EF</span> 50' stable, facile, tôt</td></tr>
+      <tr><td>Jeu 25/06</td><td><span class="tag tag-piscine">Piscine récup</span> ou <span class="tag tag-repos">repos</span></td></tr>
+      <tr><td><strong>Ven 26/06</strong></td><td><span class="tag tag-ef">EF LONG</span> <strong>monte vers 1h05-1h10 / ~10-11 km</strong> — tôt, hydrate. = la sortie qui <strong>acquiert la distance course</strong></td></tr>
+      <tr><td>Sam 27/06</td><td><span class="tag tag-renfo">Renfo complet</span> (mollet + ischios + jambe D)</td></tr>
+      <tr><td>Dim 28/06</td><td><span class="tag tag-repos">Repos</span></td></tr>
+    </table>
+    <div class="green-box"><strong>Check 28/06 :</strong> 1h05-1h10 EF passé sans signal soléaire → distance acquise, on peut ajouter la vitesse.</div>
+  </div>
+</div>
+
+<!-- BLOC 2 -->
+<div class="card" id="bloc2">
+  <div class="week-header week-vitesse">BLOC 2 — VITESSE (sur distance acquise, volume stable, zéro VMA)</div>
+  <div class="card-body">
+    <div class="info-box" style="margin-top:0;">Objectif : ajouter seuil + allure course sur une distance déjà tenue en EF. On ne monte plus la durée.</div>
+
+    <h3>Sem C (29/06-05/07) — intro qualité <span class="tag tag-kine">Bilan kiné jeu 02/07</span></h3>
+    <table>
+      <tr><th>Jour</th><th>Séance</th></tr>
+      <tr><td>Lun 30/06</td><td><span class="tag tag-ef">EF</span> 45-50' facile</td></tr>
+      <tr><td>Mar 01/07</td><td><span class="tag tag-renfo">Renfo léger</span><span class="tag tag-piscine">Piscine PB</span></td></tr>
+      <tr><td><strong>Mer 02/07</strong></td><td><span class="tag tag-kine">Bilan kiné</span> (15e séance). Caler les runs autour ; si charge élevée → EF only ce jour</td></tr>
+      <tr><td><strong>Jeu 03/07</strong></td><td><span class="tag tag-seuil">Rampe tempo</span><span class="tag tag-star">★</span> <strong>25'</strong> : 15-20' EF → 5' seuil léger → 5' seuil → 5' soutenu → 5' confortablement dur → 5' dur (pas en apnée) → 10' EF <em>(progressif = anti départ-trop-vite, zéro VMA)</em></td></tr>
+      <tr><td>Ven 04/07</td><td><span class="tag tag-repos">Repos</span> ou <span class="tag tag-piscine">piscine récup</span></td></tr>
+      <tr><td><strong>Sam 05/07</strong></td><td><span class="tag tag-as">Allure course</span> <strong>3×1 km « confortablement dur »</strong> (~4'15-4'45, peu importe) r=2'30 trot, dans 45' EF</td></tr>
+      <tr><td>Dim 06/07</td><td><span class="tag tag-repos">Repos</span></td></tr>
+    </table>
+
+    <h3>Sem D (07-12/07) — consolidation + course-test sensation</h3>
+    <table>
+      <tr><th>Jour</th><th>Séance</th></tr>
+      <tr><td>Mar 08/07</td><td><span class="tag tag-renfo">Renfo léger</span><span class="tag tag-piscine">Piscine PB</span></td></tr>
+      <tr><td><strong>Mer 09/07</strong></td><td><span class="tag tag-as">Allure course</span> <strong>2×2 km « soutenu »</strong> (~4'20-4'45) r=2'30 trot, dans ~50' EF</td></tr>
+      <tr><td>Jeu 10/07</td><td><span class="tag tag-piscine">Piscine récup</span> ou <span class="tag tag-repos">repos</span></td></tr>
+      <tr><td><strong>Sam 12/07</strong></td><td><span class="tag tag-test">Course-test</span><span class="tag tag-star">★★</span> <strong>2×2 km « allure course »</strong> (~4'15-4'40) r=2'30 trot — <strong>test de SENSATION</strong> : ça roule confortable ? jambes répondent ? mollet muet ? <em>(pas un gate chrono)</em></td></tr>
+      <tr><td>Dim 13/07</td><td><span class="tag tag-repos">Repos</span></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- BLOC 3 -->
+<div class="card" id="bloc3">
+  <div class="week-header week-affut">BLOC 3 — AFFÛTAGE + COURSE (14-19/07)</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Jour</th><th>Séance</th></tr>
+      <tr><td>Lun 14/07</td><td><span class="tag tag-ef">EF</span> 30' + 1 km allure course souple (rappel de jambe)</td></tr>
+      <tr><td>Mar 15/07</td><td><span class="tag tag-renfo">Renfo très léger</span> (PPG) + <span class="tag tag-piscine">piscine option</span></td></tr>
+      <tr><td>Mer 16/07</td><td><span class="tag tag-ef">EF</span> 25' très souple</td></tr>
+      <tr><td>Jeu 17/07</td><td><span class="tag tag-repos">Repos</span></td></tr>
+      <tr><td>Ven 18/07</td><td><span class="tag tag-repos">Repos</span> (prépa matériel, hydratation)</td></tr>
+      <tr><td><strong>Dim 19/07</strong></td><td><span class="tag tag-course">COURSE</span> <strong>🏁 LA BOÏENNE 10 KM</strong> — voir approche course</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="card" id="ensemble">
+  <div class="card-header" style="background: var(--accent);">9. Vue d'ensemble</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Bloc</th><th>Sem</th><th>Focus</th><th>Séances course clés</th></tr>
+      <tr><td><span class="tag tag-ef">Distance</span></td><td>18-28/06</td><td>monte durée EF</td><td>Sam 20 EF 50' · <strong>Ven 26 EF long 1h05-1h10</strong></td></tr>
+      <tr><td><span class="tag tag-as">Vitesse</span></td><td>29/06-12/07</td><td>qualité sur distance acquise</td><td><strong>Rampe tempo 25'</strong> · 3×1km · 2×2km · <strong>course-test</strong></td></tr>
+      <tr><td><span class="tag tag-test">Affûtage</span></td><td>14-19/07</td><td>fraîcheur</td><td>EF court + rappel · <strong>course dim 19</strong></td></tr>
+    </table>
+    <div class="info-box">Aucune VMA, aucun sprint, aucune côte. Qualité = seuil + allure course uniquement. Volume stable une fois la distance acquise.</div>
+  </div>
+</div>
+
+<!-- APPROCHE COURSE -->
+<div class="card" id="approche">
+  <div class="card-header" style="background: var(--color-course);">10. Approche course — dim 19/07 (au feeling, zéro chrono)</div>
+  <div class="card-body">
+    <ul>
+      <li><strong>Chaleur probable</strong> → casquette, eau, <strong>partir TRÈS retenu</strong>.</li>
+      <li><strong>Départ sage non négociable</strong> — ton pattern historique = positive split (6 courses/7). Pars plus lent que ce que les jambes veulent les 2 premiers km.</li>
+      <li><strong>Cours à la sensation</strong> : si le corps répond, tu accélères progressivement la 2e moitié (negative split = l'objectif d'exécution, pas un temps). Sinon, tu restes cool — c'est exploratoire.</li>
+      <li><strong>Mollet</strong> : lourdeur diffuse = OK ; point douloureux = on lève le pied, santé prime.</li>
+    </ul>
+    <div class="green-box"><strong>But réel :</strong> finir en plaisir, sans réveil soléaire, avec un RETEX propre pour calibrer <strong>Izon (27/09 = la vraie cible PR)</strong>.</div>
+  </div>
+</div>
+
+<!-- RENFO -->
+<div class="card" id="renfo">
+  <div class="card-header" style="background: var(--color-renfo);">11. Renforcement (2×/sem)</div>
+  <div class="card-body">
+    <h3>Léger (jour avant qualité)</h3>
+    <p>Stanish bilatéral 2×20 · squat unipodal 2×8 · planche 3×30" · planche latérale 3×20" · étirements chaînes post · rouleau.</p>
+    <h3>Complet (jour OFF course)</h3>
+    <ul>
+      <li><strong>Ischios</strong> (priorité — cassent km 37 marathon) : Nordic 3×6 · pont fessier unipodal 3×10 · soulevé terre roumain 3×10</li>
+      <li><strong>Mollets</strong> : montées pointes lentes 3×15 · Stanish unipodal descente lente 3×8</li>
+      <li><strong>Jambe DROITE surchargée</strong> (plus faible, gaucher + LCA D 2016) : <strong>fentes bulgares — doubler les séries côté D</strong> · équilibre/proprio unipodal D</li>
+      <li><strong>PPG</strong> : planche 3×45" · planche latérale 3×20" · gainage</li>
+    </ul>
+  </div>
+</div>
+
+<!-- CONTROLE -->
+<div class="card" id="controle">
+  <div class="card-header" style="background: var(--color-seuil);">12. Points de contrôle</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Date</th><th>Check</th><th>Action si KO</th></tr>
+      <tr><td><strong>20/06</strong></td><td>EF post-kiné, mollet OK ?</td><td>si lourdeur focale → kiné, recule</td></tr>
+      <tr><td><strong>28/06</strong></td><td>1h05-1h10 EF tenu sans signal ?</td><td>si non → prolonge bloc distance, retarde la vitesse</td></tr>
+      <tr><td><strong>02/07</strong></td><td>Bilan kiné — feu vert maintenu / élargi ?</td><td>ajuste les autorisations (strides ? côtes douces ?)</td></tr>
+      <tr><td><strong>12/07</strong></td><td>Course-test = sensation confortable ?</td><td>si ça bave / mollet parle → course en EF pur, plaisir</td></tr>
+    </table>
+  </div>
+</div>
+
+<p class="meta">Plan v3 — 18/06/2026 — structure-led, zéro cible chrono. Source markdown : <code>plans/custom/2026_10km_biganos_exploratoire_v3.md</code></p>
+
+</div>
+</body>
+</html>
