@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semi — Casteljaloux 21/11/2026 (SQUELETTE v0.1)</title>
+<style>
+  :root {
+    --color-ef: #059669;
+    --color-ef-light: #d1fae5;
+    --color-seuil: #D97706;
+    --color-seuil-light: #fef3c7;
+    --color-as: #EA580C;
+    --color-as-light: #ffedd5;
+    --color-vma: #7C3AED;
+    --color-vma-light: #ede9fe;
+    --color-renfo: #2563EB;
+    --color-renfo-light: #dbeafe;
+    --color-repos: #6B7280;
+    --color-course: #DC2626;
+    --color-course-light: #fee2e2;
+    --color-info: #e8f0fe;
+    --color-info-border: #93b4f0;
+    --color-warn: #fff8e1;
+    --color-warn-border: #f5c542;
+    --color-green: #d1fae5;
+    --color-green-border: #059669;
+    --accent: #0E7490;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #222; background: #f5f5f5; margin: 0; padding: 0; }
+  .container { max-width: 900px; margin: 0 auto; padding: 24px 16px; }
+  h1 { text-align: center; font-size: 1.7rem; margin-bottom: 0.2em; color: #111; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 0.5em; font-size: 0.95rem; }
+  .meta { text-align: center; color: #777; font-size: 0.85rem; margin-bottom: 2em; }
+  .version-badge { display: inline-block; background: var(--color-vma); color: #fff; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; vertical-align: middle; margin-left: 8px; }
+  .draft-badge { background: var(--color-course); }
+
+  .card { background: #fff; border-radius: 10px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .card-header { padding: 14px 24px; color: #fff; font-weight: 700; font-size: 1.05rem; }
+  .card-body { padding: 20px 24px; }
+  .card-body h3 { font-size: 1rem; margin-top: 1.2em; margin-bottom: 0.4em; }
+  .card-body h3:first-child { margin-top: 0; }
+  .card-body ul, .card-body ol { padding-left: 1.3em; }
+
+  .info-box { background: var(--color-info); border-left: 4px solid var(--color-info-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #1a3a6a; }
+  .warn-box { background: var(--color-warn); border-left: 4px solid var(--color-warn-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #7a5e00; }
+  .green-box { background: var(--color-green); border-left: 4px solid var(--color-green-border); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #065f46; }
+  .red-box { background: var(--color-course-light); border-left: 4px solid var(--color-course); border-radius: 4px; padding: 12px 16px; margin: 10px 0 14px; font-size: 0.92rem; color: #7f1d1d; }
+
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.88rem; }
+  th { background: #f0f0f0; text-align: left; padding: 8px 10px; font-weight: 600; border-bottom: 2px solid #ddd; }
+  td { padding: 8px 10px; border-bottom: 1px solid #eee; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td.s { white-space: nowrap; font-weight: 700; color: #111; width: 1%; }
+
+  .week-header { scroll-margin-top: 10px; padding: 12px 24px; color: #fff; font-weight: 700; font-size: 1rem; }
+  .week-base { background: var(--color-ef); }
+  .week-support { background: var(--color-seuil); }
+  .week-vma { background: var(--color-vma); }
+  .week-spe { background: var(--color-as); }
+  .week-affut { background: var(--accent); }
+  .week-repos { background: var(--color-repos); }
+  .around { font-size: 0.82rem; color: #555; font-style: italic; margin: 0 0 4px; }
+  .race { color: var(--color-course); }
+  .tbd { background: var(--color-warn); border-radius: 3px; padding: 0 4px; font-weight: 700; color: #7a5e00; }
+
+  .toc { background: #fff; border-radius: 10px; padding: 20px 24px; margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .toc h2 { font-size: 1.1rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 8px; }
+  .toc ol { padding-left: 1.3em; margin: 0; }
+  .toc li { margin: 5px 0; }
+  .toc a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .toc a:hover { text-decoration: underline; }
+
+  code { background: #f0f0f0; padding: 1px 5px; border-radius: 3px; font-size: 0.85em; }
+  strong { color: #111; }
+  @media (max-width: 600px) { .container { padding: 16px 10px; } .card-body { padding: 16px; } h1 { font-size: 1.3rem; } table { font-size: 0.82rem; } td, th { padding: 6px 7px; } }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Semi &mdash; Casteljaloux <span class="version-badge draft-badge">SQUELETTE v0.1</span> <span class="version-badge">07/09</span></h1>
+<p class="subtitle">sam 21/11/2026 &mdash; parcours plat, 162 m D+, bosse au km 12, final qui remonte</p>
+<p class="meta">D&eacute;charge 28/09 &rarr; 04/10 &bull; S1 le lun 05/10 &bull; 7 semaines &bull; 3 s&eacute;ances course/sem (lun / jeu / ven, invariable) &bull; longues TOUTES au vendredi &bull; 4<sup>e</sup> s&eacute;ance EF optionnelle en plus &bull; piscine hors plan</p>
+
+<div class="red-box">
+  <strong>&#9940; CE N'EST PAS ENCORE UN PLAN &mdash; c'est la FORME du bloc, pas ses chiffres.</strong><br>
+  Tout ce qui est marqu&eacute; <span class="tbd">&#9203; Izon</span> se remplit <strong>apr&egrave;s le 27/09</strong>, sur l'AS10 tenue en course et l'&eacute;tat du mollet apr&egrave;s un dossard : <strong>aucune allure de semi, aucun objectif chrono</strong> ici. Les allures d&eacute;j&agrave; mesur&eacute;es (sous-seuil, seuil = AS10, EF, &eacute;chelle 30/30) sont &eacute;crites &mdash; <strong>&agrave; recaler si Izon les bouge</strong>.<br>
+  <strong>&rarr; v1.0 apr&egrave;s Izon</strong> : cases remplies, workouts Garmin construits.
+</div>
+
+<div class="green-box">
+  <strong>L'esprit :</strong> un semi se court <strong>sous le seuil</strong> &mdash; le chrono d&eacute;pend de <strong>combien de temps il tient pr&egrave;s du seuil sans d&eacute;crocher</strong>, pas de la valeur du seuil. Donc <strong>la brique n&deg;1 est le bloc seuil du lundi</strong> (la fili&egrave;re &agrave; z&eacute;ro en 2025, l'ossature du plan du record 2010), <strong>la VMA revient</strong> (d&eacute;cid&eacute; le 06/09), <strong>la sp&eacute; kilom&eacute;tr&eacute;e sert le pilotage et la mesure, pas la fili&egrave;re</strong>, et <strong>les longues sont dimensionn&eacute;es sur le marathon 2027</strong>. Double mandat : le semi, et la base du marathon.
+</div>
+
+<div class="warn-box">
+  <strong>Garde-fous permanents :</strong> <strong>EF &lt; 150 strict</strong> (le plafond EST la s&eacute;ance) &bull; <strong>aucune mont&eacute;e courue vite</strong>, faux plat compris &mdash; qualit&eacute; = <strong>plat uniquement</strong> &bull; <strong>2 qualit&eacute;s/sem max</strong>, 72 h entre elles sur la trame lun/jeu/ven (<strong>plancher absolu 48 h</strong>) &bull; <strong>la longue du vendredi est une EF stricte, jamais une 3<sup>e</sup> intensit&eacute;</strong> &bull; clairance sol&eacute;aire 48-72 h &bull; <strong>douleur aigu&euml; = STOP imm&eacute;diat</strong>, on ne finit jamais la s&eacute;rie &bull; renfo permanent (mollet + ischios + <strong>jambe D surcharg&eacute;e</strong>) &bull; <strong>plafond ~4'20-4'25 sur toute sp&eacute; ou seuil en blocs</strong> &mdash; ne s'applique PAS &agrave; la VMA.
+</div>
+
+<div class="toc">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#ensemble">Vue d'ensemble</a> &mdash; <span style="font-size:0.85rem;">les 7 semaines en un tableau, chaque semaine cliquable</span></li>
+    <li><a href="#trame">Trame hebdomadaire</a> (lun / jeu / ven)</li>
+    <li><a href="#semaines">D&eacute;tail des semaines</a></li>
+    <li><a href="#q1">Q1 &mdash; le bloc seuil</a> (allures, pilotage, r&egrave;gle de coupe)</li>
+    <li><a href="#q2vma">Q2 &mdash; VMA</a> (30/30 en rampe · intervalles longs · demi-Cooper)</li>
+    <li><a href="#q2spe">Q2 &mdash; sp&eacute; kilom&eacute;tr&eacute;e</a></li>
+    <li><a href="#longues">Les longues</a></li>
+    <li><a href="#autour">Autour</a> (renfo, 4<sup>e</sup> s&eacute;ance, piscine, m&eacute;t&eacute;o)</li>
+    <li><a href="#controle">Points de contr&ocirc;le</a> &amp; <a href="#izon">ce qu'Izon remplit</a></li>
+  </ol>
+</div>
+
+<!-- VUE D'ENSEMBLE -->
+<div class="card" id="ensemble">
+  <div class="card-header" style="background: var(--accent);">Vue d'ensemble</div>
+  <div class="card-body">
+    <p style="margin-top:0;font-size:0.9rem;color:#555;">Clique une semaine pour aller &agrave; son d&eacute;tail. &#127937; <strong>Casteljaloux : sam 21/11</strong>.</p>
+    <table>
+      <tr><th>Sem</th><th>Dates</th><th>lun &mdash; Q1</th><th>jeu &mdash; Q2</th><th>ven &mdash; longue</th><th>Vol.</th></tr>
+      <tr><td><a href="#s0"><strong>S0</strong></a></td><td>28/09 &rarr; 04/10</td><td colspan="3"><strong>D&eacute;charge</strong> &mdash; d&eacute;placement pro : ~3 footings tr&egrave;s cool, <strong>z&eacute;ro qualit&eacute;</strong></td><td>~2h</td></tr>
+      <tr><td><a href="#s1"><strong>S1</strong></a></td><td>05 &rarr; 11/10</td><td>SS <strong>2&times;12'</strong></td><td><strong>VMA 30/30, 12 cycles</strong> &mdash; &#9888; gate mollet</td><td><strong>ven 09 &middot; 1h30</strong></td><td>~3h45</td></tr>
+      <tr><td><a href="#s2"><strong>S2</strong></a></td><td>12 &rarr; 18/10</td><td>SS <strong>2&times;15'</strong></td><td><strong>Sp&eacute; 3&times;2 km</strong> <span class="tbd">&#9203;</span> &mdash; 1<sup>er</sup> contact</td><td><strong>ven 16 &middot; 1h45</strong></td><td>~4h00</td></tr>
+      <tr><td><a href="#s3"><strong>S3</strong></a></td><td>19 &rarr; 25/10</td><td>SS <strong>20' + seuil 6'</strong></td><td><strong>VMA intervalles longs 4&times;4'</strong></td><td><strong>ven 23 &middot; 2h00</strong></td><td>~4h15</td></tr>
+      <tr><td><a href="#s4"><strong>S4</strong></a></td><td>26/10 &rarr; 01/11</td><td>EF 45' + 6&times;100 m <em>(pas une qualit&eacute;)</em></td><td><strong>Test VMA : demi-Cooper 6'</strong></td><td><strong>ven 30 &middot; 1h30</strong></td><td>~3h20</td></tr>
+      <tr><td><a href="#s5"><strong>S5</strong></a></td><td>02 &rarr; 08/11</td><td>SS <strong>15' + 10' + 10' seuil</strong></td><td><strong>VMA 30/30, 15 cycles</strong></td><td><strong>ven 06 &middot; 2h15</strong> <em>(pic)</em></td><td>~4h45</td></tr>
+      <tr><td><a href="#s6"><strong>S6</strong></a></td><td>09 &rarr; 15/11</td><td>SS <strong>15'</strong> <em>(l'aff&ucirc;tage commence)</em></td><td><strong>Sp&eacute; 2&times;5 km</strong> <span class="tbd">&#9203;</span> &mdash; J-9, <strong>la mesure</strong></td><td><strong>ven 13 &middot; 1h30</strong></td><td>~3h40</td></tr>
+      <tr><td><a href="#s7"><strong>S7</strong></a></td><td>16 &rarr; 21/11</td><td>lun 16 : EF 30' + <strong>rappel 3&times;1 km</strong></td><td>mer 18 : EF 25' + 3&times;100 m<br>ven 20 : d&eacute;verrouillage 20' ou repos</td><td class="race"><strong>&#127937; sam 21 &mdash; CASTELJALOUX</strong></td><td>~1h45</td></tr>
+    </table>
+    <div class="info-box">
+      <strong>Cycles</strong> : 3 semaines de charge (S1-S3) &middot; <strong>S4 all&eacute;g&eacute;e</strong> &middot; 2 de charge (S5-S6) &middot; 1 d'aff&ucirc;tage (S7).<br>
+      <strong>Compte des qualit&eacute;s</strong> : 2/semaine en S1-S3 et S5-S6 &middot; <strong>S4 : une seule</strong> (le test) &middot; S7 : le rappel.<br>
+      <strong>Longues</strong> : 1h30 &middot; 1h45 &middot; 2h00 &middot; 1h30 &middot; <strong>2h15</strong> &middot; 1h30 = <strong>10h30 au total, pic 2h15</strong>, <strong>3 sorties &ge; 1h45</strong>.<br>
+      &#10133; <strong>4<sup>e</sup> s&eacute;ance EF optionnelle non compt&eacute;e</strong> dans ces volumes.
+    </div>
+    <div class="green-box">
+      <strong>&#9989; Au-dessus du Decathlon, en une semaine de moins.</strong> Decathlon 1h30 (8 sem, 4 s&eacute;ances) : <strong>10h00 de longues, pic 2h00, 4 sorties &ge; 1h45</strong>. Ici (7 sem, 3 s&eacute;ances) : <strong>10h30, pic 2h15, 3 sorties &ge; 1h45</strong>. Le compte de 3 vient de la <strong>structure du cycle</strong> (S4 all&eacute;g&eacute;e, S6 aff&ucirc;tage, S1 rampe d'entr&eacute;e) &mdash; plus du calendrier.
+    </div>
+  </div>
+</div>
+
+<!-- TRAME -->
+<div class="card" id="trame">
+  <div class="card-header" style="background: var(--color-ef);">Trame hebdomadaire &mdash; lun / jeu / ven, invariable</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Jour</th><th>R&ocirc;le</th><th>Pourquoi ce jour</th></tr>
+      <tr><td><strong>lun</strong></td><td><strong>Q1 &mdash; le bloc seuil</strong></td><td><strong>72 h apr&egrave;s la longue du vendredi</strong>, toutes les semaines</td></tr>
+      <tr><td>mar</td><td>OFF course &mdash; <strong>renfo A</strong> · piscine si elle a lieu</td><td>bloc A = jour OFF course, <strong>jamais la veille d'une s&eacute;ance de vitesse</strong></td></tr>
+      <tr><td>mer</td><td>OFF course &mdash; <strong>renfo B</strong> <em>(ou 4<sup>e</sup> s&eacute;ance EF)</em></td><td>B = z&eacute;ro charge mollet, OK la veille d'une qualit&eacute;</td></tr>
+      <tr><td><strong>jeu</strong></td><td><strong>Q2 &mdash; VMA ou sp&eacute;, en alternance</strong></td><td><strong>72 h apr&egrave;s Q1</strong> = J+3, au-dessus de la clairance sol&eacute;aire</td></tr>
+      <tr><td><strong>ven</strong></td><td><strong>LA LONGUE &mdash; toutes dur&eacute;es</strong>, EF &lt; 150 strict</td><td>&#9888; <strong>24 h apr&egrave;s Q2</strong> &rarr; EF stricte obligatoire, <strong>jamais de finish AS21</strong></td></tr>
+      <tr><td><em>sam</em></td><td>&#10133; <em>4<sup>e</sup> s&eacute;ance OPTIONNELLE &mdash; EF pure &lt; 150, 45'-1h</em></td><td><em>libre depuis que les longues sont au vendredi ; elle s'AJOUTE, jamais une qualit&eacute;</em></td></tr>
+      <tr><td>dim</td><td>OFF &mdash; renfo B ou C</td><td>C &ge; 48 h avant la prochaine qualit&eacute;</td></tr>
+    </table>
+    <div class="warn-box">
+      <strong>Espacements</strong> : Q1 &rarr; Q2 = <strong>72 h</strong> &middot; Q2 &rarr; longue = <strong>24 h</strong> &middot; longue &rarr; Q1 suivante = <strong>72 h</strong>.<br>
+      <strong>&#128273; Le 24 h est le prix de la longue au vendredi, et il est payable parce que la longue est une EF stricte</strong> (charge mesur&eacute;e : 142 pour une longue EF contre 292 pour le 2-3-2). <strong>&#9940; Donc jamais de finish &agrave; allure sur la longue.</strong>
+    </div>
+    <p class="around">Plio (bloc C) : jamais planifi&eacute;e &mdash; &agrave; placer &agrave; l'issue d'une EF. <strong>Dernier cr&eacute;neau : mer 11/11 (J-10)</strong>. Dose 40-70 contacts.</p>
+  </div>
+</div>
+
+<!-- SEMAINES -->
+<div id="semaines">
+
+<div class="info-box">
+  <strong>Lecture des semaines :</strong> les tableaux ne listent que les s&eacute;ances <strong>COURSE</strong>. Le d&eacute;tail d'ex&eacute;cution (allures, FC, r&egrave;gles de coupe) est dans les sections <a href="#q1">Q1</a>, <a href="#q2vma">Q2-VMA</a>, <a href="#q2spe">Q2-sp&eacute;</a> et <a href="#longues">longues</a>.
+</div>
+
+<div class="card">
+  <div class="week-header week-repos" id="s0">S0 (28/09 &rarr; 04/10) &mdash; D&Eacute;CHARGE (d&eacute;placement pro)</div>
+  <div class="card-body">
+    <p class="around">Autour : renfo B si possible &mdash; z&eacute;ro contrainte.</p>
+    <table>
+      <tr><td class="s">3 footings</td><td><strong>Tr&egrave;s cool, EF &lt; 150 strict, 30-45'</strong>, terrain inconnu &rarr; plat si possible. <strong>&#9940; Z&Eacute;RO qualit&eacute;</strong>, z&eacute;ro acc&eacute;l&eacute;ration, z&eacute;ro c&ocirc;te.</td></tr>
+      <tr><td class="s">mer 30/09</td><td>&#128269; <strong>CHECK MOLLET J+3 d'Izon</strong> &mdash; c'est lui qui d&eacute;cide du contenu de S1 (voir <a href="#controle">points de contr&ocirc;le</a>).</td></tr>
+    </table>
+    <div class="info-box">C'est <strong>une semaine de r&eacute;cup apr&egrave;s un 10 km</strong>, pas un temps mort : elle est ce qui rend S1 &agrave; S3 possibles d'affil&eacute;e.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="week-header week-vma" id="s1">S1 (05 &rarr; 11/10) &mdash; Entr&eacute;e : seuil + VMA #1</div>
+  <div class="card-body">
+    <p class="around">Autour : renfo A mar 06 · renfo B mer 07 · plio apr&egrave;s une EF.</p>
+    <table>
+      <tr><td class="s">lun 05 &mdash; Q1</td><td><strong>Sous-seuil 2&times;12'</strong> &mdash; paliers de 4' : <strong>5'05 &rarr; 4'55 &rarr; 4'50</strong>, r3'. WU 15-20' + PPG, CD 10-15' &agrave; <strong>7'00-7'30 impos&eacute;s</strong>. <strong>FC moy. de bloc 165-175.</strong></td></tr>
+      <tr><td class="s">jeu 08 &mdash; Q2</td><td><strong>VMA 30/30 en rampe, 12 cycles</strong>, bloc unique. &#9888; <strong>Gate mollet post-dossard</strong> : signal au J+3 d'Izon &rarr; remplac&eacute;e par <strong>EF 45' + 6&times;100 m</strong>, la VMA glisse en S2.</td></tr>
+      <tr><td class="s">ven 09 &mdash; longue</td><td><strong>1h30 EF &lt; 150 STRICT.</strong> Rampe d'entr&eacute;e : sa longue actuelle vaut ~1h17, passer &agrave; 1h45 d'embl&eacute;e serait +36 % en une semaine.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="week-header week-spe" id="s2">S2 (12 &rarr; 18/10) &mdash; 1<sup>er</sup> contact avec l'allure du semi</div>
+  <div class="card-body">
+    <p class="around">Autour : renfo A mar 13 · renfo B mer 14.</p>
+    <table>
+      <tr><td class="s">lun 12 &mdash; Q1</td><td><strong>Sous-seuil 2&times;15'</strong>, m&ecirc;mes paliers, r3'. <strong>FC moy. de bloc 165-175.</strong></td></tr>
+      <tr><td class="s">jeu 15 &mdash; Q2</td><td><strong>Sp&eacute; 3&times;2 km @ AS21</strong> <span class="tbd">&#9203; Izon</span>, r2'. <strong>&#128273; Le km 1 n'est JAMAIS le plus rapide</strong> (positive split sur 6 courses/7). Un seul lap manuel.</td></tr>
+      <tr><td class="s">ven 16 &mdash; longue</td><td><strong>1h45 EF &lt; 150 STRICT.</strong> &#9940; Pas de finish : 24 h apr&egrave;s la sp&eacute;.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="week-header week-vma" id="s3">S3 (19 &rarr; 25/10) &mdash; Le seuil entre en jeu + VMA longue</div>
+  <div class="card-body">
+    <p class="around">Autour : renfo A mar 20 · renfo B mer 21.</p>
+    <table>
+      <tr><td class="s">lun 19 &mdash; Q1</td><td><strong>Sous-seuil 20' + seuil 6'</strong> (mod&egrave;le 502). SS &agrave; <strong>4'55-5'05</strong> (FC 165-175) &rarr; segment seuil = <strong>AS10</strong> <span class="tbd">&#9203;</span> (FC <strong>178-185</strong>).</td></tr>
+      <tr><td class="s">jeu 22 &mdash; Q2</td><td><strong>VMA intervalles longs 4&times;4'</strong>, r3' en trot (~145). <strong>Cible d'entr&eacute;e ~870-900 m par 4'</strong> <span class="tbd">&#9203; recaler sur Izon</span>. &#128308; <strong>Le palier 1 est un PLAFOND, pas une cible.</strong> Plat, aucun d&eacute;part sec. FC 185-196 attendue, <strong>relue apr&egrave;s</strong>.</td></tr>
+      <tr><td class="s">ven 23 &mdash; longue</td><td><strong>2h00 EF &lt; 150 STRICT.</strong> La plus longue avant le pic.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="week-header week-base" id="s4">S4 (26/10 &rarr; 01/11) &mdash; Semaine ALL&Eacute;G&Eacute;E : une seule qualit&eacute;, et c'est le test</div>
+  <div class="card-body">
+    <p class="around">Autour : renfo A mar 27 · renfo B mer 28 &mdash; <strong>rien de lourd avant le test du jeudi</strong>.</p>
+    <table>
+      <tr><td class="s">lun 26</td><td><strong>EF 45' + 6&times;100 m</strong> (acc&eacute;l&eacute;rations progressives, <strong>format distance, jamais en secondes</strong>). <strong>Ce n'est PAS une qualit&eacute;</strong> &mdash; jambes fra&icirc;ches pour jeudi.</td></tr>
+      <tr><td class="s">jeu 29 &mdash; test</td><td><strong>DEMI-COOPER : 6 minutes &agrave; fond sur plat.</strong> WU 20' + PPG + 3&times;100 m. <strong>distance &divide; 100 = VMA en km/h.</strong> CD 15'.<br>&#128272; <strong>GATE : mollet muet en S3, 4&times;4' compris</strong> &mdash; sinon <strong>remplac&eacute; par SS 15'</strong>. Un effort maximal est de la course rapide, le seul vrai danger sol&eacute;aire.</td></tr>
+      <tr><td class="s">ven 30 &mdash; longue</td><td><strong>1h30 EF &lt; 150</strong> &mdash; semaine all&eacute;g&eacute;e, on ne rallonge pas.</td></tr>
+    </table>
+    <div class="info-box"><strong>Pourquoi le test ici</strong> : sa VMA a <strong>cinq ans</strong> (14,5 en 2021) et le bloc porte de la VMA &mdash; les &eacute;chelles du 30/30 et des intervalles longs sont cal&eacute;es sur une vVMA de travail <strong>suppos&eacute;e</strong>. Avec Izon, &ccedil;a donne <strong>deux points</strong> pour situer son seuil en % de VMA. Plac&eacute; en semaine all&eacute;g&eacute;e, jambes fra&icirc;ches, une seule qualit&eacute;.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="week-header week-vma" id="s5">S5 (02 &rarr; 08/11) &mdash; LE PIC : plus gros seuil, plus grosse VMA, plus longue sortie</div>
+  <div class="card-body">
+    <p class="around">Autour : renfo A mar 03 · renfo B mer 04 &mdash; <strong>surveiller le cumul, c'est la semaine la plus chargée</strong>.</p>
+    <table>
+      <tr><td class="s">lun 02 &mdash; Q1</td><td><strong>Sous-seuil 15' + seuil 10' + seuil 10'</strong> (mod&egrave;le 502 S5). &#9888; &Agrave; 48 h de la longue de 2h15 &rarr; <strong>la dose est r&eacute;glable</strong> : jambes lourdes = on retire un bloc de 10', on ne d&eacute;cale pas.</td></tr>
+      <tr><td class="s">jeu 05 &mdash; Q2</td><td><strong>VMA 30/30, 15 cycles</strong> &mdash; <em>ou 5&times;4', arbitr&eacute; sur la S3 et le demi-Cooper</em>. &Eacute;chelle <strong>re-d&eacute;riv&eacute;e depuis la s&eacute;ance de S1</strong>, jamais fig&eacute;e.</td></tr>
+      <tr><td class="s">ven 06 &mdash; longue</td><td><strong>&#127942; 2h15 &mdash; le pic (J-15). EF &lt; 150 STRICT, aucun finish.</strong> C'est la sortie qui construit la base marathon.</td></tr>
+    </table>
+    <div class="warn-box"><strong>Conditionnalit&eacute;</strong> : le pic &agrave; 2h15 se confirme si la longue de 2h00 du 23/10 a laiss&eacute; <strong>le mollet muet</strong>. Sinon &rarr; <strong>2h00</strong>. On raccourcit une qualit&eacute; avant de raccourcir la longue, <strong>jamais l'inverse</strong>.</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="week-header week-spe" id="s6">S6 (09 &rarr; 15/11) &mdash; L'aff&ucirc;tage commence + LA R&Eacute;P&Eacute;TITION G&Eacute;N&Eacute;RALE</div>
+  <div class="card-body">
+    <p class="around">Autour : renfo A mar 10 · <strong>plio : dernier cr&eacute;neau mer 11/11 (J-10)</strong>, apr&egrave;s une EF.</p>
+    <table>
+      <tr><td class="s">lun 09 &mdash; Q1</td><td><strong>Sous-seuil 15'</strong> &mdash; court expr&egrave;s : le volume de seuil s'arr&ecirc;te ici.</td></tr>
+      <tr><td class="s">jeu 12 &mdash; Q2</td><td><strong>&#127919; SP&Eacute; 2&times;5 km @ AS21</strong> <span class="tbd">&#9203; Izon</span>, r3' &mdash; <strong>J-9, l'instrument de mesure</strong> : 10 km &agrave; l'allure de course.<br><strong>La question :</strong> FC plate d'un bloc &agrave; l'autre ? &rarr; <strong>oui</strong> : le plan d'allure de course se pose dessus &middot; <strong>non</strong> : on retient l'allure du 1<sup>er</sup> bloc.<br>&#128273; C'est aussi ici que se pr&eacute;pare le <strong>substitut au meneur d'allure</strong> (Casteljaloux n'en aura probablement pas) : <strong>allure moyenne fig&eacute;e &agrave; l'&eacute;cran + temps de passage</strong>.</td></tr>
+      <tr><td class="s">ven 13 &mdash; longue</td><td><strong>1h30 EF &lt; 150</strong> (J-8). Derni&egrave;re sortie longue.</td></tr>
+    </table>
+  </div>
+</div>
+
+<div class="card">
+  <div class="week-header week-affut" id="s7">S7 (16 &rarr; 21/11) &mdash; Aff&ucirc;tage &amp; <span class="race">COURSE</span></div>
+  <div class="card-body">
+    <p class="around">Autour : <strong>aucun renfo lourd</strong>, aucune plio. Mobilit&eacute; libre.</p>
+    <table>
+      <tr><td class="s">lun 16</td><td><strong>EF 30' + rappel 3&times;1 km @ AS21</strong> <span class="tbd">&#9203;</span>, r2' &mdash; <em>2&times;1 km si la S6 a bav&eacute;</em>. <strong>M&eacute;moire d'allure &agrave; J-5, aucune adaptation attendue</strong> : on ne cherche rien, on rappelle le geste.</td></tr>
+      <tr><td class="s">mer 18</td><td><strong>EF 25' + 3&times;100 m</strong> (progressives).</td></tr>
+      <tr><td class="s">ven 20</td><td><strong>D&eacute;verrouillage 20'</strong> tr&egrave;s cool, <strong>ou repos</strong> &mdash; au feeling.</td></tr>
+      <tr><td class="s race">sam 21</td><td><strong>&#127937; SEMI DE CASTELJALOUX.</strong> Parcours plat, 162 m D+ brut, <strong>2 premiers km strictement plats</strong>, bosse au km 12, <strong>final qui remonte</strong>.<br>&#128308; <strong>Plan d'allure pos&eacute; sur la S6</strong>, jamais avant. <strong>Le d&eacute;part est retenu</strong> &mdash; les 2 km plats sont exactement le pi&egrave;ge de son pattern.</td></tr>
+    </table>
+  </div>
+</div>
+
+</div>
+
+<!-- Q1 -->
+<div class="card" id="q1">
+  <div class="card-header" style="background: var(--color-seuil);">Q1 &mdash; le bloc seuil (chaque lundi) : la brique n&deg;1</div>
+  <div class="card-body">
+    <h3>Format</h3>
+    <p>Bloc(s) <strong>continu(s) progressif(s)</strong>, <strong>paliers &ge; 4'</strong> &mdash; un palier d'allure plus court est fini avant d'&ecirc;tre trouv&eacute; (le<strong> 1'+6'+1' a &eacute;t&eacute; retir&eacute; le 03/09</strong> pour cette raison). &Eacute;chauffement 15-20' + PPG &middot; retour au calme 10-15' <strong>en cible d'allure 7'00-7'30</strong>.</p>
+
+    <h3>Allures et FC</h3>
+    <table>
+      <tr><th>Zone</th><th>Allure</th><th>FC moyenne de bloc</th></tr>
+      <tr><td class="s">Sous-seuil</td><td><strong>4'55-5'05</strong> <span class="tbd">&#9203; recaler si Izon bouge</span></td><td><strong>165-175</strong></td></tr>
+      <tr><td class="s">Seuil = AS10</td><td><strong>4'45</strong> <span class="tbd">&#9203;</span> &mdash; segments &laquo; seuil &raquo; de S3 et S5</td><td><strong>178-185</strong></td></tr>
+      <tr><td class="s">CD</td><td><strong>7'00-7'30 impos&eacute;s</strong>, cible r&eacute;p&eacute;t&eacute;e en steps courts</td><td>&mdash;</td></tr>
+    </table>
+
+    <h3>Progression sur le bloc</h3>
+    <table>
+      <tr><th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>S5</th><th>S6</th><th>Total</th></tr>
+      <tr><td>2&times;12' SS</td><td>2&times;15' SS</td><td>20' SS + 6' seuil</td><td>&mdash;</td><td>15' SS + 10' + 10' seuil</td><td>15' SS</td><td></td></tr>
+      <tr><td>24'</td><td>30'</td><td>26'</td><td>0'</td><td>35'</td><td>15'</td><td><strong>130' en zone</strong></td></tr>
+    </table>
+    <p class="around">Le 502 (le plan de son record 2010) en faisait 138' sur 5 semaines.</p>
+
+    <div class="green-box">
+      <strong>Pourquoi cette brique pour lui :</strong> un semi se court <strong>sous le seuil</strong>. Le sous-seuil produit quasiment la m&ecirc;me adaptation que le seuil pour <strong>6-8 cm d'amplitude en moins</strong> (123 cm contre 131, mesur&eacute; les 01 et 03/09) &mdash; <strong>le geste qui charge le sol&eacute;aire est d&eacute;sarm&eacute;</strong>, donc on en accumule plus, plus souvent. C'est <strong>la fili&egrave;re &agrave; z&eacute;ro en 2025</strong> (craquage km 17) et <strong>l'ossature de son record 2010</strong>.
+    </div>
+
+    <div class="warn-box">
+      <strong>Pilotage</strong> : s&eacute;ance &agrave; <strong>cible d'ALLURE</strong> &rarr; l'allure pilote (champ <strong>&laquo; Allure circuit &raquo;</strong>), la <strong>FC moy. circuit</strong> est le garde-fou et <strong>se relit apr&egrave;s</strong> (&agrave; midi en plein soleil elle ne pilote pas).<br>
+      <strong>&#128721; ON COUPE si</strong> : <strong>d&eacute;rive interne &gt; 5 s/km</strong> &agrave; l'int&eacute;rieur d'un bloc &middot; FC <strong>install&eacute;e</strong> ~15 bpm au-dessus de la fourchette (pas un pic de 20 s) &middot; <strong>point focal mollet = STOP imm&eacute;diat</strong>.<br>
+      <em>Couper</em> = on termine le bloc en cours et on s'arr&ecirc;te. <strong>C'est une s&eacute;ance r&eacute;ussie</strong>, jamais un bloc de rattrapage.
+    </div>
+  </div>
+</div>
+
+<!-- Q2 VMA -->
+<div class="card" id="q2vma">
+  <div class="card-header" style="background: var(--color-vma);">Q2 &mdash; VMA : 30/30 en rampe (S1, S5) &middot; intervalles longs (S3) &middot; test (S4)</div>
+  <div class="card-body">
+    <div class="red-box">
+      <strong>&#9888; CETTE SECTION EST LA PLUS PROVISOIRE DU DOCUMENT.</strong> Elle a &eacute;t&eacute; &eacute;crite le <strong>06/09 au soir</strong>, <strong>avant</strong> le RETEX de la VMA #2 du 07/09 (champ TEMPS manquant &agrave; l'&eacute;cran, &eacute;chelle trop finement gradu&eacute;e, r&egrave;gle d'arr&ecirc;t non sym&eacute;trique). <strong>Les correctifs ne sont pas encore int&eacute;gr&eacute;s ici</strong> &mdash; ils le seront en v1.0, avec les cases Izon.
+    </div>
+
+    <h3>30/30 en pyramide ascendante <em>(m&eacute;thode retenue)</em></h3>
+    <ul>
+      <li><strong>Bloc unique</strong> &mdash; <strong>12 cycles en S1 &rarr; 15 en S5</strong>.</li>
+      <li>30'' d'<strong>acc&eacute;l&eacute;ration continue</strong> (point bas &rarr; point haut), 30'' de <strong>d&eacute;c&eacute;l&eacute;ration continue</strong> (point haut &rarr; point bas suivant). <strong>&#9940; On ne redescend JAMAIS &agrave; z&eacute;ro, la d&eacute;c&eacute; n'est JAMAIS un trot.</strong></li>
+      <li>&Eacute;chelle de d&eacute;part <strong>108 &rarr; 125 m/30''</strong> (4'38 &rarr; 4'00), &#9888; <strong>re-d&eacute;riv&eacute;e &agrave; CHAQUE s&eacute;ance depuis la pr&eacute;c&eacute;dente, dans les deux sens</strong> &mdash; jamais fig&eacute;e pour le bloc.</li>
+      <li>Cadence <strong>&ge; 172</strong> sur les acc&eacute;.</li>
+      <li><strong>&#9989; Une FC qui reste haute entre les cycles est l'OBJECTIF</strong>, jamais un d&eacute;faut. <strong>&#9940; Aucun plafond de FC : 190+ est la cible.</strong></li>
+      <li>&Eacute;cran VMA : <strong>Allure circuit</strong> en gros &middot; <strong>FC</strong>.</li>
+    </ul>
+    <div class="info-box">
+      <strong>&Eacute;talon de r&eacute;f&eacute;rence</strong> : le <strong>24/08/2026</strong> &mdash; acc&eacute; 116 m, d&eacute;c&eacute; 106 m, <strong>6'30 au-dessus de 185 bpm</strong>, mollets muets. L'&eacute;chelle 108-125 en sort.<br>
+      <strong>&#9940; NE PAS VISER LE 131 m/30'' DU 13/10/2025</strong> : ce soir-l&agrave; la d&eacute;c&eacute; &eacute;tait <strong>trott&eacute;e</strong> (63 m = 48 % de l'acc&eacute;) et le temps &gt; 185 &eacute;tait quasi nul. <strong>Une acc&eacute; de 30/30 trott&eacute; n'est pas comparable &agrave; une acc&eacute; de vrai Billat.</strong><br>
+      <strong>&#128273; Ce qui fera monter le temps &agrave; VO2max, c'est de TENIR LES D&Eacute;C&Eacute;</strong> &mdash; pas d'acc&eacute;l&eacute;rer les acc&eacute;.
+    </div>
+
+    <h3>Intervalles longs &mdash; 4&times;4' (S3)</h3>
+    <ul>
+      <li><strong>Pilotage en M&Egrave;TRES par palier</strong>. Cible d'entr&eacute;e <strong>~870-900 m par 4'</strong> <span class="tbd">&#9203; &agrave; recaler sur Izon</span>.</li>
+      <li>&#128308; <strong>Le palier 1 est un PLAFOND, pas une cible</strong> &mdash; la r&eacute;ussite est la <strong>d&eacute;rive &lt; 5 %</strong>, pas le premier chiffre.</li>
+      <li><strong>r 3' en trot</strong> (~145). <strong>Plat, aucun d&eacute;part sec.</strong></li>
+      <li>FC <strong>185-196</strong> attendue, <strong>relue apr&egrave;s</strong> &mdash; aucun plafond.</li>
+    </ul>
+    <div class="info-box">
+      <strong>Ses r&eacute;f&eacute;rences mesur&eacute;es sur ce format</strong> : <strong>5&times;4' le 11/04/2025 &rarr; 975 &middot; 966 &middot; 945 &middot; 899 &middot; 882 m</strong> (4'06 &rarr; 4'32, moyenne 4'17 = 14,0 km/h), d&eacute;rive <strong>&minus;9,6 %</strong>. Et <strong>5&times;3' le 06/10/2025 &agrave; 14,55 km/h, d&eacute;rive &minus;1,7 %</strong> &mdash; la mieux ex&eacute;cut&eacute;e du lot.<br>
+      &rarr; <strong>La cible n'est pas une allure : c'est ~900 m au palier 1 et une d&eacute;rive &lt; 5 %.</strong>
+    </div>
+    <div class="green-box"><strong>Pourquoi ce format pour lui :</strong> chez lui l'intensit&eacute; VO2max s'atteint <strong>&agrave; une allure de course</strong> &rarr; c'est <strong>la forme de VO2max la moins co&ucirc;teuse pour son sol&eacute;aire</strong>, et des paliers de 4' sont pilotables. Le 30/30 apporte en plus <strong>la composante force</strong> (F = m&times;a) <strong>sans d&eacute;part sec</strong> &mdash; son facteur limitant est musculaire. <strong>Les deux alternent : ce sont deux lectures de son VO2max &agrave; comparer</strong> (m/30'' contre allure tenue 4').</div>
+
+    <h3>Demi-Cooper &mdash; le test de S4 (jeu 29/10)</h3>
+    <ul>
+      <li><strong>6 minutes &agrave; fond sur plat</strong>, apr&egrave;s 20' d'&eacute;chauffement + PPG + <strong>3&times;100 m</strong>. <strong>Distance &divide; 100 = VMA en km/h.</strong> CD 15'.</li>
+      <li>&#128272; <strong>GATE : mollet muet en S3, 4&times;4' compris</strong> &mdash; sinon remplac&eacute; par <strong>SS 15'</strong>. Aucune discussion : un effort maximal est de la course rapide.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q2 SPE -->
+<div class="card" id="q2spe">
+  <div class="card-header" style="background: var(--color-as);">Q2 &mdash; l'allure du semi en blocs kilom&eacute;tr&eacute;s (S2, S6, rappel S7)</div>
+  <div class="card-body">
+    <div class="warn-box">
+      <strong>Allure : <span class="tbd">&#9203; d&eacute;riv&eacute;e d'Izon</span></strong> &mdash; cha&icirc;ne : <strong>AS10 en course &rarr; seuil &rarr; AS21 = AS10 + 13 &agrave; 18 s/km</strong> (son &eacute;cart mesur&eacute; ; Riegel dit +13).<br>
+      <strong>FC attendue</strong> <span class="tbd">&#9203;</span> : entre les fourchettes sous-seuil et seuil &mdash; <strong>se relit apr&egrave;s</strong>.<br>
+      <strong>&#9940; Jamais plus vite que ~4'20-4'25</strong> (son plafond de blocs r&eacute;p&eacute;t&eacute;s, mesur&eacute; sur les 3 pr&eacute;pas 2025).
+    </div>
+    <table>
+      <tr><td class="s">S2 &mdash; 3&times;2 km r2'</td><td><strong>1<sup>er</sup> contact.</strong> &#128273; <strong>Le km 1 n'est jamais le plus rapide.</strong> Un seul lap manuel (fin d'&eacute;chauffement).</td></tr>
+      <tr><td class="s">S6 &mdash; 2&times;5 km r3'</td><td><strong>J-9, l'instrument de mesure et la r&eacute;p&eacute;tition g&eacute;n&eacute;rale</strong> : 10 km &agrave; l'allure de course.<br><strong>D&eacute;cision :</strong> FC plate d'un bloc &agrave; l'autre ? <strong>oui</strong> &rarr; le plan d'allure de course se pose dessus &middot; <strong>non</strong> &rarr; on retient l'allure du 1<sup>er</sup> bloc.<br>C'est aussi la r&eacute;p&eacute;tition du <strong>substitut au meneur d'allure</strong> : allure moyenne fig&eacute;e &agrave; l'&eacute;cran + temps de passage.</td></tr>
+      <tr><td class="s">S7 &mdash; 3&times;1 km r2'</td><td>lun 16, <strong>J-5</strong>. <em>2&times;1 km si la S6 a bav&eacute;.</em> <strong>M&eacute;moire d'allure, aucune adaptation attendue.</strong></td></tr>
+    </table>
+    <div class="green-box"><strong>Pourquoi si peu de sp&eacute; :</strong> chez lui, <strong>l'AS21 n'est pas une fili&egrave;re &agrave; part</strong> &mdash; son &eacute;cart AS10 &rarr; AS21 (+13 &agrave; +18 s/km) tombe <strong>exactement dans sa zone sous-seuil</strong>. <strong>Le bloc seuil du lundi travaille donc d&eacute;j&agrave; l'allure du semi, en continu.</strong> La sp&eacute; kilom&eacute;tr&eacute;e sert <strong>le pilotage</strong> (d&eacute;part contr&ocirc;l&eacute;), <strong>la m&eacute;canique &agrave; l'allure exacte</strong> et <strong>la mesure</strong>. En 2025 : 57 km de sp&eacute; &agrave; 99 % de sa vitesse 10 km et <strong>z&eacute;ro seuil</strong> &mdash; c'est l'inverse qu'on construit.</div>
+  </div>
+</div>
+
+<!-- LONGUES -->
+<div class="card" id="longues">
+  <div class="card-header" style="background: var(--color-ef);">Les longues &mdash; toutes au VENDREDI</div>
+  <div class="card-body">
+    <div class="red-box"><strong>EF &lt; 150 STRICT &mdash; le plafond EST la s&eacute;ance.</strong> La devise &agrave; payer, c'est <strong>l'allure</strong>, pas la FC. <strong>D&eacute;part t&ocirc;t AVANT de flexer le plafond</strong> (et sur un jour travaill&eacute; contraint, on accepte le co&ucirc;t et on l'&eacute;crit comme condition de la s&eacute;ance).<br>&#9940; <strong>Jamais de finish AS21</strong> : la longue tombe &agrave; 24 h de Q2.</div>
+    <table>
+      <tr><th>S1</th><th>S2</th><th>S3</th><th>S4</th><th>S5</th><th>S6</th><th>Total</th></tr>
+      <tr><td>ven 09<br><strong>1h30</strong></td><td>ven 16<br><strong>1h45</strong></td><td>ven 23<br><strong>2h00</strong></td><td>ven 30<br><strong>1h30</strong><br><em>all&eacute;g&eacute;e</em></td><td>ven 06<br><strong>2h15</strong><br><em>pic, J-15</em></td><td>ven 13<br><strong>1h30</strong><br><em>J-8</em></td><td><strong>10h30</strong></td></tr>
+    </table>
+    <p><strong>Distances mini</strong> <span class="tbd">&#9203;</span> &mdash; &agrave; poser sur son allure d'EF d'automne : <strong>la premi&egrave;re EF &agrave; point de ros&eacute;e bas la donne</strong>.</p>
+    <div class="info-box"><strong>C'est le seul param&egrave;tre dimensionn&eacute; sur le marathon 2027</strong>, pas sur le semi. Rappel 2025 : <strong>3 sorties &ge; 2h en 12 semaines</strong> &rarr; ischios vid&eacute;s au km 37. Ici le pic est &agrave; <strong>2h15, pas 2h30</strong> : la base marathon se construit <strong>d'octobre &agrave; d&eacute;cembre</strong>, ce bloc en est la premi&egrave;re moiti&eacute;.<br>&#9888; <strong>La queue de retour est DANS la dur&eacute;e annonc&eacute;e</strong>, jamais en plus &mdash; depuis Vayres, la boucle impose 13 &agrave; 16 minutes de retour.</div>
+  </div>
+</div>
+
+<!-- AUTOUR -->
+<div class="card" id="autour">
+  <div class="card-header" style="background: var(--color-renfo);">Autour &mdash; renfo, 4<sup>e</sup> s&eacute;ance, piscine, m&eacute;t&eacute;o</div>
+  <div class="card-body">
+    <table>
+      <tr><td class="s">Renfo</td><td><strong>EXPRESS 15', &ge; 1 par semaine.</strong> <strong>A</strong> mardi (mollets + ischios &mdash; jour OFF course, <strong>jamais la veille d'une s&eacute;ance de vitesse</strong>) &middot; <strong>B</strong> mercredi ou dimanche (z&eacute;ro charge mollet) &middot; <strong>C</strong> apr&egrave;s une EF, &ge; 48 h avant une qualit&eacute;. <strong>Jambe D surcharg&eacute;e</strong> (fentes bulgares : s&eacute;ries doubl&eacute;es c&ocirc;t&eacute; D).<br>&#9888; <strong>Format court obligatoire</strong> : le renfo n'a jamais tenu &agrave; cause des <strong>courbatures</strong>. Une s&eacute;ance qui ne laisse pas de courbatures est une s&eacute;ance qu'on refait.</td></tr>
+      <tr><td class="s">Plio</td><td><strong>40-70 contacts</strong>, jamais planifi&eacute;e &mdash; &agrave; placer apr&egrave;s une EF. <strong>Dernier cr&eacute;neau : mer 11/11 (J-10).</strong></td></tr>
+      <tr><td class="s">Acc&eacute;l&eacute;rations</td><td><strong>100 m, format DISTANCE, jamais en secondes.</strong> Dans l'EF du lun 26/10 et les EF de S7.</td></tr>
+      <tr><td class="s">&#10133; 4<sup>e</sup> s&eacute;ance</td><td><strong>OPTIONNELLE. EF pure, &lt; 150 strict, 45'-1h</strong>, mercredi ou samedi. <strong>&#9940; Jamais une qualit&eacute;</strong>, <strong>&#9940; non compt&eacute;e dans les volumes annonc&eacute;s</strong> &mdash; elle s'AJOUTE. Si elle a lieu chaque semaine, le bloc gagne ~6h.</td></tr>
+      <tr><td class="s">&#127946; Piscine</td><td><strong>HORS PLAN.</strong> Si elle a lieu, la banque de s&eacute;ances sert &mdash; <strong>elle ne remplace ni n'&eacute;change aucune s&eacute;ance de course</strong>, et le plan n'&eacute;crit pas son contenu. Jours travaill&eacute;s uniquement (lun/mar/mer/jeu).<br>&#9888; <strong>Renfo prioritaire</strong> si les deux se disputent le m&ecirc;me midi.</td></tr>
+      <tr><td class="s">&#127777; M&eacute;t&eacute;o</td><td><strong>Point de ros&eacute;e regard&eacute; avant chaque s&eacute;ance &agrave; cible d'allure</strong>, pas seulement la temp&eacute;rature : <strong>dew &gt; 18 = p&eacute;nalit&eacute; FC r&eacute;elle</strong>. <strong>L'heure se d&eacute;place avant le plafond</strong> &mdash; quand un cr&eacute;neau existe.</td></tr>
+    </table>
+    <div class="info-box">
+      <strong>&#128421; &Eacute;crans de donn&eacute;es.</strong> <strong>QUALIT&Eacute;</strong> (seuil, sp&eacute;, EF) : Allure circuit &middot; FC moy. circuit &middot; FC &middot; Cadence circuit. <strong>VMA</strong> (30/30) : Allure circuit en gros &middot; FC.<br>
+      <strong>Quelle FC pour quelle s&eacute;ance</strong> : cible d'ALLURE &rarr; <strong>FC moy. circuit</strong> (le chiffre du plan est une moyenne de bloc) &middot; EF/longue &rarr; <strong>FC instantan&eacute;e</strong> (le plafond pilote, l'action est &laquo; je ralentis maintenant &raquo;) &middot; VMA &rarr; indiff&eacute;rent, aucun plafond.
+    </div>
+    <div class="info-box">
+      <strong>&#127777; LA FC EST UN REP&Egrave;RE RELATIF &Agrave; L'OBJECTIF DE LA S&Eacute;ANCE</strong> &mdash; jamais un seuil absolu. <strong>190 est NORMAL en AS10 et ANORMAL en AS42.</strong>
+      <table>
+        <tr><td class="s">EF / longue</td><td><strong>&lt; 150</strong> (160 en canicule, apr&egrave;s avoir d&eacute;plac&eacute; l'heure) &mdash; <strong>ici le plafond EST la s&eacute;ance</strong></td></tr>
+        <tr><td class="s">Sous-seuil</td><td><strong>165-175</strong></td></tr>
+        <tr><td class="s">Seuil = AS10</td><td><strong>178-185</strong></td></tr>
+        <tr><td class="s">AS21</td><td><span class="tbd">&#9203;</span> entre les deux &mdash; se relit apr&egrave;s la S2</td></tr>
+        <tr><td class="s">VMA / 30-30</td><td><strong>185-196, pics 192+ normaux</strong> &mdash; &#9940; <strong>aucun plafond</strong></td></tr>
+      </table>
+      &#128308; <strong>&Ccedil;a devient bloquant si tu sors NETTEMENT et DURABLEMENT des clous sans que ce soit pr&eacute;vu</strong> (FC install&eacute;e sur un segment, pas un pic) &rarr; tu r&eacute;duis l'allure, ou tu coupes. <strong>Le motif n'est pas cardiaque</strong> (FC max 206, test d'effort normal) : <strong>c'est que la s&eacute;ance a chang&eacute; de nature.</strong>
+    </div>
+  </div>
+</div>
+
+<!-- CONTROLE -->
+<div class="card" id="controle">
+  <div class="card-header" style="background: var(--accent);">Points de contr&ocirc;le</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Quand</th><th>Check</th><th>Si KO</th></tr>
+      <tr><td class="s">mer 30/09<br><em>(J+3 Izon)</em></td><td><strong>Mollet muet apr&egrave;s le dossard ?</strong></td><td><strong>S1 sans VMA</strong> : EF + 6&times;100 m, la VMA #1 glisse en S2 et la sp&eacute; 3&times;2 km passe en S4 &agrave; la place du demi-Cooper</td></tr>
+      <tr><td class="s">jeu 15/10<br><em>(S2, 3&times;2 km)</em></td><td>AS21 tenue sans d&eacute;rive, FC dans la fourchette, <strong>km 1 pas le plus rapide</strong> ?</td><td>AS21 recal&eacute;e avant S6</td></tr>
+      <tr><td class="s">jeu 29/10<br><em>(S4, demi-Cooper)</em></td><td><strong>VMA chiffr&eacute;e</strong></td><td>&eacute;chelles de S5 recal&eacute;es &middot; mollet qui parle &rarr; <strong>SS 15' &agrave; la place</strong></td></tr>
+      <tr><td class="s">ven 30/10</td><td>La longue de 2h00 du 23/10 a-t-elle laiss&eacute; le mollet muet ?</td><td>pic de S5 ramen&eacute; &agrave; <strong>2h00</strong> au lieu de 2h15</td></tr>
+      <tr><td class="s">jeu 12/11<br><em>(S6, 2&times;5 km)</em></td><td><strong>FC plate d'un bloc &agrave; l'autre ?</strong></td><td>plan d'allure pos&eacute; sur le <strong>1<sup>er</sup> bloc</strong></td></tr>
+      <tr><td class="s">chaque semaine</td><td>mollet &middot; chronique Garmin qui monte &middot; ACWR <strong>en direction, jamais en verdict</strong></td><td>on raccourcit <strong>une qualit&eacute;</strong>, <strong>jamais la longue</strong></td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- IZON -->
+<div class="card" id="izon">
+  <div class="card-header" style="background: var(--color-course);">Ce qu'Izon remplit &mdash; la liste exacte</div>
+  <div class="card-body">
+    <table>
+      <tr><th>Case <span class="tbd">&#9203;</span></th><th>Ce qui la remplit</th></tr>
+      <tr><td class="s">AS21 (S2, S6, S7)</td><td>l'<strong>AS10 tenue en course</strong> &rarr; AS21 = AS10 + <strong>13 &agrave; 18 s/km</strong> &middot; confirm&eacute;e par le 2&times;5 km de S6</td></tr>
+      <tr><td class="s">Allure des 4&times;4' (S3)</td><td>AS10 d'Izon <strong>&minus; 5 &agrave; 10 s/km</strong> &middot; recal&eacute;e par le demi-Cooper pour S5</td></tr>
+      <tr><td class="s">Format de la VMA de S1</td><td><strong>RETEX mollet &agrave; J+3 d'Izon</strong> : muet &rarr; 30/30 12 cycles &middot; signal &rarr; EF + 6&times;100 m</td></tr>
+      <tr><td class="s">Objectif du jour J</td><td>apr&egrave;s Izon &mdash; et <strong>le plan d'allure de course se pose sur la S6</strong>, jamais avant</td></tr>
+      <tr><td class="s">Condition d'entr&eacute;e</td><td><strong>le niveau r&eacute;el d'Izon</strong>, confront&eacute; &agrave; la structure de ce squelette &mdash; pas le record</td></tr>
+      <tr><td class="s">Distances mini des longues</td><td>son allure d'EF &agrave; <strong>point de ros&eacute;e bas</strong></td></tr>
+      <tr><td class="s">Section VMA</td><td>+ les <strong>correctifs du RETEX de la VMA #2 du 07/09</strong> (champ TEMPS, graduation, r&egrave;gle d'arr&ecirc;t)</td></tr>
+    </table>
+  </div>
+</div>
+
+<p style="text-align:center;color:#888;font-size:0.8rem;margin-top:30px;">Squelette v0.1 &mdash; 07/09/2026 &middot; <strong>v1.0 apr&egrave;s Izon (27/09)</strong></p>
+
+</div>
+</body>
+</html>
