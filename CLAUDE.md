@@ -16,9 +16,10 @@ Les fiches scolaires, études familiales, pages médicales, études de vacances 
 
 ## Confidentialité — règle bloquante
 
-**Aucune donnée personnelle ou sensible ne doit être introduite dans un commit ni publiée. Toute détection ou tout doute bloque le commit et le push jusqu’à correction.**
+**Aucune donnée personnelle sensible ne doit être introduite dans un commit ni publiée. Toute détection ou tout doute bloque le commit et le push jusqu’à correction.**
 
-- Interdits : identité et domicile du foyer, contacts et dates de naissance, informations fiscales et bancaires, données médicales personnelles, secrets et identifiants d’installation. Vérifier le contenu, les commentaires, données embarquées, noms de fichiers, messages de commit et identités auteur/committer.
+- Interdits : identité et domicile du foyer, contacts et dates de naissance, informations fiscales et bancaires, identifiants de connexion, mots de passe, secrets et identifiants d’installation. Vérifier le contenu, les commentaires, données embarquées, noms de fichiers, messages de commit et identités auteur/committer.
+- Périmètre précisé par le propriétaire : les résultats sportifs, mesures et références physiologiques, antécédents physiques et contexte d’entraînement peuvent rester. Leur seule présence ne doit ni bloquer un commit ni entraîner une généralisation des programmes. Les identifiants numériques de séance sont distincts des identifiants de connexion. Les catégories interdites ci-dessus le restent dans une page sportive.
 - La présence d’une page dans la liste autorisée ne constitue aucune exemption à cette règle. Relire humainement chaque fichier destiné à la publication.
 - Les hooks de confidentialité sont obligatoires. Leur programme et le contexte privé restent dans le dépôt privé voisin. Installation depuis ce dépôt : `python3 ../maison/scripts/publication/public_guard.py --install .`.
 - Avant commit : `python3 ../maison/scripts/publication/public_guard.py --repo . --staged`. Le contrôle porte sur tous les fichiers de l’index, en entier, y compris les fichiers inchangés. Les hooks contrôlent également les messages et les commits sortants.
@@ -36,4 +37,4 @@ Les fiches scolaires, études familiales, pages médicales, études de vacances 
 
 ## Sources sportives publiques
 
-Les versions sportives sont générées depuis les sources relues `../maison/docs/publication/sport/`, avec `python3 ../maison/scripts/publication/build_sport_pages.py --out .`. Ne jamais recopier directement les documents personnels du dépôt sportif privé. Préserver les programmes et les exercices, sans ajouter de journal individuel, identifiant de séance ou compte rendu médical. Le dashboard énergétique reste le contenu technique choisi par le propriétaire, sans secret ni identifiant d’installation.
+Les versions sportives sont générées depuis les sources relues `../maison/docs/publication/sport/`, avec `python3 ../maison/scripts/publication/build_sport_pages.py --out .`. Ne jamais recopier directement les documents personnels du dépôt sportif privé. Préserver les programmes, exercices et informations sportives autorisées ; vérifier uniquement les catégories personnelles sensibles définies ci-dessus. Le dashboard énergétique reste le contenu technique choisi par le propriétaire, sans secret ni identifiant d’installation.
