@@ -4,11 +4,13 @@ Site : https://olibruet.github.io — HTML statique publié depuis `main`.
 
 ## Périmètre autorisé
 
-Seules ces cinq pages, leur sommaire `index.html` et ce fichier d’instructions doivent être conservés dans ce dépôt :
+Le dépôt contient les pages autorisées ci-dessous, leur sommaire `index.html` et ce fichier d’instructions.
 
 - `maison/solaire/dashboard-production.html` — dashboard solaire.
 - `sport-health/plans/custom/2026_semi_casteljaloux_3s.html` — plan semi.
 - `sport-health/plans/custom/2026_10km_izon_caisse_3s.html` — plan 10 km Izon.
+- `sport-health/plans/custom/2027_10km_teich_3s.html` — En route pour le Teich.
+- `sport-health/plans/custom/2027_marathon_2-rives_calendrier.html` — calendrier sportif 2027.
 - `sport-health/entrainements/exercices/renfo_2026_semi.html` — renforcement.
 - `sport-health/plans/custom/2026_piscine_cross-training.html` — natation.
 
@@ -37,4 +39,4 @@ Les fiches scolaires, études familiales, pages médicales, études de vacances 
 
 ## Sources sportives publiques
 
-Les versions sportives sont générées depuis les sources relues `../maison/docs/publication/sport/`, avec `python3 ../maison/scripts/publication/build_sport_pages.py --out .`. Ne jamais recopier directement les documents personnels du dépôt sportif privé. Préserver les programmes, exercices et informations sportives autorisées ; vérifier uniquement les catégories personnelles sensibles définies ci-dessus. Le dashboard énergétique reste le contenu technique choisi par le propriétaire, sans secret ni identifiant d’installation.
+Les plans de Casteljaloux et du Teich sont relus et contrôlés depuis leur HTML dans `../sport-health/`. Les autres versions sportives sont générées depuis les sources relues `../maison/docs/publication/sport/`, avec `python3 ../maison/scripts/publication/build_sport_pages.py --out .`. Ne jamais recopier directement les documents personnels du dépôt sportif privé. Préserver les programmes, exercices et informations sportives autorisées ; vérifier uniquement les catégories personnelles sensibles définies ci-dessus. Le dashboard énergétique reste le contenu technique choisi par le propriétaire, sans secret ni identifiant d’installation.

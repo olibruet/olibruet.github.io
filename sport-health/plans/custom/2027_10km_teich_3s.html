@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#132d2a">
+  <title>En route pour le Teich</title>
+  <style>
+    :root{color-scheme:light;--ink:#192d28;--muted:#49605a;--paper:#fffef9;--line:#d5dfd3;--forest:#132d2a;--link:#145440}
+    *{box-sizing:border-box}
+    body{margin:0;background:#f3f5ee;color:var(--ink);font:1rem/1.55 Inter,system-ui,sans-serif}
+    h1,h2,h3,h4,p,dl,dd{margin:0}
+    a{color:var(--link);text-underline-offset:.19em}
+    a:focus-visible,summary:focus-visible{outline:3px solid #27684f;outline-offset:3px}
+    .wrap{max-width:68rem;margin:auto;padding-inline:clamp(1rem,4vw,3rem)}
+    .hero{background:var(--forest);color:#fffef8}
+    .hero .wrap{padding-block:clamp(2rem,6vw,4rem) 2rem}
+    .hero h1{font-size:clamp(2.4rem,7vw,4.6rem);letter-spacing:-.055em;line-height:1.05}
+    .hero p{max-width:45rem;margin-top:.9rem;color:#e0ece2}
+    .hero .updated{font-size:.85rem}
+    .hero a{color:#e0f2a3}
+    nav{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+    nav a{border:1px solid #739288;border-radius:2rem;padding:.36rem .76rem;text-decoration:none}
+    nav a:hover{background:#254740}
+    main.wrap{padding-block:1.6rem 3rem}
+    [id]{scroll-margin-top:1rem}
+    h2{font-size:clamp(1.45rem,4vw,2rem);letter-spacing:-.028em;line-height:1.2;margin-bottom:.9rem}
+    .overview,.guidance,.week{background:var(--paper);border:1px solid var(--line);border-radius:1rem}
+    .overview,.guidance{padding:clamp(.65rem,3vw,1.2rem);margin-bottom:1rem}
+    table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.9rem}
+    table th:first-child{width:15%}
+    th,td{text-align:left;vertical-align:top;padding:.62rem .55rem;border-block-end:1px solid var(--line)}
+    thead th{background:#edf2e8;color:var(--muted);font-size:.8rem}
+    tbody tr:last-child>*{border:0}
+    td a span{display:block}
+    td a .date{text-decoration:none}
+    .date{color:var(--muted);font-size:.82rem;font-weight:700;font-variant-numeric:tabular-nums}
+    summary{cursor:pointer;font-weight:650}
+    .guidance ul{margin:.55rem 0 0;padding-left:1.25rem}
+    .guidance li+li{margin-top:.35rem}
+    .phase{margin-top:2.25rem}
+    .week{margin-bottom:1.25rem;overflow:clip}
+    .week-heading{padding:.75rem clamp(.9rem,4vw,1.6rem);background:#e6efe4;border-bottom:1px solid var(--line)}
+    .week-heading p{color:var(--muted);font-weight:650;font-size:.84rem}
+    h3{font-size:1.35rem;letter-spacing:-.024em}
+    .session{display:grid;grid-template-columns:8.2rem minmax(0,1fr);gap:.85rem;padding:1rem clamp(.9rem,4vw,1.6rem)}
+    .session+.session{border-top:1px solid var(--line)}
+    .session:target,.week:target .week-heading{background:#f1f6e1}
+    .session-meta .date,.type{display:block}
+    .type{width:fit-content;margin-top:.22rem;padding:.12rem .45rem;border-radius:.3rem;background:#e5f2eb;color:#18533d;font-size:.77rem;font-weight:700}
+    .choix .type{background:#f4ead2;color:#674811}
+    .allure .type{background:#dfeef6;color:#174b6b}
+    .vitesse .type{background:#ece6f5;color:#51367b}
+    .course .type{background:#f9e5dc;color:#773718}
+    h4{font-size:1.1rem;margin-bottom:.25rem}
+    .target{font-size:.87rem;font-weight:650;color:#305a47}
+    .steps{display:grid;grid-template-columns:8.2rem minmax(0,1fr);gap:.35rem .65rem}
+    .steps dt{font-size:.83rem;font-weight:650;color:var(--muted);padding-top:.12rem}
+    .variant{margin-top:.55rem;padding:.5rem .7rem;background:#eef3e9;border-radius:.4rem}
+    .variant p{margin-top:.35rem}
+    .decision{margin:0 clamp(.9rem,4vw,1.6rem) 1rem;padding:.65rem .8rem;background:#eef3e9;border-left:3px solid #478f6d}
+    @media (max-width:40rem){
+      table th:first-child{width:23%}
+      th,td{padding:.45rem .25rem;overflow-wrap:anywhere}
+      .session{grid-template-columns:1fr;gap:.28rem}
+      .session-meta .date,.type{display:inline-block;margin-right:.28rem}
+      .steps{display:block}
+      .steps dd+dt{margin-top:.35rem}
+    }
+    @media print{
+      body,.hero,.overview,.guidance,.week,.week-heading{background:#fff;color:#000}
+      .hero p,.hero a{color:#000}
+      nav{display:none}
+      .hero .wrap{padding-block:.5rem}
+      .session,.week-heading{break-inside:avoid}
+      .week-heading{break-after:avoid}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero"><div class="wrap">
+    <h1>En route pour le Teich</h1>
+    <p class="updated">Dernière mise à jour le <time datetime="2026-11-25">25/11/2026</time></p>
+    <p><strong>10 km des Foulées des Plaines · dimanche 07/02/2027 à 10 h 30 · cible de préparation 4′20/km (43′20).</strong> Repos du 23 au 29/11 après Casteljaloux, puis trois sorties par semaine du 30/11 au dossard. <a href="https://protiming.fr/events/8484-foulees-des-plaines">Informations de course</a></p>
+    <nav aria-label="Sommaire">
+      <a href="#ensemble">Vue d’ensemble</a>
+      <a href="#bloc-1">Décembre</a>
+      <a href="#bloc-2">Préparation spécifique</a>
+      <a href="#jour-course">Jour de course</a>
+    </nav>
+  </div></header>
+  <main class="wrap">
+    <section class="overview" id="ensemble" aria-labelledby="ensemble-titre">
+      <h2 id="ensemble-titre">Vue d’ensemble</h2>
+      <table aria-labelledby="ensemble-titre">
+        <thead><tr><th scope="col">Semaine</th><th scope="col">Séance 1</th><th scope="col">Séance 2</th><th scope="col">Séance 3</th></tr></thead>
+        <tbody>
+<tr><th scope="row"><a href="#phase-1-semaine-1">30/11–06/12</a></th><td><a href="#phase-1-semaine-1-seance-1"><span class="date">Lun 30/11</span><span>45 min EF à Cenon</span></a></td><td><a href="#phase-1-semaine-1-seance-2"><span class="date">Mer 02/12</span><span>3 × (500–400–300 m)</span></a></td><td><a href="#phase-1-semaine-1-seance-3"><span class="date">Ven 04/12</span><span>60 min EF</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-1-semaine-2">07–13/12</a></th><td><a href="#phase-1-semaine-2-seance-1"><span class="date">Lun 07/12</span><span>45 min EF</span></a></td><td><a href="#phase-1-semaine-2-seance-2"><span class="date">Mer 09/12</span><span>4′–6′–6′–4′ ou 8–4</span></a></td><td><a href="#phase-1-semaine-2-seance-3"><span class="date">Ven 11/12</span><span>70 min EF</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-1-semaine-3">14–20/12</a></th><td><a href="#phase-1-semaine-3-seance-1"><span class="date">Lun 14/12</span><span>45 min EF</span></a></td><td><a href="#phase-1-semaine-3-seance-2"><span class="date">Mer 16/12</span><span>6 × 3 min</span></a></td><td><a href="#phase-1-semaine-3-seance-3"><span class="date">Ven 18/12</span><span>75 min EF</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-1-semaine-4">21–27/12</a></th><td><a href="#phase-1-semaine-4-seance-1"><span class="date">Lun 21/12</span><span>1 000–800–600–400 m à 4′20/km</span></a></td><td><a href="#phase-1-semaine-4-seance-2"><span class="date">Mer 23/12</span><span>40 min EF</span></a></td><td><a href="#phase-1-semaine-4-seance-3"><span class="date">Ven 25/12</span><span>65 min EF</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-2-semaine-1">S1 · 28/12–03/01</a></th><td><a href="#phase-2-semaine-1-seance-1"><span class="date">Lun 28/12</span><span>3 × 1 km à 4′20</span></a></td><td><a href="#phase-2-semaine-1-seance-2"><span class="date">Mer 30/12</span><span>2 × (8 × 30″/30″)</span></a></td><td><a href="#phase-2-semaine-1-seance-3"><span class="date">Ven 01/01</span><span>60 min EF vallonnée</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-2-semaine-2">S2 · 04–10/01</a></th><td><a href="#phase-2-semaine-2-seance-1"><span class="date">Lun 04/01</span><span>3 × 1,5 km à 4′20/km</span></a></td><td><a href="#phase-2-semaine-2-seance-2"><span class="date">Mer 06/01</span><span>12 × 200 m en 48–50″</span></a></td><td><a href="#phase-2-semaine-2-seance-3"><span class="date">Ven 08/01</span><span>75 min EF vallonnée</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-2-semaine-3">S3 · 11–17/01</a></th><td><a href="#phase-2-semaine-3-seance-1"><span class="date">Lun 11/01</span><span>2 × 2 km à 4′20/km</span></a></td><td><a href="#phase-2-semaine-3-seance-2"><span class="date">Mar 12/01</span><span>75 min EF</span></a></td><td><a href="#phase-2-semaine-3-seance-3"><span class="date">Jeu 14/01</span><span>2 × (6 × 300 m) en 1′13–1′16</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-2-semaine-4">S4 · 18–24/01</a></th><td><a href="#phase-2-semaine-4-seance-1"><span class="date">Lun 18/01</span><span>2 km + 3 km à 4′20/km</span></a></td><td><a href="#phase-2-semaine-4-seance-2"><span class="date">Mer 20/01</span><span>2 × (5 × 400 m) en 1′38–1′42</span></a></td><td><a href="#phase-2-semaine-4-seance-3"><span class="date">Ven 22/01</span><span>90 min EF vallonnée</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-2-semaine-5">S5 · 25–31/01</a></th><td><a href="#phase-2-semaine-5-seance-1"><span class="date">Lun 25/01</span><span>3 × 2 km à 4′20/km</span></a></td><td><a href="#phase-2-semaine-5-seance-2"><span class="date">Mer 27/01</span><span>6 × 600 m en 2′30–2′34</span></a></td><td><a href="#phase-2-semaine-5-seance-3"><span class="date">Ven 29/01</span><span>75 min EF + 5 × 100 m progressifs</span></a></td></tr>
+<tr><th scope="row"><a href="#phase-2-semaine-6">S6 · 01–07/02</a></th><td><a href="#phase-2-semaine-6-seance-1"><span class="date">Lun 01/02</span><span>2 × 1 km à l’allure de course retenue</span></a></td><td><a href="#phase-2-semaine-6-seance-2"><span class="date">Jeu 04/02</span><span>45 min EF + 5 × 100 m progressifs</span></a></td><td><a href="#jour-course"><span class="date">Dim 07/02</span><span>10 km du Teich, départ à 10 h 30</span></a></td></tr>
+        </tbody>
+      </table>
+    </section>
+    <details class="guidance">
+      <summary>Repères pour les séances</summary>
+      <ul><li><strong>Endurance fondamentale (EF)</strong> sous 150 bpm, y compris dans les côtes. En décembre, le footing court donne de la fréquence et la sortie plus longue entretient le foncier. Les jours et durées d’EF sont proposés.</li>
+<li><strong>Séances rapides sur plat.</strong> Faire 20 min de footing facile, des éducatifs et 3 × 100 m progressifs avant les fractions, puis 10 min faciles après. Les récupérations se font au trot, sauf indication. Sur les fractions de vitesse, prendre le temps ou la distance du tour comme repère et viser la régularité dès la première.</li>
+<li><strong>En décembre, choisir A ou B sur le créneau rapide.</strong> Les deux autres sorties complètent la semaine. Pendant le mix, le spécifique se court à 4′20/km, soit <strong>2′10 aux 500 m, 4′20 au km, 6′30 aux 1,5 km, 8′40 aux 2 km et 13′ aux 3 km</strong>.</li>
+</ul>
+    </details>
+    <section class="phase" id="bloc-1" aria-labelledby="phase-1"><h2 id="phase-1">Décembre · quatre semaines avec la banque de séances
+</h2>
+<article class="week" id="phase-1-semaine-1"><header class="week-heading"><p>30/11–06/12</p><h3>Vitesse sur trois distances</h3></header>
+<div class="session ef" id="phase-1-semaine-1-seance-1"><div class="session-meta"><span class="date">Lun 30/11</span><span class="type">Endurance</span></div><div class="session-content"><h4>45 min EF à Cenon</h4><p class="target">Sous 150 bpm sur le footing</p><p>Parcourir la côte entière à effort facile. Appuyer sur LAP au pied et au sommet pour isoler la montée sur la trace.</p></div></div>
+<div class="session choix" id="phase-1-semaine-1-seance-2"><div class="session-meta"><span class="date">Mer 02/12</span><span class="type">Séance au choix</span></div><div class="session-content"><h4>Option A — 3 × (500–400–300 m)</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Passages en <strong>2′05 · 1′38 · 1′12</strong>. Récupérer <strong>1′30 après le 500 m, 1′ après le 400 m, 5′ entre les séries</strong>. Viser les mêmes temps sur les trois séries.<details class="variant"><summary>Option B — 12 × 200 m en 48–50″</summary><p>Récupération <strong>100 m</strong>. Ouvrir autour de 50″ et garder la même foulée jusqu’au dernier 200 m.</p></details></dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-1-semaine-1-seance-3"><div class="session-meta"><span class="date">Ven 04/12</span><span class="type">Endurance</span></div><div class="session-content"><h4>60 min EF</h4><p class="target">Sous 150 bpm sur le footing</p><p>Parcours roulant ou légèrement vallonné, avec un effort facile du début à la fin.</p></div></div></article>
+<article class="week" id="phase-1-semaine-2"><header class="week-heading"><p>07–13/12</p><h3>Alterner deux allures</h3></header>
+<div class="session ef" id="phase-1-semaine-2-seance-1"><div class="session-meta"><span class="date">Lun 07/12</span><span class="type">Endurance</span></div><div class="session-content"><h4>45 min EF</h4><p class="target">Sous 150 bpm sur le footing</p><p>Footing facile sur le parcours de ton choix.</p></div></div>
+<div class="session choix" id="phase-1-semaine-2-seance-2"><div class="session-meta"><span class="date">Mer 09/12</span><span class="type">Séance au choix</span></div><div class="session-content"><h4>Option A — 4′–6′–6′–4′</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Courir à <strong>4′50 · 5′00 · 4′45–4′50 · 4′45–4′50/km</strong>. Récupérer <strong>1′, puis 2′, puis 2′</strong>. Sentir l’écart entre les deux blocs de 6 min et garder le rythme du second sur les 4 dernières minutes.<details class="variant"><summary>Option B — Ton 8–4, 3 × 8 min vers 4′55/km</summary><p>Récupération <strong>4 min</strong>. Reproduire sur le troisième bloc l’allure du premier.</p></details></dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-1-semaine-2-seance-3"><div class="session-meta"><span class="date">Ven 11/12</span><span class="type">Endurance</span></div><div class="session-content"><h4>70 min EF</h4><p class="target">Sous 150 bpm sur le footing</p><p>Vallonné doux si tu en as envie, avec la même aisance en montée et sur le plat.</p></div></div></article>
+<article class="week" id="phase-1-semaine-3"><header class="week-heading"><p>14–20/12</p><h3>Prolonger les fractions rapides</h3></header>
+<div class="session ef" id="phase-1-semaine-3-seance-1"><div class="session-meta"><span class="date">Lun 14/12</span><span class="type">Endurance</span></div><div class="session-content"><h4>45 min EF</h4><p class="target">Sous 150 bpm sur le footing</p><p>Rester en aisance jusqu’à la fin.</p></div></div>
+<div class="session choix" id="phase-1-semaine-3-seance-2"><div class="session-meta"><span class="date">Mer 16/12</span><span class="type">Séance au choix</span></div><div class="session-content"><h4>Option A — 6 × 3 min</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Partir vers <strong>690 m</strong> et viser <strong>690–700 m par fraction</strong> (environ 4′21–4′17/km). Récupérer <strong>2 min</strong>.<details class="variant"><summary>Option B — 4 × 4 min</summary><p>Récupération <strong>2 min</strong>. Viser <strong>920–935 m</strong> par fraction (environ 4′21–4′17/km), avec le premier effort au bas de la fourchette.</p></details></dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-1-semaine-3-seance-3"><div class="session-meta"><span class="date">Ven 18/12</span><span class="type">Endurance</span></div><div class="session-content"><h4>75 min EF</h4><p class="target">Sous 150 bpm sur le footing</p><p>Endurance régulière sur terrain roulant ou vallonné doux.</p></div></div></article>
+<article class="week" id="phase-1-semaine-4"><header class="week-heading"><p>21–27/12</p><h3>Trouver le 4′20</h3></header>
+<div class="session choix" id="phase-1-semaine-4-seance-1"><div class="session-meta"><span class="date">Lun 21/12</span><span class="type">Séance au choix</span></div><div class="session-content"><h4>Option A — 1 000–800–600–400 m à 4′20/km</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Passages en <strong>4′20 · 3′28 · 2′36 · 1′44</strong>, avec <strong>2′, 1′30, puis 1′</strong> de trot. Une série.<details class="variant"><summary>Option B — 3′–4′–3′ progressives</summary><p>Courir à <strong>4′30 · 4′25 · 4′20/km</strong> (environ <strong>667 · 906 · 692 m</strong>) avec <strong>1′30</strong> de trot entre les blocs.</p></details></dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-1-semaine-4-seance-2"><div class="session-meta"><span class="date">Mer 23/12</span><span class="type">Endurance</span></div><div class="session-content"><h4>40 min EF</h4><p class="target">Sous 150 bpm sur le footing</p><p>Footing facile.</p></div></div>
+<div class="session ef" id="phase-1-semaine-4-seance-3"><div class="session-meta"><span class="date">Ven 25/12</span><span class="type">Endurance</span></div><div class="session-content"><h4>65 min EF</h4><p class="target">Sous 150 bpm sur le footing</p><p>Créneau déplaçable au samedi 26/12 si Noël prend le vendredi.</p></div></div></article></section>
+<section class="phase" id="bloc-2" aria-labelledby="phase-2"><h2 id="phase-2">Préparation spécifique · six semaines de mix Decathlon
+</h2>
+<article class="week" id="phase-2-semaine-1"><header class="week-heading"><p>S1 · 28/12–03/01</p><h3>Répéter trois kilomètres réguliers</h3></header>
+<div class="session allure" id="phase-2-semaine-1-seance-1"><div class="session-meta"><span class="date">Lun 28/12</span><span class="type">Allure 10 km</span></div><div class="session-content"><h4>3 × 1 km à 4′20</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Récupération <strong>2′30</strong>. Utiliser le passage aux 500 m pour caler le premier bloc autour de 2′10.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session vitesse" id="phase-2-semaine-1-seance-2"><div class="session-meta"><span class="date">Mer 30/12</span><span class="type">Vitesse</span></div><div class="session-content"><h4>2 × (8 × 30″/30″)</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Viser <strong>116–120 m</strong> sur chaque 30″ rapide, puis 30″ de trot très lent. <strong>2′30 de marche</strong> entre séries, selon le format Decathlon.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-2-semaine-1-seance-3"><div class="session-meta"><span class="date">Ven 01/01</span><span class="type">Endurance</span></div><div class="session-content"><h4>60 min EF vallonnée</h4><p class="target">Sous 150 bpm sur le footing</p><p>Monter à l’effort d’endurance.</p></div></div></article>
+<article class="week" id="phase-2-semaine-2"><header class="week-heading"><p>S2 · 04–10/01</p><h3>Passer à 1,5 km</h3></header>
+<div class="session allure" id="phase-2-semaine-2-seance-1"><div class="session-meta"><span class="date">Lun 04/01</span><span class="type">Allure 10 km</span></div><div class="session-content"><h4>3 × 1,5 km à 4′20/km</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd><strong>6′30 par bloc</strong>, récupération <strong>2′30</strong>.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session vitesse" id="phase-2-semaine-2-seance-2"><div class="session-meta"><span class="date">Mer 06/01</span><span class="type">Vitesse</span></div><div class="session-content"><h4>12 × 200 m en 48–50″</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Récupération <strong>100 m</strong>. Partir près de 50″.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-2-semaine-2-seance-3"><div class="session-meta"><span class="date">Ven 08/01</span><span class="type">Endurance</span></div><div class="session-content"><h4>75 min EF vallonnée</h4><p class="target">Sous 150 bpm sur le footing</p></div></div></article>
+<article class="week" id="phase-2-semaine-3"><header class="week-heading"><p>S3 · 11–17/01</p><h3>Les trois séances avant Londres</h3></header>
+<div class="session allure" id="phase-2-semaine-3-seance-1"><div class="session-meta"><span class="date">Lun 11/01</span><span class="type">Allure 10 km</span></div><div class="session-content"><h4>2 × 2 km à 4′20/km</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd><strong>8′40 par bloc</strong>, récupération <strong>3 min</strong>.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-2-semaine-3-seance-2"><div class="session-meta"><span class="date">Mar 12/01</span><span class="type">Endurance</span></div><div class="session-content"><h4>75 min EF</h4><p class="target">Sous 150 bpm sur le footing</p><p>Choisir un parcours roulant pour garder l’effort facile entre les deux séances rapides.</p></div></div>
+<div class="session vitesse" id="phase-2-semaine-3-seance-3"><div class="session-meta"><span class="date">Jeu 14/01</span><span class="type">Vitesse</span></div><div class="session-content"><h4>2 × (6 × 300 m) en 1′13–1′16</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Récupération <strong>100 m</strong> et <strong>2′30</strong> entre séries. À faire avant le départ. <strong>Ven 15 au dim 17/01 · repos course.</strong></dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div></article>
+<article class="week" id="phase-2-semaine-4"><header class="week-heading"><p>S4 · 18–24/01</p><h3>Tenir 13 minutes d’affilée</h3></header>
+<div class="session allure" id="phase-2-semaine-4-seance-1"><div class="session-meta"><span class="date">Lun 18/01</span><span class="type">Allure 10 km</span></div><div class="session-content"><h4>2 km + 3 km à 4′20/km</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd><strong>8′40</strong>, puis <strong>13′</strong> après <strong>2′30</strong> de trot. Sur le bloc de 3 km, viser trois kilomètres réguliers.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session vitesse" id="phase-2-semaine-4-seance-2"><div class="session-meta"><span class="date">Mer 20/01</span><span class="type">Vitesse</span></div><div class="session-content"><h4>2 × (5 × 400 m) en 1′38–1′42</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Récupération <strong>100 m</strong> et <strong>2′30</strong> entre séries.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-2-semaine-4-seance-3"><div class="session-meta"><span class="date">Ven 22/01</span><span class="type">Endurance</span></div><div class="session-content"><h4>90 min EF vallonnée</h4><p class="target">Sous 150 bpm sur le footing</p><p>Courir en aisance jusqu’au bout et garder le week-end libre avant le contrôle du lundi.</p></div></div></article>
+<article class="week" id="phase-2-semaine-5"><header class="week-heading"><p>S5 · 25–31/01</p><h3>Contrôle sur 3 × 2 km</h3></header>
+<div class="session allure" id="phase-2-semaine-5-seance-1"><div class="session-meta"><span class="date">Lun 25/01</span><span class="type">Allure 10 km</span></div><div class="session-content"><h4>3 × 2 km à 4′20/km</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd><strong>8′40 par bloc</strong>, récupération <strong>2′30</strong>. Relever les six kilomètres et le ressenti du dernier bloc pour la décision de jeudi.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session vitesse" id="phase-2-semaine-5-seance-2"><div class="session-meta"><span class="date">Mer 27/01</span><span class="type">Vitesse</span></div><div class="session-content"><h4>6 × 600 m en 2′30–2′34</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Récupération <strong>200 m</strong>. Caler le premier effort autour de 2′34.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-2-semaine-5-seance-3"><div class="session-meta"><span class="date">Ven 29/01</span><span class="type">Endurance</span></div><div class="session-content"><h4>75 min EF + 5 × 100 m progressifs</h4><p class="target">Sous 150 bpm sur le footing</p><p>Récupération <strong>100 m</strong> en marchant ou en trottinant.</p></div></div><p class="decision"><strong>Jeu 28/01 · Choix de l’allure de départ.</strong> Relire ensemble le 2 + 3 km et le 3 × 2 km. Des kilomètres proches de 4′20 avec de la marge sur le dernier bloc plaident pour un départ à cette allure ou légèrement en dedans. Si le dernier bloc décroche ou demande un effort maximal, choisir un départ plus mesuré à partir de l’allure tenue.</p></article>
+<article class="week" id="phase-2-semaine-6"><header class="week-heading"><p>S6 · 01–07/02</p><h3>Affûtage et course</h3></header>
+<div class="session allure" id="phase-2-semaine-6-seance-1"><div class="session-meta"><span class="date">Lun 01/02</span><span class="type">Allure 10 km</span></div><div class="session-content"><h4>2 × 1 km à l’allure de course retenue</h4><dl class="steps"><dt>Échauffement</dt><dd>20 min faciles, éducatifs, puis 3 × 100 m progressifs</dd><dt>Bloc principal</dt><dd>Récupération <strong>2 min</strong>. Même cadence de passage sur les deux kilomètres.</dd><dt>Retour au calme</dt><dd>10 min faciles</dd></dl></div></div>
+<div class="session ef" id="phase-2-semaine-6-seance-2"><div class="session-meta"><span class="date">Jeu 04/02</span><span class="type">Endurance</span></div><div class="session-content"><h4>45 min EF + 5 × 100 m progressifs</h4><p class="target">Sous 150 bpm sur le footing</p><p>Récupération <strong>100 m</strong> en marchant ou en trottinant.</p></div></div>
+<div class="session course" id="jour-course"><div class="session-meta"><span class="date">Dim 07/02</span><span class="type">Course</span></div><div class="session-content"><h4>10 km du Teich, départ à 10 h 30</h4><p>Faire <strong>20 min de footing facile, des éducatifs et 3 × 100 m progressifs</strong>. Partir à l’allure choisie ou légèrement en dedans. Si la cible de 4′20/km est retenue, les repères sont <strong>4′20 au km 1, 21′40 au km 5 et 34′40 au km 8</strong>.</p></div></div></article></section>
+  </main>
+</body>
+</html>
